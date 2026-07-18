@@ -177,7 +177,8 @@ def player_ratings(season: str = LATEST, topn: int = 60) -> list[dict]:
     out = []
     for i, r in enumerate(m.itertuples(), 1):
         out.append({"rank": i, "player": r.PLAYER, "team": r.TEAM,
-                    "war": num(r.WAR), "poe": num(getattr(r, "POE_100", None)),
+                    "war": num(r.WAR), "off": num(getattr(r, "OBPM", None)),
+                    "poe": num(getattr(r, "POE_100", None)),
                     "def": num(getattr(r, "DEF_VAL_100", None)),
                     "mpg": num(r.MPG), "pts": num(r.PTS_PG),
                     "reb": num(r.REB_PG), "ast": num(r.AST_PG),

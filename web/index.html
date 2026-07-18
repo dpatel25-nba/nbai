@@ -312,6 +312,7 @@
             <th class="tleft" data-k="rank">Rk</th>
             <th class="tleft" data-k="player">Player</th>
             <th data-k="war" aria-sort="descending">WAR <span class="arw">▼</span></th>
+            <th data-k="off">Off</th>
             <th data-k="poe">Shot+</th>
             <th data-k="def">Def</th>
             <th data-k="mpg">MPG</th>
@@ -335,7 +336,8 @@
         </table>
       </div>
     </div>
-    <p class="foot"><b>WAR</b> — wins above replacement (box-based v1). <b>Shot+</b> — points over
+    <p class="foot"><b>WAR</b> — wins above replacement (box-based v1). <b>Off</b> — offensive box
+      plus-minus (points/100 above average). <b>Shot+</b> — points over
       expected on the same shots. <b>Def</b> — defensive points saved per 100 (rim + disruption,
       calibrated from our play-by-play). <b>Floor / Ceil</b> — 20th/80th-percentile scoring nights
       (props reliability). <b>Clutch</b> — points in the last 5 min within 5, with each player's
@@ -594,7 +596,7 @@
   render();
 
   /* ---- players leaderboard ---- */
-  const FALLBACK_PLAYERS = [{"rank":1,"player":"Nikola Jokić","team":"DEN","war":10.4,"poe":22.3,"def":-0.1,"mpg":34.8,"pts":27.7,"reb":12.9,"ast":10.7,"floor":21.8,"ceil":34.2,"cpts":107,"cd":0.47,"c":"#0E2240"},{"rank":2,"player":"Victor Wembanyama","team":"SAS","war":9.9,"poe":-2.3,"def":3.9,"mpg":29.2,"pts":25.0,"reb":11.5,"ast":3.1,"floor":17.0,"ceil":32.0,"cpts":83,"cd":0.55,"c":"#9EA8B0"},{"rank":3,"player":"Luka Dončić","team":"LAL","war":9.5,"poe":14.4,"def":-0.6,"mpg":35.8,"pts":33.5,"reb":7.7,"ast":8.3,"floor":26.6,"ceil":41.0,"cpts":37,"cd":0.67,"c":"#552583"},{"rank":4,"player":"Karl-Anthony Towns","team":"NYK","war":9.3,"poe":2.2,"def":-2.1,"mpg":31.0,"pts":20.1,"reb":11.9,"ast":3.0,"floor":14.0,"ceil":25.0,"cpts":27,"cd":0.57,"c":"#F58426"},{"rank":5,"player":"Jaylen Brown","team":"BOS","war":8.1,"poe":6.3,"def":-1.3,"mpg":34.4,"pts":28.7,"reb":6.9,"ast":5.1,"floor":23.0,"ceil":33.0,"cpts":66,"cd":0.58,"c":"#007A33"},{"rank":6,"player":"Jalen Johnson","team":"ATL","war":7.8,"poe":1.0,"def":-0.4,"mpg":35.2,"pts":22.5,"reb":10.3,"ast":7.9,"floor":17.0,"ceil":29.0,"cpts":78,"cd":0.58,"c":"#E03A3E"},{"rank":7,"player":"Kawhi Leonard","team":"LAC","war":7.5,"poe":13.2,"def":1.2,"mpg":32.1,"pts":27.9,"reb":6.4,"ast":3.6,"floor":22.8,"ceil":33.0,"cpts":25,"cd":0.47,"c":"#C8102E"},{"rank":8,"player":"Jalen Duren","team":"DET","war":7.0,"poe":9.9,"def":-0.8,"mpg":28.2,"pts":19.5,"reb":10.5,"ast":2.0,"floor":14.0,"ceil":24.2,"cpts":24,"cd":0.35,"c":"#C8102E"},{"rank":9,"player":"Bam Adebayo","team":"MIA","war":6.8,"poe":-7.3,"def":0.7,"mpg":32.4,"pts":20.1,"reb":10.0,"ast":3.2,"floor":14.0,"ceil":25.0,"cpts":37,"cd":0.66,"c":"#98002E"},{"rank":10,"player":"Shai Gilgeous-Alexander","team":"OKC","war":6.7,"poe":14.4,"def":1.1,"mpg":33.2,"pts":31.1,"reb":4.3,"ast":6.6,"floor":25.0,"ceil":35.6,"cpts":102,"cd":0.49,"c":"#007AC1"},{"rank":11,"player":"Paolo Banchero","team":"ORL","war":6.2,"poe":-5.5,"def":-0.9,"mpg":34.7,"pts":22.2,"reb":8.4,"ast":5.2,"floor":16.0,"ceil":28.8,"cpts":60,"cd":0.57,"c":"#0077C0"},{"rank":12,"player":"Alperen Sengun","team":"HOU","war":6.1,"poe":2.6,"def":-1.1,"mpg":33.3,"pts":20.4,"reb":8.9,"ast":6.2,"floor":14.0,"ceil":27.8,"cpts":92,"cd":0.46,"c":"#CE1141"}];
+  const FALLBACK_PLAYERS = [{"rank":1,"player":"Nikola Jokić","team":"DEN","war":10.4,"off":4.3,"poe":22.3,"def":-0.1,"mpg":34.8,"pts":27.7,"reb":12.9,"ast":10.7,"floor":21.8,"ceil":34.2,"cpts":107.0,"cd":0.47,"c":"#0E2240"},{"rank":2,"player":"Victor Wembanyama","team":"SAS","war":9.9,"off":4.7,"poe":-2.3,"def":3.9,"mpg":29.2,"pts":25.0,"reb":11.5,"ast":3.1,"floor":17.0,"ceil":32.0,"cpts":83.0,"cd":0.55,"c":"#9EA8B0"},{"rank":3,"player":"Luka Dončić","team":"LAL","war":9.5,"off":5.9,"poe":14.4,"def":-0.6,"mpg":35.8,"pts":33.5,"reb":7.7,"ast":8.3,"floor":26.6,"ceil":41.0,"cpts":37.0,"cd":0.67,"c":"#552583"},{"rank":4,"player":"Karl-Anthony Towns","team":"NYK","war":9.3,"off":2.6,"poe":2.2,"def":-2.1,"mpg":31.0,"pts":20.1,"reb":11.9,"ast":3.0,"floor":14.0,"ceil":25.0,"cpts":27.0,"cd":0.57,"c":"#F58426"},{"rank":5,"player":"Jaylen Brown","team":"BOS","war":8.1,"off":5.1,"poe":6.3,"def":-1.3,"mpg":34.4,"pts":28.7,"reb":6.9,"ast":5.1,"floor":23.0,"ceil":33.0,"cpts":66.0,"cd":0.58,"c":"#007A33"},{"rank":6,"player":"Jalen Johnson","team":"ATL","war":7.8,"off":2.1,"poe":1.0,"def":-0.4,"mpg":35.2,"pts":22.5,"reb":10.3,"ast":7.9,"floor":17.0,"ceil":29.0,"cpts":78.0,"cd":0.58,"c":"#E03A3E"},{"rank":7,"player":"Kawhi Leonard","team":"LAC","war":7.5,"off":5.3,"poe":13.2,"def":1.2,"mpg":32.1,"pts":27.9,"reb":6.4,"ast":3.6,"floor":22.8,"ceil":33.0,"cpts":25.0,"cd":0.47,"c":"#C8102E"},{"rank":8,"player":"Jalen Duren","team":"DET","war":7.0,"off":3.3,"poe":9.9,"def":-0.8,"mpg":28.2,"pts":19.5,"reb":10.5,"ast":2.0,"floor":14.0,"ceil":24.2,"cpts":24.0,"cd":0.35,"c":"#C8102E"},{"rank":9,"player":"Bam Adebayo","team":"MIA","war":6.8,"off":1.8,"poe":-7.3,"def":0.7,"mpg":32.4,"pts":20.1,"reb":10.0,"ast":3.2,"floor":14.0,"ceil":25.0,"cpts":37.0,"cd":0.66,"c":"#98002E"},{"rank":10,"player":"Shai Gilgeous-Alexander","team":"OKC","war":6.7,"off":6.1,"poe":14.4,"def":1.1,"mpg":33.2,"pts":31.1,"reb":4.3,"ast":6.6,"floor":25.0,"ceil":35.6,"cpts":102.0,"cd":0.49,"c":"#007AC1"},{"rank":11,"player":"Paolo Banchero","team":"ORL","war":6.2,"off":2.4,"poe":-5.5,"def":-0.9,"mpg":34.7,"pts":22.2,"reb":8.4,"ast":5.2,"floor":16.0,"ceil":28.8,"cpts":60.0,"cd":0.57,"c":"#0077C0"},{"rank":12,"player":"Alperen Sengun","team":"HOU","war":6.1,"off":2.4,"poe":2.6,"def":-1.1,"mpg":33.3,"pts":20.4,"reb":8.9,"ast":6.2,"floor":14.0,"ceil":27.8,"cpts":92.0,"cd":0.46,"c":"#CE1141"}];
   const PLAYERS = (D.players && D.players.length) ? D.players : FALLBACK_PLAYERS;
   let pK = "war", pDir = -1;
   const pf = v => (v === null || v === undefined) ? "—" : v;
@@ -611,6 +613,7 @@
       <td class="tleft"><span class="team"><span class="dot" style="background:${p.c || '#888'}"></span>
         ${p.player} <span class="abbr mono">${p.team}</span></span></td>
       <td class="rate mono">${pf(p.war)}</td>
+      <td class="mono">${pf(p.off)}</td>
       <td class="mono">${pf(p.poe)}</td><td class="mono">${pf(p.def)}</td>
       <td class="mono">${pf(p.mpg)}</td><td class="mono">${pf(p.pts)}</td>
       <td class="mono">${pf(p.floor)}</td><td class="mono">${pf(p.ceil)}</td>
