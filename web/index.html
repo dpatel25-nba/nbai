@@ -132,8 +132,9 @@
     cursor: pointer; -webkit-appearance: none; appearance: none; text-align: center; }
   select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
   .side .sel-elo { margin-top: 8px; font-size: 13px; color: var(--muted); }
+  .vs-col { display: flex; flex-direction: column; align-items: center; gap: 12px; padding-top: 22px; }
   .vs { font-weight: 800; color: var(--muted); letter-spacing: .1em; font-size: 13px; }
-  .venue { display: flex; gap: 6px; justify-content: center; margin-top: 6px; }
+  .venue { display: flex; gap: 6px; justify-content: center; }
   .venue button { appearance: none; border: 1px solid var(--border); background: var(--panel-2);
     color: var(--muted); font: inherit; font-size: 12px; font-weight: 600; padding: 4px 10px;
     border-radius: 999px; cursor: pointer; }
@@ -249,11 +250,13 @@
             <label class="eyebrow" for="home">Home</label>
             <select id="home" aria-label="Home team"></select>
             <div class="sel-elo mono" id="homeElo"></div>
+          </div>
+          <div class="vs-col">
+            <div class="vs">VS</div>
             <div class="venue">
               <button id="neutralBtn" type="button">Neutral site</button>
             </div>
           </div>
-          <div class="vs">VS</div>
           <div class="side">
             <label class="eyebrow" for="away">Away</label>
             <select id="away" aria-label="Away team"></select>
