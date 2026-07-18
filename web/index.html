@@ -1,0 +1,460 @@
+<title>NBAI — NBA Ratings & Prediction Engine</title>
+<style>
+  :root {
+    --bg: #EEF1F6; --panel: #FFFFFF; --panel-2: #F6F8FB; --border: #DBE1EA;
+    --text: #12161C; --muted: #59636F; --accent: #B4611A; --accent-2: #C9721F;
+    --accent-soft: rgba(180,97,26,.10); --cool: #3E6FB0; --cool-soft: rgba(62,111,176,.12);
+    --grid: rgba(15,20,28,.05); --shadow: 0 1px 2px rgba(15,20,28,.06), 0 8px 24px rgba(15,20,28,.05);
+    --good: #2E7D52; --bad: #B23A3A;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0E1116; --panel: #161B22; --panel-2: #1B212B; --border: #262E39;
+      --text: #E7ECF3; --muted: #8A97A8; --accent: #E8945A; --accent-2: #F0A268;
+      --accent-soft: rgba(232,148,90,.13); --cool: #5B93D6; --cool-soft: rgba(91,147,214,.15);
+      --grid: rgba(255,255,255,.05); --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.35);
+      --good: #4FB07E; --bad: #E0685F;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #EEF1F6; --panel: #FFFFFF; --panel-2: #F6F8FB; --border: #DBE1EA;
+    --text: #12161C; --muted: #59636F; --accent: #B4611A; --accent-2: #C9721F;
+    --accent-soft: rgba(180,97,26,.10); --cool: #3E6FB0; --cool-soft: rgba(62,111,176,.12);
+    --grid: rgba(15,20,28,.05); --shadow: 0 1px 2px rgba(15,20,28,.06), 0 8px 24px rgba(15,20,28,.05);
+    --good: #2E7D52; --bad: #B23A3A;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0E1116; --panel: #161B22; --panel-2: #1B212B; --border: #262E39;
+    --text: #E7ECF3; --muted: #8A97A8; --accent: #E8945A; --accent-2: #F0A268;
+    --accent-soft: rgba(232,148,90,.13); --cool: #5B93D6; --cool-soft: rgba(91,147,214,.15);
+    --grid: rgba(255,255,255,.05); --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.35);
+    --good: #4FB07E; --bad: #E0685F;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased;
+  }
+  .mono { font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+          font-variant-numeric: tabular-nums; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .14em; font-size: 11px;
+             font-weight: 700; color: var(--muted); }
+
+  /* ---- top nav ---- */
+  header {
+    position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--panel) 88%, transparent);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
+  }
+  .nav { max-width: 1160px; margin: 0 auto; padding: 0 20px; height: 60px;
+         display: flex; align-items: center; gap: 28px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800;
+           letter-spacing: .16em; text-transform: uppercase; font-size: 15px; }
+  .brand .ball { width: 20px; height: 20px; border-radius: 50%;
+    background: radial-gradient(circle at 32% 30%, var(--accent-2), var(--accent) 70%);
+    position: relative; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--accent) 60%, #000); }
+  .brand .ball::before, .brand .ball::after { content: ""; position: absolute; inset: 0;
+    border-radius: 50%; border: 0; }
+  .brand .ball::before { border-left: 1.5px solid color-mix(in srgb, var(--accent) 55%, #000);
+    border-right: 1.5px solid color-mix(in srgb, var(--accent) 55%, #000); margin: 0 8.5px; }
+  .brand small { color: var(--muted); font-weight: 600; letter-spacing: .04em;
+                 text-transform: none; font-size: 11px; }
+  nav.tabs { display: flex; gap: 4px; margin-left: auto; }
+  .tab { appearance: none; border: 0; background: none; color: var(--muted);
+    font: inherit; font-weight: 600; font-size: 13.5px; padding: 8px 12px; border-radius: 8px;
+    cursor: pointer; letter-spacing: .01em; }
+  .tab:hover { color: var(--text); background: var(--panel-2); }
+  .tab.active { color: var(--accent); background: var(--accent-soft); }
+  .tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  main { max-width: 1160px; margin: 0 auto; padding: 28px 20px 80px; }
+  .view { display: none; }
+  .view.active { display: block; animation: fade .28s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .view.active { animation: none; } }
+
+  .page-head { display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+  h1 { font-size: 26px; margin: 4px 0 0; letter-spacing: -.01em; text-wrap: balance; font-weight: 800; }
+  .sub { color: var(--muted); font-size: 13.5px; max-width: 62ch; }
+
+  /* ---- KPI strip ---- */
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 0 0 22px; }
+  .kpi { background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+    padding: 14px 16px; box-shadow: var(--shadow); }
+  .kpi .v { font-size: 26px; font-weight: 700; letter-spacing: -.02em; }
+  .kpi .l { margin-top: 2px; }
+  .kpi .v em { font-style: normal; color: var(--accent); }
+
+  /* ---- table ---- */
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+    box-shadow: var(--shadow); overflow: hidden; }
+  .panel-head { display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px; border-bottom: 1px solid var(--border); gap: 12px; }
+  .panel-head h2 { font-size: 14px; margin: 0; letter-spacing: .04em; text-transform: uppercase; }
+  .tblwrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  thead th { position: sticky; top: 60px; background: var(--panel-2); text-align: right;
+    font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted);
+    font-weight: 700; padding: 10px 14px; cursor: pointer; white-space: nowrap;
+    border-bottom: 1px solid var(--border); user-select: none; }
+  thead th:first-child, thead th.tleft { text-align: left; }
+  thead th:hover { color: var(--text); }
+  thead th[aria-sort] { color: var(--accent); }
+  thead th .arw { opacity: .5; font-size: 9px; }
+  tbody td { padding: 9px 14px; text-align: right; border-bottom: 1px solid var(--grid);
+    white-space: nowrap; }
+  tbody tr:hover { background: var(--panel-2); }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.tleft { text-align: left; }
+  .rk { color: var(--muted); width: 34px; }
+  .team { display: inline-flex; align-items: center; gap: 9px; font-weight: 600; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: none;
+    box-shadow: 0 0 0 1px var(--border) inset, 0 0 0 2px var(--panel); }
+  .abbr { color: var(--muted); font-size: 12px; width: 34px; display: inline-block; }
+  .rate { font-weight: 700; }
+  .barcell { width: 130px; }
+  .bar { height: 7px; border-radius: 4px; background: var(--panel-2);
+    position: relative; overflow: hidden; }
+  .bar > i { position: absolute; top: 0; bottom: 0; display: block; }
+  .pos { color: var(--good); } .neg { color: var(--bad); }
+
+  /* ---- matchup predictor ---- */
+  .matchup { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  .mk-card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+    box-shadow: var(--shadow); padding: 22px; }
+  .vs-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: center; }
+  .side { text-align: center; }
+  .side label { display: block; margin-bottom: 8px; }
+  select { width: 100%; font: inherit; font-weight: 600; padding: 10px 12px; border-radius: 10px;
+    border: 1px solid var(--border); background: var(--panel-2); color: var(--text);
+    cursor: pointer; -webkit-appearance: none; appearance: none; text-align: center; }
+  select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .side .sel-elo { margin-top: 8px; font-size: 13px; color: var(--muted); }
+  .vs { font-weight: 800; color: var(--muted); letter-spacing: .1em; font-size: 13px; }
+  .venue { display: flex; gap: 6px; justify-content: center; margin-top: 6px; }
+  .venue button { appearance: none; border: 1px solid var(--border); background: var(--panel-2);
+    color: var(--muted); font: inherit; font-size: 12px; font-weight: 600; padding: 4px 10px;
+    border-radius: 999px; cursor: pointer; }
+  .venue button.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+
+  .result { margin-top: 24px; padding-top: 22px; border-top: 1px dashed var(--border); }
+  .probbar { height: 40px; border-radius: 10px; overflow: hidden; display: flex;
+    font-weight: 700; font-size: 14px; color: #fff; }
+  .probbar .h { background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+  .probbar .a { background: linear-gradient(90deg, var(--cool), color-mix(in srgb, var(--cool) 70%, #fff)); }
+  .probbar span { display: flex; align-items: center; padding: 0 14px;
+    text-shadow: 0 1px 2px rgba(0,0,0,.35); }
+  .probbar .a span { width: 100%; justify-content: flex-end; }
+  .verdict { text-align: center; margin-top: 16px; font-size: 15px; }
+  .verdict b { color: var(--accent); font-size: 17px; }
+  .verdict .mgn { color: var(--muted); }
+
+  /* ---- roadmap ---- */
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+    padding: 20px; box-shadow: var(--shadow); position: relative; }
+  .card h3 { margin: 8px 0 6px; font-size: 17px; }
+  .card p { color: var(--muted); font-size: 13.5px; margin: 0; }
+  .flag { position: absolute; top: 16px; right: 16px; font-size: 10px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
+    background: var(--accent-soft); padding: 3px 8px; border-radius: 999px; }
+  .flag.live { color: var(--good); background: color-mix(in srgb, var(--good) 14%, transparent); }
+
+  .foot { color: var(--muted); font-size: 12px; margin-top: 26px; line-height: 1.6; }
+  .foot b { color: var(--text); font-weight: 600; }
+
+  @media (max-width: 720px) {
+    .kpis { grid-template-columns: repeat(2, 1fr); }
+    .cards { grid-template-columns: 1fr; }
+    nav.tabs .tab { padding: 8px 8px; font-size: 12.5px; }
+    .brand small { display: none; }
+    thead th { top: 60px; }
+  }
+</style>
+
+<header>
+  <div class="nav">
+    <div class="brand"><span class="ball" aria-hidden="true"></span>NBAI
+      <small>NBA Ratings &amp; Prediction Engine</small></div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button class="tab active" data-view="ratings" role="tab">Team Ratings</button>
+      <button class="tab" data-view="predict" role="tab">Matchup</button>
+      <button class="tab" data-view="roadmap" role="tab">Player &amp; Beyond</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- ============ TEAM RATINGS ============ -->
+  <section class="view active" id="ratings">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">2025–26 · through season's end</div>
+        <h1>Team Power Ratings</h1>
+      </div>
+      <div class="sub">Live Elo ratings from our walk-forward-backtested model. 1500 is a
+        league-average team; the bar shows projected point margin vs. an average opponent.</div>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi"><div class="v mono" id="kpiGames">16,758</div><div class="l eyebrow">Games in database</div></div>
+      <div class="kpi"><div class="v mono" id="kpiSeasons">13</div><div class="l eyebrow">Seasons · 2013–2026</div></div>
+      <div class="kpi"><div class="v mono" id="kpiAcc"><em>65.2%</em></div><div class="l eyebrow">Backtest accuracy</div></div>
+      <div class="kpi"><div class="v mono" id="kpiLoss">0.626</div><div class="l eyebrow">Log-loss (out-of-sample)</div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Power Ratings</h2>
+        <span class="eyebrow">Click a column to sort</span>
+      </div>
+      <div class="tblwrap">
+        <table id="rtable">
+          <thead>
+            <tr>
+              <th class="tleft" data-k="rank">Rk</th>
+              <th class="tleft" data-k="name">Team</th>
+              <th data-k="elo" aria-sort="descending">Rating <span class="arw">▼</span></th>
+              <th data-k="margin" class="tleft barcell">Margin vs avg</th>
+              <th data-k="w">W</th>
+              <th data-k="l">L</th>
+              <th data-k="pct">Win%</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="foot"><b>What's real here:</b> team ratings, records, and the projected-margin bars
+      are computed from our actual model and data. <b>In development:</b> offensive/defensive
+      efficiency splits and injury-adjusted ratings arrive once the box-score layer finishes parsing.</p>
+  </section>
+
+  <!-- ============ MATCHUP ============ -->
+  <section class="view" id="predict">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">Prediction Engine</div>
+        <h1>Matchup Predictor</h1>
+      </div>
+      <div class="sub">Pick any two teams. This runs our Elo win-probability model live —
+        the same model, computing in your browser. Home court = +100 rating points (~3.5 pts).</div>
+    </div>
+
+    <div class="matchup">
+      <div class="mk-card">
+        <div class="vs-grid">
+          <div class="side">
+            <label class="eyebrow" for="home">Home</label>
+            <select id="home" aria-label="Home team"></select>
+            <div class="sel-elo mono" id="homeElo"></div>
+            <div class="venue">
+              <button id="neutralBtn" type="button">Neutral site</button>
+            </div>
+          </div>
+          <div class="vs">VS</div>
+          <div class="side">
+            <label class="eyebrow" for="away">Away</label>
+            <select id="away" aria-label="Away team"></select>
+            <div class="sel-elo mono" id="awayElo"></div>
+          </div>
+        </div>
+
+        <div class="result">
+          <div class="probbar" id="probbar">
+            <div class="h" id="pbHome"><span id="pbHomeTxt"></span></div>
+            <div class="a" id="pbAway"><span id="pbAwayTxt"></span></div>
+          </div>
+          <div class="verdict" id="verdict"></div>
+        </div>
+      </div>
+    </div>
+    <p class="foot"><b>How it works:</b> win probability = 1 / (1 + 10^(−ΔElo/400)), where ΔElo
+      includes the home-court bonus. Projected margin = ΔElo / 28. This is our Stage-1 baseline;
+      the bottom-up matchup simulator (next) will project individual player and team stat lines.</p>
+  </section>
+
+  <!-- ============ ROADMAP ============ -->
+  <section class="view" id="roadmap">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">On the roadmap</div>
+        <h1>Players, WAR &amp; the Matchup Simulator</h1>
+      </div>
+      <div class="sub">What the data pipeline is being built to power — shown here as designed
+        placeholders so the shape is clear before the numbers land.</div>
+    </div>
+    <div class="cards">
+      <div class="card"><span class="flag live">Live</span>
+        <div class="eyebrow">Stage 1</div>
+        <h3>Team Ratings &amp; Predictions</h3>
+        <p>Elo power ratings and game win-probabilities, validated on 15,000+ games with a
+          leakage-free walk-forward backtest. Working today.</p></div>
+      <div class="card"><span class="flag">Building</span>
+        <div class="eyebrow">Player value</div>
+        <h3>Basketball WAR</h3>
+        <p>Wins Above Replacement, bake-off style: several frameworks (VORP, RAPM, blended)
+          backtested head-to-head, with the most predictive one promoted.</p></div>
+      <div class="card"><span class="flag">Building</span>
+        <div class="eyebrow">The big one</div>
+        <h3>Matchup Simulator</h3>
+        <p>Deep per-player split profiles — perimeter defense, shooting vs. taller/shorter
+          defenders, home/road, by zone — to project every player's line in a given matchup.</p></div>
+      <div class="card"><span class="flag">Building</span>
+        <div class="eyebrow">Shot &amp; lineup</div>
+        <h3>Shot Quality &amp; Lineups</h3>
+        <p>Expected-points (xPTS) from 1.6M shot coordinates, plus on/off and lineup ratings
+          from reconstructed play-by-play stints.</p></div>
+    </div>
+    <p class="foot"><b>NBAI</b> reads from a three-layer parquet pipeline
+      (raw → clean facts → leakage-safe features) — the same data engine behind every rating,
+      prediction, and metric on this site.</p>
+  </section>
+</main>
+
+<script src="data.js"></script>
+<script>
+  const FALLBACK_TEAMS = [
+    {name:"New York Knicks",abbr:"NYK",elo:1799,w:53,l:29,c:"#F58426"},
+    {name:"San Antonio Spurs",abbr:"SAS",elo:1776,w:62,l:20,c:"#9EA8B0"},
+    {name:"Oklahoma City Thunder",abbr:"OKC",elo:1761,w:64,l:18,c:"#007AC1"},
+    {name:"Detroit Pistons",abbr:"DET",elo:1689,w:60,l:22,c:"#C8102E"},
+    {name:"Boston Celtics",abbr:"BOS",elo:1656,w:56,l:26,c:"#007A33"},
+    {name:"Charlotte Hornets",abbr:"CHA",elo:1631,w:44,l:38,c:"#00788C"},
+    {name:"Denver Nuggets",abbr:"DEN",elo:1631,w:54,l:28,c:"#0E2240"},
+    {name:"Cleveland Cavaliers",abbr:"CLE",elo:1624,w:52,l:30,c:"#860038"},
+    {name:"Houston Rockets",abbr:"HOU",elo:1612,w:52,l:30,c:"#CE1141"},
+    {name:"Los Angeles Lakers",abbr:"LAL",elo:1592,w:53,l:29,c:"#552583"},
+    {name:"Minnesota Timberwolves",abbr:"MIN",elo:1586,w:49,l:33,c:"#236192"},
+    {name:"Atlanta Hawks",abbr:"ATL",elo:1567,w:46,l:36,c:"#E03A3E"},
+    {name:"Toronto Raptors",abbr:"TOR",elo:1561,w:46,l:36,c:"#CE1141"},
+    {name:"Orlando Magic",abbr:"ORL",elo:1559,w:45,l:37,c:"#0077C0"},
+    {name:"Philadelphia 76ers",abbr:"PHI",elo:1551,w:45,l:37,c:"#006BB6"},
+    {name:"Phoenix Suns",abbr:"PHX",elo:1542,w:45,l:37,c:"#E56020"},
+    {name:"LA Clippers",abbr:"LAC",elo:1534,w:42,l:40,c:"#C8102E"},
+    {name:"Portland Trail Blazers",abbr:"POR",elo:1516,w:42,l:40,c:"#E03A3E"},
+    {name:"Miami Heat",abbr:"MIA",elo:1507,w:43,l:39,c:"#98002E"},
+    {name:"Golden State Warriors",abbr:"GSW",elo:1423,w:37,l:45,c:"#1D428A"},
+    {name:"New Orleans Pelicans",abbr:"NOP",elo:1397,w:26,l:56,c:"#85714D"},
+    {name:"Chicago Bulls",abbr:"CHI",elo:1348,w:31,l:51,c:"#CE1141"},
+    {name:"Milwaukee Bucks",abbr:"MIL",elo:1344,w:32,l:50,c:"#00471B"},
+    {name:"Dallas Mavericks",abbr:"DAL",elo:1335,w:26,l:56,c:"#00538C"},
+    {name:"Indiana Pacers",abbr:"IND",elo:1334,w:19,l:63,c:"#FDBB30"},
+    {name:"Sacramento Kings",abbr:"SAC",elo:1325,w:22,l:60,c:"#5A2D81"},
+    {name:"Memphis Grizzlies",abbr:"MEM",elo:1277,w:25,l:57,c:"#5D76A9"},
+    {name:"Utah Jazz",abbr:"UTA",elo:1275,w:22,l:60,c:"#00471B"},
+    {name:"Brooklyn Nets",abbr:"BKN",elo:1250,w:20,l:62,c:"#777777"},
+    {name:"Washington Wizards",abbr:"WAS",elo:1199,w:17,l:65,c:"#002B5C"},
+  ];
+
+  /* ---- data: generated web/data.js if present, else fallback ---- */
+  const D = window.NBAI_DATA || {};
+  const TEAMS = (D.teams && D.teams.length) ? D.teams : FALLBACK_TEAMS;
+  if (D.model) {
+    const set = (id, v) => { const e = document.getElementById(id); if (e) e.innerHTML = v; };
+    set("kpiGames", D.model.games);
+    set("kpiSeasons", D.model.seasons);
+    set("kpiAcc", "<em>" + D.model.accuracy + "</em>");
+    set("kpiLoss", D.model.logloss);
+  }
+
+  /* ---- tabs ---- */
+  const tabs = document.querySelectorAll(".tab");
+  const views = document.querySelectorAll(".view");
+  tabs.forEach(t => t.addEventListener("click", () => {
+    tabs.forEach(x => x.classList.remove("active"));
+    views.forEach(v => v.classList.remove("active"));
+    t.classList.add("active");
+    document.getElementById(t.dataset.view).classList.add("active");
+  }));
+
+  /* ---- ratings table ---- */
+  const maxDev = Math.max(...TEAMS.map(t => Math.abs(t.elo - 1500)));
+  let sortK = "elo", sortDir = -1;
+  const rows = TEAMS.map((t, i) => ({...t, rank: i + 1, margin: (t.elo - 1500) / 28,
+    pct: t.w / (t.w + t.l)}));
+
+  function render() {
+    const s = [...rows].sort((a, b) => {
+      const av = a[sortK], bv = b[sortK];
+      const cmp = typeof av === "string" ? av.localeCompare(bv) : av - bv;
+      return cmp * sortDir;
+    });
+    const tb = document.querySelector("#rtable tbody");
+    tb.innerHTML = s.map(t => {
+      const dev = t.elo - 1500;
+      const w = Math.abs(dev) / maxDev * 100;
+      const col = dev >= 0 ? "var(--accent)" : "var(--cool)";
+      const bar = `<div class="bar"><i style="${dev>=0?'left:50%':'right:50%'};
+        width:${w/2}%;background:${col}"></i>
+        <i style="left:50%;width:1px;background:var(--border)"></i></div>`;
+      const mgn = (t.margin >= 0 ? "+" : "") + t.margin.toFixed(1);
+      return `<tr>
+        <td class="tleft rk mono">${t.rank}</td>
+        <td class="tleft"><span class="team"><span class="dot" style="background:${t.c}"></span>
+          <span class="abbr mono">${t.abbr}</span>${t.name}</span></td>
+        <td class="rate mono">${Math.round(t.elo)}</td>
+        <td class="tleft barcell"><div style="display:flex;align-items:center;gap:8px">
+          ${bar}<span class="mono ${t.margin>=0?'pos':'neg'}" style="font-size:12px;width:38px">${mgn}</span></div></td>
+        <td class="mono">${t.w}</td>
+        <td class="mono">${t.l}</td>
+        <td class="mono">${t.pct.toFixed(3).slice(1)}</td>
+      </tr>`;
+    }).join("");
+    document.querySelectorAll("#rtable thead th").forEach(th => {
+      th.removeAttribute("aria-sort");
+      const a = th.querySelector(".arw"); if (a) a.remove();
+      if (th.dataset.k === sortK) {
+        th.setAttribute("aria-sort", sortDir < 0 ? "descending" : "ascending");
+        th.insertAdjacentHTML("beforeend", ` <span class="arw">${sortDir<0?"▼":"▲"}</span>`);
+      }
+    });
+  }
+  document.querySelectorAll("#rtable thead th").forEach(th => {
+    th.addEventListener("click", () => {
+      const k = th.dataset.k;
+      if (k === sortK) sortDir *= -1;
+      else { sortK = k; sortDir = (k === "name" || k === "rank" || k === "l") ? 1 : -1; }
+      render();
+    });
+  });
+  render();
+
+  /* ---- matchup predictor ---- */
+  const homeSel = document.getElementById("home"), awaySel = document.getElementById("away");
+  const opts = TEAMS.map(t => `<option value="${t.abbr}">${t.name}</option>`).join("");
+  homeSel.innerHTML = opts; awaySel.innerHTML = opts;
+  homeSel.value = "OKC"; awaySel.value = "BOS";
+  let neutral = false;
+  const neutralBtn = document.getElementById("neutralBtn");
+  neutralBtn.addEventListener("click", () => {
+    neutral = !neutral; neutralBtn.classList.toggle("on", neutral); predict();
+  });
+  const byAbbr = Object.fromEntries(TEAMS.map(t => [t.abbr, t]));
+
+  function predict() {
+    const h = byAbbr[homeSel.value], a = byAbbr[awaySel.value];
+    document.getElementById("homeElo").textContent = "Elo " + Math.round(h.elo);
+    document.getElementById("awayElo").textContent = "Elo " + Math.round(a.elo);
+    const hca = neutral ? 0 : 100;
+    const diff = (h.elo + hca) - a.elo;
+    const pHome = 1 / (1 + Math.pow(10, -diff / 400));
+    const margin = diff / 28;
+    const ph = Math.round(pHome * 100), pa = 100 - ph;
+    document.getElementById("pbHome").style.width = ph + "%";
+    document.getElementById("pbAway").style.width = pa + "%";
+    document.getElementById("pbHomeTxt").textContent = h.abbr + " " + ph + "%";
+    document.getElementById("pbAwayTxt").textContent = pa + "% " + a.abbr;
+    const favTeam = margin >= 0 ? h : a;
+    const favP = Math.max(ph, pa);
+    document.getElementById("verdict").innerHTML =
+      `<b>${favTeam.name}</b> favored &nbsp;·&nbsp; ${favP}% win probability
+       <span class="mgn">&nbsp;·&nbsp; projected by ${Math.abs(margin).toFixed(1)} pts
+       ${neutral ? "(neutral court)" : "(" + h.abbr + " home)"}</span>`;
+  }
+  homeSel.addEventListener("change", predict);
+  awaySel.addEventListener("change", predict);
+  predict();
+</script>
