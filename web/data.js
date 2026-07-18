@@ -261,6 +261,10 @@ window.NBAI_DATA = {
       "pts": 27.7,
       "reb": 12.9,
       "ast": 10.7,
+      "floor": 21.8,
+      "ceil": 34.2,
+      "cpts": 107.0,
+      "cd": 0.47,
       "c": "#0E2240"
     },
     {
@@ -274,6 +278,10 @@ window.NBAI_DATA = {
       "pts": 25.0,
       "reb": 11.5,
       "ast": 3.1,
+      "floor": 17.0,
+      "ceil": 32.0,
+      "cpts": 83.0,
+      "cd": 0.55,
       "c": "#9EA8B0"
     },
     {
@@ -287,6 +295,10 @@ window.NBAI_DATA = {
       "pts": 33.5,
       "reb": 7.7,
       "ast": 8.3,
+      "floor": 26.6,
+      "ceil": 41.0,
+      "cpts": 37.0,
+      "cd": 0.67,
       "c": "#552583"
     },
     {
@@ -300,6 +312,10 @@ window.NBAI_DATA = {
       "pts": 20.1,
       "reb": 11.9,
       "ast": 3.0,
+      "floor": 14.0,
+      "ceil": 25.0,
+      "cpts": 27.0,
+      "cd": 0.57,
       "c": "#F58426"
     },
     {
@@ -313,6 +329,10 @@ window.NBAI_DATA = {
       "pts": 28.7,
       "reb": 6.9,
       "ast": 5.1,
+      "floor": 23.0,
+      "ceil": 33.0,
+      "cpts": 66.0,
+      "cd": 0.58,
       "c": "#007A33"
     },
     {
@@ -326,6 +346,10 @@ window.NBAI_DATA = {
       "pts": 22.5,
       "reb": 10.3,
       "ast": 7.9,
+      "floor": 17.0,
+      "ceil": 29.0,
+      "cpts": 78.0,
+      "cd": 0.58,
       "c": "#E03A3E"
     },
     {
@@ -339,6 +363,10 @@ window.NBAI_DATA = {
       "pts": 27.9,
       "reb": 6.4,
       "ast": 3.6,
+      "floor": 22.8,
+      "ceil": 33.0,
+      "cpts": 25.0,
+      "cd": 0.47,
       "c": "#C8102E"
     },
     {
@@ -352,6 +380,10 @@ window.NBAI_DATA = {
       "pts": 19.5,
       "reb": 10.5,
       "ast": 2.0,
+      "floor": 14.0,
+      "ceil": 24.2,
+      "cpts": 24.0,
+      "cd": 0.35,
       "c": "#C8102E"
     },
     {
@@ -365,6 +397,10 @@ window.NBAI_DATA = {
       "pts": 20.1,
       "reb": 10.0,
       "ast": 3.2,
+      "floor": 14.0,
+      "ceil": 25.0,
+      "cpts": 37.0,
+      "cd": 0.66,
       "c": "#98002E"
     },
     {
@@ -378,6 +414,10 @@ window.NBAI_DATA = {
       "pts": 31.1,
       "reb": 4.3,
       "ast": 6.6,
+      "floor": 25.0,
+      "ceil": 35.6,
+      "cpts": 102.0,
+      "cd": 0.49,
       "c": "#007AC1"
     },
     {
@@ -391,6 +431,10 @@ window.NBAI_DATA = {
       "pts": 22.2,
       "reb": 8.4,
       "ast": 5.2,
+      "floor": 16.0,
+      "ceil": 28.8,
+      "cpts": 60.0,
+      "cd": 0.57,
       "c": "#0077C0"
     },
     {
@@ -404,6 +448,10 @@ window.NBAI_DATA = {
       "pts": 20.4,
       "reb": 8.9,
       "ast": 6.2,
+      "floor": 14.0,
+      "ceil": 27.8,
+      "cpts": 92.0,
+      "cd": 0.46,
       "c": "#CE1141"
     },
     {
@@ -417,6 +465,10 @@ window.NBAI_DATA = {
       "pts": 17.1,
       "reb": 8.9,
       "ast": 1.7,
+      "floor": 11.6,
+      "ceil": 23.0,
+      "cpts": 38.0,
+      "cd": 0.5,
       "c": "#007AC1"
     },
     {
@@ -430,6 +482,10 @@ window.NBAI_DATA = {
       "pts": 26.0,
       "reb": 5.5,
       "ast": 4.8,
+      "floor": 20.0,
+      "ceil": 31.6,
+      "cpts": 91.0,
+      "cd": 0.58,
       "c": "#CE1141"
     },
     {
@@ -443,6 +499,10 @@ window.NBAI_DATA = {
       "pts": 27.9,
       "reb": 4.5,
       "ast": 5.7,
+      "floor": 19.0,
+      "ceil": 35.0,
+      "cpts": 74.0,
+      "cd": 0.67,
       "c": "#860038"
     },
     {
@@ -456,6 +516,10 @@ window.NBAI_DATA = {
       "pts": 24.2,
       "reb": 6.9,
       "ast": 6.7,
+      "floor": 18.0,
+      "ceil": 30.0,
+      "cpts": 81.0,
+      "cd": 0.57,
       "c": "#E03A3E"
     },
     {
@@ -469,6 +533,10 @@ window.NBAI_DATA = {
       "pts": 18.1,
       "reb": 7.5,
       "ast": 5.9,
+      "floor": 14.0,
+      "ceil": 23.0,
+      "cpts": 36.0,
+      "cd": 0.46,
       "c": "#CE1141"
     },
     {
@@ -482,6 +550,10 @@ window.NBAI_DATA = {
       "pts": 21.1,
       "reb": 6.7,
       "ast": 5.0,
+      "floor": 14.6,
+      "ceil": 27.0,
+      "cpts": 36.0,
+      "cd": 0.47,
       "c": "#236192"
     },
     {
@@ -495,6 +567,10 @@ window.NBAI_DATA = {
       "pts": 28.3,
       "reb": 4.1,
       "ast": 6.6,
+      "floor": 22.0,
+      "ceil": 35.0,
+      "cpts": 114.0,
+      "cd": 0.54,
       "c": "#006BB6"
     },
     {
@@ -508,6 +584,10 @@ window.NBAI_DATA = {
       "pts": 12.1,
       "reb": 11.6,
       "ast": 2.1,
+      "floor": 7.0,
+      "ceil": 18.0,
+      "cpts": 14.0,
+      "cd": 0.42,
       "c": "#E03A3E"
     },
     {
@@ -521,6 +601,10 @@ window.NBAI_DATA = {
       "pts": 28.8,
       "reb": 5.0,
       "ast": 3.7,
+      "floor": 20.0,
+      "ceil": 38.0,
+      "cpts": 106.0,
+      "cd": 0.58,
       "c": "#236192"
     },
     {
@@ -534,6 +618,10 @@ window.NBAI_DATA = {
       "pts": 23.9,
       "reb": 5.5,
       "ast": 9.9,
+      "floor": 16.0,
+      "ceil": 29.4,
+      "cpts": 89.0,
+      "cd": 0.55,
       "c": "#C8102E"
     },
     {
@@ -547,6 +635,10 @@ window.NBAI_DATA = {
       "pts": 24.2,
       "reb": 7.1,
       "ast": 3.0,
+      "floor": 18.0,
+      "ceil": 31.8,
+      "cpts": 29.0,
+      "cd": 0.65,
       "c": "#777777"
     },
     {
@@ -560,6 +652,10 @@ window.NBAI_DATA = {
       "pts": 24.0,
       "reb": 6.6,
       "ast": 3.8,
+      "floor": 19.2,
+      "ceil": 30.0,
+      "cpts": 64.0,
+      "cd": 0.54,
       "c": "#FDBB30"
     },
     {
@@ -573,6 +669,10 @@ window.NBAI_DATA = {
       "pts": 18.2,
       "reb": 9.0,
       "ast": 3.6,
+      "floor": 14.0,
+      "ceil": 23.0,
+      "cpts": 50.0,
+      "cd": 0.55,
       "c": "#860038"
     },
     {
@@ -586,6 +686,10 @@ window.NBAI_DATA = {
       "pts": 20.1,
       "reb": 4.8,
       "ast": 7.1,
+      "floor": 15.0,
+      "ceil": 25.8,
+      "cpts": 38.0,
+      "cd": 0.67,
       "c": "#00788C"
     },
     {
@@ -599,6 +703,10 @@ window.NBAI_DATA = {
       "pts": 27.6,
       "reb": 9.8,
       "ast": 5.4,
+      "floor": 22.0,
+      "ceil": 33.0,
+      "cpts": 37.0,
+      "cd": 0.39,
       "c": "#00471B"
     },
     {
@@ -612,6 +720,10 @@ window.NBAI_DATA = {
       "pts": 21.0,
       "reb": 6.7,
       "ast": 4.5,
+      "floor": 12.8,
+      "ceil": 27.0,
+      "cpts": 68.0,
+      "cd": 0.56,
       "c": "#00538C"
     },
     {
@@ -625,6 +737,10 @@ window.NBAI_DATA = {
       "pts": 11.1,
       "reb": 9.0,
       "ast": 0.7,
+      "floor": 5.0,
+      "ceil": 16.0,
+      "cpts": 11.0,
+      "cd": 0.5,
       "c": "#98002E"
     },
     {
@@ -638,6 +754,10 @@ window.NBAI_DATA = {
       "pts": 11.7,
       "reb": 7.1,
       "ast": 3.7,
+      "floor": 6.0,
+      "ceil": 17.0,
+      "cpts": 20.0,
+      "cd": 0.51,
       "c": "#85714D"
     },
     {
@@ -651,6 +771,10 @@ window.NBAI_DATA = {
       "pts": 23.6,
       "reb": 4.8,
       "ast": 8.0,
+      "floor": 18.0,
+      "ceil": 29.2,
+      "cpts": 89.0,
+      "cd": 0.67,
       "c": "#C8102E"
     },
     {
@@ -664,6 +788,10 @@ window.NBAI_DATA = {
       "pts": 21.5,
       "reb": 5.6,
       "ast": 3.7,
+      "floor": 14.2,
+      "ceil": 29.0,
+      "cpts": 45.0,
+      "cd": 0.6,
       "c": "#CE1141"
     },
     {
@@ -677,6 +805,10 @@ window.NBAI_DATA = {
       "pts": 10.9,
       "reb": 11.5,
       "ast": 1.7,
+      "floor": 6.0,
+      "ceil": 15.0,
+      "cpts": 16.0,
+      "cd": 0.32,
       "c": "#236192"
     },
     {
@@ -690,6 +822,10 @@ window.NBAI_DATA = {
       "pts": 11.4,
       "reb": 7.2,
       "ast": 2.6,
+      "floor": 6.0,
+      "ceil": 16.0,
+      "cpts": 4.0,
+      "cd": 0.45,
       "c": "#00471B"
     },
     {
@@ -703,6 +839,10 @@ window.NBAI_DATA = {
       "pts": 25.4,
       "reb": 4.4,
       "ast": 7.1,
+      "floor": 17.0,
+      "ceil": 34.0,
+      "cpts": 125.0,
+      "cd": 0.61,
       "c": "#0E2240"
     },
     {
@@ -716,6 +856,10 @@ window.NBAI_DATA = {
       "pts": 10.2,
       "reb": 8.4,
       "ast": 1.7,
+      "floor": 6.0,
+      "ceil": 14.0,
+      "cpts": 8.0,
+      "cd": 0.35,
       "c": "#007A33"
     },
     {
@@ -729,6 +873,10 @@ window.NBAI_DATA = {
       "pts": 20.9,
       "reb": 6.1,
       "ast": 7.2,
+      "floor": 15.8,
+      "ceil": 26.0,
+      "cpts": 47.0,
+      "cd": 0.51,
       "c": "#552583"
     },
     {
@@ -742,6 +890,10 @@ window.NBAI_DATA = {
       "pts": 15.1,
       "reb": 8.4,
       "ast": 3.3,
+      "floor": 9.0,
+      "ceil": 20.0,
+      "cpts": 52.0,
+      "cd": 0.63,
       "c": "#CE1141"
     },
     {
@@ -755,6 +907,10 @@ window.NBAI_DATA = {
       "pts": 26.1,
       "reb": 3.9,
       "ast": 6.0,
+      "floor": 19.6,
+      "ceil": 32.0,
+      "cpts": 71.0,
+      "cd": 0.64,
       "c": "#E56020"
     },
     {
@@ -768,6 +924,10 @@ window.NBAI_DATA = {
       "pts": 13.6,
       "reb": 6.2,
       "ast": 2.2,
+      "floor": 8.0,
+      "ceil": 19.0,
+      "cpts": 14.0,
+      "cd": 0.62,
       "c": "#236192"
     },
     {
@@ -781,6 +941,10 @@ window.NBAI_DATA = {
       "pts": 15.4,
       "reb": 8.5,
       "ast": 1.8,
+      "floor": 9.0,
+      "ceil": 20.0,
+      "cpts": 16.0,
+      "cd": 0.36,
       "c": "#860038"
     },
     {
@@ -794,6 +958,10 @@ window.NBAI_DATA = {
       "pts": 26.0,
       "reb": 3.3,
       "ast": 6.8,
+      "floor": 19.6,
+      "ceil": 32.0,
+      "cpts": 130.0,
+      "cd": 0.61,
       "c": "#F58426"
     },
     {
@@ -807,6 +975,10 @@ window.NBAI_DATA = {
       "pts": 26.9,
       "reb": 7.7,
       "ast": 3.9,
+      "floor": 20.0,
+      "ceil": 33.6,
+      "cpts": 30.0,
+      "cd": 0.54,
       "c": "#006BB6"
     },
     {
@@ -820,6 +992,10 @@ window.NBAI_DATA = {
       "pts": 15.2,
       "reb": 7.6,
       "ast": 3.1,
+      "floor": 10.0,
+      "ceil": 20.4,
+      "cpts": 18.0,
+      "cd": 0.72,
       "c": "#E03A3E"
     },
     {
@@ -833,6 +1009,10 @@ window.NBAI_DATA = {
       "pts": 20.2,
       "reb": 4.9,
       "ast": 3.3,
+      "floor": 15.8,
+      "ceil": 26.0,
+      "cpts": 17.0,
+      "cd": 0.68,
       "c": "#00788C"
     },
     {
@@ -846,6 +1026,10 @@ window.NBAI_DATA = {
       "pts": 21.0,
       "reb": 5.7,
       "ast": 3.2,
+      "floor": 15.0,
+      "ceil": 26.8,
+      "cpts": 60.0,
+      "cd": 0.4,
       "c": "#85714D"
     },
     {
@@ -859,6 +1043,10 @@ window.NBAI_DATA = {
       "pts": 13.7,
       "reb": 6.4,
       "ast": 1.6,
+      "floor": 9.2,
+      "ceil": 18.8,
+      "cpts": 10.0,
+      "cd": 0.67,
       "c": "#00471B"
     },
     {
@@ -872,6 +1060,10 @@ window.NBAI_DATA = {
       "pts": 12.5,
       "reb": 7.5,
       "ast": 1.4,
+      "floor": 6.0,
+      "ceil": 18.4,
+      "cpts": 26.0,
+      "cd": 0.41,
       "c": "#5A2D81"
     },
     {
@@ -885,6 +1077,10 @@ window.NBAI_DATA = {
       "pts": 17.0,
       "reb": 8.3,
       "ast": 9.1,
+      "floor": 9.6,
+      "ceil": 22.4,
+      "cpts": 43.0,
+      "cd": 0.56,
       "c": "#CE1141"
     },
     {
@@ -898,6 +1094,10 @@ window.NBAI_DATA = {
       "pts": 21.5,
       "reb": 5.7,
       "ast": 3.8,
+      "floor": 16.0,
+      "ceil": 27.0,
+      "cpts": 51.0,
+      "cd": 0.64,
       "c": "#85714D"
     },
     {
@@ -911,6 +1111,10 @@ window.NBAI_DATA = {
       "pts": 18.3,
       "reb": 7.8,
       "ast": 5.3,
+      "floor": 12.6,
+      "ceil": 23.0,
+      "cpts": 55.0,
+      "cd": 0.47,
       "c": "#CE1141"
     },
     {
@@ -924,6 +1128,10 @@ window.NBAI_DATA = {
       "pts": 12.5,
       "reb": 8.0,
       "ast": 0.8,
+      "floor": 6.0,
+      "ceil": 18.0,
+      "cpts": 14.0,
+      "cd": 0.33,
       "c": "#552583"
     },
     {
@@ -937,6 +1145,10 @@ window.NBAI_DATA = {
       "pts": 14.1,
       "reb": 10.6,
       "ast": 2.2,
+      "floor": 9.0,
+      "ceil": 18.0,
+      "cpts": 26.0,
+      "cd": 0.4,
       "c": "#C8102E"
     },
     {
@@ -950,6 +1162,10 @@ window.NBAI_DATA = {
       "pts": 17.1,
       "reb": 5.8,
       "ast": 3.2,
+      "floor": 11.0,
+      "ceil": 22.0,
+      "cpts": 38.0,
+      "cd": 0.59,
       "c": "#00788C"
     },
     {
@@ -963,6 +1179,10 @@ window.NBAI_DATA = {
       "pts": 11.7,
       "reb": 8.0,
       "ast": 1.0,
+      "floor": 6.0,
+      "ceil": 18.0,
+      "cpts": 18.0,
+      "cd": 0.35,
       "c": "#E56020"
     },
     {
@@ -976,6 +1196,10 @@ window.NBAI_DATA = {
       "pts": 16.3,
       "reb": 5.8,
       "ast": 2.1,
+      "floor": 11.0,
+      "ceil": 21.0,
+      "cpts": 34.0,
+      "cd": 0.66,
       "c": "#CE1141"
     },
     {
@@ -989,6 +1213,10 @@ window.NBAI_DATA = {
       "pts": 12.0,
       "reb": 7.4,
       "ast": 4.8,
+      "floor": 7.0,
+      "ceil": 18.0,
+      "cpts": 11.0,
+      "cd": 0.51,
       "c": "#F58426"
     },
     {
@@ -1002,6 +1230,10 @@ window.NBAI_DATA = {
       "pts": 26.7,
       "reb": 6.9,
       "ast": 2.1,
+      "floor": 19.0,
+      "ceil": 32.8,
+      "cpts": 38.0,
+      "cd": 0.57,
       "c": "#00471B"
     },
     {
@@ -1015,6 +1247,10 @@ window.NBAI_DATA = {
       "pts": 19.4,
       "reb": 5.7,
       "ast": 2.0,
+      "floor": 15.0,
+      "ceil": 24.6,
+      "cpts": 28.0,
+      "cd": 0.54,
       "c": "#5D76A9"
     },
     {
@@ -1028,6 +1264,10 @@ window.NBAI_DATA = {
       "pts": 8.7,
       "reb": 5.1,
       "ast": 1.2,
+      "floor": 4.0,
+      "ceil": 12.2,
+      "cpts": 4.0,
+      "cd": 0.41,
       "c": "#0E2240"
     }
   ],

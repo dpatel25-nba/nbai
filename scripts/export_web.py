@@ -25,6 +25,8 @@ PBP_DIR = ROOT / "data" / "parquet" / "pbp"
 WAR_F = ROOT / "data" / "parquet" / "player_seasons_war.parquet"
 SHOT_F = ROOT / "data" / "parquet" / "player_shot_quality.parquet"
 DEF_F = ROOT / "data" / "parquet" / "defender_quality.parquet"
+CONS_F = ROOT / "data" / "parquet" / "consistency.parquet"
+CLUTCH_F = ROOT / "data" / "parquet" / "clutch.parquet"
 OUT = ROOT / "web" / "data.js"
 BURN_IN = "2013-14"
 LATEST = "2025-26"
@@ -160,8 +162,14 @@ def player_ratings(season: str = LATEST, topn: int = 60) -> list[dict]:
     shot = shot[shot.SEASON == season][["PLAYER_ID", "POE_100"]]
     dfd = pd.read_parquet(DEF_F)
     dfd = dfd[dfd.SEASON == season][["PLAYER_ID", "DEF_VAL_100"]]
+    cons = pd.read_parquet(CONS_F)
+    cons = cons[cons.SEASON == season][["PLAYER_ID", "floor", "ceiling", "consistency"]]
+    clutch = pd.read_parquet(CLUTCH_F)
+    clutch = clutch[clutch.SEASON == season][["PLAYER_ID", "cPTS", "clutch_delta"]]
     m = (war.merge(shot, on="PLAYER_ID", how="left")
-            .merge(dfd, on="PLAYER_ID", how="left"))
+            .merge(dfd, on="PLAYER_ID", how="left")
+            .merge(cons, on="PLAYER_ID", how="left")
+            .merge(clutch, on="PLAYER_ID", how="left"))
     m = m[m["MIN"] >= 500].sort_values("WAR", ascending=False).head(topn)
 
     def num(v, d=1):
@@ -173,6 +181,8 @@ def player_ratings(season: str = LATEST, topn: int = 60) -> list[dict]:
                     "def": num(getattr(r, "DEF_VAL_100", None)),
                     "mpg": num(r.MPG), "pts": num(r.PTS_PG),
                     "reb": num(r.REB_PG), "ast": num(r.AST_PG),
+                    "floor": num(getattr(r, "floor", None)), "ceil": num(getattr(r, "ceiling", None)),
+                    "cpts": num(getattr(r, "cPTS", None), 0), "cd": num(getattr(r, "clutch_delta", None), 2),
                     "c": COLORS.get(r.TEAM, "#888888")})
     return out
 
