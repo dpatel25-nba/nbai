@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 GAME_LOGS = ROOT / "data" / "parquet" / "game_logs.parquet"
 GAMES = ROOT / "data" / "parquet" / "games.parquet"
 ELO = ROOT / "data" / "features" / "elo_predictions.parquet"
+PBP_DIR = ROOT / "data" / "parquet" / "pbp"
 WAR_F = ROOT / "data" / "parquet" / "player_seasons_war.parquet"
 SHOT_F = ROOT / "data" / "parquet" / "player_shot_quality.parquet"
 DEF_F = ROOT / "data" / "parquet" / "defender_quality.parquet"
@@ -99,6 +100,58 @@ def team_ratings() -> list[dict]:
     return teams
 
 
+def shot_charts(season: str = LATEST) -> dict:
+    """Per-team shot cells: location, volume, and efficiency vs. league at that range."""
+    pbp = pd.read_parquet(PBP_DIR / f"{season}.parquet",
+                          columns=["TEAM_TRICODE", "IS_FIELD_GOAL", "SHOT_VALUE",
+                                   "SHOT_RESULT", "SHOT_X", "SHOT_Y", "SHOT_DISTANCE"])
+    f = pbp[(pbp.IS_FIELD_GOAL == 1) & pbp.SHOT_VALUE.isin([2, 3])
+            & pbp.SHOT_RESULT.isin(["Made", "Missed"])
+            & pbp.SHOT_X.notna() & pbp.SHOT_Y.notna()
+            & pbp.SHOT_Y.between(-40, 400) & pbp.SHOT_X.between(-250, 250)].copy()
+    f["made"] = (f.SHOT_RESULT == "Made").astype(int)
+    f["pts"] = f.made * f.SHOT_VALUE
+    f["dband"] = f.SHOT_DISTANCE.round().clip(0, 35)
+    lg_pps = f.groupby("dband").pts.mean().to_dict()
+    CELL = 25
+    f["cx"] = (f.SHOT_X / CELL).round().astype(int) * CELL
+    f["cy"] = (f.SHOT_Y / CELL).round().astype(int) * CELL
+    out = {}
+    for team, d in f.groupby("TEAM_TRICODE"):
+        cells = []
+        for (cx, cy), c in d.groupby(["cx", "cy"]):
+            if len(c) < 5:
+                continue
+            re = c.pts.mean() - lg_pps.get(c.dband.median(), c.pts.mean())
+            cells.append({"x": int(cx), "y": int(cy), "n": int(len(c)), "re": round(re, 2)})
+        out[team] = cells
+    return out
+
+
+def four_factors(season: str = LATEST) -> list[dict]:
+    """Offensive & defensive Four Factors per team (eFG%, TOV%, ORB%, FTR)."""
+    lg = pd.read_parquet(GAME_LOGS, columns=["GAME_ID", "TEAM_ID", "TEAM_ABBREVIATION",
+        "SEASON", "SEASON_TYPE", "FGM", "FGA", "FG3M", "FTA", "OREB", "DREB", "TOV"])
+    lg = lg[(lg.SEASON == season) & (lg.SEASON_TYPE == "Regular Season")]
+    m = lg.merge(lg, on="GAME_ID", suffixes=("", "_o"))
+    m = m[m.TEAM_ID != m.TEAM_ID_o]
+    g = m.groupby(["TEAM_ID", "TEAM_ABBREVIATION"]).sum(numeric_only=True).reset_index()
+    out = []
+    for r in g.itertuples():
+        out.append({
+            "team": r.TEAM_ABBREVIATION, "c": COLORS.get(r.TEAM_ABBREVIATION, "#888888"),
+            "o_efg": round((r.FGM + 0.5 * r.FG3M) / r.FGA * 100, 1),
+            "o_tov": round(r.TOV / (r.FGA + 0.44 * r.FTA + r.TOV) * 100, 1),
+            "o_orb": round(r.OREB / (r.OREB + r.DREB_o) * 100, 1),
+            "o_ftr": round(r.FTA / r.FGA * 100, 1),
+            "d_efg": round((r.FGM_o + 0.5 * r.FG3M_o) / r.FGA_o * 100, 1),
+            "d_tov": round(r.TOV_o / (r.FGA_o + 0.44 * r.FTA_o + r.TOV_o) * 100, 1),
+            "d_orb": round(r.OREB_o / (r.OREB_o + r.DREB) * 100, 1),
+            "d_ftr": round(r.FTA_o / r.FGA_o * 100, 1),
+        })
+    return out
+
+
 def player_ratings(season: str = LATEST, topn: int = 60) -> list[dict]:
     """Top players for a season by our WAR, with shot-making + defense metrics."""
     war = pd.read_parquet(WAR_F)
@@ -129,7 +182,9 @@ def main() -> None:
             "season": LATEST,
             "model": model_metrics(),
             "teams": team_ratings(),
-            "players": player_ratings()}
+            "players": player_ratings(),
+            "factors": four_factors(),
+            "shots": shot_charts()}
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text("window.NBAI_DATA = " + json.dumps(data, indent=2) + ";\n")
     print(f"Wrote {OUT} — {len(data['teams'])} teams, "

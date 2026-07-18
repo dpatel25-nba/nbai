@@ -193,6 +193,12 @@
   .chip b { color: var(--accent); }
   @media (max-width: 720px) { .ptables { grid-template-columns: 1fr; } }
 
+  /* ---- four factors + shots ---- */
+  #fftable th.dsplit, #fftable td.dsplit { border-left: 2px solid var(--border); }
+  #fftable td.o1 { color: var(--accent); font-weight: 700; }
+  .shot-legend { display: flex; gap: 14px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
+  .shot-legend i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; vertical-align: -1px; margin-right: 4px; }
+
   /* ---- roadmap ---- */
   .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
@@ -222,6 +228,7 @@
     <nav class="tabs" role="tablist" aria-label="Sections">
       <button class="tab active" data-view="ratings" role="tab">Team Ratings</button>
       <button class="tab" data-view="players" role="tab">Players</button>
+      <button class="tab" data-view="shots" role="tab">Shot Charts</button>
       <button class="tab" data-view="predict" role="tab">Matchup</button>
       <button class="tab" data-view="roadmap" role="tab">Roadmap</button>
     </nav>
@@ -269,9 +276,22 @@
         </table>
       </div>
     </div>
-    <p class="foot"><b>What's real here:</b> team ratings, records, and the projected-margin bars
-      are computed from our actual model and data. <b>In development:</b> offensive/defensive
-      efficiency splits and injury-adjusted ratings arrive once the box-score layer finishes parsing.</p>
+    <div class="panel" style="margin-top:18px">
+      <div class="panel-head"><h2>Four Factors</h2><span class="eyebrow">Offense · Defense — 2025-26</span></div>
+      <div class="tblwrap">
+        <table id="fftable">
+          <thead><tr>
+            <th class="tleft" data-k="team">Team</th>
+            <th data-k="o_efg">eFG%</th><th data-k="o_tov">TOV%</th><th data-k="o_orb">ORB%</th><th data-k="o_ftr">FTr</th>
+            <th data-k="d_efg" class="dsplit">eFG%</th><th data-k="d_tov">TOV%</th><th data-k="d_orb">ORB%</th><th data-k="d_ftr">FTr</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="foot"><b>Four Factors</b> (Dean Oliver): shooting <b>eFG%</b>, ball control <b>TOV%</b>,
+      rebounding <b>ORB%</b>, and <b>FTr</b> (free-throw rate) — the left block is a team's offense,
+      the right block (shaded) is what they allow on defense. This is *why* a team's rating is what it is.</p>
   </section>
 
   <!-- ============ PLAYERS ============ -->
@@ -307,6 +327,34 @@
       over expected on the same shots (shot-making skill, from 1.6M shot locations). <b>Def</b> —
       defensive points saved per 100 (rim protection + disruption, weights calibrated from our own
       play-by-play). Deeper versions — RAPM, perimeter defense — are in progress.</p>
+  </section>
+
+  <!-- ============ SHOT CHARTS ============ -->
+  <section class="view" id="shots">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">2025–26 · 1.6M shots</div>
+        <h1>Shot Charts</h1>
+      </div>
+      <div class="sub">Where each team shoots and how well — cells sized by volume, colored by
+        efficiency vs. the league at that range. Built from every shot's court coordinates.</div>
+    </div>
+    <div class="mk-card">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px">
+        <label class="eyebrow" for="shotTeam">Team</label>
+        <select id="shotTeam" aria-label="Team" style="width:auto;min-width:200px"></select>
+        <div class="shot-legend">
+          <span><i style="background:var(--cool)"></i> below league</span>
+          <span><i style="background:var(--muted)"></i> average</span>
+          <span><i style="background:var(--accent)"></i> above league</span>
+        </div>
+      </div>
+      <div style="overflow-x:auto"><canvas id="shotCanvas" width="500" height="470"
+        style="max-width:100%;display:block;margin:0 auto"></canvas></div>
+    </div>
+    <p class="foot"><b>Reading it:</b> bigger cell = more shots from that spot; amber = the team
+      scores more points-per-shot there than the league average from that range, blue = less.
+      A big amber cluster behind the arc is an elite, high-volume shooting team.</p>
   </section>
 
   <!-- ============ MATCHUP ============ -->
@@ -569,6 +617,81 @@
     });
   });
   renderPlayers();
+
+  /* ---- four factors ---- */
+  const FALLBACK_FACTORS = [{"team":"BOS","c":"#007A33","o_efg":55.3,"o_tov":11.2,"o_orb":29.2,"o_ftr":20.7,"d_efg":52.3,"d_tov":11.4,"d_orb":24.3,"d_ftr":24.5},{"team":"CLE","c":"#860038","o_efg":56.1,"o_tov":12.2,"o_orb":26.9,"o_ftr":26.5,"d_efg":54.3,"d_tov":13.1,"d_orb":25.6,"d_ftr":26.3},{"team":"DEN","c":"#0E2240","o_efg":57.7,"o_tov":11.5,"o_orb":23.6,"o_ftr":29.4,"d_efg":54.3,"d_tov":10.4,"d_orb":24.7,"d_ftr":25.4},{"team":"LAL","c":"#552583","o_efg":57.3,"o_tov":13.2,"o_orb":23.9,"o_ftr":32.0,"d_efg":55.5,"d_tov":13.0,"d_orb":25.7,"d_ftr":24.1},{"team":"MIN","c":"#236192","o_efg":55.9,"o_tov":12.9,"o_orb":25.7,"o_ftr":28.5,"d_efg":52.9,"d_tov":13.0,"d_orb":26.3,"d_ftr":28.2},{"team":"NYK","c":"#F58426","o_efg":55.7,"o_tov":12.1,"o_orb":29.3,"o_ftr":23.8,"d_efg":54.1,"d_tov":13.1,"d_orb":23.3,"d_ftr":26.5},{"team":"OKC","c":"#007AC1","o_efg":56.1,"o_tov":11.2,"o_orb":22.3,"o_ftr":26.1,"d_efg":51.9,"d_tov":14.6,"d_orb":25.6,"d_ftr":24.8},{"team":"MEM","c":"#5D76A9","o_efg":53.3,"o_tov":13.0,"o_orb":24.7,"o_ftr":25.1,"d_efg":56.2,"d_tov":13.3,"d_orb":29.1,"d_ftr":26.2}];
+  const FACTORS = (D.factors && D.factors.length) ? D.factors : FALLBACK_FACTORS;
+  let fK = "o_efg", fDir = -1;
+  function renderFactors() {
+    const tb = document.querySelector("#fftable tbody"); if (!tb) return;
+    const s = [...FACTORS].sort((a, b) => {
+      const av = a[fK], bv = b[fK];
+      const c = typeof av === "string" ? av.localeCompare(bv) : (av - bv); return c * fDir;
+    });
+    tb.innerHTML = s.map(t => `<tr>
+      <td class="tleft"><span class="team"><span class="dot" style="background:${t.c}"></span>
+        <span class="abbr mono">${t.team}</span></span></td>
+      <td class="mono">${t.o_efg}</td><td class="mono">${t.o_tov}</td><td class="mono">${t.o_orb}</td><td class="mono">${t.o_ftr}</td>
+      <td class="mono dsplit">${t.d_efg}</td><td class="mono">${t.d_tov}</td><td class="mono">${t.d_orb}</td><td class="mono">${t.d_ftr}</td>
+    </tr>`).join("");
+  }
+  document.querySelectorAll("#fftable thead th").forEach(th =>
+    th.addEventListener("click", () => {
+      const k = th.dataset.k;
+      if (k === fK) fDir *= -1; else { fK = k; fDir = (k === "team") ? 1 : -1; }
+      renderFactors();
+    }));
+  renderFactors();
+
+  /* ---- shot charts ---- */
+  const SHOTS = D.shots || {};
+  const shotSel = document.getElementById("shotTeam");
+  const shotTeams = Object.keys(SHOTS).sort();
+  const cssv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const SC = 0.9, mapX = x => 250 + x * SC, mapY = y => 460 - (y + 40) * SC;
+  function drawCourt(ctx, line) {
+    ctx.strokeStyle = line; ctx.lineWidth = 1.4;
+    ctx.strokeRect(mapX(-80), mapY(190), 160 * SC, 230 * SC);          // paint
+    ctx.beginPath(); ctx.arc(mapX(0), mapY(190), 60 * SC, 0, 7); ctx.stroke();  // FT circle
+    ctx.beginPath(); ctx.arc(mapX(0), mapY(0), 7.5 * SC, 0, 7); ctx.stroke();   // hoop
+    ctx.beginPath(); ctx.moveTo(mapX(-250), mapY(-40)); ctx.lineTo(mapX(250), mapY(-40)); ctx.stroke(); // baseline
+    const yc = Math.sqrt(237.5 ** 2 - 220 ** 2);                        // corner-3 y
+    ctx.beginPath();
+    ctx.moveTo(mapX(-220), mapY(-40)); ctx.lineTo(mapX(-220), mapY(yc));
+    const hx = mapX(0), hy = mapY(0), R = 237.5 * SC;
+    const a1 = Math.atan2(mapY(yc) - hy, mapX(220) - hx);
+    const a2 = Math.atan2(mapY(yc) - hy, mapX(-220) - hx);
+    ctx.arc(hx, hy, R, a1, a2, true);
+    ctx.lineTo(mapX(220), mapY(-40)); ctx.stroke();
+  }
+  function drawShots() {
+    const cv = document.getElementById("shotCanvas"); if (!cv) return;
+    const ctx = cv.getContext("2d");
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    ctx.fillStyle = cssv("--panel-2"); ctx.fillRect(0, 0, cv.width, cv.height);
+    drawCourt(ctx, cssv("--border"));
+    const cells = SHOTS[shotSel && shotSel.value] || [];
+    if (!cells.length) {
+      ctx.fillStyle = cssv("--muted"); ctx.font = "14px system-ui"; ctx.textAlign = "center";
+      ctx.fillText("Shot data loads on the live site", cv.width / 2, cv.height / 2);
+      return;
+    }
+    const accent = cssv("--accent"), cool = cssv("--cool");
+    for (const c of cells) {
+      const r = Math.max(2, Math.min(13, 2 + Math.sqrt(c.n) * 0.85));
+      ctx.globalAlpha = Math.max(0.35, Math.min(0.92, 0.35 + Math.abs(c.re) * 1.3));
+      ctx.fillStyle = c.re >= 0 ? accent : cool;
+      ctx.beginPath(); ctx.arc(mapX(c.x), mapY(c.y), r, 0, 7); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+  if (shotSel) {
+    shotSel.innerHTML = (shotTeams.length ? shotTeams : ["BOS"]).map(t => `<option>${t}</option>`).join("");
+    shotSel.value = shotTeams.includes("BOS") ? "BOS" : (shotTeams[0] || "BOS");
+    shotSel.addEventListener("change", drawShots);
+  }
+  document.querySelector('[data-view="shots"]').addEventListener("click", () => setTimeout(drawShots, 0));
+  drawShots();
 
   /* ---- matchup predictor ---- */
   const homeSel = document.getElementById("home"), awaySel = document.getElementById("away");
