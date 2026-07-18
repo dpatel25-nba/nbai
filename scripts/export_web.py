@@ -21,8 +21,12 @@ ROOT = Path(__file__).resolve().parents[1]
 GAME_LOGS = ROOT / "data" / "parquet" / "game_logs.parquet"
 GAMES = ROOT / "data" / "parquet" / "games.parquet"
 ELO = ROOT / "data" / "features" / "elo_predictions.parquet"
+WAR_F = ROOT / "data" / "parquet" / "player_seasons_war.parquet"
+SHOT_F = ROOT / "data" / "parquet" / "player_shot_quality.parquet"
+DEF_F = ROOT / "data" / "parquet" / "defender_quality.parquet"
 OUT = ROOT / "web" / "data.js"
 BURN_IN = "2013-14"
+LATEST = "2025-26"
 
 # team primary colors for the roster dots (kept in sync with the site)
 COLORS = {
@@ -95,10 +99,37 @@ def team_ratings() -> list[dict]:
     return teams
 
 
+def player_ratings(season: str = LATEST, topn: int = 60) -> list[dict]:
+    """Top players for a season by our WAR, with shot-making + defense metrics."""
+    war = pd.read_parquet(WAR_F)
+    war = war[war.SEASON == season]
+    shot = pd.read_parquet(SHOT_F)
+    shot = shot[shot.SEASON == season][["PLAYER_ID", "POE_100"]]
+    dfd = pd.read_parquet(DEF_F)
+    dfd = dfd[dfd.SEASON == season][["PLAYER_ID", "DEF_VAL_100"]]
+    m = (war.merge(shot, on="PLAYER_ID", how="left")
+            .merge(dfd, on="PLAYER_ID", how="left"))
+    m = m[m["MIN"] >= 500].sort_values("WAR", ascending=False).head(topn)
+
+    def num(v, d=1):
+        return round(float(v), d) if pd.notna(v) else None
+    out = []
+    for i, r in enumerate(m.itertuples(), 1):
+        out.append({"rank": i, "player": r.PLAYER, "team": r.TEAM,
+                    "war": num(r.WAR), "poe": num(getattr(r, "POE_100", None)),
+                    "def": num(getattr(r, "DEF_VAL_100", None)),
+                    "mpg": num(r.MPG), "pts": num(r.PTS_PG),
+                    "reb": num(r.REB_PG), "ast": num(r.AST_PG),
+                    "c": COLORS.get(r.TEAM, "#888888")})
+    return out
+
+
 def main() -> None:
     data = {"generated": date.today().isoformat(),
+            "season": LATEST,
             "model": model_metrics(),
-            "teams": team_ratings()}
+            "teams": team_ratings(),
+            "players": player_ratings()}
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text("window.NBAI_DATA = " + json.dumps(data, indent=2) + ";\n")
     print(f"Wrote {OUT} — {len(data['teams'])} teams, "
