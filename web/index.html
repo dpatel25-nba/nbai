@@ -198,6 +198,33 @@
   #fftable td.o1 { color: var(--accent); font-weight: 700; }
   .shot-legend { display: flex; gap: 14px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
   .shot-legend i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; vertical-align: -1px; margin-right: 4px; }
+  #ptable tbody tr { cursor: pointer; }
+
+  /* ---- player modal ---- */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 100;
+    display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .modal-overlay[hidden] { display: none; }
+  .modal-card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px;
+    box-shadow: var(--shadow); max-width: 520px; width: 100%; padding: 24px; position: relative;
+    max-height: 90vh; overflow-y: auto; animation: fade .2s ease; }
+  .modal-x { position: absolute; top: 12px; right: 16px; background: none; border: 0;
+    color: var(--muted); font-size: 26px; cursor: pointer; line-height: 1; }
+  .modal-x:hover { color: var(--text); }
+  .modal-head { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+  .dot.big { width: 16px; height: 16px; }
+  .modal-head h2 { margin: 0; font-size: 22px; }
+  .stat-line { display: flex; gap: 20px; padding: 14px 0; margin: 14px 0 16px;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .stat-line .v { font-size: 19px; font-weight: 700; font-family: ui-monospace, Menlo, monospace;
+    font-variant-numeric: tabular-nums; }
+  .stat-line .l { font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .metric-card { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 11px 13px; }
+  .metric-card .mv { font-size: 18px; font-weight: 700; color: var(--accent);
+    font-family: ui-monospace, Menlo, monospace; font-variant-numeric: tabular-nums; }
+  .metric-card .ml { font-size: 12px; font-weight: 700; margin-top: 2px; }
+  .metric-card .mb { font-size: 11.5px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+  @media (max-width: 520px) { .metric-grid { grid-template-columns: 1fr; } }
 
   /* ---- roadmap ---- */
   .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
@@ -487,6 +514,18 @@
   </section>
 </main>
 
+<div id="pmodal" class="modal-overlay" hidden>
+  <div class="modal-card">
+    <button class="modal-x" aria-label="Close" id="pmClose">&times;</button>
+    <div class="modal-head">
+      <span class="dot big" id="pmDot"></span>
+      <div><h2 id="pmName"></h2><div class="sub" id="pmTeam"></div></div>
+    </div>
+    <div class="stat-line" id="pmLine"></div>
+    <div class="metric-grid" id="pmMetrics"></div>
+  </div>
+</div>
+
 <script src="data.js"></script>
 <script>
   const FALLBACK_TEAMS = [
@@ -598,7 +637,7 @@
   /* ---- players leaderboard ---- */
   const FALLBACK_PLAYERS = [{"rank":1,"player":"Nikola Jokić","team":"DEN","war":10.4,"off":4.3,"poe":22.3,"def":-0.1,"mpg":34.8,"pts":27.7,"reb":12.9,"ast":10.7,"floor":21.8,"ceil":34.2,"cpts":107.0,"cd":0.47,"c":"#0E2240"},{"rank":2,"player":"Victor Wembanyama","team":"SAS","war":9.9,"off":4.7,"poe":-2.3,"def":3.9,"mpg":29.2,"pts":25.0,"reb":11.5,"ast":3.1,"floor":17.0,"ceil":32.0,"cpts":83.0,"cd":0.55,"c":"#9EA8B0"},{"rank":3,"player":"Luka Dončić","team":"LAL","war":9.5,"off":5.9,"poe":14.4,"def":-0.6,"mpg":35.8,"pts":33.5,"reb":7.7,"ast":8.3,"floor":26.6,"ceil":41.0,"cpts":37.0,"cd":0.67,"c":"#552583"},{"rank":4,"player":"Karl-Anthony Towns","team":"NYK","war":9.3,"off":2.6,"poe":2.2,"def":-2.1,"mpg":31.0,"pts":20.1,"reb":11.9,"ast":3.0,"floor":14.0,"ceil":25.0,"cpts":27.0,"cd":0.57,"c":"#F58426"},{"rank":5,"player":"Jaylen Brown","team":"BOS","war":8.1,"off":5.1,"poe":6.3,"def":-1.3,"mpg":34.4,"pts":28.7,"reb":6.9,"ast":5.1,"floor":23.0,"ceil":33.0,"cpts":66.0,"cd":0.58,"c":"#007A33"},{"rank":6,"player":"Jalen Johnson","team":"ATL","war":7.8,"off":2.1,"poe":1.0,"def":-0.4,"mpg":35.2,"pts":22.5,"reb":10.3,"ast":7.9,"floor":17.0,"ceil":29.0,"cpts":78.0,"cd":0.58,"c":"#E03A3E"},{"rank":7,"player":"Kawhi Leonard","team":"LAC","war":7.5,"off":5.3,"poe":13.2,"def":1.2,"mpg":32.1,"pts":27.9,"reb":6.4,"ast":3.6,"floor":22.8,"ceil":33.0,"cpts":25.0,"cd":0.47,"c":"#C8102E"},{"rank":8,"player":"Jalen Duren","team":"DET","war":7.0,"off":3.3,"poe":9.9,"def":-0.8,"mpg":28.2,"pts":19.5,"reb":10.5,"ast":2.0,"floor":14.0,"ceil":24.2,"cpts":24.0,"cd":0.35,"c":"#C8102E"},{"rank":9,"player":"Bam Adebayo","team":"MIA","war":6.8,"off":1.8,"poe":-7.3,"def":0.7,"mpg":32.4,"pts":20.1,"reb":10.0,"ast":3.2,"floor":14.0,"ceil":25.0,"cpts":37.0,"cd":0.66,"c":"#98002E"},{"rank":10,"player":"Shai Gilgeous-Alexander","team":"OKC","war":6.7,"off":6.1,"poe":14.4,"def":1.1,"mpg":33.2,"pts":31.1,"reb":4.3,"ast":6.6,"floor":25.0,"ceil":35.6,"cpts":102.0,"cd":0.49,"c":"#007AC1"},{"rank":11,"player":"Paolo Banchero","team":"ORL","war":6.2,"off":2.4,"poe":-5.5,"def":-0.9,"mpg":34.7,"pts":22.2,"reb":8.4,"ast":5.2,"floor":16.0,"ceil":28.8,"cpts":60.0,"cd":0.57,"c":"#0077C0"},{"rank":12,"player":"Alperen Sengun","team":"HOU","war":6.1,"off":2.4,"poe":2.6,"def":-1.1,"mpg":33.3,"pts":20.4,"reb":8.9,"ast":6.2,"floor":14.0,"ceil":27.8,"cpts":92.0,"cd":0.46,"c":"#CE1141"}];
   const PLAYERS = (D.players && D.players.length) ? D.players : FALLBACK_PLAYERS;
-  let pK = "war", pDir = -1;
+  let pK = "war", pDir = -1, pRendered = [];
   const pf = v => (v === null || v === undefined) ? "—" : v;
   function renderPlayers() {
     const tb = document.querySelector("#ptable tbody");
@@ -608,7 +647,8 @@
       const c = typeof av === "string" ? av.localeCompare(bv) : ((av ?? -999) - (bv ?? -999));
       return c * pDir;
     });
-    tb.innerHTML = s.map((p, i) => `<tr>
+    pRendered = s;
+    tb.innerHTML = s.map((p, i) => `<tr data-i="${i}">
       <td class="tleft rk mono">${i + 1}</td>
       <td class="tleft"><span class="team"><span class="dot" style="background:${p.c || '#888'}"></span>
         ${p.player} <span class="abbr mono">${p.team}</span></span></td>
@@ -647,6 +687,37 @@
       <td class="mono ${(p.cd || 0) >= 0 ? 'pos' : 'neg'}">${(p.cd >= 0 ? '+' : '')}${pf(p.cd)}</td></tr>`).join("");
   }
   renderClutch();
+
+  /* ---- player detail modal ---- */
+  const pmodal = document.getElementById("pmodal");
+  function openPlayer(p) {
+    document.getElementById("pmName").textContent = p.player;
+    document.getElementById("pmTeam").textContent = p.team + " · 2025-26";
+    document.getElementById("pmDot").style.background = p.c || "#888";
+    document.getElementById("pmLine").innerHTML = [
+      ["PTS", pf(p.pts)], ["REB", pf(p.reb)], ["AST", pf(p.ast)], ["MPG", pf(p.mpg)],
+      ["Floor–Ceil", `${pf(p.floor)}–${pf(p.ceil)}`]
+    ].map(([l, v]) => `<div><div class="v">${v}</div><div class="l">${l}</div></div>`).join("");
+    const M = [
+      ["WAR", pf(p.war), "Wins above replacement — total value"],
+      ["Off", pf(p.off), "Offensive plus-minus (pts/100 above avg)"],
+      ["Shot+", pf(p.poe), "Points over expected on their shots"],
+      ["Def", pf(p.def), "Defensive points saved / 100"],
+      ["Clutch PTS", pf(p.cpts), "Points, last 5 min within 5"],
+      ["Clutch lift", (p.cd >= 0 ? "+" : "") + pf(p.cd), "Clutch eFG% vs their season"],
+    ];
+    document.getElementById("pmMetrics").innerHTML = M.map(([l, v, b]) =>
+      `<div class="metric-card"><div class="mv">${v}</div><div class="ml">${l}</div><div class="mb">${b}</div></div>`).join("");
+    pmodal.hidden = false;
+  }
+  document.querySelector("#ptable tbody").addEventListener("click", e => {
+    const tr = e.target.closest("tr"); if (!tr) return;
+    const p = pRendered[+tr.dataset.i]; if (p) openPlayer(p);
+  });
+  const closeModal = () => { pmodal.hidden = true; };
+  document.getElementById("pmClose").addEventListener("click", closeModal);
+  pmodal.addEventListener("click", e => { if (e.target === pmodal) closeModal(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !pmodal.hidden) closeModal(); });
 
   /* ---- four factors ---- */
   const FALLBACK_FACTORS = [{"team":"BOS","c":"#007A33","o_efg":55.3,"o_tov":11.2,"o_orb":29.2,"o_ftr":20.7,"d_efg":52.3,"d_tov":11.4,"d_orb":24.3,"d_ftr":24.5},{"team":"CLE","c":"#860038","o_efg":56.1,"o_tov":12.2,"o_orb":26.9,"o_ftr":26.5,"d_efg":54.3,"d_tov":13.1,"d_orb":25.6,"d_ftr":26.3},{"team":"DEN","c":"#0E2240","o_efg":57.7,"o_tov":11.5,"o_orb":23.6,"o_ftr":29.4,"d_efg":54.3,"d_tov":10.4,"d_orb":24.7,"d_ftr":25.4},{"team":"LAL","c":"#552583","o_efg":57.3,"o_tov":13.2,"o_orb":23.9,"o_ftr":32.0,"d_efg":55.5,"d_tov":13.0,"d_orb":25.7,"d_ftr":24.1},{"team":"MIN","c":"#236192","o_efg":55.9,"o_tov":12.9,"o_orb":25.7,"o_ftr":28.5,"d_efg":52.9,"d_tov":13.0,"d_orb":26.3,"d_ftr":28.2},{"team":"NYK","c":"#F58426","o_efg":55.7,"o_tov":12.1,"o_orb":29.3,"o_ftr":23.8,"d_efg":54.1,"d_tov":13.1,"d_orb":23.3,"d_ftr":26.5},{"team":"OKC","c":"#007AC1","o_efg":56.1,"o_tov":11.2,"o_orb":22.3,"o_ftr":26.1,"d_efg":51.9,"d_tov":14.6,"d_orb":25.6,"d_ftr":24.8},{"team":"MEM","c":"#5D76A9","o_efg":53.3,"o_tov":13.0,"o_orb":24.7,"o_ftr":25.1,"d_efg":56.2,"d_tov":13.3,"d_orb":29.1,"d_ftr":26.2}];
