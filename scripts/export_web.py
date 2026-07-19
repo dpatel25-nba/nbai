@@ -27,6 +27,7 @@ SHOT_F = ROOT / "data" / "parquet" / "player_shot_quality.parquet"
 DEF_F = ROOT / "data" / "parquet" / "defender_quality.parquet"
 CONS_F = ROOT / "data" / "parquet" / "consistency.parquet"
 CLUTCH_F = ROOT / "data" / "parquet" / "clutch.parquet"
+WOWY_F = ROOT / "data" / "parquet" / "wowy.json"
 OUT = ROOT / "web" / "data.js"
 BURN_IN = "2013-14"
 LATEST = "2025-26"
@@ -227,7 +228,9 @@ def main() -> None:
             "players": players,
             "factors": four_factors(),
             "shots": shot_charts(),
-            "pshots": player_shot_charts(LATEST, {p["id"] for p in players})}
+            "pshots": player_shot_charts(LATEST, {p["id"] for p in players}),
+            "wowy": {t: sorted(pl, key=lambda p: -abs(p["impact"]))[:9]
+                     for t, pl in json.loads(WOWY_F.read_text()).items()}}
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text("window.NBAI_DATA = " + json.dumps(data, indent=2) + ";\n")
     print(f"Wrote {OUT} — {len(data['teams'])} teams, "

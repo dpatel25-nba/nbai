@@ -55900,5 +55900,10061 @@ window.NBAI_DATA = {
         "re": -0.55
       }
     ]
+  },
+  "wowy": {
+    "OKC": [
+      {
+        "player": "C. Wallace",
+        "gp_in": 77,
+        "gp_out": 5,
+        "margin_in": 12.3,
+        "margin_out": -7.2,
+        "impact": 19.5,
+        "mates": []
+      },
+      {
+        "player": "A. Mitchell",
+        "gp_in": 57,
+        "gp_out": 25,
+        "margin_in": 15.4,
+        "margin_out": 1.6,
+        "impact": 13.8,
+        "mates": [
+          {
+            "name": "C. Wallace",
+            "pin": 7.5,
+            "pout": 11.3,
+            "delta": 3.8
+          },
+          {
+            "name": "J. Williams",
+            "pin": 6.1,
+            "pout": 9.6,
+            "delta": 3.5
+          },
+          {
+            "name": "J. Williams",
+            "pin": 16.6,
+            "pout": 19.6,
+            "delta": 3.0
+          },
+          {
+            "name": "J. McCain",
+            "pin": 8.9,
+            "pout": 11.8,
+            "delta": 3.0
+          },
+          {
+            "name": "K. Williams",
+            "pin": 5.2,
+            "pout": 8.2,
+            "delta": 2.9
+          }
+        ]
+      },
+      {
+        "player": "S. Gilgeous-Alexander",
+        "gp_in": 68,
+        "gp_out": 14,
+        "margin_in": 13.2,
+        "margin_out": 1.3,
+        "impact": 11.9,
+        "mates": [
+          {
+            "name": "J. Williams",
+            "pin": 15.9,
+            "pout": 25.5,
+            "delta": 9.6
+          },
+          {
+            "name": "B. Carlson",
+            "pin": 4.7,
+            "pout": 12.3,
+            "delta": 7.7
+          },
+          {
+            "name": "C. Wallace",
+            "pin": 7.6,
+            "pout": 14.2,
+            "delta": 6.5
+          },
+          {
+            "name": "J. Williams",
+            "pin": 6.3,
+            "pout": 11.8,
+            "delta": 5.5
+          },
+          {
+            "name": "K. Williams",
+            "pin": 5.3,
+            "pout": 10.1,
+            "delta": 4.8
+          }
+        ]
+      },
+      {
+        "player": "C. Holmgren",
+        "gp_in": 69,
+        "gp_out": 13,
+        "margin_in": 12.8,
+        "margin_out": 2.2,
+        "impact": 10.6,
+        "mates": [
+          {
+            "name": "J. Williams",
+            "pin": 6.1,
+            "pout": 14.3,
+            "delta": 8.3
+          },
+          {
+            "name": "K. Williams",
+            "pin": 5.3,
+            "pout": 12.6,
+            "delta": 7.2
+          },
+          {
+            "name": "A. Mitchell",
+            "pin": 12.8,
+            "pout": 18.4,
+            "delta": 5.6
+          },
+          {
+            "name": "A. Wiggins",
+            "pin": 8.5,
+            "pout": 13.4,
+            "delta": 4.9
+          },
+          {
+            "name": "C. Wallace",
+            "pin": 8.1,
+            "pout": 11.6,
+            "delta": 3.5
+          }
+        ]
+      },
+      {
+        "player": "O. Dieng",
+        "gp_in": 27,
+        "gp_out": 55,
+        "margin_in": 18.1,
+        "margin_out": 7.7,
+        "impact": 10.3,
+        "mates": [
+          {
+            "name": "I. Hartenstein",
+            "pin": 12.6,
+            "pout": 7.3,
+            "delta": -5.3
+          },
+          {
+            "name": "A. Wiggins",
+            "pin": 12.9,
+            "pout": 8.1,
+            "delta": -4.8
+          },
+          {
+            "name": "K. Williams",
+            "pin": 10.0,
+            "pout": 5.4,
+            "delta": -4.6
+          },
+          {
+            "name": "J. Williams",
+            "pin": 5.5,
+            "pout": 8.2,
+            "delta": 2.7
+          },
+          {
+            "name": "L. Dort",
+            "pin": 10.0,
+            "pout": 7.7,
+            "delta": -2.3
+          }
+        ]
+      },
+      {
+        "player": "J. Williams",
+        "gp_in": 65,
+        "gp_out": 17,
+        "margin_in": 13.2,
+        "margin_out": 3.2,
+        "impact": 10.0,
+        "mates": [
+          {
+            "name": "I. Joe",
+            "pin": 12.6,
+            "pout": 5.3,
+            "delta": -7.3
+          },
+          {
+            "name": "B. Carlson",
+            "pin": 4.3,
+            "pout": 8.1,
+            "delta": 3.8
+          },
+          {
+            "name": "C. Wallace",
+            "pin": 9.1,
+            "pout": 6.1,
+            "delta": -3.1
+          },
+          {
+            "name": "A. Wiggins",
+            "pin": 9.8,
+            "pout": 7.8,
+            "delta": -1.9
+          },
+          {
+            "name": "K. Williams",
+            "pin": 6.0,
+            "pout": 7.8,
+            "delta": 1.8
+          }
+        ]
+      },
+      {
+        "player": "L. Dort",
+        "gp_in": 69,
+        "gp_out": 13,
+        "margin_in": 9.6,
+        "margin_out": 19.3,
+        "impact": -9.7,
+        "mates": [
+          {
+            "name": "I. Hartenstein",
+            "pin": 8.2,
+            "pout": 14.7,
+            "delta": 6.5
+          },
+          {
+            "name": "A. Wiggins",
+            "pin": 8.6,
+            "pout": 14.4,
+            "delta": 5.9
+          },
+          {
+            "name": "K. Williams",
+            "pin": 5.9,
+            "pout": 10.6,
+            "delta": 4.7
+          },
+          {
+            "name": "J. Williams",
+            "pin": 16.6,
+            "pout": 20.5,
+            "delta": 3.9
+          },
+          {
+            "name": "O. Dieng",
+            "pin": 2.8,
+            "pout": 5.8,
+            "delta": 2.9
+          }
+        ]
+      },
+      {
+        "player": "A. Caruso",
+        "gp_in": 56,
+        "gp_out": 26,
+        "margin_in": 14.1,
+        "margin_out": 4.7,
+        "impact": 9.5,
+        "mates": [
+          {
+            "name": "K. Williams",
+            "pin": 4.3,
+            "pout": 10.0,
+            "delta": 5.7
+          },
+          {
+            "name": "A. Wiggins",
+            "pin": 8.1,
+            "pout": 12.0,
+            "delta": 3.9
+          },
+          {
+            "name": "S. Gilgeous-Alexander",
+            "pin": 30.5,
+            "pout": 32.8,
+            "delta": 2.3
+          },
+          {
+            "name": "A. Mitchell",
+            "pin": 13.0,
+            "pout": 15.1,
+            "delta": 2.1
+          },
+          {
+            "name": "J. McCain",
+            "pin": 10.0,
+            "pout": 12.0,
+            "delta": 2.0
+          }
+        ]
+      },
+      {
+        "player": "C. Youngblood",
+        "gp_in": 32,
+        "gp_out": 50,
+        "margin_in": 16.4,
+        "margin_out": 7.8,
+        "impact": 8.6,
+        "mates": [
+          {
+            "name": "I. Hartenstein",
+            "pin": 11.6,
+            "pout": 7.2,
+            "delta": -4.4
+          },
+          {
+            "name": "K. Williams",
+            "pin": 9.0,
+            "pout": 5.5,
+            "delta": -3.5
+          },
+          {
+            "name": "A. Wiggins",
+            "pin": 11.3,
+            "pout": 8.4,
+            "delta": -2.9
+          },
+          {
+            "name": "L. Dort",
+            "pin": 10.0,
+            "pout": 7.4,
+            "delta": -2.6
+          },
+          {
+            "name": "J. Williams",
+            "pin": 15.4,
+            "pout": 17.9,
+            "delta": 2.5
+          }
+        ]
+      }
+    ],
+    "HOU": [
+      {
+        "player": "J. Davison",
+        "gp_in": 28,
+        "gp_out": 54,
+        "margin_in": 12.9,
+        "margin_out": 1.3,
+        "impact": 11.6,
+        "mates": [
+          {
+            "name": "T. Eason",
+            "pin": 14.2,
+            "pout": 9.1,
+            "delta": -5.1
+          },
+          {
+            "name": "A. Sengun",
+            "pin": 18.6,
+            "pout": 21.2,
+            "delta": 2.6
+          },
+          {
+            "name": "K. Durant",
+            "pin": 24.6,
+            "pout": 26.6,
+            "delta": 2.0
+          },
+          {
+            "name": "C. Capela",
+            "pin": 4.9,
+            "pout": 3.2,
+            "delta": -1.7
+          },
+          {
+            "name": "J. Okogie",
+            "pin": 5.5,
+            "pout": 4.0,
+            "delta": -1.6
+          }
+        ]
+      },
+      {
+        "player": "J. Green",
+        "gp_in": 30,
+        "gp_out": 52,
+        "margin_in": 10.8,
+        "margin_out": 2.0,
+        "impact": 8.9,
+        "mates": [
+          {
+            "name": "A. Sengun",
+            "pin": 17.7,
+            "pout": 21.7,
+            "delta": 4.0
+          },
+          {
+            "name": "K. Durant",
+            "pin": 24.2,
+            "pout": 26.9,
+            "delta": 2.7
+          },
+          {
+            "name": "C. Capela",
+            "pin": 5.3,
+            "pout": 2.8,
+            "delta": -2.5
+          },
+          {
+            "name": "J. Smith Jr.",
+            "pin": 17.0,
+            "pout": 15.1,
+            "delta": -1.9
+          },
+          {
+            "name": "T. Eason",
+            "pin": 11.5,
+            "pout": 9.8,
+            "delta": -1.7
+          }
+        ]
+      },
+      {
+        "player": "J. Tate",
+        "gp_in": 46,
+        "gp_out": 36,
+        "margin_in": 8.2,
+        "margin_out": 1.5,
+        "impact": 6.7,
+        "mates": [
+          {
+            "name": "J. Davison",
+            "pin": 2.1,
+            "pout": 4.8,
+            "delta": 2.7
+          },
+          {
+            "name": "T. Eason",
+            "pin": 11.5,
+            "pout": 9.3,
+            "delta": -2.2
+          },
+          {
+            "name": "A. Thompson",
+            "pin": 17.6,
+            "pout": 19.1,
+            "delta": 1.4
+          },
+          {
+            "name": "J. Okogie",
+            "pin": 4.1,
+            "pout": 5.1,
+            "delta": 1.0
+          },
+          {
+            "name": "S. Adams",
+            "pin": 5.4,
+            "pout": 6.4,
+            "delta": 0.9
+          }
+        ]
+      },
+      {
+        "player": "A. Holiday",
+        "gp_in": 57,
+        "gp_out": 25,
+        "margin_in": 6.8,
+        "margin_out": 1.7,
+        "impact": 5.1,
+        "mates": [
+          {
+            "name": "A. Thompson",
+            "pin": 19.1,
+            "pout": 16.4,
+            "delta": -2.7
+          },
+          {
+            "name": "J. Davison",
+            "pin": 2.2,
+            "pout": 4.2,
+            "delta": 2.1
+          },
+          {
+            "name": "K. Durant",
+            "pin": 25.4,
+            "pout": 27.2,
+            "delta": 1.8
+          },
+          {
+            "name": "S. Adams",
+            "pin": 5.5,
+            "pout": 7.0,
+            "delta": 1.5
+          },
+          {
+            "name": "T. Eason",
+            "pin": 10.8,
+            "pout": 9.7,
+            "delta": -1.1
+          }
+        ]
+      },
+      {
+        "player": "S. Adams",
+        "gp_in": 32,
+        "gp_out": 50,
+        "margin_in": 7.4,
+        "margin_out": 3.8,
+        "impact": 3.6,
+        "mates": [
+          {
+            "name": "A. Sengun",
+            "pin": 22.0,
+            "pout": 19.4,
+            "delta": -2.6
+          },
+          {
+            "name": "J. Okogie",
+            "pin": 5.8,
+            "pout": 3.7,
+            "delta": -2.1
+          },
+          {
+            "name": "R. Sheppard",
+            "pin": 12.3,
+            "pout": 14.3,
+            "delta": 2.0
+          },
+          {
+            "name": "J. Tate",
+            "pin": 2.0,
+            "pout": 3.3,
+            "delta": 1.3
+          },
+          {
+            "name": "C. Capela",
+            "pin": 3.2,
+            "pout": 4.1,
+            "delta": 0.9
+          }
+        ]
+      },
+      {
+        "player": "D. Finney-Smith",
+        "gp_in": 37,
+        "gp_out": 45,
+        "margin_in": 3.5,
+        "margin_out": 6.6,
+        "impact": -3.2,
+        "mates": [
+          {
+            "name": "J. Okogie",
+            "pin": 2.4,
+            "pout": 6.2,
+            "delta": 3.8
+          },
+          {
+            "name": "A. Holiday",
+            "pin": 3.2,
+            "pout": 6.9,
+            "delta": 3.7
+          },
+          {
+            "name": "K. Durant",
+            "pin": 27.5,
+            "pout": 24.7,
+            "delta": -2.7
+          },
+          {
+            "name": "A. Thompson",
+            "pin": 19.1,
+            "pout": 17.6,
+            "delta": -1.6
+          },
+          {
+            "name": "J. Davison",
+            "pin": 3.1,
+            "pout": 2.1,
+            "delta": -1.0
+          }
+        ]
+      },
+      {
+        "player": "J. Smith Jr.",
+        "gp_in": 77,
+        "gp_out": 5,
+        "margin_in": 5.0,
+        "margin_out": 8.2,
+        "impact": -3.2,
+        "mates": []
+      },
+      {
+        "player": "C. Capela",
+        "gp_in": 75,
+        "gp_out": 7,
+        "margin_in": 5.5,
+        "margin_out": 2.7,
+        "impact": 2.7,
+        "mates": []
+      },
+      {
+        "player": "T. Eason",
+        "gp_in": 60,
+        "gp_out": 22,
+        "margin_in": 5.5,
+        "margin_out": 4.5,
+        "impact": 1.0,
+        "mates": [
+          {
+            "name": "A. Holiday",
+            "pin": 4.2,
+            "pout": 8.2,
+            "delta": 4.0
+          },
+          {
+            "name": "A. Thompson",
+            "pin": 18.7,
+            "pout": 17.1,
+            "delta": -1.6
+          },
+          {
+            "name": "J. Okogie",
+            "pin": 4.1,
+            "pout": 5.5,
+            "delta": 1.4
+          },
+          {
+            "name": "S. Adams",
+            "pin": 6.3,
+            "pout": 5.3,
+            "delta": -1.0
+          },
+          {
+            "name": "A. Sengun",
+            "pin": 20.1,
+            "pout": 21.0,
+            "delta": 0.9
+          }
+        ]
+      }
+    ],
+    "LAL": [
+      {
+        "player": "M. Kleber",
+        "gp_in": 43,
+        "gp_out": 39,
+        "margin_in": -2.0,
+        "margin_out": 5.8,
+        "impact": -7.8,
+        "mates": [
+          {
+            "name": "L. Don\u010di\u0107",
+            "pin": 30.5,
+            "pout": 36.3,
+            "delta": 5.8
+          },
+          {
+            "name": "A. Reaves",
+            "pin": 21.4,
+            "pout": 25.1,
+            "delta": 3.7
+          },
+          {
+            "name": "M. Smart",
+            "pin": 7.5,
+            "pout": 11.1,
+            "delta": 3.6
+          },
+          {
+            "name": "K. Bufkin",
+            "pin": 4.3,
+            "pout": 1.0,
+            "delta": -3.3
+          },
+          {
+            "name": "L. Kennard",
+            "pin": 10.4,
+            "pout": 7.2,
+            "delta": -3.2
+          }
+        ]
+      },
+      {
+        "player": "N. Smith Jr.",
+        "gp_in": 30,
+        "gp_out": 52,
+        "margin_in": -2.5,
+        "margin_out": 4.2,
+        "impact": -6.8,
+        "mates": [
+          {
+            "name": "L. James",
+            "pin": 24.2,
+            "pout": 19.3,
+            "delta": -4.8
+          },
+          {
+            "name": "D. Ayton",
+            "pin": 14.5,
+            "pout": 11.3,
+            "delta": -3.3
+          },
+          {
+            "name": "G. Vincent",
+            "pin": 6.7,
+            "pout": 3.7,
+            "delta": -3.0
+          },
+          {
+            "name": "J. LaRavia",
+            "pin": 10.1,
+            "pout": 7.1,
+            "delta": -3.0
+          },
+          {
+            "name": "D. Knecht",
+            "pin": 5.6,
+            "pout": 2.7,
+            "delta": -2.9
+          }
+        ]
+      },
+      {
+        "player": "D. Timme",
+        "gp_in": 27,
+        "gp_out": 55,
+        "margin_in": 4.7,
+        "margin_out": 0.3,
+        "impact": 4.4,
+        "mates": [
+          {
+            "name": "L. Don\u010di\u0107",
+            "pin": 35.7,
+            "pout": 32.6,
+            "delta": -3.1
+          },
+          {
+            "name": "L. Kennard",
+            "pin": 10.7,
+            "pout": 8.1,
+            "delta": -2.6
+          },
+          {
+            "name": "N. Smith Jr.",
+            "pin": 7.4,
+            "pout": 5.2,
+            "delta": -2.1
+          },
+          {
+            "name": "D. Knecht",
+            "pin": 3.0,
+            "pout": 5.0,
+            "delta": 2.0
+          },
+          {
+            "name": "L. James",
+            "pin": 22.2,
+            "pout": 20.2,
+            "delta": -2.0
+          }
+        ]
+      },
+      {
+        "player": "M. Smart",
+        "gp_in": 62,
+        "gp_out": 20,
+        "margin_in": 2.8,
+        "margin_out": -1.4,
+        "impact": 4.2,
+        "mates": [
+          {
+            "name": "A. Reaves",
+            "pin": 21.6,
+            "pout": 26.9,
+            "delta": 5.2
+          },
+          {
+            "name": "L. James",
+            "pin": 21.8,
+            "pout": 17.8,
+            "delta": -4.0
+          },
+          {
+            "name": "L. Don\u010di\u0107",
+            "pin": 32.9,
+            "pout": 36.4,
+            "delta": 3.5
+          },
+          {
+            "name": "D. Knecht",
+            "pin": 3.5,
+            "pout": 6.6,
+            "delta": 3.0
+          },
+          {
+            "name": "J. Hayes",
+            "pin": 6.8,
+            "pout": 9.7,
+            "delta": 2.8
+          }
+        ]
+      },
+      {
+        "player": "L. Kennard",
+        "gp_in": 32,
+        "gp_out": 50,
+        "margin_in": 4.2,
+        "margin_out": 0.2,
+        "impact": 4.0,
+        "mates": [
+          {
+            "name": "A. Reaves",
+            "pin": 20.2,
+            "pout": 26.5,
+            "delta": 6.3
+          },
+          {
+            "name": "J. LaRavia",
+            "pin": 6.2,
+            "pout": 9.5,
+            "delta": 3.2
+          },
+          {
+            "name": "J. Hayes",
+            "pin": 9.4,
+            "pout": 6.4,
+            "delta": -2.9
+          },
+          {
+            "name": "B. James",
+            "pin": 4.7,
+            "pout": 1.9,
+            "delta": -2.8
+          },
+          {
+            "name": "D. Ayton",
+            "pin": 10.9,
+            "pout": 13.4,
+            "delta": 2.5
+          }
+        ]
+      },
+      {
+        "player": "L. James",
+        "gp_in": 60,
+        "gp_out": 22,
+        "margin_in": 2.8,
+        "margin_out": -1.1,
+        "impact": 4.0,
+        "mates": [
+          {
+            "name": "A. Reaves",
+            "pin": 20.9,
+            "pout": 28.4,
+            "delta": 7.5
+          },
+          {
+            "name": "R. Hachimura",
+            "pin": 10.2,
+            "pout": 14.4,
+            "delta": 4.2
+          },
+          {
+            "name": "L. Kennard",
+            "pin": 8.4,
+            "pout": 12.2,
+            "delta": 3.8
+          },
+          {
+            "name": "D. Knecht",
+            "pin": 3.0,
+            "pout": 6.4,
+            "delta": 3.4
+          },
+          {
+            "name": "G. Vincent",
+            "pin": 4.2,
+            "pout": 6.8,
+            "delta": 2.6
+          }
+        ]
+      },
+      {
+        "player": "R. Hachimura",
+        "gp_in": 68,
+        "gp_out": 14,
+        "margin_in": 2.4,
+        "margin_out": -1.4,
+        "impact": 3.8,
+        "mates": [
+          {
+            "name": "J. LaRavia",
+            "pin": 7.6,
+            "pout": 11.4,
+            "delta": 3.8
+          },
+          {
+            "name": "L. James",
+            "pin": 20.3,
+            "pout": 23.6,
+            "delta": 3.3
+          },
+          {
+            "name": "A. Reaves",
+            "pin": 23.6,
+            "pout": 20.5,
+            "delta": -3.1
+          },
+          {
+            "name": "N. Smith Jr.",
+            "pin": 7.0,
+            "pout": 4.2,
+            "delta": -2.8
+          },
+          {
+            "name": "D. Ayton",
+            "pin": 12.9,
+            "pout": 10.3,
+            "delta": -2.5
+          }
+        ]
+      },
+      {
+        "player": "L. Don\u010di\u0107",
+        "gp_in": 64,
+        "gp_out": 18,
+        "margin_in": 2.6,
+        "margin_out": -1.2,
+        "impact": 3.8,
+        "mates": [
+          {
+            "name": "A. Reaves",
+            "pin": 22.0,
+            "pout": 28.6,
+            "delta": 6.6
+          },
+          {
+            "name": "R. Hachimura",
+            "pin": 10.0,
+            "pout": 15.8,
+            "delta": 5.8
+          },
+          {
+            "name": "N. Smith Jr.",
+            "pin": 3.8,
+            "pout": 9.3,
+            "delta": 5.5
+          },
+          {
+            "name": "L. Kennard",
+            "pin": 7.6,
+            "pout": 12.0,
+            "delta": 4.4
+          },
+          {
+            "name": "D. Timme",
+            "pin": 2.1,
+            "pout": 6.1,
+            "delta": 4.1
+          }
+        ]
+      },
+      {
+        "player": "J. Vanderbilt",
+        "gp_in": 65,
+        "gp_out": 17,
+        "margin_in": 1.0,
+        "margin_out": 4.8,
+        "impact": -3.8,
+        "mates": [
+          {
+            "name": "L. James",
+            "pin": 22.2,
+            "pout": 17.2,
+            "delta": -5.0
+          },
+          {
+            "name": "L. Kennard",
+            "pin": 10.2,
+            "pout": 5.4,
+            "delta": -4.8
+          },
+          {
+            "name": "L. Don\u010di\u0107",
+            "pin": 32.5,
+            "pout": 36.7,
+            "delta": 4.2
+          },
+          {
+            "name": "R. Hachimura",
+            "pin": 12.4,
+            "pout": 8.6,
+            "delta": -3.8
+          },
+          {
+            "name": "J. Hayes",
+            "pin": 8.4,
+            "pout": 5.1,
+            "delta": -3.3
+          }
+        ]
+      }
+    ],
+    "GSW": [
+      {
+        "player": "J. Butler III",
+        "gp_in": 38,
+        "gp_out": 44,
+        "margin_in": 4.8,
+        "margin_out": -5.2,
+        "impact": 10.0,
+        "mates": [
+          {
+            "name": "G. Santos",
+            "pin": 3.3,
+            "pout": 13.3,
+            "delta": 10.0
+          },
+          {
+            "name": "S. Curry",
+            "pin": 27.8,
+            "pout": 22.5,
+            "delta": -5.3
+          },
+          {
+            "name": "M. Moody",
+            "pin": 10.1,
+            "pout": 15.2,
+            "delta": 5.1
+          },
+          {
+            "name": "B. Hield",
+            "pin": 6.5,
+            "pout": 11.6,
+            "delta": 5.1
+          },
+          {
+            "name": "G. Payton II",
+            "pin": 5.1,
+            "pout": 9.7,
+            "delta": 4.6
+          }
+        ]
+      },
+      {
+        "player": "S. Curry",
+        "gp_in": 43,
+        "gp_out": 39,
+        "margin_in": 4.0,
+        "margin_out": -5.5,
+        "impact": 9.5,
+        "mates": [
+          {
+            "name": "G. Santos",
+            "pin": 4.8,
+            "pout": 13.3,
+            "delta": 8.6
+          },
+          {
+            "name": "P. Spencer",
+            "pin": 3.5,
+            "pout": 9.8,
+            "delta": 6.3
+          },
+          {
+            "name": "G. Payton II",
+            "pin": 5.3,
+            "pout": 9.9,
+            "delta": 4.7
+          },
+          {
+            "name": "J. Kuminga",
+            "pin": 13.5,
+            "pout": 9.4,
+            "delta": -4.1
+          },
+          {
+            "name": "B. Hield",
+            "pin": 7.2,
+            "pout": 10.4,
+            "delta": 3.3
+          }
+        ]
+      },
+      {
+        "player": "M. Leons",
+        "gp_in": 25,
+        "gp_out": 57,
+        "margin_in": -6.7,
+        "margin_out": 2.1,
+        "impact": -8.8,
+        "mates": [
+          {
+            "name": "G. Santos",
+            "pin": 13.3,
+            "pout": 7.3,
+            "delta": -6.0
+          },
+          {
+            "name": "G. Payton II",
+            "pin": 11.0,
+            "pout": 6.2,
+            "delta": -4.9
+          },
+          {
+            "name": "B. Podziemski",
+            "pin": 16.3,
+            "pout": 12.7,
+            "delta": -3.6
+          },
+          {
+            "name": "P. Spencer",
+            "pin": 9.0,
+            "pout": 6.1,
+            "delta": -2.9
+          },
+          {
+            "name": "Q. Post",
+            "pin": 9.7,
+            "pout": 7.1,
+            "delta": -2.6
+          }
+        ]
+      },
+      {
+        "player": "T. Jackson-Davis",
+        "gp_in": 36,
+        "gp_out": 46,
+        "margin_in": 3.7,
+        "margin_out": -3.9,
+        "impact": 7.6,
+        "mates": [
+          {
+            "name": "G. Santos",
+            "pin": 5.0,
+            "pout": 12.9,
+            "delta": 7.9
+          },
+          {
+            "name": "G. Payton II",
+            "pin": 4.6,
+            "pout": 9.9,
+            "delta": 5.3
+          },
+          {
+            "name": "J. Butler III",
+            "pin": 18.4,
+            "pout": 23.1,
+            "delta": 4.7
+          },
+          {
+            "name": "S. Curry",
+            "pin": 24.8,
+            "pout": 29.3,
+            "delta": 4.5
+          },
+          {
+            "name": "Q. Post",
+            "pin": 9.5,
+            "pout": 5.5,
+            "delta": -3.9
+          }
+        ]
+      },
+      {
+        "player": "K. Porzi\u0146\u0123is",
+        "gp_in": 15,
+        "gp_out": 67,
+        "margin_in": -5.9,
+        "margin_out": 0.6,
+        "impact": -6.6,
+        "mates": [
+          {
+            "name": "G. Santos",
+            "pin": 16.9,
+            "pout": 7.0,
+            "delta": -9.9
+          },
+          {
+            "name": "G. Payton II",
+            "pin": 12.0,
+            "pout": 6.3,
+            "delta": -5.7
+          },
+          {
+            "name": "B. Podziemski",
+            "pin": 17.8,
+            "pout": 12.9,
+            "delta": -4.9
+          },
+          {
+            "name": "D. Melton",
+            "pin": 10.2,
+            "pout": 13.0,
+            "delta": 2.8
+          },
+          {
+            "name": "W. Richard",
+            "pin": 5.1,
+            "pout": 6.7,
+            "delta": 1.6
+          }
+        ]
+      },
+      {
+        "player": "M. Moody",
+        "gp_in": 60,
+        "gp_out": 22,
+        "margin_in": 1.1,
+        "margin_out": -5.1,
+        "impact": 6.3,
+        "mates": [
+          {
+            "name": "G. Santos",
+            "pin": 7.1,
+            "pout": 15.1,
+            "delta": 8.1
+          },
+          {
+            "name": "G. Payton II",
+            "pin": 6.1,
+            "pout": 11.3,
+            "delta": 5.2
+          },
+          {
+            "name": "B. Podziemski",
+            "pin": 12.6,
+            "pout": 17.0,
+            "delta": 4.4
+          },
+          {
+            "name": "P. Spencer",
+            "pin": 6.2,
+            "pout": 9.5,
+            "delta": 3.3
+          },
+          {
+            "name": "W. Richard",
+            "pin": 7.1,
+            "pout": 4.0,
+            "delta": -3.1
+          }
+        ]
+      },
+      {
+        "player": "W. Richard",
+        "gp_in": 69,
+        "gp_out": 13,
+        "margin_in": 0.4,
+        "margin_out": -5.8,
+        "impact": 6.2,
+        "mates": [
+          {
+            "name": "J. Butler III",
+            "pin": 20.5,
+            "pout": 16.8,
+            "delta": -3.7
+          },
+          {
+            "name": "B. Podziemski",
+            "pin": 13.3,
+            "pout": 16.6,
+            "delta": 3.3
+          },
+          {
+            "name": "D. Melton",
+            "pin": 12.8,
+            "pout": 10.3,
+            "delta": -2.5
+          },
+          {
+            "name": "S. Curry",
+            "pin": 26.2,
+            "pout": 28.5,
+            "delta": 2.3
+          },
+          {
+            "name": "Q. Post",
+            "pin": 7.4,
+            "pout": 9.3,
+            "delta": 1.9
+          }
+        ]
+      },
+      {
+        "player": "A. Horford",
+        "gp_in": 45,
+        "gp_out": 37,
+        "margin_in": 1.6,
+        "margin_out": -3.1,
+        "impact": 4.7,
+        "mates": [
+          {
+            "name": "J. Butler III",
+            "pin": 22.1,
+            "pout": 17.4,
+            "delta": -4.7
+          },
+          {
+            "name": "D. Melton",
+            "pin": 14.0,
+            "pout": 10.1,
+            "delta": -3.9
+          },
+          {
+            "name": "Q. Post",
+            "pin": 6.1,
+            "pout": 10.0,
+            "delta": 3.9
+          },
+          {
+            "name": "T. Jackson-Davis",
+            "pin": 2.5,
+            "pout": 5.8,
+            "delta": 3.3
+          },
+          {
+            "name": "G. Payton II",
+            "pin": 6.5,
+            "pout": 8.7,
+            "delta": 2.3
+          }
+        ]
+      },
+      {
+        "player": "B. Hield",
+        "gp_in": 44,
+        "gp_out": 38,
+        "margin_in": 1.5,
+        "margin_out": -3.0,
+        "impact": 4.5,
+        "mates": [
+          {
+            "name": "G. Santos",
+            "pin": 4.9,
+            "pout": 13.5,
+            "delta": 8.7
+          },
+          {
+            "name": "G. Payton II",
+            "pin": 4.4,
+            "pout": 11.3,
+            "delta": 7.0
+          },
+          {
+            "name": "B. Podziemski",
+            "pin": 12.2,
+            "pout": 15.6,
+            "delta": 3.4
+          },
+          {
+            "name": "P. Spencer",
+            "pin": 5.7,
+            "pout": 8.6,
+            "delta": 2.9
+          },
+          {
+            "name": "A. Horford",
+            "pin": 7.2,
+            "pout": 9.6,
+            "delta": 2.5
+          }
+        ]
+      }
+    ],
+    "NYK": [
+      {
+        "player": "J. Hart",
+        "gp_in": 66,
+        "gp_out": 16,
+        "margin_in": 8.2,
+        "margin_out": -1.2,
+        "impact": 9.3,
+        "mates": [
+          {
+            "name": "M. McBride",
+            "pin": 10.2,
+            "pout": 17.5,
+            "delta": 7.3
+          },
+          {
+            "name": "M. Bridges",
+            "pin": 15.1,
+            "pout": 11.4,
+            "delta": -3.8
+          },
+          {
+            "name": "J. Brunson",
+            "pin": 25.6,
+            "pout": 27.7,
+            "delta": 2.1
+          },
+          {
+            "name": "K. McCullar Jr.",
+            "pin": 1.2,
+            "pout": 3.2,
+            "delta": 2.0
+          },
+          {
+            "name": "O. Anunoby",
+            "pin": 16.3,
+            "pout": 17.9,
+            "delta": 1.6
+          }
+        ]
+      },
+      {
+        "player": "K. Towns",
+        "gp_in": 75,
+        "gp_out": 7,
+        "margin_in": 7.0,
+        "margin_out": -1.1,
+        "impact": 8.2,
+        "mates": []
+      },
+      {
+        "player": "J. Brunson",
+        "gp_in": 74,
+        "gp_out": 8,
+        "margin_in": 7.0,
+        "margin_out": -0.2,
+        "impact": 7.3,
+        "mates": [
+          {
+            "name": "M. McBride",
+            "pin": 10.8,
+            "pout": 20.6,
+            "delta": 9.8
+          },
+          {
+            "name": "K. Towns",
+            "pin": 19.4,
+            "pout": 26.1,
+            "delta": 6.7
+          },
+          {
+            "name": "O. Anunoby",
+            "pin": 16.4,
+            "pout": 19.8,
+            "delta": 3.4
+          },
+          {
+            "name": "L. Shamet",
+            "pin": 9.0,
+            "pout": 12.0,
+            "delta": 3.0
+          },
+          {
+            "name": "M. Robinson",
+            "pin": 5.9,
+            "pout": 3.2,
+            "delta": -2.7
+          }
+        ]
+      },
+      {
+        "player": "J. Sochan",
+        "gp_in": 16,
+        "gp_out": 66,
+        "margin_in": 11.6,
+        "margin_out": 5.1,
+        "impact": 6.5,
+        "mates": [
+          {
+            "name": "J. Brunson",
+            "pin": 21.6,
+            "pout": 27.1,
+            "delta": 5.4
+          },
+          {
+            "name": "M. Bridges",
+            "pin": 11.2,
+            "pout": 15.2,
+            "delta": 4.0
+          },
+          {
+            "name": "P. Dadiet",
+            "pin": 4.0,
+            "pout": 0.8,
+            "delta": -3.2
+          },
+          {
+            "name": "M. Diawara",
+            "pin": 5.9,
+            "pout": 2.9,
+            "delta": -2.9
+          },
+          {
+            "name": "M. Robinson",
+            "pin": 7.4,
+            "pout": 5.2,
+            "delta": -2.2
+          }
+        ]
+      },
+      {
+        "player": "L. Shamet",
+        "gp_in": 51,
+        "gp_out": 31,
+        "margin_in": 8.6,
+        "margin_out": 2.6,
+        "impact": 6.0,
+        "mates": [
+          {
+            "name": "J. Hart",
+            "pin": 10.9,
+            "pout": 14.4,
+            "delta": 3.6
+          },
+          {
+            "name": "K. McCullar Jr.",
+            "pin": 0.8,
+            "pout": 3.8,
+            "delta": 3.0
+          },
+          {
+            "name": "M. McBride",
+            "pin": 10.6,
+            "pout": 13.4,
+            "delta": 2.9
+          },
+          {
+            "name": "O. Anunoby",
+            "pin": 17.6,
+            "pout": 14.9,
+            "delta": -2.8
+          },
+          {
+            "name": "T. Kolek",
+            "pin": 3.3,
+            "pout": 5.9,
+            "delta": 2.7
+          }
+        ]
+      },
+      {
+        "player": "A. Hukporti",
+        "gp_in": 54,
+        "gp_out": 28,
+        "margin_in": 8.4,
+        "margin_out": 2.4,
+        "impact": 6.0,
+        "mates": [
+          {
+            "name": "J. Brunson",
+            "pin": 24.6,
+            "pout": 29.0,
+            "delta": 4.4
+          },
+          {
+            "name": "L. Shamet",
+            "pin": 10.5,
+            "pout": 6.9,
+            "delta": -3.6
+          },
+          {
+            "name": "T. Kolek",
+            "pin": 5.1,
+            "pout": 2.1,
+            "delta": -3.0
+          },
+          {
+            "name": "J. Alvarado",
+            "pin": 7.7,
+            "pout": 4.8,
+            "delta": -2.9
+          },
+          {
+            "name": "M. Diawara",
+            "pin": 4.1,
+            "pout": 2.2,
+            "delta": -1.9
+          }
+        ]
+      },
+      {
+        "player": "K. McCullar Jr.",
+        "gp_in": 21,
+        "gp_out": 61,
+        "margin_in": 2.0,
+        "margin_out": 7.8,
+        "impact": -5.8,
+        "mates": [
+          {
+            "name": "M. McBride",
+            "pin": 18.8,
+            "pout": 10.1,
+            "delta": -8.7
+          },
+          {
+            "name": "L. Shamet",
+            "pin": 7.2,
+            "pout": 9.8,
+            "delta": 2.6
+          },
+          {
+            "name": "M. Diawara",
+            "pin": 5.2,
+            "pout": 2.8,
+            "delta": -2.4
+          },
+          {
+            "name": "J. Hart",
+            "pin": 13.7,
+            "pout": 11.7,
+            "delta": -1.9
+          },
+          {
+            "name": "J. Clarkson",
+            "pin": 9.8,
+            "pout": 8.2,
+            "delta": -1.6
+          }
+        ]
+      },
+      {
+        "player": "T. Kolek",
+        "gp_in": 62,
+        "gp_out": 20,
+        "margin_in": 7.7,
+        "margin_out": 2.2,
+        "impact": 5.5,
+        "mates": [
+          {
+            "name": "L. Shamet",
+            "pin": 8.5,
+            "pout": 11.2,
+            "delta": 2.7
+          },
+          {
+            "name": "M. McBride",
+            "pin": 12.7,
+            "pout": 10.1,
+            "delta": -2.6
+          },
+          {
+            "name": "M. Bridges",
+            "pin": 15.0,
+            "pout": 12.6,
+            "delta": -2.4
+          },
+          {
+            "name": "O. Anunoby",
+            "pin": 17.3,
+            "pout": 14.9,
+            "delta": -2.4
+          },
+          {
+            "name": "J. Hart",
+            "pin": 12.5,
+            "pout": 10.6,
+            "delta": -2.0
+          }
+        ]
+      },
+      {
+        "player": "J. Alvarado",
+        "gp_in": 28,
+        "gp_out": 54,
+        "margin_in": 8.5,
+        "margin_out": 5.2,
+        "impact": 3.4,
+        "mates": [
+          {
+            "name": "M. Bridges",
+            "pin": 12.1,
+            "pout": 15.6,
+            "delta": 3.5
+          },
+          {
+            "name": "M. Diawara",
+            "pin": 5.6,
+            "pout": 2.3,
+            "delta": -3.3
+          },
+          {
+            "name": "J. Brunson",
+            "pin": 24.0,
+            "pout": 27.1,
+            "delta": 3.1
+          },
+          {
+            "name": "P. Dadiet",
+            "pin": 3.5,
+            "pout": 0.7,
+            "delta": -2.8
+          },
+          {
+            "name": "T. Kolek",
+            "pin": 2.9,
+            "pout": 5.0,
+            "delta": 2.1
+          }
+        ]
+      }
+    ],
+    "CLE": [
+      {
+        "player": "L. Nance Jr.",
+        "gp_in": 35,
+        "gp_out": 47,
+        "margin_in": 8.8,
+        "margin_out": 0.6,
+        "impact": 8.1,
+        "mates": [
+          {
+            "name": "D. Schr\u00f6der",
+            "pin": 10.9,
+            "pout": 6.6,
+            "delta": -4.3
+          },
+          {
+            "name": "K. Ellis",
+            "pin": 10.5,
+            "pout": 6.9,
+            "delta": -3.6
+          },
+          {
+            "name": "J. Harden",
+            "pin": 18.6,
+            "pout": 21.4,
+            "delta": 2.8
+          },
+          {
+            "name": "D. Hunter",
+            "pin": 15.6,
+            "pout": 12.9,
+            "delta": -2.7
+          },
+          {
+            "name": "N. Tomlin",
+            "pin": 7.1,
+            "pout": 4.9,
+            "delta": -2.2
+          }
+        ]
+      },
+      {
+        "player": "S. Merrill",
+        "gp_in": 52,
+        "gp_out": 30,
+        "margin_in": 6.9,
+        "margin_out": -0.7,
+        "impact": 7.5,
+        "mates": [
+          {
+            "name": "J. Tyson",
+            "pin": 11.4,
+            "pout": 16.1,
+            "delta": 4.7
+          },
+          {
+            "name": "J. Allen",
+            "pin": 16.5,
+            "pout": 11.9,
+            "delta": -4.7
+          },
+          {
+            "name": "N. Tomlin",
+            "pin": 4.6,
+            "pout": 7.6,
+            "delta": 3.0
+          },
+          {
+            "name": "T. Proctor",
+            "pin": 4.4,
+            "pout": 6.7,
+            "delta": 2.3
+          },
+          {
+            "name": "J. Harden",
+            "pin": 20.9,
+            "pout": 19.0,
+            "delta": -1.9
+          }
+        ]
+      },
+      {
+        "player": "C. Porter Jr.",
+        "gp_in": 64,
+        "gp_out": 18,
+        "margin_in": 5.4,
+        "margin_out": -0.5,
+        "impact": 5.9,
+        "mates": [
+          {
+            "name": "J. Tyson",
+            "pin": 13.9,
+            "pout": 9.8,
+            "delta": -4.1
+          },
+          {
+            "name": "D. Schr\u00f6der",
+            "pin": 9.5,
+            "pout": 6.2,
+            "delta": -3.2
+          },
+          {
+            "name": "J. Harden",
+            "pin": 19.2,
+            "pout": 22.1,
+            "delta": 2.9
+          },
+          {
+            "name": "T. Proctor",
+            "pin": 5.2,
+            "pout": 7.5,
+            "delta": 2.3
+          },
+          {
+            "name": "D. Garland",
+            "pin": 17.7,
+            "pout": 19.5,
+            "delta": 1.8
+          }
+        ]
+      },
+      {
+        "player": "L. Ball",
+        "gp_in": 35,
+        "gp_out": 47,
+        "margin_in": 1.0,
+        "margin_out": 6.4,
+        "impact": -5.5,
+        "mates": [
+          {
+            "name": "D. Hunter",
+            "pin": 16.2,
+            "pout": 9.8,
+            "delta": -6.4
+          },
+          {
+            "name": "J. Allen",
+            "pin": 13.5,
+            "pout": 17.1,
+            "delta": 3.6
+          },
+          {
+            "name": "J. Tyson",
+            "pin": 14.5,
+            "pout": 12.1,
+            "delta": -2.4
+          },
+          {
+            "name": "D. Mitchell",
+            "pin": 29.0,
+            "pout": 26.9,
+            "delta": -2.1
+          },
+          {
+            "name": "T. Proctor",
+            "pin": 4.5,
+            "pout": 6.5,
+            "delta": 2.0
+          }
+        ]
+      },
+      {
+        "player": "E. Mobley",
+        "gp_in": 65,
+        "gp_out": 17,
+        "margin_in": 3.1,
+        "margin_out": 8.0,
+        "impact": -4.9,
+        "mates": [
+          {
+            "name": "J. Allen",
+            "pin": 13.7,
+            "pout": 19.8,
+            "delta": 6.1
+          },
+          {
+            "name": "D. Garland",
+            "pin": 16.9,
+            "pout": 22.6,
+            "delta": 5.7
+          },
+          {
+            "name": "T. Bryant",
+            "pin": 5.2,
+            "pout": 8.9,
+            "delta": 3.7
+          },
+          {
+            "name": "N. Tomlin",
+            "pin": 5.1,
+            "pout": 7.9,
+            "delta": 2.8
+          },
+          {
+            "name": "D. Schr\u00f6der",
+            "pin": 7.7,
+            "pout": 10.0,
+            "delta": 2.3
+          }
+        ]
+      },
+      {
+        "player": "D. Hunter",
+        "gp_in": 43,
+        "gp_out": 39,
+        "margin_in": 2.2,
+        "margin_out": 6.2,
+        "impact": -4.0,
+        "mates": [
+          {
+            "name": "J. Allen",
+            "pin": 13.2,
+            "pout": 18.2,
+            "delta": 5.0
+          },
+          {
+            "name": "J. Tyson",
+            "pin": 14.2,
+            "pout": 11.9,
+            "delta": -2.2
+          },
+          {
+            "name": "L. Nance Jr.",
+            "pin": 2.6,
+            "pout": 4.8,
+            "delta": 2.2
+          },
+          {
+            "name": "T. Bryant",
+            "pin": 5.1,
+            "pout": 7.2,
+            "delta": 2.1
+          },
+          {
+            "name": "L. Ball",
+            "pin": 4.9,
+            "pout": 3.1,
+            "delta": -1.8
+          }
+        ]
+      },
+      {
+        "player": "N. Tomlin",
+        "gp_in": 64,
+        "gp_out": 18,
+        "margin_in": 4.9,
+        "margin_out": 1.2,
+        "impact": 3.7,
+        "mates": [
+          {
+            "name": "D. Hunter",
+            "pin": 13.0,
+            "pout": 17.7,
+            "delta": 4.7
+          },
+          {
+            "name": "J. Allen",
+            "pin": 16.2,
+            "pout": 12.5,
+            "delta": -3.7
+          },
+          {
+            "name": "S. Merrill",
+            "pin": 13.4,
+            "pout": 11.3,
+            "delta": -2.1
+          },
+          {
+            "name": "T. Bryant",
+            "pin": 6.5,
+            "pout": 4.5,
+            "delta": -2.0
+          },
+          {
+            "name": "J. Tyson",
+            "pin": 13.7,
+            "pout": 11.8,
+            "delta": -1.9
+          }
+        ]
+      },
+      {
+        "player": "D. Mitchell",
+        "gp_in": 70,
+        "gp_out": 12,
+        "margin_in": 4.7,
+        "margin_out": 0.9,
+        "impact": 3.7,
+        "mates": [
+          {
+            "name": "D. Schr\u00f6der",
+            "pin": 6.2,
+            "pout": 14.7,
+            "delta": 8.5
+          },
+          {
+            "name": "T. Proctor",
+            "pin": 4.4,
+            "pout": 11.9,
+            "delta": 7.5
+          },
+          {
+            "name": "J. Allen",
+            "pin": 14.7,
+            "pout": 19.5,
+            "delta": 4.8
+          },
+          {
+            "name": "J. Harden",
+            "pin": 19.9,
+            "pout": 24.0,
+            "delta": 4.1
+          },
+          {
+            "name": "C. Porter Jr.",
+            "pin": 3.9,
+            "pout": 7.9,
+            "delta": 4.0
+          }
+        ]
+      },
+      {
+        "player": "T. Proctor",
+        "gp_in": 50,
+        "gp_out": 32,
+        "margin_in": 5.5,
+        "margin_out": 2.0,
+        "impact": 3.5,
+        "mates": [
+          {
+            "name": "J. Tyson",
+            "pin": 15.0,
+            "pout": 10.4,
+            "delta": -4.7
+          },
+          {
+            "name": "J. Harden",
+            "pin": 18.0,
+            "pout": 21.9,
+            "delta": 3.9
+          },
+          {
+            "name": "N. Tomlin",
+            "pin": 6.7,
+            "pout": 4.3,
+            "delta": -2.4
+          },
+          {
+            "name": "D. Hunter",
+            "pin": 14.7,
+            "pout": 12.4,
+            "delta": -2.3
+          },
+          {
+            "name": "K. Ellis",
+            "pin": 9.5,
+            "pout": 7.6,
+            "delta": -1.8
+          }
+        ]
+      }
+    ],
+    "DAL": [
+      {
+        "player": "A. Johnson",
+        "gp_in": 23,
+        "gp_out": 59,
+        "margin_in": -12.8,
+        "margin_out": -2.7,
+        "impact": -10.1,
+        "mates": [
+          {
+            "name": "M. Cisse",
+            "pin": 7.4,
+            "pout": 3.7,
+            "delta": -3.7
+          },
+          {
+            "name": "D. Gafford",
+            "pin": 11.9,
+            "pout": 8.7,
+            "delta": -3.1
+          },
+          {
+            "name": "C. Martin",
+            "pin": 6.1,
+            "pout": 3.4,
+            "delta": -2.7
+          },
+          {
+            "name": "K. Middleton",
+            "pin": 9.3,
+            "pout": 11.8,
+            "delta": 2.5
+          },
+          {
+            "name": "M. Bagley III",
+            "pin": 11.7,
+            "pout": 9.6,
+            "delta": -2.1
+          }
+        ]
+      },
+      {
+        "player": "N. Marshall",
+        "gp_in": 74,
+        "gp_out": 8,
+        "margin_in": -4.8,
+        "margin_out": -12.4,
+        "impact": 7.6,
+        "mates": [
+          {
+            "name": "A. Johnson",
+            "pin": 2.3,
+            "pout": 7.6,
+            "delta": 5.3
+          },
+          {
+            "name": "M. Cisse",
+            "pin": 3.9,
+            "pout": 7.7,
+            "delta": 3.8
+          },
+          {
+            "name": "B. Williams",
+            "pin": 12.8,
+            "pout": 16.0,
+            "delta": 3.2
+          },
+          {
+            "name": "D. Powell",
+            "pin": 2.9,
+            "pout": 6.0,
+            "delta": 3.1
+          },
+          {
+            "name": "K. Middleton",
+            "pin": 10.6,
+            "pout": 8.0,
+            "delta": -2.6
+          }
+        ]
+      },
+      {
+        "player": "K. Middleton",
+        "gp_in": 29,
+        "gp_out": 53,
+        "margin_in": -10.4,
+        "margin_out": -2.8,
+        "impact": -7.5,
+        "mates": [
+          {
+            "name": "M. Cisse",
+            "pin": 7.4,
+            "pout": 3.7,
+            "delta": -3.7
+          },
+          {
+            "name": "D. Gafford",
+            "pin": 11.8,
+            "pout": 8.3,
+            "delta": -3.5
+          },
+          {
+            "name": "M. Christie",
+            "pin": 10.8,
+            "pout": 13.1,
+            "delta": 2.4
+          },
+          {
+            "name": "C. Flagg",
+            "pin": 22.7,
+            "pout": 20.3,
+            "delta": -2.4
+          },
+          {
+            "name": "C. Martin",
+            "pin": 5.5,
+            "pout": 3.5,
+            "delta": -2.0
+          }
+        ]
+      },
+      {
+        "player": "M. Christie",
+        "gp_in": 77,
+        "gp_out": 5,
+        "margin_in": -5.8,
+        "margin_out": -0.6,
+        "impact": -5.2,
+        "mates": []
+      },
+      {
+        "player": "D. Gafford",
+        "gp_in": 55,
+        "gp_out": 27,
+        "margin_in": -7.1,
+        "margin_out": -2.3,
+        "impact": -4.8,
+        "mates": [
+          {
+            "name": "A. Johnson",
+            "pin": 2.5,
+            "pout": 6.1,
+            "delta": 3.6
+          },
+          {
+            "name": "J. Hardy",
+            "pin": 5.6,
+            "pout": 8.9,
+            "delta": 3.4
+          },
+          {
+            "name": "K. Middleton",
+            "pin": 11.1,
+            "pout": 7.8,
+            "delta": -3.3
+          },
+          {
+            "name": "D. Powell",
+            "pin": 2.3,
+            "pout": 4.8,
+            "delta": 2.6
+          },
+          {
+            "name": "B. Williams",
+            "pin": 13.8,
+            "pout": 11.3,
+            "delta": -2.5
+          }
+        ]
+      },
+      {
+        "player": "M. Bagley III",
+        "gp_in": 22,
+        "gp_out": 60,
+        "margin_in": -8.3,
+        "margin_out": -4.5,
+        "impact": -3.8,
+        "mates": [
+          {
+            "name": "A. Johnson",
+            "pin": 2.7,
+            "pout": 6.2,
+            "delta": 3.6
+          },
+          {
+            "name": "N. Marshall",
+            "pin": 17.7,
+            "pout": 14.3,
+            "delta": -3.4
+          },
+          {
+            "name": "D. Gafford",
+            "pin": 11.9,
+            "pout": 8.8,
+            "delta": -3.1
+          },
+          {
+            "name": "K. Middleton",
+            "pin": 10.8,
+            "pout": 8.2,
+            "delta": -2.5
+          },
+          {
+            "name": "C. Flagg",
+            "pin": 22.9,
+            "pout": 20.5,
+            "delta": -2.4
+          }
+        ]
+      },
+      {
+        "player": "A. Davis",
+        "gp_in": 20,
+        "gp_out": 62,
+        "margin_in": -2.9,
+        "margin_out": -6.4,
+        "impact": 3.5,
+        "mates": [
+          {
+            "name": "D. Gafford",
+            "pin": 5.3,
+            "pout": 10.6,
+            "delta": 5.3
+          },
+          {
+            "name": "B. Williams",
+            "pin": 10.6,
+            "pout": 13.9,
+            "delta": 3.4
+          },
+          {
+            "name": "C. Flagg",
+            "pin": 18.7,
+            "pout": 22.0,
+            "delta": 3.3
+          },
+          {
+            "name": "D. Russell",
+            "pin": 8.4,
+            "pout": 11.6,
+            "delta": 3.2
+          },
+          {
+            "name": "N. Marshall",
+            "pin": 13.0,
+            "pout": 16.1,
+            "delta": 3.1
+          }
+        ]
+      },
+      {
+        "player": "C. Martin",
+        "gp_in": 58,
+        "gp_out": 24,
+        "margin_in": -4.7,
+        "margin_out": -7.6,
+        "impact": 2.9,
+        "mates": [
+          {
+            "name": "K. Middleton",
+            "pin": 12.9,
+            "pout": 7.6,
+            "delta": -5.4
+          },
+          {
+            "name": "D. Russell",
+            "pin": 11.0,
+            "pout": 6.8,
+            "delta": -4.2
+          },
+          {
+            "name": "C. Flagg",
+            "pin": 19.9,
+            "pout": 23.8,
+            "delta": 3.9
+          },
+          {
+            "name": "A. Johnson",
+            "pin": 2.1,
+            "pout": 5.6,
+            "delta": 3.5
+          },
+          {
+            "name": "M. Cisse",
+            "pin": 3.7,
+            "pout": 6.9,
+            "delta": 3.2
+          }
+        ]
+      },
+      {
+        "player": "J. Hardy",
+        "gp_in": 34,
+        "gp_out": 48,
+        "margin_in": -3.9,
+        "margin_out": -6.6,
+        "impact": 2.7,
+        "mates": [
+          {
+            "name": "D. Russell",
+            "pin": 9.0,
+            "pout": 13.3,
+            "delta": 4.3
+          },
+          {
+            "name": "P. Washington",
+            "pin": 16.0,
+            "pout": 12.7,
+            "delta": -3.3
+          },
+          {
+            "name": "N. Marshall",
+            "pin": 13.7,
+            "pout": 16.5,
+            "delta": 2.8
+          },
+          {
+            "name": "D. Gafford",
+            "pin": 7.8,
+            "pout": 10.6,
+            "delta": 2.8
+          },
+          {
+            "name": "C. Flagg",
+            "pin": 19.6,
+            "pout": 22.1,
+            "delta": 2.5
+          }
+        ]
+      }
+    ],
+    "SAS": [
+      {
+        "player": "H. Barnes",
+        "gp_in": 77,
+        "gp_out": 5,
+        "margin_in": 7.6,
+        "margin_out": 18.6,
+        "impact": -11.0,
+        "mates": []
+      },
+      {
+        "player": "J. McLaughlin",
+        "gp_in": 44,
+        "gp_out": 38,
+        "margin_in": 12.7,
+        "margin_out": 3.2,
+        "impact": 9.5,
+        "mates": [
+          {
+            "name": "D. Fox",
+            "pin": 16.6,
+            "pout": 20.3,
+            "delta": 3.6
+          },
+          {
+            "name": "J. Sochan",
+            "pin": 2.0,
+            "pout": 5.4,
+            "delta": 3.4
+          },
+          {
+            "name": "S. Castle",
+            "pin": 18.0,
+            "pout": 14.8,
+            "delta": -3.2
+          },
+          {
+            "name": "D. Harper",
+            "pin": 12.8,
+            "pout": 10.3,
+            "delta": -2.5
+          },
+          {
+            "name": "C. Bryant",
+            "pin": 5.2,
+            "pout": 2.8,
+            "delta": -2.4
+          }
+        ]
+      },
+      {
+        "player": "B. Biyombo",
+        "gp_in": 25,
+        "gp_out": 57,
+        "margin_in": 13.6,
+        "margin_out": 6.0,
+        "impact": 7.7,
+        "mates": [
+          {
+            "name": "J. Champagnie",
+            "pin": 8.8,
+            "pout": 12.1,
+            "delta": 3.4
+          },
+          {
+            "name": "D. Harper",
+            "pin": 13.9,
+            "pout": 10.6,
+            "delta": -3.3
+          },
+          {
+            "name": "V. Wembanyama",
+            "pin": 23.0,
+            "pout": 25.9,
+            "delta": 2.9
+          },
+          {
+            "name": "D. Fox",
+            "pin": 16.6,
+            "pout": 19.2,
+            "delta": 2.6
+          },
+          {
+            "name": "K. Johnson",
+            "pin": 14.8,
+            "pout": 12.5,
+            "delta": -2.3
+          }
+        ]
+      },
+      {
+        "player": "V. Wembanyama",
+        "gp_in": 64,
+        "gp_out": 18,
+        "margin_in": 9.7,
+        "margin_out": 3.2,
+        "impact": 6.5,
+        "mates": [
+          {
+            "name": "D. Fox",
+            "pin": 16.5,
+            "pout": 24.6,
+            "delta": 8.1
+          },
+          {
+            "name": "H. Barnes",
+            "pin": 8.7,
+            "pout": 13.9,
+            "delta": 5.2
+          },
+          {
+            "name": "D. Vassell",
+            "pin": 13.0,
+            "pout": 16.9,
+            "delta": 4.0
+          },
+          {
+            "name": "J. Sochan",
+            "pin": 2.6,
+            "pout": 6.3,
+            "delta": 3.6
+          },
+          {
+            "name": "K. Olynyk",
+            "pin": 2.3,
+            "pout": 5.1,
+            "delta": 2.9
+          }
+        ]
+      },
+      {
+        "player": "K. Olynyk",
+        "gp_in": 41,
+        "gp_out": 41,
+        "margin_in": 11.4,
+        "margin_out": 5.2,
+        "impact": 6.1,
+        "mates": [
+          {
+            "name": "V. Wembanyama",
+            "pin": 23.1,
+            "pout": 26.4,
+            "delta": 3.2
+          },
+          {
+            "name": "H. Barnes",
+            "pin": 11.5,
+            "pout": 8.3,
+            "delta": -3.1
+          },
+          {
+            "name": "J. Champagnie",
+            "pin": 12.1,
+            "pout": 10.1,
+            "delta": -2.0
+          },
+          {
+            "name": "L. Waters III",
+            "pin": 3.0,
+            "pout": 1.0,
+            "delta": -2.0
+          },
+          {
+            "name": "L. Kornet",
+            "pin": 7.4,
+            "pout": 5.6,
+            "delta": -1.8
+          }
+        ]
+      },
+      {
+        "player": "C. Bryant",
+        "gp_in": 71,
+        "gp_out": 11,
+        "margin_in": 9.1,
+        "margin_out": 3.1,
+        "impact": 6.0,
+        "mates": [
+          {
+            "name": "D. Harper",
+            "pin": 12.1,
+            "pout": 8.6,
+            "delta": -3.6
+          },
+          {
+            "name": "K. Johnson",
+            "pin": 13.6,
+            "pout": 10.2,
+            "delta": -3.5
+          },
+          {
+            "name": "V. Wembanyama",
+            "pin": 25.4,
+            "pout": 22.7,
+            "delta": -2.7
+          },
+          {
+            "name": "H. Barnes",
+            "pin": 9.6,
+            "pout": 12.0,
+            "delta": 2.4
+          },
+          {
+            "name": "J. McLaughlin",
+            "pin": 1.8,
+            "pout": 3.8,
+            "delta": 1.9
+          }
+        ]
+      },
+      {
+        "player": "J. Sochan",
+        "gp_in": 28,
+        "gp_out": 54,
+        "margin_in": 5.0,
+        "margin_out": 10.0,
+        "impact": -5.0,
+        "mates": [
+          {
+            "name": "D. Fox",
+            "pin": 21.2,
+            "pout": 17.2,
+            "delta": -4.0
+          },
+          {
+            "name": "D. Vassell",
+            "pin": 15.6,
+            "pout": 13.1,
+            "delta": -2.5
+          },
+          {
+            "name": "V. Wembanyama",
+            "pin": 23.2,
+            "pout": 25.7,
+            "delta": 2.5
+          },
+          {
+            "name": "C. Bryant",
+            "pin": 2.7,
+            "pout": 4.9,
+            "delta": 2.3
+          },
+          {
+            "name": "H. Barnes",
+            "pin": 11.1,
+            "pout": 9.3,
+            "delta": -1.8
+          }
+        ]
+      },
+      {
+        "player": "S. Castle",
+        "gp_in": 68,
+        "gp_out": 14,
+        "margin_in": 9.1,
+        "margin_out": 4.6,
+        "impact": 4.5,
+        "mates": [
+          {
+            "name": "D. Fox",
+            "pin": 17.3,
+            "pout": 23.9,
+            "delta": 6.6
+          },
+          {
+            "name": "V. Wembanyama",
+            "pin": 24.7,
+            "pout": 29.8,
+            "delta": 5.1
+          },
+          {
+            "name": "D. Vassell",
+            "pin": 13.1,
+            "pout": 17.2,
+            "delta": 4.1
+          },
+          {
+            "name": "K. Johnson",
+            "pin": 12.6,
+            "pout": 15.9,
+            "delta": 3.3
+          },
+          {
+            "name": "J. Sochan",
+            "pin": 3.1,
+            "pout": 6.2,
+            "delta": 3.2
+          }
+        ]
+      },
+      {
+        "player": "D. Harper",
+        "gp_in": 69,
+        "gp_out": 13,
+        "margin_in": 8.9,
+        "margin_out": 4.9,
+        "impact": 4.0,
+        "mates": [
+          {
+            "name": "J. Sochan",
+            "pin": 2.5,
+            "pout": 6.9,
+            "delta": 4.4
+          },
+          {
+            "name": "D. Fox",
+            "pin": 18.0,
+            "pout": 21.6,
+            "delta": 3.6
+          },
+          {
+            "name": "H. Barnes",
+            "pin": 9.3,
+            "pout": 12.8,
+            "delta": 3.5
+          },
+          {
+            "name": "J. McLaughlin",
+            "pin": 1.8,
+            "pout": 3.8,
+            "delta": 1.9
+          },
+          {
+            "name": "K. Olynyk",
+            "pin": 2.9,
+            "pout": 4.7,
+            "delta": 1.8
+          }
+        ]
+      }
+    ],
+    "CHA": [
+      {
+        "player": "B. Miller",
+        "gp_in": 65,
+        "gp_out": 17,
+        "margin_in": 7.6,
+        "margin_out": -5.9,
+        "impact": 13.6,
+        "mates": [
+          {
+            "name": "T. Mann",
+            "pin": 4.0,
+            "pout": 9.9,
+            "delta": 5.9
+          },
+          {
+            "name": "M. Bridges",
+            "pin": 16.1,
+            "pout": 20.4,
+            "delta": 4.3
+          },
+          {
+            "name": "P. Connaughton",
+            "pin": 1.9,
+            "pout": 4.6,
+            "delta": 2.7
+          },
+          {
+            "name": "S. James",
+            "pin": 4.8,
+            "pout": 7.4,
+            "delta": 2.6
+          },
+          {
+            "name": "R. Kalkbrenner",
+            "pin": 7.1,
+            "pout": 9.3,
+            "delta": 2.2
+          }
+        ]
+      },
+      {
+        "player": "J. Green",
+        "gp_in": 58,
+        "gp_out": 24,
+        "margin_in": 8.5,
+        "margin_out": -4.1,
+        "impact": 12.6,
+        "mates": [
+          {
+            "name": "M. Bridges",
+            "pin": 15.3,
+            "pout": 21.0,
+            "delta": 5.7
+          },
+          {
+            "name": "T. Mann",
+            "pin": 3.6,
+            "pout": 9.2,
+            "delta": 5.6
+          },
+          {
+            "name": "B. Miller",
+            "pin": 20.7,
+            "pout": 16.4,
+            "delta": -4.3
+          },
+          {
+            "name": "C. Sexton",
+            "pin": 12.9,
+            "pout": 15.5,
+            "delta": 2.7
+          },
+          {
+            "name": "P. Connaughton",
+            "pin": 2.0,
+            "pout": 4.2,
+            "delta": 2.3
+          }
+        ]
+      },
+      {
+        "player": "X. Tillman",
+        "gp_in": 16,
+        "gp_out": 66,
+        "margin_in": 13.9,
+        "margin_out": 2.6,
+        "impact": 11.2,
+        "mates": [
+          {
+            "name": "T. Mann",
+            "pin": 3.4,
+            "pout": 6.3,
+            "delta": 2.9
+          },
+          {
+            "name": "L. Ball",
+            "pin": 22.0,
+            "pout": 19.5,
+            "delta": -2.5
+          },
+          {
+            "name": "C. White",
+            "pin": 16.7,
+            "pout": 14.2,
+            "delta": -2.4
+          },
+          {
+            "name": "R. Kalkbrenner",
+            "pin": 6.1,
+            "pout": 8.0,
+            "delta": 1.9
+          },
+          {
+            "name": "M. Bridges",
+            "pin": 15.5,
+            "pout": 17.4,
+            "delta": 1.9
+          }
+        ]
+      },
+      {
+        "player": "C. White",
+        "gp_in": 21,
+        "gp_out": 61,
+        "margin_in": 12.7,
+        "margin_out": 2.1,
+        "impact": 10.5,
+        "mates": [
+          {
+            "name": "T. Mann",
+            "pin": 2.3,
+            "pout": 6.8,
+            "delta": 4.5
+          },
+          {
+            "name": "R. Kalkbrenner",
+            "pin": 5.5,
+            "pout": 8.4,
+            "delta": 2.9
+          },
+          {
+            "name": "M. Bridges",
+            "pin": 15.0,
+            "pout": 17.8,
+            "delta": 2.8
+          },
+          {
+            "name": "J. Green",
+            "pin": 3.0,
+            "pout": 5.0,
+            "delta": 2.0
+          },
+          {
+            "name": "K. Knueppel",
+            "pin": 17.1,
+            "pout": 19.0,
+            "delta": 1.8
+          }
+        ]
+      },
+      {
+        "player": "G. Williams",
+        "gp_in": 36,
+        "gp_out": 46,
+        "margin_in": 10.4,
+        "margin_out": 0.5,
+        "impact": 9.9,
+        "mates": [
+          {
+            "name": "M. Bridges",
+            "pin": 14.5,
+            "pout": 19.0,
+            "delta": 4.6
+          },
+          {
+            "name": "C. White",
+            "pin": 16.5,
+            "pout": 12.0,
+            "delta": -4.5
+          },
+          {
+            "name": "C. Sexton",
+            "pin": 11.1,
+            "pout": 15.0,
+            "delta": 3.9
+          },
+          {
+            "name": "T. Sala\u00fcn",
+            "pin": 3.9,
+            "pout": 6.7,
+            "delta": 2.8
+          },
+          {
+            "name": "T. Mann",
+            "pin": 4.0,
+            "pout": 6.7,
+            "delta": 2.7
+          }
+        ]
+      },
+      {
+        "player": "L. Ball",
+        "gp_in": 72,
+        "gp_out": 10,
+        "margin_in": 5.8,
+        "margin_out": -1.8,
+        "impact": 7.5,
+        "mates": [
+          {
+            "name": "T. Mann",
+            "pin": 4.5,
+            "pout": 11.9,
+            "delta": 7.3
+          },
+          {
+            "name": "M. Bridges",
+            "pin": 16.2,
+            "pout": 23.1,
+            "delta": 6.9
+          },
+          {
+            "name": "K. Knueppel",
+            "pin": 18.0,
+            "pout": 22.1,
+            "delta": 4.1
+          },
+          {
+            "name": "S. James",
+            "pin": 5.0,
+            "pout": 8.2,
+            "delta": 3.2
+          },
+          {
+            "name": "P. Connaughton",
+            "pin": 2.2,
+            "pout": 4.8,
+            "delta": 2.6
+          }
+        ]
+      },
+      {
+        "player": "L. McNeeley",
+        "gp_in": 31,
+        "gp_out": 51,
+        "margin_in": 0.4,
+        "margin_out": 7.5,
+        "impact": -7.2,
+        "mates": [
+          {
+            "name": "T. Mann",
+            "pin": 7.3,
+            "pout": 4.3,
+            "delta": -3.0
+          },
+          {
+            "name": "S. James",
+            "pin": 7.0,
+            "pout": 4.4,
+            "delta": -2.7
+          },
+          {
+            "name": "M. Bridges",
+            "pin": 18.4,
+            "pout": 16.2,
+            "delta": -2.2
+          },
+          {
+            "name": "K. Knueppel",
+            "pin": 17.4,
+            "pout": 19.1,
+            "delta": 1.7
+          },
+          {
+            "name": "C. Sexton",
+            "pin": 14.9,
+            "pout": 13.3,
+            "delta": -1.6
+          }
+        ]
+      },
+      {
+        "player": "P. Connaughton",
+        "gp_in": 42,
+        "gp_out": 40,
+        "margin_in": 7.7,
+        "margin_out": 1.8,
+        "impact": 5.9,
+        "mates": [
+          {
+            "name": "C. White",
+            "pin": 14.5,
+            "pout": 18.3,
+            "delta": 3.8
+          },
+          {
+            "name": "T. Mann",
+            "pin": 4.9,
+            "pout": 6.5,
+            "delta": 1.6
+          },
+          {
+            "name": "L. Ball",
+            "pin": 20.8,
+            "pout": 19.3,
+            "delta": -1.5
+          },
+          {
+            "name": "B. Miller",
+            "pin": 20.8,
+            "pout": 19.6,
+            "delta": -1.2
+          },
+          {
+            "name": "T. Sala\u00fcn",
+            "pin": 5.4,
+            "pout": 6.5,
+            "delta": 1.1
+          }
+        ]
+      },
+      {
+        "player": "T. Mann",
+        "gp_in": 53,
+        "gp_out": 29,
+        "margin_in": 6.8,
+        "margin_out": 1.1,
+        "impact": 5.7,
+        "mates": [
+          {
+            "name": "T. Sala\u00fcn",
+            "pin": 4.8,
+            "pout": 7.9,
+            "delta": 3.1
+          },
+          {
+            "name": "M. Diabat\u00e9",
+            "pin": 8.9,
+            "pout": 6.0,
+            "delta": -3.0
+          },
+          {
+            "name": "K. Knueppel",
+            "pin": 17.6,
+            "pout": 20.1,
+            "delta": 2.5
+          },
+          {
+            "name": "J. Green",
+            "pin": 5.3,
+            "pout": 2.8,
+            "delta": -2.5
+          },
+          {
+            "name": "C. Sexton",
+            "pin": 15.0,
+            "pout": 12.8,
+            "delta": -2.2
+          }
+        ]
+      }
+    ],
+    "BKN": [
+      {
+        "player": "J. Wilson",
+        "gp_in": 54,
+        "gp_out": 28,
+        "margin_in": -13.9,
+        "margin_out": -2.5,
+        "impact": -11.4,
+        "mates": [
+          {
+            "name": "T. Etienne",
+            "pin": 7.0,
+            "pout": 12.2,
+            "delta": 5.2
+          },
+          {
+            "name": "M. Porter Jr.",
+            "pin": 22.1,
+            "pout": 27.0,
+            "delta": 4.9
+          },
+          {
+            "name": "C. Thomas",
+            "pin": 16.8,
+            "pout": 13.7,
+            "delta": -3.1
+          },
+          {
+            "name": "E. D\u00ebmin",
+            "pin": 9.2,
+            "pout": 12.0,
+            "delta": 2.8
+          },
+          {
+            "name": "J. Minott",
+            "pin": 10.1,
+            "pout": 12.8,
+            "delta": 2.7
+          }
+        ]
+      },
+      {
+        "player": "J. Minott",
+        "gp_in": 16,
+        "gp_out": 66,
+        "margin_in": -18.7,
+        "margin_out": -7.9,
+        "impact": -10.8,
+        "mates": [
+          {
+            "name": "M. Smith",
+            "pin": 5.9,
+            "pout": 11.0,
+            "delta": 5.1
+          },
+          {
+            "name": "N. Clowney",
+            "pin": 9.0,
+            "pout": 13.0,
+            "delta": 4.0
+          },
+          {
+            "name": "O. Agbaji",
+            "pin": 4.8,
+            "pout": 8.5,
+            "delta": 3.7
+          },
+          {
+            "name": "N. Claxton",
+            "pin": 9.2,
+            "pout": 12.3,
+            "delta": 3.1
+          },
+          {
+            "name": "D. Wolf",
+            "pin": 11.4,
+            "pout": 8.4,
+            "delta": -3.0
+          }
+        ]
+      },
+      {
+        "player": "E. Liddell",
+        "gp_in": 26,
+        "gp_out": 56,
+        "margin_in": -16.7,
+        "margin_out": -6.9,
+        "impact": -9.8,
+        "mates": [
+          {
+            "name": "B. Saraf",
+            "pin": 11.1,
+            "pout": 4.8,
+            "delta": -6.3
+          },
+          {
+            "name": "J. Minott",
+            "pin": 13.5,
+            "pout": 8.0,
+            "delta": -5.5
+          },
+          {
+            "name": "J. Wilson",
+            "pin": 8.9,
+            "pout": 4.6,
+            "delta": -4.2
+          },
+          {
+            "name": "D. Powell",
+            "pin": 9.0,
+            "pout": 5.2,
+            "delta": -3.8
+          },
+          {
+            "name": "O. Agbaji",
+            "pin": 8.9,
+            "pout": 5.2,
+            "delta": -3.7
+          }
+        ]
+      },
+      {
+        "player": "D. Sharpe",
+        "gp_in": 62,
+        "gp_out": 20,
+        "margin_in": -8.4,
+        "margin_out": -15.0,
+        "impact": 6.6,
+        "mates": [
+          {
+            "name": "T. Etienne",
+            "pin": 1.5,
+            "pout": 11.1,
+            "delta": 9.6
+          },
+          {
+            "name": "B. Saraf",
+            "pin": 5.1,
+            "pout": 11.5,
+            "delta": 6.4
+          },
+          {
+            "name": "E. Liddell",
+            "pin": 2.2,
+            "pout": 8.2,
+            "delta": 6.0
+          },
+          {
+            "name": "J. Wilson",
+            "pin": 5.0,
+            "pout": 10.3,
+            "delta": 5.3
+          },
+          {
+            "name": "N. Clowney",
+            "pin": 12.7,
+            "pout": 9.7,
+            "delta": -3.0
+          }
+        ]
+      },
+      {
+        "player": "M. Porter Jr.",
+        "gp_in": 52,
+        "gp_out": 30,
+        "margin_in": -8.0,
+        "margin_out": -13.4,
+        "impact": 5.3,
+        "mates": [
+          {
+            "name": "B. Saraf",
+            "pin": 4.6,
+            "pout": 10.2,
+            "delta": 5.6
+          },
+          {
+            "name": "Z. Williams",
+            "pin": 8.7,
+            "pout": 13.2,
+            "delta": 4.5
+          },
+          {
+            "name": "J. Wilson",
+            "pin": 4.6,
+            "pout": 8.5,
+            "delta": 3.9
+          },
+          {
+            "name": "D. Wolf",
+            "pin": 8.0,
+            "pout": 10.7,
+            "delta": 2.7
+          },
+          {
+            "name": "N. Traore",
+            "pin": 7.9,
+            "pout": 10.4,
+            "delta": 2.5
+          }
+        ]
+      },
+      {
+        "player": "M. Smith",
+        "gp_in": 15,
+        "gp_out": 67,
+        "margin_in": -14.3,
+        "margin_out": -9.0,
+        "impact": -5.3,
+        "mates": [
+          {
+            "name": "T. Etienne",
+            "pin": 12.4,
+            "pout": 2.5,
+            "delta": -9.8
+          },
+          {
+            "name": "B. Saraf",
+            "pin": 12.5,
+            "pout": 5.5,
+            "delta": -7.1
+          },
+          {
+            "name": "E. Liddell",
+            "pin": 9.2,
+            "pout": 2.2,
+            "delta": -7.0
+          },
+          {
+            "name": "J. Wilson",
+            "pin": 11.6,
+            "pout": 5.3,
+            "delta": -6.2
+          },
+          {
+            "name": "C. Johnson",
+            "pin": 9.6,
+            "pout": 3.5,
+            "delta": -6.1
+          }
+        ]
+      },
+      {
+        "player": "T. Etienne",
+        "gp_in": 24,
+        "gp_out": 58,
+        "margin_in": -13.8,
+        "margin_out": -8.4,
+        "impact": -5.3,
+        "mates": [
+          {
+            "name": "B. Saraf",
+            "pin": 11.7,
+            "pout": 4.7,
+            "delta": -7.0
+          },
+          {
+            "name": "J. Minott",
+            "pin": 13.5,
+            "pout": 8.0,
+            "delta": -5.5
+          },
+          {
+            "name": "E. Liddell",
+            "pin": 6.3,
+            "pout": 2.0,
+            "delta": -4.3
+          },
+          {
+            "name": "J. Wilson",
+            "pin": 9.0,
+            "pout": 4.8,
+            "delta": -4.1
+          },
+          {
+            "name": "O. Agbaji",
+            "pin": 8.9,
+            "pout": 5.2,
+            "delta": -3.7
+          }
+        ]
+      },
+      {
+        "player": "E. D\u00ebmin",
+        "gp_in": 52,
+        "gp_out": 30,
+        "margin_in": -8.1,
+        "margin_out": -13.2,
+        "impact": 5.1,
+        "mates": [
+          {
+            "name": "E. Liddell",
+            "pin": 1.8,
+            "pout": 7.4,
+            "delta": 5.6
+          },
+          {
+            "name": "Z. Williams",
+            "pin": 8.9,
+            "pout": 12.8,
+            "delta": 4.0
+          },
+          {
+            "name": "B. Saraf",
+            "pin": 5.3,
+            "pout": 9.3,
+            "delta": 4.0
+          },
+          {
+            "name": "J. Wilson",
+            "pin": 4.8,
+            "pout": 8.6,
+            "delta": 3.8
+          },
+          {
+            "name": "N. Claxton",
+            "pin": 12.6,
+            "pout": 9.8,
+            "delta": -2.8
+          }
+        ]
+      },
+      {
+        "player": "N. Clowney",
+        "gp_in": 66,
+        "gp_out": 16,
+        "margin_in": -9.0,
+        "margin_out": -14.0,
+        "impact": 5.0,
+        "mates": [
+          {
+            "name": "T. Etienne",
+            "pin": 4.1,
+            "pout": 14.1,
+            "delta": 10.0
+          },
+          {
+            "name": "E. Liddell",
+            "pin": 2.7,
+            "pout": 9.7,
+            "delta": 7.1
+          },
+          {
+            "name": "J. Minott",
+            "pin": 9.3,
+            "pout": 15.0,
+            "delta": 5.7
+          },
+          {
+            "name": "J. Wilson",
+            "pin": 5.3,
+            "pout": 10.2,
+            "delta": 4.9
+          },
+          {
+            "name": "B. Saraf",
+            "pin": 5.9,
+            "pout": 10.7,
+            "delta": 4.8
+          }
+        ]
+      }
+    ],
+    "ORL": [
+      {
+        "player": "T. da Silva",
+        "gp_in": 77,
+        "gp_out": 5,
+        "margin_in": 1.2,
+        "margin_out": -8.2,
+        "impact": 9.4,
+        "mates": []
+      },
+      {
+        "player": "P. Banchero",
+        "gp_in": 72,
+        "gp_out": 10,
+        "margin_in": -0.5,
+        "margin_out": 8.9,
+        "impact": -9.4,
+        "mates": [
+          {
+            "name": "J. Howard",
+            "pin": 4.9,
+            "pout": 9.6,
+            "delta": 4.7
+          },
+          {
+            "name": "J. Cain",
+            "pin": 5.9,
+            "pout": 1.6,
+            "delta": -4.3
+          },
+          {
+            "name": "F. Wagner",
+            "pin": 19.3,
+            "pout": 23.6,
+            "delta": 4.3
+          },
+          {
+            "name": "D. Bane",
+            "pin": 19.7,
+            "pout": 23.1,
+            "delta": 3.4
+          },
+          {
+            "name": "J. Richardson",
+            "pin": 4.1,
+            "pout": 7.2,
+            "delta": 3.1
+          }
+        ]
+      },
+      {
+        "player": "J. Suggs",
+        "gp_in": 57,
+        "gp_out": 25,
+        "margin_in": 2.6,
+        "margin_out": -3.8,
+        "impact": 6.4,
+        "mates": [
+          {
+            "name": "J. Richardson",
+            "pin": 2.6,
+            "pout": 7.8,
+            "delta": 5.2
+          },
+          {
+            "name": "A. Black",
+            "pin": 13.4,
+            "pout": 17.8,
+            "delta": 4.4
+          },
+          {
+            "name": "J. Cain",
+            "pin": 6.5,
+            "pout": 3.2,
+            "delta": -3.3
+          },
+          {
+            "name": "W. Carter Jr.",
+            "pin": 10.9,
+            "pout": 14.1,
+            "delta": 3.2
+          },
+          {
+            "name": "N. Penda",
+            "pin": 2.9,
+            "pout": 5.9,
+            "delta": 3.0
+          }
+        ]
+      },
+      {
+        "player": "J. Richardson",
+        "gp_in": 54,
+        "gp_out": 28,
+        "margin_in": -1.3,
+        "margin_out": 4.4,
+        "impact": -5.8,
+        "mates": [
+          {
+            "name": "A. Black",
+            "pin": 16.4,
+            "pout": 11.5,
+            "delta": -4.9
+          },
+          {
+            "name": "D. Bane",
+            "pin": 18.9,
+            "pout": 22.5,
+            "delta": 3.6
+          },
+          {
+            "name": "J. Carter",
+            "pin": 5.8,
+            "pout": 8.8,
+            "delta": 3.0
+          },
+          {
+            "name": "M. Wagner",
+            "pin": 7.9,
+            "pout": 5.0,
+            "delta": -2.9
+          },
+          {
+            "name": "T. da Silva",
+            "pin": 8.9,
+            "pout": 11.6,
+            "delta": 2.7
+          }
+        ]
+      },
+      {
+        "player": "F. Wagner",
+        "gp_in": 34,
+        "gp_out": 48,
+        "margin_in": 3.5,
+        "margin_out": -1.4,
+        "impact": 4.9,
+        "mates": [
+          {
+            "name": "P. Banchero",
+            "pin": 19.0,
+            "pout": 23.8,
+            "delta": 4.8
+          },
+          {
+            "name": "D. Bane",
+            "pin": 18.1,
+            "pout": 21.5,
+            "delta": 3.5
+          },
+          {
+            "name": "A. Black",
+            "pin": 13.6,
+            "pout": 16.2,
+            "delta": 2.6
+          },
+          {
+            "name": "G. Bitadze",
+            "pin": 6.6,
+            "pout": 5.2,
+            "delta": -1.5
+          },
+          {
+            "name": "T. Jones",
+            "pin": 2.3,
+            "pout": 3.8,
+            "delta": 1.4
+          }
+        ]
+      },
+      {
+        "player": "A. Black",
+        "gp_in": 64,
+        "gp_out": 18,
+        "margin_in": 1.5,
+        "margin_out": -2.5,
+        "impact": 4.0,
+        "mates": [
+          {
+            "name": "J. Cain",
+            "pin": 3.5,
+            "pout": 8.5,
+            "delta": 5.1
+          },
+          {
+            "name": "T. da Silva",
+            "pin": 8.9,
+            "pout": 13.1,
+            "delta": 4.2
+          },
+          {
+            "name": "M. Wagner",
+            "pin": 8.0,
+            "pout": 5.1,
+            "delta": -2.9
+          },
+          {
+            "name": "W. Carter Jr.",
+            "pin": 11.4,
+            "pout": 13.4,
+            "delta": 2.0
+          },
+          {
+            "name": "P. Banchero",
+            "pin": 21.7,
+            "pout": 23.7,
+            "delta": 2.0
+          }
+        ]
+      },
+      {
+        "player": "J. Carter",
+        "gp_in": 30,
+        "gp_out": 52,
+        "margin_in": 2.7,
+        "margin_out": -0.6,
+        "impact": 3.3,
+        "mates": [
+          {
+            "name": "J. Cain",
+            "pin": 7.8,
+            "pout": 2.7,
+            "delta": -5.1
+          },
+          {
+            "name": "A. Black",
+            "pin": 11.1,
+            "pout": 15.9,
+            "delta": 4.8
+          },
+          {
+            "name": "T. da Silva",
+            "pin": 11.8,
+            "pout": 8.7,
+            "delta": -3.1
+          },
+          {
+            "name": "M. Wagner",
+            "pin": 5.9,
+            "pout": 8.8,
+            "delta": 3.0
+          },
+          {
+            "name": "N. Penda",
+            "pin": 2.2,
+            "pout": 4.8,
+            "delta": 2.7
+          }
+        ]
+      },
+      {
+        "player": "T. Jones",
+        "gp_in": 48,
+        "gp_out": 34,
+        "margin_in": -0.6,
+        "margin_out": 2.4,
+        "impact": -3.0,
+        "mates": [
+          {
+            "name": "F. Wagner",
+            "pin": 22.2,
+            "pout": 15.2,
+            "delta": -6.9
+          },
+          {
+            "name": "J. Cain",
+            "pin": 2.7,
+            "pout": 7.6,
+            "delta": 4.9
+          },
+          {
+            "name": "A. Black",
+            "pin": 15.8,
+            "pout": 12.6,
+            "delta": -3.2
+          },
+          {
+            "name": "N. Penda",
+            "pin": 5.2,
+            "pout": 2.2,
+            "delta": -3.0
+          },
+          {
+            "name": "D. Bane",
+            "pin": 19.1,
+            "pout": 21.4,
+            "delta": 2.3
+          }
+        ]
+      },
+      {
+        "player": "J. Cain",
+        "gp_in": 40,
+        "gp_out": 42,
+        "margin_in": 2.0,
+        "margin_out": -0.6,
+        "impact": 2.6,
+        "mates": [
+          {
+            "name": "F. Wagner",
+            "pin": 18.0,
+            "pout": 22.0,
+            "delta": 4.0
+          },
+          {
+            "name": "J. Howard",
+            "pin": 7.2,
+            "pout": 3.6,
+            "delta": -3.6
+          },
+          {
+            "name": "A. Black",
+            "pin": 17.0,
+            "pout": 13.7,
+            "delta": -3.4
+          },
+          {
+            "name": "J. Richardson",
+            "pin": 5.8,
+            "pout": 2.8,
+            "delta": -3.0
+          },
+          {
+            "name": "T. Jones",
+            "pin": 4.3,
+            "pout": 2.2,
+            "delta": -2.0
+          }
+        ]
+      }
+    ],
+    "MIA": [
+      {
+        "player": "K. Ware",
+        "gp_in": 77,
+        "gp_out": 5,
+        "margin_in": 1.7,
+        "margin_out": 11.4,
+        "impact": -9.7,
+        "mates": []
+      },
+      {
+        "player": "T. Herro",
+        "gp_in": 33,
+        "gp_out": 49,
+        "margin_in": -2.2,
+        "margin_out": 5.4,
+        "impact": -7.5,
+        "mates": [
+          {
+            "name": "N. Jovi\u0107",
+            "pin": 3.3,
+            "pout": 8.4,
+            "delta": 5.1
+          },
+          {
+            "name": "S. Fontecchio",
+            "pin": 5.1,
+            "pout": 10.1,
+            "delta": 4.9
+          },
+          {
+            "name": "N. Powell",
+            "pin": 18.9,
+            "pout": 23.4,
+            "delta": 4.4
+          },
+          {
+            "name": "D. Smith",
+            "pin": 3.8,
+            "pout": 6.6,
+            "delta": 2.8
+          },
+          {
+            "name": "K. Ware",
+            "pin": 9.7,
+            "pout": 12.1,
+            "delta": 2.4
+          }
+        ]
+      },
+      {
+        "player": "J. Jaquez Jr.",
+        "gp_in": 75,
+        "gp_out": 7,
+        "margin_in": 2.9,
+        "margin_out": -3.4,
+        "impact": 6.3,
+        "mates": []
+      },
+      {
+        "player": "N. Powell",
+        "gp_in": 58,
+        "gp_out": 24,
+        "margin_in": 0.9,
+        "margin_out": 5.7,
+        "impact": -4.8,
+        "mates": [
+          {
+            "name": "B. Adebayo",
+            "pin": 18.2,
+            "pout": 24.1,
+            "delta": 5.9
+          },
+          {
+            "name": "P. Larsson",
+            "pin": 9.6,
+            "pout": 15.4,
+            "delta": 5.7
+          },
+          {
+            "name": "T. Herro",
+            "pin": 18.4,
+            "pout": 24.2,
+            "delta": 5.7
+          },
+          {
+            "name": "N. Jovi\u0107",
+            "pin": 8.1,
+            "pout": 4.7,
+            "delta": -3.4
+          },
+          {
+            "name": "K. Jaku\u010dionis",
+            "pin": 5.2,
+            "pout": 8.4,
+            "delta": 3.2
+          }
+        ]
+      },
+      {
+        "player": "D. Smith",
+        "gp_in": 70,
+        "gp_out": 12,
+        "margin_in": 2.9,
+        "margin_out": -0.8,
+        "impact": 3.6,
+        "mates": [
+          {
+            "name": "N. Powell",
+            "pin": 22.8,
+            "pout": 16.2,
+            "delta": -6.5
+          },
+          {
+            "name": "T. Herro",
+            "pin": 22.1,
+            "pout": 16.9,
+            "delta": -5.2
+          },
+          {
+            "name": "K. Johnson",
+            "pin": 3.7,
+            "pout": 6.7,
+            "delta": 3.0
+          },
+          {
+            "name": "A. Wiggins",
+            "pin": 15.8,
+            "pout": 12.9,
+            "delta": -2.9
+          },
+          {
+            "name": "J. Jaquez Jr.",
+            "pin": 15.0,
+            "pout": 17.1,
+            "delta": 2.1
+          }
+        ]
+      },
+      {
+        "player": "M. Gardner",
+        "gp_in": 45,
+        "gp_out": 37,
+        "margin_in": 3.6,
+        "margin_out": 0.8,
+        "impact": 2.9,
+        "mates": [
+          {
+            "name": "T. Herro",
+            "pin": 19.2,
+            "pout": 22.5,
+            "delta": 3.2
+          },
+          {
+            "name": "N. Powell",
+            "pin": 20.2,
+            "pout": 23.3,
+            "delta": 3.1
+          },
+          {
+            "name": "K. Johnson",
+            "pin": 4.9,
+            "pout": 2.4,
+            "delta": -2.5
+          },
+          {
+            "name": "P. Larsson",
+            "pin": 12.5,
+            "pout": 10.2,
+            "delta": -2.3
+          },
+          {
+            "name": "K. Jaku\u010dionis",
+            "pin": 6.7,
+            "pout": 4.4,
+            "delta": -2.3
+          }
+        ]
+      },
+      {
+        "player": "P. Larsson",
+        "gp_in": 70,
+        "gp_out": 12,
+        "margin_in": 2.7,
+        "margin_out": 0.4,
+        "impact": 2.2,
+        "mates": [
+          {
+            "name": "B. Adebayo",
+            "pin": 20.8,
+            "pout": 16.7,
+            "delta": -4.1
+          },
+          {
+            "name": "K. Jaku\u010dionis",
+            "pin": 5.5,
+            "pout": 9.3,
+            "delta": 3.8
+          },
+          {
+            "name": "A. Wiggins",
+            "pin": 15.9,
+            "pout": 12.4,
+            "delta": -3.5
+          },
+          {
+            "name": "K. Ware",
+            "pin": 10.6,
+            "pout": 13.7,
+            "delta": 3.1
+          },
+          {
+            "name": "J. Jaquez Jr.",
+            "pin": 15.1,
+            "pout": 16.8,
+            "delta": 1.7
+          }
+        ]
+      },
+      {
+        "player": "S. Fontecchio",
+        "gp_in": 70,
+        "gp_out": 12,
+        "margin_in": 2.1,
+        "margin_out": 3.4,
+        "impact": -1.3,
+        "mates": [
+          {
+            "name": "T. Herro",
+            "pin": 21.4,
+            "pout": 18.7,
+            "delta": -2.7
+          },
+          {
+            "name": "M. Gardner",
+            "pin": 4.0,
+            "pout": 1.8,
+            "delta": -2.3
+          },
+          {
+            "name": "J. Jaquez Jr.",
+            "pin": 15.1,
+            "pout": 16.7,
+            "delta": 1.6
+          },
+          {
+            "name": "A. Wiggins",
+            "pin": 15.6,
+            "pout": 14.0,
+            "delta": -1.6
+          },
+          {
+            "name": "K. Jaku\u010dionis",
+            "pin": 6.4,
+            "pout": 5.2,
+            "delta": -1.2
+          }
+        ]
+      },
+      {
+        "player": "D. Mitchell",
+        "gp_in": 70,
+        "gp_out": 12,
+        "margin_in": 2.5,
+        "margin_out": 1.4,
+        "impact": 1.1,
+        "mates": [
+          {
+            "name": "S. Fontecchio",
+            "pin": 8.0,
+            "pout": 11.2,
+            "delta": 3.3
+          },
+          {
+            "name": "P. Larsson",
+            "pin": 11.0,
+            "pout": 13.8,
+            "delta": 2.8
+          },
+          {
+            "name": "N. Powell",
+            "pin": 22.2,
+            "pout": 19.6,
+            "delta": -2.6
+          },
+          {
+            "name": "K. Jaku\u010dionis",
+            "pin": 5.7,
+            "pout": 8.2,
+            "delta": 2.5
+          },
+          {
+            "name": "K. Ware",
+            "pin": 11.3,
+            "pout": 8.9,
+            "delta": -2.4
+          }
+        ]
+      }
+    ],
+    "ATL": [
+      {
+        "player": "J. Kuminga",
+        "gp_in": 16,
+        "gp_out": 66,
+        "margin_in": 16.1,
+        "margin_out": -0.9,
+        "impact": 17.0,
+        "mates": [
+          {
+            "name": "J. Johnson",
+            "pin": 18.3,
+            "pout": 23.4,
+            "delta": 5.1
+          },
+          {
+            "name": "Z. Risacher",
+            "pin": 7.1,
+            "pout": 10.3,
+            "delta": 3.2
+          },
+          {
+            "name": "N. Alexander-Walker",
+            "pin": 23.0,
+            "pout": 20.3,
+            "delta": -2.7
+          },
+          {
+            "name": "O. Okongwu",
+            "pin": 13.1,
+            "pout": 15.8,
+            "delta": 2.7
+          },
+          {
+            "name": "J. Landale",
+            "pin": 7.7,
+            "pout": 10.2,
+            "delta": 2.5
+          }
+        ]
+      },
+      {
+        "player": "G. Vincent",
+        "gp_in": 24,
+        "gp_out": 58,
+        "margin_in": 12.4,
+        "margin_out": -1.7,
+        "impact": 14.1,
+        "mates": [
+          {
+            "name": "O. Okongwu",
+            "pin": 12.8,
+            "pout": 16.2,
+            "delta": 3.4
+          },
+          {
+            "name": "N. Alexander-Walker",
+            "pin": 23.0,
+            "pout": 19.9,
+            "delta": -3.1
+          },
+          {
+            "name": "Z. Risacher",
+            "pin": 7.7,
+            "pout": 10.6,
+            "delta": 2.9
+          },
+          {
+            "name": "J. Johnson",
+            "pin": 20.4,
+            "pout": 23.3,
+            "delta": 2.9
+          },
+          {
+            "name": "J. Landale",
+            "pin": 8.7,
+            "pout": 10.6,
+            "delta": 1.9
+          }
+        ]
+      },
+      {
+        "player": "D. Daniels",
+        "gp_in": 76,
+        "gp_out": 6,
+        "margin_in": 3.3,
+        "margin_out": -9.3,
+        "impact": 12.7,
+        "mates": []
+      },
+      {
+        "player": "C. Houstan",
+        "gp_in": 18,
+        "gp_out": 64,
+        "margin_in": 10.2,
+        "margin_out": 0.2,
+        "impact": 10.0,
+        "mates": [
+          {
+            "name": "J. Johnson",
+            "pin": 19.0,
+            "pout": 23.4,
+            "delta": 4.4
+          },
+          {
+            "name": "V. Krej\u010d\u00ed",
+            "pin": 11.0,
+            "pout": 8.5,
+            "delta": -2.5
+          },
+          {
+            "name": "K. Wallace",
+            "pin": 5.2,
+            "pout": 2.7,
+            "delta": -2.5
+          },
+          {
+            "name": "O. Okongwu",
+            "pin": 14.1,
+            "pout": 15.5,
+            "delta": 1.4
+          },
+          {
+            "name": "L. Kennard",
+            "pin": 6.8,
+            "pout": 8.2,
+            "delta": 1.4
+          }
+        ]
+      },
+      {
+        "player": "J. Landale",
+        "gp_in": 23,
+        "gp_out": 59,
+        "margin_in": 9.5,
+        "margin_out": -0.3,
+        "impact": 9.8,
+        "mates": [
+          {
+            "name": "O. Okongwu",
+            "pin": 13.5,
+            "pout": 15.8,
+            "delta": 2.3
+          },
+          {
+            "name": "Z. Risacher",
+            "pin": 8.2,
+            "pout": 10.3,
+            "delta": 2.1
+          },
+          {
+            "name": "K. Wallace",
+            "pin": 2.0,
+            "pout": 3.9,
+            "delta": 1.9
+          },
+          {
+            "name": "D. Daniels",
+            "pin": 13.0,
+            "pout": 11.5,
+            "delta": -1.5
+          },
+          {
+            "name": "J. Kuminga",
+            "pin": 12.7,
+            "pout": 11.5,
+            "delta": -1.2
+          }
+        ]
+      },
+      {
+        "player": "V. Krej\u010d\u00ed",
+        "gp_in": 46,
+        "gp_out": 36,
+        "margin_in": -1.1,
+        "margin_out": 6.9,
+        "impact": -8.0,
+        "mates": [
+          {
+            "name": "Z. Risacher",
+            "pin": 11.4,
+            "pout": 7.9,
+            "delta": -3.5
+          },
+          {
+            "name": "O. Okongwu",
+            "pin": 16.3,
+            "pout": 13.6,
+            "delta": -2.7
+          },
+          {
+            "name": "K. Porzi\u0146\u0123is",
+            "pin": 16.5,
+            "pout": 19.0,
+            "delta": 2.5
+          },
+          {
+            "name": "L. Kennard",
+            "pin": 7.6,
+            "pout": 9.8,
+            "delta": 2.2
+          },
+          {
+            "name": "K. Wallace",
+            "pin": 3.9,
+            "pout": 2.7,
+            "delta": -1.2
+          }
+        ]
+      },
+      {
+        "player": "C. McCollum",
+        "gp_in": 41,
+        "gp_out": 41,
+        "margin_in": 5.8,
+        "margin_out": -1.0,
+        "impact": 6.7,
+        "mates": [
+          {
+            "name": "V. Krej\u010d\u00ed",
+            "pin": 4.8,
+            "pout": 10.2,
+            "delta": 5.4
+          },
+          {
+            "name": "Z. Risacher",
+            "pin": 7.6,
+            "pout": 11.2,
+            "delta": 3.6
+          },
+          {
+            "name": "K. Wallace",
+            "pin": 1.9,
+            "pout": 4.4,
+            "delta": 2.5
+          },
+          {
+            "name": "J. Johnson",
+            "pin": 21.3,
+            "pout": 23.7,
+            "delta": 2.4
+          },
+          {
+            "name": "O. Okongwu",
+            "pin": 14.1,
+            "pout": 16.2,
+            "delta": 2.1
+          }
+        ]
+      },
+      {
+        "player": "Z. Risacher",
+        "gp_in": 67,
+        "gp_out": 15,
+        "margin_in": 3.6,
+        "margin_out": -2.8,
+        "impact": 6.4,
+        "mates": [
+          {
+            "name": "V. Krej\u010d\u00ed",
+            "pin": 10.6,
+            "pout": 5.4,
+            "delta": -5.2
+          },
+          {
+            "name": "J. Johnson",
+            "pin": 23.2,
+            "pout": 19.6,
+            "delta": -3.5
+          },
+          {
+            "name": "C. McCollum",
+            "pin": 19.1,
+            "pout": 17.5,
+            "delta": -1.7
+          },
+          {
+            "name": "O. Okongwu",
+            "pin": 14.9,
+            "pout": 16.4,
+            "delta": 1.5
+          },
+          {
+            "name": "M. Gueye",
+            "pin": 4.2,
+            "pout": 5.5,
+            "delta": 1.4
+          }
+        ]
+      },
+      {
+        "player": "L. Kennard",
+        "gp_in": 46,
+        "gp_out": 36,
+        "margin_in": 0.0,
+        "margin_out": 5.4,
+        "impact": -5.4,
+        "mates": [
+          {
+            "name": "O. Okongwu",
+            "pin": 17.1,
+            "pout": 12.8,
+            "delta": -4.4
+          },
+          {
+            "name": "Z. Risacher",
+            "pin": 11.0,
+            "pout": 8.1,
+            "delta": -2.9
+          },
+          {
+            "name": "N. Alexander-Walker",
+            "pin": 20.0,
+            "pout": 21.9,
+            "delta": 1.9
+          },
+          {
+            "name": "J. Johnson",
+            "pin": 23.2,
+            "pout": 21.5,
+            "delta": -1.7
+          },
+          {
+            "name": "D. Daniels",
+            "pin": 11.3,
+            "pout": 12.7,
+            "delta": 1.4
+          }
+        ]
+      }
+    ],
+    "TOR": [
+      {
+        "player": "B. Ingram",
+        "gp_in": 77,
+        "gp_out": 5,
+        "margin_in": 2.3,
+        "margin_out": 10.6,
+        "impact": -8.3,
+        "mates": []
+      },
+      {
+        "player": "R. Barrett",
+        "gp_in": 57,
+        "gp_out": 25,
+        "margin_in": 5.3,
+        "margin_out": -2.7,
+        "impact": 8.0,
+        "mates": [
+          {
+            "name": "J. Poeltl",
+            "pin": 11.7,
+            "pout": 7.3,
+            "delta": -4.4
+          },
+          {
+            "name": "O. Agbaji",
+            "pin": 3.0,
+            "pout": 5.6,
+            "delta": 2.6
+          },
+          {
+            "name": "S. Barnes",
+            "pin": 17.4,
+            "pout": 19.7,
+            "delta": 2.4
+          },
+          {
+            "name": "J. Shead",
+            "pin": 6.1,
+            "pout": 8.0,
+            "delta": 1.9
+          },
+          {
+            "name": "B. Ingram",
+            "pin": 20.9,
+            "pout": 22.7,
+            "delta": 1.8
+          }
+        ]
+      },
+      {
+        "player": "T. Jackson-Davis",
+        "gp_in": 17,
+        "gp_out": 65,
+        "margin_in": 7.6,
+        "margin_out": 1.6,
+        "impact": 6.0,
+        "mates": [
+          {
+            "name": "B. Ingram",
+            "pin": 18.7,
+            "pout": 22.2,
+            "delta": 3.4
+          },
+          {
+            "name": "S. Barnes",
+            "pin": 16.5,
+            "pout": 18.5,
+            "delta": 2.0
+          },
+          {
+            "name": "J. Walter",
+            "pin": 8.4,
+            "pout": 7.3,
+            "delta": -1.1
+          },
+          {
+            "name": "J. Battle",
+            "pin": 3.8,
+            "pout": 2.9,
+            "delta": -0.9
+          },
+          {
+            "name": "R. Barrett",
+            "pin": 18.7,
+            "pout": 19.5,
+            "delta": 0.8
+          }
+        ]
+      },
+      {
+        "player": "O. Agbaji",
+        "gp_in": 42,
+        "gp_out": 40,
+        "margin_in": 1.0,
+        "margin_out": 4.8,
+        "impact": -3.8,
+        "mates": [
+          {
+            "name": "J. Poeltl",
+            "pin": 7.2,
+            "pout": 12.2,
+            "delta": 5.0
+          },
+          {
+            "name": "S. Barnes",
+            "pin": 19.7,
+            "pout": 16.3,
+            "delta": -3.3
+          },
+          {
+            "name": "J. Walter",
+            "pin": 6.1,
+            "pout": 8.7,
+            "delta": 2.6
+          },
+          {
+            "name": "B. Ingram",
+            "pin": 22.5,
+            "pout": 20.4,
+            "delta": -2.1
+          },
+          {
+            "name": "C. Murray-Boyles",
+            "pin": 7.7,
+            "pout": 9.5,
+            "delta": 1.8
+          }
+        ]
+      },
+      {
+        "player": "J. Poeltl",
+        "gp_in": 46,
+        "gp_out": 36,
+        "margin_in": 4.3,
+        "margin_out": 0.9,
+        "impact": 3.5,
+        "mates": [
+          {
+            "name": "S. Barnes",
+            "pin": 16.9,
+            "pout": 19.7,
+            "delta": 2.8
+          },
+          {
+            "name": "S. Mamukelashvili",
+            "pin": 10.1,
+            "pout": 12.5,
+            "delta": 2.4
+          },
+          {
+            "name": "A. Martin",
+            "pin": 1.4,
+            "pout": 3.1,
+            "delta": 1.7
+          },
+          {
+            "name": "J. Shead",
+            "pin": 5.9,
+            "pout": 7.6,
+            "delta": 1.7
+          },
+          {
+            "name": "A. Lawson",
+            "pin": 4.9,
+            "pout": 3.4,
+            "delta": -1.6
+          }
+        ]
+      },
+      {
+        "player": "C. Murray-Boyles",
+        "gp_in": 57,
+        "gp_out": 25,
+        "margin_in": 1.8,
+        "margin_out": 5.2,
+        "impact": -3.5,
+        "mates": [
+          {
+            "name": "I. Quickley",
+            "pin": 15.4,
+            "pout": 18.6,
+            "delta": 3.2
+          },
+          {
+            "name": "G. Dick",
+            "pin": 5.3,
+            "pout": 7.9,
+            "delta": 2.7
+          },
+          {
+            "name": "O. Agbaji",
+            "pin": 3.9,
+            "pout": 5.8,
+            "delta": 1.9
+          },
+          {
+            "name": "J. Shead",
+            "pin": 7.2,
+            "pout": 5.4,
+            "delta": -1.9
+          },
+          {
+            "name": "J. Poeltl",
+            "pin": 10.0,
+            "pout": 11.8,
+            "delta": 1.8
+          }
+        ]
+      },
+      {
+        "player": "A. Martin",
+        "gp_in": 23,
+        "gp_out": 59,
+        "margin_in": 1.3,
+        "margin_out": 3.4,
+        "impact": -2.1,
+        "mates": [
+          {
+            "name": "C. Murray-Boyles",
+            "pin": 11.0,
+            "pout": 7.5,
+            "delta": -3.5
+          },
+          {
+            "name": "J. Shead",
+            "pin": 8.4,
+            "pout": 6.0,
+            "delta": -2.4
+          },
+          {
+            "name": "R. Barrett",
+            "pin": 20.7,
+            "pout": 18.8,
+            "delta": -1.9
+          },
+          {
+            "name": "O. Agbaji",
+            "pin": 5.4,
+            "pout": 4.0,
+            "delta": -1.4
+          },
+          {
+            "name": "I. Quickley",
+            "pin": 17.6,
+            "pout": 16.1,
+            "delta": -1.4
+          }
+        ]
+      },
+      {
+        "player": "A. Lawson",
+        "gp_in": 24,
+        "gp_out": 58,
+        "margin_in": 4.1,
+        "margin_out": 2.3,
+        "impact": 1.8,
+        "mates": [
+          {
+            "name": "C. Murray-Boyles",
+            "pin": 10.7,
+            "pout": 7.5,
+            "delta": -3.2
+          },
+          {
+            "name": "J. Shead",
+            "pin": 8.7,
+            "pout": 5.8,
+            "delta": -2.9
+          },
+          {
+            "name": "J. Walter",
+            "pin": 9.6,
+            "pout": 6.8,
+            "delta": -2.7
+          },
+          {
+            "name": "B. Ingram",
+            "pin": 23.3,
+            "pout": 20.9,
+            "delta": -2.4
+          },
+          {
+            "name": "O. Agbaji",
+            "pin": 6.1,
+            "pout": 3.8,
+            "delta": -2.3
+          }
+        ]
+      },
+      {
+        "player": "J. Mogbo",
+        "gp_in": 40,
+        "gp_out": 42,
+        "margin_in": 2.0,
+        "margin_out": 3.6,
+        "impact": -1.7,
+        "mates": [
+          {
+            "name": "J. Walter",
+            "pin": 9.7,
+            "pout": 5.8,
+            "delta": -3.9
+          },
+          {
+            "name": "J. Poeltl",
+            "pin": 9.7,
+            "pout": 11.8,
+            "delta": 2.1
+          },
+          {
+            "name": "T. Jackson-Davis",
+            "pin": 2.4,
+            "pout": 0.4,
+            "delta": -2.0
+          },
+          {
+            "name": "C. Murray-Boyles",
+            "pin": 9.4,
+            "pout": 7.8,
+            "delta": -1.6
+          },
+          {
+            "name": "A. Lawson",
+            "pin": 3.9,
+            "pout": 5.4,
+            "delta": 1.5
+          }
+        ]
+      }
+    ],
+    "BOS": [
+      {
+        "player": "B. Scheierman",
+        "gp_in": 77,
+        "gp_out": 5,
+        "margin_in": 8.2,
+        "margin_out": -0.8,
+        "impact": 9.0,
+        "mates": []
+      },
+      {
+        "player": "J. Brown",
+        "gp_in": 71,
+        "gp_out": 11,
+        "margin_in": 6.6,
+        "margin_out": 14.8,
+        "impact": -8.2,
+        "mates": [
+          {
+            "name": "P. Pritchard",
+            "pin": 15.8,
+            "pout": 25.2,
+            "delta": 9.4
+          },
+          {
+            "name": "B. Scheierman",
+            "pin": 4.5,
+            "pout": 11.6,
+            "delta": 7.1
+          },
+          {
+            "name": "R. Harper Jr.",
+            "pin": 2.8,
+            "pout": 9.8,
+            "delta": 7.1
+          },
+          {
+            "name": "L. Garza",
+            "pin": 7.7,
+            "pout": 10.3,
+            "delta": 2.6
+          },
+          {
+            "name": "H. Gonz\u00e1lez",
+            "pin": 3.6,
+            "pout": 6.2,
+            "delta": 2.6
+          }
+        ]
+      },
+      {
+        "player": "R. Harper Jr.",
+        "gp_in": 29,
+        "gp_out": 53,
+        "margin_in": 11.8,
+        "margin_out": 5.5,
+        "impact": 6.3,
+        "mates": [
+          {
+            "name": "J. Brown",
+            "pin": 24.7,
+            "pout": 30.6,
+            "delta": 5.9
+          },
+          {
+            "name": "B. Scheierman",
+            "pin": 8.3,
+            "pout": 3.9,
+            "delta": -4.5
+          },
+          {
+            "name": "S. Hauser",
+            "pin": 10.6,
+            "pout": 8.5,
+            "delta": -2.0
+          },
+          {
+            "name": "H. Gonz\u00e1lez",
+            "pin": 5.1,
+            "pout": 3.2,
+            "delta": -1.9
+          },
+          {
+            "name": "N. Vu\u010devi\u0107",
+            "pin": 10.1,
+            "pout": 8.5,
+            "delta": -1.6
+          }
+        ]
+      },
+      {
+        "player": "N. Queta",
+        "gp_in": 76,
+        "gp_out": 6,
+        "margin_in": 8.1,
+        "margin_out": 2.7,
+        "impact": 5.4,
+        "mates": []
+      },
+      {
+        "player": "L. Garza",
+        "gp_in": 69,
+        "gp_out": 13,
+        "margin_in": 8.4,
+        "margin_out": 3.8,
+        "impact": 4.7,
+        "mates": [
+          {
+            "name": "N. Vu\u010devi\u0107",
+            "pin": 10.7,
+            "pout": 6.8,
+            "delta": -3.9
+          },
+          {
+            "name": "D. White",
+            "pin": 16.0,
+            "pout": 18.7,
+            "delta": 2.6
+          },
+          {
+            "name": "J. Walsh",
+            "pin": 4.9,
+            "pout": 7.3,
+            "delta": 2.4
+          },
+          {
+            "name": "B. Scheierman",
+            "pin": 5.9,
+            "pout": 3.8,
+            "delta": -2.1
+          },
+          {
+            "name": "P. Pritchard",
+            "pin": 17.3,
+            "pout": 15.5,
+            "delta": -1.9
+          }
+        ]
+      },
+      {
+        "player": "D. White",
+        "gp_in": 77,
+        "gp_out": 5,
+        "margin_in": 7.9,
+        "margin_out": 4.8,
+        "impact": 3.1,
+        "mates": []
+      },
+      {
+        "player": "A. Williams",
+        "gp_in": 22,
+        "gp_out": 60,
+        "margin_in": 5.5,
+        "margin_out": 8.5,
+        "impact": -3.0,
+        "mates": [
+          {
+            "name": "J. Brown",
+            "pin": 26.1,
+            "pout": 29.7,
+            "delta": 3.5
+          },
+          {
+            "name": "R. Harper Jr.",
+            "pin": 6.2,
+            "pout": 2.9,
+            "delta": -3.3
+          },
+          {
+            "name": "A. Simons",
+            "pin": 12.4,
+            "pout": 14.8,
+            "delta": 2.4
+          },
+          {
+            "name": "S. Hauser",
+            "pin": 10.9,
+            "pout": 8.6,
+            "delta": -2.3
+          },
+          {
+            "name": "B. Scheierman",
+            "pin": 7.0,
+            "pout": 5.0,
+            "delta": -2.0
+          }
+        ]
+      },
+      {
+        "player": "J. Tatum",
+        "gp_in": 16,
+        "gp_out": 66,
+        "margin_in": 9.9,
+        "margin_out": 7.2,
+        "impact": 2.7,
+        "mates": [
+          {
+            "name": "D. White",
+            "pin": 14.1,
+            "pout": 17.0,
+            "delta": 3.0
+          },
+          {
+            "name": "H. Gonz\u00e1lez",
+            "pin": 1.7,
+            "pout": 4.4,
+            "delta": 2.7
+          },
+          {
+            "name": "B. Scheierman",
+            "pin": 7.1,
+            "pout": 5.1,
+            "delta": -2.0
+          },
+          {
+            "name": "N. Queta",
+            "pin": 11.8,
+            "pout": 9.8,
+            "delta": -1.9
+          },
+          {
+            "name": "R. Harper Jr.",
+            "pin": 3.2,
+            "pout": 4.7,
+            "delta": 1.5
+          }
+        ]
+      },
+      {
+        "player": "J. Walsh",
+        "gp_in": 68,
+        "gp_out": 14,
+        "margin_in": 8.1,
+        "margin_out": 5.6,
+        "impact": 2.6,
+        "mates": [
+          {
+            "name": "J. Tatum",
+            "pin": 25.0,
+            "pout": 18.5,
+            "delta": -6.5
+          },
+          {
+            "name": "R. Harper Jr.",
+            "pin": 5.1,
+            "pout": 0.0,
+            "delta": -5.1
+          },
+          {
+            "name": "S. Hauser",
+            "pin": 9.9,
+            "pout": 5.9,
+            "delta": -4.0
+          },
+          {
+            "name": "J. Minott",
+            "pin": 6.2,
+            "pout": 3.6,
+            "delta": -2.6
+          },
+          {
+            "name": "H. Gonz\u00e1lez",
+            "pin": 4.3,
+            "pout": 2.2,
+            "delta": -2.0
+          }
+        ]
+      }
+    ],
+    "PHI": [
+      {
+        "player": "V. Edgecombe",
+        "gp_in": 75,
+        "gp_out": 7,
+        "margin_in": 0.7,
+        "margin_out": -9.4,
+        "impact": 10.1,
+        "mates": []
+      },
+      {
+        "player": "Q. Grimes",
+        "gp_in": 75,
+        "gp_out": 7,
+        "margin_in": 0.5,
+        "margin_out": -8.0,
+        "impact": 8.5,
+        "mates": []
+      },
+      {
+        "player": "J. Embiid",
+        "gp_in": 38,
+        "gp_out": 44,
+        "margin_in": 3.8,
+        "margin_out": -3.6,
+        "impact": 7.4,
+        "mates": [
+          {
+            "name": "J. Edwards",
+            "pin": 2.8,
+            "pout": 8.1,
+            "delta": 5.4
+          },
+          {
+            "name": "Q. Grimes",
+            "pin": 11.0,
+            "pout": 15.5,
+            "delta": 4.5
+          },
+          {
+            "name": "A. Bona",
+            "pin": 2.8,
+            "pout": 6.6,
+            "delta": 3.8
+          },
+          {
+            "name": "J. McCain",
+            "pin": 5.0,
+            "pout": 8.8,
+            "delta": 3.8
+          },
+          {
+            "name": "A. Drummond",
+            "pin": 4.2,
+            "pout": 7.6,
+            "delta": 3.3
+          }
+        ]
+      },
+      {
+        "player": "A. Bona",
+        "gp_in": 71,
+        "gp_out": 11,
+        "margin_in": 0.8,
+        "margin_out": -6.3,
+        "impact": 7.0,
+        "mates": [
+          {
+            "name": "T. Watford",
+            "pin": 6.3,
+            "pout": 8.0,
+            "delta": 1.7
+          },
+          {
+            "name": "Q. Grimes",
+            "pin": 13.6,
+            "pout": 12.1,
+            "delta": -1.5
+          },
+          {
+            "name": "T. Maxey",
+            "pin": 28.1,
+            "pout": 29.5,
+            "delta": 1.4
+          },
+          {
+            "name": "J. Walker",
+            "pin": 4.1,
+            "pout": 5.2,
+            "delta": 1.1
+          },
+          {
+            "name": "A. Drummond",
+            "pin": 6.2,
+            "pout": 7.2,
+            "delta": 1.0
+          }
+        ]
+      },
+      {
+        "player": "J. Walker",
+        "gp_in": 64,
+        "gp_out": 18,
+        "margin_in": 1.2,
+        "margin_out": -5.1,
+        "impact": 6.2,
+        "mates": [
+          {
+            "name": "J. Embiid",
+            "pin": 25.4,
+            "pout": 30.5,
+            "delta": 5.0
+          },
+          {
+            "name": "C. Payne",
+            "pin": 8.3,
+            "pout": 4.4,
+            "delta": -3.9
+          },
+          {
+            "name": "V. Edgecombe",
+            "pin": 16.8,
+            "pout": 13.3,
+            "delta": -3.6
+          },
+          {
+            "name": "K. Oubre Jr.",
+            "pin": 14.8,
+            "pout": 12.0,
+            "delta": -2.8
+          },
+          {
+            "name": "Q. Grimes",
+            "pin": 13.9,
+            "pout": 11.3,
+            "delta": -2.6
+          }
+        ]
+      },
+      {
+        "player": "P. George",
+        "gp_in": 37,
+        "gp_out": 45,
+        "margin_in": 3.0,
+        "margin_out": -2.8,
+        "impact": 5.8,
+        "mates": [
+          {
+            "name": "K. Oubre Jr.",
+            "pin": 10.1,
+            "pout": 16.3,
+            "delta": 6.2
+          },
+          {
+            "name": "T. Watford",
+            "pin": 3.9,
+            "pout": 7.5,
+            "delta": 3.6
+          },
+          {
+            "name": "J. Embiid",
+            "pin": 28.2,
+            "pout": 24.6,
+            "delta": -3.5
+          },
+          {
+            "name": "J. Edwards",
+            "pin": 4.0,
+            "pout": 7.6,
+            "delta": 3.5
+          },
+          {
+            "name": "Q. Grimes",
+            "pin": 11.6,
+            "pout": 14.8,
+            "delta": 3.2
+          }
+        ]
+      },
+      {
+        "player": "A. Drummond",
+        "gp_in": 63,
+        "gp_out": 19,
+        "margin_in": -1.3,
+        "margin_out": 3.7,
+        "impact": -5.0,
+        "mates": [
+          {
+            "name": "C. Payne",
+            "pin": 5.8,
+            "pout": 14.8,
+            "delta": 9.0
+          },
+          {
+            "name": "J. Embiid",
+            "pin": 24.4,
+            "pout": 30.3,
+            "delta": 5.9
+          },
+          {
+            "name": "Q. Grimes",
+            "pin": 14.3,
+            "pout": 10.7,
+            "delta": -3.6
+          },
+          {
+            "name": "T. Watford",
+            "pin": 7.3,
+            "pout": 4.6,
+            "delta": -2.7
+          },
+          {
+            "name": "K. Oubre Jr.",
+            "pin": 13.4,
+            "pout": 16.0,
+            "delta": 2.6
+          }
+        ]
+      },
+      {
+        "player": "T. Watford",
+        "gp_in": 53,
+        "gp_out": 29,
+        "margin_in": -1.3,
+        "margin_out": 1.9,
+        "impact": -3.2,
+        "mates": [
+          {
+            "name": "J. Edwards",
+            "pin": 7.6,
+            "pout": 3.2,
+            "delta": -4.4
+          },
+          {
+            "name": "J. Embiid",
+            "pin": 29.0,
+            "pout": 24.7,
+            "delta": -4.3
+          },
+          {
+            "name": "A. Drummond",
+            "pin": 7.2,
+            "pout": 5.2,
+            "delta": -2.1
+          },
+          {
+            "name": "Q. Grimes",
+            "pin": 14.1,
+            "pout": 12.2,
+            "delta": -1.9
+          },
+          {
+            "name": "P. George",
+            "pin": 18.4,
+            "pout": 16.7,
+            "delta": -1.8
+          }
+        ]
+      },
+      {
+        "player": "J. Edwards",
+        "gp_in": 64,
+        "gp_out": 18,
+        "margin_in": -0.8,
+        "margin_out": 2.1,
+        "impact": -2.9,
+        "mates": [
+          {
+            "name": "C. Payne",
+            "pin": 8.4,
+            "pout": 3.0,
+            "delta": -5.4
+          },
+          {
+            "name": "P. George",
+            "pin": 18.5,
+            "pout": 13.7,
+            "delta": -4.8
+          },
+          {
+            "name": "Q. Grimes",
+            "pin": 14.2,
+            "pout": 10.9,
+            "delta": -3.2
+          },
+          {
+            "name": "J. McCain",
+            "pin": 7.4,
+            "pout": 4.4,
+            "delta": -3.0
+          },
+          {
+            "name": "T. Watford",
+            "pin": 7.1,
+            "pout": 4.4,
+            "delta": -2.7
+          }
+        ]
+      }
+    ],
+    "CHI": [
+      {
+        "player": "P. Williams",
+        "gp_in": 72,
+        "gp_out": 10,
+        "margin_in": -6.8,
+        "margin_out": 6.0,
+        "impact": -12.8,
+        "mates": [
+          {
+            "name": "R. Dillingham",
+            "pin": 10.4,
+            "pout": 6.5,
+            "delta": -3.9
+          },
+          {
+            "name": "C. Sexton",
+            "pin": 16.9,
+            "pout": 20.5,
+            "delta": 3.6
+          },
+          {
+            "name": "M. Buzelis",
+            "pin": 15.8,
+            "pout": 19.4,
+            "delta": 3.6
+          },
+          {
+            "name": "N. Richards",
+            "pin": 8.3,
+            "pout": 11.8,
+            "delta": 3.5
+          },
+          {
+            "name": "C. White",
+            "pin": 18.2,
+            "pout": 21.0,
+            "delta": 2.8
+          }
+        ]
+      },
+      {
+        "player": "K. Huerter",
+        "gp_in": 44,
+        "gp_out": 38,
+        "margin_in": -0.6,
+        "margin_out": -10.6,
+        "impact": 10.0,
+        "mates": [
+          {
+            "name": "J. Carter",
+            "pin": 4.2,
+            "pout": 11.0,
+            "delta": 6.8
+          },
+          {
+            "name": "N. Vu\u010devi\u0107",
+            "pin": 17.5,
+            "pout": 11.6,
+            "delta": -5.9
+          },
+          {
+            "name": "T. Jones",
+            "pin": 12.6,
+            "pout": 15.9,
+            "delta": 3.3
+          },
+          {
+            "name": "J. Phillips",
+            "pin": 2.3,
+            "pout": 5.3,
+            "delta": 3.0
+          },
+          {
+            "name": "J. Giddey",
+            "pin": 18.2,
+            "pout": 15.6,
+            "delta": -2.6
+          }
+        ]
+      },
+      {
+        "player": "J. Smith",
+        "gp_in": 53,
+        "gp_out": 29,
+        "margin_in": -2.1,
+        "margin_out": -11.0,
+        "impact": 8.9,
+        "mates": [
+          {
+            "name": "C. White",
+            "pin": 19.4,
+            "pout": 13.8,
+            "delta": -5.6
+          },
+          {
+            "name": "T. Jones",
+            "pin": 12.5,
+            "pout": 17.4,
+            "delta": 4.9
+          },
+          {
+            "name": "J. Phillips",
+            "pin": 1.9,
+            "pout": 6.1,
+            "delta": 4.3
+          },
+          {
+            "name": "J. Giddey",
+            "pin": 18.0,
+            "pout": 14.5,
+            "delta": -3.4
+          },
+          {
+            "name": "N. Richards",
+            "pin": 7.7,
+            "pout": 11.0,
+            "delta": 3.3
+          }
+        ]
+      },
+      {
+        "player": "M. Buzelis",
+        "gp_in": 77,
+        "gp_out": 5,
+        "margin_in": -5.7,
+        "margin_out": 2.6,
+        "impact": -8.3,
+        "mates": []
+      },
+      {
+        "player": "C. Sexton",
+        "gp_in": 26,
+        "gp_out": 56,
+        "margin_in": -10.3,
+        "margin_out": -2.9,
+        "impact": -7.4,
+        "mates": [
+          {
+            "name": "J. Giddey",
+            "pin": 12.8,
+            "pout": 18.8,
+            "delta": 6.1
+          },
+          {
+            "name": "T. Jones",
+            "pin": 15.9,
+            "pout": 13.0,
+            "delta": -2.9
+          },
+          {
+            "name": "L. Miller",
+            "pin": 11.3,
+            "pout": 14.0,
+            "delta": 2.7
+          },
+          {
+            "name": "L. Olbrich",
+            "pin": 3.6,
+            "pout": 1.2,
+            "delta": -2.4
+          },
+          {
+            "name": "I. Okoro",
+            "pin": 10.5,
+            "pout": 8.8,
+            "delta": -1.7
+          }
+        ]
+      },
+      {
+        "player": "T. Jones",
+        "gp_in": 65,
+        "gp_out": 17,
+        "margin_in": -3.8,
+        "margin_out": -10.6,
+        "impact": 6.9,
+        "mates": [
+          {
+            "name": "J. Carter",
+            "pin": 3.9,
+            "pout": 8.9,
+            "delta": 5.0
+          },
+          {
+            "name": "K. Huerter",
+            "pin": 11.4,
+            "pout": 8.5,
+            "delta": -2.9
+          },
+          {
+            "name": "D. Terry",
+            "pin": 2.6,
+            "pout": 5.4,
+            "delta": 2.8
+          },
+          {
+            "name": "A. Dosunmu",
+            "pin": 14.4,
+            "pout": 16.8,
+            "delta": 2.3
+          },
+          {
+            "name": "J. Smith",
+            "pin": 9.8,
+            "pout": 12.1,
+            "delta": 2.3
+          }
+        ]
+      },
+      {
+        "player": "L. Olbrich",
+        "gp_in": 37,
+        "gp_out": 45,
+        "margin_in": -8.8,
+        "margin_out": -2.3,
+        "impact": -6.5,
+        "mates": [
+          {
+            "name": "C. Sexton",
+            "pin": 19.4,
+            "pout": 12.3,
+            "delta": -7.1
+          },
+          {
+            "name": "G. Yabusele",
+            "pin": 11.0,
+            "pout": 7.4,
+            "delta": -3.6
+          },
+          {
+            "name": "T. Jones",
+            "pin": 16.0,
+            "pout": 12.7,
+            "delta": -3.3
+          },
+          {
+            "name": "R. Dillingham",
+            "pin": 10.5,
+            "pout": 7.2,
+            "delta": -3.2
+          },
+          {
+            "name": "A. Dosunmu",
+            "pin": 17.3,
+            "pout": 14.1,
+            "delta": -3.2
+          }
+        ]
+      },
+      {
+        "player": "N. Vu\u010devi\u0107",
+        "gp_in": 48,
+        "gp_out": 34,
+        "margin_in": -2.7,
+        "margin_out": -8.7,
+        "impact": 6.0,
+        "mates": [
+          {
+            "name": "M. Buzelis",
+            "pin": 14.8,
+            "pout": 18.7,
+            "delta": 4.0
+          },
+          {
+            "name": "J. Giddey",
+            "pin": 18.5,
+            "pout": 14.7,
+            "delta": -3.8
+          },
+          {
+            "name": "T. Jones",
+            "pin": 12.4,
+            "pout": 16.2,
+            "delta": 3.8
+          },
+          {
+            "name": "I. Okoro",
+            "pin": 8.4,
+            "pout": 10.8,
+            "delta": 2.4
+          },
+          {
+            "name": "L. Olbrich",
+            "pin": 1.1,
+            "pout": 3.0,
+            "delta": 2.0
+          }
+        ]
+      },
+      {
+        "player": "R. Dillingham",
+        "gp_in": 30,
+        "gp_out": 52,
+        "margin_in": -8.6,
+        "margin_out": -3.2,
+        "impact": -5.4,
+        "mates": [
+          {
+            "name": "J. Giddey",
+            "pin": 14.4,
+            "pout": 18.6,
+            "delta": 4.2
+          },
+          {
+            "name": "T. Jones",
+            "pin": 16.4,
+            "pout": 12.4,
+            "delta": -4.1
+          },
+          {
+            "name": "M. Buzelis",
+            "pin": 18.9,
+            "pout": 15.0,
+            "delta": -3.9
+          },
+          {
+            "name": "L. Olbrich",
+            "pin": 3.3,
+            "pout": 1.1,
+            "delta": -2.1
+          },
+          {
+            "name": "Y. Kawamura",
+            "pin": 3.0,
+            "pout": 5.0,
+            "delta": 2.0
+          }
+        ]
+      }
+    ],
+    "DET": [
+      {
+        "player": "M. Sasser",
+        "gp_in": 38,
+        "gp_out": 44,
+        "margin_in": 13.3,
+        "margin_out": 3.7,
+        "impact": 9.6,
+        "mates": [
+          {
+            "name": "K. Huerter",
+            "pin": 9.5,
+            "pout": 3.8,
+            "delta": -5.7
+          },
+          {
+            "name": "C. Cunningham",
+            "pin": 21.1,
+            "pout": 25.8,
+            "delta": 4.7
+          },
+          {
+            "name": "T. Smith",
+            "pin": 3.0,
+            "pout": 5.8,
+            "delta": 2.8
+          },
+          {
+            "name": "T. Harris",
+            "pin": 11.9,
+            "pout": 14.4,
+            "delta": 2.5
+          },
+          {
+            "name": "I. Stewart",
+            "pin": 11.4,
+            "pout": 9.0,
+            "delta": -2.4
+          }
+        ]
+      },
+      {
+        "player": "D. Robinson",
+        "gp_in": 77,
+        "gp_out": 5,
+        "margin_in": 8.7,
+        "margin_out": -0.4,
+        "impact": 9.1,
+        "mates": []
+      },
+      {
+        "player": "D. Jenkins",
+        "gp_in": 72,
+        "gp_out": 10,
+        "margin_in": 9.1,
+        "margin_out": 1.4,
+        "impact": 7.7,
+        "mates": [
+          {
+            "name": "T. Harris",
+            "pin": 12.8,
+            "pout": 18.2,
+            "delta": 5.4
+          },
+          {
+            "name": "P. Reed",
+            "pin": 8.2,
+            "pout": 4.1,
+            "delta": -4.0
+          },
+          {
+            "name": "C. Cunningham",
+            "pin": 23.4,
+            "pout": 26.7,
+            "delta": 3.3
+          },
+          {
+            "name": "I. Stewart",
+            "pin": 9.6,
+            "pout": 12.5,
+            "delta": 2.9
+          },
+          {
+            "name": "A. Thompson",
+            "pin": 9.5,
+            "pout": 12.2,
+            "delta": 2.7
+          }
+        ]
+      },
+      {
+        "player": "C. Lanier",
+        "gp_in": 34,
+        "gp_out": 48,
+        "margin_in": 12.0,
+        "margin_out": 5.4,
+        "impact": 6.6,
+        "mates": [
+          {
+            "name": "K. Huerter",
+            "pin": 10.9,
+            "pout": 5.5,
+            "delta": -5.4
+          },
+          {
+            "name": "P. Reed",
+            "pin": 9.6,
+            "pout": 5.9,
+            "delta": -3.7
+          },
+          {
+            "name": "J. Green",
+            "pin": 9.1,
+            "pout": 5.4,
+            "delta": -3.6
+          },
+          {
+            "name": "I. Stewart",
+            "pin": 11.2,
+            "pout": 9.2,
+            "delta": -2.0
+          },
+          {
+            "name": "M. Sasser",
+            "pin": 4.4,
+            "pout": 6.1,
+            "delta": 1.8
+          }
+        ]
+      },
+      {
+        "player": "P. Reed",
+        "gp_in": 65,
+        "gp_out": 17,
+        "margin_in": 9.5,
+        "margin_out": 3.2,
+        "impact": 6.3,
+        "mates": [
+          {
+            "name": "D. Jenkins",
+            "pin": 10.2,
+            "pout": 5.8,
+            "delta": -4.4
+          },
+          {
+            "name": "A. Thompson",
+            "pin": 9.3,
+            "pout": 11.8,
+            "delta": 2.5
+          },
+          {
+            "name": "J. Green",
+            "pin": 7.4,
+            "pout": 5.2,
+            "delta": -2.1
+          },
+          {
+            "name": "T. Harris",
+            "pin": 12.8,
+            "pout": 14.6,
+            "delta": 1.9
+          },
+          {
+            "name": "C. Cunningham",
+            "pin": 24.3,
+            "pout": 22.8,
+            "delta": -1.5
+          }
+        ]
+      },
+      {
+        "player": "J. Duren",
+        "gp_in": 70,
+        "gp_out": 12,
+        "margin_in": 7.5,
+        "margin_out": 12.2,
+        "impact": -4.7,
+        "mates": [
+          {
+            "name": "P. Reed",
+            "pin": 6.1,
+            "pout": 15.2,
+            "delta": 9.2
+          },
+          {
+            "name": "I. Stewart",
+            "pin": 9.4,
+            "pout": 14.3,
+            "delta": 4.9
+          },
+          {
+            "name": "T. Harris",
+            "pin": 12.9,
+            "pout": 17.6,
+            "delta": 4.7
+          },
+          {
+            "name": "K. Huerter",
+            "pin": 7.9,
+            "pout": 12.2,
+            "delta": 4.4
+          },
+          {
+            "name": "J. Green",
+            "pin": 6.3,
+            "pout": 10.5,
+            "delta": 4.2
+          }
+        ]
+      },
+      {
+        "player": "A. Thompson",
+        "gp_in": 73,
+        "gp_out": 9,
+        "margin_in": 7.8,
+        "margin_out": 11.1,
+        "impact": -3.3,
+        "mates": [
+          {
+            "name": "D. Jenkins",
+            "pin": 8.7,
+            "pout": 14.0,
+            "delta": 5.3
+          },
+          {
+            "name": "J. Green",
+            "pin": 6.4,
+            "pout": 11.4,
+            "delta": 5.1
+          },
+          {
+            "name": "M. Sasser",
+            "pin": 4.6,
+            "pout": 9.2,
+            "delta": 4.6
+          },
+          {
+            "name": "J. Duren",
+            "pin": 19.1,
+            "pout": 23.0,
+            "delta": 3.9
+          },
+          {
+            "name": "C. LeVert",
+            "pin": 7.1,
+            "pout": 10.0,
+            "delta": 2.9
+          }
+        ]
+      },
+      {
+        "player": "T. Smith",
+        "gp_in": 15,
+        "gp_out": 67,
+        "margin_in": 10.7,
+        "margin_out": 7.6,
+        "impact": 3.1,
+        "mates": [
+          {
+            "name": "P. Reed",
+            "pin": 14.3,
+            "pout": 5.8,
+            "delta": -8.6
+          },
+          {
+            "name": "D. Jenkins",
+            "pin": 11.6,
+            "pout": 8.7,
+            "delta": -2.9
+          },
+          {
+            "name": "M. Sasser",
+            "pin": 3.5,
+            "pout": 5.9,
+            "delta": 2.3
+          },
+          {
+            "name": "A. Thompson",
+            "pin": 8.2,
+            "pout": 10.3,
+            "delta": 2.1
+          },
+          {
+            "name": "J. Green",
+            "pin": 8.6,
+            "pout": 6.6,
+            "delta": -2.0
+          }
+        ]
+      },
+      {
+        "player": "T. Harris",
+        "gp_in": 63,
+        "gp_out": 19,
+        "margin_in": 8.7,
+        "margin_out": 6.4,
+        "impact": 2.3,
+        "mates": [
+          {
+            "name": "C. Cunningham",
+            "pin": 22.7,
+            "pout": 29.3,
+            "delta": 6.7
+          },
+          {
+            "name": "D. Jenkins",
+            "pin": 8.3,
+            "pout": 13.7,
+            "delta": 5.5
+          },
+          {
+            "name": "J. Green",
+            "pin": 5.7,
+            "pout": 11.1,
+            "delta": 5.4
+          },
+          {
+            "name": "K. Huerter",
+            "pin": 8.0,
+            "pout": 11.2,
+            "delta": 3.2
+          },
+          {
+            "name": "I. Stewart",
+            "pin": 9.3,
+            "pout": 12.5,
+            "delta": 3.2
+          }
+        ]
+      }
+    ],
+    "MEM": [
+      {
+        "player": "J. Wells",
+        "gp_in": 69,
+        "gp_out": 13,
+        "margin_in": -3.5,
+        "margin_out": -19.4,
+        "impact": 15.9,
+        "mates": [
+          {
+            "name": "O. Prosper",
+            "pin": 8.3,
+            "pout": 19.5,
+            "delta": 11.2
+          },
+          {
+            "name": "R. Rupert",
+            "pin": 9.7,
+            "pout": 17.6,
+            "delta": 7.9
+          },
+          {
+            "name": "J. Small",
+            "pin": 8.4,
+            "pout": 14.8,
+            "delta": 6.3
+          },
+          {
+            "name": "J. Mashack",
+            "pin": 4.9,
+            "pout": 9.3,
+            "delta": 4.4
+          },
+          {
+            "name": "G. Jackson",
+            "pin": 11.8,
+            "pout": 16.2,
+            "delta": 4.4
+          }
+        ]
+      },
+      {
+        "player": "C. Spencer",
+        "gp_in": 72,
+        "gp_out": 10,
+        "margin_in": -4.2,
+        "margin_out": -18.9,
+        "impact": 14.7,
+        "mates": [
+          {
+            "name": "G. Jackson",
+            "pin": 11.8,
+            "pout": 19.4,
+            "delta": 7.6
+          },
+          {
+            "name": "J. Small",
+            "pin": 8.8,
+            "pout": 15.8,
+            "delta": 7.0
+          },
+          {
+            "name": "C. Coward",
+            "pin": 13.2,
+            "pout": 19.8,
+            "delta": 6.6
+          },
+          {
+            "name": "W. Clayton Jr.",
+            "pin": 8.7,
+            "pout": 13.2,
+            "delta": 4.5
+          },
+          {
+            "name": "R. Rupert",
+            "pin": 10.4,
+            "pout": 14.4,
+            "delta": 4.0
+          }
+        ]
+      },
+      {
+        "player": "K. Caldwell-Pope",
+        "gp_in": 51,
+        "gp_out": 31,
+        "margin_in": -1.8,
+        "margin_out": -12.9,
+        "impact": 11.0,
+        "mates": [
+          {
+            "name": "G. Jackson",
+            "pin": 8.9,
+            "pout": 17.1,
+            "delta": 8.3
+          },
+          {
+            "name": "O. Prosper",
+            "pin": 6.1,
+            "pout": 14.3,
+            "delta": 8.2
+          },
+          {
+            "name": "J. Small",
+            "pin": 5.8,
+            "pout": 12.7,
+            "delta": 6.9
+          },
+          {
+            "name": "J. Mashack",
+            "pin": 3.8,
+            "pout": 7.5,
+            "delta": 3.7
+          },
+          {
+            "name": "C. Coward",
+            "pin": 13.0,
+            "pout": 15.2,
+            "delta": 2.1
+          }
+        ]
+      },
+      {
+        "player": "S. Aldama",
+        "gp_in": 43,
+        "gp_out": 39,
+        "margin_in": -1.0,
+        "margin_out": -11.5,
+        "impact": 10.5,
+        "mates": [
+          {
+            "name": "G. Jackson",
+            "pin": 7.4,
+            "pout": 16.1,
+            "delta": 8.7
+          },
+          {
+            "name": "O. Prosper",
+            "pin": 5.0,
+            "pout": 13.5,
+            "delta": 8.5
+          },
+          {
+            "name": "J. Small",
+            "pin": 4.3,
+            "pout": 12.7,
+            "delta": 8.4
+          },
+          {
+            "name": "J. Mashack",
+            "pin": 1.0,
+            "pout": 8.0,
+            "delta": 7.0
+          },
+          {
+            "name": "J. Jackson Jr.",
+            "pin": 18.7,
+            "pout": 23.0,
+            "delta": 4.3
+          }
+        ]
+      },
+      {
+        "player": "R. Rupert",
+        "gp_in": 16,
+        "gp_out": 66,
+        "margin_in": -14.0,
+        "margin_out": -4.1,
+        "impact": -9.9,
+        "mates": [
+          {
+            "name": "G. Jackson",
+            "pin": 17.8,
+            "pout": 11.0,
+            "delta": -6.9
+          },
+          {
+            "name": "J. Small",
+            "pin": 13.8,
+            "pout": 8.1,
+            "delta": -5.7
+          },
+          {
+            "name": "J. Mashack",
+            "pin": 8.1,
+            "pout": 5.0,
+            "delta": -3.1
+          },
+          {
+            "name": "J. Wells",
+            "pin": 14.9,
+            "pout": 12.1,
+            "delta": -2.8
+          },
+          {
+            "name": "T. Hendricks",
+            "pin": 12.2,
+            "pout": 9.4,
+            "delta": -2.8
+          }
+        ]
+      },
+      {
+        "player": "J. Landale",
+        "gp_in": 45,
+        "gp_out": 37,
+        "margin_in": -2.1,
+        "margin_out": -10.8,
+        "impact": 8.6,
+        "mates": [
+          {
+            "name": "O. Prosper",
+            "pin": 5.0,
+            "pout": 13.9,
+            "delta": 8.9
+          },
+          {
+            "name": "G. Jackson",
+            "pin": 8.0,
+            "pout": 16.2,
+            "delta": 8.1
+          },
+          {
+            "name": "J. Small",
+            "pin": 4.9,
+            "pout": 12.4,
+            "delta": 7.5
+          },
+          {
+            "name": "K. Caldwell-Pope",
+            "pin": 8.0,
+            "pout": 10.6,
+            "delta": 2.5
+          },
+          {
+            "name": "J. Wells",
+            "pin": 11.9,
+            "pout": 13.8,
+            "delta": 1.9
+          }
+        ]
+      },
+      {
+        "player": "V. Williams Jr.",
+        "gp_in": 34,
+        "gp_out": 48,
+        "margin_in": -1.2,
+        "margin_out": -9.4,
+        "impact": 8.2,
+        "mates": [
+          {
+            "name": "O. Prosper",
+            "pin": 4.2,
+            "pout": 12.5,
+            "delta": 8.2
+          },
+          {
+            "name": "J. Morant",
+            "pin": 16.2,
+            "pout": 23.4,
+            "delta": 7.3
+          },
+          {
+            "name": "G. Jackson",
+            "pin": 8.1,
+            "pout": 14.6,
+            "delta": 6.5
+          },
+          {
+            "name": "K. Caldwell-Pope",
+            "pin": 6.9,
+            "pout": 11.3,
+            "delta": 4.4
+          },
+          {
+            "name": "J. Landale",
+            "pin": 12.1,
+            "pout": 9.2,
+            "delta": -2.8
+          }
+        ]
+      },
+      {
+        "player": "J. Jackson Jr.",
+        "gp_in": 45,
+        "gp_out": 37,
+        "margin_in": -2.6,
+        "margin_out": -10.2,
+        "impact": 7.6,
+        "mates": [
+          {
+            "name": "O. Prosper",
+            "pin": 4.5,
+            "pout": 13.9,
+            "delta": 9.4
+          },
+          {
+            "name": "J. Small",
+            "pin": 4.5,
+            "pout": 12.7,
+            "delta": 8.2
+          },
+          {
+            "name": "G. Jackson",
+            "pin": 8.0,
+            "pout": 16.2,
+            "delta": 8.2
+          },
+          {
+            "name": "J. Wells",
+            "pin": 11.9,
+            "pout": 13.8,
+            "delta": 1.9
+          },
+          {
+            "name": "C. Spencer",
+            "pin": 11.8,
+            "pout": 9.9,
+            "delta": -1.9
+          }
+        ]
+      },
+      {
+        "player": "T. Hendricks",
+        "gp_in": 26,
+        "gp_out": 56,
+        "margin_in": -11.1,
+        "margin_out": -3.7,
+        "impact": -7.4,
+        "mates": [
+          {
+            "name": "G. Jackson",
+            "pin": 17.3,
+            "pout": 9.5,
+            "delta": -7.9
+          },
+          {
+            "name": "O. Prosper",
+            "pin": 14.2,
+            "pout": 7.0,
+            "delta": -7.1
+          },
+          {
+            "name": "J. Small",
+            "pin": 13.2,
+            "pout": 6.6,
+            "delta": -6.5
+          },
+          {
+            "name": "R. Rupert",
+            "pin": 10.8,
+            "pout": 15.2,
+            "delta": 4.4
+          },
+          {
+            "name": "C. Spencer",
+            "pin": 9.6,
+            "pout": 11.7,
+            "delta": 2.1
+          }
+        ]
+      }
+    ],
+    "NOP": [
+      {
+        "player": "K. Looney",
+        "gp_in": 21,
+        "gp_out": 61,
+        "margin_in": -11.3,
+        "margin_out": -2.1,
+        "impact": -9.2,
+        "mates": [
+          {
+            "name": "J. Poole",
+            "pin": 16.7,
+            "pout": 12.3,
+            "delta": -4.4
+          },
+          {
+            "name": "J. Fears",
+            "pin": 16.3,
+            "pout": 13.5,
+            "delta": -2.8
+          },
+          {
+            "name": "D. Queen",
+            "pin": 13.4,
+            "pout": 11.1,
+            "delta": -2.3
+          },
+          {
+            "name": "M. Peavy",
+            "pin": 5.8,
+            "pout": 3.6,
+            "delta": -2.2
+          },
+          {
+            "name": "H. Jones",
+            "pin": 10.7,
+            "pout": 8.5,
+            "delta": -2.2
+          }
+        ]
+      },
+      {
+        "player": "Z. Williamson",
+        "gp_in": 62,
+        "gp_out": 20,
+        "margin_in": -2.9,
+        "margin_out": -9.4,
+        "impact": 6.5,
+        "mates": [
+          {
+            "name": "J. Poole",
+            "pin": 12.5,
+            "pout": 20.0,
+            "delta": 7.5
+          },
+          {
+            "name": "J. Fears",
+            "pin": 12.6,
+            "pout": 19.2,
+            "delta": 6.6
+          },
+          {
+            "name": "D. Queen",
+            "pin": 10.2,
+            "pout": 16.4,
+            "delta": 6.2
+          },
+          {
+            "name": "J. Alvarado",
+            "pin": 6.6,
+            "pout": 9.9,
+            "delta": 3.3
+          },
+          {
+            "name": "J. Hawkins",
+            "pin": 4.0,
+            "pout": 6.9,
+            "delta": 2.9
+          }
+        ]
+      },
+      {
+        "player": "J. Hawkins",
+        "gp_in": 51,
+        "gp_out": 31,
+        "margin_in": -6.8,
+        "margin_out": -0.8,
+        "impact": -6.0,
+        "mates": [
+          {
+            "name": "J. Fears",
+            "pin": 15.9,
+            "pout": 11.6,
+            "delta": -4.3
+          },
+          {
+            "name": "S. Bey",
+            "pin": 16.0,
+            "pout": 20.0,
+            "delta": 4.0
+          },
+          {
+            "name": "D. Queen",
+            "pin": 13.1,
+            "pout": 9.5,
+            "delta": -3.6
+          },
+          {
+            "name": "J. Poole",
+            "pin": 14.5,
+            "pout": 11.0,
+            "delta": -3.5
+          },
+          {
+            "name": "K. Looney",
+            "pin": 2.3,
+            "pout": 5.0,
+            "delta": 2.7
+          }
+        ]
+      },
+      {
+        "player": "M. Peavy",
+        "gp_in": 61,
+        "gp_out": 21,
+        "margin_in": -5.9,
+        "margin_out": -0.5,
+        "impact": -5.4,
+        "mates": [
+          {
+            "name": "D. Queen",
+            "pin": 12.7,
+            "pout": 8.8,
+            "delta": -4.0
+          },
+          {
+            "name": "J. Fears",
+            "pin": 15.2,
+            "pout": 11.4,
+            "delta": -3.8
+          },
+          {
+            "name": "J. Hawkins",
+            "pin": 5.4,
+            "pout": 2.7,
+            "delta": -2.7
+          },
+          {
+            "name": "J. Alvarado",
+            "pin": 8.3,
+            "pout": 5.8,
+            "delta": -2.4
+          },
+          {
+            "name": "B. McGowens",
+            "pin": 8.6,
+            "pout": 6.5,
+            "delta": -2.1
+          }
+        ]
+      },
+      {
+        "player": "J. Alvarado",
+        "gp_in": 41,
+        "gp_out": 41,
+        "margin_in": -7.0,
+        "margin_out": -2.0,
+        "impact": -5.1,
+        "mates": [
+          {
+            "name": "S. Bey",
+            "pin": 15.8,
+            "pout": 19.6,
+            "delta": 3.8
+          },
+          {
+            "name": "D. Queen",
+            "pin": 13.2,
+            "pout": 10.2,
+            "delta": -3.1
+          },
+          {
+            "name": "K. Matkovi\u0107",
+            "pin": 4.8,
+            "pout": 6.5,
+            "delta": 1.7
+          },
+          {
+            "name": "J. Poole",
+            "pin": 14.4,
+            "pout": 12.7,
+            "delta": -1.7
+          },
+          {
+            "name": "B. McGowens",
+            "pin": 7.6,
+            "pout": 8.7,
+            "delta": 1.1
+          }
+        ]
+      },
+      {
+        "player": "H. Jones",
+        "gp_in": 56,
+        "gp_out": 26,
+        "margin_in": -3.0,
+        "margin_out": -7.8,
+        "impact": 4.8,
+        "mates": [
+          {
+            "name": "M. Peavy",
+            "pin": 2.6,
+            "pout": 6.9,
+            "delta": 4.3
+          },
+          {
+            "name": "J. Alvarado",
+            "pin": 6.8,
+            "pout": 10.2,
+            "delta": 3.4
+          },
+          {
+            "name": "J. Hawkins",
+            "pin": 3.9,
+            "pout": 6.8,
+            "delta": 2.9
+          },
+          {
+            "name": "J. Fears",
+            "pin": 13.4,
+            "pout": 16.2,
+            "delta": 2.8
+          },
+          {
+            "name": "J. Poole",
+            "pin": 12.3,
+            "pout": 15.1,
+            "delta": 2.8
+          }
+        ]
+      },
+      {
+        "player": "S. Bey",
+        "gp_in": 72,
+        "gp_out": 10,
+        "margin_in": -4.1,
+        "margin_out": -7.6,
+        "impact": 3.5,
+        "mates": [
+          {
+            "name": "J. Fears",
+            "pin": 13.0,
+            "pout": 23.2,
+            "delta": 10.2
+          },
+          {
+            "name": "T. Murphy III",
+            "pin": 20.9,
+            "pout": 28.6,
+            "delta": 7.7
+          },
+          {
+            "name": "M. Peavy",
+            "pin": 3.3,
+            "pout": 9.2,
+            "delta": 5.9
+          },
+          {
+            "name": "J. Hawkins",
+            "pin": 4.3,
+            "pout": 8.7,
+            "delta": 4.4
+          },
+          {
+            "name": "J. Alvarado",
+            "pin": 8.3,
+            "pout": 4.2,
+            "delta": -4.0
+          }
+        ]
+      },
+      {
+        "player": "T. Murphy III",
+        "gp_in": 66,
+        "gp_out": 16,
+        "margin_in": -3.9,
+        "margin_out": -7.1,
+        "impact": 3.3,
+        "mates": [
+          {
+            "name": "S. Bey",
+            "pin": 16.7,
+            "pout": 23.2,
+            "delta": 6.5
+          },
+          {
+            "name": "B. McGowens",
+            "pin": 6.8,
+            "pout": 13.0,
+            "delta": 6.2
+          },
+          {
+            "name": "J. Fears",
+            "pin": 13.3,
+            "pout": 18.3,
+            "delta": 5.0
+          },
+          {
+            "name": "M. Peavy",
+            "pin": 3.7,
+            "pout": 6.9,
+            "delta": 3.3
+          },
+          {
+            "name": "K. Matkovi\u0107",
+            "pin": 5.2,
+            "pout": 7.9,
+            "delta": 2.7
+          }
+        ]
+      },
+      {
+        "player": "K. Matkovi\u0107",
+        "gp_in": 62,
+        "gp_out": 20,
+        "margin_in": -3.9,
+        "margin_out": -6.4,
+        "impact": 2.5,
+        "mates": [
+          {
+            "name": "J. Poole",
+            "pin": 12.1,
+            "pout": 19.4,
+            "delta": 7.3
+          },
+          {
+            "name": "J. Hawkins",
+            "pin": 3.2,
+            "pout": 9.9,
+            "delta": 6.7
+          },
+          {
+            "name": "J. Fears",
+            "pin": 12.8,
+            "pout": 18.6,
+            "delta": 5.8
+          },
+          {
+            "name": "M. Peavy",
+            "pin": 3.0,
+            "pout": 7.6,
+            "delta": 4.6
+          },
+          {
+            "name": "H. Jones",
+            "pin": 9.2,
+            "pout": 6.5,
+            "delta": -2.8
+          }
+        ]
+      }
+    ],
+    "MIL": [
+      {
+        "player": "K. Kuzma",
+        "gp_in": 69,
+        "gp_out": 13,
+        "margin_in": -3.9,
+        "margin_out": -18.4,
+        "impact": 14.5,
+        "mates": [
+          {
+            "name": "A. Jackson Jr.",
+            "pin": 1.4,
+            "pout": 5.6,
+            "delta": 4.3
+          },
+          {
+            "name": "T. Prince",
+            "pin": 8.1,
+            "pout": 11.8,
+            "delta": 3.7
+          },
+          {
+            "name": "J. Sims",
+            "pin": 4.3,
+            "pout": 7.8,
+            "delta": 3.5
+          },
+          {
+            "name": "O. Dieng",
+            "pin": 10.0,
+            "pout": 13.1,
+            "delta": 3.1
+          },
+          {
+            "name": "P. Nance",
+            "pin": 4.8,
+            "pout": 7.5,
+            "delta": 2.7
+          }
+        ]
+      },
+      {
+        "player": "A. Jackson Jr.",
+        "gp_in": 48,
+        "gp_out": 34,
+        "margin_in": -12.1,
+        "margin_out": 2.1,
+        "impact": -14.3,
+        "mates": [
+          {
+            "name": "K. Porter Jr.",
+            "pin": 15.9,
+            "pout": 18.9,
+            "delta": 3.0
+          },
+          {
+            "name": "K. Kuzma",
+            "pin": 14.1,
+            "pout": 11.7,
+            "delta": -2.4
+          },
+          {
+            "name": "G. Antetokounmpo",
+            "pin": 26.3,
+            "pout": 28.4,
+            "delta": 2.1
+          },
+          {
+            "name": "C. Anthony",
+            "pin": 6.0,
+            "pout": 7.8,
+            "delta": 1.8
+          },
+          {
+            "name": "R. Rollins",
+            "pin": 16.5,
+            "pout": 18.3,
+            "delta": 1.7
+          }
+        ]
+      },
+      {
+        "player": "T. Antetokounmpo",
+        "gp_in": 34,
+        "gp_out": 48,
+        "margin_in": -13.0,
+        "margin_out": -1.4,
+        "impact": -11.6,
+        "mates": [
+          {
+            "name": "T. Prince",
+            "pin": 11.4,
+            "pout": 7.8,
+            "delta": -3.6
+          },
+          {
+            "name": "O. Dieng",
+            "pin": 10.0,
+            "pout": 12.1,
+            "delta": 2.1
+          },
+          {
+            "name": "G. Trent Jr.",
+            "pin": 7.0,
+            "pout": 9.0,
+            "delta": 2.0
+          },
+          {
+            "name": "G. Antetokounmpo",
+            "pin": 26.2,
+            "pout": 28.1,
+            "delta": 1.9
+          },
+          {
+            "name": "K. Porter Jr.",
+            "pin": 16.3,
+            "pout": 18.1,
+            "delta": 1.8
+          }
+        ]
+      },
+      {
+        "player": "P. Nance",
+        "gp_in": 47,
+        "gp_out": 35,
+        "margin_in": -11.1,
+        "margin_out": 0.4,
+        "impact": -11.5,
+        "mates": [
+          {
+            "name": "G. Antetokounmpo",
+            "pin": 23.1,
+            "pout": 29.3,
+            "delta": 6.2
+          },
+          {
+            "name": "O. Dieng",
+            "pin": 11.7,
+            "pout": 7.8,
+            "delta": -3.9
+          },
+          {
+            "name": "B. Portis",
+            "pin": 15.0,
+            "pout": 12.3,
+            "delta": -2.7
+          },
+          {
+            "name": "A. Green",
+            "pin": 9.4,
+            "pout": 11.5,
+            "delta": 2.1
+          },
+          {
+            "name": "T. Prince",
+            "pin": 10.0,
+            "pout": 8.1,
+            "delta": -1.9
+          }
+        ]
+      },
+      {
+        "player": "J. Sims",
+        "gp_in": 67,
+        "gp_out": 15,
+        "margin_in": -7.5,
+        "margin_out": -0.3,
+        "impact": -7.3,
+        "mates": [
+          {
+            "name": "T. Prince",
+            "pin": 9.9,
+            "pout": 5.2,
+            "delta": -4.7
+          },
+          {
+            "name": "C. Anthony",
+            "pin": 5.7,
+            "pout": 10.0,
+            "delta": 4.3
+          },
+          {
+            "name": "G. Antetokounmpo",
+            "pin": 26.4,
+            "pout": 29.7,
+            "delta": 3.3
+          },
+          {
+            "name": "B. Portis",
+            "pin": 14.2,
+            "pout": 11.5,
+            "delta": -2.7
+          },
+          {
+            "name": "M. Turner",
+            "pin": 11.5,
+            "pout": 13.5,
+            "delta": 2.0
+          }
+        ]
+      },
+      {
+        "player": "G. Antetokounmpo",
+        "gp_in": 36,
+        "gp_out": 46,
+        "margin_in": -2.5,
+        "margin_out": -9.1,
+        "impact": 6.6,
+        "mates": [
+          {
+            "name": "K. Porter Jr.",
+            "pin": 14.1,
+            "pout": 20.1,
+            "delta": 6.0
+          },
+          {
+            "name": "R. Rollins",
+            "pin": 14.6,
+            "pout": 19.9,
+            "delta": 5.4
+          },
+          {
+            "name": "T. Prince",
+            "pin": 6.0,
+            "pout": 11.2,
+            "delta": 5.2
+          },
+          {
+            "name": "J. Sims",
+            "pin": 2.6,
+            "pout": 6.2,
+            "delta": 3.6
+          },
+          {
+            "name": "B. Portis",
+            "pin": 12.4,
+            "pout": 15.1,
+            "delta": 2.7
+          }
+        ]
+      },
+      {
+        "player": "O. Dieng",
+        "gp_in": 30,
+        "gp_out": 52,
+        "margin_in": -10.4,
+        "margin_out": -3.8,
+        "impact": -6.6,
+        "mates": [
+          {
+            "name": "T. Prince",
+            "pin": 11.1,
+            "pout": 6.2,
+            "delta": -4.9
+          },
+          {
+            "name": "J. Sims",
+            "pin": 7.3,
+            "pout": 3.2,
+            "delta": -4.1
+          },
+          {
+            "name": "M. Turner",
+            "pin": 9.9,
+            "pout": 12.8,
+            "delta": 2.9
+          },
+          {
+            "name": "A. Jackson Jr.",
+            "pin": 3.4,
+            "pout": 1.5,
+            "delta": -1.9
+          },
+          {
+            "name": "P. Nance",
+            "pin": 6.1,
+            "pout": 4.6,
+            "delta": -1.4
+          }
+        ]
+      },
+      {
+        "player": "M. Turner",
+        "gp_in": 71,
+        "gp_out": 11,
+        "margin_in": -5.4,
+        "margin_out": -11.4,
+        "impact": 6.0,
+        "mates": [
+          {
+            "name": "O. Dieng",
+            "pin": 8.9,
+            "pout": 16.1,
+            "delta": 7.3
+          },
+          {
+            "name": "T. Prince",
+            "pin": 7.8,
+            "pout": 14.0,
+            "delta": 6.2
+          },
+          {
+            "name": "K. Kuzma",
+            "pin": 13.3,
+            "pout": 8.4,
+            "delta": -4.9
+          },
+          {
+            "name": "P. Nance",
+            "pin": 4.4,
+            "pout": 9.2,
+            "delta": 4.8
+          },
+          {
+            "name": "R. Rollins",
+            "pin": 17.0,
+            "pout": 21.0,
+            "delta": 4.0
+          }
+        ]
+      },
+      {
+        "player": "G. Harris",
+        "gp_in": 48,
+        "gp_out": 34,
+        "margin_in": -8.7,
+        "margin_out": -2.7,
+        "impact": -5.9,
+        "mates": [
+          {
+            "name": "P. Nance",
+            "pin": 3.0,
+            "pout": 8.9,
+            "delta": 5.9
+          },
+          {
+            "name": "K. Porter Jr.",
+            "pin": 16.3,
+            "pout": 20.4,
+            "delta": 4.1
+          },
+          {
+            "name": "R. Rollins",
+            "pin": 16.0,
+            "pout": 19.4,
+            "delta": 3.5
+          },
+          {
+            "name": "O. Dieng",
+            "pin": 8.8,
+            "pout": 12.2,
+            "delta": 3.4
+          },
+          {
+            "name": "J. Sims",
+            "pin": 3.7,
+            "pout": 6.7,
+            "delta": 3.1
+          }
+        ]
+      }
+    ],
+    "WAS": [
+      {
+        "player": "A. Gill",
+        "gp_in": 55,
+        "gp_out": 27,
+        "margin_in": -16.1,
+        "margin_out": -3.6,
+        "impact": -12.6,
+        "mates": [
+          {
+            "name": "W. Riley",
+            "pin": 12.3,
+            "pout": 5.3,
+            "delta": -7.0
+          },
+          {
+            "name": "A. Sarr",
+            "pin": 13.8,
+            "pout": 19.5,
+            "delta": 5.7
+          },
+          {
+            "name": "K. George",
+            "pin": 12.5,
+            "pout": 17.7,
+            "delta": 5.2
+          },
+          {
+            "name": "J. Watkins",
+            "pin": 8.5,
+            "pout": 3.7,
+            "delta": -4.9
+          },
+          {
+            "name": "C. Whitmore",
+            "pin": 6.6,
+            "pout": 10.8,
+            "delta": 4.1
+          }
+        ]
+      },
+      {
+        "player": "T. Vukcevic",
+        "gp_in": 49,
+        "gp_out": 33,
+        "margin_in": -15.1,
+        "margin_out": -7.4,
+        "impact": -7.7,
+        "mates": [
+          {
+            "name": "C. McCollum",
+            "pin": 17.5,
+            "pout": 22.7,
+            "delta": 5.2
+          },
+          {
+            "name": "A. Johnson",
+            "pin": 1.3,
+            "pout": 6.6,
+            "delta": 5.2
+          },
+          {
+            "name": "S. Cooper",
+            "pin": 6.5,
+            "pout": 10.2,
+            "delta": 3.7
+          },
+          {
+            "name": "K. George",
+            "pin": 13.8,
+            "pout": 16.6,
+            "delta": 2.8
+          },
+          {
+            "name": "B. Carrington",
+            "pin": 9.6,
+            "pout": 12.3,
+            "delta": 2.7
+          }
+        ]
+      },
+      {
+        "player": "C. Whitmore",
+        "gp_in": 21,
+        "gp_out": 61,
+        "margin_in": -15.9,
+        "margin_out": -10.6,
+        "impact": -5.3,
+        "mates": [
+          {
+            "name": "W. Riley",
+            "pin": 3.2,
+            "pout": 12.1,
+            "delta": 8.9
+          },
+          {
+            "name": "J. Champagnie",
+            "pin": 4.1,
+            "pout": 10.4,
+            "delta": 6.3
+          },
+          {
+            "name": "B. Carrington",
+            "pin": 6.6,
+            "pout": 12.1,
+            "delta": 5.5
+          },
+          {
+            "name": "T. Vukcevic",
+            "pin": 5.9,
+            "pout": 10.8,
+            "delta": 4.9
+          },
+          {
+            "name": "A. Gill",
+            "pin": 2.1,
+            "pout": 6.5,
+            "delta": 4.3
+          }
+        ]
+      },
+      {
+        "player": "A. Johnson",
+        "gp_in": 25,
+        "gp_out": 57,
+        "margin_in": -15.4,
+        "margin_out": -10.5,
+        "impact": -5.0,
+        "mates": [
+          {
+            "name": "A. Gill",
+            "pin": 1.2,
+            "pout": 7.9,
+            "delta": 6.7
+          },
+          {
+            "name": "T. Vukcevic",
+            "pin": 5.1,
+            "pout": 11.3,
+            "delta": 6.1
+          },
+          {
+            "name": "W. Riley",
+            "pin": 6.4,
+            "pout": 12.0,
+            "delta": 5.6
+          },
+          {
+            "name": "C. Whitmore",
+            "pin": 6.3,
+            "pout": 11.3,
+            "delta": 5.0
+          },
+          {
+            "name": "M. Bagley III",
+            "pin": 8.3,
+            "pout": 12.9,
+            "delta": 4.5
+          }
+        ]
+      },
+      {
+        "player": "J. Champagnie",
+        "gp_in": 69,
+        "gp_out": 13,
+        "margin_in": -12.7,
+        "margin_out": -8.1,
+        "impact": -4.6,
+        "mates": [
+          {
+            "name": "W. Riley",
+            "pin": 9.4,
+            "pout": 15.2,
+            "delta": 5.8
+          },
+          {
+            "name": "A. Gill",
+            "pin": 5.0,
+            "pout": 9.0,
+            "delta": 4.0
+          },
+          {
+            "name": "B. Coulibaly",
+            "pin": 11.0,
+            "pout": 14.9,
+            "delta": 3.9
+          },
+          {
+            "name": "L. Black",
+            "pin": 5.6,
+            "pout": 9.3,
+            "delta": 3.8
+          },
+          {
+            "name": "J. Watkins",
+            "pin": 7.0,
+            "pout": 9.5,
+            "delta": 2.5
+          }
+        ]
+      },
+      {
+        "player": "T. Johnson",
+        "gp_in": 60,
+        "gp_out": 22,
+        "margin_in": -10.8,
+        "margin_out": -15.2,
+        "impact": 4.4,
+        "mates": [
+          {
+            "name": "A. Johnson",
+            "pin": 1.9,
+            "pout": 7.8,
+            "delta": 5.9
+          },
+          {
+            "name": "C. McCollum",
+            "pin": 17.7,
+            "pout": 23.3,
+            "delta": 5.6
+          },
+          {
+            "name": "K. George",
+            "pin": 15.9,
+            "pout": 11.1,
+            "delta": -4.8
+          },
+          {
+            "name": "T. Vukcevic",
+            "pin": 7.9,
+            "pout": 11.9,
+            "delta": 4.0
+          },
+          {
+            "name": "A. Gill",
+            "pin": 4.7,
+            "pout": 8.4,
+            "delta": 3.7
+          }
+        ]
+      },
+      {
+        "player": "L. Black",
+        "gp_in": 15,
+        "gp_out": 67,
+        "margin_in": -15.4,
+        "margin_out": -11.2,
+        "impact": -4.2,
+        "mates": [
+          {
+            "name": "W. Riley",
+            "pin": 16.5,
+            "pout": 8.8,
+            "delta": -7.7
+          },
+          {
+            "name": "A. Gill",
+            "pin": 10.9,
+            "pout": 4.1,
+            "delta": -6.8
+          },
+          {
+            "name": "J. Watkins",
+            "pin": 10.7,
+            "pout": 6.4,
+            "delta": -4.3
+          },
+          {
+            "name": "B. Coulibaly",
+            "pin": 14.3,
+            "pout": 11.0,
+            "delta": -3.3
+          },
+          {
+            "name": "S. Cooper",
+            "pin": 9.9,
+            "pout": 7.1,
+            "delta": -2.9
+          }
+        ]
+      },
+      {
+        "player": "S. Cooper",
+        "gp_in": 41,
+        "gp_out": 41,
+        "margin_in": -14.0,
+        "margin_out": -9.9,
+        "impact": -4.1,
+        "mates": [
+          {
+            "name": "W. Riley",
+            "pin": 14.1,
+            "pout": 5.7,
+            "delta": -8.4
+          },
+          {
+            "name": "J. Watkins",
+            "pin": 9.9,
+            "pout": 3.2,
+            "delta": -6.8
+          },
+          {
+            "name": "A. Gill",
+            "pin": 8.1,
+            "pout": 1.5,
+            "delta": -6.6
+          },
+          {
+            "name": "K. George",
+            "pin": 11.3,
+            "pout": 16.4,
+            "delta": 5.0
+          },
+          {
+            "name": "T. Vukcevic",
+            "pin": 11.0,
+            "pout": 7.3,
+            "delta": -3.7
+          }
+        ]
+      },
+      {
+        "player": "K. Middleton",
+        "gp_in": 34,
+        "gp_out": 48,
+        "margin_in": -9.7,
+        "margin_out": -13.6,
+        "impact": 3.9,
+        "mates": [
+          {
+            "name": "W. Riley",
+            "pin": 5.6,
+            "pout": 13.2,
+            "delta": 7.6
+          },
+          {
+            "name": "J. Watkins",
+            "pin": 2.6,
+            "pout": 9.0,
+            "delta": 6.4
+          },
+          {
+            "name": "T. Vukcevic",
+            "pin": 5.3,
+            "pout": 11.6,
+            "delta": 6.3
+          },
+          {
+            "name": "A. Gill",
+            "pin": 1.4,
+            "pout": 7.5,
+            "delta": 6.1
+          },
+          {
+            "name": "M. Branham",
+            "pin": 2.8,
+            "pout": 7.4,
+            "delta": 4.6
+          }
+        ]
+      }
+    ],
+    "UTA": [
+      {
+        "player": "B. Sensabaugh",
+        "gp_in": 75,
+        "gp_out": 7,
+        "margin_in": -9.7,
+        "margin_out": 5.6,
+        "impact": -15.3,
+        "mates": []
+      },
+      {
+        "player": "K. Anderson",
+        "gp_in": 20,
+        "gp_out": 62,
+        "margin_in": -16.7,
+        "margin_out": -5.8,
+        "impact": -10.9,
+        "mates": [
+          {
+            "name": "S. Mykhailiuk",
+            "pin": 5.4,
+            "pout": 10.8,
+            "delta": 5.4
+          },
+          {
+            "name": "L. Markkanen",
+            "pin": 24.2,
+            "pout": 27.7,
+            "delta": 3.5
+          },
+          {
+            "name": "I. Collier",
+            "pin": 10.2,
+            "pout": 12.3,
+            "delta": 2.1
+          },
+          {
+            "name": "J. Nurki\u0107",
+            "pin": 9.3,
+            "pout": 11.4,
+            "delta": 2.1
+          },
+          {
+            "name": "K. George",
+            "pin": 22.6,
+            "pout": 24.1,
+            "delta": 1.5
+          }
+        ]
+      },
+      {
+        "player": "L. Markkanen",
+        "gp_in": 42,
+        "gp_out": 40,
+        "margin_in": -4.9,
+        "margin_out": -12.2,
+        "impact": 7.3,
+        "mates": [
+          {
+            "name": "B. Sensabaugh",
+            "pin": 10.9,
+            "pout": 19.7,
+            "delta": 8.8
+          },
+          {
+            "name": "C. Williams",
+            "pin": 4.6,
+            "pout": 11.9,
+            "delta": 7.3
+          },
+          {
+            "name": "A. Bailey",
+            "pin": 10.2,
+            "pout": 17.5,
+            "delta": 7.3
+          },
+          {
+            "name": "E. Harkless",
+            "pin": 2.1,
+            "pout": 8.9,
+            "delta": 6.8
+          },
+          {
+            "name": "K. Filipowski",
+            "pin": 9.1,
+            "pout": 14.0,
+            "delta": 4.9
+          }
+        ]
+      },
+      {
+        "player": "K. Filipowski",
+        "gp_in": 77,
+        "gp_out": 5,
+        "margin_in": -8.7,
+        "margin_out": -4.0,
+        "impact": -4.7,
+        "mates": []
+      },
+      {
+        "player": "A. Bailey",
+        "gp_in": 72,
+        "gp_out": 10,
+        "margin_in": -8.0,
+        "margin_out": -11.7,
+        "impact": 3.7,
+        "mates": [
+          {
+            "name": "C. Williams",
+            "pin": 8.0,
+            "pout": 13.0,
+            "delta": 5.0
+          },
+          {
+            "name": "K. George",
+            "pin": 24.1,
+            "pout": 20.0,
+            "delta": -4.1
+          },
+          {
+            "name": "W. Clayton Jr.",
+            "pin": 6.2,
+            "pout": 10.1,
+            "delta": 4.0
+          },
+          {
+            "name": "S. Mykhailiuk",
+            "pin": 9.6,
+            "pout": 6.5,
+            "delta": -3.1
+          },
+          {
+            "name": "K. Filipowski",
+            "pin": 11.8,
+            "pout": 8.9,
+            "delta": -2.9
+          }
+        ]
+      },
+      {
+        "player": "K. Love",
+        "gp_in": 37,
+        "gp_out": 45,
+        "margin_in": -10.3,
+        "margin_out": -6.9,
+        "impact": -3.5,
+        "mates": [
+          {
+            "name": "C. Williams",
+            "pin": 5.8,
+            "pout": 10.9,
+            "delta": 5.1
+          },
+          {
+            "name": "B. Sensabaugh",
+            "pin": 12.3,
+            "pout": 17.2,
+            "delta": 4.9
+          },
+          {
+            "name": "J. Konchar",
+            "pin": 3.2,
+            "pout": 7.3,
+            "delta": 4.1
+          },
+          {
+            "name": "J. Nurki\u0107",
+            "pin": 9.4,
+            "pout": 13.0,
+            "delta": 3.6
+          },
+          {
+            "name": "K. Filipowski",
+            "pin": 9.7,
+            "pout": 13.0,
+            "delta": 3.3
+          }
+        ]
+      },
+      {
+        "player": "O. Tshiebwe",
+        "gp_in": 27,
+        "gp_out": 55,
+        "margin_in": -10.6,
+        "margin_out": -7.3,
+        "impact": -3.3,
+        "mates": [
+          {
+            "name": "B. Sensabaugh",
+            "pin": 20.7,
+            "pout": 12.3,
+            "delta": -8.5
+          },
+          {
+            "name": "C. Williams",
+            "pin": 13.7,
+            "pout": 5.6,
+            "delta": -8.1
+          },
+          {
+            "name": "E. Harkless",
+            "pin": 9.5,
+            "pout": 1.9,
+            "delta": -7.6
+          },
+          {
+            "name": "A. Bailey",
+            "pin": 18.2,
+            "pout": 11.7,
+            "delta": -6.5
+          },
+          {
+            "name": "I. Collier",
+            "pin": 16.8,
+            "pout": 10.4,
+            "delta": -6.4
+          }
+        ]
+      },
+      {
+        "player": "J. Nurki\u0107",
+        "gp_in": 41,
+        "gp_out": 41,
+        "margin_in": -7.0,
+        "margin_out": -9.8,
+        "impact": 2.8,
+        "mates": [
+          {
+            "name": "B. Sensabaugh",
+            "pin": 10.1,
+            "pout": 19.8,
+            "delta": 9.6
+          },
+          {
+            "name": "C. Williams",
+            "pin": 4.1,
+            "pout": 11.9,
+            "delta": 7.8
+          },
+          {
+            "name": "K. Filipowski",
+            "pin": 8.4,
+            "pout": 14.6,
+            "delta": 6.2
+          },
+          {
+            "name": "A. Bailey",
+            "pin": 10.9,
+            "pout": 17.0,
+            "delta": 6.1
+          },
+          {
+            "name": "I. Collier",
+            "pin": 9.8,
+            "pout": 14.0,
+            "delta": 4.2
+          }
+        ]
+      },
+      {
+        "player": "W. Clayton Jr.",
+        "gp_in": 45,
+        "gp_out": 37,
+        "margin_in": -9.7,
+        "margin_out": -6.9,
+        "impact": -2.8,
+        "mates": [
+          {
+            "name": "I. Collier",
+            "pin": 9.3,
+            "pout": 15.6,
+            "delta": 6.3
+          },
+          {
+            "name": "B. Sensabaugh",
+            "pin": 12.4,
+            "pout": 18.0,
+            "delta": 5.6
+          },
+          {
+            "name": "A. Bailey",
+            "pin": 11.2,
+            "pout": 16.6,
+            "delta": 5.4
+          },
+          {
+            "name": "C. Williams",
+            "pin": 6.3,
+            "pout": 10.9,
+            "delta": 4.6
+          },
+          {
+            "name": "K. Filipowski",
+            "pin": 9.7,
+            "pout": 13.9,
+            "delta": 4.2
+          }
+        ]
+      }
+    ],
+    "LAC": [
+      {
+        "player": "J. Collins",
+        "gp_in": 69,
+        "gp_out": 13,
+        "margin_in": -0.6,
+        "margin_out": 10.4,
+        "impact": -11.0,
+        "mates": [
+          {
+            "name": "K. Leonard",
+            "pin": 26.8,
+            "pout": 33.2,
+            "delta": 6.4
+          },
+          {
+            "name": "Y. Niederh\u00e4user",
+            "pin": 3.5,
+            "pout": 8.1,
+            "delta": 4.6
+          },
+          {
+            "name": "B. Mathurin",
+            "pin": 16.0,
+            "pout": 20.0,
+            "delta": 4.0
+          },
+          {
+            "name": "D. Garland",
+            "pin": 21.1,
+            "pout": 17.3,
+            "delta": -3.7
+          },
+          {
+            "name": "B. Lopez",
+            "pin": 8.0,
+            "pout": 10.8,
+            "delta": 2.9
+          }
+        ]
+      },
+      {
+        "player": "C. Paul",
+        "gp_in": 16,
+        "gp_out": 66,
+        "margin_in": -6.9,
+        "margin_out": 3.1,
+        "impact": -10.0,
+        "mates": [
+          {
+            "name": "B. Lopez",
+            "pin": 6.2,
+            "pout": 8.9,
+            "delta": 2.6
+          },
+          {
+            "name": "C. Christie",
+            "pin": 4.6,
+            "pout": 2.4,
+            "delta": -2.3
+          },
+          {
+            "name": "I. Zubac",
+            "pin": 15.5,
+            "pout": 13.7,
+            "delta": -1.8
+          },
+          {
+            "name": "K. Leonard",
+            "pin": 26.4,
+            "pout": 28.2,
+            "delta": 1.8
+          },
+          {
+            "name": "J. Collins",
+            "pin": 12.2,
+            "pout": 14.0,
+            "delta": 1.8
+          }
+        ]
+      },
+      {
+        "player": "K. Leonard",
+        "gp_in": 65,
+        "gp_out": 17,
+        "margin_in": 3.0,
+        "margin_out": -6.1,
+        "impact": 9.1,
+        "mates": [
+          {
+            "name": "J. Harden",
+            "pin": 23.1,
+            "pout": 31.6,
+            "delta": 8.5
+          },
+          {
+            "name": "B. Bogdanovi\u0107",
+            "pin": 3.8,
+            "pout": 12.2,
+            "delta": 8.4
+          },
+          {
+            "name": "C. Christie",
+            "pin": 1.8,
+            "pout": 5.9,
+            "delta": 4.1
+          },
+          {
+            "name": "J. Miller",
+            "pin": 9.3,
+            "pout": 13.2,
+            "delta": 3.9
+          },
+          {
+            "name": "B. Lopez",
+            "pin": 9.2,
+            "pout": 6.1,
+            "delta": -3.1
+          }
+        ]
+      },
+      {
+        "player": "I. Zubac",
+        "gp_in": 43,
+        "gp_out": 39,
+        "margin_in": -3.0,
+        "margin_out": 5.7,
+        "impact": -8.7,
+        "mates": [
+          {
+            "name": "B. Lopez",
+            "pin": 5.8,
+            "pout": 10.9,
+            "delta": 5.1
+          },
+          {
+            "name": "K. Leonard",
+            "pin": 25.3,
+            "pout": 30.1,
+            "delta": 4.8
+          },
+          {
+            "name": "Y. Niederh\u00e4user",
+            "pin": 2.3,
+            "pout": 6.9,
+            "delta": 4.6
+          },
+          {
+            "name": "B. Bogdanovi\u0107",
+            "pin": 8.9,
+            "pout": 5.1,
+            "delta": -3.8
+          },
+          {
+            "name": "C. Christie",
+            "pin": 4.1,
+            "pout": 1.4,
+            "delta": -2.7
+          }
+        ]
+      },
+      {
+        "player": "B. Lopez",
+        "gp_in": 75,
+        "gp_out": 7,
+        "margin_in": 1.9,
+        "margin_out": -6.7,
+        "impact": 8.6,
+        "mates": []
+      },
+      {
+        "player": "D. Garland",
+        "gp_in": 19,
+        "gp_out": 63,
+        "margin_in": 6.5,
+        "margin_out": -0.5,
+        "impact": 6.9,
+        "mates": [
+          {
+            "name": "D. Jones Jr.",
+            "pin": 8.1,
+            "pout": 11.3,
+            "delta": 3.2
+          },
+          {
+            "name": "I. Jackson",
+            "pin": 8.5,
+            "pout": 5.5,
+            "delta": -3.0
+          },
+          {
+            "name": "B. Lopez",
+            "pin": 10.4,
+            "pout": 7.8,
+            "delta": -2.6
+          },
+          {
+            "name": "T. Washington Jr.",
+            "pin": 0.4,
+            "pout": 2.8,
+            "delta": 2.4
+          },
+          {
+            "name": "K. Dunn",
+            "pin": 5.5,
+            "pout": 7.8,
+            "delta": 2.3
+          }
+        ]
+      },
+      {
+        "player": "I. Jackson",
+        "gp_in": 17,
+        "gp_out": 65,
+        "margin_in": 6.6,
+        "margin_out": -0.3,
+        "impact": 6.9,
+        "mates": [
+          {
+            "name": "D. Garland",
+            "pin": 22.7,
+            "pout": 16.0,
+            "delta": -6.7
+          },
+          {
+            "name": "B. Mathurin",
+            "pin": 20.3,
+            "pout": 14.5,
+            "delta": -5.8
+          },
+          {
+            "name": "B. Lopez",
+            "pin": 11.0,
+            "pout": 7.7,
+            "delta": -3.3
+          },
+          {
+            "name": "K. Dunn",
+            "pin": 5.1,
+            "pout": 7.8,
+            "delta": 2.8
+          },
+          {
+            "name": "J. Collins",
+            "pin": 11.3,
+            "pout": 13.9,
+            "delta": 2.6
+          }
+        ]
+      },
+      {
+        "player": "K. Brown",
+        "gp_in": 34,
+        "gp_out": 48,
+        "margin_in": -2.8,
+        "margin_out": 3.9,
+        "impact": -6.8,
+        "mates": [
+          {
+            "name": "I. Zubac",
+            "pin": 13.0,
+            "pout": 17.6,
+            "delta": 4.6
+          },
+          {
+            "name": "Y. Niederh\u00e4user",
+            "pin": 3.2,
+            "pout": 6.4,
+            "delta": 3.1
+          },
+          {
+            "name": "B. Lopez",
+            "pin": 6.6,
+            "pout": 9.5,
+            "delta": 2.9
+          },
+          {
+            "name": "J. Harden",
+            "pin": 24.6,
+            "pout": 27.0,
+            "delta": 2.4
+          },
+          {
+            "name": "K. Leonard",
+            "pin": 26.7,
+            "pout": 28.7,
+            "delta": 1.9
+          }
+        ]
+      },
+      {
+        "player": "J. Miller",
+        "gp_in": 60,
+        "gp_out": 22,
+        "margin_in": 2.8,
+        "margin_out": -3.3,
+        "impact": 6.1,
+        "mates": [
+          {
+            "name": "K. Leonard",
+            "pin": 28.9,
+            "pout": 24.7,
+            "delta": -4.2
+          },
+          {
+            "name": "I. Zubac",
+            "pin": 12.8,
+            "pout": 16.1,
+            "delta": 3.3
+          },
+          {
+            "name": "B. Lopez",
+            "pin": 9.1,
+            "pout": 6.4,
+            "delta": -2.6
+          },
+          {
+            "name": "C. Christie",
+            "pin": 2.1,
+            "pout": 4.7,
+            "delta": 2.6
+          },
+          {
+            "name": "Y. Niederh\u00e4user",
+            "pin": 4.9,
+            "pout": 2.5,
+            "delta": -2.4
+          }
+        ]
+      }
+    ],
+    "PHX": [
+      {
+        "player": "D. Booker",
+        "gp_in": 64,
+        "gp_out": 18,
+        "margin_in": 3.6,
+        "margin_out": -6.3,
+        "impact": 9.9,
+        "mates": [
+          {
+            "name": "A. Coffey",
+            "pin": 2.4,
+            "pout": 8.8,
+            "delta": 6.4
+          },
+          {
+            "name": "J. Green",
+            "pin": 18.7,
+            "pout": 12.4,
+            "delta": -6.3
+          },
+          {
+            "name": "G. Allen",
+            "pin": 15.5,
+            "pout": 18.8,
+            "delta": 3.3
+          },
+          {
+            "name": "J. Bouyea",
+            "pin": 4.7,
+            "pout": 7.5,
+            "delta": 2.8
+          },
+          {
+            "name": "C. Gillespie",
+            "pin": 12.2,
+            "pout": 14.5,
+            "delta": 2.3
+          }
+        ]
+      },
+      {
+        "player": "J. Bouyea",
+        "gp_in": 46,
+        "gp_out": 36,
+        "margin_in": -0.8,
+        "margin_out": 4.3,
+        "impact": -5.1,
+        "mates": [
+          {
+            "name": "C. Gillespie",
+            "pin": 14.1,
+            "pout": 10.9,
+            "delta": -3.2
+          },
+          {
+            "name": "D. Booker",
+            "pin": 24.9,
+            "pout": 27.0,
+            "delta": 2.1
+          },
+          {
+            "name": "D. Brooks",
+            "pin": 21.0,
+            "pout": 19.1,
+            "delta": -1.9
+          },
+          {
+            "name": "A. Coffey",
+            "pin": 5.5,
+            "pout": 3.7,
+            "delta": -1.8
+          },
+          {
+            "name": "J. Goodwin",
+            "pin": 9.4,
+            "pout": 7.7,
+            "delta": -1.7
+          }
+        ]
+      },
+      {
+        "player": "A. Coffey",
+        "gp_in": 16,
+        "gp_out": 66,
+        "margin_in": -2.2,
+        "margin_out": 2.3,
+        "impact": -4.5,
+        "mates": [
+          {
+            "name": "M. Williams",
+            "pin": 7.4,
+            "pout": 12.3,
+            "delta": 5.0
+          },
+          {
+            "name": "K. Maluach",
+            "pin": 5.2,
+            "pout": 2.2,
+            "delta": -3.1
+          },
+          {
+            "name": "R. Fleming",
+            "pin": 6.2,
+            "pout": 3.6,
+            "delta": -2.6
+          },
+          {
+            "name": "O. Ighodaro",
+            "pin": 7.6,
+            "pout": 6.2,
+            "delta": -1.4
+          },
+          {
+            "name": "D. Booker",
+            "pin": 27.2,
+            "pout": 25.9,
+            "delta": -1.3
+          }
+        ]
+      },
+      {
+        "player": "M. Williams",
+        "gp_in": 60,
+        "gp_out": 22,
+        "margin_in": 0.3,
+        "margin_out": 4.6,
+        "impact": -4.3,
+        "mates": [
+          {
+            "name": "J. Green",
+            "pin": 15.0,
+            "pout": 20.5,
+            "delta": 5.5
+          },
+          {
+            "name": "D. Booker",
+            "pin": 24.7,
+            "pout": 29.0,
+            "delta": 4.3
+          },
+          {
+            "name": "D. Brooks",
+            "pin": 19.7,
+            "pout": 23.7,
+            "delta": 4.0
+          },
+          {
+            "name": "R. Fleming",
+            "pin": 3.0,
+            "pout": 6.4,
+            "delta": 3.4
+          },
+          {
+            "name": "O. Ighodaro",
+            "pin": 5.8,
+            "pout": 8.4,
+            "delta": 2.6
+          }
+        ]
+      },
+      {
+        "player": "G. Allen",
+        "gp_in": 51,
+        "gp_out": 31,
+        "margin_in": -0.1,
+        "margin_out": 4.0,
+        "impact": -4.1,
+        "mates": [
+          {
+            "name": "C. Gillespie",
+            "pin": 10.9,
+            "pout": 15.6,
+            "delta": 4.8
+          },
+          {
+            "name": "D. Brooks",
+            "pin": 18.7,
+            "pout": 22.8,
+            "delta": 4.1
+          },
+          {
+            "name": "D. Booker",
+            "pin": 27.3,
+            "pout": 24.5,
+            "delta": -2.8
+          },
+          {
+            "name": "J. Bouyea",
+            "pin": 4.3,
+            "pout": 6.8,
+            "delta": 2.5
+          },
+          {
+            "name": "R. Fleming",
+            "pin": 3.4,
+            "pout": 5.9,
+            "delta": 2.5
+          }
+        ]
+      },
+      {
+        "player": "I. Livers",
+        "gp_in": 36,
+        "gp_out": 46,
+        "margin_in": 3.5,
+        "margin_out": -0.2,
+        "impact": 3.7,
+        "mates": [
+          {
+            "name": "G. Allen",
+            "pin": 20.1,
+            "pout": 14.3,
+            "delta": -5.8
+          },
+          {
+            "name": "C. Gillespie",
+            "pin": 14.2,
+            "pout": 11.3,
+            "delta": -2.9
+          },
+          {
+            "name": "J. Green",
+            "pin": 19.4,
+            "pout": 17.2,
+            "delta": -2.2
+          },
+          {
+            "name": "R. Fleming",
+            "pin": 3.3,
+            "pout": 5.1,
+            "delta": 1.8
+          },
+          {
+            "name": "K. Maluach",
+            "pin": 2.0,
+            "pout": 3.8,
+            "delta": 1.8
+          }
+        ]
+      },
+      {
+        "player": "D. Brooks",
+        "gp_in": 56,
+        "gp_out": 26,
+        "margin_in": 0.3,
+        "margin_out": 3.9,
+        "impact": -3.5,
+        "mates": [
+          {
+            "name": "J. Green",
+            "pin": 11.5,
+            "pout": 21.5,
+            "delta": 10.0
+          },
+          {
+            "name": "K. Maluach",
+            "pin": 1.4,
+            "pout": 4.9,
+            "delta": 3.5
+          },
+          {
+            "name": "D. Booker",
+            "pin": 24.9,
+            "pout": 28.3,
+            "delta": 3.4
+          },
+          {
+            "name": "R. Fleming",
+            "pin": 3.0,
+            "pout": 6.2,
+            "delta": 3.2
+          },
+          {
+            "name": "R. Dunn",
+            "pin": 4.8,
+            "pout": 7.8,
+            "delta": 3.0
+          }
+        ]
+      },
+      {
+        "player": "R. Dunn",
+        "gp_in": 70,
+        "gp_out": 12,
+        "margin_in": 1.9,
+        "margin_out": -0.9,
+        "impact": 2.8,
+        "mates": [
+          {
+            "name": "J. Green",
+            "pin": 17.0,
+            "pout": 21.8,
+            "delta": 4.8
+          },
+          {
+            "name": "G. Allen",
+            "pin": 17.0,
+            "pout": 12.5,
+            "delta": -4.5
+          },
+          {
+            "name": "M. Williams",
+            "pin": 11.4,
+            "pout": 14.4,
+            "delta": 3.0
+          },
+          {
+            "name": "J. Goodwin",
+            "pin": 8.4,
+            "pout": 10.2,
+            "delta": 1.9
+          },
+          {
+            "name": "K. Maluach",
+            "pin": 3.3,
+            "pout": 1.4,
+            "delta": -1.9
+          }
+        ]
+      },
+      {
+        "player": "K. Maluach",
+        "gp_in": 46,
+        "gp_out": 36,
+        "margin_in": 0.4,
+        "margin_out": 2.8,
+        "impact": -2.4,
+        "mates": [
+          {
+            "name": "J. Green",
+            "pin": 20.0,
+            "pout": 12.0,
+            "delta": -8.0
+          },
+          {
+            "name": "M. Williams",
+            "pin": 9.2,
+            "pout": 13.3,
+            "delta": 4.2
+          },
+          {
+            "name": "D. Brooks",
+            "pin": 22.0,
+            "pout": 18.7,
+            "delta": -3.3
+          },
+          {
+            "name": "C. Gillespie",
+            "pin": 11.3,
+            "pout": 14.4,
+            "delta": 3.1
+          },
+          {
+            "name": "J. Goodwin",
+            "pin": 7.8,
+            "pout": 9.9,
+            "delta": 2.1
+          }
+        ]
+      }
+    ],
+    "SAC": [
+      {
+        "player": "D. DeRozan",
+        "gp_in": 77,
+        "gp_out": 5,
+        "margin_in": -10.5,
+        "margin_out": -2.4,
+        "impact": -8.1,
+        "mates": []
+      },
+      {
+        "player": "D. Carter",
+        "gp_in": 38,
+        "gp_out": 44,
+        "margin_in": -13.7,
+        "margin_out": -6.8,
+        "impact": -7.0,
+        "mates": [
+          {
+            "name": "N. Clifford",
+            "pin": 12.0,
+            "pout": 6.0,
+            "delta": -6.0
+          },
+          {
+            "name": "D. DeRozan",
+            "pin": 15.9,
+            "pout": 20.3,
+            "delta": 4.5
+          },
+          {
+            "name": "K. Ellis",
+            "pin": 8.4,
+            "pout": 4.2,
+            "delta": -4.3
+          },
+          {
+            "name": "D. Plowden",
+            "pin": 9.9,
+            "pout": 13.2,
+            "delta": 3.3
+          },
+          {
+            "name": "D. Schr\u00f6der",
+            "pin": 10.6,
+            "pout": 13.8,
+            "delta": 3.2
+          }
+        ]
+      },
+      {
+        "player": "K. Hayes",
+        "gp_in": 23,
+        "gp_out": 59,
+        "margin_in": -5.9,
+        "margin_out": -11.6,
+        "impact": 5.7,
+        "mates": [
+          {
+            "name": "P. Achiuwa",
+            "pin": 15.9,
+            "pout": 7.4,
+            "delta": -8.4
+          },
+          {
+            "name": "M. Raynaud",
+            "pin": 17.4,
+            "pout": 10.2,
+            "delta": -7.2
+          },
+          {
+            "name": "N. Clifford",
+            "pin": 13.8,
+            "pout": 6.6,
+            "delta": -7.2
+          },
+          {
+            "name": "D. Carter",
+            "pin": 12.5,
+            "pout": 6.6,
+            "delta": -6.0
+          },
+          {
+            "name": "D. Plowden",
+            "pin": 12.5,
+            "pout": 6.8,
+            "delta": -5.7
+          }
+        ]
+      },
+      {
+        "player": "D. Cardwell",
+        "gp_in": 44,
+        "gp_out": 38,
+        "margin_in": -7.5,
+        "margin_out": -12.9,
+        "impact": 5.3,
+        "mates": [
+          {
+            "name": "D. Carter",
+            "pin": 11.5,
+            "pout": 5.7,
+            "delta": -5.8
+          },
+          {
+            "name": "D. DeRozan",
+            "pin": 20.4,
+            "pout": 16.3,
+            "delta": -4.1
+          },
+          {
+            "name": "D. Plowden",
+            "pin": 12.1,
+            "pout": 8.5,
+            "delta": -3.6
+          },
+          {
+            "name": "D. McDermott",
+            "pin": 6.6,
+            "pout": 3.2,
+            "delta": -3.3
+          },
+          {
+            "name": "N. Clifford",
+            "pin": 9.8,
+            "pout": 7.2,
+            "delta": -2.7
+          }
+        ]
+      },
+      {
+        "player": "K. Murray",
+        "gp_in": 23,
+        "gp_out": 59,
+        "margin_in": -13.7,
+        "margin_out": -8.6,
+        "impact": -5.1,
+        "mates": [
+          {
+            "name": "N. Clifford",
+            "pin": 6.6,
+            "pout": 9.5,
+            "delta": 2.9
+          },
+          {
+            "name": "K. Ellis",
+            "pin": 4.1,
+            "pout": 6.5,
+            "delta": 2.5
+          },
+          {
+            "name": "M. Monk",
+            "pin": 10.7,
+            "pout": 13.2,
+            "delta": 2.5
+          },
+          {
+            "name": "P. Achiuwa",
+            "pin": 8.5,
+            "pout": 10.8,
+            "delta": 2.3
+          },
+          {
+            "name": "D. Eubanks",
+            "pin": 3.9,
+            "pout": 6.1,
+            "delta": 2.1
+          }
+        ]
+      },
+      {
+        "player": "D. Eubanks",
+        "gp_in": 42,
+        "gp_out": 40,
+        "margin_in": -12.1,
+        "margin_out": -7.8,
+        "impact": -4.4,
+        "mates": [
+          {
+            "name": "D. Carter",
+            "pin": 5.6,
+            "pout": 12.6,
+            "delta": 6.9
+          },
+          {
+            "name": "D. Plowden",
+            "pin": 6.8,
+            "pout": 13.5,
+            "delta": 6.7
+          },
+          {
+            "name": "Z. LaVine",
+            "pin": 21.1,
+            "pout": 15.8,
+            "delta": -5.3
+          },
+          {
+            "name": "D. McDermott",
+            "pin": 3.2,
+            "pout": 6.9,
+            "delta": 3.7
+          },
+          {
+            "name": "N. Clifford",
+            "pin": 7.0,
+            "pout": 10.3,
+            "delta": 3.3
+          }
+        ]
+      },
+      {
+        "player": "D. McDermott",
+        "gp_in": 29,
+        "gp_out": 53,
+        "margin_in": -12.8,
+        "margin_out": -8.5,
+        "impact": -4.3,
+        "mates": [
+          {
+            "name": "D. Carter",
+            "pin": 13.0,
+            "pout": 4.3,
+            "delta": -8.7
+          },
+          {
+            "name": "N. Clifford",
+            "pin": 12.2,
+            "pout": 6.7,
+            "delta": -5.5
+          },
+          {
+            "name": "M. Raynaud",
+            "pin": 15.6,
+            "pout": 10.4,
+            "delta": -5.2
+          },
+          {
+            "name": "K. Hayes",
+            "pin": 6.5,
+            "pout": 3.3,
+            "delta": -3.2
+          },
+          {
+            "name": "P. Achiuwa",
+            "pin": 11.6,
+            "pout": 9.2,
+            "delta": -2.4
+          }
+        ]
+      },
+      {
+        "player": "Z. LaVine",
+        "gp_in": 39,
+        "gp_out": 43,
+        "margin_in": -8.1,
+        "margin_out": -11.7,
+        "impact": 3.7,
+        "mates": [
+          {
+            "name": "D. Carter",
+            "pin": 3.7,
+            "pout": 11.0,
+            "delta": 7.3
+          },
+          {
+            "name": "N. Clifford",
+            "pin": 4.9,
+            "pout": 11.8,
+            "delta": 7.0
+          },
+          {
+            "name": "M. Raynaud",
+            "pin": 8.5,
+            "pout": 15.3,
+            "delta": 6.7
+          },
+          {
+            "name": "P. Achiuwa",
+            "pin": 8.0,
+            "pout": 11.6,
+            "delta": 3.6
+          },
+          {
+            "name": "K. Ellis",
+            "pin": 4.4,
+            "pout": 7.9,
+            "delta": 3.4
+          }
+        ]
+      },
+      {
+        "player": "N. Clifford",
+        "gp_in": 75,
+        "gp_out": 7,
+        "margin_in": -9.7,
+        "margin_out": -13.4,
+        "impact": 3.7,
+        "mates": []
+      }
+    ],
+    "POR": [
+      {
+        "player": "J. Cooke",
+        "gp_in": 19,
+        "gp_out": 63,
+        "margin_in": -11.9,
+        "margin_out": 3.2,
+        "impact": -15.1,
+        "mates": [
+          {
+            "name": "D. Avdija",
+            "pin": 19.5,
+            "pout": 25.1,
+            "delta": 5.6
+          },
+          {
+            "name": "C. Love",
+            "pin": 12.9,
+            "pout": 9.4,
+            "delta": -3.5
+          },
+          {
+            "name": "J. Grant",
+            "pin": 16.4,
+            "pout": 19.6,
+            "delta": 3.2
+          },
+          {
+            "name": "S. Cissoko",
+            "pin": 7.6,
+            "pout": 4.3,
+            "delta": -3.2
+          },
+          {
+            "name": "J. Holiday",
+            "pin": 18.0,
+            "pout": 15.8,
+            "delta": -2.2
+          }
+        ]
+      },
+      {
+        "player": "D. Clingan",
+        "gp_in": 77,
+        "gp_out": 5,
+        "margin_in": 0.4,
+        "margin_out": -10.2,
+        "impact": 10.6,
+        "mates": []
+      },
+      {
+        "player": "B. Wesley",
+        "gp_in": 31,
+        "gp_out": 51,
+        "margin_in": 4.0,
+        "margin_out": -2.9,
+        "impact": 6.9,
+        "mates": [
+          {
+            "name": "S. Sharpe",
+            "pin": 14.7,
+            "pout": 22.6,
+            "delta": 7.8
+          },
+          {
+            "name": "C. Love",
+            "pin": 6.1,
+            "pout": 11.5,
+            "delta": 5.4
+          },
+          {
+            "name": "D. Avdija",
+            "pin": 20.8,
+            "pout": 25.8,
+            "delta": 5.0
+          },
+          {
+            "name": "J. Holiday",
+            "pin": 18.2,
+            "pout": 13.9,
+            "delta": -4.3
+          },
+          {
+            "name": "R. Williams III",
+            "pin": 8.7,
+            "pout": 5.7,
+            "delta": -3.0
+          }
+        ]
+      },
+      {
+        "player": "S. Henderson",
+        "gp_in": 30,
+        "gp_out": 52,
+        "margin_in": 3.8,
+        "margin_out": -2.7,
+        "impact": 6.5,
+        "mates": [
+          {
+            "name": "D. Avdija",
+            "pin": 21.7,
+            "pout": 25.5,
+            "delta": 3.8
+          },
+          {
+            "name": "S. Cissoko",
+            "pin": 2.7,
+            "pout": 6.5,
+            "delta": 3.8
+          },
+          {
+            "name": "J. Holiday",
+            "pin": 17.6,
+            "pout": 14.7,
+            "delta": -2.9
+          },
+          {
+            "name": "B. Wesley",
+            "pin": 4.0,
+            "pout": 6.8,
+            "delta": 2.8
+          },
+          {
+            "name": "D. Clingan",
+            "pin": 13.4,
+            "pout": 11.4,
+            "delta": -2.1
+          }
+        ]
+      },
+      {
+        "player": "M. Thybulle",
+        "gp_in": 30,
+        "gp_out": 52,
+        "margin_in": 3.2,
+        "margin_out": -2.3,
+        "impact": 5.6,
+        "mates": [
+          {
+            "name": "S. Cissoko",
+            "pin": 2.4,
+            "pout": 6.5,
+            "delta": 4.1
+          },
+          {
+            "name": "V. Krej\u010d\u00ed",
+            "pin": 5.9,
+            "pout": 9.8,
+            "delta": 3.9
+          },
+          {
+            "name": "D. Avdija",
+            "pin": 22.0,
+            "pout": 25.5,
+            "delta": 3.5
+          },
+          {
+            "name": "J. Holiday",
+            "pin": 17.2,
+            "pout": 15.2,
+            "delta": -1.9
+          },
+          {
+            "name": "R. Williams III",
+            "pin": 7.2,
+            "pout": 6.4,
+            "delta": -0.8
+          }
+        ]
+      },
+      {
+        "player": "J. Holiday",
+        "gp_in": 53,
+        "gp_out": 29,
+        "margin_in": 1.5,
+        "margin_out": -3.5,
+        "impact": 5.0,
+        "mates": [
+          {
+            "name": "J. Grant",
+            "pin": 17.6,
+            "pout": 21.5,
+            "delta": 3.9
+          },
+          {
+            "name": "D. Avdija",
+            "pin": 22.6,
+            "pout": 26.4,
+            "delta": 3.8
+          },
+          {
+            "name": "S. Cissoko",
+            "pin": 3.7,
+            "pout": 7.4,
+            "delta": 3.7
+          },
+          {
+            "name": "C. Love",
+            "pin": 8.8,
+            "pout": 11.4,
+            "delta": 2.6
+          },
+          {
+            "name": "D. Reath",
+            "pin": 4.5,
+            "pout": 2.0,
+            "delta": -2.5
+          }
+        ]
+      },
+      {
+        "player": "C. Love",
+        "gp_in": 49,
+        "gp_out": 33,
+        "margin_in": -1.9,
+        "margin_out": 2.1,
+        "impact": -4.0,
+        "mates": [
+          {
+            "name": "S. Cissoko",
+            "pin": 6.5,
+            "pout": 2.7,
+            "delta": -3.8
+          },
+          {
+            "name": "S. Sharpe",
+            "pin": 21.4,
+            "pout": 18.5,
+            "delta": -2.9
+          },
+          {
+            "name": "D. Avdija",
+            "pin": 25.3,
+            "pout": 22.6,
+            "delta": -2.7
+          },
+          {
+            "name": "J. Grant",
+            "pin": 19.3,
+            "pout": 17.8,
+            "delta": -1.5
+          },
+          {
+            "name": "J. Cooke",
+            "pin": 1.5,
+            "pout": 0.4,
+            "delta": -1.1
+          }
+        ]
+      },
+      {
+        "player": "D. Reath",
+        "gp_in": 32,
+        "gp_out": 50,
+        "margin_in": -2.6,
+        "margin_out": 1.2,
+        "impact": -3.7,
+        "mates": [
+          {
+            "name": "S. Cissoko",
+            "pin": 7.1,
+            "pout": 3.8,
+            "delta": -3.3
+          },
+          {
+            "name": "D. Avdija",
+            "pin": 25.4,
+            "pout": 23.3,
+            "delta": -2.1
+          },
+          {
+            "name": "R. Williams III",
+            "pin": 5.7,
+            "pout": 7.4,
+            "delta": 1.7
+          },
+          {
+            "name": "D. Clingan",
+            "pin": 11.2,
+            "pout": 12.7,
+            "delta": 1.5
+          },
+          {
+            "name": "K. Murray",
+            "pin": 6.4,
+            "pout": 5.3,
+            "delta": -1.1
+          }
+        ]
+      },
+      {
+        "player": "S. Sharpe",
+        "gp_in": 50,
+        "gp_out": 32,
+        "margin_in": -1.7,
+        "margin_out": 1.8,
+        "impact": -3.5,
+        "mates": [
+          {
+            "name": "D. Avdija",
+            "pin": 26.0,
+            "pout": 21.2,
+            "delta": -4.8
+          },
+          {
+            "name": "J. Holiday",
+            "pin": 14.7,
+            "pout": 17.8,
+            "delta": 3.0
+          },
+          {
+            "name": "S. Cissoko",
+            "pin": 6.2,
+            "pout": 3.4,
+            "delta": -2.8
+          },
+          {
+            "name": "D. Clingan",
+            "pin": 11.0,
+            "pout": 13.7,
+            "delta": 2.7
+          },
+          {
+            "name": "C. Love",
+            "pin": 10.7,
+            "pout": 9.1,
+            "delta": -1.6
+          }
+        ]
+      }
+    ],
+    "MIN": [
+      {
+        "player": "J. Juzang",
+        "gp_in": 21,
+        "gp_out": 61,
+        "margin_in": 9.6,
+        "margin_out": 1.2,
+        "impact": 8.4,
+        "mates": [
+          {
+            "name": "A. Edwards",
+            "pin": 30.9,
+            "pout": 28.0,
+            "delta": -3.0
+          },
+          {
+            "name": "J. Clark",
+            "pin": 5.1,
+            "pout": 3.6,
+            "delta": -1.5
+          },
+          {
+            "name": "J. Ingles",
+            "pin": 0.6,
+            "pout": 2.1,
+            "delta": 1.5
+          },
+          {
+            "name": "J. McDaniels",
+            "pin": 15.6,
+            "pout": 14.5,
+            "delta": -1.1
+          },
+          {
+            "name": "D. DiVincenzo",
+            "pin": 11.5,
+            "pout": 12.4,
+            "delta": 0.9
+          }
+        ]
+      },
+      {
+        "player": "T. Shannon Jr.",
+        "gp_in": 43,
+        "gp_out": 39,
+        "margin_in": 0.2,
+        "margin_out": 6.8,
+        "impact": -6.6,
+        "mates": [
+          {
+            "name": "A. Dosunmu",
+            "pin": 15.1,
+            "pout": 12.9,
+            "delta": -2.2
+          },
+          {
+            "name": "J. Ingles",
+            "pin": 2.6,
+            "pout": 0.7,
+            "delta": -1.9
+          },
+          {
+            "name": "D. DiVincenzo",
+            "pin": 12.9,
+            "pout": 11.4,
+            "delta": -1.5
+          },
+          {
+            "name": "B. Hyland",
+            "pin": 9.2,
+            "pout": 7.9,
+            "delta": -1.3
+          },
+          {
+            "name": "A. Edwards",
+            "pin": 28.0,
+            "pout": 29.4,
+            "delta": 1.3
+          }
+        ]
+      },
+      {
+        "player": "M. Conley",
+        "gp_in": 54,
+        "gp_out": 28,
+        "margin_in": 5.1,
+        "margin_out": -0.1,
+        "impact": 5.2,
+        "mates": [
+          {
+            "name": "B. Hyland",
+            "pin": 6.8,
+            "pout": 11.3,
+            "delta": 4.5
+          },
+          {
+            "name": "A. Dosunmu",
+            "pin": 16.9,
+            "pout": 13.1,
+            "delta": -3.8
+          },
+          {
+            "name": "J. Randle",
+            "pin": 22.1,
+            "pout": 19.1,
+            "delta": -3.0
+          },
+          {
+            "name": "D. DiVincenzo",
+            "pin": 13.0,
+            "pout": 10.6,
+            "delta": -2.4
+          },
+          {
+            "name": "J. Ingles",
+            "pin": 0.7,
+            "pout": 2.9,
+            "delta": 2.2
+          }
+        ]
+      },
+      {
+        "player": "R. Dillingham",
+        "gp_in": 35,
+        "gp_out": 47,
+        "margin_in": 6.1,
+        "margin_out": 1.3,
+        "impact": 4.8,
+        "mates": [
+          {
+            "name": "D. DiVincenzo",
+            "pin": 13.8,
+            "pout": 11.0,
+            "delta": -2.8
+          },
+          {
+            "name": "B. Hyland",
+            "pin": 7.1,
+            "pout": 9.3,
+            "delta": 2.2
+          },
+          {
+            "name": "N. Reid",
+            "pin": 14.7,
+            "pout": 12.6,
+            "delta": -2.1
+          },
+          {
+            "name": "J. Beringer",
+            "pin": 2.7,
+            "pout": 4.9,
+            "delta": 2.1
+          },
+          {
+            "name": "J. Ingles",
+            "pin": 0.7,
+            "pout": 2.4,
+            "delta": 1.7
+          }
+        ]
+      },
+      {
+        "player": "L. Miller",
+        "gp_in": 19,
+        "gp_out": 63,
+        "margin_in": 7.0,
+        "margin_out": 2.3,
+        "impact": 4.7,
+        "mates": [
+          {
+            "name": "B. Hyland",
+            "pin": 6.1,
+            "pout": 9.4,
+            "delta": 3.3
+          },
+          {
+            "name": "J. Randle",
+            "pin": 19.7,
+            "pout": 21.5,
+            "delta": 1.8
+          },
+          {
+            "name": "J. Clark",
+            "pin": 5.3,
+            "pout": 3.6,
+            "delta": -1.7
+          },
+          {
+            "name": "J. Beringer",
+            "pin": 3.1,
+            "pout": 4.5,
+            "delta": 1.4
+          },
+          {
+            "name": "D. DiVincenzo",
+            "pin": 13.2,
+            "pout": 11.9,
+            "delta": -1.3
+          }
+        ]
+      },
+      {
+        "player": "J. Ingles",
+        "gp_in": 27,
+        "gp_out": 55,
+        "margin_in": 0.9,
+        "margin_out": 4.6,
+        "impact": -3.7,
+        "mates": [
+          {
+            "name": "A. Edwards",
+            "pin": 25.5,
+            "pout": 30.6,
+            "delta": 5.1
+          },
+          {
+            "name": "T. Shannon Jr.",
+            "pin": 8.8,
+            "pout": 4.4,
+            "delta": -4.4
+          },
+          {
+            "name": "J. Beringer",
+            "pin": 5.2,
+            "pout": 2.7,
+            "delta": -2.5
+          },
+          {
+            "name": "D. DiVincenzo",
+            "pin": 10.6,
+            "pout": 13.0,
+            "delta": 2.3
+          },
+          {
+            "name": "L. Miller",
+            "pin": 3.3,
+            "pout": 1.0,
+            "delta": -2.3
+          }
+        ]
+      },
+      {
+        "player": "R. Gobert",
+        "gp_in": 76,
+        "gp_out": 6,
+        "margin_in": 3.6,
+        "margin_out": 0.2,
+        "impact": 3.4,
+        "mates": []
+      },
+      {
+        "player": "K. Anderson",
+        "gp_in": 19,
+        "gp_out": 63,
+        "margin_in": 0.9,
+        "margin_out": 4.1,
+        "impact": -3.1,
+        "mates": [
+          {
+            "name": "A. Dosunmu",
+            "pin": 16.9,
+            "pout": 10.2,
+            "delta": -6.6
+          },
+          {
+            "name": "B. Hyland",
+            "pin": 12.4,
+            "pout": 7.2,
+            "delta": -5.2
+          },
+          {
+            "name": "A. Edwards",
+            "pin": 24.6,
+            "pout": 29.5,
+            "delta": 5.0
+          },
+          {
+            "name": "N. Reid",
+            "pin": 11.8,
+            "pout": 14.0,
+            "delta": 2.2
+          },
+          {
+            "name": "M. Conley",
+            "pin": 6.2,
+            "pout": 4.2,
+            "delta": -2.0
+          }
+        ]
+      },
+      {
+        "player": "A. Edwards",
+        "gp_in": 61,
+        "gp_out": 21,
+        "margin_in": 2.6,
+        "margin_out": 5.5,
+        "impact": -2.9,
+        "mates": [
+          {
+            "name": "A. Dosunmu",
+            "pin": 12.6,
+            "pout": 18.7,
+            "delta": 6.1
+          },
+          {
+            "name": "J. McDaniels",
+            "pin": 13.8,
+            "pout": 18.7,
+            "delta": 4.9
+          },
+          {
+            "name": "B. Hyland",
+            "pin": 7.2,
+            "pout": 11.8,
+            "delta": 4.6
+          },
+          {
+            "name": "J. Ingles",
+            "pin": 0.6,
+            "pout": 4.8,
+            "delta": 4.3
+          },
+          {
+            "name": "M. Conley",
+            "pin": 3.7,
+            "pout": 7.3,
+            "delta": 3.6
+          }
+        ]
+      }
+    ],
+    "IND": [
+      {
+        "player": "J. Walker",
+        "gp_in": 76,
+        "gp_out": 6,
+        "margin_in": -8.6,
+        "margin_out": -0.5,
+        "impact": -8.1,
+        "mates": []
+      },
+      {
+        "player": "P. Siakam",
+        "gp_in": 62,
+        "gp_out": 20,
+        "margin_in": -6.4,
+        "margin_out": -12.9,
+        "impact": 6.6,
+        "mates": [
+          {
+            "name": "E. Thompson",
+            "pin": 4.7,
+            "pout": 11.9,
+            "delta": 7.2
+          },
+          {
+            "name": "M. Potter",
+            "pin": 7.8,
+            "pout": 13.4,
+            "delta": 5.6
+          },
+          {
+            "name": "T. Peter",
+            "pin": 2.2,
+            "pout": 7.6,
+            "delta": 5.4
+          },
+          {
+            "name": "Q. Jackson",
+            "pin": 7.7,
+            "pout": 12.1,
+            "delta": 4.4
+          },
+          {
+            "name": "A. Nesmith",
+            "pin": 13.2,
+            "pout": 17.5,
+            "delta": 4.3
+          }
+        ]
+      },
+      {
+        "player": "G. Mathews",
+        "gp_in": 15,
+        "gp_out": 67,
+        "margin_in": -4.1,
+        "margin_out": -8.9,
+        "impact": 4.7,
+        "mates": [
+          {
+            "name": "J. Walker",
+            "pin": 8.1,
+            "pout": 12.5,
+            "delta": 4.4
+          },
+          {
+            "name": "B. Mathurin",
+            "pin": 15.9,
+            "pout": 19.8,
+            "delta": 3.9
+          },
+          {
+            "name": "P. Siakam",
+            "pin": 22.4,
+            "pout": 24.4,
+            "delta": 2.0
+          },
+          {
+            "name": "E. Thompson",
+            "pin": 5.6,
+            "pout": 7.6,
+            "delta": 2.0
+          },
+          {
+            "name": "T. Bradley",
+            "pin": 2.9,
+            "pout": 4.5,
+            "delta": 1.6
+          }
+        ]
+      },
+      {
+        "player": "K. Jones",
+        "gp_in": 37,
+        "gp_out": 45,
+        "margin_in": -10.2,
+        "margin_out": -6.1,
+        "impact": -4.1,
+        "mates": [
+          {
+            "name": "T. Peter",
+            "pin": 6.4,
+            "pout": 1.6,
+            "delta": -4.8
+          },
+          {
+            "name": "E. Thompson",
+            "pin": 8.1,
+            "pout": 4.5,
+            "delta": -3.6
+          },
+          {
+            "name": "J. Furphy",
+            "pin": 7.1,
+            "pout": 3.5,
+            "delta": -3.5
+          },
+          {
+            "name": "M. Potter",
+            "pin": 10.6,
+            "pout": 7.9,
+            "delta": -2.7
+          },
+          {
+            "name": "B. Sheppard",
+            "pin": 8.4,
+            "pout": 6.2,
+            "delta": -2.3
+          }
+        ]
+      },
+      {
+        "player": "T. Peter",
+        "gp_in": 38,
+        "gp_out": 44,
+        "margin_in": -10.2,
+        "margin_out": -6.1,
+        "impact": -4.0,
+        "mates": [
+          {
+            "name": "E. Thompson",
+            "pin": 9.0,
+            "pout": 3.2,
+            "delta": -5.8
+          },
+          {
+            "name": "O. Toppin",
+            "pin": 14.2,
+            "pout": 9.0,
+            "delta": -5.2
+          },
+          {
+            "name": "I. Jackson",
+            "pin": 8.1,
+            "pout": 4.8,
+            "delta": -3.3
+          },
+          {
+            "name": "Q. Jackson",
+            "pin": 10.8,
+            "pout": 7.6,
+            "delta": -3.2
+          },
+          {
+            "name": "M. Potter",
+            "pin": 11.2,
+            "pout": 8.8,
+            "delta": -2.5
+          }
+        ]
+      },
+      {
+        "player": "K. Brown",
+        "gp_in": 27,
+        "gp_out": 55,
+        "margin_in": -9.9,
+        "margin_out": -7.0,
+        "impact": -2.9,
+        "mates": [
+          {
+            "name": "E. Thompson",
+            "pin": 11.3,
+            "pout": 5.0,
+            "delta": -6.3
+          },
+          {
+            "name": "T. Peter",
+            "pin": 8.5,
+            "pout": 2.2,
+            "delta": -6.3
+          },
+          {
+            "name": "M. Potter",
+            "pin": 11.9,
+            "pout": 7.3,
+            "delta": -4.6
+          },
+          {
+            "name": "O. Toppin",
+            "pin": 10.7,
+            "pout": 15.2,
+            "delta": 4.5
+          },
+          {
+            "name": "J. Walker",
+            "pin": 14.5,
+            "pout": 10.5,
+            "delta": -4.0
+          }
+        ]
+      },
+      {
+        "player": "B. Mathurin",
+        "gp_in": 28,
+        "gp_out": 54,
+        "margin_in": -6.2,
+        "margin_out": -8.9,
+        "impact": 2.7,
+        "mates": [
+          {
+            "name": "Q. Jackson",
+            "pin": 4.4,
+            "pout": 10.4,
+            "delta": 6.0
+          },
+          {
+            "name": "T. Peter",
+            "pin": 1.1,
+            "pout": 6.5,
+            "delta": 5.3
+          },
+          {
+            "name": "E. Thompson",
+            "pin": 4.6,
+            "pout": 9.1,
+            "delta": 4.5
+          },
+          {
+            "name": "J. Walker",
+            "pin": 9.1,
+            "pout": 13.1,
+            "delta": 4.0
+          },
+          {
+            "name": "M. Potter",
+            "pin": 6.8,
+            "pout": 10.4,
+            "delta": 3.6
+          }
+        ]
+      },
+      {
+        "player": "J. Furphy",
+        "gp_in": 35,
+        "gp_out": 47,
+        "margin_in": -6.5,
+        "margin_out": -9.1,
+        "impact": 2.6,
+        "mates": [
+          {
+            "name": "E. Thompson",
+            "pin": 4.6,
+            "pout": 10.8,
+            "delta": 6.2
+          },
+          {
+            "name": "M. Potter",
+            "pin": 6.8,
+            "pout": 11.9,
+            "delta": 5.0
+          },
+          {
+            "name": "T. Peter",
+            "pin": 2.0,
+            "pout": 5.8,
+            "delta": 3.8
+          },
+          {
+            "name": "K. Jones",
+            "pin": 2.6,
+            "pout": 5.7,
+            "delta": 3.1
+          },
+          {
+            "name": "I. Jackson",
+            "pin": 5.0,
+            "pout": 7.9,
+            "delta": 2.8
+          }
+        ]
+      },
+      {
+        "player": "T. McConnell",
+        "gp_in": 56,
+        "gp_out": 26,
+        "margin_in": -7.3,
+        "margin_out": -9.5,
+        "impact": 2.3,
+        "mates": [
+          {
+            "name": "B. Mathurin",
+            "pin": 16.4,
+            "pout": 25.8,
+            "delta": 9.3
+          },
+          {
+            "name": "E. Thompson",
+            "pin": 3.6,
+            "pout": 11.4,
+            "delta": 7.8
+          },
+          {
+            "name": "O. Toppin",
+            "pin": 8.8,
+            "pout": 15.0,
+            "delta": 6.2
+          },
+          {
+            "name": "Q. Jackson",
+            "pin": 7.4,
+            "pout": 11.8,
+            "delta": 4.4
+          },
+          {
+            "name": "K. Jones",
+            "pin": 3.0,
+            "pout": 6.2,
+            "delta": 3.2
+          }
+        ]
+      }
+    ],
+    "DEN": [
+      {
+        "player": "C. Johnson",
+        "gp_in": 54,
+        "gp_out": 28,
+        "margin_in": 7.8,
+        "margin_out": -0.0,
+        "impact": 7.9,
+        "mates": [
+          {
+            "name": "P. Watson",
+            "pin": 10.7,
+            "pout": 19.8,
+            "delta": 9.1
+          },
+          {
+            "name": "C. Braun",
+            "pin": 13.0,
+            "pout": 6.6,
+            "delta": -6.4
+          },
+          {
+            "name": "J. Pickett",
+            "pin": 2.8,
+            "pout": 7.8,
+            "delta": 5.0
+          },
+          {
+            "name": "Z. Nnaji",
+            "pin": 1.5,
+            "pout": 6.2,
+            "delta": 4.7
+          },
+          {
+            "name": "J. Murray",
+            "pin": 24.4,
+            "pout": 27.8,
+            "delta": 3.4
+          }
+        ]
+      },
+      {
+        "player": "N. Joki\u0107",
+        "gp_in": 65,
+        "gp_out": 17,
+        "margin_in": 6.6,
+        "margin_out": -0.2,
+        "impact": 6.8,
+        "mates": [
+          {
+            "name": "P. Watson",
+            "pin": 11.7,
+            "pout": 22.1,
+            "delta": 10.4
+          },
+          {
+            "name": "J. Valan\u010di\u016bnas",
+            "pin": 8.0,
+            "pout": 16.8,
+            "delta": 8.8
+          },
+          {
+            "name": "J. Pickett",
+            "pin": 3.1,
+            "pout": 9.4,
+            "delta": 6.3
+          },
+          {
+            "name": "Z. Nnaji",
+            "pin": 1.8,
+            "pout": 7.9,
+            "delta": 6.1
+          },
+          {
+            "name": "J. Murray",
+            "pin": 25.0,
+            "pout": 27.8,
+            "delta": 2.8
+          }
+        ]
+      },
+      {
+        "player": "J. Valan\u010di\u016bnas",
+        "gp_in": 65,
+        "gp_out": 17,
+        "margin_in": 6.5,
+        "margin_out": -0.1,
+        "impact": 6.6,
+        "mates": [
+          {
+            "name": "P. Watson",
+            "pin": 12.6,
+            "pout": 20.2,
+            "delta": 7.6
+          },
+          {
+            "name": "J. Pickett",
+            "pin": 3.5,
+            "pout": 10.0,
+            "delta": 6.5
+          },
+          {
+            "name": "Z. Nnaji",
+            "pin": 2.1,
+            "pout": 8.4,
+            "delta": 6.3
+          },
+          {
+            "name": "J. Murray",
+            "pin": 24.4,
+            "pout": 30.4,
+            "delta": 6.0
+          },
+          {
+            "name": "C. Braun",
+            "pin": 12.8,
+            "pout": 8.1,
+            "delta": -4.7
+          }
+        ]
+      },
+      {
+        "player": "Z. Nnaji",
+        "gp_in": 52,
+        "gp_out": 30,
+        "margin_in": 7.1,
+        "margin_out": 1.7,
+        "impact": 5.4,
+        "mates": [
+          {
+            "name": "P. Watson",
+            "pin": 17.2,
+            "pout": 8.9,
+            "delta": -8.3
+          },
+          {
+            "name": "A. Gordon",
+            "pin": 13.3,
+            "pout": 19.8,
+            "delta": 6.4
+          },
+          {
+            "name": "J. Pickett",
+            "pin": 5.6,
+            "pout": 3.0,
+            "delta": -2.6
+          },
+          {
+            "name": "J. Valan\u010di\u016bnas",
+            "pin": 9.7,
+            "pout": 7.3,
+            "delta": -2.4
+          },
+          {
+            "name": "N. Joki\u0107",
+            "pin": 26.6,
+            "pout": 29.0,
+            "delta": 2.4
+          }
+        ]
+      },
+      {
+        "player": "C. Braun",
+        "gp_in": 44,
+        "gp_out": 38,
+        "margin_in": 6.8,
+        "margin_out": 3.3,
+        "impact": 3.5,
+        "mates": [
+          {
+            "name": "P. Watson",
+            "pin": 10.9,
+            "pout": 17.0,
+            "delta": 6.1
+          },
+          {
+            "name": "J. Pickett",
+            "pin": 2.8,
+            "pout": 7.1,
+            "delta": 4.3
+          },
+          {
+            "name": "S. Jones",
+            "pin": 3.4,
+            "pout": 7.1,
+            "delta": 3.7
+          },
+          {
+            "name": "C. Johnson",
+            "pin": 11.1,
+            "pout": 14.6,
+            "delta": 3.5
+          },
+          {
+            "name": "N. Joki\u0107",
+            "pin": 26.8,
+            "pout": 29.2,
+            "delta": 2.4
+          }
+        ]
+      },
+      {
+        "player": "J. Pickett",
+        "gp_in": 50,
+        "gp_out": 32,
+        "margin_in": 6.1,
+        "margin_out": 3.7,
+        "impact": 2.3,
+        "mates": [
+          {
+            "name": "A. Gordon",
+            "pin": 13.5,
+            "pout": 20.4,
+            "delta": 7.0
+          },
+          {
+            "name": "N. Joki\u0107",
+            "pin": 25.1,
+            "pout": 30.3,
+            "delta": 5.3
+          },
+          {
+            "name": "P. Watson",
+            "pin": 16.4,
+            "pout": 11.1,
+            "delta": -5.2
+          },
+          {
+            "name": "J. Valan\u010di\u016bnas",
+            "pin": 10.2,
+            "pout": 6.7,
+            "delta": -3.5
+          },
+          {
+            "name": "C. Johnson",
+            "pin": 11.4,
+            "pout": 13.0,
+            "delta": 1.5
+          }
+        ]
+      },
+      {
+        "player": "J. Strawther",
+        "gp_in": 57,
+        "gp_out": 25,
+        "margin_in": 5.8,
+        "margin_out": 3.8,
+        "impact": 2.0,
+        "mates": [
+          {
+            "name": "A. Gordon",
+            "pin": 14.0,
+            "pout": 20.0,
+            "delta": 6.0
+          },
+          {
+            "name": "C. Braun",
+            "pin": 12.8,
+            "pout": 7.6,
+            "delta": -5.2
+          },
+          {
+            "name": "D. Holmes II",
+            "pin": 3.2,
+            "pout": 6.5,
+            "delta": 3.3
+          },
+          {
+            "name": "P. Watson",
+            "pin": 13.3,
+            "pout": 16.4,
+            "delta": 3.2
+          },
+          {
+            "name": "B. Brown",
+            "pin": 8.7,
+            "pout": 6.2,
+            "delta": -2.5
+          }
+        ]
+      },
+      {
+        "player": "A. Gordon",
+        "gp_in": 36,
+        "gp_out": 46,
+        "margin_in": 6.3,
+        "margin_out": 4.3,
+        "impact": 2.0,
+        "mates": [
+          {
+            "name": "J. Strawther",
+            "pin": 3.8,
+            "pout": 9.6,
+            "delta": 5.7
+          },
+          {
+            "name": "S. Jones",
+            "pin": 3.4,
+            "pout": 7.0,
+            "delta": 3.6
+          },
+          {
+            "name": "P. Watson",
+            "pin": 12.9,
+            "pout": 16.1,
+            "delta": 3.1
+          },
+          {
+            "name": "J. Murray",
+            "pin": 24.2,
+            "pout": 26.4,
+            "delta": 2.2
+          },
+          {
+            "name": "C. Johnson",
+            "pin": 11.4,
+            "pout": 12.9,
+            "delta": 1.5
+          }
+        ]
+      },
+      {
+        "player": "D. Holmes II",
+        "gp_in": 25,
+        "gp_out": 57,
+        "margin_in": 4.4,
+        "margin_out": 5.5,
+        "impact": -1.1,
+        "mates": [
+          {
+            "name": "A. Gordon",
+            "pin": 12.2,
+            "pout": 17.9,
+            "delta": 5.7
+          },
+          {
+            "name": "P. Watson",
+            "pin": 17.9,
+            "pout": 13.2,
+            "delta": -4.6
+          },
+          {
+            "name": "N. Joki\u0107",
+            "pin": 24.2,
+            "pout": 28.7,
+            "delta": 4.5
+          },
+          {
+            "name": "H. Tyson",
+            "pin": 4.0,
+            "pout": 1.1,
+            "delta": -2.9
+          },
+          {
+            "name": "J. Murray",
+            "pin": 23.4,
+            "pout": 26.1,
+            "delta": 2.7
+          }
+        ]
+      }
+    ]
   }
 };

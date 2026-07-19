@@ -60,7 +60,7 @@
     border-right: 1.5px solid color-mix(in srgb, var(--accent) 55%, #000); margin: 0 8.5px; }
   .brand small { color: var(--muted); font-weight: 600; letter-spacing: .04em;
                  text-transform: none; font-size: 11px; }
-  nav.tabs { display: flex; gap: 4px; margin-left: auto; }
+  nav.tabs { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; justify-content: flex-end; }
   .tab { appearance: none; border: 0; background: none; color: var(--muted);
     font: inherit; font-weight: 600; font-size: 13.5px; padding: 8px 12px; border-radius: 8px;
     cursor: pointer; letter-spacing: .01em; }
@@ -226,6 +226,16 @@
   .metric-card .mb { font-size: 11.5px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
   @media (max-width: 520px) { .metric-grid { grid-template-columns: 1fr; } }
 
+  /* ---- WOWY impact ---- */
+  #wtable tbody tr { cursor: pointer; }
+  .wmates { margin-top: 18px; }
+  .wmate-head { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  .wmate { display: grid; grid-template-columns: 1fr auto 56px; gap: 14px; align-items: center;
+    padding: 8px 0; border-top: 1px solid var(--grid); font-size: 14px; }
+  .wmate span:first-child { font-weight: 600; }
+  .wmate .mono { text-align: right; }
+  .wmate-note { font-size: 13px; color: var(--muted); padding-top: 6px; }
+
   /* ---- roadmap ---- */
   .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
@@ -256,6 +266,7 @@
       <button class="tab active" data-view="ratings" role="tab">Team Ratings</button>
       <button class="tab" data-view="players" role="tab">Players</button>
       <button class="tab" data-view="shots" role="tab">Shot Charts</button>
+      <button class="tab" data-view="impact" role="tab">Impact</button>
       <button class="tab" data-view="predict" role="tab">Matchup</button>
       <button class="tab" data-view="roadmap" role="tab">Roadmap</button>
     </nav>
@@ -397,6 +408,37 @@
     <p class="foot"><b>Reading it:</b> bigger cell = more shots from that spot; amber = the team
       scores more points-per-shot there than the league average from that range, blue = less.
       A big amber cluster behind the arc is an elite, high-volume shooting team.</p>
+  </section>
+
+  <!-- ============ IMPACT (WOWY) ============ -->
+  <section class="view" id="impact">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">2025–26 · With-Or-Without-You</div>
+        <h1>Player Impact</h1>
+      </div>
+      <div class="sub">How much better or worse a team is in games a player <b>plays</b> vs.
+        <b>misses</b> — and which teammates pick up the slack. This is the injury/absence impact,
+        measured from games played vs. sat out.</div>
+    </div>
+    <div class="mk-card">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px">
+        <label class="eyebrow" for="wowyTeam">Team</label>
+        <select id="wowyTeam" style="width:auto;min-width:200px"></select>
+      </div>
+      <div class="tblwrap">
+        <table id="wtable">
+          <thead><tr><th class="tleft">Player</th><th>Impact</th>
+            <th>Team w/</th><th>Team w/o</th><th>G in</th><th>G out</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="wmates" class="wmates"></div>
+    </div>
+    <p class="foot"><b>Impact</b> = the team's average point margin per game <em>with</em> the player
+      minus <em>without</em> (positive = better with them). Click a player to see how teammates'
+      scoring changes when they sit. <b>Caveat:</b> players miss few games, so big numbers on a tiny
+      "G out" are noisy — this is descriptive, not a controlled on/off (which needs lineup data).</p>
   </section>
 
   <!-- ============ MATCHUP ============ -->
@@ -803,6 +845,43 @@
   }
   document.querySelector('[data-view="shots"]').addEventListener("click", () => setTimeout(drawShots, 0));
   drawShots();
+
+  /* ---- WOWY impact ---- */
+  const FALLBACK_WOWY = {"DEN":[{"player":"C. Johnson","gp_in":54,"gp_out":28,"margin_in":7.8,"margin_out":-0.0,"impact":7.9,"mates":[{"name":"P. Watson","pin":10.7,"pout":19.8,"delta":9.1},{"name":"C. Braun","pin":13.0,"pout":6.6,"delta":-6.4},{"name":"J. Pickett","pin":2.8,"pout":7.8,"delta":5.0},{"name":"Z. Nnaji","pin":1.5,"pout":6.2,"delta":4.7},{"name":"J. Murray","pin":24.4,"pout":27.8,"delta":3.4}]},{"player":"N. Jokić","gp_in":65,"gp_out":17,"margin_in":6.6,"margin_out":-0.2,"impact":6.8,"mates":[{"name":"P. Watson","pin":11.7,"pout":22.1,"delta":10.4},{"name":"J. Valančiūnas","pin":8.0,"pout":16.8,"delta":8.8},{"name":"J. Pickett","pin":3.1,"pout":9.4,"delta":6.3},{"name":"Z. Nnaji","pin":1.8,"pout":7.9,"delta":6.1},{"name":"J. Murray","pin":25.0,"pout":27.8,"delta":2.8}]},{"player":"J. Valančiūnas","gp_in":65,"gp_out":17,"margin_in":6.5,"margin_out":-0.1,"impact":6.6,"mates":[{"name":"P. Watson","pin":12.6,"pout":20.2,"delta":7.6},{"name":"J. Pickett","pin":3.5,"pout":10.0,"delta":6.5},{"name":"Z. Nnaji","pin":2.1,"pout":8.4,"delta":6.3},{"name":"J. Murray","pin":24.4,"pout":30.4,"delta":6.0},{"name":"C. Braun","pin":12.8,"pout":8.1,"delta":-4.7}]},{"player":"Z. Nnaji","gp_in":52,"gp_out":30,"margin_in":7.1,"margin_out":1.7,"impact":5.4,"mates":[{"name":"P. Watson","pin":17.2,"pout":8.9,"delta":-8.3},{"name":"A. Gordon","pin":13.3,"pout":19.8,"delta":6.4},{"name":"J. Pickett","pin":5.6,"pout":3.0,"delta":-2.6},{"name":"J. Valančiūnas","pin":9.7,"pout":7.3,"delta":-2.4},{"name":"N. Jokić","pin":26.6,"pout":29.0,"delta":2.4}]},{"player":"C. Braun","gp_in":44,"gp_out":38,"margin_in":6.8,"margin_out":3.3,"impact":3.5,"mates":[{"name":"P. Watson","pin":10.9,"pout":17.0,"delta":6.1},{"name":"J. Pickett","pin":2.8,"pout":7.1,"delta":4.3},{"name":"S. Jones","pin":3.4,"pout":7.1,"delta":3.7},{"name":"C. Johnson","pin":11.1,"pout":14.6,"delta":3.5},{"name":"N. Jokić","pin":26.8,"pout":29.2,"delta":2.4}]},{"player":"J. Pickett","gp_in":50,"gp_out":32,"margin_in":6.1,"margin_out":3.7,"impact":2.3,"mates":[{"name":"A. Gordon","pin":13.5,"pout":20.4,"delta":7.0},{"name":"N. Jokić","pin":25.1,"pout":30.3,"delta":5.3},{"name":"P. Watson","pin":16.4,"pout":11.1,"delta":-5.2},{"name":"J. Valančiūnas","pin":10.2,"pout":6.7,"delta":-3.5},{"name":"C. Johnson","pin":11.4,"pout":13.0,"delta":1.5}]},{"player":"J. Strawther","gp_in":57,"gp_out":25,"margin_in":5.8,"margin_out":3.8,"impact":2.0,"mates":[{"name":"A. Gordon","pin":14.0,"pout":20.0,"delta":6.0},{"name":"C. Braun","pin":12.8,"pout":7.6,"delta":-5.2},{"name":"D. Holmes II","pin":3.2,"pout":6.5,"delta":3.3},{"name":"P. Watson","pin":13.3,"pout":16.4,"delta":3.2},{"name":"B. Brown","pin":8.7,"pout":6.2,"delta":-2.5}]},{"player":"A. Gordon","gp_in":36,"gp_out":46,"margin_in":6.3,"margin_out":4.3,"impact":2.0,"mates":[{"name":"J. Strawther","pin":3.8,"pout":9.6,"delta":5.7},{"name":"S. Jones","pin":3.4,"pout":7.0,"delta":3.6},{"name":"P. Watson","pin":12.9,"pout":16.1,"delta":3.1},{"name":"J. Murray","pin":24.2,"pout":26.4,"delta":2.2},{"name":"C. Johnson","pin":11.4,"pout":12.9,"delta":1.5}]},{"player":"D. Holmes II","gp_in":25,"gp_out":57,"margin_in":4.4,"margin_out":5.5,"impact":-1.1,"mates":[{"name":"A. Gordon","pin":12.2,"pout":17.9,"delta":5.7},{"name":"P. Watson","pin":17.9,"pout":13.2,"delta":-4.6},{"name":"N. Jokić","pin":24.2,"pout":28.7,"delta":4.5},{"name":"H. Tyson","pin":4.0,"pout":1.1,"delta":-2.9},{"name":"J. Murray","pin":23.4,"pout":26.1,"delta":2.7}]}]};
+  const WOWY = D.wowy || FALLBACK_WOWY;
+  const wowySel = document.getElementById("wowyTeam");
+  const wowyTeams = Object.keys(WOWY).sort();
+  const sgn = v => (v >= 0 ? "+" : "") + v;
+  function renderWowy() {
+    const players = WOWY[wowySel && wowySel.value] || [];
+    const tb = document.querySelector("#wtable tbody"); if (!tb) return;
+    tb.innerHTML = players.map((p, i) => `<tr data-i="${i}">
+      <td class="tleft" style="font-weight:600">${p.player}</td>
+      <td class="rate mono ${p.impact >= 0 ? 'pos' : 'neg'}">${sgn(p.impact)}</td>
+      <td class="mono">${sgn(p.margin_in)}</td><td class="mono">${sgn(p.margin_out)}</td>
+      <td class="mono">${p.gp_in}</td><td class="mono">${p.gp_out}</td></tr>`).join("");
+    document.getElementById("wmates").innerHTML = "";
+  }
+  const wtb = document.querySelector("#wtable tbody");
+  if (wtb) wtb.addEventListener("click", e => {
+    const tr = e.target.closest("tr"); if (!tr) return;
+    const p = (WOWY[wowySel.value] || [])[+tr.dataset.i]; if (!p) return;
+    const el = document.getElementById("wmates");
+    if (!p.mates || !p.mates.length) {
+      el.innerHTML = `<div class="wmate-note">Not enough missed games to break down teammates for ${p.player}.</div>`;
+      return;
+    }
+    el.innerHTML = `<div class="wmate-head">When <b>${p.player}</b> sits, teammate scoring:</div>` +
+      p.mates.map(m => `<div class="wmate"><span>${m.name}</span>
+        <span class="mono">${m.pin} → ${m.pout}</span>
+        <span class="mono ${m.delta >= 0 ? 'pos' : 'neg'}">${sgn(m.delta)}</span></div>`).join("");
+  });
+  if (wowySel && wowyTeams.length) {
+    wowySel.innerHTML = wowyTeams.map(t => `<option>${t}</option>`).join("");
+    wowySel.value = wowyTeams.includes("DEN") ? "DEN" : wowyTeams[0];
+    wowySel.addEventListener("change", renderWowy);
+    renderWowy();
+  }
 
   /* ---- matchup predictor ---- */
   const homeSel = document.getElementById("home"), awaySel = document.getElementById("away");
