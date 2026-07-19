@@ -25,6 +25,7 @@ import ssl
 import time
 import urllib.parse
 import urllib.request
+from collections import defaultdict
 from datetime import timedelta
 from pathlib import Path
 
@@ -92,24 +93,35 @@ def pull_date(key, date, markets, gmap, spent):
     pulled = 0
     for ev in data:
         h = FULL_NAME.get(ev.get("home_team")); a = FULL_NAME.get(ev.get("away_team"))
-        gid = gmap.get((h, a))
-        if gid is None:
+        if h is None or a is None:
             continue
         commence = pd.Timestamp(ev["commence_time"].replace("Z", "+00:00"))
-        pre = iso((commence - timedelta(minutes=10)).tz_convert("UTC").tz_localize(None))
+        target = (commence - timedelta(hours=8)).date()   # UTC commence -> US game date
+        gid, best = None, 2
+        for gd, g_id in gmap.get((h, a), []):             # match on date + teams (teams repeat!)
+            diff = abs((gd - target).days)
+            if diff < best:
+                best, gid = diff, g_id
+        if gid is None or best > 1:
+            continue
+        # two snapshots: OPEN (~5h pre-tip, softer) and CLOSE (~10min pre-tip, sharp),
+        # so we can measure closing-line edge AND opening-line CLV (where game edge lived)
+        snaps = {"open": commence - timedelta(hours=5), "close": commence - timedelta(minutes=10)}
         for market in markets:
-            out = RAW / f"{gid}_{market}.json"
-            if out.exists():
-                continue
-            q = urllib.parse.urlencode({"apiKey": key, "date": pre, "regions": "us",
-                                        "markets": market, "oddsFormat": "american"})
-            odds, hdr = get(f"{BASE}/events/{ev['id']}/odds?{q}")
-            out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_text(json.dumps(odds))
-            spent["used"] = hdr.get("x-requests-used", spent.get("used"))
-            spent["remaining"] = hdr.get("x-requests-remaining", spent.get("remaining"))
-            pulled += 1
-            time.sleep(0.4)
+            for tag, ts in snaps.items():
+                out = RAW / f"{gid}_{market}_{tag}.json"
+                if out.exists():
+                    continue
+                pre = iso(ts.tz_convert("UTC").tz_localize(None))
+                q = urllib.parse.urlencode({"apiKey": key, "date": pre, "regions": "us",
+                                            "markets": market, "oddsFormat": "american"})
+                odds, hdr = get(f"{BASE}/events/{ev['id']}/odds?{q}")
+                out.parent.mkdir(parents=True, exist_ok=True)
+                out.write_text(json.dumps(odds))
+                spent["used"] = hdr.get("x-requests-used", spent.get("used"))
+                spent["remaining"] = hdr.get("x-requests-remaining", spent.get("remaining"))
+                pulled += 1
+                time.sleep(0.4)
     return pulled, len(data)
 
 
@@ -123,7 +135,9 @@ def main() -> None:
     key = api_key()
     markets = [args.market]
     g = our_games()
-    gmap = {(r.HOME_TEAM, r.AWAY_TEAM): r.GAME_ID for r in g.itertuples()}
+    gmap = defaultdict(list)
+    for r in g.itertuples():
+        gmap[(r.HOME_TEAM, r.AWAY_TEAM)].append((r.d.date(), r.GAME_ID))
     spent = {"used": "?", "remaining": "?"}
 
     if args.test:
@@ -132,7 +146,7 @@ def main() -> None:
         n, ev = pull_date(key, d.date(), markets, gmap, spent)
         print(f"  events found: {ev}, props pulled: {n}")
         print(f"  credits used total: {spent['used']}, remaining: {spent['remaining']}")
-        f = sorted(RAW.glob(f"*_{markets[0]}.json"))
+        f = sorted(RAW.glob(f"*_{markets[0]}_close.json"))
         if f:
             o = json.loads(f[0].read_text()).get("data", {})
             bk = (o.get("bookmakers") or [{}])[0]
