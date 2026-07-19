@@ -23,6 +23,7 @@ GAMES = ROOT / "data" / "parquet" / "games.parquet"
 ELO = ROOT / "data" / "features" / "elo_predictions.parquet"
 PBP_DIR = ROOT / "data" / "parquet" / "pbp"
 WAR_F = ROOT / "data" / "parquet" / "player_seasons_war.parquet"
+WAR3_F = ROOT / "data" / "parquet" / "player_seasons_war_v3.parquet"
 SHOT_F = ROOT / "data" / "parquet" / "player_shot_quality.parquet"
 DEF_F = ROOT / "data" / "parquet" / "defender_quality.parquet"
 CONS_F = ROOT / "data" / "parquet" / "consistency.parquet"
@@ -196,31 +197,31 @@ def four_factors(season: str = LATEST) -> list[dict]:
 
 
 def player_ratings(season: str = LATEST, topn: int = 60) -> list[dict]:
-    """Top players for a season by our WAR, with shot-making + defense metrics."""
-    war = pd.read_parquet(WAR_F)
+    """Top players by WAR v3 (box + play-type + tracking), with shot-making + defense."""
+    war = pd.read_parquet(WAR3_F)                          # v3: WAR3/OBPM3/DBPM3
     war = war[war.SEASON == season]
+    v1 = pd.read_parquet(WAR_F)
+    v1 = v1[v1.SEASON == season][["PLAYER_ID", "MIN", "PTS_PG", "REB_PG", "AST_PG"]]
     shot = pd.read_parquet(SHOT_F)
     shot = shot[shot.SEASON == season][["PLAYER_ID", "POE_100"]]
-    dfd = pd.read_parquet(DEF_F)
-    dfd = dfd[dfd.SEASON == season][["PLAYER_ID", "DEF_VAL_100"]]
     cons = pd.read_parquet(CONS_F)
     cons = cons[cons.SEASON == season][["PLAYER_ID", "floor", "ceiling", "consistency"]]
     clutch = pd.read_parquet(CLUTCH_F)
     clutch = clutch[clutch.SEASON == season][["PLAYER_ID", "cPTS", "clutch_delta"]]
-    m = (war.merge(shot, on="PLAYER_ID", how="left")
-            .merge(dfd, on="PLAYER_ID", how="left")
+    m = (war.merge(v1, on="PLAYER_ID", how="inner")
+            .merge(shot, on="PLAYER_ID", how="left")
             .merge(cons, on="PLAYER_ID", how="left")
             .merge(clutch, on="PLAYER_ID", how="left"))
-    m = m[m["MIN"] >= 500].sort_values("WAR", ascending=False).head(topn)
+    m = m[m["MIN"] >= 500].sort_values("WAR3", ascending=False).head(topn)
 
     def num(v, d=1):
         return round(float(v), d) if pd.notna(v) else None
     out = []
     for i, r in enumerate(m.itertuples(), 1):
         out.append({"rank": i, "id": int(r.PLAYER_ID), "player": r.PLAYER, "team": r.TEAM,
-                    "war": num(r.WAR), "off": num(getattr(r, "OBPM", None)),
+                    "war": num(r.WAR3), "off": num(getattr(r, "OBPM3", None)),
                     "poe": num(getattr(r, "POE_100", None)),
-                    "def": num(getattr(r, "DEF_VAL_100", None)),
+                    "def": num(getattr(r, "DBPM3", None)),
                     "mpg": num(r.MPG), "pts": num(r.PTS_PG),
                     "reb": num(r.REB_PG), "ast": num(r.AST_PG),
                     "floor": num(getattr(r, "floor", None)), "ceil": num(getattr(r, "ceiling", None)),

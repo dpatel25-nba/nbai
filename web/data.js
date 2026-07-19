@@ -255,10 +255,10 @@ window.NBAI_DATA = {
       "id": 203999,
       "player": "Nikola Joki\u0107",
       "team": "DEN",
-      "war": 10.4,
-      "off": 4.3,
+      "war": 11.5,
+      "off": 5.9,
       "poe": 22.3,
-      "def": -0.1,
+      "def": 4.4,
       "mpg": 34.8,
       "pts": 27.7,
       "reb": 12.9,
@@ -274,10 +274,10 @@ window.NBAI_DATA = {
       "id": 1641705,
       "player": "Victor Wembanyama",
       "team": "SAS",
-      "war": 9.9,
-      "off": 4.7,
+      "war": 10.1,
+      "off": 3.7,
       "poe": -2.3,
-      "def": 3.9,
+      "def": 7.4,
       "mpg": 29.2,
       "pts": 25.0,
       "reb": 11.5,
@@ -290,13 +290,32 @@ window.NBAI_DATA = {
     },
     {
       "rank": 3,
+      "id": 1628983,
+      "player": "Shai Gilgeous-Alexander",
+      "team": "OKC",
+      "war": 9.2,
+      "off": 8.0,
+      "poe": 14.4,
+      "def": -0.0,
+      "mpg": 33.2,
+      "pts": 31.1,
+      "reb": 4.3,
+      "ast": 6.6,
+      "floor": 25.0,
+      "ceil": 35.6,
+      "cpts": 102.0,
+      "cd": 0.49,
+      "c": "#007AC1"
+    },
+    {
+      "rank": 4,
       "id": 1629029,
       "player": "Luka Don\u010di\u0107",
       "team": "LAL",
-      "war": 9.5,
-      "off": 5.9,
+      "war": 9.2,
+      "off": 6.6,
       "poe": 14.4,
-      "def": -0.6,
+      "def": 1.1,
       "mpg": 35.8,
       "pts": 33.5,
       "reb": 7.7,
@@ -308,14 +327,14 @@ window.NBAI_DATA = {
       "c": "#552583"
     },
     {
-      "rank": 4,
+      "rank": 5,
       "id": 1626157,
       "player": "Karl-Anthony Towns",
       "team": "NYK",
-      "war": 9.3,
-      "off": 2.6,
+      "war": 8.3,
+      "off": 1.8,
       "poe": 2.2,
-      "def": -2.1,
+      "def": 4.9,
       "mpg": 31.0,
       "pts": 20.1,
       "reb": 11.9,
@@ -327,33 +346,33 @@ window.NBAI_DATA = {
       "c": "#F58426"
     },
     {
-      "rank": 5,
-      "id": 1627759,
-      "player": "Jaylen Brown",
-      "team": "BOS",
-      "war": 8.1,
-      "off": 5.1,
-      "poe": 6.3,
-      "def": -1.3,
-      "mpg": 34.4,
-      "pts": 28.7,
-      "reb": 6.9,
-      "ast": 5.1,
-      "floor": 23.0,
-      "ceil": 33.0,
-      "cpts": 66.0,
-      "cd": 0.58,
-      "c": "#007A33"
+      "rank": 6,
+      "id": 1631096,
+      "player": "Chet Holmgren",
+      "team": "OKC",
+      "war": 7.5,
+      "off": 1.4,
+      "poe": 7.2,
+      "def": 5.7,
+      "mpg": 28.9,
+      "pts": 17.1,
+      "reb": 8.9,
+      "ast": 1.7,
+      "floor": 11.6,
+      "ceil": 23.0,
+      "cpts": 38.0,
+      "cd": 0.5,
+      "c": "#007AC1"
     },
     {
-      "rank": 6,
+      "rank": 7,
       "id": 1630552,
       "player": "Jalen Johnson",
       "team": "ATL",
-      "war": 7.8,
-      "off": 2.1,
+      "war": 7.3,
+      "off": 2.3,
       "poe": 1.0,
-      "def": -0.4,
+      "def": 2.8,
       "mpg": 35.2,
       "pts": 22.5,
       "reb": 10.3,
@@ -365,33 +384,14 @@ window.NBAI_DATA = {
       "c": "#E03A3E"
     },
     {
-      "rank": 7,
-      "id": 202695,
-      "player": "Kawhi Leonard",
-      "team": "LAC",
-      "war": 7.5,
-      "off": 5.3,
-      "poe": 13.2,
-      "def": 1.2,
-      "mpg": 32.1,
-      "pts": 27.9,
-      "reb": 6.4,
-      "ast": 3.6,
-      "floor": 22.8,
-      "ceil": 33.0,
-      "cpts": 25.0,
-      "cd": 0.47,
-      "c": "#C8102E"
-    },
-    {
       "rank": 8,
       "id": 1631105,
       "player": "Jalen Duren",
       "team": "DET",
       "war": 7.0,
-      "off": 3.3,
+      "off": 3.1,
       "poe": 9.9,
-      "def": -0.8,
+      "def": 3.6,
       "mpg": 28.2,
       "pts": 19.5,
       "reb": 10.5,
@@ -404,108 +404,51 @@ window.NBAI_DATA = {
     },
     {
       "rank": 9,
-      "id": 1628389,
-      "player": "Bam Adebayo",
-      "team": "MIA",
+      "id": 1627759,
+      "player": "Jaylen Brown",
+      "team": "BOS",
       "war": 6.8,
-      "off": 1.8,
-      "poe": -7.3,
-      "def": 0.7,
-      "mpg": 32.4,
-      "pts": 20.1,
-      "reb": 10.0,
-      "ast": 3.2,
-      "floor": 14.0,
-      "ceil": 25.0,
-      "cpts": 37.0,
-      "cd": 0.66,
-      "c": "#98002E"
+      "off": 3.9,
+      "poe": 6.3,
+      "def": 0.9,
+      "mpg": 34.4,
+      "pts": 28.7,
+      "reb": 6.9,
+      "ast": 5.1,
+      "floor": 23.0,
+      "ceil": 33.0,
+      "cpts": 66.0,
+      "cd": 0.58,
+      "c": "#007A33"
     },
     {
       "rank": 10,
-      "id": 1628983,
-      "player": "Shai Gilgeous-Alexander",
-      "team": "OKC",
-      "war": 6.7,
-      "off": 6.1,
-      "poe": 14.4,
-      "def": 1.1,
-      "mpg": 33.2,
-      "pts": 31.1,
-      "reb": 4.3,
-      "ast": 6.6,
-      "floor": 25.0,
-      "ceil": 35.6,
-      "cpts": 102.0,
-      "cd": 0.49,
-      "c": "#007AC1"
+      "id": 202695,
+      "player": "Kawhi Leonard",
+      "team": "LAC",
+      "war": 6.8,
+      "off": 5.5,
+      "poe": 13.2,
+      "def": 0.4,
+      "mpg": 32.1,
+      "pts": 27.9,
+      "reb": 6.4,
+      "ast": 3.6,
+      "floor": 22.8,
+      "ceil": 33.0,
+      "cpts": 25.0,
+      "cd": 0.47,
+      "c": "#C8102E"
     },
     {
       "rank": 11,
-      "id": 1631094,
-      "player": "Paolo Banchero",
-      "team": "ORL",
-      "war": 6.2,
-      "off": 2.4,
-      "poe": -5.5,
-      "def": -0.9,
-      "mpg": 34.7,
-      "pts": 22.2,
-      "reb": 8.4,
-      "ast": 5.2,
-      "floor": 16.0,
-      "ceil": 28.8,
-      "cpts": 60.0,
-      "cd": 0.57,
-      "c": "#0077C0"
-    },
-    {
-      "rank": 12,
-      "id": 1630578,
-      "player": "Alperen Sengun",
-      "team": "HOU",
-      "war": 6.1,
-      "off": 2.4,
-      "poe": 2.6,
-      "def": -1.1,
-      "mpg": 33.3,
-      "pts": 20.4,
-      "reb": 8.9,
-      "ast": 6.2,
-      "floor": 14.0,
-      "ceil": 27.8,
-      "cpts": 92.0,
-      "cd": 0.46,
-      "c": "#CE1141"
-    },
-    {
-      "rank": 13,
-      "id": 1631096,
-      "player": "Chet Holmgren",
-      "team": "OKC",
-      "war": 5.5,
-      "off": 1.5,
-      "poe": 7.2,
-      "def": 3.2,
-      "mpg": 28.9,
-      "pts": 17.1,
-      "reb": 8.9,
-      "ast": 1.7,
-      "floor": 11.6,
-      "ceil": 23.0,
-      "cpts": 38.0,
-      "cd": 0.5,
-      "c": "#007AC1"
-    },
-    {
-      "rank": 14,
       "id": 201142,
       "player": "Kevin Durant",
       "team": "HOU",
-      "war": 5.5,
-      "off": 3.4,
+      "war": 6.7,
+      "off": 4.1,
       "poe": 19.1,
-      "def": 0.1,
+      "def": -0.3,
       "mpg": 36.4,
       "pts": 26.0,
       "reb": 5.5,
@@ -517,14 +460,71 @@ window.NBAI_DATA = {
       "c": "#CE1141"
     },
     {
+      "rank": 12,
+      "id": 1642270,
+      "player": "Donovan Clingan",
+      "team": "POR",
+      "war": 6.0,
+      "off": -0.3,
+      "poe": -6.5,
+      "def": 5.3,
+      "mpg": 27.2,
+      "pts": 12.1,
+      "reb": 11.6,
+      "ast": 2.1,
+      "floor": 7.0,
+      "ceil": 18.0,
+      "cpts": 14.0,
+      "cd": 0.42,
+      "c": "#E03A3E"
+    },
+    {
+      "rank": 13,
+      "id": 203497,
+      "player": "Rudy Gobert",
+      "team": "MIN",
+      "war": 5.8,
+      "off": -0.9,
+      "poe": -6.2,
+      "def": 4.9,
+      "mpg": 31.3,
+      "pts": 10.9,
+      "reb": 11.5,
+      "ast": 1.7,
+      "floor": 6.0,
+      "ceil": 15.0,
+      "cpts": 16.0,
+      "cd": 0.32,
+      "c": "#236192"
+    },
+    {
+      "rank": 14,
+      "id": 1630178,
+      "player": "Tyrese Maxey",
+      "team": "PHI",
+      "war": 5.6,
+      "off": 4.3,
+      "poe": 3.8,
+      "def": -1.0,
+      "mpg": 38.0,
+      "pts": 28.3,
+      "reb": 4.1,
+      "ast": 6.6,
+      "floor": 22.0,
+      "ceil": 35.0,
+      "cpts": 114.0,
+      "cd": 0.54,
+      "c": "#006BB6"
+    },
+    {
       "rank": 15,
       "id": 1628378,
       "player": "Donovan Mitchell",
       "team": "CLE",
-      "war": 5.3,
-      "off": 4.3,
+      "war": 5.5,
+      "off": 4.9,
       "poe": 6.8,
-      "def": -0.6,
+      "def": -1.0,
       "mpg": 33.5,
       "pts": 27.9,
       "reb": 4.5,
@@ -537,127 +537,13 @@ window.NBAI_DATA = {
     },
     {
       "rank": 16,
-      "id": 1630166,
-      "player": "Deni Avdija",
-      "team": "POR",
-      "war": 5.3,
-      "off": 3.3,
-      "poe": -1.2,
-      "def": -1.6,
-      "mpg": 33.3,
-      "pts": 24.2,
-      "reb": 6.9,
-      "ast": 6.7,
-      "floor": 18.0,
-      "ceil": 30.0,
-      "cpts": 81.0,
-      "cd": 0.57,
-      "c": "#E03A3E"
-    },
-    {
-      "rank": 17,
-      "id": 1630567,
-      "player": "Scottie Barnes",
-      "team": "TOR",
-      "war": 5.0,
-      "off": 1.1,
-      "poe": -1.0,
-      "def": 0.9,
-      "mpg": 33.5,
-      "pts": 18.1,
-      "reb": 7.5,
-      "ast": 5.9,
-      "floor": 14.0,
-      "ceil": 23.0,
-      "cpts": 36.0,
-      "cd": 0.46,
-      "c": "#CE1141"
-    },
-    {
-      "rank": 18,
-      "id": 203944,
-      "player": "Julius Randle",
-      "team": "MIN",
-      "war": 5.0,
-      "off": 2.2,
-      "poe": -3.5,
-      "def": -2.0,
-      "mpg": 33.0,
-      "pts": 21.1,
-      "reb": 6.7,
-      "ast": 5.0,
-      "floor": 14.6,
-      "ceil": 27.0,
-      "cpts": 36.0,
-      "cd": 0.47,
-      "c": "#236192"
-    },
-    {
-      "rank": 19,
-      "id": 1630178,
-      "player": "Tyrese Maxey",
-      "team": "PHI",
-      "war": 4.9,
-      "off": 3.5,
-      "poe": 3.8,
-      "def": 0.8,
-      "mpg": 38.0,
-      "pts": 28.3,
-      "reb": 4.1,
-      "ast": 6.6,
-      "floor": 22.0,
-      "ceil": 35.0,
-      "cpts": 114.0,
-      "cd": 0.54,
-      "c": "#006BB6"
-    },
-    {
-      "rank": 20,
-      "id": 1642270,
-      "player": "Donovan Clingan",
-      "team": "POR",
-      "war": 4.9,
-      "off": -0.1,
-      "poe": -6.5,
-      "def": 1.9,
-      "mpg": 27.2,
-      "pts": 12.1,
-      "reb": 11.6,
-      "ast": 2.1,
-      "floor": 7.0,
-      "ceil": 18.0,
-      "cpts": 14.0,
-      "cd": 0.42,
-      "c": "#E03A3E"
-    },
-    {
-      "rank": 21,
-      "id": 1630162,
-      "player": "Anthony Edwards",
-      "team": "MIN",
-      "war": 4.9,
-      "off": 4.2,
-      "poe": 7.3,
-      "def": 0.5,
-      "mpg": 35.0,
-      "pts": 28.8,
-      "reb": 5.0,
-      "ast": 3.7,
-      "floor": 20.0,
-      "ceil": 38.0,
-      "cpts": 106.0,
-      "cd": 0.58,
-      "c": "#236192"
-    },
-    {
-      "rank": 22,
       "id": 1630595,
       "player": "Cade Cunningham",
       "team": "DET",
-      "war": 4.8,
-      "off": 3.0,
+      "war": 5.4,
+      "off": 3.4,
       "poe": 1.7,
-      "def": -0.3,
+      "def": 0.8,
       "mpg": 33.9,
       "pts": 23.9,
       "reb": 5.5,
@@ -669,242 +555,33 @@ window.NBAI_DATA = {
       "c": "#C8102E"
     },
     {
-      "rank": 23,
-      "id": 1629008,
-      "player": "Michael Porter Jr.",
-      "team": "BKN",
-      "war": 4.5,
-      "off": 3.3,
-      "poe": 4.7,
-      "def": -1.5,
-      "mpg": 32.5,
-      "pts": 24.2,
-      "reb": 7.1,
-      "ast": 3.0,
-      "floor": 18.0,
-      "ceil": 31.8,
-      "cpts": 29.0,
-      "cd": 0.65,
-      "c": "#777777"
-    },
-    {
-      "rank": 24,
-      "id": 1627783,
-      "player": "Pascal Siakam",
-      "team": "IND",
-      "war": 4.5,
-      "off": 3.0,
-      "poe": 7.2,
-      "def": -1.0,
-      "mpg": 33.2,
-      "pts": 24.0,
-      "reb": 6.6,
-      "ast": 3.8,
-      "floor": 19.2,
-      "ceil": 30.0,
-      "cpts": 64.0,
-      "cd": 0.54,
-      "c": "#FDBB30"
-    },
-    {
-      "rank": 25,
-      "id": 1630596,
-      "player": "Evan Mobley",
-      "team": "CLE",
-      "war": 4.4,
-      "off": 1.3,
-      "poe": -4.5,
-      "def": 1.3,
-      "mpg": 31.9,
-      "pts": 18.2,
-      "reb": 9.0,
-      "ast": 3.6,
-      "floor": 14.0,
-      "ceil": 23.0,
-      "cpts": 50.0,
-      "cd": 0.55,
-      "c": "#860038"
-    },
-    {
-      "rank": 26,
-      "id": 1630163,
-      "player": "LaMelo Ball",
-      "team": "CHA",
-      "war": 4.4,
-      "off": 2.8,
-      "poe": 1.7,
-      "def": -1.9,
-      "mpg": 28.0,
-      "pts": 20.1,
-      "reb": 4.8,
-      "ast": 7.1,
-      "floor": 15.0,
-      "ceil": 25.8,
-      "cpts": 38.0,
-      "cd": 0.67,
-      "c": "#00788C"
-    },
-    {
-      "rank": 27,
-      "id": 203507,
-      "player": "Giannis Antetokounmpo",
-      "team": "MIL",
-      "war": 4.4,
-      "off": 5.5,
-      "poe": 3.2,
-      "def": 0.5,
-      "mpg": 28.9,
-      "pts": 27.6,
-      "reb": 9.8,
-      "ast": 5.4,
-      "floor": 22.0,
-      "ceil": 33.0,
-      "cpts": 37.0,
-      "cd": 0.39,
-      "c": "#00471B"
-    },
-    {
-      "rank": 28,
-      "id": 1642843,
-      "player": "Cooper Flagg",
-      "team": "DAL",
-      "war": 4.4,
-      "off": 2.0,
-      "poe": -3.2,
-      "def": 0.7,
-      "mpg": 33.5,
-      "pts": 21.0,
-      "reb": 6.7,
-      "ast": 4.5,
-      "floor": 12.8,
-      "ceil": 27.0,
-      "cpts": 68.0,
-      "cd": 0.56,
-      "c": "#00538C"
-    },
-    {
-      "rank": 29,
-      "id": 1642276,
-      "player": "Kel'el Ware",
+      "rank": 17,
+      "id": 1628389,
+      "player": "Bam Adebayo",
       "team": "MIA",
-      "war": 4.3,
-      "off": 0.1,
-      "poe": -3.2,
-      "def": 0.7,
-      "mpg": 22.1,
-      "pts": 11.1,
-      "reb": 9.0,
-      "ast": 0.7,
-      "floor": 5.0,
-      "ceil": 16.0,
-      "cpts": 11.0,
-      "cd": 0.5,
+      "war": 5.4,
+      "off": 0.7,
+      "poe": -7.3,
+      "def": 3.0,
+      "mpg": 32.4,
+      "pts": 20.1,
+      "reb": 10.0,
+      "ast": 3.2,
+      "floor": 14.0,
+      "ceil": 25.0,
+      "cpts": 37.0,
+      "cd": 0.66,
       "c": "#98002E"
     },
     {
-      "rank": 30,
-      "id": 1642852,
-      "player": "Derik Queen",
-      "team": "NOP",
-      "war": 4.2,
-      "off": 0.1,
-      "poe": -8.9,
-      "def": -0.1,
-      "mpg": 25.0,
-      "pts": 11.7,
-      "reb": 7.1,
-      "ast": 3.7,
-      "floor": 6.0,
-      "ceil": 17.0,
-      "cpts": 20.0,
-      "cd": 0.51,
-      "c": "#85714D"
-    },
-    {
-      "rank": 31,
-      "id": 201935,
-      "player": "James Harden",
-      "team": "LAC",
-      "war": 4.1,
-      "off": 2.9,
-      "poe": 2.3,
-      "def": -1.0,
-      "mpg": 34.8,
-      "pts": 23.6,
-      "reb": 4.8,
-      "ast": 8.0,
-      "floor": 18.0,
-      "ceil": 29.2,
-      "cpts": 89.0,
-      "cd": 0.67,
-      "c": "#C8102E"
-    },
-    {
-      "rank": 32,
-      "id": 1627742,
-      "player": "Brandon Ingram",
-      "team": "TOR",
-      "war": 4.1,
-      "off": 2.3,
-      "poe": 3.5,
-      "def": -0.3,
-      "mpg": 33.8,
-      "pts": 21.5,
-      "reb": 5.6,
-      "ast": 3.7,
-      "floor": 14.2,
-      "ceil": 29.0,
-      "cpts": 45.0,
-      "cd": 0.6,
-      "c": "#CE1141"
-    },
-    {
-      "rank": 33,
-      "id": 203497,
-      "player": "Rudy Gobert",
-      "team": "MIN",
-      "war": 4.0,
-      "off": -1.3,
-      "poe": -6.2,
-      "def": 1.6,
-      "mpg": 31.3,
-      "pts": 10.9,
-      "reb": 11.5,
-      "ast": 1.7,
-      "floor": 6.0,
-      "ceil": 15.0,
-      "cpts": 16.0,
-      "cd": 0.32,
-      "c": "#236192"
-    },
-    {
-      "rank": 34,
-      "id": 1642271,
-      "player": "Kyle Filipowski",
-      "team": "UTA",
-      "war": 4.0,
-      "off": 0.1,
-      "poe": 2.0,
-      "def": -3.4,
-      "mpg": 23.4,
-      "pts": 11.4,
-      "reb": 7.2,
-      "ast": 2.6,
-      "floor": 6.0,
-      "ceil": 16.0,
-      "cpts": 4.0,
-      "cd": 0.45,
-      "c": "#00471B"
-    },
-    {
-      "rank": 35,
+      "rank": 18,
       "id": 1627750,
       "player": "Jamal Murray",
       "team": "DEN",
-      "war": 4.0,
-      "off": 3.2,
+      "war": 5.4,
+      "off": 4.8,
       "poe": 12.3,
-      "def": -0.8,
+      "def": -1.7,
       "mpg": 35.4,
       "pts": 25.4,
       "reb": 4.4,
@@ -916,14 +593,166 @@ window.NBAI_DATA = {
       "c": "#0E2240"
     },
     {
-      "rank": 36,
+      "rank": 19,
+      "id": 201935,
+      "player": "James Harden",
+      "team": "LAC",
+      "war": 5.3,
+      "off": 4.9,
+      "poe": 2.3,
+      "def": -1.5,
+      "mpg": 34.8,
+      "pts": 23.6,
+      "reb": 4.8,
+      "ast": 8.0,
+      "floor": 18.0,
+      "ceil": 29.2,
+      "cpts": 89.0,
+      "cd": 0.67,
+      "c": "#C8102E"
+    },
+    {
+      "rank": 20,
+      "id": 1630596,
+      "player": "Evan Mobley",
+      "team": "CLE",
+      "war": 5.3,
+      "off": 1.1,
+      "poe": -4.5,
+      "def": 3.2,
+      "mpg": 31.9,
+      "pts": 18.2,
+      "reb": 9.0,
+      "ast": 3.6,
+      "floor": 14.0,
+      "ceil": 23.0,
+      "cpts": 50.0,
+      "cd": 0.55,
+      "c": "#860038"
+    },
+    {
+      "rank": 21,
+      "id": 1630578,
+      "player": "Alperen Sengun",
+      "team": "HOU",
+      "war": 5.1,
+      "off": 1.5,
+      "poe": 2.6,
+      "def": 1.8,
+      "mpg": 33.3,
+      "pts": 20.4,
+      "reb": 8.9,
+      "ast": 6.2,
+      "floor": 14.0,
+      "ceil": 27.8,
+      "cpts": 92.0,
+      "cd": 0.46,
+      "c": "#CE1141"
+    },
+    {
+      "rank": 22,
+      "id": 1630162,
+      "player": "Anthony Edwards",
+      "team": "MIN",
+      "war": 5.1,
+      "off": 4.5,
+      "poe": 7.3,
+      "def": -0.6,
+      "mpg": 35.0,
+      "pts": 28.8,
+      "reb": 5.0,
+      "ast": 3.7,
+      "floor": 20.0,
+      "ceil": 38.0,
+      "cpts": 106.0,
+      "cd": 0.58,
+      "c": "#236192"
+    },
+    {
+      "rank": 23,
+      "id": 1631094,
+      "player": "Paolo Banchero",
+      "team": "ORL",
+      "war": 5.1,
+      "off": 1.7,
+      "poe": -5.5,
+      "def": 1.3,
+      "mpg": 34.7,
+      "pts": 22.2,
+      "reb": 8.4,
+      "ast": 5.2,
+      "floor": 16.0,
+      "ceil": 28.8,
+      "cpts": 60.0,
+      "cd": 0.57,
+      "c": "#0077C0"
+    },
+    {
+      "rank": 24,
+      "id": 1630567,
+      "player": "Scottie Barnes",
+      "team": "TOR",
+      "war": 5.0,
+      "off": 0.9,
+      "poe": -1.0,
+      "def": 1.8,
+      "mpg": 33.5,
+      "pts": 18.1,
+      "reb": 7.5,
+      "ast": 5.9,
+      "floor": 14.0,
+      "ceil": 23.0,
+      "cpts": 36.0,
+      "cd": 0.46,
+      "c": "#CE1141"
+    },
+    {
+      "rank": 25,
+      "id": 1630166,
+      "player": "Deni Avdija",
+      "team": "POR",
+      "war": 4.9,
+      "off": 3.2,
+      "poe": -1.2,
+      "def": 0.3,
+      "mpg": 33.3,
+      "pts": 24.2,
+      "reb": 6.9,
+      "ast": 6.7,
+      "floor": 18.0,
+      "ceil": 30.0,
+      "cpts": 81.0,
+      "cd": 0.57,
+      "c": "#E03A3E"
+    },
+    {
+      "rank": 26,
+      "id": 203507,
+      "player": "Giannis Antetokounmpo",
+      "team": "MIL",
+      "war": 4.8,
+      "off": 5.4,
+      "poe": 3.2,
+      "def": 3.8,
+      "mpg": 28.9,
+      "pts": 27.6,
+      "reb": 9.8,
+      "ast": 5.4,
+      "floor": 22.0,
+      "ceil": 33.0,
+      "cpts": 37.0,
+      "cd": 0.39,
+      "c": "#00471B"
+    },
+    {
+      "rank": 27,
       "id": 1629674,
       "player": "Neemias Queta",
       "team": "BOS",
-      "war": 3.9,
-      "off": -0.3,
+      "war": 4.6,
+      "off": 0.0,
       "poe": 11.5,
-      "def": 0.0,
+      "def": 3.9,
       "mpg": 25.3,
       "pts": 10.2,
       "reb": 8.4,
@@ -935,90 +764,14 @@ window.NBAI_DATA = {
       "c": "#007A33"
     },
     {
-      "rank": 37,
-      "id": 2544,
-      "player": "LeBron James",
-      "team": "LAL",
-      "war": 3.8,
-      "off": 2.1,
-      "poe": 3.7,
-      "def": 1.2,
-      "mpg": 33.2,
-      "pts": 20.9,
-      "reb": 6.1,
-      "ast": 7.2,
-      "floor": 15.8,
-      "ceil": 26.0,
-      "cpts": 47.0,
-      "cd": 0.51,
-      "c": "#552583"
-    },
-    {
-      "rank": 38,
-      "id": 202696,
-      "player": "Nikola Vu\u010devi\u0107",
-      "team": "CHI",
-      "war": 3.6,
-      "off": 0.6,
-      "poe": 8.6,
-      "def": -0.8,
-      "mpg": 28.4,
-      "pts": 15.1,
-      "reb": 8.4,
-      "ast": 3.3,
-      "floor": 9.0,
-      "ceil": 20.0,
-      "cpts": 52.0,
-      "cd": 0.63,
-      "c": "#CE1141"
-    },
-    {
-      "rank": 39,
-      "id": 1626164,
-      "player": "Devin Booker",
-      "team": "PHX",
-      "war": 3.6,
-      "off": 4.0,
-      "poe": 1.7,
-      "def": -1.5,
-      "mpg": 33.5,
-      "pts": 26.1,
-      "reb": 3.9,
-      "ast": 6.0,
-      "floor": 19.6,
-      "ceil": 32.0,
-      "cpts": 71.0,
-      "cd": 0.64,
-      "c": "#E56020"
-    },
-    {
-      "rank": 40,
-      "id": 1629675,
-      "player": "Naz Reid",
-      "team": "MIN",
-      "war": 3.5,
-      "off": 0.2,
-      "poe": 5.3,
-      "def": 0.0,
-      "mpg": 26.1,
-      "pts": 13.6,
-      "reb": 6.2,
-      "ast": 2.2,
-      "floor": 8.0,
-      "ceil": 19.0,
-      "cpts": 14.0,
-      "cd": 0.62,
-      "c": "#236192"
-    },
-    {
-      "rank": 41,
+      "rank": 28,
       "id": 1628386,
       "player": "Jarrett Allen",
       "team": "CLE",
-      "war": 3.5,
-      "off": 1.3,
+      "war": 4.4,
+      "off": 1.1,
       "poe": 8.7,
-      "def": 2.8,
+      "def": 4.0,
       "mpg": 27.1,
       "pts": 15.4,
       "reb": 8.5,
@@ -1030,185 +783,166 @@ window.NBAI_DATA = {
       "c": "#860038"
     },
     {
-      "rank": 42,
-      "id": 1628973,
-      "player": "Jalen Brunson",
-      "team": "NYK",
-      "war": 3.5,
-      "off": 3.8,
-      "poe": 5.9,
-      "def": -2.2,
-      "mpg": 35.0,
-      "pts": 26.0,
-      "reb": 3.3,
-      "ast": 6.8,
+      "rank": 29,
+      "id": 1626164,
+      "player": "Devin Booker",
+      "team": "PHX",
+      "war": 4.2,
+      "off": 4.2,
+      "poe": 1.7,
+      "def": -1.4,
+      "mpg": 33.5,
+      "pts": 26.1,
+      "reb": 3.9,
+      "ast": 6.0,
       "floor": 19.6,
       "ceil": 32.0,
-      "cpts": 130.0,
-      "cd": 0.61,
-      "c": "#F58426"
+      "cpts": 71.0,
+      "cd": 0.64,
+      "c": "#E56020"
     },
     {
-      "rank": 43,
-      "id": 203954,
-      "player": "Joel Embiid",
-      "team": "PHI",
-      "war": 3.5,
-      "off": 4.4,
-      "poe": 6.8,
-      "def": 0.1,
-      "mpg": 31.6,
-      "pts": 26.9,
-      "reb": 7.7,
-      "ast": 3.9,
-      "floor": 20.0,
-      "ceil": 33.6,
-      "cpts": 30.0,
-      "cd": 0.54,
-      "c": "#006BB6"
+      "rank": 30,
+      "id": 1642843,
+      "player": "Cooper Flagg",
+      "team": "DAL",
+      "war": 4.1,
+      "off": 1.5,
+      "poe": -3.2,
+      "def": 0.9,
+      "mpg": 33.5,
+      "pts": 21.0,
+      "reb": 6.7,
+      "ast": 4.5,
+      "floor": 12.8,
+      "ceil": 27.0,
+      "cpts": 68.0,
+      "cd": 0.56,
+      "c": "#00538C"
     },
     {
-      "rank": 44,
-      "id": 1630168,
-      "player": "Onyeka Okongwu",
-      "team": "ATL",
-      "war": 3.4,
-      "off": -0.1,
-      "poe": 4.7,
-      "def": -1.0,
-      "mpg": 31.0,
-      "pts": 15.2,
-      "reb": 7.6,
-      "ast": 3.1,
-      "floor": 10.0,
-      "ceil": 20.4,
-      "cpts": 18.0,
-      "cd": 0.72,
-      "c": "#E03A3E"
-    },
-    {
-      "rank": 45,
-      "id": 1641706,
-      "player": "Brandon Miller",
-      "team": "CHA",
-      "war": 3.4,
-      "off": 2.3,
-      "poe": 2.4,
-      "def": -1.0,
-      "mpg": 30.3,
-      "pts": 20.2,
-      "reb": 4.9,
-      "ast": 3.3,
+      "rank": 31,
+      "id": 2544,
+      "player": "LeBron James",
+      "team": "LAL",
+      "war": 4.0,
+      "off": 2.2,
+      "poe": 3.7,
+      "def": 0.8,
+      "mpg": 33.2,
+      "pts": 20.9,
+      "reb": 6.1,
+      "ast": 7.2,
       "floor": 15.8,
       "ceil": 26.0,
-      "cpts": 17.0,
-      "cd": 0.68,
+      "cpts": 47.0,
+      "cd": 0.51,
+      "c": "#552583"
+    },
+    {
+      "rank": 32,
+      "id": 203944,
+      "player": "Julius Randle",
+      "team": "MIN",
+      "war": 4.0,
+      "off": 2.0,
+      "poe": -3.5,
+      "def": -0.1,
+      "mpg": 33.0,
+      "pts": 21.1,
+      "reb": 6.7,
+      "ast": 5.0,
+      "floor": 14.6,
+      "ceil": 27.0,
+      "cpts": 36.0,
+      "cd": 0.47,
+      "c": "#236192"
+    },
+    {
+      "rank": 33,
+      "id": 1630163,
+      "player": "LaMelo Ball",
+      "team": "CHA",
+      "war": 3.9,
+      "off": 2.7,
+      "poe": 1.7,
+      "def": 0.1,
+      "mpg": 28.0,
+      "pts": 20.1,
+      "reb": 4.8,
+      "ast": 7.1,
+      "floor": 15.0,
+      "ceil": 25.8,
+      "cpts": 38.0,
+      "cd": 0.67,
       "c": "#00788C"
     },
     {
-      "rank": 46,
-      "id": 1629627,
-      "player": "Zion Williamson",
+      "rank": 34,
+      "id": 1642852,
+      "player": "Derik Queen",
       "team": "NOP",
-      "war": 3.3,
-      "off": 3.1,
-      "poe": 9.6,
-      "def": -0.8,
-      "mpg": 29.7,
-      "pts": 21.0,
-      "reb": 5.7,
-      "ast": 3.2,
-      "floor": 15.0,
-      "ceil": 26.8,
-      "cpts": 60.0,
-      "cd": 0.4,
+      "war": 3.8,
+      "off": -0.6,
+      "poe": -8.9,
+      "def": 3.2,
+      "mpg": 25.0,
+      "pts": 11.7,
+      "reb": 7.1,
+      "ast": 3.7,
+      "floor": 6.0,
+      "ceil": 17.0,
+      "cpts": 20.0,
+      "cd": 0.51,
       "c": "#85714D"
     },
     {
-      "rank": 47,
-      "id": 1626171,
-      "player": "Bobby Portis",
-      "team": "MIL",
-      "war": 3.3,
-      "off": 0.9,
-      "poe": 16.5,
-      "def": -1.7,
-      "mpg": 24.2,
-      "pts": 13.7,
-      "reb": 6.4,
-      "ast": 1.6,
-      "floor": 9.2,
-      "ceil": 18.8,
-      "cpts": 10.0,
-      "cd": 0.67,
-      "c": "#00471B"
+      "rank": 35,
+      "id": 1642276,
+      "player": "Kel'el Ware",
+      "team": "MIA",
+      "war": 3.7,
+      "off": -0.2,
+      "poe": -3.2,
+      "def": 3.7,
+      "mpg": 22.1,
+      "pts": 11.1,
+      "reb": 9.0,
+      "ast": 0.7,
+      "floor": 5.0,
+      "ceil": 16.0,
+      "cpts": 11.0,
+      "cd": 0.5,
+      "c": "#98002E"
     },
     {
-      "rank": 48,
-      "id": 1642875,
-      "player": "Maxime Raynaud",
-      "team": "SAC",
-      "war": 3.2,
-      "off": 0.1,
-      "poe": 17.3,
-      "def": -2.0,
-      "mpg": 26.5,
-      "pts": 12.5,
-      "reb": 7.5,
-      "ast": 1.4,
-      "floor": 6.0,
-      "ceil": 18.4,
-      "cpts": 26.0,
-      "cd": 0.41,
-      "c": "#5A2D81"
-    },
-    {
-      "rank": 49,
-      "id": 1630581,
-      "player": "Josh Giddey",
-      "team": "CHI",
-      "war": 3.2,
-      "off": 0.5,
-      "poe": -1.1,
-      "def": -0.3,
-      "mpg": 32.1,
-      "pts": 17.0,
-      "reb": 8.3,
-      "ast": 9.1,
-      "floor": 9.6,
-      "ceil": 22.4,
-      "cpts": 43.0,
-      "cd": 0.56,
+      "rank": 36,
+      "id": 1627742,
+      "player": "Brandon Ingram",
+      "team": "TOR",
+      "war": 3.6,
+      "off": 1.7,
+      "poe": 3.5,
+      "def": -0.1,
+      "mpg": 33.8,
+      "pts": 21.5,
+      "reb": 5.6,
+      "ast": 3.7,
+      "floor": 14.2,
+      "ceil": 29.0,
+      "cpts": 45.0,
+      "cd": 0.6,
       "c": "#CE1141"
     },
     {
-      "rank": 50,
-      "id": 1630530,
-      "player": "Trey Murphy III",
-      "team": "NOP",
-      "war": 3.2,
-      "off": 1.4,
-      "poe": 4.3,
-      "def": -0.2,
-      "mpg": 35.5,
-      "pts": 21.5,
-      "reb": 5.7,
-      "ast": 3.8,
-      "floor": 16.0,
-      "ceil": 27.0,
-      "cpts": 51.0,
-      "cd": 0.64,
-      "c": "#85714D"
-    },
-    {
-      "rank": 51,
+      "rank": 37,
       "id": 1641708,
       "player": "Amen Thompson",
       "team": "HOU",
-      "war": 3.2,
-      "off": 0.7,
+      "war": 3.6,
+      "off": 1.0,
       "poe": -4.0,
-      "def": 0.5,
+      "def": 0.1,
       "mpg": 37.4,
       "pts": 18.3,
       "reb": 7.8,
@@ -1220,147 +954,14 @@ window.NBAI_DATA = {
       "c": "#CE1141"
     },
     {
-      "rank": 52,
-      "id": 1629028,
-      "player": "Deandre Ayton",
-      "team": "LAL",
-      "war": 3.1,
-      "off": 0.1,
-      "poe": 18.6,
-      "def": -0.4,
-      "mpg": 27.2,
-      "pts": 12.5,
-      "reb": 8.0,
-      "ast": 0.8,
-      "floor": 6.0,
-      "ceil": 18.0,
-      "cpts": 14.0,
-      "cd": 0.33,
-      "c": "#552583"
-    },
-    {
-      "rank": 53,
-      "id": 1627826,
-      "player": "Ivica Zubac",
-      "team": "LAC",
-      "war": 3.0,
-      "off": 0.4,
-      "poe": 3.1,
-      "def": -0.0,
-      "mpg": 30.1,
-      "pts": 14.1,
-      "reb": 10.6,
-      "ast": 2.2,
-      "floor": 9.0,
-      "ceil": 18.0,
-      "cpts": 26.0,
-      "cd": 0.4,
-      "c": "#C8102E"
-    },
-    {
-      "rank": 54,
-      "id": 1628970,
-      "player": "Miles Bridges",
-      "team": "CHA",
-      "war": 3.0,
-      "off": 1.1,
-      "poe": -1.5,
-      "def": -0.8,
-      "mpg": 31.0,
-      "pts": 17.1,
-      "reb": 5.8,
-      "ast": 3.2,
-      "floor": 11.0,
-      "ceil": 22.0,
-      "cpts": 38.0,
-      "cd": 0.59,
-      "c": "#00788C"
-    },
-    {
-      "rank": 55,
-      "id": 1631109,
-      "player": "Mark Williams",
-      "team": "PHX",
-      "war": 2.9,
-      "off": 0.6,
-      "poe": 3.6,
-      "def": -0.3,
-      "mpg": 23.6,
-      "pts": 11.7,
-      "reb": 8.0,
-      "ast": 1.0,
-      "floor": 6.0,
-      "ceil": 18.0,
-      "cpts": 18.0,
-      "cd": 0.35,
-      "c": "#E56020"
-    },
-    {
-      "rank": 56,
-      "id": 1641824,
-      "player": "Matas Buzelis",
-      "team": "CHI",
-      "war": 2.8,
-      "off": 0.6,
-      "poe": -3.9,
-      "def": -0.0,
-      "mpg": 29.2,
-      "pts": 16.3,
-      "reb": 5.8,
-      "ast": 2.1,
-      "floor": 11.0,
-      "ceil": 21.0,
-      "cpts": 34.0,
-      "cd": 0.66,
-      "c": "#CE1141"
-    },
-    {
-      "rank": 57,
-      "id": 1628404,
-      "player": "Josh Hart",
-      "team": "NYK",
-      "war": 2.8,
-      "off": -0.9,
-      "poe": 4.9,
-      "def": -1.6,
-      "mpg": 30.2,
-      "pts": 12.0,
-      "reb": 7.4,
-      "ast": 4.8,
-      "floor": 7.0,
-      "ceil": 18.0,
-      "cpts": 11.0,
-      "cd": 0.51,
-      "c": "#F58426"
-    },
-    {
-      "rank": 58,
-      "id": 1628374,
-      "player": "Lauri Markkanen",
-      "team": "UTA",
-      "war": 2.8,
-      "off": 3.2,
-      "poe": 3.6,
-      "def": -0.4,
-      "mpg": 34.3,
-      "pts": 26.7,
-      "reb": 6.9,
-      "ast": 2.1,
-      "floor": 19.0,
-      "ceil": 32.8,
-      "cpts": 38.0,
-      "cd": 0.57,
-      "c": "#00471B"
-    },
-    {
-      "rank": 59,
+      "rank": 38,
       "id": 1628991,
       "player": "Jaren Jackson Jr.",
       "team": "MEM",
-      "war": 2.8,
-      "off": 1.6,
+      "war": 3.5,
+      "off": 1.3,
       "poe": 7.5,
-      "def": 0.2,
+      "def": 2.7,
       "mpg": 30.3,
       "pts": 19.4,
       "reb": 5.7,
@@ -1372,23 +973,422 @@ window.NBAI_DATA = {
       "c": "#5D76A9"
     },
     {
-      "rank": 60,
-      "id": 202685,
-      "player": "Jonas Valan\u010di\u016bnas",
-      "team": "DEN",
-      "war": 2.7,
-      "off": 2.2,
-      "poe": 16.8,
-      "def": -3.0,
-      "mpg": 13.4,
-      "pts": 8.7,
-      "reb": 5.1,
-      "ast": 1.2,
-      "floor": 4.0,
-      "ceil": 12.2,
+      "rank": 39,
+      "id": 1628973,
+      "player": "Jalen Brunson",
+      "team": "NYK",
+      "war": 3.5,
+      "off": 4.2,
+      "poe": 5.9,
+      "def": -2.8,
+      "mpg": 35.0,
+      "pts": 26.0,
+      "reb": 3.3,
+      "ast": 6.8,
+      "floor": 19.6,
+      "ceil": 32.0,
+      "cpts": 130.0,
+      "cd": 0.61,
+      "c": "#F58426"
+    },
+    {
+      "rank": 40,
+      "id": 1629627,
+      "player": "Zion Williamson",
+      "team": "NOP",
+      "war": 3.5,
+      "off": 3.2,
+      "poe": 9.6,
+      "def": -0.6,
+      "mpg": 29.7,
+      "pts": 21.0,
+      "reb": 5.7,
+      "ast": 3.2,
+      "floor": 15.0,
+      "ceil": 26.8,
+      "cpts": 60.0,
+      "cd": 0.4,
+      "c": "#85714D"
+    },
+    {
+      "rank": 41,
+      "id": 1630168,
+      "player": "Onyeka Okongwu",
+      "team": "ATL",
+      "war": 3.4,
+      "off": -0.1,
+      "poe": 4.7,
+      "def": 1.8,
+      "mpg": 31.0,
+      "pts": 15.2,
+      "reb": 7.6,
+      "ast": 3.1,
+      "floor": 10.0,
+      "ceil": 20.4,
+      "cpts": 18.0,
+      "cd": 0.72,
+      "c": "#E03A3E"
+    },
+    {
+      "rank": 42,
+      "id": 1629675,
+      "player": "Naz Reid",
+      "team": "MIN",
+      "war": 3.4,
+      "off": -0.2,
+      "poe": 5.3,
+      "def": 2.4,
+      "mpg": 26.1,
+      "pts": 13.6,
+      "reb": 6.2,
+      "ast": 2.2,
+      "floor": 8.0,
+      "ceil": 19.0,
+      "cpts": 14.0,
+      "cd": 0.62,
+      "c": "#236192"
+    },
+    {
+      "rank": 43,
+      "id": 1627783,
+      "player": "Pascal Siakam",
+      "team": "IND",
+      "war": 3.4,
+      "off": 2.1,
+      "poe": 7.2,
+      "def": 0.0,
+      "mpg": 33.2,
+      "pts": 24.0,
+      "reb": 6.6,
+      "ast": 3.8,
+      "floor": 19.2,
+      "ceil": 30.0,
+      "cpts": 64.0,
+      "cd": 0.54,
+      "c": "#FDBB30"
+    },
+    {
+      "rank": 44,
+      "id": 203954,
+      "player": "Joel Embiid",
+      "team": "PHI",
+      "war": 3.4,
+      "off": 3.3,
+      "poe": 6.8,
+      "def": 1.5,
+      "mpg": 31.6,
+      "pts": 26.9,
+      "reb": 7.7,
+      "ast": 3.9,
+      "floor": 20.0,
+      "ceil": 33.6,
+      "cpts": 30.0,
+      "cd": 0.54,
+      "c": "#006BB6"
+    },
+    {
+      "rank": 45,
+      "id": 1627826,
+      "player": "Ivica Zubac",
+      "team": "LAC",
+      "war": 3.3,
+      "off": -0.2,
+      "poe": 3.1,
+      "def": 3.9,
+      "mpg": 30.1,
+      "pts": 14.1,
+      "reb": 10.6,
+      "ast": 2.2,
+      "floor": 9.0,
+      "ceil": 18.0,
+      "cpts": 26.0,
+      "cd": 0.4,
+      "c": "#C8102E"
+    },
+    {
+      "rank": 46,
+      "id": 1629028,
+      "player": "Deandre Ayton",
+      "team": "LAL",
+      "war": 3.3,
+      "off": 0.1,
+      "poe": 18.6,
+      "def": 2.2,
+      "mpg": 27.2,
+      "pts": 12.5,
+      "reb": 8.0,
+      "ast": 0.8,
+      "floor": 6.0,
+      "ceil": 18.0,
+      "cpts": 14.0,
+      "cd": 0.33,
+      "c": "#552583"
+    },
+    {
+      "rank": 47,
+      "id": 1629008,
+      "player": "Michael Porter Jr.",
+      "team": "BKN",
+      "war": 3.3,
+      "off": 2.4,
+      "poe": 4.7,
+      "def": 0.4,
+      "mpg": 32.5,
+      "pts": 24.2,
+      "reb": 7.1,
+      "ast": 3.0,
+      "floor": 18.0,
+      "ceil": 31.8,
+      "cpts": 29.0,
+      "cd": 0.65,
+      "c": "#777777"
+    },
+    {
+      "rank": 48,
+      "id": 1630530,
+      "player": "Trey Murphy III",
+      "team": "NOP",
+      "war": 3.2,
+      "off": 2.0,
+      "poe": 4.3,
+      "def": -0.5,
+      "mpg": 35.5,
+      "pts": 21.5,
+      "reb": 5.7,
+      "ast": 3.8,
+      "floor": 16.0,
+      "ceil": 27.0,
+      "cpts": 51.0,
+      "cd": 0.64,
+      "c": "#85714D"
+    },
+    {
+      "rank": 49,
+      "id": 1642259,
+      "player": "Alex Sarr",
+      "team": "WAS",
+      "war": 3.1,
+      "off": -0.1,
+      "poe": -0.5,
+      "def": 4.0,
+      "mpg": 27.2,
+      "pts": 16.3,
+      "reb": 7.4,
+      "ast": 2.7,
+      "floor": 10.0,
+      "ceil": 23.0,
+      "cpts": 22.0,
+      "cd": 0.58,
+      "c": "#002B5C"
+    },
+    {
+      "rank": 50,
+      "id": 1641706,
+      "player": "Brandon Miller",
+      "team": "CHA",
+      "war": 3.1,
+      "off": 1.8,
+      "poe": 2.4,
+      "def": 0.2,
+      "mpg": 30.3,
+      "pts": 20.2,
+      "reb": 4.9,
+      "ast": 3.3,
+      "floor": 15.8,
+      "ceil": 26.0,
+      "cpts": 17.0,
+      "cd": 0.68,
+      "c": "#00788C"
+    },
+    {
+      "rank": 51,
+      "id": 1630581,
+      "player": "Josh Giddey",
+      "team": "CHI",
+      "war": 3.0,
+      "off": 1.1,
+      "poe": -1.1,
+      "def": 1.3,
+      "mpg": 32.1,
+      "pts": 17.0,
+      "reb": 8.3,
+      "ast": 9.1,
+      "floor": 9.6,
+      "ceil": 22.4,
+      "cpts": 43.0,
+      "cd": 0.56,
+      "c": "#CE1141"
+    },
+    {
+      "rank": 52,
+      "id": 202696,
+      "player": "Nikola Vu\u010devi\u0107",
+      "team": "CHI",
+      "war": 2.9,
+      "off": -0.1,
+      "poe": 8.6,
+      "def": 2.1,
+      "mpg": 28.4,
+      "pts": 15.1,
+      "reb": 8.4,
+      "ast": 3.3,
+      "floor": 9.0,
+      "ceil": 20.0,
+      "cpts": 52.0,
+      "cd": 0.63,
+      "c": "#CE1141"
+    },
+    {
+      "rank": 53,
+      "id": 1628976,
+      "player": "Wendell Carter Jr.",
+      "team": "ORL",
+      "war": 2.9,
+      "off": -0.7,
+      "poe": -0.1,
+      "def": 1.9,
+      "mpg": 29.3,
+      "pts": 11.8,
+      "reb": 7.4,
+      "ast": 2.0,
+      "floor": 7.0,
+      "ceil": 16.6,
+      "cpts": 43.0,
+      "cd": 0.46,
+      "c": "#0077C0"
+    },
+    {
+      "rank": 54,
+      "id": 1628392,
+      "player": "Isaiah Hartenstein",
+      "team": "OKC",
+      "war": 2.9,
+      "off": -0.5,
+      "poe": 2.7,
+      "def": 4.8,
+      "mpg": 24.2,
+      "pts": 9.2,
+      "reb": 9.4,
+      "ast": 3.5,
+      "floor": 5.0,
+      "ceil": 12.8,
+      "cpts": 6.0,
+      "cd": 0.38,
+      "c": "#007AC1"
+    },
+    {
+      "rank": 55,
+      "id": 1631095,
+      "player": "Jabari Smith Jr.",
+      "team": "HOU",
+      "war": 2.9,
+      "off": -0.4,
+      "poe": 0.8,
+      "def": 1.2,
+      "mpg": 35.1,
+      "pts": 15.8,
+      "reb": 6.9,
+      "ast": 1.9,
+      "floor": 12.0,
+      "ceil": 20.0,
+      "cpts": 46.0,
+      "cd": 0.74,
+      "c": "#CE1141"
+    },
+    {
+      "rank": 56,
+      "id": 1642271,
+      "player": "Kyle Filipowski",
+      "team": "UTA",
+      "war": 2.8,
+      "off": -0.3,
+      "poe": 2.0,
+      "def": 2.2,
+      "mpg": 23.4,
+      "pts": 11.4,
+      "reb": 7.2,
+      "ast": 2.6,
+      "floor": 6.0,
+      "ceil": 16.0,
       "cpts": 4.0,
-      "cd": 0.41,
-      "c": "#0E2240"
+      "cd": 0.45,
+      "c": "#00471B"
+    },
+    {
+      "rank": 57,
+      "id": 1642851,
+      "player": "Kon Knueppel",
+      "team": "CHA",
+      "war": 2.8,
+      "off": 1.9,
+      "poe": 15.4,
+      "def": -1.0,
+      "mpg": 31.5,
+      "pts": 18.5,
+      "reb": 5.3,
+      "ast": 3.4,
+      "floor": 13.0,
+      "ceil": 24.0,
+      "cpts": 48.0,
+      "cd": 0.66,
+      "c": "#00788C"
+    },
+    {
+      "rank": 58,
+      "id": 1628970,
+      "player": "Miles Bridges",
+      "team": "CHA",
+      "war": 2.8,
+      "off": 1.0,
+      "poe": -1.5,
+      "def": 0.0,
+      "mpg": 31.0,
+      "pts": 17.1,
+      "reb": 5.8,
+      "ast": 3.2,
+      "floor": 11.0,
+      "ceil": 22.0,
+      "cpts": 38.0,
+      "cd": 0.59,
+      "c": "#00788C"
+    },
+    {
+      "rank": 59,
+      "id": 1629651,
+      "player": "Nic Claxton",
+      "team": "BKN",
+      "war": 2.8,
+      "off": 0.2,
+      "poe": -3.8,
+      "def": 1.5,
+      "mpg": 27.8,
+      "pts": 11.7,
+      "reb": 6.9,
+      "ast": 3.7,
+      "floor": 7.6,
+      "ceil": 16.0,
+      "cpts": 14.0,
+      "cd": 0.43,
+      "c": "#777777"
+    },
+    {
+      "rank": 60,
+      "id": 201939,
+      "player": "Stephen Curry",
+      "team": "GSW",
+      "war": 2.7,
+      "off": 4.2,
+      "poe": 18.1,
+      "def": -1.2,
+      "mpg": 30.9,
+      "pts": 26.6,
+      "reb": 3.6,
+      "ast": 4.7,
+      "floor": 16.4,
+      "ceil": 34.6,
+      "cpts": 61.0,
+      "cd": 0.74,
+      "c": "#1D428A"
     }
   ],
   "factors": [
@@ -35134,150 +35134,372 @@ window.NBAI_DATA = {
         "re": -0.46
       }
     ],
-    "202685": [
+    "201939": [
       {
-        "x": -120,
-        "y": 30,
-        "n": 9,
-        "re": -0.05
-      },
-      {
-        "x": -90,
+        "x": -240,
         "y": 0,
         "n": 6,
-        "re": 0.44
+        "re": 1.06
       },
       {
-        "x": -90,
+        "x": -240,
         "y": 30,
-        "n": 5,
-        "re": 0.31
-      },
-      {
-        "x": -90,
-        "y": 60,
         "n": 6,
-        "re": 1.1
+        "re": 1.35
       },
       {
-        "x": -90,
-        "y": 240,
-        "n": 6,
-        "re": -0.06
-      },
-      {
-        "x": -60,
-        "y": 30,
-        "n": 5,
-        "re": 0.74
-      },
-      {
-        "x": -60,
+        "x": -240,
         "y": 60,
-        "n": 5,
-        "re": -0.47
+        "n": 4,
+        "re": -1.15
       },
       {
-        "x": -60,
-        "y": 90,
-        "n": 5,
-        "re": -0.5
+        "x": -240,
+        "y": 120,
+        "n": 4,
+        "re": 0.41
       },
       {
-        "x": -30,
+        "x": -210,
         "y": 0,
-        "n": 7,
-        "re": -0.28
+        "n": 4,
+        "re": 0.0
       },
       {
-        "x": -30,
-        "y": 30,
-        "n": 18,
-        "re": 0.36
-      },
-      {
-        "x": -30,
-        "y": 60,
-        "n": 8,
-        "re": 0.64
-      },
-      {
-        "x": -30,
+        "x": -210,
         "y": 150,
-        "n": 4,
-        "re": -0.37
+        "n": 8,
+        "re": 0.0
       },
       {
-        "x": -30,
-        "y": 240,
-        "n": 4,
-        "re": -0.34
+        "x": -210,
+        "y": 180,
+        "n": 8,
+        "re": 0.0
       },
       {
-        "x": 0,
-        "y": 0,
-        "n": 95,
-        "re": 0.16
-      },
-      {
-        "x": 0,
-        "y": 30,
-        "n": 42,
+        "x": -180,
+        "y": 150,
+        "n": 5,
         "re": 0.29
       },
       {
-        "x": 0,
-        "y": 60,
-        "n": 21,
-        "re": 0.39
+        "x": -180,
+        "y": 180,
+        "n": 13,
+        "re": 0.09
       },
       {
-        "x": 0,
+        "x": -180,
+        "y": 210,
+        "n": 15,
+        "re": 0.18
+      },
+      {
+        "x": -180,
+        "y": 240,
+        "n": 5,
+        "re": 0.3
+      },
+      {
+        "x": -150,
+        "y": 210,
+        "n": 20,
+        "re": 0.44
+      },
+      {
+        "x": -150,
+        "y": 240,
+        "n": 11,
+        "re": -0.12
+      },
+      {
+        "x": -120,
         "y": 90,
-        "n": 10,
-        "re": 0.11
+        "n": 5,
+        "re": -0.06
       },
       {
-        "x": 0,
-        "y": 120,
-        "n": 8,
-        "re": 0.35
-      },
-      {
-        "x": 0,
+        "x": -120,
         "y": 150,
+        "n": 6,
+        "re": -0.13
+      },
+      {
+        "x": -120,
+        "y": 210,
+        "n": 5,
+        "re": 0.71
+      },
+      {
+        "x": -120,
+        "y": 240,
+        "n": 11,
+        "re": 0.07
+      },
+      {
+        "x": -90,
+        "y": 240,
+        "n": 12,
+        "re": -0.31
+      },
+      {
+        "x": -90,
+        "y": 270,
+        "n": 11,
+        "re": 0.88
+      },
+      {
+        "x": -60,
+        "y": 30,
+        "n": 7,
+        "re": 0.29
+      },
+      {
+        "x": -60,
+        "y": 240,
+        "n": 9,
+        "re": 0.27
+      },
+      {
+        "x": -60,
+        "y": 270,
+        "n": 11,
+        "re": -0.48
+      },
+      {
+        "x": -30,
+        "y": 0,
+        "n": 10,
+        "re": 0.46
+      },
+      {
+        "x": -30,
+        "y": 30,
+        "n": 20,
+        "re": 0.13
+      },
+      {
+        "x": -30,
+        "y": 240,
+        "n": 5,
+        "re": -0.49
+      },
+      {
+        "x": -30,
+        "y": 300,
         "n": 4,
         "re": 0.0
       },
       {
+        "x": 0,
+        "y": 0,
+        "n": 41,
+        "re": -0.13
+      },
+      {
+        "x": 0,
+        "y": 30,
+        "n": 36,
+        "re": 0.25
+      },
+      {
+        "x": 0,
+        "y": 60,
+        "n": 10,
+        "re": 0.55
+      },
+      {
+        "x": 0,
+        "y": 90,
+        "n": 4,
+        "re": 0.13
+      },
+      {
+        "x": 0,
+        "y": 240,
+        "n": 6,
+        "re": 0.41
+      },
+      {
+        "x": 0,
+        "y": 270,
+        "n": 24,
+        "re": 0.6
+      },
+      {
+        "x": 0,
+        "y": 300,
+        "n": 6,
+        "re": 0.56
+      },
+      {
         "x": 30,
         "y": 0,
-        "n": 9,
-        "re": 0.0
+        "n": 20,
+        "re": -0.14
       },
       {
         "x": 30,
         "y": 30,
-        "n": 27,
-        "re": 0.21
+        "n": 24,
+        "re": 0.44
       },
       {
         "x": 30,
         "y": 60,
-        "n": 9,
-        "re": -0.42
+        "n": 8,
+        "re": -0.11
       },
       {
         "x": 30,
-        "y": 90,
-        "n": 7,
-        "re": 0.25
+        "y": 240,
+        "n": 6,
+        "re": 0.0
+      },
+      {
+        "x": 30,
+        "y": 270,
+        "n": 18,
+        "re": 0.14
+      },
+      {
+        "x": 60,
+        "y": 0,
+        "n": 5,
+        "re": 0.32
+      },
+      {
+        "x": 60,
+        "y": 30,
+        "n": 5,
+        "re": 0.75
       },
       {
         "x": 60,
         "y": 60,
+        "n": 5,
+        "re": -0.07
+      },
+      {
+        "x": 60,
+        "y": 180,
         "n": 4,
+        "re": 0.22
+      },
+      {
+        "x": 60,
+        "y": 270,
+        "n": 17,
+        "re": 0.03
+      },
+      {
+        "x": 90,
+        "y": 60,
+        "n": 6,
+        "re": 0.06
+      },
+      {
+        "x": 90,
+        "y": 90,
+        "n": 4,
+        "re": -0.39
+      },
+      {
+        "x": 90,
+        "y": 240,
+        "n": 13,
+        "re": -0.37
+      },
+      {
+        "x": 90,
+        "y": 270,
+        "n": 7,
+        "re": 0.26
+      },
+      {
+        "x": 120,
+        "y": 120,
+        "n": 4,
+        "re": 0.0
+      },
+      {
+        "x": 120,
+        "y": 210,
+        "n": 7,
         "re": 0.63
+      },
+      {
+        "x": 120,
+        "y": 240,
+        "n": 15,
+        "re": -0.22
+      },
+      {
+        "x": 120,
+        "y": 270,
+        "n": 9,
+        "re": -0.27
+      },
+      {
+        "x": 150,
+        "y": 210,
+        "n": 20,
+        "re": 0.14
+      },
+      {
+        "x": 150,
+        "y": 240,
+        "n": 22,
+        "re": -0.21
+      },
+      {
+        "x": 180,
+        "y": 180,
+        "n": 14,
+        "re": 0.65
+      },
+      {
+        "x": 180,
+        "y": 210,
+        "n": 17,
+        "re": 0.39
+      },
+      {
+        "x": 180,
+        "y": 240,
+        "n": 7,
+        "re": -0.08
+      },
+      {
+        "x": 210,
+        "y": 150,
+        "n": 11,
+        "re": 0.55
+      },
+      {
+        "x": 210,
+        "y": 180,
+        "n": 4,
+        "re": 0.48
+      },
+      {
+        "x": 210,
+        "y": 210,
+        "n": 6,
+        "re": 0.06
+      },
+      {
+        "x": 240,
+        "y": 60,
+        "n": 5,
+        "re": 1.17
+      },
+      {
+        "x": 240,
+        "y": 120,
+        "n": 4,
+        "re": 0.0
       }
     ],
     "202695": [
@@ -38466,416 +38688,6 @@ window.NBAI_DATA = {
         "re": 0.22
       }
     ],
-    "1626171": [
-      {
-        "x": -240,
-        "y": -30,
-        "n": 4,
-        "re": -0.48
-      },
-      {
-        "x": -240,
-        "y": 0,
-        "n": 29,
-        "re": 0.32
-      },
-      {
-        "x": -240,
-        "y": 30,
-        "n": 26,
-        "re": 0.15
-      },
-      {
-        "x": -240,
-        "y": 60,
-        "n": 5,
-        "re": 0.65
-      },
-      {
-        "x": -210,
-        "y": 0,
-        "n": 8,
-        "re": 0.72
-      },
-      {
-        "x": -210,
-        "y": 30,
-        "n": 6,
-        "re": 0.6
-      },
-      {
-        "x": -210,
-        "y": 90,
-        "n": 5,
-        "re": 0.27
-      },
-      {
-        "x": -180,
-        "y": 0,
-        "n": 6,
-        "re": 0.2
-      },
-      {
-        "x": -180,
-        "y": 30,
-        "n": 4,
-        "re": -0.3
-      },
-      {
-        "x": -180,
-        "y": 180,
-        "n": 8,
-        "re": 0.0
-      },
-      {
-        "x": -180,
-        "y": 210,
-        "n": 5,
-        "re": 0.78
-      },
-      {
-        "x": -150,
-        "y": 0,
-        "n": 6,
-        "re": 0.12
-      },
-      {
-        "x": -150,
-        "y": 30,
-        "n": 11,
-        "re": -0.13
-      },
-      {
-        "x": -150,
-        "y": 60,
-        "n": 7,
-        "re": 0.03
-      },
-      {
-        "x": -150,
-        "y": 120,
-        "n": 5,
-        "re": 0.4
-      },
-      {
-        "x": -150,
-        "y": 210,
-        "n": 10,
-        "re": 0.74
-      },
-      {
-        "x": -120,
-        "y": 0,
-        "n": 7,
-        "re": -0.04
-      },
-      {
-        "x": -120,
-        "y": 30,
-        "n": 4,
-        "re": -0.44
-      },
-      {
-        "x": -120,
-        "y": 60,
-        "n": 4,
-        "re": 0.12
-      },
-      {
-        "x": -120,
-        "y": 120,
-        "n": 12,
-        "re": 0.01
-      },
-      {
-        "x": -120,
-        "y": 210,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": -120,
-        "y": 240,
-        "n": 13,
-        "re": 0.59
-      },
-      {
-        "x": -90,
-        "y": 60,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": -90,
-        "y": 120,
-        "n": 4,
-        "re": -0.86
-      },
-      {
-        "x": -90,
-        "y": 240,
-        "n": 15,
-        "re": 0.14
-      },
-      {
-        "x": -60,
-        "y": 120,
-        "n": 5,
-        "re": -0.49
-      },
-      {
-        "x": -60,
-        "y": 240,
-        "n": 5,
-        "re": 0.14
-      },
-      {
-        "x": -30,
-        "y": 0,
-        "n": 10,
-        "re": -0.13
-      },
-      {
-        "x": -30,
-        "y": 30,
-        "n": 12,
-        "re": -0.31
-      },
-      {
-        "x": -30,
-        "y": 60,
-        "n": 12,
-        "re": 0.64
-      },
-      {
-        "x": -30,
-        "y": 270,
-        "n": 6,
-        "re": -0.02
-      },
-      {
-        "x": 0,
-        "y": 0,
-        "n": 50,
-        "re": -0.23
-      },
-      {
-        "x": 0,
-        "y": 30,
-        "n": 32,
-        "re": -0.2
-      },
-      {
-        "x": 0,
-        "y": 60,
-        "n": 17,
-        "re": 0.32
-      },
-      {
-        "x": 0,
-        "y": 90,
-        "n": 13,
-        "re": 0.06
-      },
-      {
-        "x": 0,
-        "y": 120,
-        "n": 8,
-        "re": 0.0
-      },
-      {
-        "x": 0,
-        "y": 150,
-        "n": 6,
-        "re": 0.0
-      },
-      {
-        "x": 0,
-        "y": 240,
-        "n": 5,
-        "re": 0.71
-      },
-      {
-        "x": 0,
-        "y": 270,
-        "n": 9,
-        "re": 0.64
-      },
-      {
-        "x": 30,
-        "y": 0,
-        "n": 10,
-        "re": 0.47
-      },
-      {
-        "x": 30,
-        "y": 30,
-        "n": 12,
-        "re": -0.14
-      },
-      {
-        "x": 30,
-        "y": 60,
-        "n": 7,
-        "re": -0.0
-      },
-      {
-        "x": 30,
-        "y": 90,
-        "n": 8,
-        "re": 0.0
-      },
-      {
-        "x": 30,
-        "y": 180,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": 30,
-        "y": 270,
-        "n": 5,
-        "re": 0.14
-      },
-      {
-        "x": 60,
-        "y": 30,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": 60,
-        "y": 60,
-        "n": 6,
-        "re": 0.14
-      },
-      {
-        "x": 60,
-        "y": 90,
-        "n": 7,
-        "re": 0.25
-      },
-      {
-        "x": 60,
-        "y": 120,
-        "n": 5,
-        "re": 0.31
-      },
-      {
-        "x": 60,
-        "y": 240,
-        "n": 6,
-        "re": -0.59
-      },
-      {
-        "x": 60,
-        "y": 270,
-        "n": 4,
-        "re": 0.48
-      },
-      {
-        "x": 90,
-        "y": 0,
-        "n": 7,
-        "re": 0.25
-      },
-      {
-        "x": 90,
-        "y": 30,
-        "n": 9,
-        "re": 0.0
-      },
-      {
-        "x": 90,
-        "y": 240,
-        "n": 10,
-        "re": -0.16
-      },
-      {
-        "x": 120,
-        "y": 0,
-        "n": 5,
-        "re": 0.31
-      },
-      {
-        "x": 120,
-        "y": 30,
-        "n": 5,
-        "re": -0.1
-      },
-      {
-        "x": 120,
-        "y": 120,
-        "n": 4,
-        "re": 0.2
-      },
-      {
-        "x": 120,
-        "y": 240,
-        "n": 14,
-        "re": -0.21
-      },
-      {
-        "x": 150,
-        "y": 60,
-        "n": 4,
-        "re": -0.37
-      },
-      {
-        "x": 150,
-        "y": 90,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": 180,
-        "y": 180,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": 210,
-        "y": 30,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": 210,
-        "y": 150,
-        "n": 7,
-        "re": -0.66
-      },
-      {
-        "x": 210,
-        "y": 180,
-        "n": 4,
-        "re": 0.48
-      },
-      {
-        "x": 240,
-        "y": 0,
-        "n": 11,
-        "re": 0.13
-      },
-      {
-        "x": 240,
-        "y": 30,
-        "n": 9,
-        "re": 0.18
-      },
-      {
-        "x": 240,
-        "y": 60,
-        "n": 11,
-        "re": 0.49
-      },
-      {
-        "x": 240,
-        "y": 90,
-        "n": 6,
-        "re": 0.0
-      }
-    ],
     "1627742": [
       {
         "x": -240,
@@ -41178,362 +40990,6 @@ window.NBAI_DATA = {
         "re": -0.11
       }
     ],
-    "1628374": [
-      {
-        "x": -240,
-        "y": 0,
-        "n": 9,
-        "re": -0.15
-      },
-      {
-        "x": -240,
-        "y": 30,
-        "n": 15,
-        "re": 0.57
-      },
-      {
-        "x": -240,
-        "y": 60,
-        "n": 7,
-        "re": 0.14
-      },
-      {
-        "x": -240,
-        "y": 90,
-        "n": 6,
-        "re": 0.41
-      },
-      {
-        "x": -210,
-        "y": 120,
-        "n": 8,
-        "re": 0.04
-      },
-      {
-        "x": -210,
-        "y": 150,
-        "n": 10,
-        "re": 0.14
-      },
-      {
-        "x": -210,
-        "y": 180,
-        "n": 8,
-        "re": 0.1
-      },
-      {
-        "x": -180,
-        "y": 180,
-        "n": 12,
-        "re": 0.19
-      },
-      {
-        "x": -180,
-        "y": 210,
-        "n": 4,
-        "re": -0.31
-      },
-      {
-        "x": -150,
-        "y": 180,
-        "n": 4,
-        "re": -1.09
-      },
-      {
-        "x": -150,
-        "y": 210,
-        "n": 10,
-        "re": 0.74
-      },
-      {
-        "x": -150,
-        "y": 240,
-        "n": 4,
-        "re": -0.28
-      },
-      {
-        "x": -120,
-        "y": 210,
-        "n": 9,
-        "re": -0.42
-      },
-      {
-        "x": -120,
-        "y": 240,
-        "n": 13,
-        "re": 0.36
-      },
-      {
-        "x": -90,
-        "y": 60,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": -90,
-        "y": 120,
-        "n": 4,
-        "re": -0.38
-      },
-      {
-        "x": -90,
-        "y": 150,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": -90,
-        "y": 240,
-        "n": 11,
-        "re": -0.27
-      },
-      {
-        "x": -60,
-        "y": 0,
-        "n": 5,
-        "re": -0.48
-      },
-      {
-        "x": -60,
-        "y": 30,
-        "n": 7,
-        "re": -0.29
-      },
-      {
-        "x": -60,
-        "y": 60,
-        "n": 5,
-        "re": -0.47
-      },
-      {
-        "x": -60,
-        "y": 90,
-        "n": 4,
-        "re": -0.38
-      },
-      {
-        "x": -60,
-        "y": 240,
-        "n": 6,
-        "re": -0.06
-      },
-      {
-        "x": -30,
-        "y": 0,
-        "n": 23,
-        "re": 0.43
-      },
-      {
-        "x": -30,
-        "y": 30,
-        "n": 29,
-        "re": 0.34
-      },
-      {
-        "x": -30,
-        "y": 60,
-        "n": 14,
-        "re": 0.28
-      },
-      {
-        "x": -30,
-        "y": 90,
-        "n": 4,
-        "re": 0.62
-      },
-      {
-        "x": -30,
-        "y": 270,
-        "n": 6,
-        "re": 0.0
-      },
-      {
-        "x": 0,
-        "y": 0,
-        "n": 98,
-        "re": -0.16
-      },
-      {
-        "x": 0,
-        "y": 30,
-        "n": 57,
-        "re": 0.34
-      },
-      {
-        "x": 0,
-        "y": 60,
-        "n": 24,
-        "re": -0.18
-      },
-      {
-        "x": 0,
-        "y": 120,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": 0,
-        "y": 270,
-        "n": 6,
-        "re": 0.98
-      },
-      {
-        "x": 30,
-        "y": 0,
-        "n": 29,
-        "re": 0.17
-      },
-      {
-        "x": 30,
-        "y": 30,
-        "n": 42,
-        "re": 0.12
-      },
-      {
-        "x": 30,
-        "y": 60,
-        "n": 9,
-        "re": -0.19
-      },
-      {
-        "x": 30,
-        "y": 90,
-        "n": 4,
-        "re": -0.39
-      },
-      {
-        "x": 30,
-        "y": 120,
-        "n": 4,
-        "re": 0.11
-      },
-      {
-        "x": 30,
-        "y": 150,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": 30,
-        "y": 240,
-        "n": 7,
-        "re": -0.23
-      },
-      {
-        "x": 30,
-        "y": 270,
-        "n": 8,
-        "re": 0.44
-      },
-      {
-        "x": 60,
-        "y": 30,
-        "n": 14,
-        "re": 0.0
-      },
-      {
-        "x": 60,
-        "y": 60,
-        "n": 6,
-        "re": -0.19
-      },
-      {
-        "x": 60,
-        "y": 150,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": 60,
-        "y": 240,
-        "n": 10,
-        "re": -0.16
-      },
-      {
-        "x": 60,
-        "y": 270,
-        "n": 6,
-        "re": -0.52
-      },
-      {
-        "x": 90,
-        "y": 60,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": 90,
-        "y": 150,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": 90,
-        "y": 240,
-        "n": 12,
-        "re": -0.31
-      },
-      {
-        "x": 120,
-        "y": 210,
-        "n": 7,
-        "re": 1.06
-      },
-      {
-        "x": 120,
-        "y": 240,
-        "n": 21,
-        "re": -0.45
-      },
-      {
-        "x": 150,
-        "y": 210,
-        "n": 10,
-        "re": -0.76
-      },
-      {
-        "x": 180,
-        "y": 180,
-        "n": 8,
-        "re": -1.06
-      },
-      {
-        "x": 180,
-        "y": 210,
-        "n": 6,
-        "re": 0.47
-      },
-      {
-        "x": 210,
-        "y": 0,
-        "n": 4,
-        "re": 0.77
-      },
-      {
-        "x": 240,
-        "y": 0,
-        "n": 8,
-        "re": -0.11
-      },
-      {
-        "x": 240,
-        "y": 30,
-        "n": 10,
-        "re": -0.03
-      },
-      {
-        "x": 240,
-        "y": 60,
-        "n": 5,
-        "re": 0.65
-      },
-      {
-        "x": 240,
-        "y": 90,
-        "n": 4,
-        "re": 0.0
-      }
-    ],
     "1628378": [
       {
         "x": -240,
@@ -42710,276 +42166,132 @@ window.NBAI_DATA = {
         "re": 0.14
       }
     ],
-    "1628404": [
+    "1628392": [
       {
-        "x": -240,
+        "x": -120,
         "y": 0,
-        "n": 29,
-        "re": 0.01
-      },
-      {
-        "x": -240,
-        "y": 30,
-        "n": 15,
-        "re": 0.37
-      },
-      {
-        "x": -240,
-        "y": 60,
-        "n": 5,
-        "re": 0.65
-      },
-      {
-        "x": -180,
-        "y": 180,
-        "n": 11,
-        "re": 0.01
-      },
-      {
-        "x": -150,
-        "y": 210,
-        "n": 18,
-        "re": 0.1
-      },
-      {
-        "x": -120,
-        "y": 210,
-        "n": 17,
-        "re": 0.15
-      },
-      {
-        "x": -120,
-        "y": 240,
-        "n": 14,
-        "re": 0.0
+        "n": 4,
+        "re": 0.11
       },
       {
         "x": -90,
-        "y": 240,
-        "n": 16,
-        "re": -0.31
+        "y": 0,
+        "n": 4,
+        "re": 0.13
+      },
+      {
+        "x": -60,
+        "y": 0,
+        "n": 7,
+        "re": 0.29
       },
       {
         "x": -60,
         "y": 30,
-        "n": 6,
-        "re": -0.19
-      },
-      {
-        "x": -60,
-        "y": 60,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": -60,
-        "y": 120,
         "n": 5,
-        "re": -0.48
-      },
-      {
-        "x": -60,
-        "y": 150,
-        "n": 5,
-        "re": -0.86
-      },
-      {
-        "x": -60,
-        "y": 240,
-        "n": 6,
-        "re": 0.0
+        "re": 0.74
       },
       {
         "x": -30,
         "y": 0,
-        "n": 13,
-        "re": -0.1
-      },
-      {
-        "x": -30,
-        "y": 30,
-        "n": 20,
+        "n": 15,
         "re": -0.07
       },
       {
         "x": -30,
+        "y": 30,
+        "n": 16,
+        "re": -0.22
+      },
+      {
+        "x": -30,
         "y": 60,
-        "n": 9,
-        "re": 0.48
+        "n": 7,
+        "re": -0.0
       },
       {
         "x": -30,
         "y": 90,
         "n": 5,
-        "re": 0.71
+        "re": 0.72
       },
       {
         "x": -30,
         "y": 120,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": -30,
-        "y": 240,
         "n": 9,
-        "re": -0.42
-      },
-      {
-        "x": -30,
-        "y": 270,
-        "n": 4,
-        "re": 0.0
+        "re": 0.4
       },
       {
         "x": 0,
         "y": 0,
-        "n": 159,
-        "re": -0.12
+        "n": 140,
+        "re": 0.02
       },
       {
         "x": 0,
         "y": 30,
-        "n": 42,
+        "n": 34,
         "re": 0.0
       },
       {
         "x": 0,
         "y": 60,
-        "n": 10,
-        "re": 0.15
+        "n": 9,
+        "re": -0.18
       },
       {
         "x": 0,
         "y": 90,
-        "n": 15,
+        "n": 13,
         "re": 0.04
       },
       {
         "x": 0,
         "y": 120,
-        "n": 11,
-        "re": 0.01
-      },
-      {
-        "x": 0,
-        "y": 150,
-        "n": 7,
-        "re": 0.28
-      },
-      {
-        "x": 0,
-        "y": 240,
-        "n": 14,
-        "re": -0.01
-      },
-      {
-        "x": 0,
-        "y": 270,
-        "n": 6,
-        "re": 0.94
+        "n": 19,
+        "re": 0.37
       },
       {
         "x": 30,
         "y": 0,
-        "n": 20,
-        "re": -0.44
+        "n": 14,
+        "re": 0.01
       },
       {
         "x": 30,
         "y": 30,
-        "n": 21,
-        "re": 0.07
+        "n": 19,
+        "re": 0.08
       },
       {
         "x": 30,
         "y": 60,
-        "n": 5,
-        "re": -0.85
+        "n": 4,
+        "re": 0.14
       },
       {
         "x": 30,
         "y": 90,
-        "n": 6,
-        "re": -0.56
+        "n": 5,
+        "re": -0.88
       },
       {
         "x": 30,
-        "y": 270,
-        "n": 5,
-        "re": 0.14
-      },
-      {
-        "x": 60,
-        "y": 60,
+        "y": 120,
         "n": 4,
         "re": 0.0
       },
       {
         "x": 60,
-        "y": 150,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": 60,
-        "y": 240,
-        "n": 8,
-        "re": -0.69
+        "y": 90,
+        "n": 7,
+        "re": 0.55
       },
       {
         "x": 90,
-        "y": 240,
-        "n": 13,
-        "re": 0.32
-      },
-      {
-        "x": 120,
-        "y": 210,
-        "n": 7,
-        "re": 0.63
-      },
-      {
-        "x": 120,
-        "y": 240,
-        "n": 15,
-        "re": -0.46
-      },
-      {
-        "x": 150,
-        "y": 180,
-        "n": 4,
-        "re": 0.41
-      },
-      {
-        "x": 150,
-        "y": 210,
-        "n": 11,
-        "re": 0.3
-      },
-      {
-        "x": 180,
-        "y": 180,
-        "n": 8,
-        "re": -0.31
-      },
-      {
-        "x": 210,
-        "y": 150,
-        "n": 7,
-        "re": -0.23
-      },
-      {
-        "x": 240,
         "y": 0,
-        "n": 18,
-        "re": 0.1
-      },
-      {
-        "x": 240,
-        "y": 30,
-        "n": 20,
-        "re": -0.18
+        "n": 7,
+        "re": 0.83
       }
     ],
     "1628970": [
@@ -43968,6 +43280,272 @@ window.NBAI_DATA = {
         "y": 60,
         "n": 12,
         "re": -0.65
+      }
+    ],
+    "1628976": [
+      {
+        "x": -240,
+        "y": 0,
+        "n": 22,
+        "re": 0.27
+      },
+      {
+        "x": -240,
+        "y": 30,
+        "n": 12,
+        "re": -0.19
+      },
+      {
+        "x": -240,
+        "y": 60,
+        "n": 5,
+        "re": -1.15
+      },
+      {
+        "x": -210,
+        "y": 0,
+        "n": 4,
+        "re": 0.27
+      },
+      {
+        "x": -210,
+        "y": 150,
+        "n": 4,
+        "re": -1.09
+      },
+      {
+        "x": -180,
+        "y": 180,
+        "n": 11,
+        "re": 0.57
+      },
+      {
+        "x": -150,
+        "y": 210,
+        "n": 8,
+        "re": 0.41
+      },
+      {
+        "x": -120,
+        "y": 240,
+        "n": 8,
+        "re": 0.06
+      },
+      {
+        "x": -60,
+        "y": 120,
+        "n": 4,
+        "re": -0.39
+      },
+      {
+        "x": -60,
+        "y": 150,
+        "n": 6,
+        "re": 0.0
+      },
+      {
+        "x": -60,
+        "y": 180,
+        "n": 4,
+        "re": -0.3
+      },
+      {
+        "x": -60,
+        "y": 240,
+        "n": 9,
+        "re": -0.42
+      },
+      {
+        "x": -60,
+        "y": 270,
+        "n": 6,
+        "re": -0.02
+      },
+      {
+        "x": -30,
+        "y": 0,
+        "n": 40,
+        "re": 0.12
+      },
+      {
+        "x": -30,
+        "y": 30,
+        "n": 26,
+        "re": 0.18
+      },
+      {
+        "x": -30,
+        "y": 90,
+        "n": 7,
+        "re": -0.32
+      },
+      {
+        "x": -30,
+        "y": 120,
+        "n": 4,
+        "re": -0.39
+      },
+      {
+        "x": -30,
+        "y": 150,
+        "n": 5,
+        "re": -0.47
+      },
+      {
+        "x": -30,
+        "y": 240,
+        "n": 7,
+        "re": -0.23
+      },
+      {
+        "x": -30,
+        "y": 270,
+        "n": 4,
+        "re": 0.0
+      },
+      {
+        "x": 0,
+        "y": 0,
+        "n": 125,
+        "re": 0.06
+      },
+      {
+        "x": 0,
+        "y": 30,
+        "n": 72,
+        "re": 0.14
+      },
+      {
+        "x": 0,
+        "y": 60,
+        "n": 14,
+        "re": 0.0
+      },
+      {
+        "x": 0,
+        "y": 90,
+        "n": 8,
+        "re": -0.39
+      },
+      {
+        "x": 0,
+        "y": 120,
+        "n": 10,
+        "re": 0.0
+      },
+      {
+        "x": 0,
+        "y": 150,
+        "n": 8,
+        "re": 0.89
+      },
+      {
+        "x": 0,
+        "y": 240,
+        "n": 6,
+        "re": -1.09
+      },
+      {
+        "x": 0,
+        "y": 270,
+        "n": 9,
+        "re": -0.06
+      },
+      {
+        "x": 30,
+        "y": 0,
+        "n": 13,
+        "re": 0.05
+      },
+      {
+        "x": 30,
+        "y": 30,
+        "n": 20,
+        "re": -0.14
+      },
+      {
+        "x": 30,
+        "y": 60,
+        "n": 6,
+        "re": -0.86
+      },
+      {
+        "x": 30,
+        "y": 150,
+        "n": 4,
+        "re": 0.13
+      },
+      {
+        "x": 30,
+        "y": 240,
+        "n": 4,
+        "re": 0.41
+      },
+      {
+        "x": 30,
+        "y": 270,
+        "n": 5,
+        "re": 0.14
+      },
+      {
+        "x": 60,
+        "y": 90,
+        "n": 4,
+        "re": 0.0
+      },
+      {
+        "x": 60,
+        "y": 120,
+        "n": 5,
+        "re": -0.08
+      },
+      {
+        "x": 60,
+        "y": 240,
+        "n": 9,
+        "re": -0.4
+      },
+      {
+        "x": 90,
+        "y": 240,
+        "n": 10,
+        "re": 0.74
+      },
+      {
+        "x": 120,
+        "y": 240,
+        "n": 12,
+        "re": -0.06
+      },
+      {
+        "x": 150,
+        "y": 210,
+        "n": 9,
+        "re": -1.06
+      },
+      {
+        "x": 210,
+        "y": 30,
+        "n": 4,
+        "re": 0.02
+      },
+      {
+        "x": 240,
+        "y": -30,
+        "n": 4,
+        "re": -0.48
+      },
+      {
+        "x": 240,
+        "y": 0,
+        "n": 23,
+        "re": -0.45
+      },
+      {
+        "x": 240,
+        "y": 30,
+        "n": 4,
+        "re": -0.48
       }
     ],
     "1628983": [
@@ -46098,6 +45676,128 @@ window.NBAI_DATA = {
         "y": 30,
         "n": 6,
         "re": 0.15
+      }
+    ],
+    "1629651": [
+      {
+        "x": -90,
+        "y": 30,
+        "n": 7,
+        "re": -0.02
+      },
+      {
+        "x": -90,
+        "y": 60,
+        "n": 4,
+        "re": 0.12
+      },
+      {
+        "x": -60,
+        "y": 0,
+        "n": 8,
+        "re": -0.1
+      },
+      {
+        "x": -60,
+        "y": 30,
+        "n": 17,
+        "re": -0.14
+      },
+      {
+        "x": -60,
+        "y": 60,
+        "n": 7,
+        "re": -0.01
+      },
+      {
+        "x": -60,
+        "y": 120,
+        "n": 4,
+        "re": 0.0
+      },
+      {
+        "x": -30,
+        "y": 0,
+        "n": 36,
+        "re": -0.3
+      },
+      {
+        "x": -30,
+        "y": 30,
+        "n": 50,
+        "re": 0.07
+      },
+      {
+        "x": -30,
+        "y": 60,
+        "n": 14,
+        "re": -0.28
+      },
+      {
+        "x": 0,
+        "y": 0,
+        "n": 205,
+        "re": -0.03
+      },
+      {
+        "x": 0,
+        "y": 30,
+        "n": 63,
+        "re": 0.13
+      },
+      {
+        "x": 0,
+        "y": 60,
+        "n": 24,
+        "re": -0.02
+      },
+      {
+        "x": 0,
+        "y": 90,
+        "n": 11,
+        "re": -0.16
+      },
+      {
+        "x": 0,
+        "y": 120,
+        "n": 4,
+        "re": -0.4
+      },
+      {
+        "x": 30,
+        "y": 0,
+        "n": 26,
+        "re": 0.02
+      },
+      {
+        "x": 30,
+        "y": 30,
+        "n": 22,
+        "re": 0.03
+      },
+      {
+        "x": 30,
+        "y": 60,
+        "n": 14,
+        "re": 0.29
+      },
+      {
+        "x": 60,
+        "y": 30,
+        "n": 9,
+        "re": 0.04
+      },
+      {
+        "x": 60,
+        "y": 60,
+        "n": 4,
+        "re": -0.37
+      },
+      {
+        "x": 90,
+        "y": 240,
+        "n": 5,
+        "re": -1.09
       }
     ],
     "1629674": [
@@ -52238,6 +51938,506 @@ window.NBAI_DATA = {
         "re": 0.48
       }
     ],
+    "1631095": [
+      {
+        "x": -240,
+        "y": -30,
+        "n": 6,
+        "re": -1.23
+      },
+      {
+        "x": -240,
+        "y": 0,
+        "n": 49,
+        "re": 0.05
+      },
+      {
+        "x": -240,
+        "y": 30,
+        "n": 17,
+        "re": -0.53
+      },
+      {
+        "x": -240,
+        "y": 60,
+        "n": 8,
+        "re": -0.02
+      },
+      {
+        "x": -210,
+        "y": 0,
+        "n": 8,
+        "re": -0.11
+      },
+      {
+        "x": -210,
+        "y": 30,
+        "n": 5,
+        "re": -0.03
+      },
+      {
+        "x": -210,
+        "y": 120,
+        "n": 4,
+        "re": 0.41
+      },
+      {
+        "x": -210,
+        "y": 150,
+        "n": 15,
+        "re": 0.71
+      },
+      {
+        "x": -210,
+        "y": 180,
+        "n": 4,
+        "re": 0.48
+      },
+      {
+        "x": -180,
+        "y": 150,
+        "n": 8,
+        "re": 0.04
+      },
+      {
+        "x": -180,
+        "y": 180,
+        "n": 20,
+        "re": -0.46
+      },
+      {
+        "x": -180,
+        "y": 210,
+        "n": 11,
+        "re": 0.07
+      },
+      {
+        "x": -150,
+        "y": 0,
+        "n": 4,
+        "re": 0.14
+      },
+      {
+        "x": -150,
+        "y": 210,
+        "n": 14,
+        "re": 0.01
+      },
+      {
+        "x": -150,
+        "y": 240,
+        "n": 7,
+        "re": -0.6
+      },
+      {
+        "x": -120,
+        "y": 0,
+        "n": 6,
+        "re": 0.0
+      },
+      {
+        "x": -120,
+        "y": 30,
+        "n": 5,
+        "re": -0.89
+      },
+      {
+        "x": -120,
+        "y": 60,
+        "n": 5,
+        "re": -0.48
+      },
+      {
+        "x": -120,
+        "y": 210,
+        "n": 4,
+        "re": 0.41
+      },
+      {
+        "x": -120,
+        "y": 240,
+        "n": 13,
+        "re": -0.33
+      },
+      {
+        "x": -90,
+        "y": 30,
+        "n": 7,
+        "re": 0.26
+      },
+      {
+        "x": -90,
+        "y": 60,
+        "n": 7,
+        "re": -0.65
+      },
+      {
+        "x": -90,
+        "y": 120,
+        "n": 4,
+        "re": 0.0
+      },
+      {
+        "x": -90,
+        "y": 240,
+        "n": 10,
+        "re": 0.0
+      },
+      {
+        "x": -60,
+        "y": 0,
+        "n": 4,
+        "re": 0.14
+      },
+      {
+        "x": -60,
+        "y": 30,
+        "n": 4,
+        "re": -0.36
+      },
+      {
+        "x": -60,
+        "y": 60,
+        "n": 4,
+        "re": 0.61
+      },
+      {
+        "x": -60,
+        "y": 90,
+        "n": 9,
+        "re": -0.45
+      },
+      {
+        "x": -60,
+        "y": 120,
+        "n": 7,
+        "re": 0.25
+      },
+      {
+        "x": -60,
+        "y": 240,
+        "n": 10,
+        "re": 0.74
+      },
+      {
+        "x": -60,
+        "y": 270,
+        "n": 4,
+        "re": 0.0
+      },
+      {
+        "x": -30,
+        "y": 0,
+        "n": 10,
+        "re": 0.0
+      },
+      {
+        "x": -30,
+        "y": 30,
+        "n": 15,
+        "re": -0.31
+      },
+      {
+        "x": -30,
+        "y": 60,
+        "n": 6,
+        "re": 0.0
+      },
+      {
+        "x": -30,
+        "y": 90,
+        "n": 4,
+        "re": 0.0
+      },
+      {
+        "x": -30,
+        "y": 120,
+        "n": 15,
+        "re": -0.14
+      },
+      {
+        "x": -30,
+        "y": 150,
+        "n": 4,
+        "re": 0.64
+      },
+      {
+        "x": -30,
+        "y": 240,
+        "n": 4,
+        "re": -0.34
+      },
+      {
+        "x": -30,
+        "y": 270,
+        "n": 10,
+        "re": 0.44
+      },
+      {
+        "x": 0,
+        "y": 0,
+        "n": 77,
+        "re": 0.02
+      },
+      {
+        "x": 0,
+        "y": 30,
+        "n": 58,
+        "re": -0.06
+      },
+      {
+        "x": 0,
+        "y": 60,
+        "n": 17,
+        "re": -0.14
+      },
+      {
+        "x": 0,
+        "y": 90,
+        "n": 15,
+        "re": 0.31
+      },
+      {
+        "x": 0,
+        "y": 120,
+        "n": 17,
+        "re": 0.12
+      },
+      {
+        "x": 0,
+        "y": 150,
+        "n": 5,
+        "re": -0.06
+      },
+      {
+        "x": 0,
+        "y": 180,
+        "n": 5,
+        "re": -0.0
+      },
+      {
+        "x": 0,
+        "y": 270,
+        "n": 14,
+        "re": 0.01
+      },
+      {
+        "x": 30,
+        "y": 0,
+        "n": 12,
+        "re": 0.0
+      },
+      {
+        "x": 30,
+        "y": 30,
+        "n": 31,
+        "re": 0.28
+      },
+      {
+        "x": 30,
+        "y": 60,
+        "n": 4,
+        "re": 0.15
+      },
+      {
+        "x": 30,
+        "y": 90,
+        "n": 9,
+        "re": 0.67
+      },
+      {
+        "x": 30,
+        "y": 120,
+        "n": 9,
+        "re": 0.4
+      },
+      {
+        "x": 30,
+        "y": 150,
+        "n": 5,
+        "re": 0.74
+      },
+      {
+        "x": 30,
+        "y": 240,
+        "n": 5,
+        "re": 1.34
+      },
+      {
+        "x": 30,
+        "y": 270,
+        "n": 8,
+        "re": 0.06
+      },
+      {
+        "x": 60,
+        "y": 30,
+        "n": 6,
+        "re": 0.47
+      },
+      {
+        "x": 60,
+        "y": 60,
+        "n": 5,
+        "re": 0.31
+      },
+      {
+        "x": 60,
+        "y": 90,
+        "n": 8,
+        "re": -0.4
+      },
+      {
+        "x": 60,
+        "y": 120,
+        "n": 10,
+        "re": 0.0
+      },
+      {
+        "x": 60,
+        "y": 240,
+        "n": 9,
+        "re": -0.42
+      },
+      {
+        "x": 90,
+        "y": 0,
+        "n": 6,
+        "re": 0.0
+      },
+      {
+        "x": 90,
+        "y": 30,
+        "n": 4,
+        "re": -0.39
+      },
+      {
+        "x": 90,
+        "y": 90,
+        "n": 5,
+        "re": -0.14
+      },
+      {
+        "x": 90,
+        "y": 120,
+        "n": 6,
+        "re": 0.14
+      },
+      {
+        "x": 90,
+        "y": 240,
+        "n": 16,
+        "re": 0.25
+      },
+      {
+        "x": 120,
+        "y": 30,
+        "n": 4,
+        "re": 0.11
+      },
+      {
+        "x": 120,
+        "y": 60,
+        "n": 4,
+        "re": -0.38
+      },
+      {
+        "x": 120,
+        "y": 120,
+        "n": 8,
+        "re": -0.08
+      },
+      {
+        "x": 120,
+        "y": 210,
+        "n": 11,
+        "re": -0.81
+      },
+      {
+        "x": 120,
+        "y": 240,
+        "n": 19,
+        "re": -0.12
+      },
+      {
+        "x": 150,
+        "y": 180,
+        "n": 4,
+        "re": -0.34
+      },
+      {
+        "x": 150,
+        "y": 210,
+        "n": 36,
+        "re": 0.27
+      },
+      {
+        "x": 150,
+        "y": 240,
+        "n": 6,
+        "re": 0.47
+      },
+      {
+        "x": 180,
+        "y": 180,
+        "n": 22,
+        "re": 0.03
+      },
+      {
+        "x": 180,
+        "y": 210,
+        "n": 6,
+        "re": -0.02
+      },
+      {
+        "x": 210,
+        "y": 0,
+        "n": 8,
+        "re": -0.48
+      },
+      {
+        "x": 210,
+        "y": 30,
+        "n": 5,
+        "re": -0.63
+      },
+      {
+        "x": 210,
+        "y": 150,
+        "n": 12,
+        "re": -0.31
+      },
+      {
+        "x": 210,
+        "y": 180,
+        "n": 5,
+        "re": 0.18
+      },
+      {
+        "x": 240,
+        "y": 0,
+        "n": 24,
+        "re": -0.36
+      },
+      {
+        "x": 240,
+        "y": 30,
+        "n": 45,
+        "re": 0.03
+      },
+      {
+        "x": 240,
+        "y": 60,
+        "n": 15,
+        "re": 0.65
+      },
+      {
+        "x": 240,
+        "y": 90,
+        "n": 7,
+        "re": -0.66
+      }
+    ],
     "1631096": [
       {
         "x": -240,
@@ -52678,80 +52878,6 @@ window.NBAI_DATA = {
         "y": 0,
         "n": 4,
         "re": 0.0
-      }
-    ],
-    "1631109": [
-      {
-        "x": -60,
-        "y": 30,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": -30,
-        "y": 0,
-        "n": 10,
-        "re": 0.0
-      },
-      {
-        "x": -30,
-        "y": 30,
-        "n": 17,
-        "re": 0.2
-      },
-      {
-        "x": 0,
-        "y": 0,
-        "n": 186,
-        "re": -0.13
-      },
-      {
-        "x": 0,
-        "y": 30,
-        "n": 76,
-        "re": 0.14
-      },
-      {
-        "x": 0,
-        "y": 60,
-        "n": 16,
-        "re": 0.15
-      },
-      {
-        "x": 0,
-        "y": 90,
-        "n": 11,
-        "re": -0.14
-      },
-      {
-        "x": 30,
-        "y": 0,
-        "n": 28,
-        "re": -0.33
-      },
-      {
-        "x": 30,
-        "y": 30,
-        "n": 22,
-        "re": 0.48
-      },
-      {
-        "x": 30,
-        "y": 60,
-        "n": 12,
-        "re": 0.0
-      },
-      {
-        "x": 30,
-        "y": 90,
-        "n": 9,
-        "re": -0.66
-      },
-      {
-        "x": 60,
-        "y": 60,
-        "n": 10,
-        "re": 0.31
       }
     ],
     "1641705": [
@@ -53984,318 +54110,252 @@ window.NBAI_DATA = {
         "re": -0.55
       }
     ],
-    "1641824": [
-      {
-        "x": -240,
-        "y": -30,
-        "n": 6,
-        "re": -0.73
-      },
+    "1642259": [
       {
         "x": -240,
         "y": 0,
-        "n": 31,
-        "re": 0.41
-      },
-      {
-        "x": -240,
-        "y": 30,
-        "n": 24,
-        "re": -0.27
-      },
-      {
-        "x": -240,
-        "y": 60,
-        "n": 7,
-        "re": -0.72
-      },
-      {
-        "x": -240,
-        "y": 90,
-        "n": 8,
-        "re": 0.04
-      },
-      {
-        "x": -240,
-        "y": 120,
         "n": 4,
-        "re": -0.31
+        "re": -0.48
       },
       {
-        "x": -210,
-        "y": 90,
+        "x": -180,
+        "y": 180,
         "n": 5,
-        "re": 1.25
-      },
-      {
-        "x": -210,
-        "y": 120,
-        "n": 7,
-        "re": -0.23
-      },
-      {
-        "x": -210,
-        "y": 150,
-        "n": 12,
-        "re": 0.0
-      },
-      {
-        "x": -180,
-        "y": 180,
-        "n": 27,
-        "re": 0.27
-      },
-      {
-        "x": -180,
-        "y": 210,
-        "n": 6,
-        "re": 0.0
+        "re": -1.09
       },
       {
         "x": -150,
-        "y": 180,
+        "y": 210,
+        "n": 13,
+        "re": -1.06
+      },
+      {
+        "x": -120,
+        "y": 240,
         "n": 8,
-        "re": -0.34
+        "re": 0.06
       },
       {
-        "x": -150,
-        "y": 210,
-        "n": 29,
-        "re": 0.18
-      },
-      {
-        "x": -150,
-        "y": 240,
-        "n": 10,
-        "re": -0.43
-      },
-      {
-        "x": -120,
-        "y": 210,
-        "n": 17,
-        "re": 0.33
-      },
-      {
-        "x": -120,
-        "y": 240,
-        "n": 18,
-        "re": -0.19
+        "x": -90,
+        "y": 60,
+        "n": 5,
+        "re": -0.5
       },
       {
         "x": -90,
         "y": 240,
-        "n": 19,
-        "re": -0.12
+        "n": 8,
+        "re": -0.31
       },
       {
         "x": -60,
         "y": 30,
-        "n": 7,
-        "re": 0.01
+        "n": 9,
+        "re": -0.19
+      },
+      {
+        "x": -60,
+        "y": 60,
+        "n": 6,
+        "re": -0.22
+      },
+      {
+        "x": -60,
+        "y": 120,
+        "n": 6,
+        "re": 0.0
       },
       {
         "x": -60,
         "y": 240,
         "n": 7,
-        "re": 0.22
+        "re": -0.23
       },
       {
         "x": -60,
         "y": 270,
-        "n": 4,
-        "re": -0.27
+        "n": 5,
+        "re": -0.42
       },
       {
         "x": -30,
         "y": 0,
-        "n": 29,
+        "n": 19,
+        "re": -0.19
+      },
+      {
+        "x": -30,
+        "y": 30,
+        "n": 28,
+        "re": 0.17
+      },
+      {
+        "x": -30,
+        "y": 60,
+        "n": 25,
         "re": -0.37
       },
       {
         "x": -30,
-        "y": 30,
-        "n": 20,
-        "re": 0.33
-      },
-      {
-        "x": -30,
-        "y": 60,
-        "n": 8,
-        "re": -0.36
-      },
-      {
-        "x": -30,
         "y": 90,
-        "n": 5,
-        "re": -0.49
-      },
-      {
-        "x": -30,
-        "y": 270,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": 0,
-        "y": 0,
-        "n": 202,
-        "re": -0.18
-      },
-      {
-        "x": 0,
-        "y": 30,
-        "n": 79,
-        "re": 0.05
-      },
-      {
-        "x": 0,
-        "y": 60,
-        "n": 15,
-        "re": 0.22
-      },
-      {
-        "x": 0,
-        "y": 240,
-        "n": 10,
-        "re": -0.19
-      },
-      {
-        "x": 0,
-        "y": 270,
-        "n": 17,
-        "re": 0.35
-      },
-      {
-        "x": 30,
-        "y": 0,
-        "n": 25,
-        "re": -0.21
-      },
-      {
-        "x": 30,
-        "y": 30,
-        "n": 27,
-        "re": -0.23
-      },
-      {
-        "x": 30,
-        "y": 60,
-        "n": 5,
-        "re": 0.35
-      },
-      {
-        "x": 30,
-        "y": 240,
-        "n": 5,
+        "n": 6,
         "re": 0.11
       },
       {
-        "x": 30,
-        "y": 270,
-        "n": 6,
-        "re": -0.06
-      },
-      {
-        "x": 60,
-        "y": 30,
-        "n": 7,
-        "re": -0.56
-      },
-      {
-        "x": 60,
+        "x": -30,
         "y": 240,
-        "n": 14,
-        "re": 0.2
-      },
-      {
-        "x": 90,
-        "y": 240,
-        "n": 15,
-        "re": -0.46
-      },
-      {
-        "x": 90,
-        "y": 270,
-        "n": 4,
-        "re": -1.02
-      },
-      {
-        "x": 120,
-        "y": 210,
-        "n": 11,
-        "re": -0.81
-      },
-      {
-        "x": 120,
-        "y": 240,
-        "n": 7,
-        "re": -0.21
-      },
-      {
-        "x": 150,
-        "y": 210,
-        "n": 21,
-        "re": -0.21
-      },
-      {
-        "x": 150,
-        "y": 240,
-        "n": 9,
-        "re": 0.31
-      },
-      {
-        "x": 180,
-        "y": 180,
-        "n": 16,
-        "re": -0.5
-      },
-      {
-        "x": 180,
-        "y": 210,
-        "n": 8,
-        "re": 0.0
-      },
-      {
-        "x": 210,
-        "y": 30,
-        "n": 4,
-        "re": 1.02
-      },
-      {
-        "x": 210,
-        "y": 120,
         "n": 4,
         "re": 0.41
       },
       {
-        "x": 210,
+        "x": -30,
+        "y": 270,
+        "n": 7,
+        "re": -0.21
+      },
+      {
+        "x": 0,
+        "y": 0,
+        "n": 92,
+        "re": 0.04
+      },
+      {
+        "x": 0,
+        "y": 30,
+        "n": 89,
+        "re": 0.17
+      },
+      {
+        "x": 0,
+        "y": 60,
+        "n": 30,
+        "re": 0.15
+      },
+      {
+        "x": 0,
+        "y": 90,
+        "n": 5,
+        "re": -0.07
+      },
+      {
+        "x": 0,
+        "y": 120,
+        "n": 4,
+        "re": 0.06
+      },
+      {
+        "x": 0,
         "y": 150,
+        "n": 4,
+        "re": -0.36
+      },
+      {
+        "x": 0,
+        "y": 240,
         "n": 6,
         "re": -0.09
       },
       {
-        "x": 240,
+        "x": 0,
+        "y": 270,
+        "n": 11,
+        "re": 0.3
+      },
+      {
+        "x": 30,
         "y": 0,
-        "n": 19,
-        "re": -0.29
-      },
-      {
-        "x": 240,
-        "y": 30,
         "n": 12,
-        "re": 0.31
+        "re": 0.53
       },
       {
-        "x": 240,
+        "x": 30,
+        "y": 30,
+        "n": 31,
+        "re": -0.07
+      },
+      {
+        "x": 30,
         "y": 60,
-        "n": 9,
-        "re": -0.48
+        "n": 13,
+        "re": -0.4
       },
       {
-        "x": 240,
+        "x": 30,
+        "y": 270,
+        "n": 9,
+        "re": -0.4
+      },
+      {
+        "x": 60,
+        "y": 0,
+        "n": 5,
+        "re": 0.35
+      },
+      {
+        "x": 60,
+        "y": 30,
+        "n": 17,
+        "re": -0.26
+      },
+      {
+        "x": 60,
+        "y": 60,
+        "n": 10,
+        "re": 0.0
+      },
+      {
+        "x": 60,
         "y": 90,
-        "n": 7,
-        "re": -0.23
+        "n": 6,
+        "re": 0.0
+      },
+      {
+        "x": 60,
+        "y": 120,
+        "n": 5,
+        "re": -0.49
+      },
+      {
+        "x": 90,
+        "y": 60,
+        "n": 10,
+        "re": -0.1
+      },
+      {
+        "x": 90,
+        "y": 240,
+        "n": 5,
+        "re": 0.74
+      },
+      {
+        "x": 120,
+        "y": 30,
+        "n": 5,
+        "re": -0.14
+      },
+      {
+        "x": 120,
+        "y": 210,
+        "n": 4,
+        "re": 0.41
+      },
+      {
+        "x": 120,
+        "y": 240,
+        "n": 6,
+        "re": 0.0
+      },
+      {
+        "x": 150,
+        "y": 210,
+        "n": 5,
+        "re": 0.74
+      },
+      {
+        "x": 180,
+        "y": 180,
+        "n": 4,
+        "re": 0.0
       }
     ],
     "1642270": [
@@ -55512,6 +55572,398 @@ window.NBAI_DATA = {
         "re": -0.48
       }
     ],
+    "1642851": [
+      {
+        "x": -240,
+        "y": 0,
+        "n": 21,
+        "re": 0.48
+      },
+      {
+        "x": -240,
+        "y": 30,
+        "n": 26,
+        "re": 0.27
+      },
+      {
+        "x": -240,
+        "y": 60,
+        "n": 13,
+        "re": 0.24
+      },
+      {
+        "x": -210,
+        "y": 0,
+        "n": 4,
+        "re": -0.48
+      },
+      {
+        "x": -210,
+        "y": 120,
+        "n": 9,
+        "re": -0.09
+      },
+      {
+        "x": -210,
+        "y": 150,
+        "n": 17,
+        "re": -0.2
+      },
+      {
+        "x": -210,
+        "y": 180,
+        "n": 4,
+        "re": 0.0
+      },
+      {
+        "x": -180,
+        "y": 180,
+        "n": 25,
+        "re": 0.38
+      },
+      {
+        "x": -180,
+        "y": 210,
+        "n": 20,
+        "re": 0.93
+      },
+      {
+        "x": -150,
+        "y": 180,
+        "n": 5,
+        "re": 0.11
+      },
+      {
+        "x": -150,
+        "y": 210,
+        "n": 36,
+        "re": 0.27
+      },
+      {
+        "x": -150,
+        "y": 240,
+        "n": 18,
+        "re": -0.19
+      },
+      {
+        "x": -120,
+        "y": 30,
+        "n": 4,
+        "re": -0.44
+      },
+      {
+        "x": -120,
+        "y": 210,
+        "n": 9,
+        "re": 0.25
+      },
+      {
+        "x": -120,
+        "y": 240,
+        "n": 27,
+        "re": 0.2
+      },
+      {
+        "x": -120,
+        "y": 270,
+        "n": 5,
+        "re": -0.34
+      },
+      {
+        "x": -90,
+        "y": 60,
+        "n": 4,
+        "re": 0.12
+      },
+      {
+        "x": -90,
+        "y": 240,
+        "n": 15,
+        "re": -0.06
+      },
+      {
+        "x": -90,
+        "y": 270,
+        "n": 6,
+        "re": -0.52
+      },
+      {
+        "x": -60,
+        "y": 30,
+        "n": 11,
+        "re": 0.06
+      },
+      {
+        "x": -60,
+        "y": 60,
+        "n": 7,
+        "re": 0.54
+      },
+      {
+        "x": -60,
+        "y": 90,
+        "n": 4,
+        "re": 0.6
+      },
+      {
+        "x": -60,
+        "y": 120,
+        "n": 6,
+        "re": -0.21
+      },
+      {
+        "x": -60,
+        "y": 240,
+        "n": 14,
+        "re": -0.21
+      },
+      {
+        "x": -60,
+        "y": 270,
+        "n": 10,
+        "re": -0.42
+      },
+      {
+        "x": -30,
+        "y": 0,
+        "n": 30,
+        "re": 0.06
+      },
+      {
+        "x": -30,
+        "y": 30,
+        "n": 25,
+        "re": -0.33
+      },
+      {
+        "x": -30,
+        "y": 60,
+        "n": 16,
+        "re": -0.11
+      },
+      {
+        "x": -30,
+        "y": 90,
+        "n": 12,
+        "re": 0.45
+      },
+      {
+        "x": -30,
+        "y": 120,
+        "n": 6,
+        "re": 0.4
+      },
+      {
+        "x": -30,
+        "y": 270,
+        "n": 13,
+        "re": 0.78
+      },
+      {
+        "x": 0,
+        "y": 0,
+        "n": 71,
+        "re": -0.07
+      },
+      {
+        "x": 0,
+        "y": 30,
+        "n": 54,
+        "re": 0.16
+      },
+      {
+        "x": 0,
+        "y": 60,
+        "n": 14,
+        "re": 0.44
+      },
+      {
+        "x": 0,
+        "y": 90,
+        "n": 16,
+        "re": -0.01
+      },
+      {
+        "x": 0,
+        "y": 120,
+        "n": 11,
+        "re": 0.52
+      },
+      {
+        "x": 0,
+        "y": 150,
+        "n": 5,
+        "re": -0.46
+      },
+      {
+        "x": 0,
+        "y": 240,
+        "n": 8,
+        "re": 0.41
+      },
+      {
+        "x": 0,
+        "y": 270,
+        "n": 20,
+        "re": 0.59
+      },
+      {
+        "x": 30,
+        "y": 0,
+        "n": 22,
+        "re": -0.15
+      },
+      {
+        "x": 30,
+        "y": 30,
+        "n": 22,
+        "re": -0.16
+      },
+      {
+        "x": 30,
+        "y": 60,
+        "n": 6,
+        "re": -0.52
+      },
+      {
+        "x": 30,
+        "y": 90,
+        "n": 12,
+        "re": -0.06
+      },
+      {
+        "x": 30,
+        "y": 240,
+        "n": 10,
+        "re": 0.11
+      },
+      {
+        "x": 30,
+        "y": 270,
+        "n": 14,
+        "re": 0.65
+      },
+      {
+        "x": 60,
+        "y": 30,
+        "n": 8,
+        "re": 0.0
+      },
+      {
+        "x": 60,
+        "y": 60,
+        "n": 4,
+        "re": 0.11
+      },
+      {
+        "x": 60,
+        "y": 120,
+        "n": 5,
+        "re": -0.09
+      },
+      {
+        "x": 60,
+        "y": 240,
+        "n": 9,
+        "re": -0.4
+      },
+      {
+        "x": 60,
+        "y": 270,
+        "n": 8,
+        "re": 0.0
+      },
+      {
+        "x": 90,
+        "y": 240,
+        "n": 19,
+        "re": -0.12
+      },
+      {
+        "x": 90,
+        "y": 270,
+        "n": 8,
+        "re": 0.0
+      },
+      {
+        "x": 120,
+        "y": 210,
+        "n": 6,
+        "re": 1.94
+      },
+      {
+        "x": 120,
+        "y": 240,
+        "n": 28,
+        "re": 0.0
+      },
+      {
+        "x": 150,
+        "y": 210,
+        "n": 23,
+        "re": 0.37
+      },
+      {
+        "x": 150,
+        "y": 240,
+        "n": 8,
+        "re": -0.65
+      },
+      {
+        "x": 180,
+        "y": 180,
+        "n": 25,
+        "re": -0.1
+      },
+      {
+        "x": 180,
+        "y": 210,
+        "n": 9,
+        "re": -0.06
+      },
+      {
+        "x": 210,
+        "y": 120,
+        "n": 7,
+        "re": -0.23
+      },
+      {
+        "x": 210,
+        "y": 150,
+        "n": 15,
+        "re": 0.94
+      },
+      {
+        "x": 240,
+        "y": 0,
+        "n": 22,
+        "re": 0.68
+      },
+      {
+        "x": 240,
+        "y": 30,
+        "n": 20,
+        "re": 0.27
+      },
+      {
+        "x": 240,
+        "y": 60,
+        "n": 15,
+        "re": 0.45
+      },
+      {
+        "x": 240,
+        "y": 90,
+        "n": 9,
+        "re": -0.09
+      },
+      {
+        "x": 240,
+        "y": 120,
+        "n": 4,
+        "re": 1.16
+      }
+    ],
     "1642852": [
       {
         "x": -120,
@@ -55698,206 +56150,6 @@ window.NBAI_DATA = {
         "y": 0,
         "n": 14,
         "re": -0.38
-      }
-    ],
-    "1642875": [
-      {
-        "x": -240,
-        "y": 0,
-        "n": 7,
-        "re": 0.05
-      },
-      {
-        "x": -210,
-        "y": 30,
-        "n": 4,
-        "re": 0.37
-      },
-      {
-        "x": -180,
-        "y": 210,
-        "n": 4,
-        "re": -0.27
-      },
-      {
-        "x": -150,
-        "y": 240,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": -90,
-        "y": 0,
-        "n": 4,
-        "re": 0.61
-      },
-      {
-        "x": -90,
-        "y": 30,
-        "n": 8,
-        "re": 0.0
-      },
-      {
-        "x": -90,
-        "y": 60,
-        "n": 4,
-        "re": 0.0
-      },
-      {
-        "x": -60,
-        "y": 0,
-        "n": 15,
-        "re": 0.35
-      },
-      {
-        "x": -60,
-        "y": 30,
-        "n": 15,
-        "re": 0.07
-      },
-      {
-        "x": -60,
-        "y": 60,
-        "n": 11,
-        "re": 0.04
-      },
-      {
-        "x": -60,
-        "y": 90,
-        "n": 7,
-        "re": -0.61
-      },
-      {
-        "x": -30,
-        "y": 0,
-        "n": 26,
-        "re": 0.48
-      },
-      {
-        "x": -30,
-        "y": 30,
-        "n": 34,
-        "re": 0.44
-      },
-      {
-        "x": -30,
-        "y": 60,
-        "n": 27,
-        "re": -0.03
-      },
-      {
-        "x": -30,
-        "y": 90,
-        "n": 6,
-        "re": 0.12
-      },
-      {
-        "x": -30,
-        "y": 120,
-        "n": 10,
-        "re": 0.26
-      },
-      {
-        "x": 0,
-        "y": 0,
-        "n": 77,
-        "re": 0.27
-      },
-      {
-        "x": 0,
-        "y": 30,
-        "n": 57,
-        "re": 0.37
-      },
-      {
-        "x": 0,
-        "y": 60,
-        "n": 48,
-        "re": 0.44
-      },
-      {
-        "x": 0,
-        "y": 90,
-        "n": 19,
-        "re": 0.16
-      },
-      {
-        "x": 0,
-        "y": 120,
-        "n": 22,
-        "re": 0.29
-      },
-      {
-        "x": 30,
-        "y": 0,
-        "n": 15,
-        "re": -0.07
-      },
-      {
-        "x": 30,
-        "y": 30,
-        "n": 34,
-        "re": 0.03
-      },
-      {
-        "x": 30,
-        "y": 60,
-        "n": 29,
-        "re": 0.66
-      },
-      {
-        "x": 30,
-        "y": 90,
-        "n": 20,
-        "re": 0.51
-      },
-      {
-        "x": 30,
-        "y": 120,
-        "n": 7,
-        "re": -0.61
-      },
-      {
-        "x": 60,
-        "y": 0,
-        "n": 9,
-        "re": 0.26
-      },
-      {
-        "x": 60,
-        "y": 30,
-        "n": 18,
-        "re": 0.03
-      },
-      {
-        "x": 60,
-        "y": 60,
-        "n": 13,
-        "re": 0.34
-      },
-      {
-        "x": 60,
-        "y": 90,
-        "n": 13,
-        "re": -0.28
-      },
-      {
-        "x": 90,
-        "y": 30,
-        "n": 8,
-        "re": 0.62
-      },
-      {
-        "x": 90,
-        "y": 60,
-        "n": 5,
-        "re": -0.48
-      },
-      {
-        "x": 240,
-        "y": 60,
-        "n": 5,
-        "re": -0.55
       }
     ]
   },

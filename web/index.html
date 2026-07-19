@@ -377,12 +377,14 @@
         </table>
       </div>
     </div>
-    <p class="foot"><b>WAR</b> — wins above replacement (box-based v1). <b>Off</b> — offensive box
-      plus-minus (points/100 above average). <b>Shot+</b> — points over
-      expected on the same shots. <b>Def</b> — defensive points saved per 100 (rim + disruption,
-      calibrated from our play-by-play). <b>Floor / Ceil</b> — 20th/80th-percentile scoring nights
-      (props reliability). <b>Clutch</b> — points in the last 5 min within 5, with each player's
-      shooting lift vs. their season eFG%. Deeper versions (RAPM, perimeter defense) in progress.</p>
+    <p class="foot"><b>WAR</b> — wins above replacement, <b>v3</b>: box score <i>plus</i> Synergy
+      play-type efficiency, tracking rim protection, and playmaking creation. Each source was
+      backtested to add out-of-sample signal; the blend lifts team-win correlation 0.837→0.868 vs
+      the box-only version. <b>Off / Def</b> — the offensive (box + play-type + creation) and
+      defensive (box + rim protection) components, in points/100 above average. <b>Shot+</b> —
+      points over expected on the same shots. <b>Floor / Ceil</b> — 20th/80th-percentile scoring
+      nights (props reliability). <b>Clutch</b> — points in the last 5 min within 5, with each
+      player's shooting lift vs. their season eFG%.</p>
   </section>
 
   <!-- ============ PROPS ============ -->
