@@ -130,6 +130,36 @@ def shot_charts(season: str = LATEST) -> dict:
     return out
 
 
+def player_shot_charts(season: str, player_ids: set) -> dict:
+    """Per-player shot cells (only for the given players) — for the detail card."""
+    pbp = pd.read_parquet(PBP_DIR / f"{season}.parquet",
+                          columns=["PLAYER_ID", "IS_FIELD_GOAL", "SHOT_VALUE",
+                                   "SHOT_RESULT", "SHOT_X", "SHOT_Y", "SHOT_DISTANCE"])
+    f = pbp[(pbp.IS_FIELD_GOAL == 1) & pbp.SHOT_VALUE.isin([2, 3])
+            & pbp.SHOT_RESULT.isin(["Made", "Missed"])
+            & pbp.SHOT_X.notna() & pbp.SHOT_Y.notna()
+            & pbp.SHOT_Y.between(-40, 400) & pbp.SHOT_X.between(-250, 250)].copy()
+    f["made"] = (f.SHOT_RESULT == "Made").astype(int)
+    f["pts"] = f.made * f.SHOT_VALUE
+    f["dband"] = f.SHOT_DISTANCE.round().clip(0, 35)
+    lg_pps = f.groupby("dband").pts.mean().to_dict()
+    CELL = 30
+    f = f[f.PLAYER_ID.isin(player_ids)]
+    f["cx"] = (f.SHOT_X / CELL).round().astype(int) * CELL
+    f["cy"] = (f.SHOT_Y / CELL).round().astype(int) * CELL
+    out = {}
+    for pid, d in f.groupby("PLAYER_ID"):
+        cells = []
+        for (cx, cy), c in d.groupby(["cx", "cy"]):
+            if len(c) < 4:
+                continue
+            re = c.pts.mean() - lg_pps.get(c.dband.median(), c.pts.mean())
+            cells.append({"x": int(cx), "y": int(cy), "n": int(len(c)), "re": round(re, 2)})
+        if cells:
+            out[str(int(pid))] = cells
+    return out
+
+
 def four_factors(season: str = LATEST) -> list[dict]:
     """Offensive & defensive Four Factors per team (eFG%, TOV%, ORB%, FTR)."""
     lg = pd.read_parquet(GAME_LOGS, columns=["GAME_ID", "TEAM_ID", "TEAM_ABBREVIATION",
@@ -176,7 +206,7 @@ def player_ratings(season: str = LATEST, topn: int = 60) -> list[dict]:
         return round(float(v), d) if pd.notna(v) else None
     out = []
     for i, r in enumerate(m.itertuples(), 1):
-        out.append({"rank": i, "player": r.PLAYER, "team": r.TEAM,
+        out.append({"rank": i, "id": int(r.PLAYER_ID), "player": r.PLAYER, "team": r.TEAM,
                     "war": num(r.WAR), "off": num(getattr(r, "OBPM", None)),
                     "poe": num(getattr(r, "POE_100", None)),
                     "def": num(getattr(r, "DEF_VAL_100", None)),
@@ -189,13 +219,15 @@ def player_ratings(season: str = LATEST, topn: int = 60) -> list[dict]:
 
 
 def main() -> None:
+    players = player_ratings()
     data = {"generated": date.today().isoformat(),
             "season": LATEST,
             "model": model_metrics(),
             "teams": team_ratings(),
-            "players": player_ratings(),
+            "players": players,
             "factors": four_factors(),
-            "shots": shot_charts()}
+            "shots": shot_charts(),
+            "pshots": player_shot_charts(LATEST, {p["id"] for p in players})}
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text("window.NBAI_DATA = " + json.dumps(data, indent=2) + ";\n")
     print(f"Wrote {OUT} — {len(data['teams'])} teams, "
