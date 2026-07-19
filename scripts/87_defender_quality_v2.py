@@ -98,8 +98,13 @@ def main() -> None:
     d.rename(columns={"DEF_ID": "PLAYER_ID"}).to_parquet(OUT, index=False)
     print(f"defender_quality_v2: {len(d):,} defender-seasons "
           f"(≥{MIN_POSS} poss), seasons {d.SEASON.min()}…{d.SEASON.max()}")
-    print(f"  assignment-adjusted skill vs MPG corr: {np.corrcoef(d.skill, d.MPG)[0,1]:+.3f} "
-          f"(confound removed)\n")
+    # NOTE: `skill` is the OLS residual of suppression on [MPG, assign_diff], so its
+    # correlation with MPG is ~0 BY CONSTRUCTION (Frisch–Waugh) — that is NOT evidence
+    # the confound was removed. This metric is DESCRIPTIVE (face-valid leaderboard) only;
+    # script 89 showed it does NOT predict team defense out-of-sample, and star scorers
+    # still skew to the bottom. Do not treat it as a validated skill rating.
+    print(f"  residualized on minutes+assignment (corr with MPG ~0 by construction, "
+          f"not a validation) — descriptive metric only\n")
 
     latest = d.SEASON.max()
     print(f"=== Top 15 perimeter defenders, {latest} (assignment-adjusted skill) ===")

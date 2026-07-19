@@ -121,6 +121,11 @@ def main() -> None:
         except Exception as e:
             print(f"  {s}: FAIL {type(e).__name__} {str(e)[:80]}")
     lines = pd.DataFrame(all_rows)
+    # sanity guard: NBA totals are ~180-270; anything outside is a mis-parsed/blank cell
+    for c in ("total", "open_total"):
+        lines.loc[(lines[c] < 150) | (lines[c] > 285), c] = np.nan
+    for c in ("home_spread", "open_home_spread"):
+        lines.loc[lines[c].abs() > 30, c] = np.nan
 
     # join to our GAME_IDs by date + home + away
     games = pd.read_parquet(GAMES, columns=["GAME_ID", "SEASON", "SEASON_TYPE",
