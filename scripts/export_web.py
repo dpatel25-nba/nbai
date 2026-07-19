@@ -28,9 +28,19 @@ DEF_F = ROOT / "data" / "parquet" / "defender_quality.parquet"
 CONS_F = ROOT / "data" / "parquet" / "consistency.parquet"
 CLUTCH_F = ROOT / "data" / "parquet" / "clutch.parquet"
 WOWY_F = ROOT / "data" / "parquet" / "wowy.json"
+PROPS_F = ROOT / "data" / "features" / "props_predictions.parquet"
+DEFV2_F = ROOT / "data" / "parquet" / "defender_quality_v2.parquet"
+SYN_F = ROOT / "data" / "parquet" / "team_synergy.parquet"
 OUT = ROOT / "web" / "data.js"
 BURN_IN = "2013-14"
 LATEST = "2025-26"
+
+PLAY_LABELS = {
+    "Transition": "Transition", "Isolation": "Isolation", "PRBallHandler": "P&R Ball-Handler",
+    "PRRollman": "P&R Roll Man", "Postup": "Post-Up", "Spotup": "Spot-Up",
+    "Handoff": "Hand-Off", "Cut": "Cut", "OffScreen": "Off Screen",
+    "OffRebound": "Putbacks", "Misc": "Misc",
+}
 
 # team primary colors for the roster dots (kept in sync with the site)
 COLORS = {
@@ -219,6 +229,67 @@ def player_ratings(season: str = LATEST, topn: int = 60) -> list[dict]:
     return out
 
 
+def props(season: str = LATEST, topn: int = 60) -> dict:
+    """Props engine: per-player projected line vs actual (season avg) + engine accuracy."""
+    pp = pd.read_parquet(PROPS_F)
+    acc = {}
+    for s, a, p in [("pts", "points", "pred_points"), ("reb", "reb", "pred_reb"),
+                    ("ast", "ast", "pred_ast"), ("min", "MIN", "pred_min")]:
+        t = pp[[a, p]].dropna()
+        acc[s] = round(float((t[a] - t[p]).abs().mean()), 2)
+    cur = pp[pp.SEASON == season]
+    g = cur.groupby("PLAYER_ID").agg(
+        gp=("GAME_ID", "size"), pmin=("pred_min", "mean"), amin=("MIN", "mean"),
+        ppts=("pred_points", "mean"), apts=("points", "mean"),
+        preb=("pred_reb", "mean"), areb=("reb", "mean"),
+        past=("pred_ast", "mean"), aast=("ast", "mean")).reset_index()
+    war = pd.read_parquet(WAR_F)
+    war = war[war.SEASON == season][["PLAYER_ID", "PLAYER", "TEAM"]]
+    g = g.merge(war, on="PLAYER_ID", how="left")
+    g = g[(g.gp >= 15) & g.PLAYER.notna()].sort_values("ppts", ascending=False).head(topn)
+    rows = []
+    for i, r in enumerate(g.itertuples(), 1):
+        rows.append({"rank": i, "id": int(r.PLAYER_ID), "player": r.PLAYER, "team": r.TEAM,
+                     "gp": int(r.gp), "c": COLORS.get(r.TEAM, "#888888"),
+                     "pmin": round(r.pmin, 1), "ppts": round(r.ppts, 1), "apts": round(r.apts, 1),
+                     "preb": round(r.preb, 1), "areb": round(r.areb, 1),
+                     "past": round(r.past, 1), "aast": round(r.aast, 1)})
+    return {"acc": acc, "rows": rows}
+
+
+def defenders(season: str = LATEST, topn: int = 30) -> list[dict]:
+    """Perimeter-defense leaderboard (opponent + assignment-adjusted matchup suppression)."""
+    d = pd.read_parquet(DEFV2_F)
+    d = d[(d.SEASON == season) & (d.pp >= 1500) & (d.MPG >= 20)]
+    d = d.sort_values("DEF_RATING", ascending=False).head(topn)
+    out = []
+    for i, r in enumerate(d.itertuples(), 1):
+        out.append({"rank": i, "player": r.PLAYER, "team": r.TEAM,
+                    "rating": round(float(r.DEF_RATING), 2), "mpg": round(float(r.MPG), 1),
+                    "poss": int(r.pp), "c": COLORS.get(r.TEAM, "#888888")})
+    return out
+
+
+def synergy(season: str = LATEST) -> dict:
+    """Team play-type profiles: offensive freq+PPP and defensive PPP allowed, by play type."""
+    syn = pd.read_parquet(SYN_F)
+    syn = syn[syn.SEASON == season]
+    types = [t for t in PLAY_LABELS if t in set(syn.play_type)]
+    lg_def = {t: round(float(syn[(syn.side == "defensive") & (syn.play_type == t)].ppp.mean()), 2)
+              for t in types}
+    teams = {}
+    for tri, d in syn.groupby("TEAM_ABBREVIATION"):
+        off = d[d.side == "offensive"].set_index("play_type")
+        dfn = d[d.side == "defensive"].set_index("play_type")
+        teams[tri] = {
+            "off": {t: [round(float(off.loc[t, "poss_pct"]), 3), round(float(off.loc[t, "ppp"]), 2)]
+                    for t in types if t in off.index},
+            "def": {t: round(float(dfn.loc[t, "ppp"]), 2) for t in types if t in dfn.index},
+        }
+    return {"types": types, "labels": {t: PLAY_LABELS[t] for t in types},
+            "league_def": lg_def, "teams": teams}
+
+
 def main() -> None:
     players = player_ratings()
     data = {"generated": date.today().isoformat(),
@@ -230,7 +301,10 @@ def main() -> None:
             "shots": shot_charts(),
             "pshots": player_shot_charts(LATEST, {p["id"] for p in players}),
             "wowy": {t: sorted(pl, key=lambda p: -abs(p["impact"]))[:9]
-                     for t, pl in json.loads(WOWY_F.read_text()).items()}}
+                     for t, pl in json.loads(WOWY_F.read_text()).items()},
+            "props": props(),
+            "defenders": defenders(),
+            "synergy": synergy()}
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text("window.NBAI_DATA = " + json.dumps(data, indent=2) + ";\n")
     print(f"Wrote {OUT} — {len(data['teams'])} teams, "

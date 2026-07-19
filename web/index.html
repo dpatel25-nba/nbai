@@ -265,6 +265,9 @@
     <nav class="tabs" role="tablist" aria-label="Sections">
       <button class="tab active" data-view="ratings" role="tab">Team Ratings</button>
       <button class="tab" data-view="players" role="tab">Players</button>
+      <button class="tab" data-view="props" role="tab">Props</button>
+      <button class="tab" data-view="defense" role="tab">Defense</button>
+      <button class="tab" data-view="playtypes" role="tab">Play Types</button>
       <button class="tab" data-view="shots" role="tab">Shot Charts</button>
       <button class="tab" data-view="impact" role="tab">Impact</button>
       <button class="tab" data-view="predict" role="tab">Matchup</button>
@@ -380,6 +383,117 @@
       calibrated from our play-by-play). <b>Floor / Ceil</b> — 20th/80th-percentile scoring nights
       (props reliability). <b>Clutch</b> — points in the last 5 min within 5, with each player's
       shooting lift vs. their season eFG%. Deeper versions (RAPM, perimeter defense) in progress.</p>
+  </section>
+
+  <!-- ============ PROPS ============ -->
+  <section class="view" id="props">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">2025–26 · projection engine</div>
+        <h1>Player Props</h1>
+      </div>
+      <div class="sub">Pre-game projections for every player — projected <b>minutes</b> drive
+        projected points, rebounds, assists. Honest walk-forward accuracy (never trained on the
+        future), and the numbers use <b>projected</b> minutes, not hindsight.</div>
+    </div>
+    <div class="kpis" id="propKpis"></div>
+    <div class="panel" style="margin-top:16px">
+      <div class="panel-head"><h2>Projected Season Lines</h2><span class="eyebrow">proj vs actual · click a column to sort</span></div>
+      <div class="tblwrap">
+        <table id="proptable">
+          <thead><tr>
+            <th class="tleft" data-k="rank">Rk</th>
+            <th class="tleft" data-k="player">Player</th>
+            <th data-k="gp">GP</th>
+            <th data-k="pmin">Min</th>
+            <th data-k="ppts" aria-sort="descending">PTS <span class="arw">▼</span></th>
+            <th data-k="apts">actual</th>
+            <th data-k="preb">REB</th>
+            <th data-k="areb">actual</th>
+            <th data-k="past">AST</th>
+            <th data-k="aast">actual</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="foot"><b>How it's built:</b> a gradient-boosted minutes model (recent minutes +
+      rest + <b>who's out</b> — a teammate's absence redistributes minutes and usage) feeds
+      per-stat models that add recent form and a shot-volume vs. shooting-efficiency split.
+      The strongest single lever we found is <b>teammate availability</b>: minutes MAE dropped
+      from 4.87 to 4.60 once the model sees who's sitting. Opponent-specific signals — team
+      defense, pace, even exact matchup — were tested and add almost nothing.</p>
+  </section>
+
+  <!-- ============ DEFENSE ============ -->
+  <section class="view" id="defense">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">matchup data · 2.2M possessions</div>
+        <h1>Perimeter Defense</h1>
+      </div>
+      <div class="sub">Who actually makes life hard on the man they guard — measured from every
+        defender-vs-scorer matchup, adjusted for <b>who</b> they guard and <b>how much</b> they play.
+        This is the on-ball defense box scores can't see.</div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>Defender Leaderboard</h2><span class="eyebrow">2025-26 · click a column to sort</span></div>
+      <div class="tblwrap">
+        <table id="deftable">
+          <thead><tr>
+            <th class="tleft" data-k="rank">Rk</th>
+            <th class="tleft" data-k="player">Player</th>
+            <th data-k="rating" aria-sort="descending">Def Rating <span class="arw">▼</span></th>
+            <th data-k="mpg">MPG</th>
+            <th data-k="poss">Poss Guarded</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="foot"><b>Def Rating</b> — points saved per matchup vs. what the offensive players
+      "should" score, standardized across the league (higher = better). We <b>residualize out
+      minutes and assignment difficulty</b>, because raw matchup numbers reward bench players hidden
+      on weak scorers. Honest caveat: this is <b>on-ball</b> defense only — it doesn't capture rim
+      protection, help, or scheme, so it's a descriptive lens, not a full defensive rating.</p>
+  </section>
+
+  <!-- ============ PLAY TYPES ============ -->
+  <section class="view" id="playtypes">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">Synergy · 2025–26</div>
+        <h1>Play-Type Matchups</h1>
+      </div>
+      <div class="sub">Every team's offense broken into how <b>often</b> they run each play type and
+        how <b>efficiently</b> — matched against how the opponent <b>defends</b> that play type. Pick
+        an offense and a defense to see the bottom-up scouting grid.</div>
+    </div>
+    <div class="mk-card">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px">
+        <label class="eyebrow" for="synOff">Offense</label>
+        <select id="synOff" aria-label="Offense team" style="width:auto;min-width:170px"></select>
+        <label class="eyebrow" for="synDef">Defense</label>
+        <select id="synDef" aria-label="Defense team" style="width:auto;min-width:170px"></select>
+      </div>
+      <div class="tblwrap">
+        <table id="syntable">
+          <thead><tr>
+            <th class="tleft">Play Type</th>
+            <th>Off Freq</th><th>Off PPP</th>
+            <th>Def PPP</th><th>vs Lg</th><th>Matchup</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="foot"><b>Reading it:</b> <b>Off Freq</b> = share of the offense's possessions in that
+      play type; <b>Off PPP</b> = their points per possession on it; <b>Def PPP</b> = what the defense
+      allows on it; <b>vs Lg</b> = how the defense compares to league average (green = stingy);
+      <b>Matchup</b> = the offense's efficiency shifted by this defense's strength on that play type.
+      An honest note we found in backtests: this grid is a superb <b>scouting</b> tool, but at the
+      team level it doesn't out-predict the simple rating difference — great defenses tend to be
+      great everywhere.</p>
   </section>
 
   <!-- ============ SHOT CHARTS ============ -->
@@ -953,5 +1067,116 @@
       `<b>Pace</b> — GSW ${B.team.pace} vs BOS ${A.team.pace}`,
       `<b>Stars</b> — Tatum ${A.players[0].pts} vs Curry ${B.players[0].pts} PPG`,
     ].map(e => `<span class="chip">${e}</span>`).join("");
+  })();
+
+  /* ---- props ---- */
+  (function () {
+    const P = D.props; if (!P || !P.rows) return;
+    const k = document.getElementById("propKpis");
+    if (k) k.innerHTML = [
+      ["pts", "Points MAE"], ["reb", "Rebounds MAE"], ["ast", "Assists MAE"], ["min", "Minutes MAE"],
+    ].map(([m, l]) => `<div class="kpi"><div class="v mono"><em>${P.acc[m]}</em></div>
+      <div class="l eyebrow">${l}</div></div>`).join("");
+    let sk = "ppts", sd = -1;
+    const tb = document.querySelector("#proptable tbody");
+    const pair = new Set(["apts", "areb", "aast"]);
+    function draw() {
+      const s = [...P.rows].sort((a, b) => {
+        const av = a[sk], bv = b[sk];
+        return (typeof av === "string" ? av.localeCompare(bv) : av - bv) * sd;
+      });
+      tb.innerHTML = s.map((p, i) => `<tr>
+        <td class="tleft rk mono">${i + 1}</td>
+        <td class="tleft"><span class="team"><span class="dot" style="background:${p.c}"></span>
+          ${p.player} <span class="abbr mono">${p.team}</span></span></td>
+        <td class="mono">${p.gp}</td>
+        <td class="mono">${p.pmin}</td>
+        <td class="mono" style="font-weight:700">${p.ppts}</td>
+        <td class="mono" style="color:var(--muted)">${p.apts}</td>
+        <td class="mono" style="font-weight:700">${p.preb}</td>
+        <td class="mono" style="color:var(--muted)">${p.areb}</td>
+        <td class="mono" style="font-weight:700">${p.past}</td>
+        <td class="mono" style="color:var(--muted)">${p.aast}</td></tr>`).join("");
+      document.querySelectorAll("#proptable thead th").forEach(th => {
+        th.removeAttribute("aria-sort"); const a = th.querySelector(".arw"); if (a) a.remove();
+        if (th.dataset.k === sk) { th.setAttribute("aria-sort", sd < 0 ? "descending" : "ascending");
+          th.insertAdjacentHTML("beforeend", ` <span class="arw">${sd < 0 ? "▼" : "▲"}</span>`); }
+      });
+    }
+    document.querySelectorAll("#proptable thead th").forEach(th => th.addEventListener("click", () => {
+      const key = th.dataset.k; if (!key) return;
+      if (key === sk) sd *= -1; else { sk = key; sd = (key === "player" || key === "rank") ? 1 : -1; }
+      draw();
+    }));
+    draw();
+  })();
+
+  /* ---- defense leaderboard ---- */
+  (function () {
+    const DF = D.defenders; if (!DF || !DF.length) return;
+    let sk = "rating", sd = -1;
+    const tb = document.querySelector("#deftable tbody");
+    const maxr = Math.max(...DF.map(d => Math.abs(d.rating)));
+    function draw() {
+      const s = [...DF].sort((a, b) => (typeof a[sk] === "string"
+        ? a[sk].localeCompare(b[sk]) : a[sk] - b[sk]) * sd);
+      tb.innerHTML = s.map((d, i) => {
+        const w = Math.abs(d.rating) / maxr * 100;
+        return `<tr>
+        <td class="tleft rk mono">${i + 1}</td>
+        <td class="tleft"><span class="team"><span class="dot" style="background:${d.c}"></span>
+          ${d.player} <span class="abbr mono">${d.team}</span></span></td>
+        <td class="tleft barcell"><div style="display:flex;align-items:center;gap:8px">
+          <div class="bar"><i style="left:0;width:${w}%;background:var(--accent)"></i></div>
+          <span class="mono pos" style="width:38px">+${d.rating.toFixed(2)}</span></div></td>
+        <td class="mono">${d.mpg}</td>
+        <td class="mono">${d.poss.toLocaleString()}</td></tr>`;
+      }).join("");
+      document.querySelectorAll("#deftable thead th").forEach(th => {
+        th.removeAttribute("aria-sort"); const a = th.querySelector(".arw"); if (a) a.remove();
+        if (th.dataset.k === sk) { th.setAttribute("aria-sort", sd < 0 ? "descending" : "ascending");
+          th.insertAdjacentHTML("beforeend", ` <span class="arw">${sd < 0 ? "▼" : "▲"}</span>`); }
+      });
+    }
+    document.querySelectorAll("#deftable thead th").forEach(th => th.addEventListener("click", () => {
+      const key = th.dataset.k; if (!key) return;
+      if (key === sk) sd *= -1; else { sk = key; sd = (key === "player" || key === "rank") ? 1 : -1; }
+      draw();
+    }));
+    draw();
+  })();
+
+  /* ---- play-type matchups ---- */
+  (function () {
+    const S = D.synergy; if (!S || !S.teams) return;
+    const abbrs = Object.keys(S.teams).sort();
+    const NAMES = {}; (D.teams || []).forEach(t => { NAMES[t.abbr] = t.name; });
+    const offSel = document.getElementById("synOff"), defSel = document.getElementById("synDef");
+    const opt = a => `<option value="${a}">${NAMES[a] || a}</option>`;
+    offSel.innerHTML = abbrs.map(opt).join(""); defSel.innerHTML = abbrs.map(opt).join("");
+    offSel.value = abbrs.includes("OKC") ? "OKC" : abbrs[0];
+    defSel.value = abbrs.includes("BOS") ? "BOS" : abbrs[1];
+    const tb = document.querySelector("#syntable tbody");
+    function draw() {
+      const o = S.teams[offSel.value], d = S.teams[defSel.value];
+      const rows = S.types.filter(t => o.off[t] && d.def[t] != null).map(t => {
+        const [freq, offppp] = o.off[t], defppp = d.def[t], lg = S.league_def[t];
+        const vsLg = defppp - lg;                      // <0 = stingy defense
+        const matchup = offppp + vsLg;                 // offense efficiency shifted by defense
+        return { t, freq, offppp, defppp, vsLg, matchup };
+      }).sort((a, b) => b.freq - a.freq);
+      tb.innerHTML = rows.map(r => {
+        const vsCol = r.vsLg < 0 ? "var(--accent)" : "var(--cool)";
+        return `<tr>
+          <td class="tleft">${S.labels[r.t]}</td>
+          <td class="mono">${(r.freq * 100).toFixed(1)}%</td>
+          <td class="mono">${r.offppp.toFixed(2)}</td>
+          <td class="mono">${r.defppp.toFixed(2)}</td>
+          <td class="mono" style="color:${vsCol}">${r.vsLg >= 0 ? "+" : ""}${r.vsLg.toFixed(2)}</td>
+          <td class="mono" style="font-weight:700">${r.matchup.toFixed(2)}</td></tr>`;
+      }).join("");
+    }
+    offSel.addEventListener("change", draw); defSel.addEventListener("change", draw);
+    draw();
   })();
 </script>

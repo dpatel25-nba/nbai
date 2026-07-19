@@ -1,0 +1,522 @@
+<title>NBAI — Game Simulation Framework</title>
+<style>
+  :root {
+    --bg:#EEF1F6; --panel:#FFFFFF; --panel-2:#F6F8FB; --border:#DBE1EA;
+    --text:#12161C; --muted:#59636F; --accent:#B4611A; --accent-2:#C9721F;
+    --accent-soft:rgba(180,97,26,.10); --cool:#3E6FB0; --cool-soft:rgba(62,111,176,.12);
+    --good:#2E7D52; --warn:#B26A1A; --bad:#B23A3A;
+    --shadow:0 1px 2px rgba(15,20,28,.06),0 10px 30px rgba(15,20,28,.05);
+    --grid:rgba(15,20,28,.05);
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --bg:#0E1116; --panel:#161B22; --panel-2:#1B212B; --border:#262E39;
+    --text:#E7ECF3; --muted:#8A97A8; --accent:#E8945A; --accent-2:#F0A268;
+    --accent-soft:rgba(232,148,90,.13); --cool:#5B93D6; --cool-soft:rgba(91,147,214,.15);
+    --good:#4FB07E; --warn:#E0A45A; --bad:#E0685F;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 14px 34px rgba(0,0,0,.35);
+    --grid:rgba(255,255,255,.05);
+  }}
+  :root[data-theme="light"]{
+    --bg:#EEF1F6; --panel:#FFFFFF; --panel-2:#F6F8FB; --border:#DBE1EA;
+    --text:#12161C; --muted:#59636F; --accent:#B4611A; --accent-2:#C9721F;
+    --accent-soft:rgba(180,97,26,.10); --cool:#3E6FB0; --cool-soft:rgba(62,111,176,.12);
+    --good:#2E7D52; --warn:#B26A1A; --bad:#B23A3A;
+    --shadow:0 1px 2px rgba(15,20,28,.06),0 10px 30px rgba(15,20,28,.05);
+    --grid:rgba(15,20,28,.05);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E1116; --panel:#161B22; --panel-2:#1B212B; --border:#262E39;
+    --text:#E7ECF3; --muted:#8A97A8; --accent:#E8945A; --accent-2:#F0A268;
+    --accent-soft:rgba(232,148,90,.13); --cool:#5B93D6; --cool-soft:rgba(91,147,214,.15);
+    --good:#4FB07E; --warn:#E0A45A; --bad:#E0685F;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 14px 34px rgba(0,0,0,.35);
+    --grid:rgba(255,255,255,.05);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+  .mono{font-family:ui-monospace,"SF Mono","JetBrains Mono",Menlo,monospace;
+    font-variant-numeric:tabular-nums;}
+  .wrap{max-width:940px;margin:0 auto;padding:0 22px;}
+  .eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:11px;font-weight:700;color:var(--muted);}
+
+  /* hero */
+  header{border-bottom:1px solid var(--border);
+    background:linear-gradient(180deg,var(--accent-soft),transparent);}
+  .hero{padding:52px 0 40px;}
+  .ball{width:26px;height:26px;border-radius:50%;display:inline-block;vertical-align:-5px;
+    background:radial-gradient(circle at 32% 30%,var(--accent-2),var(--accent) 70%);
+    box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--accent) 55%,#000);margin-right:10px;}
+  h1{font-size:38px;line-height:1.1;margin:14px 0 12px;letter-spacing:-.02em;text-wrap:balance;font-weight:800;}
+  .lead{font-size:19px;color:var(--muted);max-width:66ch;margin:0;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
+  .chip{font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:999px;
+    background:var(--panel);border:1px solid var(--border);}
+  .chip b{color:var(--accent);}
+
+  /* contents */
+  .toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;
+    margin:26px 0 6px;}
+  .toc a{display:flex;gap:10px;align-items:baseline;text-decoration:none;color:var(--text);
+    padding:9px 12px;border:1px solid var(--border);border-radius:10px;background:var(--panel);
+    font-size:14px;transition:border-color .15s;}
+  .toc a:hover{border-color:var(--accent);}
+  .toc a span{color:var(--accent);font-weight:700;}
+  .toc a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+  section{padding:40px 0;border-top:1px solid var(--border);}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;}
+  .sec-num{font-family:ui-monospace,Menlo,monospace;font-size:15px;font-weight:700;color:var(--accent);
+    border:1px solid var(--accent);border-radius:8px;padding:2px 9px;flex:none;}
+  h2{font-size:27px;margin:0;letter-spacing:-.01em;font-weight:800;text-wrap:balance;}
+  h3{font-size:18px;margin:26px 0 8px;}
+  p{margin:12px 0;}
+  .sub{color:var(--muted);margin-top:2px;}
+  strong{font-weight:700;}
+  a.link{color:var(--accent);}
+
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:20px 22px;box-shadow:var(--shadow);margin:16px 0;}
+  .card h3{margin-top:0;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .grid2>.card{margin:0;}
+
+  /* engine component cards */
+  .comp{display:flex;gap:14px;align-items:flex-start;}
+  .comp .idx{font-family:ui-monospace,Menlo,monospace;font-weight:700;color:var(--accent);
+    background:var(--accent-soft);border-radius:8px;padding:3px 9px;font-size:13px;flex:none;margin-top:2px;}
+  .comp .body{flex:1;}
+  .comp .body h3{margin:0 0 4px;font-size:16.5px;}
+  .comp .body p{margin:4px 0 0;font-size:14.5px;color:var(--muted);}
+  .comp .body .feeds{margin-top:8px;font-size:12.5px;}
+  .feeds .tag{display:inline-block;font-family:ui-monospace,Menlo,monospace;font-size:11.5px;
+    background:var(--panel-2);border:1px solid var(--border);border-radius:6px;padding:2px 7px;margin:2px 4px 0 0;}
+
+  /* pipeline diagram */
+  .flow{display:flex;flex-direction:column;gap:0;margin:8px 0;}
+  .band{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);}
+  .band .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:8px;}
+  .band .row{display:flex;flex-wrap:wrap;gap:8px;}
+  .node{font-size:13px;font-weight:600;padding:7px 11px;border-radius:9px;background:var(--panel-2);
+    border:1px solid var(--border);}
+  .node.hi{background:var(--accent-soft);border-color:var(--accent);}
+  .node.co{background:var(--cool-soft);border-color:var(--cool);}
+  .arrow{align-self:center;color:var(--muted);font-size:20px;line-height:1;padding:5px 0;}
+
+  /* possession loop */
+  .loop{counter-reset:step;display:flex;flex-direction:column;gap:0;}
+  .step{display:flex;gap:14px;}
+  .step .mk{display:flex;flex-direction:column;align-items:center;flex:none;}
+  .step .dot{width:30px;height:30px;border-radius:50%;background:var(--accent-soft);border:1px solid var(--accent);
+    color:var(--accent);font-weight:700;font-family:ui-monospace,Menlo,monospace;font-size:13px;
+    display:flex;align-items:center;justify-content:center;}
+  .step .line{width:2px;flex:1;background:var(--border);margin:3px 0;}
+  .step:last-child .line{display:none;}
+  .step .txt{padding-bottom:18px;}
+  .step .txt h4{margin:4px 0 3px;font-size:15.5px;}
+  .step .txt p{margin:0;font-size:14px;color:var(--muted);}
+  .step .txt .br{font-size:12.5px;color:var(--muted);margin-top:5px;}
+  .br code{font-family:ui-monospace,Menlo,monospace;background:var(--panel-2);border:1px solid var(--border);
+    border-radius:5px;padding:1px 6px;font-size:12px;color:var(--text);}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:14px 0;}
+  .tblwrap{overflow-x:auto;}
+  th{text-align:left;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);
+    font-weight:700;padding:9px 12px;border-bottom:1px solid var(--border);}
+  td{padding:10px 12px;border-bottom:1px solid var(--grid);vertical-align:top;}
+  tr:last-child td{border-bottom:0;}
+  td .st{font-family:ui-monospace,Menlo,monospace;font-size:12px;padding:2px 7px;border-radius:6px;font-weight:700;}
+  .st.have{color:var(--good);background:color-mix(in srgb,var(--good) 13%,transparent);}
+  .st.build{color:var(--warn);background:color-mix(in srgb,var(--warn) 15%,transparent);}
+  .st.block{color:var(--muted);background:var(--panel-2);}
+
+  /* phases */
+  .phase{display:grid;grid-template-columns:64px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--grid);}
+  .phase:last-child{border-bottom:0;}
+  .phase .p{font-family:ui-monospace,Menlo,monospace;font-weight:800;font-size:22px;color:var(--accent);}
+  .phase .p small{display:block;font-size:10px;letter-spacing:.1em;color:var(--muted);font-weight:700;}
+  .phase h3{margin:0 0 4px;font-size:17px;}
+  .phase p{margin:0;font-size:14.5px;color:var(--muted);}
+
+  .callout{border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 10px 10px 0;
+    padding:14px 18px;margin:16px 0;}
+  .callout.warn{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 9%,transparent);}
+  .callout .eyebrow{color:var(--accent);}
+  .callout.warn .eyebrow{color:var(--bad);}
+  ul.tight{margin:10px 0;padding-left:22px;}
+  ul.tight li{margin:6px 0;}
+  .formula{font-family:ui-monospace,Menlo,monospace;font-size:13.5px;background:var(--panel-2);
+    border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin:12px 0;overflow-x:auto;
+    line-height:1.7;}
+  .formula .c{color:var(--muted);}
+  footer{border-top:1px solid var(--border);padding:30px 0 60px;color:var(--muted);font-size:13px;}
+  @media (max-width:680px){
+    h1{font-size:30px;} .grid2{grid-template-columns:1fr;} .hero{padding:38px 0 30px;}
+    .phase{grid-template-columns:48px 1fr;}
+  }
+</style>
+
+<header><div class="wrap hero">
+  <div class="eyebrow"><span class="ball"></span>NBAI · Capstone Design</div>
+  <h1>NBA Game Simulation Framework</h1>
+  <p class="lead">A possession-level Monte&nbsp;Carlo engine that plays a full game thousands of times —
+    producing a win probability, a score distribution, and every player's stat line with uncertainty,
+    all opponent-adjusted from our own data pipeline.</p>
+  <div class="chips">
+    <span class="chip"><b>possession-level</b> engine</span>
+    <span class="chip"><b>Monte Carlo</b> · 10k+ sims/game</span>
+    <span class="chip"><b>opponent-adjusted</b> throughout</span>
+    <span class="chip"><b>two modes</b> · distributional + full sim</span>
+    <span class="chip">leakage-free <b>backtested</b></span>
+  </div>
+</div></header>
+
+<div class="wrap">
+
+  <nav class="toc" aria-label="Contents">
+    <a href="#goal"><span>01</span> What it produces</a>
+    <a href="#arch"><span>02</span> System architecture</a>
+    <a href="#components"><span>03</span> The eight engines</a>
+    <a href="#loop"><span>04</span> The possession loop</a>
+    <a href="#modes"><span>05</span> Two simulation modes</a>
+    <a href="#data"><span>06</span> Data dependencies</a>
+    <a href="#build"><span>07</span> Build sequence</a>
+    <a href="#validate"><span>08</span> Validation &amp; metrics</a>
+    <a href="#risks"><span>09</span> Honest challenges</a>
+    <a href="#sota"><span>10</span> State-of-the-art edges</a>
+  </nav>
+
+  <!-- 01 -->
+  <section id="goal">
+    <div class="sec-head"><span class="sec-num">01</span><h2>What it produces</h2></div>
+    <p class="sub">The output defines the whole design — everything upstream exists to make these numbers honest.</p>
+    <p>Given two rosters, a date, and a venue, one run of the simulator returns a full <strong>distribution of
+      outcomes</strong>, not a single prediction:</p>
+    <div class="grid2">
+      <div class="card">
+        <div class="eyebrow">Game level</div>
+        <h3>Win probability &amp; score</h3>
+        <p style="color:var(--muted);font-size:14.5px;margin:6px 0 0">Home/away win probability, the full
+          margin distribution (not just a point spread), and the total-points distribution — so we read out
+          spread-cover and over/under probabilities directly, with calibrated uncertainty.</p>
+      </div>
+      <div class="card">
+        <div class="eyebrow">Player level</div>
+        <h3>Every stat line, with intervals</h3>
+        <p style="color:var(--muted);font-size:14.5px;margin:6px 0 0">Each player's points, rebounds, assists,
+          minutes, shooting, etc. as a <em>distribution</em> — median plus percentiles — reflecting matchup,
+          role, and rotation, not a season average.</p>
+      </div>
+    </div>
+    <p>Because it simulates the actual game, the same engine answers questions a regression can't: <em>what if this
+      player is out, what if the pace is faster, how does the fourth quarter swing.</em> That flexibility is the
+      reason for a simulator over a direct stat model.</p>
+  </section>
+
+  <!-- 02 -->
+  <section id="arch">
+    <div class="sec-head"><span class="sec-num">02</span><h2>System architecture</h2></div>
+    <p class="sub">Data flows up into player/team ratings, the engines turn ratings into a simulated game, and the orchestrator repeats it into distributions.</p>
+    <div class="flow">
+      <div class="band">
+        <div class="lbl">Layer 1 · Data pipeline (built)</div>
+        <div class="row">
+          <span class="node">player_games</span><span class="node">team_games</span>
+          <span class="node">pbp / stints</span><span class="node">shots</span>
+          <span class="node">matchups 2017-18+</span><span class="node">rosters · bios</span>
+        </div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="band">
+        <div class="lbl">Layer 2 · Ratings &amp; abilities</div>
+        <div class="row">
+          <span class="node hi">projections</span><span class="node hi">xPTS shot model</span>
+          <span class="node hi">RAPM</span><span class="node hi">defender quality</span>
+          <span class="node hi">rotation model</span><span class="node hi">tendencies</span>
+        </div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="band">
+        <div class="lbl">Layer 3 · Simulation engines (this doc)</div>
+        <div class="row">
+          <span class="node co">rotation</span><span class="node co">assignment</span>
+          <span class="node co">possession</span><span class="node co">game-state</span>
+          <span class="node co">correlation</span>
+        </div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="band">
+        <div class="lbl">Layer 4 · Monte Carlo → outputs</div>
+        <div class="row">
+          <span class="node">win prob</span><span class="node">score dist</span>
+          <span class="node">player stat lines</span><span class="node">market probs</span>
+        </div>
+      </div>
+    </div>
+    <p>The design principle: <strong>keep facts, ratings, and simulation strictly separated.</strong> The engines
+      never touch raw data — only the calibrated ratings — so we can swap a better rating in (e.g. RAPM-WAR for
+      box-WAR) without rewriting the simulator, and re-run history leakage-free.</p>
+  </section>
+
+  <!-- 03 -->
+  <section id="components">
+    <div class="sec-head"><span class="sec-num">03</span><h2>The eight engines</h2></div>
+    <p class="sub">Each is an independent, testable module with a defined input (ratings) and output (game state changes).</p>
+
+    <div class="card"><div class="comp"><div class="idx">A</div><div class="body">
+      <h3>Player representation</h3>
+      <p>Turns each player into an ability vector: usage rate, shot-location distribution, finishing skill (points
+        over expected), passing/assist propensity, turnover rate, offensive/defensive rebound rates, foul rates
+        (drawn &amp; committed), free-throw%, and a defensive profile (defender quality, rim protection). Every
+        value carries an uncertainty band and is <em>aged &amp; projected</em> to the game date.</p>
+      <div class="feeds"><span class="tag">projections</span><span class="tag">xPTS</span><span class="tag">defender-quality</span></div>
+    </div></div></div>
+
+    <div class="card"><div class="comp"><div class="idx">B</div><div class="body">
+      <h3>Rotation engine — who's on the floor</h3>
+      <p>Predicts the on-court five for each team through the game: minutes projection, realistic stint structure
+        (starter runs, bench units, staggering of stars), foul-trouble response, blowout / garbage-time logic,
+        and rest on back-to-backs. Parameters are learned from historical rotations reconstructed by the stint
+        solver. This is the behavioral heart — and the hardest module.</p>
+      <div class="feeds"><span class="tag">rotation-model</span><span class="tag">minutes-projection</span><span class="tag">stints</span></div>
+    </div></div></div>
+
+    <div class="card"><div class="comp"><div class="idx">C</div><div class="body">
+      <h3>Assignment engine — who guards whom</h3>
+      <p>Given the two on-court fives, predicts the defensive matchup matrix (primary assignments, cross-matches,
+        switch tendencies) from size/position logic plus historical matchup tendencies. Feeds shot difficulty and
+        the <em>defensive-pressure</em> term on each offensive player.</p>
+      <div class="feeds"><span class="tag">matchup-data</span><span class="tag">defender-quality</span></div>
+    </div></div></div>
+
+    <div class="card"><div class="comp"><div class="idx">D</div><div class="body">
+      <h3>Possession engine — the core</h3>
+      <p>The per-possession decision process: pace/clock → who initiates (usage-weighted, matchup-adjusted) →
+        action selection (shot / drive / pass / turnover / drawn foul) → if a shot, sample location then resolve
+        make/miss from <span class="mono">xPTS × shooter-skill × defender-contest</span> → rebound contest →
+        assist, and-1, free throws. Emits box-score events and updates the score.</p>
+      <div class="feeds"><span class="tag">xPTS</span><span class="tag">RAPM</span><span class="tag">defender-quality</span><span class="tag">tendencies</span></div>
+    </div></div></div>
+
+    <div class="card"><div class="comp"><div class="idx">E</div><div class="body">
+      <h3>Game-state manager</h3>
+      <p>Tracks period, game clock, shot clock, score, team fouls / bonus, timeouts, and possession arrow — and
+        handles special situations: end-of-quarter 2-for-1s and heaves, late-game intentional fouling and
+        3-for-2 math, and overtime. These situations disproportionately drive close-game outcomes.</p>
+      <div class="feeds"><span class="tag">clock-model</span><span class="tag">foul-model</span></div>
+    </div></div></div>
+
+    <div class="card"><div class="comp"><div class="idx">F</div><div class="body">
+      <h3>Correlation &amp; realism layer</h3>
+      <p>Real games have game-script and hot/cold streaks; independent possessions <em>under-disperse</em> the
+        outcome distribution. This layer injects controlled correlation — a per-game team-form random effect and
+        mild possession autocorrelation — so the simulated spread of results matches reality, not just the mean.</p>
+      <div class="feeds"><span class="tag">variance-calibration</span></div>
+    </div></div></div>
+
+    <div class="card"><div class="comp"><div class="idx">G</div><div class="body">
+      <h3>Monte Carlo orchestrator</h3>
+      <p>Runs the game N times (10k+), collecting outcomes into distributions. Uses variance-reduction (common
+        random numbers, antithetic variates) so probabilities stabilize with fewer sims — important for running a
+        full slate nightly for the website.</p>
+      <div class="feeds"><span class="tag">simulation-core</span></div>
+    </div></div></div>
+
+    <div class="card"><div class="comp"><div class="idx">H</div><div class="body">
+      <h3>Calibration &amp; constraints</h3>
+      <p>Enforces the accounting that keeps a simulation honest: team minutes sum to 240, usage sums to 100%, pace
+        and team totals land in real ranges. Then post-calibrates outputs (isotonic / Platt) so the <em>win
+        probabilities are actually calibrated</em>, and shrinks every noisy input toward its prior.</p>
+      <div class="feeds"><span class="tag">shrinkage</span><span class="tag">calibration</span></div>
+    </div></div></div>
+  </section>
+
+  <!-- 04 -->
+  <section id="loop">
+    <div class="sec-head"><span class="sec-num">04</span><h2>The possession loop</h2></div>
+    <p class="sub">One trip down the floor — the atom the whole simulator is built from. Repeated ~200× per game, ~10k× per matchup.</p>
+    <div class="loop">
+      <div class="step"><div class="mk"><div class="dot">1</div><div class="line"></div></div><div class="txt">
+        <h4>Possession start &amp; pace</h4>
+        <p>Set the clock burn for this possession by sampling from the two teams' pace tendencies and the game state.</p>
+        <div class="br">state in: <code>score</code> <code>game clock</code> <code>shot clock</code> <code>on-court 10</code></div>
+      </div></div>
+      <div class="step"><div class="mk"><div class="dot">2</div><div class="line"></div></div><div class="txt">
+        <h4>Initiator</h4>
+        <p>Choose who uses the possession — usage-weighted among the five on offense, adjusted for the defensive
+          assignment (a star smothered by an elite stopper cedes some usage).</p>
+      </div></div>
+      <div class="step"><div class="mk"><div class="dot">3</div><div class="line"></div></div><div class="txt">
+        <h4>Action selection</h4>
+        <p>Sample the action from the initiator's tendencies, conditioned on defender quality, shot clock, and
+          score/time: <em>shoot · drive · pass-out · turnover · draw foul.</em></p>
+        <div class="br">branch → <code>turnover</code> (forced vs unforced) ends possession; <code>foul</code> → free throws</div>
+      </div></div>
+      <div class="step"><div class="mk"><div class="dot">4</div><div class="line"></div></div><div class="txt">
+        <h4>Shot resolution</h4>
+        <p>If a shot: sample the location from the shooter's shot chart, then resolve make/miss.</p>
+        <div class="br">P(make) = <code>xPTS(location)</code> × <code>shooter skill (POE)</code> × <code>defender contest (DefQ + pressure)</code></div>
+      </div></div>
+      <div class="step"><div class="mk"><div class="dot">5</div><div class="line"></div></div><div class="txt">
+        <h4>Rebound contest</h4>
+        <p>On a miss, contest the board — probability split by the on-court players' offensive/defensive rebound
+          rates. Offensive board → new possession, same team, reset shot clock.</p>
+      </div></div>
+      <div class="step"><div class="mk"><div class="dot">6</div><div class="line"></div></div><div class="txt">
+        <h4>Bookkeeping &amp; state update</h4>
+        <p>Credit the box-score events (points, assist, rebound, block, steal, foul, FTs), advance the clock and
+          score, update team fouls / bonus, and hand off possession. Loop back to step 1.</p>
+      </div></div>
+    </div>
+    <div class="callout"><div class="eyebrow">Why this granularity</div>
+      Modeling the possession — rather than projecting box lines directly — is what makes the interactions real:
+      a good defender lowers <em>make probability at the moment of the shot</em>, foul trouble changes <em>who is
+      even on the floor</em>, and pace emerges from the two teams rather than being assumed.</div>
+  </section>
+
+  <!-- 05 -->
+  <section id="modes">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Two simulation modes</h2></div>
+    <p class="sub">We build both and let the backtest decide — the same bake-off discipline we use for WAR.</p>
+    <div class="grid2">
+      <div class="card">
+        <div class="eyebrow" style="color:var(--cool)">Mode 1 · Milestone</div>
+        <h3>Distributional simulation</h3>
+        <p style="font-size:14.5px;color:var(--muted)">Project each player's stat-line <em>distribution</em>
+          for the matchup (mean + variance), impose a realistic covariance structure (teammates' usage trades off,
+          team scoring correlates), and sample jointly. Reuses the projection + matchup work directly.</p>
+        <ul class="tight" style="font-size:14px;color:var(--muted)">
+          <li><strong>Pros:</strong> robust, fast, no compounding error, easy to calibrate.</li>
+          <li><strong>Cons:</strong> no in-game dynamics (foul trouble, game script, clutch).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="eyebrow">Mode 2 · Full</div>
+        <h3>Possession simulation</h3>
+        <p style="font-size:14.5px;color:var(--muted)">The full engine in §3–4: play every possession. Richest
+          possible output — any lineup, any what-if, real in-game dynamics.</p>
+        <ul class="tight" style="font-size:14px;color:var(--muted)">
+          <li><strong>Pros:</strong> maximum realism &amp; flexibility, true stat-line detail.</li>
+          <li><strong>Cons:</strong> compounding error, hard to calibrate, heavier compute.</li>
+        </ul>
+      </div>
+    </div>
+    <p><strong>Strategy:</strong> ship the distributional mode first as a robust, testable baseline, then build the
+      possession engine, and <strong>bake them off on out-of-sample predictive accuracy.</strong> We never bet the
+      whole project on the hardest version working perfectly — the simpler model is both a milestone and a floor.</p>
+  </section>
+
+  <!-- 06 -->
+  <section id="data">
+    <div class="sec-head"><span class="sec-num">06</span><h2>Data dependencies</h2></div>
+    <p class="sub">Every engine maps to a concrete piece of our pipeline. Status reflects where we are today.</p>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Simulator input</th><th>Source in our pipeline</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Player abilities, usage, rates</td><td><span class="mono">player_seasons</span> → projection engine</td><td><span class="st have">built</span></td></tr>
+        <tr><td>Shot make-probability by location</td><td>xPTS model (pbp shot coords)</td><td><span class="st have">built</span></td></tr>
+        <tr><td>Shot-making skill</td><td>points-over-expected (xPTS)</td><td><span class="st have">built</span></td></tr>
+        <tr><td>Player value / impact calibration</td><td>WAR (box) → RAPM</td><td><span class="st build">box done · RAPM next</span></td></tr>
+        <tr><td>Defender quality &amp; pressure</td><td>defender-quality framework</td><td><span class="st build">designed</span></td></tr>
+        <tr><td>On-court lineups (training)</td><td>stint reconstruction (solver A)</td><td><span class="st build">in progress</span></td></tr>
+        <tr><td>Rotation / minutes patterns</td><td>rotation model ← stints</td><td><span class="st build">after solver A</span></td></tr>
+        <tr><td>Defensive assignments</td><td>matchup data (<span class="mono">boxscorematchupsv3</span>)</td><td><span class="st build">scraping now · 2017-18+</span></td></tr>
+        <tr><td>Ages / rosters (projection)</td><td><span class="mono">commonplayerinfo · commonteamroster</span></td><td><span class="st block">post-scrape pull</span></td></tr>
+        <tr><td>Team-strength calibration anchor</td><td>Elo model</td><td><span class="st have">built</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- 07 -->
+  <section id="build">
+    <div class="sec-head"><span class="sec-num">07</span><h2>Build sequence</h2></div>
+    <p class="sub">Ingredients first, then the two modes, then calibration. Each phase is independently useful.</p>
+    <div class="card">
+      <div class="phase"><div class="p">0<small>FOUND.</small></div><div><h3>Foundations</h3>
+        <p>Stint reconstruction (solver A) → RAPM → defender quality → finish the projection system (aging, rosters, rookies). The ratings the engines consume.</p></div></div>
+      <div class="phase"><div class="p">1<small>MODE 1</small></div><div><h3>Distributional simulator</h3>
+        <p>Project player stat-line distributions + covariance; sample jointly to get win prob + stat lines. First end-to-end predictions. Validate &amp; calibrate.</p></div></div>
+      <div class="phase"><div class="p">2<small>CORE</small></div><div><h3>Possession engine (fixed lineups)</h3>
+        <p>Build the possession loop (§4) with lineups held fixed. Validate that simulated <em>aggregate</em> stats — pace, team points, usage splits — match reality.</p></div></div>
+      <div class="phase"><div class="p">3<small>DYNAMIC</small></div><div><h3>Rotation + assignment engines</h3>
+        <p>Add the behavioral layers: dynamic lineups over the game and defensive matchups. Now the sim reacts to foul trouble and matchups.</p></div></div>
+      <div class="phase"><div class="p">4<small>REALISM</small></div><div><h3>Game-state + correlation</h3>
+        <p>Clutch situations, intentional fouling, OT, and the correlation layer so the outcome distribution has the right spread.</p></div></div>
+      <div class="phase"><div class="p">5<small>SHIP</small></div><div><h3>Monte Carlo, calibration, bake-off</h3>
+        <p>Full orchestration, probability calibration, leakage-free backtest, and the mode-1-vs-mode-2 bake-off. Then productionize for the website (precompute the nightly slate).</p></div></div>
+    </div>
+  </section>
+
+  <!-- 08 -->
+  <section id="validate">
+    <div class="sec-head"><span class="sec-num">08</span><h2>Validation &amp; metrics</h2></div>
+    <p class="sub">A simulator is only as good as its calibration. We validate it three ways, all leakage-free (walk-forward, simulate each game using only prior data).</p>
+    <div class="grid2">
+      <div class="card"><h3>Outcome accuracy</h3>
+        <ul class="tight" style="font-size:14px;color:var(--muted)">
+          <li><strong>Win prob:</strong> Brier, log-loss, reliability curve, ECE — and vs. the market baseline / closing line (CLV).</li>
+          <li><strong>Score:</strong> MAE on final margin &amp; total.</li>
+        </ul>
+      </div>
+      <div class="card"><h3>Distributional honesty</h3>
+        <ul class="tight" style="font-size:14px;color:var(--muted)">
+          <li><strong>Interval coverage:</strong> do actual player stat lines land inside the predicted 50/80/90% intervals at the right rate?</li>
+          <li><strong>Spread:</strong> is the simulated score variance realistic (not under-dispersed)?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card"><h3>Aggregate realism (the sanity gate)</h3>
+      <p style="font-size:14.5px;color:var(--muted);margin:6px 0 0">Before trusting any prediction, the sim must
+        reproduce the league it was built from: pace distribution, points-per-100, usage curves, shot-location mix,
+        rebound rates, and the shape of player stat distributions. If simulated seasons don't look like real ones,
+        nothing downstream is trustworthy.</p></div>
+  </section>
+
+  <!-- 09 -->
+  <section id="risks">
+    <div class="sec-head"><span class="sec-num">09</span><h2>Honest challenges</h2></div>
+    <p class="sub">Where this is genuinely hard — named up front, because pretending otherwise is how simulators quietly fail.</p>
+    <div class="callout warn"><div class="eyebrow">Compounding error</div>
+      Small per-possession biases stack over ~200 possessions. The outcome model has to be well-calibrated <em>at
+      the possession level</em>, or the game drifts. This is the single biggest risk, and the reason we validate
+      aggregate realism before trusting outcomes.</div>
+    <div class="callout warn"><div class="eyebrow">Rotation realism</div>
+      Predicting coach substitution behavior is the messiest, most human part of the model. It won't be perfect;
+      we bound the damage by validating minutes distributions and letting the distributional mode (which needs only
+      minutes totals, not patterns) serve as a floor.</div>
+    <div class="callout warn"><div class="eyebrow">Under-dispersion</div>
+      Independent possessions produce outcome distributions that are too narrow — the model looks overconfident.
+      The correlation layer (§3F) exists specifically to fix this, and interval-coverage checks catch it.</div>
+    <div class="callout warn"><div class="eyebrow">Defensive attribution &amp; data limits</div>
+      Individual defense carries irreducible uncertainty, matchup data only reaches 2017-18, and per-shot defender
+      identity doesn't exist publicly. The engine is designed to degrade gracefully — it uses aggregate defender
+      quality where per-event data is missing.</div>
+  </section>
+
+  <!-- 10 -->
+  <section id="sota">
+    <div class="sec-head"><span class="sec-num">10</span><h2>State-of-the-art edges</h2></div>
+    <p class="sub">Where we push past a standard simulator, once the foundations are in.</p>
+    <div class="grid2">
+      <div class="card"><h3>Hierarchical Bayesian shrinkage</h3>
+        <p class="sub" style="font-size:14px">Every rating is a posterior, not a point estimate — small samples pull toward position/role priors. The simulator samples from these posteriors, so uncertainty propagates all the way to the final intervals.</p></div>
+      <div class="card"><h3>Player-style embeddings</h3>
+        <p class="sub" style="font-size:14px">Learn low-dimensional style vectors so matchup interactions generalize — how a shooter fares vs. a rim-protector — beyond the pairs actually observed in the matchup data.</p></div>
+      <div class="card"><h3>Fatigue from tracking</h3>
+        <p class="sub" style="font-size:14px">Use speed/distance tracking to model within-game and schedule fatigue, feeding both the rotation engine and late-game shot efficiency.</p></div>
+      <div class="card"><h3>Scenario toggles</h3>
+        <p class="sub" style="font-size:14px">Because it's a real simulation, we can flip a player out (injury), cap minutes (load management), or force a pace — and get a full re-simulated distribution. This is the website's killer feature.</p></div>
+    </div>
+    <div class="callout"><div class="eyebrow">The through-line</div>
+      Every earlier piece — projections, xPTS, WAR, RAPM, defender quality, defensive pressure, stints, matchup data
+      — is not a side project. Each one is an <strong>input to this engine.</strong> The simulator is where the whole
+      pipeline finally pays off as a single, coherent product.</div>
+  </section>
+
+  <footer>
+    NBAI · Game Simulation Framework — design v1. Built to sit on top of the three-layer data pipeline
+    (raw → clean facts → leakage-safe features). Every rating it consumes is opponent-adjusted, backtested,
+    and swappable, so the engine improves as the ratings do.
+  </footer>
+</div>

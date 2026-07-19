@@ -1,5 +1,5 @@
 window.NBAI_DATA = {
-  "generated": "2026-07-18",
+  "generated": "2026-07-19",
   "season": "2025-26",
   "model": {
     "games": "16,758",
@@ -65956,5 +65956,3060 @@ window.NBAI_DATA = {
         ]
       }
     ]
+  },
+  "props": {
+    "acc": {
+      "pts": 4.54,
+      "reb": 1.91,
+      "ast": 1.31,
+      "min": 4.97
+    },
+    "rows": [
+      {
+        "rank": 1,
+        "id": 1629029,
+        "player": "Luka Don\u010di\u0107",
+        "team": "LAL",
+        "gp": 64,
+        "c": "#552583",
+        "pmin": 35.7,
+        "ppts": 32.6,
+        "apts": 33.5,
+        "preb": 8.0,
+        "areb": 7.7,
+        "past": 8.2,
+        "aast": 8.3
+      },
+      {
+        "rank": 2,
+        "id": 1628983,
+        "player": "Shai Gilgeous-Alexander",
+        "team": "OKC",
+        "gp": 68,
+        "c": "#007AC1",
+        "pmin": 33.5,
+        "ppts": 30.7,
+        "apts": 31.1,
+        "preb": 4.7,
+        "areb": 4.3,
+        "past": 6.3,
+        "aast": 6.6
+      },
+      {
+        "rank": 3,
+        "id": 1630162,
+        "player": "Anthony Edwards",
+        "team": "MIN",
+        "gp": 61,
+        "c": "#236192",
+        "pmin": 35.4,
+        "ppts": 28.4,
+        "apts": 28.8,
+        "preb": 5.3,
+        "areb": 5.0,
+        "past": 4.2,
+        "aast": 3.7
+      },
+      {
+        "rank": 4,
+        "id": 1628378,
+        "player": "Donovan Mitchell",
+        "team": "CLE",
+        "gp": 70,
+        "c": "#860038",
+        "pmin": 33.8,
+        "ppts": 28.0,
+        "apts": 27.9,
+        "preb": 4.6,
+        "areb": 4.5,
+        "past": 5.7,
+        "aast": 5.7
+      },
+      {
+        "rank": 5,
+        "id": 203507,
+        "player": "Giannis Antetokounmpo",
+        "team": "MIL",
+        "gp": 36,
+        "c": "#00471B",
+        "pmin": 30.5,
+        "ppts": 28.0,
+        "apts": 27.6,
+        "preb": 10.4,
+        "areb": 9.8,
+        "past": 6.0,
+        "aast": 5.4
+      },
+      {
+        "rank": 6,
+        "id": 203999,
+        "player": "Nikola Joki\u0107",
+        "team": "DEN",
+        "gp": 65,
+        "c": "#0E2240",
+        "pmin": 35.0,
+        "ppts": 26.9,
+        "apts": 27.7,
+        "preb": 12.3,
+        "areb": 12.9,
+        "past": 10.1,
+        "aast": 10.7
+      },
+      {
+        "rank": 7,
+        "id": 1628973,
+        "player": "Jalen Brunson",
+        "team": "NYK",
+        "gp": 74,
+        "c": "#F58426",
+        "pmin": 35.2,
+        "ppts": 26.8,
+        "apts": 26.0,
+        "preb": 3.3,
+        "areb": 3.3,
+        "past": 6.7,
+        "aast": 6.8
+      },
+      {
+        "rank": 8,
+        "id": 202695,
+        "player": "Kawhi Leonard",
+        "team": "LAC",
+        "gp": 65,
+        "c": "#C8102E",
+        "pmin": 32.5,
+        "ppts": 26.6,
+        "apts": 27.9,
+        "preb": 6.0,
+        "areb": 6.4,
+        "past": 3.6,
+        "aast": 3.6
+      },
+      {
+        "rank": 9,
+        "id": 201939,
+        "player": "Stephen Curry",
+        "team": "GSW",
+        "gp": 43,
+        "c": "#1D428A",
+        "pmin": 31.5,
+        "ppts": 26.5,
+        "apts": 26.6,
+        "preb": 4.1,
+        "areb": 3.6,
+        "past": 5.2,
+        "aast": 4.7
+      },
+      {
+        "rank": 10,
+        "id": 1626164,
+        "player": "Devin Booker",
+        "team": "PHX",
+        "gp": 64,
+        "c": "#E56020",
+        "pmin": 34.1,
+        "ppts": 26.4,
+        "apts": 26.1,
+        "preb": 3.9,
+        "areb": 3.9,
+        "past": 6.1,
+        "aast": 6.0
+      },
+      {
+        "rank": 11,
+        "id": 1630178,
+        "player": "Tyrese Maxey",
+        "team": "PHI",
+        "gp": 70,
+        "c": "#006BB6",
+        "pmin": 36.6,
+        "ppts": 26.3,
+        "apts": 28.3,
+        "preb": 3.6,
+        "areb": 4.1,
+        "past": 5.9,
+        "aast": 6.6
+      },
+      {
+        "rank": 12,
+        "id": 1627759,
+        "player": "Jaylen Brown",
+        "team": "BOS",
+        "gp": 71,
+        "c": "#007A33",
+        "pmin": 33.5,
+        "ppts": 26.3,
+        "apts": 28.7,
+        "preb": 6.3,
+        "areb": 6.9,
+        "past": 4.8,
+        "aast": 5.1
+      },
+      {
+        "rank": 13,
+        "id": 201142,
+        "player": "Kevin Durant",
+        "team": "HOU",
+        "gp": 78,
+        "c": "#CE1141",
+        "pmin": 35.6,
+        "ppts": 25.8,
+        "apts": 26.0,
+        "preb": 5.6,
+        "areb": 5.5,
+        "past": 4.7,
+        "aast": 4.8
+      },
+      {
+        "rank": 14,
+        "id": 203954,
+        "player": "Joel Embiid",
+        "team": "PHI",
+        "gp": 38,
+        "c": "#006BB6",
+        "pmin": 30.8,
+        "ppts": 25.8,
+        "apts": 26.9,
+        "preb": 8.2,
+        "areb": 7.7,
+        "past": 4.1,
+        "aast": 3.9
+      },
+      {
+        "rank": 15,
+        "id": 1630595,
+        "player": "Cade Cunningham",
+        "team": "DET",
+        "gp": 64,
+        "c": "#C8102E",
+        "pmin": 34.0,
+        "ppts": 25.3,
+        "apts": 23.9,
+        "preb": 5.4,
+        "areb": 5.5,
+        "past": 9.4,
+        "aast": 9.9
+      },
+      {
+        "rank": 16,
+        "id": 1628374,
+        "player": "Lauri Markkanen",
+        "team": "UTA",
+        "gp": 42,
+        "c": "#00471B",
+        "pmin": 33.7,
+        "ppts": 25.3,
+        "apts": 26.7,
+        "preb": 6.9,
+        "areb": 6.9,
+        "past": 1.9,
+        "aast": 2.1
+      },
+      {
+        "rank": 17,
+        "id": 1641705,
+        "player": "Victor Wembanyama",
+        "team": "SAS",
+        "gp": 64,
+        "c": "#9EA8B0",
+        "pmin": 29.5,
+        "ppts": 24.6,
+        "apts": 25.0,
+        "preb": 10.8,
+        "areb": 11.5,
+        "past": 3.3,
+        "aast": 3.1
+      },
+      {
+        "rank": 18,
+        "id": 1627750,
+        "player": "Jamal Murray",
+        "team": "DEN",
+        "gp": 75,
+        "c": "#0E2240",
+        "pmin": 34.5,
+        "ppts": 23.9,
+        "apts": 25.4,
+        "preb": 4.2,
+        "areb": 4.4,
+        "past": 6.8,
+        "aast": 7.1
+      },
+      {
+        "rank": 19,
+        "id": 1628369,
+        "player": "Jayson Tatum",
+        "team": "BOS",
+        "gp": 16,
+        "c": "#007A33",
+        "pmin": 33.0,
+        "ppts": 23.5,
+        "apts": 21.8,
+        "preb": 8.0,
+        "areb": 10.0,
+        "past": 5.0,
+        "aast": 5.3
+      },
+      {
+        "rank": 20,
+        "id": 1627783,
+        "player": "Pascal Siakam",
+        "team": "IND",
+        "gp": 62,
+        "c": "#FDBB30",
+        "pmin": 33.8,
+        "ppts": 23.4,
+        "apts": 24.0,
+        "preb": 6.8,
+        "areb": 6.6,
+        "past": 4.1,
+        "aast": 3.8
+      },
+      {
+        "rank": 21,
+        "id": 1631094,
+        "player": "Paolo Banchero",
+        "team": "ORL",
+        "gp": 72,
+        "c": "#0077C0",
+        "pmin": 34.5,
+        "ppts": 22.9,
+        "apts": 22.2,
+        "preb": 7.7,
+        "areb": 8.4,
+        "past": 5.0,
+        "aast": 5.2
+      },
+      {
+        "rank": 22,
+        "id": 2544,
+        "player": "LeBron James",
+        "team": "LAL",
+        "gp": 60,
+        "c": "#552583",
+        "pmin": 34.0,
+        "ppts": 22.7,
+        "apts": 20.9,
+        "preb": 6.4,
+        "areb": 6.1,
+        "past": 7.2,
+        "aast": 7.2
+      },
+      {
+        "rank": 23,
+        "id": 201935,
+        "player": "James Harden",
+        "team": "LAC",
+        "gp": 70,
+        "c": "#C8102E",
+        "pmin": 35.2,
+        "ppts": 22.5,
+        "apts": 23.6,
+        "preb": 5.2,
+        "areb": 4.8,
+        "past": 8.5,
+        "aast": 8.0
+      },
+      {
+        "rank": 24,
+        "id": 1629008,
+        "player": "Michael Porter Jr.",
+        "team": "BKN",
+        "gp": 52,
+        "c": "#777777",
+        "pmin": 32.9,
+        "ppts": 22.3,
+        "apts": 24.2,
+        "preb": 6.9,
+        "areb": 7.1,
+        "past": 2.6,
+        "aast": 3.0
+      },
+      {
+        "rank": 25,
+        "id": 203944,
+        "player": "Julius Randle",
+        "team": "MIN",
+        "gp": 79,
+        "c": "#236192",
+        "pmin": 33.8,
+        "ppts": 22.1,
+        "apts": 21.1,
+        "preb": 7.4,
+        "areb": 6.7,
+        "past": 4.9,
+        "aast": 5.0
+      },
+      {
+        "rank": 26,
+        "id": 1629627,
+        "player": "Zion Williamson",
+        "team": "NOP",
+        "gp": 62,
+        "c": "#85714D",
+        "pmin": 29.8,
+        "ppts": 22.1,
+        "apts": 21.0,
+        "preb": 5.9,
+        "areb": 5.7,
+        "past": 3.8,
+        "aast": 3.2
+      },
+      {
+        "rank": 27,
+        "id": 1627742,
+        "player": "Brandon Ingram",
+        "team": "TOR",
+        "gp": 77,
+        "c": "#CE1141",
+        "pmin": 33.3,
+        "ppts": 21.9,
+        "apts": 21.5,
+        "preb": 5.3,
+        "areb": 5.6,
+        "past": 4.3,
+        "aast": 3.7
+      },
+      {
+        "rank": 28,
+        "id": 1630166,
+        "player": "Deni Avdija",
+        "team": "POR",
+        "gp": 66,
+        "c": "#E03A3E",
+        "pmin": 32.3,
+        "ppts": 21.8,
+        "apts": 24.2,
+        "preb": 7.4,
+        "areb": 6.9,
+        "past": 5.7,
+        "aast": 6.7
+      },
+      {
+        "rank": 29,
+        "id": 203076,
+        "player": "Anthony Davis",
+        "team": "DAL",
+        "gp": 20,
+        "c": "#00538C",
+        "pmin": 31.3,
+        "ppts": 21.6,
+        "apts": 20.4,
+        "preb": 11.1,
+        "areb": 11.1,
+        "past": 3.2,
+        "aast": 2.8
+      },
+      {
+        "rank": 30,
+        "id": 1629630,
+        "player": "Ja Morant",
+        "team": "MEM",
+        "gp": 20,
+        "c": "#5D76A9",
+        "pmin": 28.5,
+        "ppts": 21.5,
+        "apts": 19.4,
+        "preb": 3.8,
+        "areb": 3.2,
+        "past": 7.2,
+        "aast": 8.1
+      },
+      {
+        "rank": 31,
+        "id": 1629639,
+        "player": "Tyler Herro",
+        "team": "MIA",
+        "gp": 33,
+        "c": "#98002E",
+        "pmin": 31.1,
+        "ppts": 21.5,
+        "apts": 20.5,
+        "preb": 4.6,
+        "areb": 4.8,
+        "past": 4.1,
+        "aast": 4.1
+      },
+      {
+        "rank": 32,
+        "id": 1630532,
+        "player": "Franz Wagner",
+        "team": "ORL",
+        "gp": 34,
+        "c": "#0077C0",
+        "pmin": 30.5,
+        "ppts": 21.2,
+        "apts": 20.6,
+        "preb": 5.1,
+        "areb": 5.2,
+        "past": 3.8,
+        "aast": 3.3
+      },
+      {
+        "rank": 33,
+        "id": 1630163,
+        "player": "LaMelo Ball",
+        "team": "CHA",
+        "gp": 72,
+        "c": "#00788C",
+        "pmin": 28.9,
+        "ppts": 21.0,
+        "apts": 20.1,
+        "preb": 4.6,
+        "areb": 4.8,
+        "past": 7.1,
+        "aast": 7.1
+      },
+      {
+        "rank": 34,
+        "id": 1641718,
+        "player": "Keyonte George",
+        "team": "UTA",
+        "gp": 54,
+        "c": "#00471B",
+        "pmin": 33.0,
+        "ppts": 20.9,
+        "apts": 23.6,
+        "preb": 3.8,
+        "areb": 3.7,
+        "past": 6.1,
+        "aast": 6.1
+      },
+      {
+        "rank": 35,
+        "id": 1630559,
+        "player": "Austin Reaves",
+        "team": "LAL",
+        "gp": 51,
+        "c": "#552583",
+        "pmin": 33.5,
+        "ppts": 20.9,
+        "apts": 23.3,
+        "preb": 4.4,
+        "areb": 4.7,
+        "past": 5.5,
+        "aast": 5.5
+      },
+      {
+        "rank": 36,
+        "id": 1626157,
+        "player": "Karl-Anthony Towns",
+        "team": "NYK",
+        "gp": 75,
+        "c": "#F58426",
+        "pmin": 32.2,
+        "ppts": 20.6,
+        "apts": 20.1,
+        "preb": 11.2,
+        "areb": 11.9,
+        "past": 3.1,
+        "aast": 3.0
+      },
+      {
+        "rank": 37,
+        "id": 1630552,
+        "player": "Jalen Johnson",
+        "team": "ATL",
+        "gp": 72,
+        "c": "#E03A3E",
+        "pmin": 33.6,
+        "ppts": 20.6,
+        "apts": 22.5,
+        "preb": 9.7,
+        "areb": 10.3,
+        "past": 6.4,
+        "aast": 7.9
+      },
+      {
+        "rank": 38,
+        "id": 1629027,
+        "player": "Trae Young",
+        "team": "ATL",
+        "gp": 15,
+        "c": "#E03A3E",
+        "pmin": 29.3,
+        "ppts": 20.5,
+        "apts": 17.9,
+        "preb": 2.3,
+        "areb": 2.0,
+        "past": 9.3,
+        "aast": 8.0
+      },
+      {
+        "rank": 39,
+        "id": 203897,
+        "player": "Zach LaVine",
+        "team": "SAC",
+        "gp": 39,
+        "c": "#5A2D81",
+        "pmin": 33.5,
+        "ppts": 20.5,
+        "apts": 19.2,
+        "preb": 3.5,
+        "areb": 2.8,
+        "past": 3.0,
+        "aast": 2.3
+      },
+      {
+        "rank": 40,
+        "id": 1630217,
+        "player": "Desmond Bane",
+        "team": "ORL",
+        "gp": 82,
+        "c": "#0077C0",
+        "pmin": 33.6,
+        "ppts": 20.5,
+        "apts": 20.1,
+        "preb": 4.8,
+        "areb": 4.1,
+        "past": 4.7,
+        "aast": 4.1
+      },
+      {
+        "rank": 41,
+        "id": 1628991,
+        "player": "Jaren Jackson Jr.",
+        "team": "MEM",
+        "gp": 48,
+        "c": "#5D76A9",
+        "pmin": 30.7,
+        "ppts": 20.5,
+        "apts": 19.4,
+        "preb": 5.8,
+        "areb": 5.7,
+        "past": 1.9,
+        "aast": 2.0
+      },
+      {
+        "rank": 42,
+        "id": 1630578,
+        "player": "Alperen Sengun",
+        "team": "HOU",
+        "gp": 72,
+        "c": "#CE1141",
+        "pmin": 32.7,
+        "ppts": 20.3,
+        "apts": 20.4,
+        "preb": 9.3,
+        "areb": 8.9,
+        "past": 5.5,
+        "aast": 6.2
+      },
+      {
+        "rank": 43,
+        "id": 1626181,
+        "player": "Norman Powell",
+        "team": "MIA",
+        "gp": 58,
+        "c": "#98002E",
+        "pmin": 29.5,
+        "ppts": 20.2,
+        "apts": 21.7,
+        "preb": 3.2,
+        "areb": 3.5,
+        "past": 2.2,
+        "aast": 2.5
+      },
+      {
+        "rank": 44,
+        "id": 1628368,
+        "player": "De'Aaron Fox",
+        "team": "SAS",
+        "gp": 72,
+        "c": "#9EA8B0",
+        "pmin": 32.4,
+        "ppts": 20.1,
+        "apts": 18.6,
+        "preb": 4.0,
+        "areb": 3.8,
+        "past": 6.1,
+        "aast": 6.2
+      },
+      {
+        "rank": 45,
+        "id": 1630530,
+        "player": "Trey Murphy III",
+        "team": "NOP",
+        "gp": 66,
+        "c": "#85714D",
+        "pmin": 34.0,
+        "ppts": 20.1,
+        "apts": 21.5,
+        "preb": 5.2,
+        "areb": 5.7,
+        "past": 3.4,
+        "aast": 3.8
+      },
+      {
+        "rank": 46,
+        "id": 1628389,
+        "player": "Bam Adebayo",
+        "team": "MIA",
+        "gp": 73,
+        "c": "#98002E",
+        "pmin": 32.7,
+        "ppts": 19.9,
+        "apts": 20.1,
+        "preb": 9.4,
+        "areb": 10.0,
+        "past": 3.4,
+        "aast": 3.2
+      },
+      {
+        "rank": 47,
+        "id": 1631101,
+        "player": "Shaedon Sharpe",
+        "team": "POR",
+        "gp": 50,
+        "c": "#E03A3E",
+        "pmin": 29.9,
+        "ppts": 19.7,
+        "apts": 20.8,
+        "preb": 4.5,
+        "areb": 4.3,
+        "past": 2.6,
+        "aast": 2.6
+      },
+      {
+        "rank": 48,
+        "id": 201942,
+        "player": "DeMar DeRozan",
+        "team": "SAC",
+        "gp": 77,
+        "c": "#5A2D81",
+        "pmin": 33.4,
+        "ppts": 19.6,
+        "apts": 18.4,
+        "preb": 3.4,
+        "areb": 2.9,
+        "past": 4.4,
+        "aast": 4.1
+      },
+      {
+        "rank": 49,
+        "id": 1641706,
+        "player": "Brandon Miller",
+        "team": "CHA",
+        "gp": 65,
+        "c": "#00788C",
+        "pmin": 30.8,
+        "ppts": 19.2,
+        "apts": 20.2,
+        "preb": 4.4,
+        "areb": 4.9,
+        "past": 3.2,
+        "aast": 3.3
+      },
+      {
+        "rank": 50,
+        "id": 1629636,
+        "player": "Darius Garland",
+        "team": "CLE",
+        "gp": 45,
+        "c": "#860038",
+        "pmin": 30.5,
+        "ppts": 19.0,
+        "apts": 18.8,
+        "preb": 2.6,
+        "areb": 2.4,
+        "past": 6.7,
+        "aast": 6.7
+      },
+      {
+        "rank": 51,
+        "id": 1628415,
+        "player": "Dillon Brooks",
+        "team": "PHX",
+        "gp": 56,
+        "c": "#E56020",
+        "pmin": 30.7,
+        "ppts": 18.8,
+        "apts": 20.2,
+        "preb": 3.5,
+        "areb": 3.6,
+        "past": 1.8,
+        "aast": 1.8
+      },
+      {
+        "rank": 52,
+        "id": 202710,
+        "player": "Jimmy Butler III",
+        "team": "GSW",
+        "gp": 38,
+        "c": "#1D428A",
+        "pmin": 31.9,
+        "ppts": 18.8,
+        "apts": 20.0,
+        "preb": 5.2,
+        "areb": 5.6,
+        "past": 5.3,
+        "aast": 4.9
+      },
+      {
+        "rank": 53,
+        "id": 1629628,
+        "player": "RJ Barrett",
+        "team": "TOR",
+        "gp": 57,
+        "c": "#CE1141",
+        "pmin": 29.7,
+        "ppts": 18.7,
+        "apts": 19.3,
+        "preb": 5.2,
+        "areb": 5.3,
+        "past": 3.5,
+        "aast": 3.3
+      },
+      {
+        "rank": 54,
+        "id": 203468,
+        "player": "CJ McCollum",
+        "team": "ATL",
+        "gp": 76,
+        "c": "#E03A3E",
+        "pmin": 30.3,
+        "ppts": 18.7,
+        "apts": 18.7,
+        "preb": 3.6,
+        "areb": 3.3,
+        "past": 4.1,
+        "aast": 3.9
+      },
+      {
+        "rank": 55,
+        "id": 1630567,
+        "player": "Scottie Barnes",
+        "team": "TOR",
+        "gp": 80,
+        "c": "#CE1141",
+        "pmin": 33.4,
+        "ppts": 18.4,
+        "apts": 18.1,
+        "preb": 7.3,
+        "areb": 7.5,
+        "past": 5.8,
+        "aast": 5.9
+      },
+      {
+        "rank": 56,
+        "id": 1630224,
+        "player": "Jalen Green",
+        "team": "PHX",
+        "gp": 32,
+        "c": "#E56020",
+        "pmin": 26.5,
+        "ppts": 18.3,
+        "apts": 17.8,
+        "preb": 3.6,
+        "areb": 3.6,
+        "past": 3.0,
+        "aast": 2.8
+      },
+      {
+        "rank": 57,
+        "id": 1630596,
+        "player": "Evan Mobley",
+        "team": "CLE",
+        "gp": 65,
+        "c": "#860038",
+        "pmin": 32.1,
+        "ppts": 18.0,
+        "apts": 18.2,
+        "preb": 9.0,
+        "areb": 9.0,
+        "past": 3.6,
+        "aast": 3.6
+      },
+      {
+        "rank": 58,
+        "id": 1629638,
+        "player": "Nickeil Alexander-Walker",
+        "team": "ATL",
+        "gp": 78,
+        "c": "#E03A3E",
+        "pmin": 31.9,
+        "ppts": 18.0,
+        "apts": 20.8,
+        "preb": 3.6,
+        "areb": 3.4,
+        "past": 3.8,
+        "aast": 3.7
+      },
+      {
+        "rank": 59,
+        "id": 204001,
+        "player": "Kristaps Porzi\u0146\u0123is",
+        "team": "ATL",
+        "gp": 32,
+        "c": "#E03A3E",
+        "pmin": 25.2,
+        "ppts": 17.7,
+        "apts": 16.7,
+        "preb": 5.7,
+        "areb": 5.2,
+        "past": 2.3,
+        "aast": 2.5
+      },
+      {
+        "rank": 60,
+        "id": 1631114,
+        "player": "Jalen Williams",
+        "team": "OKC",
+        "gp": 33,
+        "c": "#007AC1",
+        "pmin": 28.6,
+        "ppts": 17.6,
+        "apts": 17.1,
+        "preb": 4.4,
+        "areb": 4.6,
+        "past": 4.7,
+        "aast": 5.5
+      }
+    ]
+  },
+  "defenders": [
+    {
+      "rank": 1,
+      "player": "Kris Dunn",
+      "team": "LAC",
+      "rating": 4.1,
+      "mpg": 27.2,
+      "poss": 4204,
+      "c": "#C8102E"
+    },
+    {
+      "rank": 2,
+      "player": "Draymond Green",
+      "team": "GSW",
+      "rating": 4.0,
+      "mpg": 27.5,
+      "poss": 3646,
+      "c": "#1D428A"
+    },
+    {
+      "rank": 3,
+      "player": "Dyson Daniels",
+      "team": "ATL",
+      "rating": 3.95,
+      "mpg": 33.2,
+      "poss": 5347,
+      "c": "#E03A3E"
+    },
+    {
+      "rank": 4,
+      "player": "Rudy Gobert",
+      "team": "MIN",
+      "rating": 3.95,
+      "mpg": 31.3,
+      "poss": 5299,
+      "c": "#236192"
+    },
+    {
+      "rank": 5,
+      "player": "Steven Adams",
+      "team": "HOU",
+      "rating": 3.74,
+      "mpg": 22.8,
+      "poss": 1564,
+      "c": "#CE1141"
+    },
+    {
+      "rank": 6,
+      "player": "Luguentz Dort",
+      "team": "OKC",
+      "rating": 3.62,
+      "mpg": 26.8,
+      "poss": 3606,
+      "c": "#007AC1"
+    },
+    {
+      "rank": 7,
+      "player": "Sion James",
+      "team": "CHA",
+      "rating": 3.56,
+      "mpg": 22.5,
+      "poss": 3483,
+      "c": "#00788C"
+    },
+    {
+      "rank": 8,
+      "player": "Davion Mitchell",
+      "team": "MIA",
+      "rating": 3.52,
+      "mpg": 28.6,
+      "poss": 4103,
+      "c": "#98002E"
+    },
+    {
+      "rank": 9,
+      "player": "Moussa Diabat\u00e9",
+      "team": "CHA",
+      "rating": 3.49,
+      "mpg": 26.0,
+      "poss": 4035,
+      "c": "#00788C"
+    },
+    {
+      "rank": 10,
+      "player": "Kris Murray",
+      "team": "POR",
+      "rating": 3.46,
+      "mpg": 23.4,
+      "poss": 2739,
+      "c": "#E03A3E"
+    },
+    {
+      "rank": 11,
+      "player": "Spencer Jones",
+      "team": "DEN",
+      "rating": 3.45,
+      "mpg": 22.1,
+      "poss": 2787,
+      "c": "#0E2240"
+    },
+    {
+      "rank": 12,
+      "player": "Marcus Smart",
+      "team": "LAL",
+      "rating": 3.35,
+      "mpg": 28.5,
+      "poss": 3348,
+      "c": "#552583"
+    },
+    {
+      "rank": 13,
+      "player": "Dean Wade",
+      "team": "CLE",
+      "rating": 3.31,
+      "mpg": 22.3,
+      "poss": 2617,
+      "c": "#860038"
+    },
+    {
+      "rank": 14,
+      "player": "Cason Wallace",
+      "team": "OKC",
+      "rating": 3.3,
+      "mpg": 26.6,
+      "poss": 4147,
+      "c": "#007AC1"
+    },
+    {
+      "rank": 15,
+      "player": "Christian Braun",
+      "team": "DEN",
+      "rating": 3.22,
+      "mpg": 31.8,
+      "poss": 2866,
+      "c": "#0E2240"
+    },
+    {
+      "rank": 16,
+      "player": "Toumani Camara",
+      "team": "POR",
+      "rating": 3.16,
+      "mpg": 33.3,
+      "poss": 5467,
+      "c": "#E03A3E"
+    },
+    {
+      "rank": 17,
+      "player": "Herbert Jones",
+      "team": "NOP",
+      "rating": 3.13,
+      "mpg": 28.4,
+      "poss": 3126,
+      "c": "#85714D"
+    },
+    {
+      "rank": 18,
+      "player": "Royce O'Neale",
+      "team": "PHX",
+      "rating": 3.04,
+      "mpg": 28.4,
+      "poss": 4295,
+      "c": "#E56020"
+    },
+    {
+      "rank": 19,
+      "player": "Isaac Okoro",
+      "team": "CHI",
+      "rating": 3.04,
+      "mpg": 26.9,
+      "poss": 3520,
+      "c": "#CE1141"
+    },
+    {
+      "rank": 20,
+      "player": "Dylan Cardwell",
+      "team": "SAC",
+      "rating": 2.96,
+      "mpg": 20.6,
+      "poss": 1948,
+      "c": "#5A2D81"
+    },
+    {
+      "rank": 21,
+      "player": "AJ Green",
+      "team": "MIL",
+      "rating": 2.91,
+      "mpg": 29.1,
+      "poss": 4437,
+      "c": "#00471B"
+    },
+    {
+      "rank": 22,
+      "player": "Terance Mann",
+      "team": "BKN",
+      "rating": 2.86,
+      "mpg": 24.3,
+      "poss": 3000,
+      "c": "#777777"
+    },
+    {
+      "rank": 23,
+      "player": "Luke Kornet",
+      "team": "SAS",
+      "rating": 2.68,
+      "mpg": 21.0,
+      "poss": 3150,
+      "c": "#9EA8B0"
+    },
+    {
+      "rank": 24,
+      "player": "Jake LaRavia",
+      "team": "LAL",
+      "rating": 2.65,
+      "mpg": 25.1,
+      "poss": 4098,
+      "c": "#552583"
+    },
+    {
+      "rank": 25,
+      "player": "Cameron Johnson",
+      "team": "DEN",
+      "rating": 2.64,
+      "mpg": 30.5,
+      "poss": 3297,
+      "c": "#0E2240"
+    },
+    {
+      "rank": 26,
+      "player": "Wendell Carter Jr.",
+      "team": "ORL",
+      "rating": 2.62,
+      "mpg": 29.3,
+      "poss": 4811,
+      "c": "#0077C0"
+    },
+    {
+      "rank": 27,
+      "player": "Jamal Shead",
+      "team": "TOR",
+      "rating": 2.6,
+      "mpg": 22.6,
+      "poss": 3556,
+      "c": "#CE1141"
+    },
+    {
+      "rank": 28,
+      "player": "Oso Ighodaro",
+      "team": "PHX",
+      "rating": 2.57,
+      "mpg": 22.1,
+      "poss": 3746,
+      "c": "#E56020"
+    },
+    {
+      "rank": 29,
+      "player": "Keegan Murray",
+      "team": "SAC",
+      "rating": 2.54,
+      "mpg": 34.5,
+      "poss": 1607,
+      "c": "#5A2D81"
+    },
+    {
+      "rank": 30,
+      "player": "Donte DiVincenzo",
+      "team": "MIN",
+      "rating": 2.48,
+      "mpg": 30.4,
+      "poss": 4974,
+      "c": "#236192"
+    }
+  ],
+  "synergy": {
+    "types": [
+      "Transition",
+      "Isolation",
+      "PRBallHandler",
+      "PRRollman",
+      "Postup",
+      "Spotup",
+      "Handoff",
+      "Cut",
+      "OffScreen",
+      "OffRebound",
+      "Misc"
+    ],
+    "labels": {
+      "Transition": "Transition",
+      "Isolation": "Isolation",
+      "PRBallHandler": "P&R Ball-Handler",
+      "PRRollman": "P&R Roll Man",
+      "Postup": "Post-Up",
+      "Spotup": "Spot-Up",
+      "Handoff": "Hand-Off",
+      "Cut": "Cut",
+      "OffScreen": "Off Screen",
+      "OffRebound": "Putbacks",
+      "Misc": "Misc"
+    },
+    "league_def": {
+      "Transition": 1.13,
+      "Isolation": 0.93,
+      "PRBallHandler": 0.88,
+      "PRRollman": 1.11,
+      "Postup": 1.0,
+      "Spotup": 1.05,
+      "Handoff": 0.95,
+      "Cut": 1.31,
+      "OffScreen": 0.98,
+      "OffRebound": 1.12,
+      "Misc": 0.49
+    },
+    "teams": {
+      "ATL": {
+        "off": {
+          "Transition": [
+            0.216,
+            1.14
+          ],
+          "Isolation": [
+            0.042,
+            0.8
+          ],
+          "PRBallHandler": [
+            0.147,
+            0.84
+          ],
+          "PRRollman": [
+            0.051,
+            1.04
+          ],
+          "Postup": [
+            0.028,
+            1.07
+          ],
+          "Spotup": [
+            0.223,
+            1.09
+          ],
+          "Handoff": [
+            0.06,
+            1.0
+          ],
+          "Cut": [
+            0.076,
+            1.29
+          ],
+          "OffScreen": [
+            0.056,
+            1.01
+          ],
+          "OffRebound": [
+            0.048,
+            1.16
+          ],
+          "Misc": [
+            0.054,
+            0.49
+          ]
+        },
+        "def": {
+          "Transition": 1.19,
+          "Isolation": 1.0,
+          "PRBallHandler": 0.88,
+          "PRRollman": 1.05,
+          "Postup": 0.95,
+          "Spotup": 1.0,
+          "Handoff": 0.91,
+          "Cut": 1.33,
+          "OffScreen": 0.95,
+          "OffRebound": 1.17,
+          "Misc": 0.4
+        }
+      },
+      "BKN": {
+        "off": {
+          "Transition": [
+            0.163,
+            1.07
+          ],
+          "Isolation": [
+            0.059,
+            0.9
+          ],
+          "PRBallHandler": [
+            0.127,
+            0.82
+          ],
+          "PRRollman": [
+            0.043,
+            1.03
+          ],
+          "Postup": [
+            0.019,
+            0.95
+          ],
+          "Spotup": [
+            0.287,
+            0.98
+          ],
+          "Handoff": [
+            0.087,
+            0.88
+          ],
+          "Cut": [
+            0.066,
+            1.33
+          ],
+          "OffScreen": [
+            0.033,
+            0.94
+          ],
+          "OffRebound": [
+            0.052,
+            1.19
+          ],
+          "Misc": [
+            0.064,
+            0.43
+          ]
+        },
+        "def": {
+          "Transition": 1.2,
+          "Isolation": 0.94,
+          "PRBallHandler": 0.87,
+          "PRRollman": 1.16,
+          "Postup": 1.06,
+          "Spotup": 1.09,
+          "Handoff": 0.79,
+          "Cut": 1.33,
+          "OffScreen": 1.27,
+          "OffRebound": 1.13,
+          "Misc": 0.51
+        }
+      },
+      "BOS": {
+        "off": {
+          "Transition": [
+            0.15,
+            1.18
+          ],
+          "Isolation": [
+            0.096,
+            0.95
+          ],
+          "PRBallHandler": [
+            0.183,
+            0.92
+          ],
+          "PRRollman": [
+            0.058,
+            1.14
+          ],
+          "Postup": [
+            0.02,
+            0.98
+          ],
+          "Spotup": [
+            0.231,
+            1.1
+          ],
+          "Handoff": [
+            0.053,
+            0.96
+          ],
+          "Cut": [
+            0.054,
+            1.36
+          ],
+          "OffScreen": [
+            0.049,
+            0.98
+          ],
+          "OffRebound": [
+            0.055,
+            1.18
+          ],
+          "Misc": [
+            0.051,
+            0.52
+          ]
+        },
+        "def": {
+          "Transition": 1.14,
+          "Isolation": 0.9,
+          "PRBallHandler": 0.9,
+          "PRRollman": 1.16,
+          "Postup": 0.86,
+          "Spotup": 1.0,
+          "Handoff": 0.93,
+          "Cut": 1.3,
+          "OffScreen": 0.91,
+          "OffRebound": 1.11,
+          "Misc": 0.39
+        }
+      },
+      "CHA": {
+        "off": {
+          "Transition": [
+            0.162,
+            1.09
+          ],
+          "Isolation": [
+            0.054,
+            0.88
+          ],
+          "PRBallHandler": [
+            0.205,
+            0.86
+          ],
+          "PRRollman": [
+            0.069,
+            1.19
+          ],
+          "Postup": [
+            0.019,
+            1.07
+          ],
+          "Spotup": [
+            0.243,
+            1.11
+          ],
+          "Handoff": [
+            0.06,
+            0.92
+          ],
+          "Cut": [
+            0.053,
+            1.39
+          ],
+          "OffScreen": [
+            0.031,
+            1.07
+          ],
+          "OffRebound": [
+            0.048,
+            1.2
+          ],
+          "Misc": [
+            0.058,
+            0.49
+          ]
+        },
+        "def": {
+          "Transition": 1.12,
+          "Isolation": 0.94,
+          "PRBallHandler": 0.91,
+          "PRRollman": 1.12,
+          "Postup": 1.0,
+          "Spotup": 1.03,
+          "Handoff": 0.89,
+          "Cut": 1.26,
+          "OffScreen": 1.0,
+          "OffRebound": 1.1,
+          "Misc": 0.58
+        }
+      },
+      "CHI": {
+        "off": {
+          "Transition": [
+            0.234,
+            1.15
+          ],
+          "Isolation": [
+            0.038,
+            0.93
+          ],
+          "PRBallHandler": [
+            0.178,
+            0.85
+          ],
+          "PRRollman": [
+            0.068,
+            1.06
+          ],
+          "Postup": [
+            0.022,
+            0.87
+          ],
+          "Spotup": [
+            0.272,
+            1.03
+          ],
+          "Handoff": [
+            0.027,
+            0.92
+          ],
+          "Cut": [
+            0.054,
+            1.3
+          ],
+          "OffScreen": [
+            0.018,
+            0.91
+          ],
+          "OffRebound": [
+            0.042,
+            1.08
+          ],
+          "Misc": [
+            0.047,
+            0.55
+          ]
+        },
+        "def": {
+          "Transition": 1.12,
+          "Isolation": 0.95,
+          "PRBallHandler": 0.86,
+          "PRRollman": 1.2,
+          "Postup": 1.1,
+          "Spotup": 1.07,
+          "Handoff": 1.01,
+          "Cut": 1.34,
+          "OffScreen": 0.97,
+          "OffRebound": 1.16,
+          "Misc": 0.54
+        }
+      },
+      "CLE": {
+        "off": {
+          "Transition": [
+            0.179,
+            1.16
+          ],
+          "Isolation": [
+            0.073,
+            0.99
+          ],
+          "PRBallHandler": [
+            0.163,
+            0.9
+          ],
+          "PRRollman": [
+            0.077,
+            1.07
+          ],
+          "Postup": [
+            0.022,
+            1.02
+          ],
+          "Spotup": [
+            0.228,
+            1.07
+          ],
+          "Handoff": [
+            0.041,
+            0.93
+          ],
+          "Cut": [
+            0.09,
+            1.3
+          ],
+          "OffScreen": [
+            0.027,
+            1.0
+          ],
+          "OffRebound": [
+            0.045,
+            1.17
+          ],
+          "Misc": [
+            0.056,
+            0.61
+          ]
+        },
+        "def": {
+          "Transition": 1.11,
+          "Isolation": 0.9,
+          "PRBallHandler": 0.85,
+          "PRRollman": 1.11,
+          "Postup": 0.99,
+          "Spotup": 1.08,
+          "Handoff": 0.99,
+          "Cut": 1.26,
+          "OffScreen": 0.99,
+          "OffRebound": 1.04,
+          "Misc": 0.52
+        }
+      },
+      "DAL": {
+        "off": {
+          "Transition": [
+            0.198,
+            1.2
+          ],
+          "Isolation": [
+            0.075,
+            0.87
+          ],
+          "PRBallHandler": [
+            0.177,
+            0.84
+          ],
+          "PRRollman": [
+            0.052,
+            1.1
+          ],
+          "Postup": [
+            0.025,
+            0.93
+          ],
+          "Spotup": [
+            0.212,
+            0.98
+          ],
+          "Handoff": [
+            0.044,
+            0.93
+          ],
+          "Cut": [
+            0.058,
+            1.24
+          ],
+          "OffScreen": [
+            0.048,
+            0.9
+          ],
+          "OffRebound": [
+            0.052,
+            1.14
+          ],
+          "Misc": [
+            0.057,
+            0.51
+          ]
+        },
+        "def": {
+          "Transition": 1.11,
+          "Isolation": 1.0,
+          "PRBallHandler": 0.89,
+          "PRRollman": 1.12,
+          "Postup": 1.04,
+          "Spotup": 1.02,
+          "Handoff": 0.97,
+          "Cut": 1.31,
+          "OffScreen": 1.0,
+          "OffRebound": 1.16,
+          "Misc": 0.48
+        }
+      },
+      "DEN": {
+        "off": {
+          "Transition": [
+            0.162,
+            1.18
+          ],
+          "Isolation": [
+            0.063,
+            1.02
+          ],
+          "PRBallHandler": [
+            0.135,
+            0.91
+          ],
+          "PRRollman": [
+            0.058,
+            1.24
+          ],
+          "Postup": [
+            0.069,
+            1.08
+          ],
+          "Spotup": [
+            0.195,
+            1.14
+          ],
+          "Handoff": [
+            0.064,
+            1.03
+          ],
+          "Cut": [
+            0.089,
+            1.31
+          ],
+          "OffScreen": [
+            0.042,
+            1.22
+          ],
+          "OffRebound": [
+            0.052,
+            1.22
+          ],
+          "Misc": [
+            0.07,
+            0.63
+          ]
+        },
+        "def": {
+          "Transition": 1.22,
+          "Isolation": 0.97,
+          "PRBallHandler": 0.89,
+          "PRRollman": 1.09,
+          "Postup": 0.95,
+          "Spotup": 1.02,
+          "Handoff": 1.0,
+          "Cut": 1.29,
+          "OffScreen": 0.87,
+          "OffRebound": 1.06,
+          "Misc": 0.6
+        }
+      },
+      "DET": {
+        "off": {
+          "Transition": [
+            0.193,
+            1.14
+          ],
+          "Isolation": [
+            0.06,
+            0.94
+          ],
+          "PRBallHandler": [
+            0.141,
+            0.83
+          ],
+          "PRRollman": [
+            0.05,
+            1.21
+          ],
+          "Postup": [
+            0.043,
+            1.12
+          ],
+          "Spotup": [
+            0.21,
+            1.07
+          ],
+          "Handoff": [
+            0.045,
+            0.77
+          ],
+          "Cut": [
+            0.098,
+            1.3
+          ],
+          "OffScreen": [
+            0.037,
+            0.92
+          ],
+          "OffRebound": [
+            0.064,
+            1.1
+          ],
+          "Misc": [
+            0.061,
+            0.52
+          ]
+        },
+        "def": {
+          "Transition": 1.09,
+          "Isolation": 0.89,
+          "PRBallHandler": 0.81,
+          "PRRollman": 1.07,
+          "Postup": 0.85,
+          "Spotup": 0.96,
+          "Handoff": 0.9,
+          "Cut": 1.33,
+          "OffScreen": 1.01,
+          "OffRebound": 1.16,
+          "Misc": 0.49
+        }
+      },
+      "GSW": {
+        "off": {
+          "Transition": [
+            0.16,
+            1.08
+          ],
+          "Isolation": [
+            0.055,
+            0.95
+          ],
+          "PRBallHandler": [
+            0.128,
+            0.86
+          ],
+          "PRRollman": [
+            0.046,
+            1.06
+          ],
+          "Postup": [
+            0.028,
+            0.92
+          ],
+          "Spotup": [
+            0.267,
+            1.06
+          ],
+          "Handoff": [
+            0.041,
+            1.05
+          ],
+          "Cut": [
+            0.096,
+            1.39
+          ],
+          "OffScreen": [
+            0.065,
+            0.94
+          ],
+          "OffRebound": [
+            0.048,
+            1.09
+          ],
+          "Misc": [
+            0.066,
+            0.4
+          ]
+        },
+        "def": {
+          "Transition": 1.09,
+          "Isolation": 0.93,
+          "PRBallHandler": 0.88,
+          "PRRollman": 1.06,
+          "Postup": 0.96,
+          "Spotup": 1.1,
+          "Handoff": 0.93,
+          "Cut": 1.27,
+          "OffScreen": 1.01,
+          "OffRebound": 1.1,
+          "Misc": 0.48
+        }
+      },
+      "HOU": {
+        "off": {
+          "Transition": [
+            0.162,
+            1.18
+          ],
+          "Isolation": [
+            0.095,
+            0.92
+          ],
+          "PRBallHandler": [
+            0.13,
+            0.88
+          ],
+          "PRRollman": [
+            0.053,
+            1.01
+          ],
+          "Postup": [
+            0.059,
+            0.96
+          ],
+          "Spotup": [
+            0.224,
+            1.03
+          ],
+          "Handoff": [
+            0.039,
+            0.96
+          ],
+          "Cut": [
+            0.084,
+            1.27
+          ],
+          "OffScreen": [
+            0.026,
+            0.84
+          ],
+          "OffRebound": [
+            0.067,
+            1.01
+          ],
+          "Misc": [
+            0.061,
+            0.53
+          ]
+        },
+        "def": {
+          "Transition": 1.12,
+          "Isolation": 0.9,
+          "PRBallHandler": 0.83,
+          "PRRollman": 1.0,
+          "Postup": 0.95,
+          "Spotup": 1.08,
+          "Handoff": 1.02,
+          "Cut": 1.2,
+          "OffScreen": 0.89,
+          "OffRebound": 1.14,
+          "Misc": 0.49
+        }
+      },
+      "IND": {
+        "off": {
+          "Transition": [
+            0.193,
+            1.13
+          ],
+          "Isolation": [
+            0.05,
+            0.83
+          ],
+          "PRBallHandler": [
+            0.163,
+            0.92
+          ],
+          "PRRollman": [
+            0.053,
+            1.13
+          ],
+          "Postup": [
+            0.04,
+            1.04
+          ],
+          "Spotup": [
+            0.258,
+            1.0
+          ],
+          "Handoff": [
+            0.041,
+            0.86
+          ],
+          "Cut": [
+            0.059,
+            1.28
+          ],
+          "OffScreen": [
+            0.045,
+            0.95
+          ],
+          "OffRebound": [
+            0.045,
+            1.04
+          ],
+          "Misc": [
+            0.053,
+            0.41
+          ]
+        },
+        "def": {
+          "Transition": 1.17,
+          "Isolation": 1.0,
+          "PRBallHandler": 0.95,
+          "PRRollman": 1.12,
+          "Postup": 1.05,
+          "Spotup": 1.07,
+          "Handoff": 0.93,
+          "Cut": 1.38,
+          "OffScreen": 1.01,
+          "OffRebound": 1.16,
+          "Misc": 0.51
+        }
+      },
+      "LAC": {
+        "off": {
+          "Transition": [
+            0.162,
+            1.2
+          ],
+          "Isolation": [
+            0.116,
+            0.99
+          ],
+          "PRBallHandler": [
+            0.151,
+            0.92
+          ],
+          "PRRollman": [
+            0.06,
+            1.0
+          ],
+          "Postup": [
+            0.056,
+            1.13
+          ],
+          "Spotup": [
+            0.219,
+            1.11
+          ],
+          "Handoff": [
+            0.034,
+            0.89
+          ],
+          "Cut": [
+            0.067,
+            1.38
+          ],
+          "OffScreen": [
+            0.022,
+            1.05
+          ],
+          "OffRebound": [
+            0.055,
+            1.16
+          ],
+          "Misc": [
+            0.058,
+            0.48
+          ]
+        },
+        "def": {
+          "Transition": 1.16,
+          "Isolation": 0.98,
+          "PRBallHandler": 0.86,
+          "PRRollman": 1.11,
+          "Postup": 1.09,
+          "Spotup": 1.04,
+          "Handoff": 0.87,
+          "Cut": 1.21,
+          "OffScreen": 1.01,
+          "OffRebound": 1.1,
+          "Misc": 0.51
+        }
+      },
+      "LAL": {
+        "off": {
+          "Transition": [
+            0.177,
+            1.16
+          ],
+          "Isolation": [
+            0.085,
+            1.03
+          ],
+          "PRBallHandler": [
+            0.17,
+            0.99
+          ],
+          "PRRollman": [
+            0.056,
+            1.17
+          ],
+          "Postup": [
+            0.055,
+            0.96
+          ],
+          "Spotup": [
+            0.199,
+            1.06
+          ],
+          "Handoff": [
+            0.022,
+            0.97
+          ],
+          "Cut": [
+            0.078,
+            1.36
+          ],
+          "OffScreen": [
+            0.052,
+            1.08
+          ],
+          "OffRebound": [
+            0.043,
+            1.14
+          ],
+          "Misc": [
+            0.064,
+            0.45
+          ]
+        },
+        "def": {
+          "Transition": 1.12,
+          "Isolation": 0.92,
+          "PRBallHandler": 0.86,
+          "PRRollman": 1.23,
+          "Postup": 0.97,
+          "Spotup": 1.02,
+          "Handoff": 1.05,
+          "Cut": 1.41,
+          "OffScreen": 0.85,
+          "OffRebound": 1.15,
+          "Misc": 0.55
+        }
+      },
+      "MEM": {
+        "off": {
+          "Transition": [
+            0.206,
+            1.07
+          ],
+          "Isolation": [
+            0.047,
+            0.89
+          ],
+          "PRBallHandler": [
+            0.166,
+            0.86
+          ],
+          "PRRollman": [
+            0.056,
+            1.12
+          ],
+          "Postup": [
+            0.036,
+            0.94
+          ],
+          "Spotup": [
+            0.283,
+            1.02
+          ],
+          "Handoff": [
+            0.025,
+            0.9
+          ],
+          "Cut": [
+            0.05,
+            1.28
+          ],
+          "OffScreen": [
+            0.03,
+            1.08
+          ],
+          "OffRebound": [
+            0.051,
+            1.03
+          ],
+          "Misc": [
+            0.05,
+            0.5
+          ]
+        },
+        "def": {
+          "Transition": 1.13,
+          "Isolation": 0.99,
+          "PRBallHandler": 0.91,
+          "PRRollman": 1.05,
+          "Postup": 1.04,
+          "Spotup": 1.05,
+          "Handoff": 0.91,
+          "Cut": 1.44,
+          "OffScreen": 1.04,
+          "OffRebound": 1.17,
+          "Misc": 0.53
+        }
+      },
+      "MIA": {
+        "off": {
+          "Transition": [
+            0.249,
+            1.1
+          ],
+          "Isolation": [
+            0.089,
+            0.95
+          ],
+          "PRBallHandler": [
+            0.056,
+            0.87
+          ],
+          "PRRollman": [
+            0.022,
+            1.07
+          ],
+          "Postup": [
+            0.039,
+            0.93
+          ],
+          "Spotup": [
+            0.343,
+            1.05
+          ],
+          "Handoff": [
+            0.013,
+            0.98
+          ],
+          "Cut": [
+            0.049,
+            1.28
+          ],
+          "OffScreen": [
+            0.036,
+            0.96
+          ],
+          "OffRebound": [
+            0.056,
+            1.13
+          ],
+          "Misc": [
+            0.048,
+            0.46
+          ]
+        },
+        "def": {
+          "Transition": 1.13,
+          "Isolation": 0.92,
+          "PRBallHandler": 0.9,
+          "PRRollman": 1.07,
+          "Postup": 1.06,
+          "Spotup": 1.02,
+          "Handoff": 0.86,
+          "Cut": 1.21,
+          "OffScreen": 1.02,
+          "OffRebound": 1.17,
+          "Misc": 0.53
+        }
+      },
+      "MIL": {
+        "off": {
+          "Transition": [
+            0.163,
+            1.08
+          ],
+          "Isolation": [
+            0.059,
+            0.96
+          ],
+          "PRBallHandler": [
+            0.174,
+            0.84
+          ],
+          "PRRollman": [
+            0.065,
+            1.18
+          ],
+          "Postup": [
+            0.05,
+            1.02
+          ],
+          "Spotup": [
+            0.268,
+            1.13
+          ],
+          "Handoff": [
+            0.051,
+            0.92
+          ],
+          "Cut": [
+            0.052,
+            1.34
+          ],
+          "OffScreen": [
+            0.023,
+            0.96
+          ],
+          "OffRebound": [
+            0.04,
+            1.08
+          ],
+          "Misc": [
+            0.056,
+            0.41
+          ]
+        },
+        "def": {
+          "Transition": 1.13,
+          "Isolation": 0.95,
+          "PRBallHandler": 0.89,
+          "PRRollman": 1.22,
+          "Postup": 0.98,
+          "Spotup": 1.09,
+          "Handoff": 1.03,
+          "Cut": 1.34,
+          "OffScreen": 1.0,
+          "OffRebound": 1.08,
+          "Misc": 0.54
+        }
+      },
+      "MIN": {
+        "off": {
+          "Transition": [
+            0.19,
+            1.17
+          ],
+          "Isolation": [
+            0.096,
+            0.96
+          ],
+          "PRBallHandler": [
+            0.131,
+            0.88
+          ],
+          "PRRollman": [
+            0.042,
+            1.16
+          ],
+          "Postup": [
+            0.041,
+            0.99
+          ],
+          "Spotup": [
+            0.229,
+            1.12
+          ],
+          "Handoff": [
+            0.057,
+            0.98
+          ],
+          "Cut": [
+            0.052,
+            1.18
+          ],
+          "OffScreen": [
+            0.05,
+            0.95
+          ],
+          "OffRebound": [
+            0.056,
+            1.16
+          ],
+          "Misc": [
+            0.055,
+            0.49
+          ]
+        },
+        "def": {
+          "Transition": 1.12,
+          "Isolation": 0.86,
+          "PRBallHandler": 0.88,
+          "PRRollman": 1.09,
+          "Postup": 1.12,
+          "Spotup": 1.03,
+          "Handoff": 0.97,
+          "Cut": 1.23,
+          "OffScreen": 0.9,
+          "OffRebound": 1.03,
+          "Misc": 0.56
+        }
+      },
+      "NOP": {
+        "off": {
+          "Transition": [
+            0.197,
+            1.13
+          ],
+          "Isolation": [
+            0.093,
+            0.95
+          ],
+          "PRBallHandler": [
+            0.148,
+            0.85
+          ],
+          "PRRollman": [
+            0.04,
+            1.12
+          ],
+          "Postup": [
+            0.04,
+            0.94
+          ],
+          "Spotup": [
+            0.223,
+            1.02
+          ],
+          "Handoff": [
+            0.051,
+            0.93
+          ],
+          "Cut": [
+            0.066,
+            1.34
+          ],
+          "OffScreen": [
+            0.026,
+            0.91
+          ],
+          "OffRebound": [
+            0.065,
+            1.09
+          ],
+          "Misc": [
+            0.051,
+            0.47
+          ]
+        },
+        "def": {
+          "Transition": 1.16,
+          "Isolation": 0.91,
+          "PRBallHandler": 0.88,
+          "PRRollman": 1.1,
+          "Postup": 1.07,
+          "Spotup": 1.05,
+          "Handoff": 0.99,
+          "Cut": 1.32,
+          "OffScreen": 0.91,
+          "OffRebound": 1.17,
+          "Misc": 0.51
+        }
+      },
+      "NYK": {
+        "off": {
+          "Transition": [
+            0.182,
+            1.17
+          ],
+          "Isolation": [
+            0.068,
+            0.9
+          ],
+          "PRBallHandler": [
+            0.14,
+            0.91
+          ],
+          "PRRollman": [
+            0.053,
+            1.17
+          ],
+          "Postup": [
+            0.034,
+            0.87
+          ],
+          "Spotup": [
+            0.284,
+            1.07
+          ],
+          "Handoff": [
+            0.048,
+            1.05
+          ],
+          "Cut": [
+            0.056,
+            1.45
+          ],
+          "OffScreen": [
+            0.025,
+            1.0
+          ],
+          "OffRebound": [
+            0.055,
+            1.07
+          ],
+          "Misc": [
+            0.055,
+            0.42
+          ]
+        },
+        "def": {
+          "Transition": 1.17,
+          "Isolation": 0.88,
+          "PRBallHandler": 0.86,
+          "PRRollman": 1.1,
+          "Postup": 1.02,
+          "Spotup": 1.04,
+          "Handoff": 0.93,
+          "Cut": 1.37,
+          "OffScreen": 1.05,
+          "OffRebound": 1.04,
+          "Misc": 0.44
+        }
+      },
+      "OKC": {
+        "off": {
+          "Transition": [
+            0.161,
+            1.21
+          ],
+          "Isolation": [
+            0.097,
+            1.03
+          ],
+          "PRBallHandler": [
+            0.171,
+            0.98
+          ],
+          "PRRollman": [
+            0.063,
+            1.11
+          ],
+          "Postup": [
+            0.019,
+            1.08
+          ],
+          "Spotup": [
+            0.261,
+            1.05
+          ],
+          "Handoff": [
+            0.043,
+            0.96
+          ],
+          "Cut": [
+            0.071,
+            1.3
+          ],
+          "OffScreen": [
+            0.024,
+            1.03
+          ],
+          "OffRebound": [
+            0.039,
+            1.18
+          ],
+          "Misc": [
+            0.053,
+            0.57
+          ]
+        },
+        "def": {
+          "Transition": 1.02,
+          "Isolation": 0.86,
+          "PRBallHandler": 0.81,
+          "PRRollman": 1.04,
+          "Postup": 0.91,
+          "Spotup": 1.05,
+          "Handoff": 0.83,
+          "Cut": 1.22,
+          "OffScreen": 0.91,
+          "OffRebound": 1.04,
+          "Misc": 0.33
+        }
+      },
+      "ORL": {
+        "off": {
+          "Transition": [
+            0.19,
+            1.15
+          ],
+          "Isolation": [
+            0.067,
+            0.85
+          ],
+          "PRBallHandler": [
+            0.16,
+            0.86
+          ],
+          "PRRollman": [
+            0.05,
+            1.1
+          ],
+          "Postup": [
+            0.034,
+            1.06
+          ],
+          "Spotup": [
+            0.237,
+            1.0
+          ],
+          "Handoff": [
+            0.044,
+            0.93
+          ],
+          "Cut": [
+            0.073,
+            1.31
+          ],
+          "OffScreen": [
+            0.034,
+            0.99
+          ],
+          "OffRebound": [
+            0.053,
+            1.2
+          ],
+          "Misc": [
+            0.058,
+            0.5
+          ]
+        },
+        "def": {
+          "Transition": 1.12,
+          "Isolation": 0.95,
+          "PRBallHandler": 0.9,
+          "PRRollman": 1.14,
+          "Postup": 1.07,
+          "Spotup": 1.05,
+          "Handoff": 0.99,
+          "Cut": 1.33,
+          "OffScreen": 0.88,
+          "OffRebound": 1.08,
+          "Misc": 0.51
+        }
+      },
+      "PHI": {
+        "off": {
+          "Transition": [
+            0.185,
+            1.16
+          ],
+          "Isolation": [
+            0.099,
+            0.92
+          ],
+          "PRBallHandler": [
+            0.141,
+            0.89
+          ],
+          "PRRollman": [
+            0.045,
+            1.0
+          ],
+          "Postup": [
+            0.039,
+            1.1
+          ],
+          "Spotup": [
+            0.23,
+            1.04
+          ],
+          "Handoff": [
+            0.04,
+            0.97
+          ],
+          "Cut": [
+            0.062,
+            1.27
+          ],
+          "OffScreen": [
+            0.033,
+            0.98
+          ],
+          "OffRebound": [
+            0.067,
+            1.07
+          ],
+          "Misc": [
+            0.059,
+            0.51
+          ]
+        },
+        "def": {
+          "Transition": 1.13,
+          "Isolation": 0.92,
+          "PRBallHandler": 0.82,
+          "PRRollman": 1.12,
+          "Postup": 0.99,
+          "Spotup": 1.03,
+          "Handoff": 0.92,
+          "Cut": 1.33,
+          "OffScreen": 0.89,
+          "OffRebound": 1.19,
+          "Misc": 0.52
+        }
+      },
+      "PHX": {
+        "off": {
+          "Transition": [
+            0.159,
+            1.13
+          ],
+          "Isolation": [
+            0.069,
+            0.96
+          ],
+          "PRBallHandler": [
+            0.203,
+            0.88
+          ],
+          "PRRollman": [
+            0.05,
+            1.08
+          ],
+          "Postup": [
+            0.025,
+            0.97
+          ],
+          "Spotup": [
+            0.238,
+            1.08
+          ],
+          "Handoff": [
+            0.049,
+            0.96
+          ],
+          "Cut": [
+            0.059,
+            1.24
+          ],
+          "OffScreen": [
+            0.034,
+            0.92
+          ],
+          "OffRebound": [
+            0.058,
+            1.0
+          ],
+          "Misc": [
+            0.055,
+            0.48
+          ]
+        },
+        "def": {
+          "Transition": 1.1,
+          "Isolation": 0.83,
+          "PRBallHandler": 0.87,
+          "PRRollman": 1.16,
+          "Postup": 0.97,
+          "Spotup": 1.03,
+          "Handoff": 0.93,
+          "Cut": 1.34,
+          "OffScreen": 0.95,
+          "OffRebound": 1.18,
+          "Misc": 0.43
+        }
+      },
+      "POR": {
+        "off": {
+          "Transition": [
+            0.178,
+            1.11
+          ],
+          "Isolation": [
+            0.075,
+            0.89
+          ],
+          "PRBallHandler": [
+            0.171,
+            0.83
+          ],
+          "PRRollman": [
+            0.05,
+            1.1
+          ],
+          "Postup": [
+            0.015,
+            0.92
+          ],
+          "Spotup": [
+            0.277,
+            1.0
+          ],
+          "Handoff": [
+            0.035,
+            0.9
+          ],
+          "Cut": [
+            0.067,
+            1.26
+          ],
+          "OffScreen": [
+            0.021,
+            0.82
+          ],
+          "OffRebound": [
+            0.058,
+            1.12
+          ],
+          "Misc": [
+            0.053,
+            0.51
+          ]
+        },
+        "def": {
+          "Transition": 1.12,
+          "Isolation": 0.94,
+          "PRBallHandler": 0.91,
+          "PRRollman": 1.08,
+          "Postup": 0.94,
+          "Spotup": 1.05,
+          "Handoff": 0.93,
+          "Cut": 1.26,
+          "OffScreen": 0.9,
+          "OffRebound": 1.08,
+          "Misc": 0.43
+        }
+      },
+      "SAC": {
+        "off": {
+          "Transition": [
+            0.162,
+            1.1
+          ],
+          "Isolation": [
+            0.08,
+            0.9
+          ],
+          "PRBallHandler": [
+            0.166,
+            0.82
+          ],
+          "PRRollman": [
+            0.068,
+            1.09
+          ],
+          "Postup": [
+            0.043,
+            1.02
+          ],
+          "Spotup": [
+            0.229,
+            0.98
+          ],
+          "Handoff": [
+            0.039,
+            0.95
+          ],
+          "Cut": [
+            0.075,
+            1.23
+          ],
+          "OffScreen": [
+            0.034,
+            1.1
+          ],
+          "OffRebound": [
+            0.051,
+            1.18
+          ],
+          "Misc": [
+            0.052,
+            0.44
+          ]
+        },
+        "def": {
+          "Transition": 1.17,
+          "Isolation": 0.98,
+          "PRBallHandler": 0.94,
+          "PRRollman": 1.22,
+          "Postup": 1.09,
+          "Spotup": 1.09,
+          "Handoff": 0.96,
+          "Cut": 1.35,
+          "OffScreen": 1.13,
+          "OffRebound": 1.18,
+          "Misc": 0.47
+        }
+      },
+      "SAS": {
+        "off": {
+          "Transition": [
+            0.213,
+            1.15
+          ],
+          "Isolation": [
+            0.064,
+            0.89
+          ],
+          "PRBallHandler": [
+            0.122,
+            0.88
+          ],
+          "PRRollman": [
+            0.043,
+            1.26
+          ],
+          "Postup": [
+            0.024,
+            1.01
+          ],
+          "Spotup": [
+            0.269,
+            1.08
+          ],
+          "Handoff": [
+            0.051,
+            0.98
+          ],
+          "Cut": [
+            0.06,
+            1.39
+          ],
+          "OffScreen": [
+            0.05,
+            0.96
+          ],
+          "OffRebound": [
+            0.054,
+            1.19
+          ],
+          "Misc": [
+            0.051,
+            0.55
+          ]
+        },
+        "def": {
+          "Transition": 1.09,
+          "Isolation": 0.93,
+          "PRBallHandler": 0.83,
+          "PRRollman": 1.03,
+          "Postup": 0.86,
+          "Spotup": 1.03,
+          "Handoff": 0.93,
+          "Cut": 1.25,
+          "OffScreen": 1.02,
+          "OffRebound": 1.16,
+          "Misc": 0.51
+        }
+      },
+      "TOR": {
+        "off": {
+          "Transition": [
+            0.225,
+            1.14
+          ],
+          "Isolation": [
+            0.056,
+            0.88
+          ],
+          "PRBallHandler": [
+            0.127,
+            0.84
+          ],
+          "PRRollman": [
+            0.049,
+            1.17
+          ],
+          "Postup": [
+            0.039,
+            1.04
+          ],
+          "Spotup": [
+            0.238,
+            1.0
+          ],
+          "Handoff": [
+            0.041,
+            1.01
+          ],
+          "Cut": [
+            0.092,
+            1.31
+          ],
+          "OffScreen": [
+            0.042,
+            1.02
+          ],
+          "OffRebound": [
+            0.049,
+            1.05
+          ],
+          "Misc": [
+            0.044,
+            0.43
+          ]
+        },
+        "def": {
+          "Transition": 1.13,
+          "Isolation": 0.9,
+          "PRBallHandler": 0.9,
+          "PRRollman": 1.09,
+          "Postup": 1.02,
+          "Spotup": 1.04,
+          "Handoff": 0.93,
+          "Cut": 1.4,
+          "OffScreen": 0.99,
+          "OffRebound": 1.07,
+          "Misc": 0.39
+        }
+      },
+      "UTA": {
+        "off": {
+          "Transition": [
+            0.196,
+            1.15
+          ],
+          "Isolation": [
+            0.062,
+            0.88
+          ],
+          "PRBallHandler": [
+            0.125,
+            0.9
+          ],
+          "PRRollman": [
+            0.053,
+            0.99
+          ],
+          "Postup": [
+            0.022,
+            0.95
+          ],
+          "Spotup": [
+            0.213,
+            1.03
+          ],
+          "Handoff": [
+            0.059,
+            0.97
+          ],
+          "Cut": [
+            0.081,
+            1.3
+          ],
+          "OffScreen": [
+            0.071,
+            0.91
+          ],
+          "OffRebound": [
+            0.055,
+            1.06
+          ],
+          "Misc": [
+            0.063,
+            0.42
+          ]
+        },
+        "def": {
+          "Transition": 1.17,
+          "Isolation": 0.97,
+          "PRBallHandler": 0.93,
+          "PRRollman": 1.22,
+          "Postup": 1.05,
+          "Spotup": 1.08,
+          "Handoff": 1.04,
+          "Cut": 1.34,
+          "OffScreen": 0.99,
+          "OffRebound": 1.17,
+          "Misc": 0.5
+        }
+      },
+      "WAS": {
+        "off": {
+          "Transition": [
+            0.184,
+            1.03
+          ],
+          "Isolation": [
+            0.069,
+            0.84
+          ],
+          "PRBallHandler": [
+            0.184,
+            0.91
+          ],
+          "PRRollman": [
+            0.07,
+            1.14
+          ],
+          "Postup": [
+            0.024,
+            0.93
+          ],
+          "Spotup": [
+            0.207,
+            0.97
+          ],
+          "Handoff": [
+            0.054,
+            0.9
+          ],
+          "Cut": [
+            0.059,
+            1.33
+          ],
+          "OffScreen": [
+            0.035,
+            0.95
+          ],
+          "OffRebound": [
+            0.057,
+            1.27
+          ],
+          "Misc": [
+            0.058,
+            0.51
+          ]
+        },
+        "def": {
+          "Transition": 1.18,
+          "Isolation": 0.9,
+          "PRBallHandler": 0.92,
+          "PRRollman": 1.06,
+          "Postup": 1.02,
+          "Spotup": 1.12,
+          "Handoff": 1.08,
+          "Cut": 1.34,
+          "OffScreen": 1.0,
+          "OffRebound": 1.1,
+          "Misc": 0.53
+        }
+      }
+    }
   }
 };
