@@ -106,7 +106,9 @@ def pull_date(key, date, markets, gmap, spent):
             continue
         # two snapshots: OPEN (~5h pre-tip, softer) and CLOSE (~10min pre-tip, sharp),
         # so we can measure closing-line edge AND opening-line CLV (where game edge lived)
-        snaps = {"open": commence - timedelta(hours=5), "close": commence - timedelta(minutes=10)}
+        # -12h = the true opening (props posted ~75% coverage, ~1pt of movement to close);
+        # -5h was too settled (0.33pt). -10min = sharp closing line.
+        snaps = {"open": commence - timedelta(hours=12), "close": commence - timedelta(minutes=10)}
         for market in markets:
             for tag, ts in snaps.items():
                 out = RAW / f"{gid}_{market}_{tag}.json"
