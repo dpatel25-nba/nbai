@@ -51,7 +51,7 @@ SIM1 = ROOT / "data" / "features" / "sim_mode1_predictions.parquet"
 TMPL = ROOT / "data" / "parquet" / "rotation_templates.parquet"
 AFF = ROOT / "data" / "parquet" / "assignment_affinity.parquet"
 DQ = ROOT / "data" / "parquet" / "defender_quality_v2.parquet"
-SEASON = "2025-26"
+DEFAULT_SEASON = "2025-26"
 
 
 def load_sim_module():
@@ -75,11 +75,14 @@ def main() -> None:
     ap.add_argument("--sims", type=int, default=150)
     ap.add_argument("--minutes", choices=["projected", "actual"], default="projected")
     ap.add_argument("--seed", type=int, default=11)
+    ap.add_argument("--season", default=DEFAULT_SEASON,
+                    help="evaluate on a season the parameters were NOT tuned on")
     ap.add_argument("--ingame", choices=["on", "off"], default="on",
                     help="use in-season updated rates (script 131) vs prior-season only")
     args = ap.parse_args()
 
     S = load_sim_module()
+    SEASON = args.season
     games = pd.read_parquet(GAMES)
     gs = games[(games.SEASON == SEASON) & (games.SEASON_TYPE == "Regular Season")]
     rng = np.random.default_rng(args.seed)
@@ -89,8 +92,15 @@ def main() -> None:
     rates, pos = S.build_rates(SEASON)
     tmpl = pd.read_parquet(TMPL)
     aff = pd.read_parquet(AFF).set_index("dpos")[S.POSITIONS].to_numpy()
-    defq = S.defensive_index(SEASON)
-    if not defq:
+    dq_raw = S.defensive_index(SEASON)
+    defq_by_game = {}
+    if dq_raw and isinstance(next(iter(dq_raw)), tuple):
+        for (gg, pp), vv in dq_raw.items():
+            defq_by_game.setdefault(gg, {})[pp] = vv
+        defq = {}
+    else:
+        defq = dq_raw
+    if not defq and not defq_by_game:
         dq = pd.read_parquet(DQ)
         dq = dq[dq.SEASON == SEASON]
         defq = {int(r.PLAYER_ID): float(r.DEF_RATING) for r in dq.itertuples()}
@@ -151,6 +161,8 @@ def main() -> None:
         if not ok:
             continue
 
+        if defq_by_game:
+            sim.defq = defq_by_game.get(gid, {})
         if game_rates:
             ov = dict(base_rates)
             for tag in sides:

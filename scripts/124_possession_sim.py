@@ -282,8 +282,15 @@ def team_pace_ingame(season: str, k_games: float = 20.0) -> dict:
     return out
 
 
-def defensive_index(season: str) -> dict:
-    """Per-player defensive quality from PRIOR-season hustle activity.
+def defensive_index(season: str, ingame: bool = True) -> dict:
+    """Per-player defensive quality from hustle activity.
+
+    Returns either a season-level dict {pid: z} or, with `ingame`, a per-game
+    dict {(GAME_ID, pid): z} that blends the prior season with what the player
+    has actually done SO FAR this season — the same temporal blindness that was
+    costing the player rates and the pace model. Deflection rate is persistent
+    (year-over-year r = +0.82), so the prior is a strong starting point, but by
+    midseason the current year should dominate.
 
     Replaces defender_quality_v2, which script 89 showed adds zero portable
     signal and which the metric's own docstring flags as descriptive-only.
@@ -321,8 +328,31 @@ def defensive_index(season: str) -> dict:
     lg_rate = g.defl.sum() / g.mins.sum()
     raw = g.defl / g.mins
     g["r"] = ((raw * g.mins + lg_rate * K_DEFL) / (g.mins + K_DEFL)) * 36
-    z = (g.r - g.r.mean()) / (g.r.std(ddof=0) or 1.0)
-    return {int(p): float(v) for p, v in zip(g.PLAYER_ID, z)}
+    mu, sd = float(g.r.mean()), float(g.r.std(ddof=0) or 1.0)
+    prior_rate = {int(p): float(v) for p, v in zip(g.PLAYER_ID, g.r)}
+    if not ingame:
+        return {p: (v - mu) / sd for p, v in prior_rate.items()}
+
+    cur = pd.read_parquet(HUS, columns=["SEASON", "SEASON_TYPE", "GAME_ID",
+                                        "GAME_DATE", "PLAYER_ID", "MINUTES",
+                                        "DEFLECTIONS"])
+    cur = cur[(cur.SEASON == season) & (cur.SEASON_TYPE == "Regular Season")].copy()
+    if not len(cur):
+        return {p: (v - mu) / sd for p, v in prior_rate.items()}
+    cur["mins"] = pd.to_numeric(cur.MINUTES.astype(str).str.split(":").str[0],
+                                errors="coerce").fillna(0)
+    cur = cur.sort_values("GAME_DATE")
+    acc, out = defaultdict(lambda: [0.0, 0.0]), {}
+    for r in cur.itertuples():
+        pid = int(r.PLAYER_ID)
+        d_td, m_td = acc[pid]
+        base = prior_rate.get(pid, mu)
+        obs = (d_td / m_td * 36.0) if m_td > 0 else base
+        blended = (m_td * obs + K_DEFL * base) / (m_td + K_DEFL)
+        out[(r.GAME_ID, pid)] = (blended - mu) / sd
+        acc[pid][0] += (r.DEFLECTIONS or 0)
+        acc[pid][1] += r.mins
+    return out
 
 
 def team_pace(season: str) -> dict:
@@ -414,13 +444,25 @@ class Simulator:
         return sum(p["minutes"] * self.bpm.get(p["pid"], -1.5)
                    for p in players) / 48.0
 
-    def _team_ppp(self, players) -> float:
+    def _team_ppp(self, players, opp=None) -> float:
         """Expected points per possession for a lineup, in closed form.
 
         Includes the offensive-rebound geometric tail: a possession that misses
         and is rebounded by the offence gets another attempt, so the expectation
         is E1 / (1 - continuation), not E1.
         """
+        # The engine now resolves offensive rebounds from the two lineups, so the
+        # anchor has to use the SAME rate. Leaving it at the league constant made
+        # a strong rebounding team overshoot its calibration target — Denver's
+        # projected margin drifted from +8.1 to +13.9 before this was matched up.
+        p_oreb = LG["oreb"]
+        if opp:
+            mw = lambda pl, c: (sum(x["minutes"] * self.rates[x["pid"]][c] for x in pl)
+                                / max(sum(x["minutes"] for x in pl), 1e-9)) * 5.0
+            off_s = mw(players, "OREB_36") / self._ref["OREB_36"]
+            def_s = mw(opp, "DREB_36") / self._ref["DREB_36"]
+            odds = (LG["oreb"] / (1 - LG["oreb"])) * (off_s / max(def_s, 1e-6))
+            p_oreb = float(np.clip(odds / (1 + odds), 0.06, 0.50))
         num = den = 0.0
         for p in players:
             r = self.rates[p["pid"]]
@@ -430,7 +472,7 @@ class Simulator:
             q = np.array([r["FG2A_36"], r["FG3A_36"], 0.44 * r["FTA_36"], r["TOV_36"]]) / upp
             e1 = (q[0] * 2 * r["FG2_PCT"] + q[1] * 3 * r["FG3_PCT"]
                   + q[2] * 2.27 * r["FT_PCT"])
-            cont = (q[0] * (1 - r["FG2_PCT"]) + q[1] * (1 - r["FG3_PCT"])) * LG["oreb"]
+            cont = (q[0] * (1 - r["FG2_PCT"]) + q[1] * (1 - r["FG3_PCT"])) * p_oreb
             ppp = e1 / (1 - cont) if cont < 0.95 else e1
             w = p["minutes"] * upp          # possessions this player is likely to use
             num += w * ppp
@@ -530,7 +572,9 @@ class Simulator:
                 # depleted roster would silently cancel the absence out — the
                 # team would be rescaled right back to full strength.
                 base = ref.get(tag) or sides[tag]["players"]
-                ppp = self._team_ppp(base)
+                other = "A" if tag == "H" else "H"
+                base_opp = ref.get(other) or sides[other]["players"]
+                ppp = self._team_ppp(base, base_opp)
                 if ppp <= 0 or pace <= 0:
                     continue
                 scale = float(np.clip((target / pace) / ppp, 0.80, 1.25))
@@ -805,7 +849,11 @@ def main() -> None:
     args_game = args.game
     tmpl = pd.read_parquet(TMPL)
     aff = pd.read_parquet(AFF).set_index("dpos")[POSITIONS].to_numpy()
-    defq = defensive_index(g.SEASON)
+    _dq = defensive_index(g.SEASON)
+    if _dq and isinstance(next(iter(_dq)), tuple):
+        defq = {p: v for (gg, p), v in _dq.items() if gg == args.game}
+    else:
+        defq = _dq
     if not defq:
         dq = pd.read_parquet(DQ)
         dq = dq[dq.SEASON == g.SEASON]
