@@ -116,8 +116,62 @@ def on_court(lu, gid, t, team):
     return None
 
 
+def within_season(S120, season="2024-25", split=0.6):
+    """The FAIR test for pair chemistry: train on a season's early games and test
+    on its later ones, so rosters are mostly intact. The cross-season test was
+    structurally unfair — trades and signings had dissolved most pairs before
+    they were ever scored."""
+    rows, _ = assists_for(season, S120)
+    lu = lineup_lookup(season)
+    gids = sorted({r[0] for r in rows})
+    cut = gids[int(len(gids) * split)]
+    early = [r for r in rows if r[0] < cut]
+    late = [r for r in rows if r[0] >= cut]
+    pair, by_p, by_s, grand = defaultdict(float), defaultdict(float), defaultdict(float), 0.0
+    for _, _, _, sc, pa in early:
+        pair[(pa, sc)] += 1
+        by_p[pa] += 1
+        by_s[sc] += 1
+        grand += 1
+    ps = pd.read_parquet(PS, columns=["PLAYER_ID", "SEASON", "AST_36"])
+    a36 = {r.PLAYER_ID: r.AST_36 for r in ps[ps.SEASON == season].itertuples()}
+    print(f"\nWITHIN-SEASON test, {season}: fit on {len(early):,} assists "
+          f"from the first {int(split*100)}% of games, scored on {len(late):,}")
+    print(f"  {'K_PAIR':>9}{'top-1 acc':>11}{'log-loss':>11}")
+    base_h, base_ll, n = 0, [], 0
+    for K in (0, 15, 40, 100, 300, 1000):
+        h, lls = 0, []
+        for gid, t, team, sc, pa in late:
+            five = on_court(lu, gid, t, team)
+            if not five or pa not in five or sc not in five:
+                continue
+            mates = [q for q in five if q != sc]
+            if len(mates) < 2:
+                continue
+            b = np.array([a36.get(q, 1.0) + 1e-6 for q in mates]); b = b / b.sum()
+            if K == 0:
+                w = b
+            else:
+                aff = []
+                for q in mates:
+                    e = by_p.get(q, 0.0) * by_s.get(sc, 0.0) / max(grand, 1e-9)
+                    aff.append((pair.get((q, sc), 0.0) + K) / (e + K))
+                w = b * np.array(aff); w = w / w.sum()
+            j = mates.index(pa)
+            h += int(np.argmax(w) == j); lls.append(-np.log(max(w[j], 1e-9)))
+        lab = "baseline (AST_36 only)" if K == 0 else str(K)
+        print(f"  {lab:>9}{h/len(lls)*100:>10.1f}%{np.mean(lls):>11.4f}")
+        if K == 0:
+            base_h, base_ll, n = h, np.mean(lls), len(lls)
+    print(f"  scored on {n:,} assisted makes")
+
+
 def main() -> None:
     S120 = load_120()
+    import sys
+    if "--within" in sys.argv:
+        within_season(S120)
+        return
 
     # ---- fit pair rates on the training seasons ----
     pair = defaultdict(float)      # (passer, scorer) -> assists
