@@ -129,6 +129,15 @@ def main() -> None:
     for r in pg.itertuples():
         played_full[(r.TEAM_ID, r.SEASON, r.PLAYER_ID)].add(r.GAME_ID)
 
+    # Exponentially-weighted form. Script 130 showed a flat window is two wrong
+    # assumptions at once — that the last N games matter equally and game N+1 not
+    # at all — and that a steady-state Kalman filter on a random walk reduces to
+    # this. Alphas were chosen on seasons before 2021-22 and scored after:
+    # minutes want fast adaptation (role drifts), scoring wants slow (efficiency
+    # is stable), so they get different memories rather than one shared window.
+    A_MIN, A_PTS, A_REB, A_AST = 0.25, 0.15, 0.15, 0.15
+    ewm = defaultdict(lambda: {})
+
     hist = defaultdict(lambda: deque(maxlen=10))   # (min, pts, reb, ast, started, fga, fta)
     vac_hist = defaultdict(lambda: deque(maxlen=10))  # tonight's vacated_min per past game
     date_hist = defaultdict(lambda: deque(maxlen=10))  # (date, min) for recent-load
@@ -160,7 +169,10 @@ def main() -> None:
             own_m10 = sum(1 for g in teamsched[max(0, pos - 10):pos] if g not in plset)
             load3 = sum(m for dt, m in date_hist[r.PLAYER_ID]
                         if 0 < (r.GAME_DATE - dt).days <= 3)
+            e = ewm[r.PLAYER_ID]
             rows.append({
+                "ewm_min": e.get("min", M[-1]), "ewm_pts": e.get("pts", P[-1]),
+                "ewm_reb": e.get("reb", R[-1]), "ewm_ast": e.get("ast", A[-1]),
                 "SEASON": r.SEASON, "PLAYER_ID": r.PLAYER_ID, "GAME_ID": r.GAME_ID,
                 "MIN": r.MIN, "points": r.points, "reb": r.reboundsTotal, "ast": r.assists,
                 "proj_mpg": pm, "proj_pts36": pjs["PTS"], "proj_reb36": pjs["REB"], "proj_ast36": pjs["AST"],
@@ -181,6 +193,10 @@ def main() -> None:
                 "opp_def": face.get((r.GAME_ID, r.TEAM_ID), 0.0),
                 "home": int(r.HOME_AWAY == "HOME"), "rest": min(rest, 7), "b2b": int(rest == 1),
             })
+        e = ewm[r.PLAYER_ID]
+        for key, val, al in (("min", r.MIN, A_MIN), ("pts", r.points, A_PTS),
+                             ("reb", r.reboundsTotal, A_REB), ("ast", r.assists, A_AST)):
+            e[key] = val if key not in e else al * val + (1 - al) * e[key]
         hist[r.PLAYER_ID].append((r.MIN, r.points, r.reboundsTotal, r.assists, r.started,
                                   r.fieldGoalsAttempted, r.freeThrowsAttempted))
         vac_hist[r.PLAYER_ID].append(vac_min.get((r.GAME_ID, r.TEAM_ID), 0.0))

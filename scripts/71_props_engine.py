@@ -58,7 +58,9 @@ def main() -> None:
     #    minutes; scripts 90/91): minutes MAE 4.87 -> 4.78, best of every feature tried.
     mfeat = ["proj_mpg", "recent_min3", "recent_min5", "recent_min10", "started_last", "rest",
              "vacated_min", "vacated_pos", "vacated_delta",
-             "load3", "own_missed3", "own_missed10"]   # own availability + fatigue (script 93)
+             "load3", "own_missed3", "own_missed10",   # own availability + fatigue (script 93)
+             "ewm_min"]      # exponentially-weighted minutes (script 130): -3.04%
+                             # against the best flat window on its own
     pmin = walk_forward(df[mfeat], df.MIN.to_numpy(), season)
     df["pred_min"] = np.where(np.isnan(pmin), df.proj_mpg, pmin)
     print(f"Props engine — {mask.sum():,} test player-games (honest: projected minutes)\n")
@@ -70,6 +72,7 @@ def main() -> None:
         "reb":    ("proj_reb36", "recent_reb5", "recent_reb10", "recent_r36"),
         "ast":    ("proj_ast36", "recent_ast5", "recent_ast10", "recent_a36"),
     }
+    ewm_of = {"points": "ewm_pts", "reb": "ewm_reb", "ast": "ewm_ast"}
     # vacated helps the RATE too, not just minutes: teammates out -> usage spike
     # (points 4.598 -> 4.568). Both channels validated (script 92 + rate test).
     vac = ["vacated_min", "vacated_pos", "vacated_delta"]
@@ -79,7 +82,7 @@ def main() -> None:
     print(f"{'stat':<8}{'engine MAE':>12}{'naive MAE':>12}{'80% cover':>12}")
     for stat, (prate, r5, r10, r36) in specs.items():
         feats = (["pred_min", prate, r5, r10, r36, "opp_def", "home", "rest"]
-                 + vac + usage_eff.get(stat, []))
+                 + vac + usage_eff.get(stat, []) + [ewm_of[stat]])
         pred = walk_forward(df[feats], df[stat].to_numpy(), season)
         naive = df[prate].to_numpy() * df.pred_min.to_numpy() / 36.0
         df[f"pred_{stat}"] = pred
