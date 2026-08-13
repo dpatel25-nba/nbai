@@ -243,20 +243,19 @@ def main() -> None:
 
     print("\n1. WIN PROBABILITY")
     print(f"   {'model':<26}{'acc':>8}{'logloss':>10}{'brier':>9}")
-    for nm, col in [("possession sim (raw)", "p_home"),
-                    ("possession sim (calibrated)", "p_cal"),
+    for nm, col in [("possession sim", "p_home"),
                     ("Elo baseline", "p_elo"), ("Mode-1 sim", "p_s1")]:
         v = d[col].dropna()
         if len(v) > 10:
             acc, ll, br = metrics(v.to_numpy(), d.loc[v.index, "home_win"].to_numpy())
             print(f"   {nm:<26}{acc:>8.3f}{ll:>10.4f}{br:>9.4f}")
 
-    h = d[d._held]
-    if len(h) > 20:
-        acc, ll, br = metrics(h.p_cal.to_numpy(), h.home_win.to_numpy())
-        print(f"   {'  (calibrated, HELD-OUT half only)':<26}{acc:>8.3f}{ll:>10.4f}{br:>9.4f}"
-              f"   sd={best_sd:.2f}")
-
+    # The width-recalibration that used to sit here is gone. Fitted on half the
+    # games it produced sd = 9.00, 11.00, 13.50 and 17.75 across four runs, and
+    # made held-out log-loss WORSE than the raw simulator in two of them. A
+    # parameter that swings 2x between samples of the same season is fitting
+    # noise. Mode-1 and Elo own win probability; the simulator reports its raw
+    # number and does not pretend to compete there.
     print("\n2. SCORE PREDICTION (MAE)")
     print(f"   {'model':<26}{'margin':>9}{'total':>9}")
     print(f"   {'possession sim (new)':<26}"
