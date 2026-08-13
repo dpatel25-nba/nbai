@@ -119,6 +119,7 @@ def main() -> None:
         for r in ig.itertuples():
             game_rates[(r.GAME_ID, int(r.PLAYER_ID))] = {c: getattr(r, c) for c in rc}
         print(f"in-season rates loaded: {len(game_rates):,} player-games", flush=True)
+    pace_ig = S.team_pace_ingame(SEASON)
     base_rates = sim.rates
     pmin = {(r.GAME_ID, int(r.PLAYER_ID)): r.pred_min for r in props.itertuples()}
     ppts = {(r.GAME_ID, int(r.PLAYER_ID)): r.pred_points for r in props.itertuples()}
@@ -163,7 +164,10 @@ def main() -> None:
         res, box, _ = sim.simulate(sides["H"], sides["A"], g.HOME_TEAM_ID,
                                    g.AWAY_TEAM_ID, n_sims=args.sims,
                                    seed=int(rng.integers(1 << 30)),
-                                   anchor=anchors.get(gid))
+                                   anchor=anchors.get(gid),
+                                   pace_pair=(pace_ig.get((gid, g.HOME_TEAM_ID)),
+                                              pace_ig.get((gid, g.AWAY_TEAM_ID)))
+                                   if (gid, g.HOME_TEAM_ID) in pace_ig else None)
         h, a = res["H"], res["A"]
         m = h - a
         rows.append({"GAME_ID": gid, "p_home": float((m > 0).mean()),
