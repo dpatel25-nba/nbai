@@ -224,6 +224,45 @@ def main() -> None:
         print(f"  {'+ ' + str(k) + ' x player pace effects':<40}"
               f"{np.abs(act - pred).mean():>9.4f}")
 
+    # ---- is tempo a TEAM property or a LINEUP property? ----
+    # This project's recurring lesson is that aggregates beat granularity. Tempo
+    # is the exception, and it is worth showing rather than asserting: team-level
+    # tendencies wash out because a team's starters and bench play at very
+    # different speeds, so the team mean sits between them and describes neither.
+    # CRITICAL: team residuals must be measured against the SAME baseline the
+    # player model uses (the ridge start-type coefficients), not against raw group
+    # means. Mixing the two put the comparison on different intercepts and made
+    # "+ opponent tempo" look worse than predicting nothing.
+    tr["resid"] = tr.dur - tr.start.map(start_fx).fillna(tmean)
+    off_t = tr.groupby("off_team").resid.mean().to_dict()
+    g = pd.read_parquet(ROOT / "data" / "parquet" / "games.parquet",
+                        columns=["GAME_ID", "HOME_TEAM_ID", "AWAY_TEAM_ID"])
+    ha = {r.GAME_ID: (r.HOME_TEAM_ID, r.AWAY_TEAM_ID) for r in g.itertuples()}
+
+    def dteam(df):
+        return [None if r.GAME_ID not in ha else
+                (ha[r.GAME_ID][1] if r.off_team == ha[r.GAME_ID][0] else ha[r.GAME_ID][0])
+                for r in df.itertuples()]
+    tr2 = tr.assign(def_team=dteam(tr)).dropna(subset=["def_team"])
+    def_t = tr2.groupby("def_team").resid.mean().to_dict()
+    te2 = te.assign(def_team=dteam(te)).dropna(subset=["def_team"])
+    b2 = te2.start.map(start_fx).fillna(tmean).to_numpy()
+    o2 = te2.off_team.map(off_t).fillna(0.0).to_numpy()
+    d2 = te2.def_team.map(def_t).fillna(0.0).to_numpy()
+    a2 = te2.dur.to_numpy()
+    print(f"\n  TEAM-level tempo, same held-out season ({len(te2):,} possessions):")
+    print(f"  {'start-type only':<40}{np.abs(a2 - b2).mean():>9.4f}")
+    print(f"  {'+ own team tempo':<40}{np.abs(a2 - b2 - o2).mean():>9.4f}")
+    print(f"  {'+ own + opponent team tempo':<40}{np.abs(a2 - b2 - o2 - d2).mean():>9.4f}")
+    # centre both team effects so they add to the ridge baseline coherently
+    mo, md = float(np.mean(list(off_t.values()))), float(np.mean(list(def_t.values())))
+    o2c, d2c = o2 - mo, d2 - md
+    print(f"  {'+ own team tempo (centred)':<40}{np.abs(a2 - b2 - o2c).mean():>9.4f}")
+    print(f"  {'+ own + opponent team tempo (centred)':<40}"
+          f"{np.abs(a2 - b2 - o2c - d2c).mean():>9.4f}")
+    print(f"  team spread: own {np.std(list(off_t.values())):.3f}s  "
+          f"opp {np.std(list(def_t.values())):.3f}s")
+
 
 if __name__ == "__main__":
     main()
