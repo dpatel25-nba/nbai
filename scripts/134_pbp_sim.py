@@ -57,7 +57,7 @@ DUR_BY_START = {"live_to": 8.9, "rebound": 10.3, "dead_to": 14.7, "make": 16.3,
 DUR_CV = 0.56          # sd/mean of possession length, from the observed spread
 PERIOD_LEN = 720.0
 OT_LEN = 300.0
-LINEUP_PACE_SHRINK = 0.35   # how much of a lineup's raw pace deviation to trust
+PACE_RAPM = ROOT / "data" / "parquet" / "pace_rapm.parquet"
 
 
 def load124():
@@ -77,6 +77,17 @@ def clock_str(period: int, remaining: float) -> str:
 class PbpGame:
     """One clock-driven game that records every event as it happens."""
 
+    def _load_pace_effects(self):
+        """Per-player possession-duration effects (script 136), centred so an
+        average lineup gets no adjustment and the pace calibration is preserved."""
+        if not PACE_RAPM.exists():
+            return {}, {}, 0.0
+        t = pd.read_parquet(PACE_RAPM)
+        off = {int(r.PLAYER_ID): float(r.OFF_SEC) for r in t.itertuples()}
+        dfn = {int(r.PLAYER_ID): float(r.DEF_SEC) for r in t.itertuples()}
+        centre = 5.0 * (float(t.OFF_SEC.mean()) + float(t.DEF_SEC.mean()))
+        return off, dfn, centre
+
     def __init__(self, S, sim, sides, home_tid, away_tid, pace_pair, rng):
         self.S, self.sim, self.sides = S, sim, sides
         self.tid = {"H": home_tid, "A": away_tid}
@@ -95,6 +106,7 @@ class PbpGame:
             pids, M = sim.occupancy(sides[t])
             self.lu[t] = sim._lineups(pids, M, rng)
         self.on = {t: list(self.lu[t][0]) for t in ("H", "A")}
+        self.p_off, self.p_def, self.p_centre = self._load_pace_effects()
 
     def _state_scale(self, period, rem, own_margin) -> float:
         """Clock management. Measured against a 12.1s baseline, pace is flat all
@@ -177,8 +189,15 @@ class PbpGame:
             while rem > 0:
                 self.sub_check(period, rem, elapsed_total)
                 own = self.score[off] - self.score[dfn]
-                dur = min(self._duration(start_kind,
-                                         scale * self._state_scale(period, rem, own)), rem)
+                # who is on the floor changes how long a possession takes:
+                # Trae Young and De'Aaron Fox shorten their own, Mitchell Robinson
+                # and Bam Adebayo lengthen them, and pests like VanVleet force the
+                # opponent to burn clock. Validated at -4.2% held-out (script 136).
+                padj = (sum(self.p_off.get(int(q), 0.0) for q in self.on[off])
+                        + sum(self.p_def.get(int(q), 0.0) for q in self.on[dfn])
+                        - self.p_centre)
+                dur = min(max(self._duration(
+                    start_kind, scale * self._state_scale(period, rem, own)) + padj, 1.0), rem)
                 rem -= dur
                 elapsed_total += dur
                 start_kind = self.possession(off, dfn, period, rem)
