@@ -14,11 +14,16 @@ echo "==> Bundling data/ (~7 GB raw; compresses to ~2-3 GB). This takes a few mi
 tar czf "$OUT/nbai-data.tgz" data/          # includes data/raw, parquet, features, .odds_key
 echo "    $OUT/nbai-data.tgz  ($(du -h "$OUT/nbai-data.tgz" | cut -f1))"
 
-# research findings / memory that live OUTSIDE the repo (also copied into docs/research-notes)
-MEM="$HOME/.claude/projects/-Users-kids-Documents-nba-data/memory"
-if [ -d "$MEM" ]; then
+# research findings / memory that live OUTSIDE the repo (also copied into docs/research-notes).
+# Claude Code keys each project by its absolute path with "/" replaced by "-", so derive
+# the slug from where this script actually lives instead of hardcoding one machine's path.
+MEM="$HOME/.claude/projects/$(pwd -P | tr '/' '-')/memory"
+if [ -d "$MEM" ] && [ -n "$(ls -A "$MEM" 2>/dev/null)" ]; then
   tar czf "$OUT/nbai-memory.tgz" -C "$(dirname "$MEM")" memory
   echo "    $OUT/nbai-memory.tgz  ($(du -h "$OUT/nbai-memory.tgz" | cut -f1))"
+else
+  echo "    ! no Claude Code memory found at $MEM — skipping nbai-memory.tgz"
+  echo "      (the same findings are in docs/research-notes/, which travel with git)"
 fi
 
 # checksums so you can confirm the transfer wasn't corrupted
