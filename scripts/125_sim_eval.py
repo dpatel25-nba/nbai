@@ -206,14 +206,44 @@ def main() -> None:
         columns={"P_HOME": "p_s1", "pred_margin": "m_s1", "pred_total": "t_s1"})
     d = d.merge(elo, on="GAME_ID", how="left").merge(s1, on="GAME_ID", how="left")
 
+    # The possession engine is over-dispersed on margin: per-game sd ~16.7
+    # against an actual conditional sd near 14.4, because possessions are drawn
+    # independently while real basketball has stabilising feedback (leads relax
+    # defences, pace adjusts, garbage time compresses). Reading P(margin>0) off
+    # that distribution yields UNDER-CONFIDENT probabilities. Recalibrate the
+    # width on held-out games, as sim_mode1 already does with phi(m/MARGIN_SD).
+    import math
+    gl2 = d.GAME_ID.unique()
+    rc2 = np.random.default_rng(1)
+    cg = set(rc2.choice(gl2, max(1, len(gl2) // 2), replace=False))
+    cal = d[d.GAME_ID.isin(cg)]
+    best_sd, best_ll = None, None
+    for sd_try in np.arange(9.0, 20.1, 0.25):
+        pc = np.array([0.5 * (1 + math.erf(m / (sd_try * math.sqrt(2))))
+                       for m in cal.pred_margin])
+        pc = np.clip(pc, 1e-6, 1 - 1e-6)
+        ll = -np.mean(cal.home_win * np.log(pc) + (1 - cal.home_win) * np.log(1 - pc))
+        if best_ll is None or ll < best_ll:
+            best_sd, best_ll = float(sd_try), float(ll)
+    d["p_cal"] = [0.5 * (1 + math.erf(m / (best_sd * math.sqrt(2))))
+                  for m in d.pred_margin]
+    d["_held"] = ~d.GAME_ID.isin(cg)
+
     print("\n1. WIN PROBABILITY")
     print(f"   {'model':<26}{'acc':>8}{'logloss':>10}{'brier':>9}")
-    for nm, col in [("possession sim (new)", "p_home"), ("Elo baseline", "p_elo"),
-                    ("Mode-1 sim", "p_s1")]:
+    for nm, col in [("possession sim (raw)", "p_home"),
+                    ("possession sim (calibrated)", "p_cal"),
+                    ("Elo baseline", "p_elo"), ("Mode-1 sim", "p_s1")]:
         v = d[col].dropna()
         if len(v) > 10:
             acc, ll, br = metrics(v.to_numpy(), d.loc[v.index, "home_win"].to_numpy())
             print(f"   {nm:<26}{acc:>8.3f}{ll:>10.4f}{br:>9.4f}")
+
+    h = d[d._held]
+    if len(h) > 20:
+        acc, ll, br = metrics(h.p_cal.to_numpy(), h.home_win.to_numpy())
+        print(f"   {'  (calibrated, HELD-OUT half only)':<26}{acc:>8.3f}{ll:>10.4f}{br:>9.4f}"
+              f"   sd={best_sd:.2f}")
 
     print("\n2. SCORE PREDICTION (MAE)")
     print(f"   {'model':<26}{'margin':>9}{'total':>9}")

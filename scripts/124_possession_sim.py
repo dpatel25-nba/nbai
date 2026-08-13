@@ -60,17 +60,30 @@ POSITIONS = ["G", "F", "C"]
 
 # league constants, calibrated from our own data in calibrate()
 USE_SHRINK = 0.72     # damping on per-game usage variation
+MIN_JITTER_SHRINK = 1.0  # damping on per-player minutes variation (no effect on team spread)
 FOUL_OUT = 6          # personal fouls that disqualify
 NONSHOOT_FOUL = 0.092 # per-possession chance of a non-shooting foul
 FOUL_BENCH = 5        # coaches sit a player on this many fouls until late
 GARBAGE_MARGIN = 18   # lead that empties the benches late
-TEAM_SHOOT_SD = 0.045 # team-wide hot/cold shooting night
+# Shooting luck splits into a SHARED game component (both teams shoot well in
+# the same loose game) and a TEAM-specific one. Only the team-specific part moves
+# the margin; the shared part moves the total. Drawing it all as team-specific
+# over-dispersed the margin (sd 17.8 against an actual residual sd of ~14.5),
+# which makes win probabilities under-confident.
+SHOOT_SD_SHARED = 0.045
+SHOOT_SD_TEAM = 0.012
 # measured from game logs, 2023-24+. The offensive-rebound rate was hardcoded at
 # 0.23 against an actual mean of 0.250, biased low on every possession.
 LG = {"oreb": 0.250, "ast3": 0.82, "ast2": 0.50, "ft_per_trip": 1.9,
       "stl_share": 0.566,    # share of turnovers that are steals
       "team_reb": 0.072,     # misses booked as TEAM rebounds, credited to nobody
-      "blk_share": 0.235}    # share of missed TWOS blocked. The measured 0.104
+      "blk_share": 0.235,
+      # endgame behaviour, measured from Q4 play-by-play. A trailing team's
+      # three-point share climbs from ~40% to 46.5% inside two minutes and 64.8%
+      # in the last 24 seconds, and it fouls 3-6x more often to stop the clock.
+      # Ignoring this distorts exactly the close games that decide win
+      # probability.
+      "late3_2min": 1.16, "late3_final": 1.62, "hack_prob": 0.55}    # share of missed TWOS blocked. The measured 0.104
                              # is blocks over ALL missed FGs; applying that to
                              # twos alone produced half the real block count.
 
@@ -446,6 +459,7 @@ class Simulator:
             if pids is not None:
                 f = np.array([self._pdraw(self.min_pools[b], seed, sim, q, 1)
                               for b, q in zip(buckets, pids)])
+                f = 1.0 + MIN_JITTER_SHRINK * (f - 1.0)
             else:
                 f = np.array([rng.choice(self.min_pools[b]) for b in buckets])
         else:
@@ -559,7 +573,9 @@ class Simulator:
             # A team's shooting travels together on a given night — makes are not
             # independent across teammates. Without a shared multiplier the team
             # total is under-dispersed, the classic independent-possession flaw.
-            self._hot = {t: float(np.exp(rng.normal(0, TEAM_SHOOT_SD))) for t in sides}
+            shared = float(np.exp(rng.normal(0, SHOOT_SD_SHARED)))
+            self._hot = {t: shared * float(np.exp(rng.normal(0, SHOOT_SD_TEAM)))
+                         for t in sides}
             fouls = {t: defaultdict(int) for t in sides}
             out = {t: set() for t in sides}
             garbage = False
@@ -573,8 +589,9 @@ class Simulator:
                                       rng, garbage, fouls[off], not late)
                     dv = self._active(lu[dfn][slot], out[dfn], sides[dfn]["pids"],
                                       rng, garbage, fouls[dfn], not late)
-                    res[off][sim] += self._possession(off, dfn, on, dv, rng, box,
-                                                      sim, fouls[dfn], out[dfn])
+                    res[off][sim] += self._possession(
+                        off, dfn, on, dv, rng, box, sim, fouls[dfn], out[dfn],
+                        rem=npos - i, margin=res[off][sim] - res[dfn][sim])
                 if i > 0.75 * npos and abs(res["H"][sim] - res["A"][sim]) > GARBAGE_MARGIN:
                     garbage = True
             # overtime — a tie has to be played out, otherwise the margin
@@ -622,7 +639,7 @@ class Simulator:
         return np.array(cur[:5]) if len(cur) >= 5 else np.asarray(five)
 
     def _possession(self, off, dfn, on, dfive, rng, box, sim,
-                    dfouls=None, dout=None) -> int:
+                    dfouls=None, dout=None, rem=99, margin=0.0) -> int:
         """One possession, played out through offensive rebounds.
 
         A possession is not one shot: ~23% of misses are rebounded by the offense
@@ -660,6 +677,29 @@ class Simulator:
             if dfouls is not None and rng.random() < NONSHOOT_FOUL:
                 fw = np.array([self.rates[d]["PF_36"] + 1e-6 for d in dfive])
                 charge(int(dfive[rng.choice(5, p=fw / fw.sum())]))
+
+            # endgame: a trailing offence chases threes, and a trailing DEFENCE
+            # fouls deliberately to get the ball back
+            if rem <= 4 and margin < 0:
+                q = probs.copy()
+                mult = LG["late3_final"] if rem <= 1 else LG["late3_2min"]
+                shift = min(q[0] * (mult - 1.0) * q[1] / max(q[0] + q[1], 1e-9), q[0])
+                q[1] += shift
+                q[0] -= shift
+                probs = q / q.sum()
+            if (rem <= 1 and dfouls is not None and -9 <= -margin <= -1
+                    and rng.random() < LG["hack_prob"]):
+                charge_target = int(dfive[rng.choice(5)])
+                if dout is None or charge_target not in dout:
+                    dfouls[charge_target] += 1
+                    box[dfn][charge_target]["PF"][sim] += 1
+                nft = 2
+                pts = sum(1 for _ in range(nft)
+                          if rng.random() < np.clip(r["FT_PCT"], 0.3, 0.99))
+                box[off][user]["FTA"][sim] += nft
+                if pts:
+                    box[off][user]["PTS"][sim] += pts
+                return total + pts
 
             k = rng.choice(4, p=probs)
             pts = 0
