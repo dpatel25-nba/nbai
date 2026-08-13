@@ -61,14 +61,21 @@ POSITIONS = ["G", "F", "C"]
 # league constants, calibrated from our own data in calibrate()
 USE_SHRINK = 0.72     # damping on per-game usage variation
 FOUL_OUT = 6          # personal fouls that disqualify
-NONSHOOT_FOUL = 0.075 # per-possession chance of a non-shooting foul
+NONSHOOT_FOUL = 0.092 # per-possession chance of a non-shooting foul
 FOUL_BENCH = 5        # coaches sit a player on this many fouls until late
 GARBAGE_MARGIN = 18   # lead that empties the benches late
 TEAM_SHOOT_SD = 0.045 # team-wide hot/cold shooting night
-LG = {"oreb": 0.23, "ast3": 0.82, "ast2": 0.50, "ft_per_trip": 1.9}
+# measured from game logs, 2023-24+. The offensive-rebound rate was hardcoded at
+# 0.23 against an actual mean of 0.250, biased low on every possession.
+LG = {"oreb": 0.250, "ast3": 0.82, "ast2": 0.50, "ft_per_trip": 1.9,
+      "stl_share": 0.566,    # share of turnovers that are steals
+      "team_reb": 0.072,     # misses booked as TEAM rebounds, credited to nobody
+      "blk_share": 0.235}    # share of missed TWOS blocked. The measured 0.104
+                             # is blocks over ALL missed FGs; applying that to
+                             # twos alone produced half the real block count.
 
 RATE_COLS = ["FGA_36", "FG3A_36", "FTA_36", "TOV_36", "OREB_36", "DREB_36",
-             "AST_36", "PF_36", "MPG"]
+             "AST_36", "PF_36", "STL_36", "BLK_36", "MPG"]
 PCT_COLS = ["FG3_PCT", "FT_PCT"]
 
 
@@ -329,6 +336,14 @@ class Simulator:
         # at nearly the same per-possession efficiency.
         self.bpm = bpm or {}
         self.min_pools = min_pools
+        # reference on-court totals, so lineup strength is measured RELATIVE to a
+        # league-average five rather than in raw per-36 units
+        vals = list(self.rates.values()) or [getattr(self.rates, "fallback", {})]
+        def _mean(c):
+            xs = [v.get(c, 0.0) for v in vals if c in v]
+            return float(np.mean(xs)) if xs else 1.0
+        self._ref = {c: 5.0 * max(_mean(c), 1e-6)
+                     for c in ("OREB_36", "DREB_36", "AST_36", "STL_36", "BLK_36")}
         self.use_pool = use_pool
         self._use_mult = {}
         self.tmpl = {(int(r.started), int(r.bucket)): np.array(r.curve)
@@ -671,22 +686,50 @@ class Simulator:
                 box[off][user]["FTA"][sim] += nft
             else:                                             # turnover
                 box[off][user]["TOV"][sim] += 1
+                # 56.6% of turnovers are steals; credit one to a defender
+                if rng.random() < LG["stl_share"]:
+                    sw = np.array([self.rates[d]["STL_36"] + 1e-6 for d in dfive])
+                    box[dfn][dfive[rng.choice(5, p=sw / sw.sum())]]["STL"][sim] += 1
 
             if pts:
                 box[off][user]["PTS"][sim] += pts
                 total += pts
-                if k in (0, 1) and rng.random() < (LG["ast3"] if k == 1 else LG["ast2"]):
-                    mates = [p for p in on if p != user]
-                    aw2 = np.array([self.rates[p]["AST_36"] + 1e-6 for p in mates])
-                    box[off][mates[rng.choice(len(mates), p=aw2 / aw2.sum())]]["AST"][sim] += 1
+                if k in (0, 1):
+                    # assist likelihood scales with how much this five actually
+                    # passes — league AST-per-make spans 0.514 to 0.750
+                    a_s = sum(self.rates[q]["AST_36"] for q in on) / self._ref["AST_36"]
+                    p_ast = float(np.clip((LG["ast3"] if k == 1 else LG["ast2"]) * a_s,
+                                          0.05, 0.95))
+                    if rng.random() < p_ast:
+                        mates = [p for p in on if p != user]
+                        aw2 = np.array([self.rates[p]["AST_36"] + 1e-6 for p in mates])
+                        box[off][mates[rng.choice(len(mates), p=aw2 / aw2.sum())]]["AST"][sim] += 1
                 return total
             if k in (0, 1):                                   # miss -> live rebound
-                if rng.random() < LG["oreb"]:
-                    w = np.array([self.rates[p]["OREB_36"] + 1e-6 for p in on])
-                    box[off][on[rng.choice(5, p=w / w.sum())]]["REB"][sim] += 1
+                # A miss is contested by the five men actually on the floor, so
+                # the OREB rate has to move with them. Team OREB% ranges 0.154 to
+                # 0.350 across games; a single constant discards all of it.
+                # log5 odds: league odds scaled by offensive crashing over
+                # defensive rebounding, both relative to a league-average five.
+                off_s = sum(self.rates[q]["OREB_36"] for q in on) / self._ref["OREB_36"]
+                def_s = sum(self.rates[q]["DREB_36"] for q in dfive) / self._ref["DREB_36"]
+                odds = (LG["oreb"] / (1 - LG["oreb"])) * (off_s / max(def_s, 1e-6))
+                p_oreb = float(np.clip(odds / (1 + odds), 0.06, 0.50))
+                if k == 0 and rng.random() < LG["blk_share"]:
+                    bw = np.array([self.rates[d]["BLK_36"] + 1e-6 for d in dfive])
+                    box[dfn][dfive[rng.choice(5, p=bw / bw.sum())]]["BLK"][sim] += 1
+                # a share of misses are booked as TEAM rebounds (out of bounds,
+                # deadball) and credited to no player — crediting every miss to
+                # an individual inflated rebound totals by ~7%
+                team_reb = rng.random() < LG["team_reb"]
+                if rng.random() < p_oreb:
+                    if not team_reb:
+                        w = np.array([self.rates[p]["OREB_36"] + 1e-6 for p in on])
+                        box[off][on[rng.choice(5, p=w / w.sum())]]["REB"][sim] += 1
                     continue                                  # offence keeps the ball
-                w = np.array([self.rates[p]["DREB_36"] + 1e-6 for p in dfive])
-                box[dfn][dfive[rng.choice(5, p=w / w.sum())]]["REB"][sim] += 1
+                if not team_reb:
+                    w = np.array([self.rates[p]["DREB_36"] + 1e-6 for p in dfive])
+                    box[dfn][dfive[rng.choice(5, p=w / w.sum())]]["REB"][sim] += 1
             return total
         return total
 
