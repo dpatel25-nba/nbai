@@ -83,7 +83,17 @@ LG = {"oreb": 0.250, "ast3": 0.82, "ast2": 0.50, "ft_per_trip": 1.9,
       # in the last 24 seconds, and it fouls 3-6x more often to stop the clock.
       # Ignoring this distorts exactly the close games that decide win
       # probability.
-      "late3_2min": 1.16, "late3_final": 1.62, "hack_prob": 0.55}    # share of missed TWOS blocked. The measured 0.104
+      "late3_2min": 1.16, "late3_final": 1.62, "hack_prob": 0.55,
+      # TRANSITION. Measured from Q1-Q4 pbp: the first shot after a LIVE-ball
+      # turnover is worth 1.213 pts against 1.059 after a made basket (+13.8%),
+      # comes 7 seconds sooner, and is far closer to the rim (11.1ft vs 14.0,
+      # 37.4% threes vs 44.6%). Defensive rebounds do NOT create transition —
+      # they yield 1.026, slightly WORSE than conceding a basket, because after a
+      # make the offence gets to set up. Without this the engine cannot express
+      # why forcing turnovers is worth more than collecting rebounds.
+      "live_to_share": 0.76,   # share of turnovers that are live-ball
+      "trans_make": 1.13,      # make-probability multiplier in transition
+      "trans_3share": 0.84}    # threes are taken less often on the break    # share of missed TWOS blocked. The measured 0.104
                              # is blocks over ALL missed FGs; applying that to
                              # twos alone produced half the real block count.
 
@@ -463,6 +473,19 @@ class Simulator:
             def_s = mw(opp, "DREB_36") / self._ref["DREB_36"]
             odds = (LG["oreb"] / (1 - LG["oreb"])) * (off_s / max(def_s, 1e-6))
             p_oreb = float(np.clip(odds / (1 + odds), 0.06, 0.50))
+        # The engine gets a transition premium after the OPPONENT's live-ball
+        # turnovers, so the anchor must expect it too — otherwise the level is
+        # calibrated against a slower offence than the one actually simulated.
+        trans_lift = 1.0
+        if opp:
+            tw = sum(x["minutes"] for x in opp) or 1e-9
+            opp_to = sum(x["minutes"] * (self.rates[x["pid"]]["TOV_36"] /
+                         max(self.rates[x["pid"]]["FG2A_36"] + self.rates[x["pid"]]["FG3A_36"]
+                             + 0.44 * self.rates[x["pid"]]["FTA_36"]
+                             + self.rates[x["pid"]]["TOV_36"], 1e-9))
+                         for x in opp) / tw
+            p_trans = opp_to * LG["live_to_share"]
+            trans_lift = 1.0 + p_trans * (LG["trans_make"] - 1.0)
         num = den = 0.0
         for p in players:
             r = self.rates[p["pid"]]
@@ -473,7 +496,7 @@ class Simulator:
             e1 = (q[0] * 2 * r["FG2_PCT"] + q[1] * 3 * r["FG3_PCT"]
                   + q[2] * 2.27 * r["FT_PCT"])
             cont = (q[0] * (1 - r["FG2_PCT"]) + q[1] * (1 - r["FG3_PCT"])) * p_oreb
-            ppp = e1 / (1 - cont) if cont < 0.95 else e1
+            ppp = (e1 / (1 - cont) if cont < 0.95 else e1) * trans_lift
             w = p["minutes"] * upp          # possessions this player is likely to use
             num += w * ppp
             den += w
@@ -622,6 +645,7 @@ class Simulator:
                          for t in sides}
             fouls = {t: defaultdict(int) for t in sides}
             out = {t: set() for t in sides}
+            trans = {t: False for t in sides}
             garbage = False
             # possessions ALTERNATE, so the running score is meaningful and
             # garbage time can be detected as it happens
@@ -633,9 +657,14 @@ class Simulator:
                                       rng, garbage, fouls[off], not late)
                     dv = self._active(lu[dfn][slot], out[dfn], sides[dfn]["pids"],
                                       rng, garbage, fouls[dfn], not late)
-                    res[off][sim] += self._possession(
+                    pts_p, live_to = self._possession(
                         off, dfn, on, dv, rng, box, sim, fouls[dfn], out[dfn],
-                        rem=npos - i, margin=res[off][sim] - res[dfn][sim])
+                        rem=npos - i, margin=res[off][sim] - res[dfn][sim],
+                        transition=trans.get(off, False))
+                    res[off][sim] += pts_p
+                    # a live-ball turnover hands the OTHER team a fast break
+                    trans[dfn] = live_to
+                    trans[off] = False
                 if i > 0.75 * npos and abs(res["H"][sim] - res["A"][sim]) > GARBAGE_MARGIN:
                     garbage = True
             # overtime — a tie has to be played out, otherwise the margin
@@ -650,8 +679,9 @@ class Simulator:
                                           sides[off]["pids"], rng, False)
                         dv = self._active(lu[dfn][N_SLOTS - 1], out[dfn],
                                           sides[dfn]["pids"], rng, False)
-                        res[off][sim] += self._possession(off, dfn, on, dv, rng,
-                                                          box, sim, fouls[dfn], out[dfn])
+                        pts_p, _ = self._possession(off, dfn, on, dv, rng,
+                                                    box, sim, fouls[dfn], out[dfn])
+                        res[off][sim] += pts_p
         return res, box, sides
 
     def _active(self, five, out, pool, rng, garbage, fouls=None, protect=False):
@@ -683,7 +713,8 @@ class Simulator:
         return np.array(cur[:5]) if len(cur) >= 5 else np.asarray(five)
 
     def _possession(self, off, dfn, on, dfive, rng, box, sim,
-                    dfouls=None, dout=None, rem=99, margin=0.0) -> int:
+                    dfouls=None, dout=None, rem=99, margin=0.0,
+                    transition=False):
         """One possession, played out through offensive rebounds.
 
         A possession is not one shot: ~23% of misses are rebounded by the offense
@@ -691,6 +722,7 @@ class Simulator:
         shot silently deletes every putback and depresses scoring by ~10%.
         """
         total = 0
+        live_to = False
         for _ in range(4):                       # putback chains beyond this are rare
             use_w = np.array([(self.rates[p]["FG2A_36"] + self.rates[p]["FG3A_36"]
                                + 0.44 * self.rates[p]["FTA_36"] + self.rates[p]["TOV_36"])
@@ -707,6 +739,8 @@ class Simulator:
             # your studies show on-ball defence is a modest slice of the outcome)
             adj = ((1.0 - 0.010 * self.defq.get(defender, 0.0))
                    * self.team_scale[off] * getattr(self, "_hot", {}).get(off, 1.0))
+            if transition:
+                adj *= LG["trans_make"]
 
             def charge(d):
                 """Book a personal foul; disqualify at the limit."""
@@ -724,6 +758,12 @@ class Simulator:
 
             # endgame: a trailing offence chases threes, and a trailing DEFENCE
             # fouls deliberately to get the ball back
+            if transition:                       # fewer threes on the break
+                q = probs.copy()
+                moved = q[1] * (1 - LG["trans_3share"])
+                q[1] -= moved
+                q[0] += moved
+                probs = q / q.sum()
             if rem <= 4 and margin < 0:
                 q = probs.copy()
                 mult = LG["late3_final"] if rem <= 1 else LG["late3_2min"]
@@ -743,7 +783,7 @@ class Simulator:
                 box[off][user]["FTA"][sim] += nft
                 if pts:
                     box[off][user]["PTS"][sim] += pts
-                return total + pts
+                return total + pts, live_to
 
             k = rng.choice(4, p=probs)
             pts = 0
@@ -770,6 +810,7 @@ class Simulator:
                 box[off][user]["FTA"][sim] += nft
             else:                                             # turnover
                 box[off][user]["TOV"][sim] += 1
+                live_to = rng.random() < LG["live_to_share"]
                 # 56.6% of turnovers are steals; credit one to a defender
                 if rng.random() < LG["stl_share"]:
                     sw = np.array([self.rates[d]["STL_36"] + 1e-6 for d in dfive])
@@ -788,7 +829,7 @@ class Simulator:
                         mates = [p for p in on if p != user]
                         aw2 = np.array([self.rates[p]["AST_36"] + 1e-6 for p in mates])
                         box[off][mates[rng.choice(len(mates), p=aw2 / aw2.sum())]]["AST"][sim] += 1
-                return total
+                return total, live_to
             if k in (0, 1):                                   # miss -> live rebound
                 # A miss is contested by the five men actually on the floor, so
                 # the OREB rate has to move with them. Team OREB% ranges 0.154 to
@@ -814,8 +855,8 @@ class Simulator:
                 if not team_reb:
                     w = np.array([self.rates[p]["DREB_36"] + 1e-6 for p in dfive])
                     box[dfn][dfive[rng.choice(5, p=w / w.sum())]]["REB"][sim] += 1
-            return total
-        return total
+            return total, live_to
+        return total, live_to
 
 
 def load_game_context(gid: str, out_ids: set):
