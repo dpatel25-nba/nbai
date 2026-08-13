@@ -96,6 +96,26 @@ class PbpGame:
             self.lu[t] = sim._lineups(pids, M, rng)
         self.on = {t: list(self.lu[t][0]) for t in ("H", "A")}
 
+    def _state_scale(self, period, rem, own_margin) -> float:
+        """Clock management. Measured against a 12.1s baseline, pace is flat all
+        game until the last two minutes, then splits hard: a team trailing by
+        3-9 runs 10.6s in the final two minutes and 7.0s inside 24 seconds
+        (42% faster), while a team leading by 3-9 milks 13.7s. Before that the
+        spread is under a second and not worth modelling."""
+        if period < 4 or rem > 120:
+            return 1.0
+        if rem > 24:
+            if -9 <= own_margin <= -3:
+                return 0.88
+            if 3 <= own_margin <= 9:
+                return 1.13
+            return 1.0
+        if own_margin < 0:
+            return 0.58      # chasing: every second counts
+        if own_margin > 0:
+            return 0.75      # being fouled ends possessions fast anyway
+        return 1.0
+
     # ---- duration ----
     def _duration(self, start_kind: str, scale: float) -> float:
         base = DUR_BY_START.get(start_kind, 12.2) * scale
@@ -156,7 +176,9 @@ class PbpGame:
                                         f"{period if period<=4 else period-4} ---")
             while rem > 0:
                 self.sub_check(period, rem, elapsed_total)
-                dur = min(self._duration(start_kind, scale), rem)
+                own = self.score[off] - self.score[dfn]
+                dur = min(self._duration(start_kind,
+                                         scale * self._state_scale(period, rem, own)), rem)
                 rem -= dur
                 elapsed_total += dur
                 start_kind = self.possession(off, dfn, period, rem)
