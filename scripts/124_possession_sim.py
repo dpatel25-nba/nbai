@@ -52,6 +52,7 @@ DQ = ROOT / "data" / "parquet" / "defender_quality_v2.parquet"
 PROPS = ROOT / "data" / "features" / "props_predictions.parquet"
 SHRINK = ROOT / "data" / "parquet" / "shrinkage_constants.parquet"
 HUS = ROOT / "data" / "parquet" / "player_hustle.parquet"
+ZONES_F = ROOT / "data" / "parquet" / "shot_zones.parquet"
 
 RECENCY = {1: 5.0, 2: 4.0, 3: 3.0}
 K = 1000.0
@@ -203,6 +204,34 @@ def build_rates(season: str) -> tuple[dict, dict]:
         med[c] *= 0.80
     med["MPG"] = 12.0
     return RateBook(full, med), pos
+
+
+ZONES2 = ["rim", "paint", "mid"]
+ZONES3 = ["corner3", "arc3"]
+
+
+def build_zones(season: str):
+    """Marcel-projected shot-zone profile per player, prior seasons only.
+
+    Replaces a single FG2_PCT/FG3_PCT with a mix over five zones. The league
+    spread is enormous — rim 1.357 pts/shot against mid-range 0.829 — so a
+    rim-runner and a mid-range shooter with equal two-point accuracy previously
+    simulated identically. Zones also give defence a way to matter that a make-
+    probability multiplier cannot express: pushing shots away from the rim.
+    """
+    if not ZONES_F.exists():
+        return {}, {}
+    z = pd.read_parquet(ZONES_F)
+    cols = [f"sh_{c}" for c in ZONES2 + ZONES3] + [f"fg_{c}" for c in ZONES2 + ZONES3]
+    proj = {c: marcel(z, c, weight="FGA", k=400.0) for c in cols}
+    out = defaultdict(dict)
+    for c in cols:
+        for (pid, sn), v in proj[c].items():
+            if sn == season:
+                out[pid][c] = v
+    full = {p: r for p, r in out.items() if len(r) == len(cols)}
+    med = {c: float(np.nanmedian([r[c] for r in full.values()])) for c in cols}
+    return full, med
 
 
 MIN_BINS = (4, 12, 20, 28, 36, 49)
@@ -379,7 +408,7 @@ def team_pace(season: str) -> dict:
 
 class Simulator:
     def __init__(self, rates, pos, tmpl, aff, defq, pace_map, lg_pace, bpm=None,
-                 min_pools=None, use_pool=None):
+                 min_pools=None, use_pool=None, zones=None, zone_fallback=None):
         self.rates, self.pos, self.aff = rates, pos, aff
         self.defq, self.pace_map, self.lg_pace = defq, pace_map, lg_pace
         # BPM3 (WAR v3) is points per 100 possessions above average — the only
@@ -398,6 +427,8 @@ class Simulator:
         self._ref = {c: 5.0 * max(_mean(c), 1e-6)
                      for c in ("OREB_36", "DREB_36", "AST_36", "STL_36", "BLK_36")}
         self.use_pool = use_pool
+        self.zones = zones or {}
+        self.zone_fb = zone_fallback or {}
         self._use_mult = {}
         self.tmpl = {(int(r.started), int(r.bucket)): np.array(r.curve)
                      for r in tmpl.itertuples()}
@@ -493,9 +524,14 @@ class Simulator:
             if upp <= 0:
                 continue
             q = np.array([r["FG2A_36"], r["FG3A_36"], 0.44 * r["FTA_36"], r["TOV_36"]]) / upp
-            e1 = (q[0] * 2 * r["FG2_PCT"] + q[1] * 3 * r["FG3_PCT"]
-                  + q[2] * 2.27 * r["FT_PCT"])
-            cont = (q[0] * (1 - r["FG2_PCT"]) + q[1] * (1 - r["FG3_PCT"])) * p_oreb
+            # the engine now resolves shots by ZONE, so the closed form has to
+            # value them the same way or the calibration drifts
+            v2 = self._zone_value(p["pid"], False)
+            v3 = self._zone_value(p["pid"], True)
+            e2 = v2 if v2 is not None else 2 * r["FG2_PCT"]
+            e3 = v3 if v3 is not None else 3 * r["FG3_PCT"]
+            e1 = q[0] * e2 + q[1] * e3 + q[2] * 2.27 * r["FT_PCT"]
+            cont = (q[0] * (1 - e2 / 2.0) + q[1] * (1 - e3 / 3.0)) * p_oreb
             ppp = (e1 / (1 - cont) if cont < 0.95 else e1) * trans_lift
             w = p["minutes"] * upp          # possessions this player is likely to use
             num += w * ppp
@@ -556,6 +592,36 @@ class Simulator:
         return out
 
     # ---- possession outcome ----
+    def _zone(self, pid):
+        return self.zones.get(pid, self.zone_fb)
+
+    def _zone_value(self, pid, three: bool) -> float:
+        """Expected points per attempt for this player's zone mix on 2s or 3s."""
+        z = self._zone(pid)
+        if not z:
+            return None
+        names = ZONES3 if three else ZONES2
+        val = 3.0 if three else 2.0
+        tot = sum(z.get(f"sh_{c}", 0.0) for c in names)
+        if tot <= 0:
+            return None
+        return sum(z.get(f"sh_{c}", 0.0) / tot * z.get(f"fg_{c}", 0.4) * val for c in names)
+
+    def _draw_zone(self, pid, three: bool, rng, transition=False):
+        z = self._zone(pid)
+        names = ZONES3 if three else ZONES2
+        if not z:
+            return None, None
+        w = np.array([max(z.get(f"sh_{c}", 0.0), 1e-9) for c in names])
+        # No transition shift here. Tested at rim multipliers up to 3x and the
+        # zone mix alone moves total scoring only 0.29%, against the ~1% the
+        # measured transition premium requires — rim share is already high, so
+        # there is little headroom. The premium therefore stays on the make
+        # probability (trans_make), which is what the anchor accounts for.
+        # Applying BOTH double-counted it and drifted the anchor +1.5 pts.
+        i = rng.choice(len(names), p=w / w.sum())
+        return names[i], z.get(f"fg_{names[i]}", 0.4)
+
     def _profile(self, pid):
         r = self.rates[pid]
         upp = max(r["FG2A_36"] + r["FG3A_36"] + 0.44 * r["FTA_36"] + r["TOV_36"], 1e-6)
@@ -788,12 +854,16 @@ class Simulator:
             k = rng.choice(4, p=probs)
             pts = 0
             if k == 0:                                        # two-point try
-                made = rng.random() < np.clip(r["FG2_PCT"] * adj, 0.05, 0.95)
+                zn, zfg = self._draw_zone(user, False, rng, transition)
+                base_p = zfg if zfg is not None else r["FG2_PCT"]
+                made = rng.random() < np.clip(base_p * adj, 0.05, 0.95)
                 pts = 2 if made else 0
                 box[off][user]["FGA"][sim] += 1
                 box[off][user]["FGM"][sim] += made
             elif k == 1:                                      # three-point try
-                made = rng.random() < np.clip(r["FG3_PCT"] * adj, 0.05, 0.85)
+                zn, zfg = self._draw_zone(user, True, rng)
+                base_p = zfg if zfg is not None else r["FG3_PCT"]
+                made = rng.random() < np.clip(base_p * adj, 0.05, 0.85)
                 pts = 3 if made else 0
                 box[off][user]["FGA"][sim] += 1
                 box[off][user]["FGM"][sim] += made
@@ -916,7 +986,8 @@ def main() -> None:
                 p["minutes"] *= 240.0 / tot
 
     sim = Simulator(rates, pos, tmpl, aff, defq, pace_map, lg_pace, bpm,
-                    minutes_ratio_pools(g.SEASON), usage_ratio_pool(g.SEASON))
+                    minutes_ratio_pools(g.SEASON), usage_ratio_pool(g.SEASON),
+                    *build_zones(g.SEASON))
     res, box, meta = sim.simulate(sides["H"], sides["A"], g.HOME_TEAM_ID,
                                   g.AWAY_TEAM_ID, n_sims=args.sims,
                                   anchor=anchor, anchor_ref=full)
