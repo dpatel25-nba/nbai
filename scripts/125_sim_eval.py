@@ -75,6 +75,8 @@ def main() -> None:
     ap.add_argument("--sims", type=int, default=150)
     ap.add_argument("--minutes", choices=["projected", "actual"], default="projected")
     ap.add_argument("--seed", type=int, default=11)
+    ap.add_argument("--ingame", choices=["on", "off"], default="on",
+                    help="use in-season updated rates (script 131) vs prior-season only")
     args = ap.parse_args()
 
     S = load_sim_module()
@@ -106,6 +108,18 @@ def main() -> None:
     props = props[props.SEASON == SEASON]
     s1a = pd.read_parquet(SIM1)[["GAME_ID", "MU_HOME", "MU_AWAY"]]
     anchors = {r.GAME_ID: (r.MU_HOME, r.MU_AWAY) for r in s1a.itertuples()}
+    # in-season empirical-Bayes rates (script 131): the simulator otherwise sees
+    # only prior seasons and discards everything observed since October
+    IGR = ROOT / "data" / "parquet" / "ingame_rates" / f"{SEASON}.parquet"
+    game_rates = {}
+    if args.ingame == "on" and IGR.exists():
+        ig = pd.read_parquet(IGR)
+        rc = [c for c in ig.columns if c not in ("GAME_ID", "PLAYER_ID", "SEASON",
+                                                 "m_todate")]
+        for r in ig.itertuples():
+            game_rates[(r.GAME_ID, int(r.PLAYER_ID))] = {c: getattr(r, c) for c in rc}
+        print(f"in-season rates loaded: {len(game_rates):,} player-games", flush=True)
+    base_rates = sim.rates
     pmin = {(r.GAME_ID, int(r.PLAYER_ID)): r.pred_min for r in props.itertuples()}
     ppts = {(r.GAME_ID, int(r.PLAYER_ID)): r.pred_points for r in props.itertuples()}
 
@@ -136,6 +150,16 @@ def main() -> None:
         if not ok:
             continue
 
+        if game_rates:
+            ov = dict(base_rates)
+            for tag in sides:
+                for pl in sides[tag]:
+                    gr = game_rates.get((gid, pl["pid"]))
+                    if gr:
+                        merged = dict(base_rates[pl["pid"]])
+                        merged.update(gr)
+                        ov[pl["pid"]] = merged
+            sim.rates = S.RateBook(ov, base_rates.fallback)
         res, box, _ = sim.simulate(sides["H"], sides["A"], g.HOME_TEAM_ID,
                                    g.AWAY_TEAM_ID, n_sims=args.sims,
                                    seed=int(rng.integers(1 << 30)),
