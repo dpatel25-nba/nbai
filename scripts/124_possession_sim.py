@@ -258,10 +258,18 @@ def defensive_index(season: str) -> dict:
                               errors="coerce").fillna(0)
     g = h.groupby("PLAYER_ID").agg(mins=("mins", "sum"),
                                    defl=("DEFLECTIONS", "sum")).reset_index()
-    g = g[g.mins >= 300]
+    g = g[g.mins >= 200]
     if len(g) < 30:
         return {}
-    g["r"] = g.defl / g.mins * 36
+    # Empirical-Bayes shrinkage toward the league rate. Raw per-36 rates let
+    # small-sample players rank alongside genuine stoppers — Paul Reed and
+    # Trevelin Queen were scoring near Thybulle and Caruso purely on ~300
+    # minutes of noise. K is the minutes at which a player's own rate and the
+    # league mean carry equal weight.
+    K_DEFL = 900.0
+    lg_rate = g.defl.sum() / g.mins.sum()
+    raw = g.defl / g.mins
+    g["r"] = ((raw * g.mins + lg_rate * K_DEFL) / (g.mins + K_DEFL)) * 36
     z = (g.r - g.r.mean()) / (g.r.std(ddof=0) or 1.0)
     return {int(p): float(v) for p, v in zip(g.PLAYER_ID, z)}
 
