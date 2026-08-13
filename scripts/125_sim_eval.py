@@ -87,9 +87,11 @@ def main() -> None:
     rates, pos = S.build_rates(SEASON)
     tmpl = pd.read_parquet(TMPL)
     aff = pd.read_parquet(AFF).set_index("dpos")[S.POSITIONS].to_numpy()
-    dq = pd.read_parquet(DQ)
-    dq = dq[dq.SEASON == SEASON]
-    defq = {int(r.PLAYER_ID): float(r.DEF_RATING) for r in dq.itertuples()}
+    defq = S.defensive_index(SEASON)
+    if not defq:
+        dq = pd.read_parquet(DQ)
+        dq = dq[dq.SEASON == SEASON]
+        defq = {int(r.PLAYER_ID): float(r.DEF_RATING) for r in dq.itertuples()}
     pace_map, lg_pace = S.team_pace(SEASON)
     w3 = pd.read_parquet(ROOT / "data" / "parquet" / "player_seasons_war_v3.parquet")
     w3 = w3[w3.SEASON == SEASON]

@@ -51,6 +51,7 @@ AFF = ROOT / "data" / "parquet" / "assignment_affinity.parquet"
 DQ = ROOT / "data" / "parquet" / "defender_quality_v2.parquet"
 PROPS = ROOT / "data" / "features" / "props_predictions.parquet"
 SHRINK = ROOT / "data" / "parquet" / "shrinkage_constants.parquet"
+HUS = ROOT / "data" / "parquet" / "player_hustle.parquet"
 
 RECENCY = {1: 5.0, 2: 4.0, 3: 3.0}
 K = 1000.0
@@ -228,6 +229,41 @@ def min_bucket(m: float) -> int:
         if MIN_BINS[i] <= m < MIN_BINS[i + 1]:
             return i
     return 0 if m < MIN_BINS[0] else len(MIN_BINS) - 2
+
+
+def defensive_index(season: str) -> dict:
+    """Per-player defensive quality from PRIOR-season hustle activity.
+
+    Replaces defender_quality_v2, which script 89 showed adds zero portable
+    signal and which the metric's own docstring flags as descriptive-only.
+    Script 128 found deflections are the strongest available defensive predictor
+    -- correlation -0.292 with team defensive rating against -0.256 for rim
+    protection and -0.181 for box DBPM, and -4.8% CV RMSE on top of both.
+
+    Prior season only, so simulating a game never consults its own season.
+    """
+    order = [f"{y}-{str(y + 1)[2:]}" for y in range(2013, 2027)]
+    idx = order.index(season) if season in order else 0
+    if idx == 0:
+        return {}
+    prev = order[idx - 1]
+    if not HUS.exists():
+        return {}
+    h = pd.read_parquet(HUS, columns=["SEASON", "SEASON_TYPE", "PLAYER_ID",
+                                      "MINUTES", "DEFLECTIONS"])
+    h = h[(h.SEASON == prev) & (h.SEASON_TYPE == "Regular Season")].copy()
+    if not len(h):
+        return {}
+    h["mins"] = pd.to_numeric(h.MINUTES.astype(str).str.split(":").str[0],
+                              errors="coerce").fillna(0)
+    g = h.groupby("PLAYER_ID").agg(mins=("mins", "sum"),
+                                   defl=("DEFLECTIONS", "sum")).reset_index()
+    g = g[g.mins >= 300]
+    if len(g) < 30:
+        return {}
+    g["r"] = g.defl / g.mins * 36
+    z = (g.r - g.r.mean()) / (g.r.std(ddof=0) or 1.0)
+    return {int(p): float(v) for p, v in zip(g.PLAYER_ID, z)}
 
 
 def team_pace(season: str) -> dict:
@@ -646,9 +682,11 @@ def main() -> None:
     args_game = args.game
     tmpl = pd.read_parquet(TMPL)
     aff = pd.read_parquet(AFF).set_index("dpos")[POSITIONS].to_numpy()
-    dq = pd.read_parquet(DQ)
-    dq = dq[dq.SEASON == g.SEASON]
-    defq = {int(r.PLAYER_ID): float(r.DEF_RATING) for r in dq.itertuples()}
+    defq = defensive_index(g.SEASON)
+    if not defq:
+        dq = pd.read_parquet(DQ)
+        dq = dq[dq.SEASON == g.SEASON]
+        defq = {int(r.PLAYER_ID): float(r.DEF_RATING) for r in dq.itertuples()}
     pace_map, lg_pace = team_pace(g.SEASON)
     w3 = pd.read_parquet(ROOT / "data" / "parquet" / "player_seasons_war_v3.parquet")
     w3 = w3[w3.SEASON == g.SEASON]
