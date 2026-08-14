@@ -123,10 +123,34 @@ def rebound():
     print("  ALLOCATION weight they carry the same information the engine already")
     print("  uses. They would only add value if conversion rate varied a lot by")
     print("  player, which is what the ratio spread below shows:")
-    m["conv_o"] = m.oreb / m.OREB_CHANCES.clip(lower=1e-6)
-    m["conv_d"] = m.dreb / m.DREB_CHANCES.clip(lower=1e-6)
-    print(f"  offensive conversion  mean {m.conv_o.mean():.3f}  sd {m.conv_o.std():.3f}")
-    print(f"  defensive conversion  mean {m.conv_d.mean():.3f}  sd {m.conv_d.std():.3f}")
+    # UNITS: the tracking tables are PerGame while the box totals are season
+    # sums, so dividing one by the other gave ratios near 24 and 33 — which is
+    # just games played, not a conversion rate. Compare per-36 to per-36.
+    m["conv_o"] = m.oreb36 / m.ch_o36.clip(lower=1e-6)
+    m["conv_d"] = m.dreb36 / m.ch_d36.clip(lower=1e-6)
+    print(f"  offensive conversion  mean {m.conv_o.mean():.3f}  sd {m.conv_o.std():.3f}"
+          f"  p10-p90 {m.conv_o.quantile(.1):.2f}-{m.conv_o.quantile(.9):.2f}")
+    print(f"  defensive conversion  mean {m.conv_d.mean():.3f}  sd {m.conv_d.std():.3f}"
+          f"  p10-p90 {m.conv_d.quantile(.1):.2f}-{m.conv_d.quantile(.9):.2f}")
+    # does conversion PERSIST? a skill must repeat to be worth modelling
+    prev = pd.read_parquet(TRK)
+    prev = prev[(prev.SEASON == "2023-24") & prev.MIN.notna() & (prev.MIN > 0)].copy()
+    pg2 = pd.read_parquet(PG, columns=["SEASON", "SEASON_TYPE", "PLAYER_ID", "MIN",
+                                       "reboundsOffensive", "reboundsDefensive"])
+    pg2 = pg2[(pg2.SEASON == "2023-24") & (pg2.SEASON_TYPE == "Regular Season") & (pg2.MIN > 0)]
+    g2 = pg2.groupby("PLAYER_ID").agg(mn=("MIN", "sum"),
+                                      dreb=("reboundsDefensive", "sum")).reset_index()
+    g2 = g2[g2.mn >= 500]
+    g2["dreb36"] = g2.dreb / g2.mn * 36
+    m2 = g2.merge(prev[["PLAYER_ID", "MIN", "DREB_CHANCES"]], on="PLAYER_ID")
+    m2["ch"] = m2.DREB_CHANCES / m2.MIN * 36
+    m2["conv"] = m2.dreb36 / m2.ch.clip(lower=1e-6)
+    j = m[["PLAYER_ID", "conv_d"]].merge(m2[["PLAYER_ID", "conv"]], on="PLAYER_ID")
+    if len(j) > 60:
+        print(f"\n  year-over-year correlation of defensive conversion: "
+              f"{np.corrcoef(j.conv_d, j.conv)[0,1]:+.3f}  ({len(j)} players)")
+        print("  (a conversion SKILL must repeat; if this is near zero the spread")
+        print("   above is noise and chances add nothing the engine lacks)")
 
 
 def assisted():
