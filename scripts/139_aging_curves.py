@@ -65,7 +65,8 @@ BIO = ROOT / "data" / "parquet" / "player_bio.parquet"
 OUT = ROOT / "data" / "parquet" / "aging_curves.parquet"
 
 METRICS = ["PTS_36", "REB_36", "AST_36", "MPG", "TS_PCT", "FG3_PCT"]
-MIN_MIN = 400
+import os
+MIN_MIN = int(os.environ.get("AGE_MIN_MIN", 400))
 AGE_LO, AGE_HI = 20, 38
 RECENCY = {1: 5.0, 2: 4.0, 3: 3.0}
 K = 1000.0
@@ -251,9 +252,46 @@ def main() -> None:
         e1 = np.abs(d[m] - (d.proj + adj)).mean()
         print(f"  {m:<10}{e0:>12.4f}{e1:>10.4f}{(e1/e0-1)*100:>9.2f}%"
               f"   {'YES' if e1 < e0 else 'no'}")
-    print("\n  NOTE: this validation is IN-SAMPLE for the curve (the same seasons")
-    print("  built it). It shows the curve is real, not that it generalises — a")
-    print("  walk-forward version needs more birthdate coverage than 411 players.")
+    # ---- WALK-FORWARD: build the curve on early seasons, apply to later ones ----
+    cut = sorted(ps.SEASON.unique())[len(ps.SEASON.unique()) * 2 // 3]
+    print(f"\nWALK-FORWARD — curve fitted on seasons < {cut}, scored on >= {cut}")
+    print(f"  {'metric':<10}{'age-blind':>12}{'age-adj':>10}{'change':>10}   holds?")
+    early = ps[ps.SEASON < cut]
+    for m in ms:
+        # refit the curve using only the early seasons
+        nxt = early[["PLAYER_ID", "si", "MIN", m]].copy()
+        nxt.columns = ["PLAYER_ID", "si", "MIN_n", f"{m}_n"]
+        nxt["si"] = nxt.si - 1
+        pr = early.merge(nxt, on=["PLAYER_ID", "si"])
+        pr = pr[(pr.MIN >= MIN_MIN) & (pr.MIN_n >= MIN_MIN)].dropna(subset=[m, f"{m}_n"])
+        if len(pr) < 300:
+            continue
+        pr["abin"] = pr.age.round().clip(AGE_LO, AGE_HI).astype(int)
+        pr["delta"] = pr[f"{m}_n"] - pr[m]
+        ages = [a for a in sorted(pr.abin.unique()) if (pr.abin == a).sum() >= 20]
+        if len(ages) < 6:
+            continue
+        yearly = {a: np.average(pr.loc[pr.abin == a, "delta"],
+                                weights=np.minimum(pr.loc[pr.abin == a, "MIN"],
+                                                   pr.loc[pr.abin == a, "MIN_n"]))
+                  for a in ages}
+        cum, run = {}, 0.0
+        for a in range(min(ages), max(ages) + 1):
+            run += yearly.get(a, 0.0)
+            cum[a] = run
+        proj = marcel(ps, m, order)
+        late = ps[(ps.SEASON >= cut) & (ps.MIN >= MIN_MIN)].copy()
+        late["proj"] = [proj.get((r.PLAYER_ID, r.si), np.nan) for r in late.itertuples()]
+        late = late.dropna(subset=["proj", m])
+        an = late.age.round().clip(AGE_LO, AGE_HI).astype(int).map(cum).fillna(0.0)
+        ap = (late.age - 1).round().clip(AGE_LO, AGE_HI).astype(int).map(cum).fillna(0.0)
+        e0 = np.abs(late[m] - late.proj).mean()
+        e1 = np.abs(late[m] - (late.proj + (an - ap))).mean()
+        print(f"  {m:<10}{e0:>12.4f}{e1:>10.4f}{(e1/e0-1)*100:>9.2f}%"
+              f"   {'YES' if e1 < e0 else 'no'}")
+
+    print("\n  NOTE: in-sample for the curve — it shows the curve is real, not that")
+    print("  it generalises. Bio coverage is now the full 1,706-player archive.")
 
 
 if __name__ == "__main__":
