@@ -68,6 +68,12 @@ FOUL_OUT = 6          # personal fouls that disqualify
 NONSHOOT_FOUL = 0.092 # per-possession chance of a non-shooting foul
 FOUL_BENCH = 5        # coaches sit a player on this many fouls until late
 GARBAGE_MARGIN = 18   # lead that empties the benches late
+# The lineup sampler redraws every 30s slot, so without strong persistence it
+# substitutes constantly: at the old value of 1.85 it produced 116 substitutions
+# per team per game against a real 24.4, nearly 5x too many. That was invisible
+# until the cold-start feature needed to know how long a player had been on the
+# floor. 35 reproduces roughly the real rate.
+LINEUP_PERSISTENCE = 35.0
 # Shooting luck splits into a SHARED game component (both teams shoot well in
 # the same loose game) and a TEAM-specific one. Only the team-specific part moves
 # the margin; the shared part moves the total. Drawing it all as team-specific
@@ -94,6 +100,13 @@ LG = {"oreb": 0.250, "ast3": 0.82, "ast2": 0.50, "ft_per_trip": 1.9,
       # they yield 1.026, slightly WORSE than conceding a basket, because after a
       # make the offence gets to set up. Without this the engine cannot express
       # why forcing turnovers is worth more than collecting rebounds.
+      # COLD START. A player's first minute on the floor is worth ~0.045 fewer
+      # points per shot than his own norm, replicating across seasons (-0.039 and
+      # -0.043) and monotone thereafter (-0.008, +0.002, +0.006, +0.008). It is
+      # substitution entries, not tip-off: mid-game entries show -0.037 and -0.049.
+      # Note this is the OPPOSITE of fatigue, which was tested and found absent.
+      "cold_make": 0.960,      # make-probability multiplier in the first minute
+      "cold_share": 0.10,      # share of shots taken inside that window
       "live_to_share": 0.76,   # share of turnovers that are live-ball
       "trans_make": 1.13,      # make-probability multiplier in transition
       "trans_3share": 0.84}    # threes are taken less often on the break    # share of missed TWOS blocked. The measured 0.104
@@ -584,6 +597,7 @@ class Simulator:
         # anchor has to use the SAME rate. Leaving it at the league constant made
         # a strong rebounding team overshoot its calibration target — Denver's
         # projected margin drifted from +8.1 to +13.9 before this was matched up.
+        cold_lift = 1.0 - LG["cold_share"] * (1.0 - LG["cold_make"])
         p_oreb = LG["oreb"]
         if opp:
             mw = lambda pl, c: (sum(x["minutes"] * self.rates[x["pid"]][c] for x in pl)
@@ -620,7 +634,7 @@ class Simulator:
             e3 = v3 if v3 is not None else 3 * r["FG3_PCT"]
             e1 = q[0] * e2 + q[1] * e3 + q[2] * 2.27 * r["FT_PCT"]
             cont = (q[0] * (1 - e2 / 2.0) + q[1] * (1 - e3 / 3.0)) * p_oreb
-            ppp = (e1 / (1 - cont) if cont < 0.95 else e1) * trans_lift
+            ppp = (e1 / (1 - cont) if cont < 0.95 else e1) * trans_lift * cold_lift
             w = p["minutes"] * upp          # possessions this player is likely to use
             num += w * ppp
             den += w
@@ -672,7 +686,7 @@ class Simulator:
         for s in range(N_SLOTS):
             w = M[:, s].astype(float).copy()
             if prev:
-                w *= np.where(np.isin(arr, list(prev)), 1.85, 1.0)
+                w *= np.where(np.isin(arr, list(prev)), 1.0 + LINEUP_PERSISTENCE, 1.0)
             w = np.clip(w, 1e-9, None)
             pick = rng.choice(len(arr), 5, replace=False, p=w / w.sum())
             out[s] = arr[pick]
@@ -800,11 +814,25 @@ class Simulator:
             fouls = {t: defaultdict(int) for t in sides}
             out = {t: set() for t in sides}
             trans = {t: False for t in sides}
+            entered = {t: {} for t in sides}      # pid -> slot he came on
+            lastseen = {t: {} for t in sides}     # pid -> last slot on the floor
             garbage = False
             # possessions ALTERNATE, so the running score is meaningful and
             # garbage time can be detected as it happens
             for i in range(npos):
                 slot = min(int(i / npos * N_SLOTS), N_SLOTS - 1)
+                for t in sides:
+                    # A player counts as newly ENTERED only after a real absence.
+                    # The lineup sampler redraws every 30s slot, so a one-slot
+                    # flicker would otherwise reset his clock and mark him cold
+                    # again — which over-applied the penalty and pulled the
+                    # engine 2 points below its anchor.
+                    cur = set(int(q) for q in lu[t][slot])
+                    for q in cur:
+                        gap = slot - lastseen[t].get(q, -99)
+                        if gap >= 2:
+                            entered[t][q] = slot
+                        lastseen[t][q] = slot
                 for off, dfn in (("H", "A"), ("A", "H")):
                     late = i > 0.88 * npos
                     on = self._active(lu[off][slot], out[off], sides[off]["pids"],
@@ -814,7 +842,8 @@ class Simulator:
                     pts_p, live_to = self._possession(
                         off, dfn, on, dv, rng, box, sim, fouls[dfn], out[dfn],
                         rem=npos - i, margin=res[off][sim] - res[dfn][sim],
-                        transition=trans.get(off, False))
+                        transition=trans.get(off, False),
+                        cold={q: slot - e for q, e in entered[off].items()})
                     res[off][sim] += pts_p
                     # a live-ball turnover hands the OTHER team a fast break
                     trans[dfn] = live_to
@@ -868,7 +897,7 @@ class Simulator:
 
     def _possession(self, off, dfn, on, dfive, rng, box, sim,
                     dfouls=None, dout=None, rem=99, margin=0.0,
-                    transition=False):
+                    transition=False, cold=None):
         """One possession, played out through offensive rebounds.
 
         A possession is not one shot: ~23% of misses are rebounded by the offense
@@ -907,6 +936,9 @@ class Simulator:
                    * self.team_scale[off] * getattr(self, "_hot", {}).get(off, 1.0))
             if transition:
                 adj *= LG["trans_make"]
+            # two 30-second slots = the first minute on the floor
+            if cold is not None and cold.get(int(user), 99) < 2:
+                adj *= LG["cold_make"]
 
             def charge(d):
                 """Book a personal foul; disqualify at the limit."""
