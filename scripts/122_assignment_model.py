@@ -49,6 +49,7 @@ STINTS = ROOT / "data" / "parquet" / "stints"
 MU = ROOT / "data" / "parquet" / "matchups.parquet"
 PS = ROOT / "data" / "parquet" / "player_seasons.parquet"
 OUT = ROOT / "data" / "parquet" / "assignment_affinity.parquet"
+BIO = ROOT / "data" / "parquet" / "player_bio.parquet"
 
 FIRST = "2017-18"          # matchup coverage begins here
 TEST = "2025-26"
@@ -160,6 +161,60 @@ def evaluate(df: pd.DataFrame, A: np.ndarray, label: str):
     return pred_pos
 
 
+def height_test(train, test, A):
+    """Does actual height beat G/F/C buckets at predicting who guards whom?
+
+    Positions are a three-level proxy for size. If defenders genuinely match up
+    by height, the height GAP between a defender and the man he is guarding
+    should predict assignment share beyond what position already captures.
+    """
+    if not BIO.exists():
+        print("\n(no bio data yet — skipping the height test)")
+        return
+    bio = pd.read_parquet(BIO)
+    h = {int(r.PLAYER_ID): float(r.HEIGHT_IN) for r in bio.itertuples()
+         if pd.notna(r.HEIGHT_IN)}
+    pi = {p: i for i, p in enumerate(POSITIONS)}
+
+    def prep(d):
+        d = d.copy()
+        d["dh"] = d.DEF_ID.map(h)
+        d["oh"] = d.OFF_ID.map(h)
+        return d.dropna(subset=["dh", "oh"])
+    tr, te = prep(train), prep(test)
+    cov = len(te) / max(len(test), 1)
+    print(f"\n=== HEIGHT vs POSITION in the assignment model ===")
+    print(f"  bio coverage of test rows: {cov*100:.0f}%  ({len(te):,} of {len(test):,})")
+    if len(te) < 5000:
+        print("  too few covered rows to judge")
+        return
+    tr["gap"] = tr.dh - tr.oh
+    te["gap"] = te.dh - te.oh
+    # empirical: how does the height gap relate to being the assigned defender?
+    tr["b"] = pd.cut(tr.gap, [-99, -4, -2, 2, 4, 99],
+                     labels=["4+ shorter", "2-4 shorter", "within 2", "2-4 taller", "4+ taller"])
+    g = tr.groupby("b", observed=True).apply(
+        lambda d: (d.actual.sum() / d.avail.sum()) if d.avail.sum() > 0 else np.nan)
+    print(f"\n  {'height gap (def - off)':<24}{'share vs availability':>22}")
+    for k, v in g.items():
+        print(f"  {str(k):<24}{v:>22.3f}")
+    # fit a multiplicative height term on top of the positional model
+    lift = {k: (v if np.isfinite(v) else 1.0) for k, v in g.items()}
+    di = te.dpos.map(pi).to_numpy(); oi = te.opos.map(pi).to_numpy()
+    base = te.avail.to_numpy() * A[di, oi]
+    hb = pd.cut(te.gap, [-99, -4, -2, 2, 4, 99],
+                labels=["4+ shorter", "2-4 shorter", "within 2", "2-4 taller", "4+ taller"])
+    hmul = hb.map(lift).astype(float).fillna(1.0).to_numpy()
+    act = te.actual.to_numpy()
+    print(f"\n  {'model':<40}{'share MAE':>11}{'corr':>9}")
+    for nm, w in (("availability only", te.avail.to_numpy()),
+                  ("+ position affinity", base),
+                  ("+ position + height gap", base * hmul)):
+        ssum = pd.Series(w).groupby([te.GAME_ID.values, te.OFF_ID.values]).transform("sum").to_numpy()
+        pred = np.where(ssum > 0, w / ssum, 0.0)
+        print(f"  {nm:<40}{np.abs(pred-act).mean():>11.4f}{np.corrcoef(pred,act)[0,1]:>9.3f}")
+
+
 def main() -> None:
     seasons = [s for s in sorted(p.stem for p in STINTS.glob("*.parquet")) if s >= FIRST]
     train_s = [s for s in seasons if s != TEST]
@@ -180,6 +235,8 @@ def main() -> None:
 
     evaluate(train, A, "IN-SAMPLE (train)")
     evaluate(test, A, f"OUT-OF-SAMPLE ({TEST})")
+
+    height_test(train, test, A)
 
     pd.DataFrame(A, index=POSITIONS, columns=POSITIONS).reset_index().rename(
         columns={"index": "dpos"}).to_parquet(OUT, index=False)

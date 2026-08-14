@@ -53,6 +53,7 @@ PROPS = ROOT / "data" / "features" / "props_predictions.parquet"
 SHRINK = ROOT / "data" / "parquet" / "shrinkage_constants.parquet"
 HUS = ROOT / "data" / "parquet" / "player_hustle.parquet"
 ZONES_F = ROOT / "data" / "parquet" / "shot_zones.parquet"
+BIO = ROOT / "data" / "parquet" / "player_bio.parquet"
 
 RECENCY = {1: 5.0, 2: 4.0, 3: 3.0}
 K = 1000.0
@@ -208,6 +209,31 @@ def build_rates(season: str) -> tuple[dict, dict]:
 
 ZONES2 = ["rim", "paint", "mid"]
 ZONES3 = ["corner3", "arc3"]
+
+
+# Defenders match up by SIZE, not just position. Measured from matchup data, the
+# share of an offender's possessions a defender takes, relative to pure
+# availability, by their height gap: 4+ inches shorter 0.657, 2-4 shorter 1.134,
+# within 2 inches 1.340, 2-4 taller 1.009, 4+ taller 0.621. A clean inverted-U on
+# same-size matchups — both mismatches get avoided. Worth -5.6% share MAE on top
+# of the G/F/C affinity, which is only a three-level proxy for the same thing.
+HEIGHT_LIFT = [(-99, -4, 0.657), (-4, -2, 1.134), (-2, 2, 1.340),
+               (2, 4, 1.009), (4, 99, 0.621)]
+
+
+def load_heights() -> dict:
+    if not BIO.exists():
+        return {}
+    b = pd.read_parquet(BIO)
+    return {int(r.PLAYER_ID): float(r.HEIGHT_IN) for r in b.itertuples()
+            if pd.notna(r.HEIGHT_IN)}
+
+
+def height_mult(gap: float) -> float:
+    for lo, hi, v in HEIGHT_LIFT:
+        if lo <= gap < hi:
+            return v
+    return 1.0
 
 
 def build_zones(season: str):
@@ -408,7 +434,8 @@ def team_pace(season: str) -> dict:
 
 class Simulator:
     def __init__(self, rates, pos, tmpl, aff, defq, pace_map, lg_pace, bpm=None,
-                 min_pools=None, use_pool=None, zones=None, zone_fallback=None):
+                 min_pools=None, use_pool=None, zones=None, zone_fallback=None,
+                 heights=None):
         self.rates, self.pos, self.aff = rates, pos, aff
         self.defq, self.pace_map, self.lg_pace = defq, pace_map, lg_pace
         # BPM3 (WAR v3) is points per 100 possessions above average — the only
@@ -429,6 +456,7 @@ class Simulator:
         self.use_pool = use_pool
         self.zones = zones or {}
         self.zone_fb = zone_fallback or {}
+        self.heights = heights or {}
         self._use_mult = {}
         self.tmpl = {(int(r.started), int(r.bucket)): np.array(r.curve)
                      for r in tmpl.itertuples()}
@@ -800,6 +828,12 @@ class Simulator:
             opos = self.pos.get(user, "F")
             aw = np.array([self.aff[POSITIONS.index(self.pos.get(d, "F"))]
                            [POSITIONS.index(opos)] for d in dfive])
+            if self.heights:
+                oh = self.heights.get(int(user))
+                if oh is not None:
+                    aw = aw * np.array([
+                        height_mult(self.heights[int(d)] - oh)
+                        if int(d) in self.heights else 1.0 for d in dfive])
             defender = dfive[rng.choice(5, p=aw / aw.sum())]
             # defender quality shifts the make probability (deliberately small —
             # your studies show on-ball defence is a modest slice of the outcome)
@@ -987,7 +1021,7 @@ def main() -> None:
 
     sim = Simulator(rates, pos, tmpl, aff, defq, pace_map, lg_pace, bpm,
                     minutes_ratio_pools(g.SEASON), usage_ratio_pool(g.SEASON),
-                    *build_zones(g.SEASON))
+                    *build_zones(g.SEASON), load_heights())
     res, box, meta = sim.simulate(sides["H"], sides["A"], g.HOME_TEAM_ID,
                                   g.AWAY_TEAM_ID, n_sims=args.sims,
                                   anchor=anchor, anchor_ref=full)
