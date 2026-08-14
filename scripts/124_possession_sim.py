@@ -54,6 +54,7 @@ SHRINK = ROOT / "data" / "parquet" / "shrinkage_constants.parquet"
 HUS = ROOT / "data" / "parquet" / "player_hustle.parquet"
 ZONES_F = ROOT / "data" / "parquet" / "shot_zones.parquet"
 BIO = ROOT / "data" / "parquet" / "player_bio.parquet"
+ROOKIE = ROOT / "data" / "parquet" / "rookie_priors.parquet"
 
 RECENCY = {1: 5.0, 2: 4.0, 3: 3.0}
 K = 1000.0
@@ -163,7 +164,7 @@ def marcel(df: pd.DataFrame, metric: str, weight="MIN", k=None) -> dict:
 
 
 class RateBook(dict):
-    """Rate lookup with a replacement-level fallback.
+    """Rate lookup with a DRAFT-SLOT-AWARE fallback.
 
     ~20% of players in a season (rookies, two-way call-ups) have no prior-season
     history and so no Marcel projection. Dropping them is NOT harmless: their
@@ -173,11 +174,20 @@ class RateBook(dict):
     and keep their minutes instead of vanishing.
     """
 
-    def __init__(self, d, fallback):
+    def __init__(self, d, fallback, slot_of=None, slot_profiles=None):
         super().__init__(d)
         self.fallback = fallback
+        self.slot_of = slot_of or {}
+        self.slot_profiles = slot_profiles or {}
 
     def __missing__(self, key):
+        # A first overall pick and an undrafted two-way used to get identical
+        # rates. Draft slot predicts ROLE strongly (minutes R2 0.285, FGA/36
+        # 0.220, points/36 0.197) and skill not at all (every shooting
+        # percentage R2 ~ 0), so the slot profile mostly reshapes volume.
+        slot = self.slot_of.get(int(key))
+        if slot is not None and slot in self.slot_profiles:
+            return self.slot_profiles[slot]
         return self.fallback
 
 
@@ -204,7 +214,39 @@ def build_rates(season: str) -> tuple[dict, dict]:
     for c in ("FG2A_36", "FG3A_36", "FTA_36", "AST_36"):
         med[c] *= 0.80
     med["MPG"] = 12.0
-    return RateBook(full, med), pos
+    return RateBook(full, med, *rookie_profiles(cols, med)), pos
+
+
+def rookie_profiles(cols, med):
+    """-> ({player: draft slot}, {slot: rate profile}) for players with no history."""
+    if not (ROOKIE.exists() and BIO.exists()):
+        return {}, {}
+    pri = pd.read_parquet(ROOKIE)
+    bio = pd.read_parquet(BIO)
+    slot_of = {}
+    for r in bio.itertuples():
+        d = str(r.DRAFT_NUMBER)
+        slot_of[int(r.PLAYER_ID)] = 0 if d.lower().startswith("undraft") else (
+            int(d) if d.isdigit() else None)
+    slot_of = {k: v for k, v in slot_of.items() if v is not None}
+    look = defaultdict(dict)
+    for r in pri.itertuples():
+        look[int(r.slot)][r.metric] = float(r.value)
+    profiles = {}
+    for slot, v in look.items():
+        prof = dict(med)
+        for c in cols:
+            if c in v:
+                prof[c] = v[c]
+        # the simulator needs two derived columns the priors do not carry
+        fga, fg3a = v.get("FGA_36", med["FGA_36"]), v.get("FG3A_36", med["FG3A_36"])
+        prof["FG2A_36"] = max(fga - fg3a, 0.1)
+        fgp, fg3p = v.get("FG_PCT", 0.45), v.get("FG3_PCT", 0.33)
+        made = fgp * fga
+        prof["FG2_PCT"] = float(np.clip((made - fg3p * fg3a) / max(fga - fg3a, 0.1),
+                                        0.30, 0.70))
+        profiles[slot] = prof
+    return slot_of, profiles
 
 
 ZONES2 = ["rim", "paint", "mid"]
