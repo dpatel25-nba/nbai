@@ -23,7 +23,7 @@ GAMES = ROOT / "data" / "parquet" / "games.parquet"
 ELO = ROOT / "data" / "features" / "elo_predictions.parquet"
 PBP_DIR = ROOT / "data" / "parquet" / "pbp"
 WAR_F = ROOT / "data" / "parquet" / "player_seasons_war.parquet"
-WAR3_F = ROOT / "data" / "parquet" / "player_seasons_war_v3.parquet"
+WAR4_F = ROOT / "data" / "parquet" / "player_seasons_war_v4.parquet"
 SHOT_F = ROOT / "data" / "parquet" / "player_shot_quality.parquet"
 DEF_F = ROOT / "data" / "parquet" / "defender_quality.parquet"
 CONS_F = ROOT / "data" / "parquet" / "consistency.parquet"
@@ -198,7 +198,9 @@ def four_factors(season: str = LATEST) -> list[dict]:
 
 def player_ratings(season: str = LATEST, topn: int = 60) -> list[dict]:
     """Top players by WAR v3 (box + play-type + tracking), with shot-making + defense."""
-    war = pd.read_parquet(WAR3_F)                          # v3: WAR3/OBPM3/DBPM3
+    # v4 adds hustle-based defence (deflections beat rim protection, script 128);
+    # team-win correlation 0.883 -> 0.892 over the hustle era
+    war = pd.read_parquet(WAR4_F)                          # v4: WAR4/OBPM4/DBPM4
     war = war[war.SEASON == season]
     v1 = pd.read_parquet(WAR_F)
     v1 = v1[v1.SEASON == season][["PLAYER_ID", "MIN", "PTS_PG", "REB_PG", "AST_PG"]]
@@ -212,16 +214,16 @@ def player_ratings(season: str = LATEST, topn: int = 60) -> list[dict]:
             .merge(shot, on="PLAYER_ID", how="left")
             .merge(cons, on="PLAYER_ID", how="left")
             .merge(clutch, on="PLAYER_ID", how="left"))
-    m = m[m["MIN"] >= 500].sort_values("WAR3", ascending=False).head(topn)
+    m = m[m["MIN"] >= 500].sort_values("WAR4", ascending=False).head(topn)
 
     def num(v, d=1):
         return round(float(v), d) if pd.notna(v) else None
     out = []
     for i, r in enumerate(m.itertuples(), 1):
         out.append({"rank": i, "id": int(r.PLAYER_ID), "player": r.PLAYER, "team": r.TEAM,
-                    "war": num(r.WAR3), "off": num(getattr(r, "OBPM3", None)),
+                    "war": num(r.WAR4), "off": num(getattr(r, "OBPM4", None)),
                     "poe": num(getattr(r, "POE_100", None)),
-                    "def": num(getattr(r, "DBPM3", None)),
+                    "def": num(getattr(r, "DBPM4", None)),
                     "mpg": num(r.MPG), "pts": num(r.PTS_PG),
                     "reb": num(r.REB_PG), "ast": num(r.AST_PG),
                     "floor": num(getattr(r, "floor", None)), "ceil": num(getattr(r, "ceiling", None)),
