@@ -206,10 +206,38 @@ def height_test(train, test, A):
                 labels=["4+ shorter", "2-4 shorter", "within 2", "2-4 taller", "4+ taller"])
     hmul = hb.map(lift).astype(float).fillna(1.0).to_numpy()
     act = te.actual.to_numpy()
+
+    # WEIGHT — does mass add anything once height is accounted for? Height and
+    # weight correlate strongly, so a coarse bucketed control leaves height
+    # inside the weight term. The honest test is whether adding weight improves
+    # out-of-sample share prediction on top of height, which is exactly the bar
+    # height itself had to clear.
+    wt = {int(r.PLAYER_ID): float(r.WEIGHT_LB) for r in bio.itertuples()
+          if pd.notna(r.WEIGHT_LB)}
+    for d in (tr, te):
+        d["wgap"] = d.DEF_ID.map(wt) - d.OFF_ID.map(wt)
+    wbins = [-999, -30, -10, 10, 30, 999]
+    wlab = ["30+ light", "10-30 light", "within 10", "10-30 heavy", "30+ heavy"]
+    trw = tr.dropna(subset=["wgap"]).copy()
+    trw["hb"] = pd.cut(trw.gap, [-99, -4, -2, 2, 4, 99],
+                       labels=["4+ shorter", "2-4 shorter", "within 2",
+                               "2-4 taller", "4+ taller"])
+    trw["hmul"] = trw.hb.map(lift).astype(float).fillna(1.0)
+    trw["wb"] = pd.cut(trw.wgap, wbins, labels=wlab)
+    # weight lift measured on top of availability x position x height
+    wlift = trw.groupby("wb", observed=True).apply(
+        lambda d: (d.actual.sum() / (d.avail * d.hmul).sum())
+        if (d.avail * d.hmul).sum() > 0 else 1.0, include_groups=False)
+    print("\n  weight-gap lift, measured ON TOP of height:")
+    for k, v in wlift.items():
+        print(f"    {str(k):<16}{v:>8.3f}")
+    wmul = (pd.cut(te.wgap, wbins, labels=wlab).map(wlift)
+            .astype(float).fillna(1.0).to_numpy())
     print(f"\n  {'model':<40}{'share MAE':>11}{'corr':>9}")
     for nm, w in (("availability only", te.avail.to_numpy()),
                   ("+ position affinity", base),
-                  ("+ position + height gap", base * hmul)):
+                  ("+ position + height gap", base * hmul),
+                  ("+ position + height + weight", base * hmul * wmul)):
         ssum = pd.Series(w).groupby([te.GAME_ID.values, te.OFF_ID.values]).transform("sum").to_numpy()
         pred = np.where(ssum > 0, w / ssum, 0.0)
         print(f"  {nm:<40}{np.abs(pred-act).mean():>11.4f}{np.corrcoef(pred,act)[0,1]:>9.3f}")

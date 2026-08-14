@@ -219,21 +219,38 @@ ZONES3 = ["corner3", "arc3"]
 # of the G/F/C affinity, which is only a three-level proxy for the same thing.
 HEIGHT_LIFT = [(-99, -4, 0.657), (-4, -2, 1.134), (-2, 2, 1.340),
                (2, 4, 1.009), (4, 99, 0.621)]
+# Weight adds on top of height, measured the same way and validated the same way:
+# share MAE 0.0636 -> 0.0625 and corr 0.587 -> 0.603 out of sample. Smaller than
+# height, as expected given the two correlate, but not absorbed by it — mass
+# matters separately from length when deciding who can guard whom.
+WEIGHT_LIFT = [(-999, -30, 0.798), (-30, -10, 1.056), (-10, 10, 1.166),
+               (10, 30, 1.048), (30, 999, 0.798)]
 
 
-def load_heights() -> dict:
+def load_heights() -> tuple[dict, dict]:
     if not BIO.exists():
-        return {}
+        return {}, {}
     b = pd.read_parquet(BIO)
-    return {int(r.PLAYER_ID): float(r.HEIGHT_IN) for r in b.itertuples()
-            if pd.notna(r.HEIGHT_IN)}
+    h = {int(r.PLAYER_ID): float(r.HEIGHT_IN) for r in b.itertuples()
+         if pd.notna(r.HEIGHT_IN)}
+    w = {int(r.PLAYER_ID): float(r.WEIGHT_LB) for r in b.itertuples()
+         if pd.notna(r.WEIGHT_LB)}
+    return h, w
 
 
-def height_mult(gap: float) -> float:
-    for lo, hi, v in HEIGHT_LIFT:
+def _lift(table, gap: float) -> float:
+    for lo, hi, v in table:
         if lo <= gap < hi:
             return v
     return 1.0
+
+
+def height_mult(gap: float) -> float:
+    return _lift(HEIGHT_LIFT, gap)
+
+
+def weight_mult(gap: float) -> float:
+    return _lift(WEIGHT_LIFT, gap)
 
 
 def build_zones(season: str):
@@ -435,7 +452,7 @@ def team_pace(season: str) -> dict:
 class Simulator:
     def __init__(self, rates, pos, tmpl, aff, defq, pace_map, lg_pace, bpm=None,
                  min_pools=None, use_pool=None, zones=None, zone_fallback=None,
-                 heights=None):
+                 heights=None, weights=None):
         self.rates, self.pos, self.aff = rates, pos, aff
         self.defq, self.pace_map, self.lg_pace = defq, pace_map, lg_pace
         # BPM3 (WAR v3) is points per 100 possessions above average — the only
@@ -457,6 +474,7 @@ class Simulator:
         self.zones = zones or {}
         self.zone_fb = zone_fallback or {}
         self.heights = heights or {}
+        self.weights = weights or {}
         self._use_mult = {}
         self.tmpl = {(int(r.started), int(r.bucket)): np.array(r.curve)
                      for r in tmpl.itertuples()}
@@ -834,6 +852,12 @@ class Simulator:
                     aw = aw * np.array([
                         height_mult(self.heights[int(d)] - oh)
                         if int(d) in self.heights else 1.0 for d in dfive])
+            if self.weights:
+                ow = self.weights.get(int(user))
+                if ow is not None:
+                    aw = aw * np.array([
+                        weight_mult(self.weights[int(d)] - ow)
+                        if int(d) in self.weights else 1.0 for d in dfive])
             defender = dfive[rng.choice(5, p=aw / aw.sum())]
             # defender quality shifts the make probability (deliberately small —
             # your studies show on-ball defence is a modest slice of the outcome)
@@ -1021,7 +1045,7 @@ def main() -> None:
 
     sim = Simulator(rates, pos, tmpl, aff, defq, pace_map, lg_pace, bpm,
                     minutes_ratio_pools(g.SEASON), usage_ratio_pool(g.SEASON),
-                    *build_zones(g.SEASON), load_heights())
+                    *build_zones(g.SEASON), *load_heights())
     res, box, meta = sim.simulate(sides["H"], sides["A"], g.HOME_TEAM_ID,
                                   g.AWAY_TEAM_ID, n_sims=args.sims,
                                   anchor=anchor, anchor_ref=full)
