@@ -684,3 +684,91 @@ Three bugs the validation caught, none of which would have been visible from the
 **Stars missing entire games.** The engine drifts its sampling offset slowly because its play-by-play must show a believable substitution count. Ported directly, that left a star with no minutes in 8.5% of simulations. The browser port shows no substitutions, so the correlation buys nothing there and the offset is drawn fresh each window.
 
 The level is solved EMPIRICALLY in the browser rather than by porting the engine's closed form: run warm-up games, see what this implementation actually produces, scale to the projection. Three passes, because scaling a make probability does not move points linearly — one pass under-corrects and two still left some matchups 4 points high. Being self-correcting, it means the port's own offsets cannot drift the displayed level even if the two implementations diverge further.
+
+## A one-rebound Jokić game is fine; his average is not
+
+Prompted by a 1-rebound minimum showing up in 100 simulations of DEN vs OKC.
+
+**The tail is right.** Jokić has 757 career games of 20+ minutes in the archive and exactly one with a single rebound (0.13%). Across all comparable seasons — 9.5+ rebounds in 28+ minutes, 12,909 games — 13 have one rebound or fewer, 0.10%. The simulator produces it at **0.10% for 20+ minute games**, matching exactly. Seeing one in a run of 100 is roughly a 1-in-6 event, so it is not evidence of anything wrong.
+
+The mid-tail is modestly fat: 2 or fewer at 0.50% against a real 0.35%, 3 or fewer at 1.74% against 1.15%. About 1.5x too generous with bad rebounding nights.
+
+**The mean is the real problem.** Jokić averages 12.9 rebounds in 2025-26 (13.3 per 36). The engine gives him 10.5 in 32.5 minutes (11.6 per 36) and the browser port 9.7 (10.7 per 36). Testing whether the allocation reproduces the rate it was GIVEN, across four matchups:
+
+```
+input REB/36     n    input   simulated   ratio
+(0, 4]           7     3.46        3.41   0.985
+(4, 6]          14     5.23        5.25   1.003
+(6, 8]          10     6.77        6.73   0.994
+(8, 10]          1     8.41        8.71   1.035
+(10, 20]         4    11.63       10.16   0.874
+```
+
+Everyone below ten rebounds per 36 comes back within half a percent of their input. **Elite rebounders come back at 0.874 of theirs.** Rebounds are handed out in proportion to each on-court player's rate, and a rate earned across all of a player's lineups does not transfer to a share within one lineup — the same failure the usage-context work found on the scoring side, where a reserve's usage does not survive being put next to four starters.
+
+Only four players sit in that top bucket, so the size of the effect is not settled even though its direction is consistent across matchups. Worth fixing before the site's box scores are trusted for individual rebounding, since it is the same 12-13% for every elite rebounder and it always points the same way.
+
+## Every allocated stat was compressed toward the middle (158, 159)
+
+Chasing Jokic's rebounds found a defect in every counting stat the engine
+produces, not just his. Rebounds, assists, steals, blocks, fouls and the
+possession itself are all handed out by drawing one of the five on court in
+proportion to their per-36 rates. **A rate is earned across the mix of team-mates
+a player actually plays with; renormalising it inside one specific five pulls
+everyone toward the middle of that five.** Script 158 measures it:
+
+```
+stat    q1 (low)   q2      q3      q4    q5 (high)
+REB       0.984  0.966   0.926   0.934     0.874
+AST       1.159  1.110   1.063   1.032     0.966
+STL       1.033  1.011   1.021   0.920     0.864
+BLK       1.400  1.267   1.253   1.145     0.986
+PF        1.313  1.107   1.046   0.946     0.898
+FGA       0.960  0.985   0.958   0.936     0.884
+FTA       1.055  0.988   0.975   0.957     0.880
+```
+
+The top quintile came back 11-14% short on every stat and the bottom quintile up
+to 40% long. It is the same mechanism the usage-context work found on the
+scoring side, and it had been invisible because team totals were right the whole
+time — the split was wrong, not the sum.
+
+**The fix is a fixed point, not a model change.** Script 159 scales each
+player's allocation weight by `target / observed` and iterates. Because a share
+is normalised within the lineup, this moves only the SPLIT and can never change
+a team total, so nothing above it — the anchor, the level, the box realism — is
+at risk by construction.
+
+**The first attempt stalled at 13% error with every factor drifting away from
+1.0** (steals to 0.63, rebounds to 1.34). The targets were unreachable: if a
+team's total for a stat differs from the sum of its players' rate-implied
+targets, no reallocation can reach them, and the iteration was trying to fix a
+TOTAL with weights that can only move a SPLIT. Rescaling the targets to the
+observed total gives a reachable fixed point, and it then converges properly —
+9.89% -> 6.22% -> 4.39% -> 3.31% -> 2.89%.
+
+Afterwards, seven of eight splits sit within 4% of correct where they had been
+11-14% short:
+
+```
+stat   team total   share q1   share q5
+REB         0.932      1.022      0.978
+AST         1.037      0.990      1.018
+STL         0.960      0.980      0.964
+FGA         0.937      0.974      1.003
+PF          1.063      1.045      1.005
+```
+
+**The residual is team totals, and it is NOT the engine's fault.** Measured
+against real league averages the engine's totals are right (rebounds 0.999,
+shots 1.005); measured against the summed rate book they are 6% low. The book
+over-states, because per-36 rates summed across twelve players at 240 minutes
+imply more rebounds than a game contains. Chasing fidelity to the book here
+would make the engine WORSE against reality, so it is deliberately left alone.
+
+**What remains for Jokic specifically**, and it is three compounding losses
+rather than one bug: the book projects 12.58 REB/36 against his actual 13.3
+(Marcel regression, −5.5%), the engine's team rebound total runs 42.4 against a
+real 44 (−5.8%), and the rotation gives him 32.5 minutes against a real 34.8
+(−6.6%). Each is individually defensible; together they are the 17% gap between
+10.7 simulated and 12.9 actual.

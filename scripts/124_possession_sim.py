@@ -410,6 +410,22 @@ def apply_drift(prof: dict, fac: dict) -> dict:
     return out
 
 
+def load_share_cal() -> dict:
+    """{(player, stat): weight multiplier} solved by script 159.
+
+    Rates are handed out in proportion to the on-court players' per-36 numbers,
+    which pulls everyone toward the middle of their lineup: script 158 measured
+    the top quintile 11-14% short on every stat. These factors restore the
+    split. They cannot move a team total, because a share is normalised within
+    the five.
+    """
+    f = ROOT / "data" / "parquet" / "share_cal.parquet"
+    if not f.exists():
+        return {}
+    d = pd.read_parquet(f)
+    return {(int(r.PLAYER_ID), str(r.stat)): float(r.cal) for r in d.itertuples()}
+
+
 def rookie_profiles(cols, med):
     """-> ({player: draft slot}, {slot: rate profile}) for players with no history."""
     if not (ROOKIE.exists() and BIO.exists()):
@@ -697,6 +713,10 @@ class Simulator:
         # at nearly the same per-possession efficiency.
         self.bpm = bpm or {}
         self.min_pools = min_pools
+        # Allocation-share corrections (script 159). Loaded here rather than by
+        # each caller so every consumer — evaluation, matchup driver, web export
+        # — gets the same engine, and a missing file simply means no correction.
+        self.share_cal = load_share_cal()
         # reference on-court totals, so lineup strength is measured RELATIVE to a
         # league-average five rather than in raw per-36 units
         vals = list(self.rates.values()) or [getattr(self.rates, "fallback", {})]
@@ -831,6 +851,24 @@ class Simulator:
         ftp = sum(x["minutes"] * self.rates[x["pid"]]["FT_PCT"] for x in players) \
             / max(sum(x["minutes"] for x in players), 1e-9)
         return base + PEN_TRIPS * (2.0 * ftp - base)
+
+    def cal(self, pid, stat: str) -> float:
+        """Multiplier on this player's ALLOCATION weight for one stat.
+
+        Shares are drawn in proportion to per-36 rates among the five on court,
+        but a rate is earned across the mix of team-mates a player actually
+        plays with. Inside one specific five, proportional weighting pulls
+        everyone toward the middle: script 158 measures the top quintile
+        under-produced by 11-14% on every stat and the bottom quintile
+        over-produced by up to 40%. These factors are solved by script 159 so
+        the engine reproduces the rate it was given.
+
+        Because a share is normalised within the lineup, scaling weights moves
+        only the SPLIT and never the team total, so this cannot disturb any
+        team-level calibration.
+        """
+        c = self.share_cal.get((int(pid), stat))
+        return 1.0 if c is None else float(c)
 
     def _pdraw(self, pool, seed, sim, pid, salt):
         """COMMON RANDOM NUMBERS: a player's draw is keyed to (seed, sim, player),
@@ -1208,7 +1246,8 @@ class Simulator:
         for _ in range(4):                       # putback chains beyond this are rare
             use_w = np.array([(self.rates[p]["FG2A_36"] + self.rates[p]["FG3A_36"]
                                + 0.44 * self.rates[p]["FTA_36"] + self.rates[p]["TOV_36"])
-                              * self._use_mult.get(p, 1.0) + 1e-9 for p in on])
+                              * self._use_mult.get(p, 1.0) * self.cal(p, "USE")
+                              + 1e-9 for p in on])
             user = on[rng.choice(5, p=use_w / use_w.sum())]
             probs, _, r = self._profile(user)
 
@@ -1263,7 +1302,8 @@ class Simulator:
             # possession — the bonus, which the engine previously could not
             # represent at all.
             if dfouls is not None and rng.random() < NONSHOOT_FOUL:
-                fw = np.array([self.rates[d]["PF_36"] + 1e-6 for d in dfive])
+                fw = np.array([self.rates[d]["PF_36"] * self.cal(d, "PF") + 1e-6
+                               for d in dfive])
                 charge(int(dfive[rng.choice(5, p=fw / fw.sum())]))
                 PEN_DIAG["nonshoot"] += 1
                 if tfoul is not None and tfoul[0] > PENALTY_LIMIT:
@@ -1338,7 +1378,8 @@ class Simulator:
                 live_to = rng.random() < LG["live_to_share"]
                 # 56.6% of turnovers are steals; credit one to a defender
                 if rng.random() < LG["stl_share"]:
-                    sw = np.array([self.rates[d]["STL_36"] + 1e-6 for d in dfive])
+                    sw = np.array([self.rates[d]["STL_36"] * self.cal(d, "STL") + 1e-6
+                                   for d in dfive])
                     box[dfn][dfive[rng.choice(5, p=sw / sw.sum())]]["STL"][sim] += 1
 
             if pts:
@@ -1352,7 +1393,8 @@ class Simulator:
                                           0.05, 0.95))
                     if rng.random() < p_ast:
                         mates = [p for p in on if p != user]
-                        aw2 = np.array([self.rates[p]["AST_36"] + 1e-6 for p in mates])
+                        aw2 = np.array([self.rates[p]["AST_36"] * self.cal(p, "AST") + 1e-6
+                                        for p in mates])
                         box[off][mates[rng.choice(len(mates), p=aw2 / aw2.sum())]]["AST"][sim] += 1
                 return total, live_to
             if k in (0, 1):                                   # miss -> live rebound
@@ -1366,7 +1408,8 @@ class Simulator:
                 odds = (LG["oreb"] / (1 - LG["oreb"])) * (off_s / max(def_s, 1e-6))
                 p_oreb = float(np.clip(odds / (1 + odds), 0.06, 0.50))
                 if k == 0 and rng.random() < LG["blk_share"]:
-                    bw = np.array([self.rates[d]["BLK_36"] + 1e-6 for d in dfive])
+                    bw = np.array([self.rates[d]["BLK_36"] * self.cal(d, "BLK") + 1e-6
+                                   for d in dfive])
                     box[dfn][dfive[rng.choice(5, p=bw / bw.sum())]]["BLK"][sim] += 1
                 # a share of misses are booked as TEAM rebounds (out of bounds,
                 # deadball) and credited to no player — crediting every miss to
@@ -1374,11 +1417,13 @@ class Simulator:
                 team_reb = rng.random() < LG["team_reb"]
                 if rng.random() < p_oreb:
                     if not team_reb:
-                        w = np.array([self.rates[p]["OREB_36"] + 1e-6 for p in on])
+                        w = np.array([self.rates[p]["OREB_36"] * self.cal(p, "REB") + 1e-6
+                                      for p in on])
                         box[off][on[rng.choice(5, p=w / w.sum())]]["REB"][sim] += 1
                     continue                                  # offence keeps the ball
                 if not team_reb:
-                    w = np.array([self.rates[p]["DREB_36"] + 1e-6 for p in dfive])
+                    w = np.array([self.rates[p]["DREB_36"] * self.cal(p, "REB") + 1e-6
+                                  for p in dfive])
                     box[dfn][dfive[rng.choice(5, p=w / w.sum())]]["REB"][sim] += 1
             return total, live_to
         return total, live_to
