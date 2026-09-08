@@ -193,7 +193,17 @@ SHOOT_SD_TEAM = 0.012
 # 0.23 against an actual mean of 0.250, biased low on every possession.
 LG = {"oreb": 0.250, "ast3": 0.82, "ast2": 0.50, "ft_per_trip": 1.9,
       "stl_share": 0.566,    # share of turnovers that are steals
-      "team_reb": 0.072,     # misses booked as TEAM rebounds, credited to nobody
+      # TEAM rebounds — out of bounds, end of period, deadball — are credited to no
+      # player. In the play-by-play they carry a team id ("Hawks Rebound") and are
+      # 15.8% of all rebound events: 16.56 of 104.59 a game, leaving 88.03 for
+      # players against a box-score 88.47. The engine cannot use 0.158 directly,
+      # because it generates 100.4 rebound opportunities a game rather than the
+      # league's 104.59 — it does not model the deadball situations that produce
+      # many team boards. Applied to ITS opportunity count, the share that leaves
+      # players with the right number is 0.119. At the previous 0.072 players were
+      # over-credited, which exactly offset the missing free-throw rebounds; the
+      # two errors cancelled and rebounds looked correct at 1.012.
+      "team_reb": 0.119, "ft_oreb_scale": 0.426,
       "blk_share": 0.235,
       # endgame behaviour, measured from Q4 play-by-play. A trailing team's
       # three-point share climbs from ~40% to 46.5% inside two minutes and 64.8%
@@ -1348,6 +1358,7 @@ class Simulator:
 
             k = rng.choice(4, p=probs)
             pts = 0
+            ft_live = False
             if k == 0:                                        # two-point try
                 zn, zfg = self._draw_zone(user, False, rng, transition)
                 base_p = zfg if zfg is not None else r["FG2_PCT"]
@@ -1369,9 +1380,12 @@ class Simulator:
                 # would systematically under-count free-throw scoring.
                 charge(int(defender))          # somebody fouled to send him there
                 nft = 2 + (1 if rng.random() < 0.27 else 0)
-                for _ in range(nft):
-                    if rng.random() < np.clip(r["FT_PCT"], 0.3, 0.99):
+                for _z in range(nft):
+                    _ok = rng.random() < np.clip(r["FT_PCT"], 0.3, 0.99)
+                    if _ok:
                         pts += 1
+                    if _z == nft - 1:
+                        ft_live = not _ok     # a missed LAST free throw is live
                 box[off][user]["FTA"][sim] += nft
             else:                                             # turnover
                 box[off][user]["TOV"][sim] += 1
@@ -1396,8 +1410,20 @@ class Simulator:
                         aw2 = np.array([self.rates[p]["AST_36"] * self.cal(p, "AST") + 1e-6
                                         for p in mates])
                         box[off][mates[rng.choice(len(mates), p=aw2 / aw2.sum())]]["AST"][sim] += 1
-                return total, live_to
-            if k in (0, 1):                                   # miss -> live rebound
+                # A trip that SCORED but missed its last free throw is still
+                # live. Returning here unconditionally lost those rebounds, and
+                # they are the common case — most missed last free throws follow
+                # a made one, so only the all-missed trips reached the board and
+                # the fix recovered 0.8 rebounds a game instead of 4.6.
+                if not ft_live:
+                    return total, live_to
+            # A MISSED LAST FREE THROW IS LIVE and gets rebounded. The engine
+            # ended every trip to the line, so 4.81 rebounds a game — 4.6% of
+            # them — simply never happened, and the team total came out 82
+            # against a real 88.5. Offensive rebounds off a free throw are much
+            # rarer than off a field goal (10.7% against 25.0% measured on
+            # 6,318 of them), because the defence is already lined up.
+            if k in (0, 1) or ft_live:                        # miss -> live rebound
                 # A miss is contested by the five men actually on the floor, so
                 # the OREB rate has to move with them. Team OREB% ranges 0.154 to
                 # 0.350 across games; a single constant discards all of it.
@@ -1407,6 +1433,8 @@ class Simulator:
                 def_s = sum(self.rates[q]["DREB_36"] for q in dfive) / self._ref["DREB_36"]
                 odds = (LG["oreb"] / (1 - LG["oreb"])) * (off_s / max(def_s, 1e-6))
                 p_oreb = float(np.clip(odds / (1 + odds), 0.06, 0.50))
+                if ft_live:
+                    p_oreb *= LG["ft_oreb_scale"]
                 if k == 0 and rng.random() < LG["blk_share"]:
                     bw = np.array([self.rates[d]["BLK_36"] * self.cal(d, "BLK") + 1e-6
                                    for d in dfive])

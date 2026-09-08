@@ -772,3 +772,28 @@ rather than one bug: the book projects 12.58 REB/36 against his actual 13.3
 real 44 (−5.8%), and the rotation gives him 32.5 minutes against a real 34.8
 (−6.6%). Each is individually defensible; together they are the 17% gap between
 10.7 simulated and 12.9 actual.
+
+## Two rebound errors that had been cancelling
+
+After the share calibration, rebounds were still short in the matchup driver (82.0 against a real 88.5) while the official evaluation showed them fine (1.012). Both were true, and the reason is that two errors were offsetting.
+
+**Missed free throws are live and get rebounded; the engine ended every trip to the line.** Measured in the play-by-play: 4.82 missed final free throws a game, of which 4.81 are rebounded — 4.6% of all rebounds, simply absent. Offensive rebounds off a free throw are much rarer than off a field goal, 10.7% against 25.0% measured across 6,318 of them, because the defence is already lined up; that ratio is now a constant rather than an assumption.
+
+The first attempt at this recovered only 0.8 rebounds a game instead of 4.6, because the branch returned unconditionally once a trip scored. **Most missed last free throws follow a made one**, so only the all-missed trips ever reached the board — the common case was still being dropped.
+
+**Team rebounds were under-booked at less than half their real rate.** In the play-by-play they carry a team id rather than a player's ("Hawks Rebound") and are **15.8% of all rebound events** — 16.56 of 104.59 a game, leaving 88.03 for players against a box-score 88.47. The engine used 0.072. It cannot use 0.158 directly either, because it generates 100.4 rebound opportunities a game rather than the league's 104.59: it does not model the deadball situations that produce many team boards. Applied to its own opportunity count the correct share is **0.119**.
+
+At 0.072 players were over-credited by almost exactly what the missing free-throw rebounds took away, so the total looked right (1.012) while both halves were wrong. Fixing one alone made it worse — adding free-throw rebounds pushed the total to 1.053 — which is what surfaced the second error. **A total that matches is not evidence that its parts do.**
+
+```
+                    before   +FT rebounds   +team share   real
+team rebounds        89.5        93.2          88.48      88.47
+```
+
+Jokic across the three fixes — share calibration, rotation minutes, rebound mechanics — goes from 10.5 to 12.0 rebounds in 34.3 minutes, against a real 12.9 in 34.8. The remaining 7% is the rate book projecting 12.58 per 36 against his actual 13.3, which is Marcel regression doing its job on a forecast rather than an engine defect.
+
+Held out afterwards: rebounds 1.000, shots 1.006, assists 1.004, fouls 1.021, free throws 1.028, interval coverage 80.2% and 52.4% against 80/50 targets.
+
+## Minutes: the marginal player should absorb the overflow
+
+Rosters were filled until the cumulative projection crossed 240 minutes and then everyone was rescaled to fit. Rosters summed to 251.4, so every player was multiplied by 0.955 and a 34.0-minute starter was assigned 32.5 — **the overflow created by admitting the last man was charged to the whole rotation.** Filling to exactly 240 and letting the marginal player take what is left restores every projection: slot 1 now gets 34.1 against a book 34.0, and the tail absorbs the remainder.

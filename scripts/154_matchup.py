@@ -128,6 +128,7 @@ def roster(season: str, tid: int, before=None, n_games=RECENT_GAMES):
 # A roster has ~19 players and a rotation has ~10. Everyone on the roster gets a
 # projected MPG, but handing all 19 a share of 240 minutes would give the whole
 # team bench-level minutes, so the rotation is cut at these bounds first.
+MIN_TAIL = 4.0     # below this the last slot is dropped rather than filled
 ROT_MIN_MPG = 6.0
 ROT_MAX = 14
 
@@ -168,11 +169,22 @@ def current_roster(tid: int, rates, rseason: str):
     # own projection and lets the roster end where a real rotation ends.
     out.sort(key=lambda x: -x["minutes"])
     out = [p for p in out if p["minutes"] >= ROT_MIN_MPG][:ROT_MAX]
+    # Fill to exactly 240 and let the MARGINAL player absorb the remainder.
+    # Admitting whoever crosses the line and then rescaling everyone spreads his
+    # overflow across the whole rotation: rosters summed to 251 minutes, so every
+    # player was multiplied by 0.955 and the starter lost 1.5 minutes he was
+    # projected to play. The overflow belongs to the last man in, not to the
+    # rotation as a whole.
     keep, run = [], 0.0
     for q in out:
+        room = 240.0 - run
+        if room <= MIN_TAIL:
+            break
+        if q["minutes"] > room:
+            q = dict(q, minutes=room)      # the last man plays what is left
         keep.append(q)
         run += q["minutes"]
-        if run >= 240.0:
+        if run >= 240.0 - 1e-9:
             break
     out = keep
     for i, p in enumerate(out):
