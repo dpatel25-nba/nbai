@@ -239,6 +239,15 @@
   .subtab:hover { color: var(--text); background: var(--panel-2); }
   .subtab.active { color: var(--text); background: var(--panel-2); }
   .subtab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .subgroup { font-size: 10.5px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--muted); opacity: .72;
+    align-self: center; padding: 0 8px 0 2px; white-space: nowrap; }
+  .subsep { width: 1px; align-self: stretch; margin: 2px 8px;
+    background: var(--line, #222838); }
+  @media (max-width: 720px) {
+    .subsep { display: none; }
+    .subgroup { width: 100%; padding: 8px 2px 2px; }
+  }
   /* ---- simulator tab ---- */
   .note { color: var(--muted, #8b93a7); font-size: 13px; line-height: 1.6;
           margin-top: 12px; max-width: 78ch; }
@@ -392,14 +401,19 @@
       <button class="tab" data-view="roadmap" role="tab">Roadmap</button>
     </nav>
     <nav class="subtabs" id="researchNav" role="tablist" aria-label="Research sections" hidden>
-      <button class="subtab active" data-view="ratings" role="tab">Team Ratings</button>
-      <button class="subtab" data-view="players" role="tab">Players</button>
-      <button class="subtab" data-view="props" role="tab">Props</button>
-      <button class="subtab" data-view="defense" role="tab">Defense</button>
-      <button class="subtab" data-view="playtypes" role="tab">Play Types</button>
-      <button class="subtab" data-view="shots" role="tab">Shot Charts</button>
-      <button class="subtab" data-view="impact" role="tab">Impact</button>
+      <span class="subgroup">Teams</span>
+      <button class="subtab active" data-view="ratings" role="tab">Power Ratings</button>
       <button class="subtab" data-view="predict" role="tab">Elo Matchup</button>
+      <span class="subsep" aria-hidden="true"></span>
+      <span class="subgroup">Players</span>
+      <button class="subtab" data-view="players" role="tab">Ratings</button>
+      <button class="subtab" data-view="impact" role="tab">Impact</button>
+      <button class="subtab" data-view="props" role="tab">Props</button>
+      <span class="subsep" aria-hidden="true"></span>
+      <span class="subgroup">Matchup detail</span>
+      <button class="subtab" data-view="defense" role="tab">Perimeter D</button>
+      <button class="subtab" data-view="shots" role="tab">Shot Charts</button>
+      <button class="subtab" data-view="playtypes" role="tab">Play Types</button>
     </nav>
   </div>
 </header>
