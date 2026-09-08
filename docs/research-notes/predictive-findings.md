@@ -797,3 +797,15 @@ Held out afterwards: rebounds 1.000, shots 1.006, assists 1.004, fouls 1.021, fr
 ## Minutes: the marginal player should absorb the overflow
 
 Rosters were filled until the cumulative projection crossed 240 minutes and then everyone was rescaled to fit. Rosters summed to 251.4, so every player was multiplied by 0.955 and a 34.0-minute starter was assigned 32.5 — **the overflow created by admitting the last man was charged to the whole rotation.** Filling to exactly 240 and letting the marginal player take what is left restores every projection: slot 1 now gets 34.1 against a book 34.0, and the tail absorbs the remainder.
+
+## The browser port drifted, and the validator could not see it
+
+Every engine fix — share calibration, free-throw rebounds, the team-rebound share — was made in Python only. The port picked up the new `team_reb` of 0.119 through the exported constants, which REMOVES rebounds, but not the free-throw rebounds that put them back or the share factors. The live site was briefly worse than before the work started.
+
+Worse, `157_validate_js.py` reported the port agreeing to 1.31 points the whole time. It compared team scores and player points and nothing else, and **a rebound that never happens costs nobody any points**. It now checks box categories too.
+
+With that check in place the real defect appeared immediately: the port ran offensive rebounds at **14% against the engine's 25%**, because the engine normalises `off_s / def_s` by league reference sums and the port compared the raw totals. A lineup grabs about twice as many defensive boards as offensive ones, so the un-normalised ratio sits near 0.5 rather than near 1.
+
+**And that explains a constant I had believed.** `LEVEL_CAL = 1.043` existed because the port scored 4.1% below the engine on every matchup, which I attributed to the shot zones it omits. It was the missing second chances. Fixing the rebounds removed the deficit, and the constant went back to 1.0 with team scores agreeing to 1.38 points and every box category within 4% except blocks.
+
+A correction that exactly cancels a bug looks like a good calibration for as long as nothing measures the quantity underneath. Both times this session that a tuned constant appeared — the renderer's anchor and this one — the constant was hiding a mechanism error, and in both cases the tell was available: a residual that would not respond to the knob, or a category nobody was checking.

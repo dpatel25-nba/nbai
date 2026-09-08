@@ -1247,7 +1247,8 @@
         const tot = {H: 0, A: 0};
         for (let i = 0; i < W; i++) {
           const g = window.NBAI_SIM.playGame(H, A, ratesOf, E.const, E.lg, pace,
-                                             scale, 1000 + pass * 97 + i, false);
+                                             scale, 1000 + pass * 97 + i, false,
+                                             E.cal);
           tot.H += g.score.H; tot.A += g.score.A;
         }
         scale = {H: scale.H * mu.H / Math.max(tot.H / W, 1),
@@ -1411,7 +1412,7 @@
           const wantLog = (showGame && i === 0) || !state.first;
           const g = window.NBAI_SIM.playGame(state.H, state.A, ratesOf, E.const,
                                              E.lg, state.pace, state.scale,
-                                             state.seed++, wantLog);
+                                             state.seed++, wantLog, E.cal);
           if (wantLog) state.first = g;
           accumulate(g);
         }

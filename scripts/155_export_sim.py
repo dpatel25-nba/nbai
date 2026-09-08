@@ -198,6 +198,18 @@ def main() -> None:
                         "MEAN_REVERT", "MEAN_REVERT_TOT", "PACE_SD",
                         "SHOOT_SD_SHARED", "SHOOT_SD_TEAM", "GARBAGE_MARGIN")}
     engine["lg_pace"] = round(float(lg_pace), 2)
+    # League reference sums the engine normalises rebound and assist odds by.
+    # The port omitted them, so off_s/def_s collapsed from a ratio-about-one to
+    # ~0.5 and offensive rebounds ran at 14% instead of 25%.
+    engine["ref"] = {k: round(float(v), 4) for k, v in sim._ref.items()}
+    # Allocation-share factors (script 159). Without them the browser carries the
+    # 11-14% compression the engine no longer has, and the two implementations
+    # disagree by more than the port's measured tolerance.
+    engine["cal"] = {"__ref": {k: round(float(v), 4)
+                               for k, v in sim._ref.items()}}
+    for (pid, stat), v in sim.share_cal.items():
+        if str(pid) in engine["players"]:
+            engine["cal"].setdefault(str(pid), {})[stat] = round(float(v), 4)
 
     payload = {"engine": engine,
                "season": season, "mu0": round(mu0, 3), "hca": round(hca, 3),

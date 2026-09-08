@@ -47,13 +47,18 @@
   const BOX = ["MIN","FGM","FGA","FG3M","FG3A","FTM","FTA","OREB","DREB","REB",
                "AST","STL","BLK","TOV","PF","PTS"];
 
-  /* Level calibration. Given the SAME anchor scale, this port scored 4.1% below
-   * the Python engine on every matchup tested (ratios .963 .955 .966 .953) while
-   * per-player points differed by only 0.71 on average — so the shape across
-   * players is intact and what is missing is a level offset, almost certainly
-   * the shot-zone valuation the port omits. Measured by scripts/157, not tuned
-   * until the output looked right. */
-  const LEVEL_CAL = 1.043;
+  /* Level calibration, now 1.0 — and the history is the point. It was set to
+   * 1.043 because the port scored 4.1% below the engine on every matchup. That
+   * gap was not the shot zones it omits, as assumed at the time: it was a
+   * missing reference normalisation that ran offensive rebounds at 14% against
+   * a real 25%, costing second chances. Fixing the rebounds removed the deficit
+   * and the constant with it. A correction that exactly cancels a bug will look
+   * like a good calibration for as long as nobody measures the thing underneath
+   * — which here needed the validator to check box categories, not just
+   * scores. */
+  const LEVEL_CAL = 1.0;
+  // Used only if the payload predates the reference export.
+  const REF_FALLBACK = {OREB_36: 12.5, DREB_36: 25.0, AST_36: 25.0};
 
   /* Systematic pi-ps lineup sampling: exactly the engine's approach. Marginal
    * inclusion probabilities are hit exactly, the offset is held for LINEUP_HOLD
@@ -97,7 +102,15 @@
   }
 
   /* One game. Returns a per-player box plus the event log when asked. */
-  function playGame(home, away, ratesOf, C, LG, pace, scale, seed, wantLog) {
+  function playGame(home, away, ratesOf, C, LG, pace, scale, seed, wantLog, CAL) {
+    // Allocation-share factors from script 159. Rates are handed out in
+    // proportion to the on-court players' per-36 numbers, which pulls everyone
+    // toward the middle of their lineup; these restore the split. Absent, the
+    // port silently carries a defect the engine has already fixed.
+    const cal = (id, stat) => {
+      const c = CAL && CAL[String(id)];
+      return c && c[stat] != null ? c[stat] : 1;
+    };
     const r = rng(seed);
     const teams = {H: home, A: away};
     const box = {H: {}, A: {}}, lu = {}, fouls = {H: {}, A: {}};
@@ -132,8 +145,8 @@
         // who uses the possession
         const uw = on.map(p => {
           const q = ratesOf(p.id);
-          return q.FG2A_36 + q.FG3A_36 + 0.44 * q.FTA_36 * (1 - C.PEN_FT_TRIM)
-                 + q.TOV_36 + 1e-9;
+          return (q.FG2A_36 + q.FG3A_36 + 0.44 * q.FTA_36 * (1 - C.PEN_FT_TRIM)
+                  + q.TOV_36) * cal(p.id, "USE") + 1e-9;
         });
         const user = on[pick(r, uw)];
         const q = ratesOf(user.id);
@@ -151,7 +164,7 @@
 
         // non-shooting foul, and the penalty once past the limit
         if (r() < C.NONSHOOT_FOUL) {
-          const fw = dv.map(p => ratesOf(p.id).PF_36 + 1e-6);
+          const fw = dv.map(p => ratesOf(p.id).PF_36 * cal(p.id, "PF") + 1e-6);
           const fl = dv[pick(r, fw)];
           box[dfn][fl.id].PF += 1; tfoul[dfn] += 1;
           if (tfoul[dfn] > C.PENALTY_LIMIT) {
@@ -167,7 +180,7 @@
         }
 
         // the possession itself, through offensive-rebound continuations
-        let lastFt = "";                   // kept local: a string on the box
+        let lastFt = "", ftLive = false;                   // kept local: a string on the box
                                            // object would corrupt any code
                                            // that sums its fields
         for (let cyc = 0; cyc < 4; cyc++) {
@@ -182,8 +195,10 @@
             if (made) {
               pts = three ? 3 : 2; b.FGM += 1; if (three) b.FG3M += 1;
               const aw = on.filter(p => p.id !== user.id)
-                           .map(p => ratesOf(p.id).AST_36 + 1e-6);
-              const pAst = clamp((three ? LG.ast3 : LG.ast2), 0.05, 0.95);
+                           .map(p => ratesOf(p.id).AST_36 * cal(p.id, "AST") + 1e-6);
+              const aS = on.reduce((s2, p) => s2 + ratesOf(p.id).AST_36, 0)
+                         / ((CAL && CAL.__ref) || REF_FALLBACK).AST_36;
+              const pAst = clamp((three ? LG.ast3 : LG.ast2) * aS, 0.05, 0.95);
               if (r() < pAst) {
                 const mates = on.filter(p => p.id !== user.id);
                 box[off][mates[pick(r, aw)].id].AST += 1;
@@ -192,7 +207,12 @@
           } else if (k === 2) {
             const nft = 2 + (r() < 0.27 ? 1 : 0);
             let m2 = 0;
-            for (let z = 0; z < nft; z++) if (r() < clamp(q.FT_PCT, .3, .99)) m2++;
+            for (let z = 0; z < nft; z++) {
+              const ok = r() < clamp(q.FT_PCT, .3, .99);
+              if (ok) m2++;
+              // a missed LAST free throw is live and gets rebounded
+              if (z === nft - 1) ftLive = !ok;
+            }
             b.FTA += nft; b.FTM += m2; pts = m2; made = true;
             lastFt = `${m2}/${nft} FT`;
             const fw = dv.map(p => ratesOf(p.id).PF_36 + 1e-6);
@@ -202,7 +222,7 @@
             b.TOV += 1;
             let thief = null;
             if (r() < LG.stl_share) {
-              const sw = dv.map(p => ratesOf(p.id).STL_36 + 1e-6);
+              const sw = dv.map(p => ratesOf(p.id).STL_36 * cal(p.id, "STL") + 1e-6);
               thief = dv[pick(r, sw)];
               box[dfn][thief.id].STL += 1;
             }
@@ -219,22 +239,34 @@
           if (wantLog && k === 2) log.push({p: period, t: off,
             x: `${user.n} ${lastFt} at the line`,
             H: score.H, A: score.A});
-          if (k === 2 || k === 3) break;
-          if (made) break;
+          if (k === 3) break;
+          if (k === 2) { if (!ftLive) break; }
+          else if (made) break;
 
           // a miss is live: does the offence keep it?
           if (k === 0 && r() < LG.blk_share) {
-            const bw = dv.map(p => ratesOf(p.id).BLK_36 + 1e-6);
+            const bw = dv.map(p => ratesOf(p.id).BLK_36 * cal(p.id, "BLK") + 1e-6);
             box[dfn][dv[pick(r, bw)].id].BLK += 1;
           }
-          const offS = on.reduce((a, p) => a + ratesOf(p.id).OREB_36, 0);
-          const defS = dv.reduce((a, p) => a + ratesOf(p.id).DREB_36, 0);
+          // Both sides are normalised by the league reference, so the ratio
+          // sits near one for an average pair of fives. Comparing the raw sums
+          // instead makes it ~0.5, because a lineup grabs about twice as many
+          // defensive boards as offensive ones — which drove offensive
+          // rebounds to 14% against a real 25%.
+          const REF = (CAL && CAL.__ref) || REF_FALLBACK;
+          const offS = on.reduce((a, p) => a + ratesOf(p.id).OREB_36, 0)
+                       / REF.OREB_36;
+          const defS = dv.reduce((a, p) => a + ratesOf(p.id).DREB_36, 0)
+                       / REF.DREB_36;
           const odds = (LG.oreb / (1 - LG.oreb)) * (offS / Math.max(defS, 1e-6));
-          const pOreb = clamp(odds / (1 + odds), 0.06, 0.50);
+          let pOreb = clamp(odds / (1 + odds), 0.06, 0.50);
+          // an offensive board off a free throw is far rarer than off a field
+          // goal — 10.7% against 25.0% — because the defence is already set
+          if (ftLive) pOreb *= (LG.ft_oreb_scale || 1);
           const teamReb = r() < LG.team_reb;
           if (r() < pOreb) {
             if (!teamReb) {
-              const w = on.map(p => ratesOf(p.id).OREB_36 + 1e-6);
+              const w = on.map(p => ratesOf(p.id).OREB_36 * cal(p.id, "REB") + 1e-6);
               const g = on[pick(r, w)];
               box[off][g.id].OREB += 1; box[off][g.id].REB += 1;
               if (wantLog) log.push({p: period, t: off,
@@ -243,7 +275,7 @@
             continue;                           // offence keeps the ball
           }
           if (!teamReb) {
-            const w = dv.map(p => ratesOf(p.id).DREB_36 + 1e-6);
+            const w = dv.map(p => ratesOf(p.id).DREB_36 * cal(p.id, "REB") + 1e-6);
             const g = dv[pick(r, w)];
             box[dfn][g.id].DREB += 1; box[dfn][g.id].REB += 1;
             if (wantLog) log.push({p: period, t: dfn,

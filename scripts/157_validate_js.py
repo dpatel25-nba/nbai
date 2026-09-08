@@ -63,7 +63,7 @@ def run_js(payload: dict, home: str, away: str, sims: int) -> dict:
     var scale = {H: SCH, A: SCA, mu: mu};
     var tot = {H: 0, A: 0}, acc = {}, n = SIMS;
     for (var s = 0; s < n; s++) {
-      var g = this.NBAI_SIM.playGame(H, A, ratesOf, C, LG, pace, scale, s + 1, false);
+      var g = this.NBAI_SIM.playGame(H, A, ratesOf, C, LG, pace, scale, s + 1, false, E.cal);
       tot.H += g.score.H; tot.A += g.score.A;
       for (var t in g.box) for (var pid in g.box[t]) {
         var k = t + "|" + pid;
@@ -118,7 +118,7 @@ def main() -> None:
 
     print(f"  {'matchup':<12}{'py home':>9}{'js home':>9}{'py away':>9}"
           f"{'js away':>9}{'|diff|':>8}")
-    dif, ptsdif = [], []
+    dif, ptsdif, boxdif = [], [], {}
     for h, aw in PAIRS:
         hid, aid = code[h], code[aw]
         sides = MU.build_sides(season, hid, aid, set(), rates=rates, rseason=rseason)
@@ -162,11 +162,27 @@ def main() -> None:
         for k, v in js["players"].items():
             if k in pyp and pyp[k]["PTS"] > 4:
                 ptsdif.append(abs(pyp[k]["PTS"] - v["PTS"]))
+        # Box categories too. Checking only scores and points let the port run
+        # 14% offensive rebounds against the engine's 25% — the totals agreed to
+        # 1.3 points the whole time, because a rebound that never happens costs
+        # nobody any points.
+        for f in ("REB", "AST", "STL", "BLK", "TOV", "FGA", "FTA"):
+            pv = sum(x.get(f, 0.0) for x in pyp.values())
+            jv = sum(x.get(f, 0.0) for x in js["players"].values())
+            if pv > 1:
+                boxdif.setdefault(f, []).append(jv / pv)
 
     print(f"\n  team score   mean |diff| {np.mean(dif):.2f} pts   max {np.max(dif):.2f}")
     if ptsdif:
         print(f"  player points mean |diff| {np.mean(ptsdif):.2f} pts   "
               f"max {np.max(ptsdif):.2f}   (n={len(ptsdif)} rotation players)")
+    if boxdif:
+        print(f"\n  BOX CATEGORIES, browser / engine")
+        print(f"  {'stat':<6}{'ratio':>8}")
+        for f, v in boxdif.items():
+            flag = "" if 0.95 <= float(np.mean(v)) <= 1.05 else "   <- off"
+            print(f"  {f:<6}{np.mean(v):>8.3f}{flag}")
+
     print("\n  The port omits shot zones, defender affinity, height/weight, cold")
     print("  start and endgame shot selection. These figures are the cost of that.")
 
