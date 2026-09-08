@@ -1389,6 +1389,7 @@
     }
     function setBusy(on, label) {
       const started = !!state && state.n > 0;
+      el("simRun1").textContent = started ? "Simulate another game" : "Simulate game";
       el("simRun1").disabled = on;
       ["simRun10","simRun100","simRun1000","simReset"].forEach(id =>
         el(id).disabled = on || !started);
@@ -1396,14 +1397,18 @@
       el("simRunNote").textContent =
         label || (started ? plural(state.n, "simulation") + " run" : "");
     }
-    function go(k, first) {
+    // `showGame` means "replace the gamecast with a fresh one", NOT "start
+    // over". Pressing Simulate game keeps every simulation already run and adds
+    // this one to them; only Reset clears the totals, and only a change of
+    // matchup forces a new state because the old one is about different teams.
+    function go(k, showGame) {
       const h = hs.value, a = as.value;
       if (h === a) { meta(); return; }
       setBusy(true, k >= 100 ? `running ${k.toLocaleString()}…` : "running…");
       setTimeout(() => {
-        if (first || !state || state.h !== h || state.a !== a) state = newState(h, a);
+        if (!state || state.h !== h || state.a !== a) state = newState(h, a);
         for (let i = 0; i < k; i++) {
-          const wantLog = state.n === 0;
+          const wantLog = (showGame && i === 0) || !state.first;
           const g = window.NBAI_SIM.playGame(state.H, state.A, ratesOf, E.const,
                                              E.lg, state.pace, state.scale,
                                              state.seed++, wantLog);
@@ -1413,7 +1418,7 @@
         drawGame(); drawAgg(); setBusy(false);
       }, 20);
     }
-    el("simRun1").addEventListener("click", () => go(1, true));
+    el("simRun1").addEventListener("click", () => go(1, true));   // fresh gamecast
     el("simRun10").addEventListener("click", () => go(10));
     el("simRun100").addEventListener("click", () => go(100));
     el("simRun1000").addEventListener("click", () => go(1000));
