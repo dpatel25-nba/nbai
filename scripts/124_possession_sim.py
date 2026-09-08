@@ -264,8 +264,37 @@ def load_K() -> dict:
     return k
 
 
-def marcel(df: pd.DataFrame, metric: str, weight="MIN", k=None) -> dict:
-    """Leakage-safe projection: recency-weighted prior seasons, regressed to mean."""
+def height_tier(pid, heights) -> str:
+    """Coarse height band, used as the group a player is regressed toward."""
+    v = heights.get(int(pid))
+    if v is None:
+        return "unknown"
+    if v >= 82:
+        return "6-10+"
+    if v >= 79:
+        return "6-7/6-9"
+    if v >= 76:
+        return "6-4/6-6"
+    return "under 6-4"
+
+
+# Metrics regressed toward their HEIGHT GROUP rather than the whole league.
+# Shrinking a centre's rebounding toward a mean built mostly from guards costs
+# him rebounds he will actually get; script 160 validates the change walk-forward
+# with a cluster bootstrap over players — defensive rebounds −1.06% [−1.92,−0.18]
+# and assists −1.15% [−1.85,−0.48]. Offensive rebounds move the same way but the
+# interval spans zero, so they stay on the league prior.
+GROUP_PRIOR = {"DREB_36", "AST_36"}
+
+
+def marcel(df: pd.DataFrame, metric: str, weight="MIN", k=None,
+           groups=None) -> dict:
+    """Leakage-safe projection: recency-weighted prior seasons, regressed to mean.
+
+    `groups` maps a player to the population he is regressed toward. Without it
+    every player is pulled to one league mean, which is the wrong prior for
+    anyone far from the middle of it.
+    """
     Kv = K if k is None else float(k)
     order = {s: i for i, s in enumerate(sorted(df.SEASON.unique()))}
     inv = {i: s for s, i in order.items()}
@@ -276,12 +305,26 @@ def marcel(df: pd.DataFrame, metric: str, weight="MIN", k=None) -> dict:
         ti = order[r.SEASON]
         if ti == 0:
             continue
-        if ti not in cache:
+        gkey = groups.get(int(r.PLAYER_ID)) if groups else None
+        ckey = (ti, gkey)
+        if ckey not in cache:
             pri = df[df.SEASON.map(order) < ti]
+            if gkey is not None:
+                pri = pri[[groups.get(int(q)) == gkey for q in pri.PLAYER_ID]]
             ok = pri[metric].notna() & pri[weight].notna()
-            cache[ti] = (np.average(pri.loc[ok, metric], weights=pri.loc[ok, weight])
-                         if ok.any() else np.nan)
-        pm = cache[ti]
+            # a thin group is worse than no group; fall back to the league
+            cache[ckey] = (np.average(pri.loc[ok, metric],
+                                      weights=pri.loc[ok, weight])
+                           if ok.sum() >= 30 else np.nan)
+        pm = cache[ckey]
+        if np.isnan(pm) and gkey is not None:
+            if (ti, None) not in cache:
+                pri = df[df.SEASON.map(order) < ti]
+                ok = pri[metric].notna() & pri[weight].notna()
+                cache[(ti, None)] = (np.average(pri.loc[ok, metric],
+                                                weights=pri.loc[ok, weight])
+                                     if ok.any() else np.nan)
+            pm = cache[(ti, None)]
         num = den = 0.0
         for lag, w in RECENCY.items():
             s = inv.get(ti - lag)
@@ -331,7 +374,11 @@ def build_rates(season: str) -> tuple[dict, dict]:
                              0.5)
     cols = RATE_COLS + PCT_COLS + ["FG2A_36", "FG2_PCT"]
     kmap = load_K()
-    proj = {c: marcel(ps, c, k=kmap.get(c)) for c in cols}
+    _h, _ = load_heights()      # (heights, weights)
+    _tier = {int(p): height_tier(p, _h) for p in ps.PLAYER_ID.unique()}
+    proj = {c: marcel(ps, c, k=kmap.get(c),
+                      groups=(_tier if c in GROUP_PRIOR else None))
+            for c in cols}
     pos = {r.PLAYER_ID: pos_bucket(r.POS) for r in ps.itertuples()}
     rates = defaultdict(dict)
     for c in cols:

@@ -809,3 +809,28 @@ With that check in place the real defect appeared immediately: the port ran offe
 **And that explains a constant I had believed.** `LEVEL_CAL = 1.043` existed because the port scored 4.1% below the engine on every matchup, which I attributed to the shot zones it omits. It was the missing second chances. Fixing the rebounds removed the deficit, and the constant went back to 1.0 with team scores agreeing to 1.38 points and every box category within 4% except blocks.
 
 A correction that exactly cancels a bug looks like a good calibration for as long as nothing measures the quantity underneath. Both times this session that a tuned constant appeared — the renderer's anchor and this one — the constant was hiding a mechanism error, and in both cases the tell was available: a residual that would not respond to the knob, or a category nobody was checking.
+
+## What a player is regressed TOWARD (160)
+
+Shrinkage amount was tuned per metric in script 126. What a projection is shrunk toward had never been examined, and it is the other half of the same estimator: `marcel` pulls every player to a single league mean. A centre projecting 10 defensive rebounds per 36 is regressed toward a number built mostly from guards, who are not drawn from his distribution at all.
+
+**The first test found a null for rebounds, and the null was an artefact.** Grouping by the `POS` label reported rebounds unchanged and points improved 0.70% — but **`POS` is blank on 3,841 of 6,942 player-seasons**, 55%, so every unlabelled player was swept into one bucket. The grouping variable was mostly noise, and the metric the idea was aimed at was the one it failed on.
+
+Regrouped by HEIGHT, which is objective and complete, the result reverses:
+
+```
+metric      league   by height   change      95% CI
+DREB_36     0.6309     0.6242    -1.06%   [-1.92,-0.18]   REAL
+REB_36      0.7528     0.7435    -1.24%   [-2.12,-0.34]   REAL
+AST_36      0.6885     0.6806    -1.15%   [-1.85,-0.48]   REAL
+OREB_36     0.3216     0.3200    -0.49%   [-1.21,+0.26]   not adopted
+PTS_36      2.1398     2.1395    -0.01%   [-0.21,+0.18]   nothing
+```
+
+The apparent points win vanishes and the rebounding win appears. `DREB_36` and `AST_36` now regress toward their height band; offensive rebounds move the same way but the interval spans zero, so they stay on the league prior.
+
+**It does not fix the case that prompted it, and the reason is worth recording.** The group prior is far from the league one — 6-10+ players average 7.40 DREB/36 against a league 4.99 — but Jokic carries about 6,154 prior-weighted minutes, so at K=400 his shrinkage is only **6.1%** and the prior is worth 0.10 rebounds to him. The change helps players whose samples are thin enough for shrinkage to bite, which is most of a roster and none of its stars.
+
+His remaining gap is not a defect. The book projects 12.61 per 36 against prior seasons of 12.7, 12.8 and 12.5; he is having a career-best 13.3 season. **A forecast that matched it would be reading the future**, and the honest description of the residual is irreducible rather than fixable.
+
+Held out afterwards: player points 4.721 against the props model's 4.708 on identical rows, rebounds 1.000, assists 1.004, coverage 80.0%/52.4%, PIT deviation 0.062 — the best recorded.
