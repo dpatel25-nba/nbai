@@ -253,7 +253,45 @@
         }
       }
     }
-    return {score, box, log, npos};
+    // Overtime. A tie has to be played out — without this the margin
+    // distribution carries an impossible spike at exactly zero, and the
+    // aggregate view reported "closest game 0 points" on a real basketball
+    // scoreline that cannot happen.
+    let ot = 0;
+    while (score.H === score.A && ot < 4) {
+      ot += 1;
+      const extra = Math.max(6, Math.round(npos * 5 / 48));
+      for (let i = 0; i < extra; i++) {
+        for (const [off, dfn] of [["H", "A"], ["A", "H"]]) {
+          const on = lu[off][C.N_SLOTS - 1].map(k => teams[off][k]);
+          const uw = on.map(p => {
+            const q = ratesOf(p.id);
+            return q.FG2A_36 + q.FG3A_36 + 0.44 * q.FTA_36 * (1 - C.PEN_FT_TRIM)
+                   + q.TOV_36 + 1e-9;
+          });
+          const user = on[pick(r, uw)];
+          const q = ratesOf(user.id);
+          const mix = [q.FG2A_36, q.FG3A_36,
+                       0.44 * q.FTA_36 * (1 - C.PEN_FT_TRIM), q.TOV_36];
+          const k = pick(r, mix), b = box[off][user.id];
+          if (k === 0 || k === 1) {
+            const three = k === 1;
+            const made = r() < clamp((three ? q.FG3_PCT : q.FG2_PCT)
+                                     * scale[off] * LEVEL_CAL, 0.05,
+                                     three ? 0.85 : 0.95);
+            b.FGA += 1; if (three) b.FG3A += 1;
+            if (made) { b.FGM += 1; if (three) b.FG3M += 1;
+              const pts = three ? 3 : 2; b.PTS += pts; score[off] += pts; }
+          } else if (k === 2) {
+            const nft = 2;
+            let m2 = 0;
+            for (let z = 0; z < nft; z++) if (r() < clamp(q.FT_PCT, .3, .99)) m2++;
+            b.FTA += nft; b.FTM += m2; b.PTS += m2; score[off] += m2;
+          } else { b.TOV += 1; }
+        }
+      }
+    }
+    return {score, box, log, npos, ot};
   }
 
   global.NBAI_SIM = {playGame, BOX, rng};

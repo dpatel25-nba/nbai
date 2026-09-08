@@ -123,10 +123,9 @@
   /* ---- possession simulator ---- */
   (function simulatorTab() {
     const SIM = (window.NBAI_DATA || {}).sim || {};
-    const E = SIM.engine;
-    if (!SIM.teams || !Object.keys(SIM.teams).length) return;
+    const E = SIM.engine, T = SIM.teams || {};
 
-    /* held-out scorecard */
+    /* held-out scorecard (model credibility, kept at the foot of the page) */
     const ev = SIM.eval;
     if (ev) {
       const rows = [
@@ -153,11 +152,13 @@
          versus the dedicated props model's <b>${ev.props_pts_mae}</b> on identical
          rows. It wins on margin and total error and on both proper scoring rules
          against Elo, and trails the top-down model on win probability — it is
-         built to allocate a game across players, not to replace a team rating.`;
+         built to allocate a game across players, not to replace a team rating.
+         The in-page engine is a port of it, checked at <b>1.3 points</b> mean
+         difference on team scores and <b>0.8</b> on player points.`;
     }
 
-    if (!E || !window.NBAI_SIM) return;                 // engine payload absent
-    const T = SIM.teams, abbrs = Object.keys(T).sort();
+    if (!E || !window.NBAI_SIM || !Object.keys(T).length) return;
+    const abbrs = Object.keys(T).sort();
     const hs = document.getElementById("simHome"), as = document.getElementById("simAway");
     const opts = abbrs.map(a => `<option value="${a}">${a}</option>`).join("");
     hs.innerHTML = opts; as.innerHTML = opts;
@@ -165,24 +166,24 @@
     as.value = abbrs.includes("BOS") ? "BOS" : abbrs[1];
 
     const ratesOf = id => E.players[String(id)];
+    const nameOf = pid => (E.players[String(pid)] || {}).n || String(pid);
     const sideOf = t => E.teams[t].roster.map(x =>
-      ({id: x.id, n: (E.players[String(x.id)] || {}).n || String(x.id), min: x.min}));
+      ({id: x.id, n: nameOf(x.id), min: x.min}));
     const proj = (h, a, home) => SIM.mu0 + T[h].off - T[a].def + (home ? SIM.hca : 0);
+    const F = (x, d) => (Math.round(x * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d);
+    const el = id => document.getElementById(id);
 
-    let state = null;   // {h,a,n,sum,min,max,scale,mu}
+    let state = null;
 
     function newState(h, a) {
       const mu = {H: proj(h, a, true), A: proj(a, h, false)};
       const H = sideOf(h), A = sideOf(a);
       const pace = (E.teams[h].pace + E.teams[a].pace) / 2;
-      // Solve the level EMPIRICALLY rather than porting the engine's closed
-      // form: run a few unscaled games, see what this implementation actually
-      // produces, and scale to the projection. Self-correcting, so the port's
-      // own offsets cannot drift the level.
-      // Three passes: scaling a make probability does not move points linearly
-      // (clipping and offensive rebounds), so a single pass under-corrects and
-      // two still left some matchups 4 points high. 48 warm-up games costs
-      // about 15ms, which is invisible next to a click.
+      // Solve the level EMPIRICALLY: run warm-up games, see what this
+      // implementation actually produces, scale to the projection. Three passes
+      // because scaling a make probability does not move points linearly, so one
+      // under-corrects and two still left some matchups 4 points high. Being
+      // self-correcting, the port's own offsets cannot drift the displayed level.
       let scale = {H: 1, A: 1, mu}, W = 16;
       for (let pass = 0; pass < 3; pass++) {
         const tot = {H: 0, A: 0};
@@ -195,57 +196,65 @@
                  A: scale.A * mu.A / Math.max(tot.A / W, 1), mu};
       }
       return {h, a, H, A, pace, scale, mu, n: 0, sum: {}, mn: {}, mx: {},
-              wins: 0, pts: [], last: null, seed: 1};
+              wins: 0, sc: [], first: null, seed: 1};
     }
 
     function accumulate(g) {
       state.n += 1;
       if (g.score.H > g.score.A) state.wins += 1;
-      state.pts.push([g.score.H, g.score.A]);
+      state.sc.push([g.score.H, g.score.A]);
       for (const t of ["H", "A"]) for (const pid in g.box[t]) {
-        const key = t + "|" + pid, v = g.box[t][pid];
-        if (!state.sum[key]) { state.sum[key] = {}; state.mn[key] = {}; state.mx[key] = {}; }
+        const k = t + "|" + pid, v = g.box[t][pid];
+        if (!state.sum[k]) { state.sum[k] = {}; state.mn[k] = {}; state.mx[k] = {}; }
         for (const f of window.NBAI_SIM.BOX) {
-          state.sum[key][f] = (state.sum[key][f] || 0) + v[f];
-          state.mn[key][f] = state.mn[key][f] == null ? v[f] : Math.min(state.mn[key][f], v[f]);
-          state.mx[key][f] = state.mx[key][f] == null ? v[f] : Math.max(state.mx[key][f], v[f]);
+          state.sum[k][f] = (state.sum[k][f] || 0) + v[f];
+          state.mn[k][f] = state.mn[k][f] == null ? v[f] : Math.min(state.mn[k][f], v[f]);
+          state.mx[k][f] = state.mx[k][f] == null ? v[f] : Math.max(state.mx[k][f], v[f]);
         }
       }
     }
 
-    function run(k) {
-      const wantLog = state.n === 0 && k === 1;
-      for (let i = 0; i < k; i++) {
-        const g = window.NBAI_SIM.playGame(state.H, state.A, ratesOf, E.const,
-                                           E.lg, state.pace, state.scale,
-                                           state.seed++, wantLog && i === 0);
-        if (wantLog && i === 0) state.last = g;
-        accumulate(g);
-      }
+    function boxTable(abbr, rows, sub) {
+      return `<div class="bx"><div class="bx-h">${abbr}<span>${sub}</span></div>
+        <div class="tblwrap"><table><thead><tr>
+          <th class="tleft">Player</th><th>MIN</th><th>FG</th><th>3PT</th><th>FT</th>
+          <th>REB</th><th>AST</th><th>STL</th><th>BLK</th><th>TO</th><th>PF</th><th>PTS</th>
+        </tr></thead><tbody>${rows}</tbody></table></div></div>`;
     }
 
-    const F = (x, d) => (Math.round(x * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d);
+    function drawGame() {
+      const g = state.first, h = state.h, a = state.a;
+      el("simGamePanel").style.display = "";
+      el("simBoxPanel").style.display = "";
+      const q = [0, 0, 0, 0].map((_, i) => {
+        const upto = (g.log || []).filter(e => e.p <= i);
+        const last = upto[upto.length - 1];
+        return last ? {H: last.H, A: last.A} : {H: 0, A: 0};
+      });
+      let prev = {H: 0, A: 0}, cells = {H: [], A: []};
+      for (const s2 of q) { for (const t of ["H", "A"]) {
+        cells[t].push(s2[t] - prev[t]); prev[t] = s2[t]; } }
+      el("simLine").innerHTML =
+        `<table class="ls"><thead><tr><th></th><th>Q1</th><th>Q2</th><th>Q3</th>
+          <th>Q4</th><th>Final</th></tr></thead><tbody>
+          <tr><td class="tleft">${a}</td>${cells.A.map(x => `<td>${x}</td>`).join("")}
+            <td><b>${g.score.A}</b></td></tr>
+          <tr><td class="tleft">${h}</td>${cells.H.map(x => `<td>${x}</td>`).join("")}
+            <td><b>${g.score.H}</b></td></tr></tbody></table>`;
+      el("simPbpNote").textContent =
+        `${a} ${g.score.A} — ${g.score.H} ${h} · ${(g.log || []).length} plays`;
+      document.querySelector("#simPbpTbl tbody").innerHTML = (g.log || []).map(e =>
+        `<tr><td class="tleft mono">Q${e.p + 1}</td>
+          <td class="tleft">${e.t === "H" ? h : a}</td>
+          <td class="tleft">${e.x}</td>
+          <td class="mono">${e.A}-${e.H}</td></tr>`).join("");
 
-    function drawSingle() {
-      const g = state.last;
-      document.getElementById("simVerdict").innerHTML =
-        `<b>${state.a} ${g.score.A} — ${g.score.H} ${state.h}</b>
-         <span class="mgn">&nbsp;·&nbsp; one simulated game</span>`;
-      document.getElementById("simAgg").innerHTML = "";
       let html = "";
       for (const t of ["A", "H"]) {
-        const abbr = t === "H" ? state.h : state.a;
-        const rows = Object.entries(g.box[t])
-          .filter(([, v]) => v.MIN >= 1)
-          .sort((x, y) => y[1].MIN - x[1].MIN);
-        html += `<div class="panel" style="margin-top:14px">
-          <div class="panel-head"><h2>${abbr}</h2>
-            <span class="eyebrow">${g.score[t]} points</span></div>
-          <div class="tblwrap"><table><thead><tr>
-            <th class="tleft">Player</th><th>MIN</th><th>FG</th><th>3PT</th><th>FT</th>
-            <th>REB</th><th>AST</th><th>STL</th><th>BLK</th><th>TO</th><th>PF</th><th>PTS</th>
-          </tr></thead><tbody>` +
-          rows.map(([pid, v]) => `<tr><td class="tleft">${nameOf(t, pid)}</td>
+        const abbr = t === "H" ? h : a;
+        const rows = Object.entries(g.box[t]).filter(([, v]) => v.MIN >= 1)
+          .sort((x, y) => y[1].MIN - x[1].MIN)
+          .map(([pid, v]) => `<tr><td class="tleft">${nameOf(pid)}</td>
             <td>${Math.round(v.MIN)}</td>
             <td>${Math.round(v.FGM)}-${Math.round(v.FGA)}</td>
             <td>${Math.round(v.FG3M)}-${Math.round(v.FG3A)}</td>
@@ -253,100 +262,111 @@
             <td>${Math.round(v.REB)}</td><td>${Math.round(v.AST)}</td>
             <td>${Math.round(v.STL)}</td><td>${Math.round(v.BLK)}</td>
             <td>${Math.round(v.TOV)}</td><td>${Math.round(v.PF)}</td>
-            <td><b>${Math.round(v.PTS)}</b></td></tr>`).join("") +
-          `</tbody></table></div></div>`;
+            <td><b>${Math.round(v.PTS)}</b></td></tr>`).join("");
+        html += boxTable(abbr, rows, `${g.score[t]} points`);
       }
-      document.getElementById("simBoxes").innerHTML = html;
-      const tb = document.querySelector("#simPbpTbl tbody");
-      document.getElementById("simPbpPanel").style.display = "";
-      tb.innerHTML = (g.log || []).map(e => `<tr>
-        <td class="tleft mono">Q${e.p + 1}</td>
-        <td class="tleft">${e.t === "H" ? state.h : state.a}</td>
-        <td class="tleft">${e.x}</td>
-        <td class="mono">${e.A}-${e.H}</td></tr>`).join("");
-      document.getElementById("simPbpNote").textContent =
-        `${(g.log || []).length} events from the simulated game`;
-    }
-
-    function nameOf(t, pid) {
-      const p = E.players[String(pid)];
-      return p ? p.n : String(pid);
+      el("simBoxes").innerHTML = html;
     }
 
     function drawAgg() {
-      const n = state.n;
-      const hp = state.pts.reduce((s, x) => s + x[0], 0) / n;
-      const ap = state.pts.reduce((s, x) => s + x[1], 0) / n;
-      document.getElementById("simVerdict").innerHTML =
-        `<b>${state.h} ${F(hp,1)} — ${F(ap,1)} ${state.a}</b>
-         <span class="mgn">&nbsp;·&nbsp; ${n.toLocaleString()} simulations
-         &nbsp;·&nbsp; ${state.h} wins ${F(state.wins / n * 100, 1)}%</span>`;
-      document.getElementById("simPbpPanel").style.display = "none";
-      document.getElementById("simAgg").innerHTML = "";
+      const n = state.n, h = state.h, a = state.a;
+      if (n < 2) { el("simAggPanel").style.display = "none"; return; }
+      el("simAggPanel").style.display = "";
+      const hs2 = state.sc.map(x => x[0]), as2 = state.sc.map(x => x[1]);
+      const mean = v => v.reduce((s, x) => s + x, 0) / v.length;
+      const mh = mean(hs2), ma = mean(as2);
+      const marg = mean(state.sc.map(x => x[0] - x[1]));
+      const tot = mean(state.sc.map(x => x[0] + x[1]));
+      el("simAggNote").textContent = `${n.toLocaleString()} simulations`;
+      document.querySelector("#simTeamTbl tbody").innerHTML =
+        `<tr><td class="tleft">${a}</td><td>${F(ma,1)}</td><td>${Math.min(...as2)}</td>
+           <td>${Math.max(...as2)}</td><td>${F(100-state.wins/n*100,1)}%</td></tr>
+         <tr><td class="tleft">${h}</td><td>${F(mh,1)}</td><td>${Math.min(...hs2)}</td>
+           <td>${Math.max(...hs2)}</td><td>${F(state.wins/n*100,1)}%</td></tr>`;
+      el("simAggSummary").innerHTML =
+        `Average margin <b>${h} ${marg >= 0 ? "+" : ""}${F(marg,1)}</b> ·
+         average total <b>${F(tot,1)}</b> ·
+         closest game ${Math.min(...state.sc.map(x => Math.abs(x[0]-x[1])))} points,
+         widest ${Math.max(...state.sc.map(x => Math.abs(x[0]-x[1])))}.
+         Player rows show the average with the lowest and highest single game beneath.`;
       let html = "";
       for (const t of ["A", "H"]) {
-        const abbr = t === "H" ? state.h : state.a;
-        const keys = Object.keys(state.sum).filter(k => k.startsWith(t + "|"));
-        keys.sort((x, y) => state.sum[y].MIN - state.sum[x].MIN);
-        html += `<div class="panel" style="margin-top:14px">
-          <div class="panel-head"><h2>${abbr}</h2>
-            <span class="eyebrow">average · min · max over ${n.toLocaleString()} sims</span></div>
-          <div class="tblwrap"><table><thead><tr>
-            <th class="tleft">Player</th><th>MIN</th><th>PTS</th><th>REB</th>
-            <th>AST</th><th>FG</th><th>3PM</th><th>STL</th><th>BLK</th><th>TO</th>
-          </tr></thead><tbody>` +
-          keys.filter(k => state.sum[k].MIN / n >= 1).map(k => {
-            const pid = k.split("|")[1], s = state.sum[k], mn = state.mn[k], mx = state.mx[k];
-            const cell = f => `<td><span class="avg">${F(s[f] / n, 1)}</span>
-              <span class="rng">${Math.round(mn[f])}–${Math.round(mx[f])}</span></td>`;
-            return `<tr><td class="tleft">${nameOf(t, pid)}</td>
-              <td>${F(s.MIN / n, 1)}</td>${cell("PTS")}${cell("REB")}${cell("AST")}
-              <td><span class="avg">${F(s.FGM / n, 1)}-${F(s.FGA / n, 1)}</span></td>
-              ${cell("FG3M")}${cell("STL")}${cell("BLK")}${cell("TOV")}</tr>`;
-          }).join("") + `</tbody></table></div></div>`;
+        const abbr = t === "H" ? h : a;
+        const keys = Object.keys(state.sum).filter(k => k.startsWith(t + "|"))
+          .filter(k => state.sum[k].MIN / n >= 1)
+          .sort((x, y) => state.sum[y].MIN - state.sum[x].MIN);
+        const rows = keys.map(k => {
+          const pid = k.split("|")[1], s2 = state.sum[k],
+                mn = state.mn[k], mx = state.mx[k];
+          const c = f => `<td><span class="avg">${F(s2[f] / n, 1)}</span>
+            <span class="rng">${Math.round(mn[f])}–${Math.round(mx[f])}</span></td>`;
+          return `<tr><td class="tleft">${nameOf(pid)}</td>
+            <td>${F(s2.MIN / n, 1)}</td>
+            <td><span class="avg">${F(s2.FGM/n,1)}-${F(s2.FGA/n,1)}</span></td>
+            <td><span class="avg">${F(s2.FG3M/n,1)}-${F(s2.FG3A/n,1)}</span></td>
+            <td><span class="avg">${F(s2.FTM/n,1)}-${F(s2.FTA/n,1)}</span></td>
+            ${c("REB")}${c("AST")}${c("STL")}${c("BLK")}${c("TOV")}
+            <td>${F(s2.PF / n, 1)}</td>${c("PTS")}</tr>`;
+        }).join("");
+        html += boxTable(abbr, rows, `average over ${n.toLocaleString()} sims`);
       }
-      document.getElementById("simBoxes").innerHTML = html;
+      el("simAggBoxes").innerHTML = html;
     }
 
-    function refresh() {
+    function meta() {
       const h = hs.value, a = as.value;
-      document.getElementById("simHomeProj").textContent =
-        `off ${T[h].off >= 0 ? "+" : ""}${T[h].off.toFixed(1)} · def ${T[h].def >= 0 ? "+" : ""}${T[h].def.toFixed(1)}`;
-      document.getElementById("simAwayProj").textContent =
-        `off ${T[a].off >= 0 ? "+" : ""}${T[a].off.toFixed(1)} · def ${T[a].def >= 0 ? "+" : ""}${T[a].def.toFixed(1)}`;
+      for (const [sel, id] of [[h, "simHomeMeta"], [a, "simAwayMeta"]]) {
+        const t = T[sel];
+        el(id).innerHTML = `<span>off ${t.off >= 0 ? "+" : ""}${t.off.toFixed(1)}</span>
+          <span>def ${t.def >= 0 ? "+" : ""}${t.def.toFixed(1)}</span>`;
+      }
+      if (h === a) { el("simProj").innerHTML =
+        `<span class="warn">Pick two different teams.</span>`; return; }
+      el("simProj").innerHTML =
+        `Projected <b>${a} ${F(proj(a,h,false),1)} — ${F(proj(h,a,true),1)} ${h}</b>
+         <span class="mgn">· home edge +${SIM.hca.toFixed(1)}</span>`;
     }
     function setBusy(on, label) {
-      ["simRun1","simRun10","simRun100","simRun1000","simReset"].forEach(id =>
-        document.getElementById(id).disabled = on || (id !== "simRun1" && !state));
-      document.getElementById("simRunNote").textContent =
-        label || (state ? `${state.n.toLocaleString()} simulations` : "pick two teams");
+      const started = !!state && state.n > 0;
+      el("simRun1").disabled = on;
+      ["simRun10","simRun100","simRun1000","simReset"].forEach(id =>
+        el(id).disabled = on || !started);
+      el("simRunNote").textContent =
+        label || (started ? `${state.n.toLocaleString()} simulations run` : "");
     }
     function go(k, first) {
       const h = hs.value, a = as.value;
-      if (h === a) { document.getElementById("simVerdict").textContent =
-        "Pick two different teams."; return; }
+      if (h === a) { meta(); return; }
       setBusy(true, k >= 100 ? `running ${k.toLocaleString()}…` : "running…");
-      setTimeout(() => {                       // let the label paint first
+      setTimeout(() => {
         if (first || !state || state.h !== h || state.a !== a) state = newState(h, a);
-        run(k);
-        if (state.n === 1 && state.last) drawSingle(); else drawAgg();
-        setBusy(false);
+        for (let i = 0; i < k; i++) {
+          const wantLog = state.n === 0;
+          const g = window.NBAI_SIM.playGame(state.H, state.A, ratesOf, E.const,
+                                             E.lg, state.pace, state.scale,
+                                             state.seed++, wantLog);
+          if (wantLog) state.first = g;
+          accumulate(g);
+        }
+        drawGame(); drawAgg(); setBusy(false);
       }, 20);
     }
-    document.getElementById("simRun1").addEventListener("click", () => go(1, true));
-    document.getElementById("simRun10").addEventListener("click", () => go(10));
-    document.getElementById("simRun100").addEventListener("click", () => go(100));
-    document.getElementById("simRun1000").addEventListener("click", () => go(1000));
-    document.getElementById("simReset").addEventListener("click", () => {
+    el("simRun1").addEventListener("click", () => go(1, true));
+    el("simRun10").addEventListener("click", () => go(10));
+    el("simRun100").addEventListener("click", () => go(100));
+    el("simRun1000").addEventListener("click", () => go(1000));
+    el("simReset").addEventListener("click", () => {
       state = null;
-      document.getElementById("simBoxes").innerHTML = "";
-      document.getElementById("simVerdict").innerHTML = "";
-      document.querySelector("#simPbpTbl tbody").innerHTML = "";
+      ["simGamePanel","simBoxPanel","simAggPanel"].forEach(x =>
+        el(x).style.display = "none");
       setBusy(false);
     });
-    hs.addEventListener("change", () => { state = null; refresh(); setBusy(false); });
-    as.addEventListener("change", () => { state = null; refresh(); setBusy(false); });
-    refresh(); setBusy(false);
+    const reset = () => { state = null;
+      ["simGamePanel","simBoxPanel","simAggPanel"].forEach(x =>
+        el(x).style.display = "none");
+      meta(); setBusy(false); };
+    hs.addEventListener("change", reset); as.addEventListener("change", reset);
+    meta(); setBusy(false);
   })();
 
   /* ---- matchup predictor ---- */
@@ -501,6 +521,459 @@
 
 <main>
   <!-- ============ TEAM RATINGS ============ -->
+  <section class="view" id="research">
+    <div class="page-head">
+      <div><div class="eyebrow">Exploratory work</div><h1>Research</h1></div>
+      <div class="sub">Models and measurements behind the simulator. These are investigations rather than products — some fed the engine, some were tested and rejected.</div>
+    </div>
+    <div class="rgroup"><div class="eyebrow">Teams</div><div class="rgrid"><button class="rcard" data-view="ratings"><div class="rc-t">Power Ratings</div><div class="rc-d">Elo power ratings and Four Factors for all 30 teams.</div></button><button class="rcard" data-view="predict"><div class="rc-t">Elo Matchup</div><div class="rc-d">Team-vs-team win probability from the Elo baseline.</div></button></div></div>
+    <div class="rgroup"><div class="eyebrow">Players</div><div class="rgrid"><button class="rcard" data-view="players"><div class="rc-t">Player Ratings</div><div class="rc-d">WAR leaderboard and clutch-situation splits.</div></button><button class="rcard" data-view="impact"><div class="rc-t">Impact</div><div class="rc-d">With-or-without-you on/off impact for each rotation.</div></button><button class="rcard" data-view="props"><div class="rc-t">Props</div><div class="rc-d">Projected season lines from the production props model.</div></button></div></div>
+    <div class="rgroup"><div class="eyebrow">Matchup detail</div><div class="rgrid"><button class="rcard" data-view="defense"><div class="rc-t">Perimeter Defense</div><div class="rc-d">Defender quality measured over 2.2M possessions.</div></button><button class="rcard" data-view="shots"><div class="rc-t">Shot Charts</div><div class="rc-d">Shot location and efficiency across 1.6M attempts.</div></button><button class="rcard" data-view="playtypes"><div class="rc-t">Play Types</div><div class="rc-d">Synergy play-type frequency and matchup edges.</div></button></div></div>
+  </section>
+
+  <section class="view" id="ratings">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">2025–26 · through season's end</div>
+        <h1>Team Power Ratings</h1>
+      </div>
+      <div class="sub">Live Elo ratings from our walk-forward-backtested model. 1500 is a
+        league-average team; the bar shows projected point margin vs. an average opponent.</div>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi"><div class="v mono" id="kpiGames">16,758</div><div class="l eyebrow">Games in database</div></div>
+      <div class="kpi"><div class="v mono" id="kpiSeasons">13</div><div class="l eyebrow">Seasons · 2013–2026</div></div>
+      <div class="kpi"><div class="v mono" id="kpiAcc"><em>65.2%</em></div><div class="l eyebrow">Backtest accuracy</div></div>
+      <div class="kpi"><div class="v mono" id="kpiLoss">0.626</div><div class="l eyebrow">Log-loss (out-of-sample)</div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Power Ratings</h2>
+        <span class="eyebrow">Click a column to sort</span>
+      </div>
+      <div class="tblwrap">
+        <table id="rtable">
+          <thead>
+            <tr>
+              <th class="tleft" data-k="rank">Rk</th>
+              <th class="tleft" data-k="name">Team</th>
+              <th data-k="elo" aria-sort="descending">Rating <span class="arw">▼</span></th>
+              <th data-k="margin" class="tleft barcell">Margin vs avg</th>
+              <th data-k="w">W</th>
+              <th data-k="l">L</th>
+              <th data-k="pct">Win%</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:18px">
+      <div class="panel-head"><h2>Four Factors</h2><span class="eyebrow">Offense · Defense — 2025-26</span></div>
+      <div class="tblwrap">
+        <table id="fftable">
+          <thead><tr>
+            <th class="tleft" data-k="team">Team</th>
+            <th data-k="o_efg">eFG%</th><th data-k="o_tov">TOV%</th><th data-k="o_orb">ORB%</th><th data-k="o_ftr">FTr</th>
+            <th data-k="d_efg" class="dsplit">eFG%</th><th data-k="d_tov">TOV%</th><th data-k="d_orb">ORB%</th><th data-k="d_ftr">FTr</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="foot"><b>Four Factors</b> (Dean Oliver): shooting <b>eFG%</b>, ball control <b>TOV%</b>,
+      rebounding <b>ORB%</b>, and <b>FTr</b> (free-throw rate) — the left block is a team's offense,
+      the right block (shaded) is what they allow on defense. This is *why* a team's rating is what it is.</p>
+  </section>
+
+  <!-- ============ PLAYERS ============ -->
+  <section class="view" id="players">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">2025–26 · our models</div>
+        <h1>Player Ratings</h1>
+      </div>
+      <div class="sub">Top players by our WAR, alongside shot-making and defensive value —
+        every column is a model we built and backtested, not a box-score average.</div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>Player Leaderboard</h2><span class="eyebrow">Click a column to sort</span></div>
+      <div class="tblwrap">
+        <table id="ptable">
+          <thead><tr>
+            <th class="tleft" data-k="rank">Rk</th>
+            <th class="tleft" data-k="player">Player</th>
+            <th data-k="war" aria-sort="descending">WAR <span class="arw">▼</span></th>
+            <th data-k="off">Off</th>
+            <th data-k="poe">Shot+</th>
+            <th data-k="def">Def</th>
+            <th data-k="mpg">MPG</th>
+            <th data-k="pts">PTS</th>
+            <th data-k="floor">Floor</th>
+            <th data-k="ceil">Ceil</th>
+            <th data-k="reb">REB</th>
+            <th data-k="ast">AST</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:16px">
+      <div class="panel-head"><h2>Clutch Leaders</h2><span class="eyebrow">Last 5 min · within 5 · 2025-26</span></div>
+      <div class="tblwrap">
+        <table id="cltable">
+          <thead><tr><th class="tleft">Rk</th><th class="tleft">Player</th>
+            <th>Clutch PTS</th><th>Shooting Lift</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="foot"><b>WAR</b> — wins above replacement, <b>v3</b>: box score <i>plus</i> Synergy
+      play-type efficiency, tracking rim protection, and playmaking creation. Each source was
+      backtested to add out-of-sample signal; the blend lifts team-win correlation 0.837→0.868 vs
+      the box-only version. <b>Off / Def</b> — the offensive (box + play-type + creation) and
+      defensive (box + rim protection) components, in points/100 above average. <b>Shot+</b> —
+      points over expected on the same shots. <b>Floor / Ceil</b> — 20th/80th-percentile scoring
+      nights (props reliability). <b>Clutch</b> — points in the last 5 min within 5, with each
+      player's shooting lift vs. their season eFG%.</p>
+  </section>
+
+  <!-- ============ PROPS ============ -->
+  <section class="view" id="props">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">2025–26 · projection engine</div>
+        <h1>Player Props</h1>
+      </div>
+      <div class="sub">Pre-game projections for every player — projected <b>minutes</b> drive
+        projected points, rebounds, assists. Honest walk-forward accuracy (never trained on the
+        future), and the numbers use <b>projected</b> minutes, not hindsight.</div>
+    </div>
+    <div class="kpis" id="propKpis"></div>
+    <div class="panel" style="margin-top:16px">
+      <div class="panel-head"><h2>Projected Season Lines</h2><span class="eyebrow">proj vs actual · click a column to sort</span></div>
+      <div class="tblwrap">
+        <table id="proptable">
+          <thead><tr>
+            <th class="tleft" data-k="rank">Rk</th>
+            <th class="tleft" data-k="player">Player</th>
+            <th data-k="gp">GP</th>
+            <th data-k="pmin">Min</th>
+            <th data-k="ppts" aria-sort="descending">PTS <span class="arw">▼</span></th>
+            <th data-k="apts">actual</th>
+            <th data-k="preb">REB</th>
+            <th data-k="areb">actual</th>
+            <th data-k="past">AST</th>
+            <th data-k="aast">actual</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="foot"><b>How it's built:</b> a gradient-boosted minutes model (recent minutes +
+      rest + <b>who's out</b> — a teammate's absence redistributes minutes and usage) feeds
+      per-stat models that add recent form and a shot-volume vs. shooting-efficiency split.
+      The strongest single lever we found is <b>teammate availability</b>: minutes MAE dropped
+      from 4.87 to 4.60 once the model sees who's sitting. Opponent-specific signals — team
+      defense, pace, even exact matchup — were tested and add almost nothing.</p>
+  </section>
+
+  <!-- ============ DEFENSE ============ -->
+  <section class="view" id="defense">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">matchup data · 2.2M possessions</div>
+        <h1>Perimeter Defense</h1>
+      </div>
+      <div class="sub">Who actually makes life hard on the man they guard — measured from every
+        defender-vs-scorer matchup, adjusted for <b>who</b> they guard and <b>how much</b> they play.
+        This is the on-ball defense box scores can't see.</div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>Defender Leaderboard</h2><span class="eyebrow">2025-26 · click a column to sort</span></div>
+      <div class="tblwrap">
+        <table id="deftable">
+          <thead><tr>
+            <th class="tleft" data-k="rank">Rk</th>
+            <th class="tleft" data-k="player">Player</th>
+            <th data-k="rating" aria-sort="descending">Def Rating <span class="arw">▼</span></th>
+            <th data-k="mpg">MPG</th>
+            <th data-k="poss">Poss Guarded</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="foot"><b>Def Rating</b> — points saved per matchup vs. what the offensive players
+      "should" score, standardized across the league (higher = better). We <b>residualize out
+      minutes and assignment difficulty</b>, because raw matchup numbers reward bench players hidden
+      on weak scorers. Honest caveat: this is <b>on-ball</b> defense only — it doesn't capture rim
+      protection, help, or scheme, so it's a descriptive lens, not a full defensive rating.</p>
+  </section>
+
+  <!-- ============ PLAY TYPES ============ -->
+  <section class="view" id="playtypes">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">Synergy · 2025–26</div>
+        <h1>Play-Type Matchups</h1>
+      </div>
+      <div class="sub">Every team's offense broken into how <b>often</b> they run each play type and
+        how <b>efficiently</b> — matched against how the opponent <b>defends</b> that play type. Pick
+        an offense and a defense to see the bottom-up scouting grid.</div>
+    </div>
+    <div class="mk-card">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px">
+        <label class="eyebrow" for="synOff">Offense</label>
+        <select id="synOff" aria-label="Offense team" style="width:auto;min-width:170px"></select>
+        <label class="eyebrow" for="synDef">Defense</label>
+        <select id="synDef" aria-label="Defense team" style="width:auto;min-width:170px"></select>
+      </div>
+      <div class="tblwrap">
+        <table id="syntable">
+          <thead><tr>
+            <th class="tleft">Play Type</th>
+            <th>Off Freq</th><th>Off PPP</th>
+            <th>Def PPP</th><th>vs Lg</th><th>Matchup</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="foot"><b>Reading it:</b> <b>Off Freq</b> = share of the offense's possessions in that
+      play type; <b>Off PPP</b> = their points per possession on it; <b>Def PPP</b> = what the defense
+      allows on it; <b>vs Lg</b> = how the defense compares to league average (green = stingy);
+      <b>Matchup</b> = the offense's efficiency shifted by this defense's strength on that play type.
+      An honest note we found in backtests: this grid is a superb <b>scouting</b> tool, but at the
+      team level it doesn't out-predict the simple rating difference — great defenses tend to be
+      great everywhere.</p>
+  </section>
+
+  <!-- ============ SHOT CHARTS ============ -->
+  <section class="view" id="shots">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">2025–26 · 1.6M shots</div>
+        <h1>Shot Charts</h1>
+      </div>
+      <div class="sub">Where each team shoots and how well — cells sized by volume, colored by
+        efficiency vs. the league at that range. Built from every shot's court coordinates.</div>
+    </div>
+    <div class="mk-card">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px">
+        <label class="eyebrow" for="shotTeam">Team</label>
+        <select id="shotTeam" aria-label="Team" style="width:auto;min-width:200px"></select>
+        <div class="shot-legend">
+          <span><i style="background:var(--cool)"></i> below league</span>
+          <span><i style="background:var(--muted)"></i> average</span>
+          <span><i style="background:var(--accent)"></i> above league</span>
+        </div>
+      </div>
+      <div style="overflow-x:auto"><canvas id="shotCanvas" width="500" height="470"
+        style="max-width:100%;display:block;margin:0 auto"></canvas></div>
+    </div>
+    <p class="foot"><b>Reading it:</b> bigger cell = more shots from that spot; amber = the team
+      scores more points-per-shot there than the league average from that range, blue = less.
+      A big amber cluster behind the arc is an elite, high-volume shooting team.</p>
+  </section>
+
+  <!-- ============ IMPACT (WOWY) ============ -->
+  <section class="view" id="impact">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">2025–26 · With-Or-Without-You</div>
+        <h1>Player Impact</h1>
+      </div>
+      <div class="sub">How much better or worse a team is in games a player <b>plays</b> vs.
+        <b>misses</b> — and which teammates pick up the slack. This is the injury/absence impact,
+        measured from games played vs. sat out.</div>
+    </div>
+    <div class="mk-card">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px">
+        <label class="eyebrow" for="wowyTeam">Team</label>
+        <select id="wowyTeam" style="width:auto;min-width:200px"></select>
+      </div>
+      <div class="tblwrap">
+        <table id="wtable">
+          <thead><tr><th class="tleft">Player</th><th>Impact</th>
+            <th>Team w/</th><th>Team w/o</th><th>G in</th><th>G out</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="wmates" class="wmates"></div>
+    </div>
+    <p class="foot"><b>Impact</b> = the team's average point margin per game <em>with</em> the player
+      minus <em>without</em> (positive = better with them). Click a player to see how teammates'
+      scoring changes when they sit. <b>Caveat:</b> players miss few games, so big numbers on a tiny
+      "G out" are noisy — this is descriptive, not a controlled on/off (which needs lineup data).</p>
+  </section>
+
+  <!-- ============ MATCHUP ============ -->
+  <section class="view" id="predict">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">Prediction Engine</div>
+        <h1>Matchup Predictor</h1>
+      </div>
+      <div class="sub">Pick any two teams. This runs our Elo win-probability model live —
+        the same model, computing in your browser. Home court = +100 rating points (~3.5 pts).</div>
+    </div>
+
+    <div class="matchup">
+      <div class="mk-card">
+        <div class="vs-grid">
+          <div class="side">
+            <label class="eyebrow" for="home">Home</label>
+            <select id="home" aria-label="Home team"></select>
+            <div class="sel-elo mono" id="homeElo"></div>
+          </div>
+          <div class="vs-col">
+            <div class="vs">VS</div>
+            <div class="venue">
+              <button id="neutralBtn" type="button">Neutral site</button>
+            </div>
+          </div>
+          <div class="side">
+            <label class="eyebrow" for="away">Away</label>
+            <select id="away" aria-label="Away team"></select>
+            <div class="sel-elo mono" id="awayElo"></div>
+          </div>
+        </div>
+
+        <div class="result">
+          <div class="probbar" id="probbar">
+            <div class="h" id="pbHome"><span id="pbHomeTxt"></span></div>
+            <div class="a" id="pbAway"><span id="pbAwayTxt"></span></div>
+          </div>
+          <div class="verdict" id="verdict"></div>
+        </div>
+      </div>
+    </div>
+    <p class="foot"><b>How it works:</b> win probability = 1 / (1 + 10^(−ΔElo/400)), where ΔElo
+      includes the home-court bonus. Projected margin = ΔElo / 28. This is our Stage-1 baseline;
+      the bottom-up matchup simulator (next) will project individual player and team stat lines.</p>
+
+    <div class="page-head" style="margin-top: 44px">
+      <div>
+        <div class="eyebrow">Coming soon · the full vision</div>
+        <h1>Projected Box Score <span class="badge-preview">Preview</span></h1>
+      </div>
+      <div class="sub">The depth we're building toward — a team comparison plus player-by-player
+        lines for any matchup. Shown here with <b>real 2021-22 season data</b> (Celtics vs Warriors)
+        as a stand-in; the live tool will <b>project</b> these opponent-adjusted for current rosters.</div>
+    </div>
+
+    <div class="preview-wrap">
+      <div class="mk-card">
+        <div class="cmp-head"><span>Boston Celtics</span>
+          <span class="cmp-season">2021-22 · per game</span><span>Golden State Warriors</span></div>
+        <div id="cmpRows"></div>
+      </div>
+      <div class="ptables">
+        <div class="mk-card"><div class="pt-head">Boston Celtics <small>2021-22 avg</small></div>
+          <table class="ptbl" id="ptA"></table></div>
+        <div class="mk-card"><div class="pt-head">Golden State Warriors <small>2021-22 avg</small></div>
+          <table class="ptbl" id="ptB"></table></div>
+      </div>
+      <div class="mk-card">
+        <div class="eyebrow">Key matchup edges</div>
+        <div class="chips" id="edges"></div>
+      </div>
+    </div>
+    <p class="foot"><b>What makes it a projection (next):</b> each line gets adjusted for the specific
+      opponent — pace, defensive rating faced, and the deep per-player splits (perimeter defense,
+      shooting vs. taller/shorter defenders) — then regressed with shrinkage so small samples don't mislead.</p>
+  </section>
+
+  <!-- ============ ROADMAP ============ -->
+  <section class="view active" id="simulator">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">Possession Engine</div>
+        <h1>Game Simulator</h1>
+      </div>
+      <div class="sub">Choose a matchup. The engine plays it out one possession at
+        a time — rotations, matchups, fouls, the bonus, offensive rebounds — and
+        returns a gamecast and a full box score. Run it again for the distribution.</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h2>Choose a matchup</h2>
+        <span class="eyebrow" id="simRunNote"></span></div>
+      <div class="mk-grid">
+        <div class="mk-box">
+          <div class="eyebrow">Away</div>
+          <select id="simAway" aria-label="Away team"></select>
+          <div class="mk-meta" id="simAwayMeta"></div>
+        </div>
+        <div class="mk-at">@</div>
+        <div class="mk-box">
+          <div class="eyebrow">Home</div>
+          <select id="simHome" aria-label="Home team"></select>
+          <div class="mk-meta" id="simHomeMeta"></div>
+        </div>
+      </div>
+      <div class="mk-proj" id="simProj"></div>
+      <div class="simbtns">
+        <button class="simbtn primary" id="simRun1">Simulate game</button>
+        <button class="simbtn" id="simRun10" disabled>+10 simulations</button>
+        <button class="simbtn" id="simRun100" disabled>+100</button>
+        <button class="simbtn" id="simRun1000" disabled>+1000</button>
+        <button class="simbtn ghost" id="simReset" disabled>Reset</button>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:18px;display:none" id="simGamePanel">
+      <div class="panel-head"><h2>Gamecast</h2>
+        <span class="eyebrow" id="simPbpNote"></span></div>
+      <div class="linescore" id="simLine"></div>
+      <div class="tblwrap" style="max-height:420px;overflow:auto">
+        <table id="simPbpTbl">
+          <thead><tr><th class="tleft">Q</th><th class="tleft">Team</th>
+            <th class="tleft">Play</th><th>Score</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:18px;display:none" id="simBoxPanel">
+      <div class="panel-head"><h2>Box score</h2>
+        <span class="eyebrow">that game</span></div>
+      <div id="simBoxes"></div>
+    </div>
+
+    <div class="panel" style="margin-top:18px;display:none" id="simAggPanel">
+      <div class="panel-head"><h2>Across all simulations</h2>
+        <span class="eyebrow" id="simAggNote"></span></div>
+      <div class="tblwrap">
+        <table id="simTeamTbl">
+          <thead><tr><th class="tleft">Team</th><th>Avg score</th><th>Low</th>
+            <th>High</th><th>Win %</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="note" id="simAggSummary"></div>
+      <div id="simAggBoxes"></div>
+    </div>
+
+    <div class="panel" style="margin-top:18px">
+      <div class="panel-head"><h2>Held-out accuracy</h2>
+        <span class="eyebrow" id="simEvalNote"></span></div>
+      <div class="tblwrap">
+        <table id="simEvalTbl">
+          <thead><tr>
+            <th class="tleft">Model</th><th>Accuracy</th><th>Log-loss</th>
+            <th>Brier</th><th>Margin MAE</th><th>Total MAE</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="note" id="simEvalCal"></div>
+    </div>
+  </section>
+
   <section class="view" id="research">
     <div class="page-head">
       <div><div class="eyebrow">Exploratory work</div><h1>Research</h1></div>
