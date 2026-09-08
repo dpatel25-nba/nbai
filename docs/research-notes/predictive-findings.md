@@ -661,3 +661,26 @@ The cause was a default. `padj` reads each on-court player's pace effect with `.
 A residual +1.7 remains on the anchored path only, absorbed by one constant that cannot touch an unanchored render — verified by re-measuring box realism afterwards (points 1.004, possessions 0.988, unchanged).
 
 **The lesson is the one this file keeps recording.** A constant that removes half an error and then stops responding is not a calibration, it is a symptom. Two of them stacked would have hidden a genuine bug behind plausible-looking numbers, and the tell was the saturation, not the size of the residual.
+
+## The simulator becomes interactive: a browser port, and what it cost
+
+The product goal is to pick two teams, get a box score and a play-by-play, then run 10/100/1000 more and read each player's average, minimum and maximum. The Python engine reads parquet and takes about a second a game, so it cannot run in a page, and precomputing 435 matchups x 1000 simulations is not feasible either. What IS portable is the loop.
+
+`web/sim.js` re-implements the possession loop in the browser: usage allocation, the four-way outcome mix, offensive-rebound continuation, fouls and the penalty, assist/steal/block credit, and mean reversion split into its margin and total components. **1000 simulations run in about 220ms.** It deliberately omits refinements whose data is too large to ship or which move totals by well under a point — shot zones, defender matchup affinity, height and weight, cold start, transition and endgame shot selection.
+
+**A second implementation of the same model is a liability unless it is checked against the first**, so `157_validate_js.py` runs both on identical matchups under macOS's JavaScriptCore and compares what a user actually reads:
+
+```
+team score    mean |diff| 1.31 pts   max 3.79
+player points mean |diff| 0.82 pts   max 3.01   (72 rotation players)
+```
+
+Three bugs the validation caught, none of which would have been visible from the output alone:
+
+**Minutes were halved.** A player was credited only for possessions in which his own team had the ball, so a 34-minute starter reported 13.8. Each iteration of the loop is one possession for EACH team.
+
+**A flat rotation nobody plays.** Taking twelve projected rotation players and rescaling them to 240 team-minutes multiplied everyone by 0.77, so a 36-minute star came out at 27. Twelve projections sum to ~311 minutes; the fix takes players in order until their own projections ADD UP to a game, which keeps each player's projection and lets the rotation end where a real one ends.
+
+**Stars missing entire games.** The engine drifts its sampling offset slowly because its play-by-play must show a believable substitution count. Ported directly, that left a star with no minutes in 8.5% of simulations. The browser port shows no substitutions, so the correlation buys nothing there and the offset is drawn fresh each window.
+
+The level is solved EMPIRICALLY in the browser rather than by porting the engine's closed form: run warm-up games, see what this implementation actually produces, scale to the projection. Three passes, because scaling a make probability does not move points linearly — one pass under-corrects and two still left some matchups 4 points high. Being self-correcting, it means the port's own offsets cannot drift the displayed level even if the two implementations diverge further.

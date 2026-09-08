@@ -162,7 +162,45 @@ def main() -> None:
     pbp = [{"c": e["clock"], "t": e["team"], "x": e["text"],
             "a": int(e["A"]), "h": int(e["H"])} for e in ev]
 
-    payload = {"season": season, "mu0": round(mu0, 3), "hca": round(hca, 3),
+    # ---- everything a browser needs to run the possession loop itself ----
+    # The engine is Python reading parquet, so it cannot run in a page, and
+    # precomputing 435 matchups x 1000 simulations is not feasible either. What
+    # IS portable is the loop: per-player rates, a rotation, and the league
+    # constants. The JS port is validated against this engine in 157.
+    ENG_COLS = ["FG2A_36", "FG3A_36", "FTA_36", "TOV_36", "OREB_36", "DREB_36",
+                "AST_36", "PF_36", "STL_36", "BLK_36", "FG2_PCT", "FG3_PCT",
+                "FT_PCT", "MPG"]
+    engine = {"players": {}, "teams": {}}
+    for abbr, tid in sorted(code.items()):
+        sides = MU.build_sides(season, tid, ref, set(), rates=rates, rseason=rseason)
+        roster_out = []
+        for pl in sides["H"]:
+            pid = int(pl["pid"])
+            r = rates[pid]
+            engine["players"][str(pid)] = {
+                "n": full.get(pid, str(pid)),
+                **{c: round(float(r.get(c, 0.0) or 0.0), 4) for c in ENG_COLS}}
+            roster_out.append({"id": pid, "min": round(float(pl["minutes"]), 2),
+                               "st": int(pl.get("started", 0))})
+        prior = MU.prior_roster(season, tid, ref)["H"]
+        engine["teams"][abbr] = {
+            "id": tid, "pace": round(float(pace_map.get(tid, lg_pace)), 2),
+            "roster": roster_out,
+            # BPM of the roster the RATING was fitted on, so the browser can
+            # apply the same roster-delta correction the engine does
+            "base_bpm": round(float(sim.team_bpm(prior)), 3),
+            "bpm": round(float(sim.team_bpm(sides["H"])), 3)}
+    engine["lg"] = {k: (round(v, 5) if isinstance(v, float) else v)
+                    for k, v in S.LG.items()}
+    engine["const"] = {k: getattr(S, k) for k in
+                       ("N_SLOTS", "SLOT_SEC", "NONSHOOT_FOUL", "PENALTY_LIMIT",
+                        "PEN_FT_TRIM", "FOUL_OUT", "LINEUP_HOLD", "LINEUP_DRIFT",
+                        "MEAN_REVERT", "MEAN_REVERT_TOT", "PACE_SD",
+                        "SHOOT_SD_SHARED", "SHOOT_SD_TEAM", "GARBAGE_MARGIN")}
+    engine["lg_pace"] = round(float(lg_pace), 2)
+
+    payload = {"engine": engine,
+               "season": season, "mu0": round(mu0, 3), "hca": round(hca, 3),
                "ref": name_of.get(ref, str(ref)), "games_fit": int(ngames),
                "sims": int(args.sims), "teams": teams,
                "sample": {"home": top[0], "away": top[1],

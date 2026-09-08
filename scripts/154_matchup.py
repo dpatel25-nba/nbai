@@ -129,7 +129,7 @@ def roster(season: str, tid: int, before=None, n_games=RECENT_GAMES):
 # projected MPG, but handing all 19 a share of 240 minutes would give the whole
 # team bench-level minutes, so the rotation is cut at these bounds first.
 ROT_MIN_MPG = 6.0
-ROT_MAX = 12
+ROT_MAX = 14
 
 
 def current_roster(tid: int, rates, rseason: str):
@@ -160,8 +160,21 @@ def current_roster(tid: int, rates, rseason: str):
             mpg = 0.0
         out.append({"pid": pid, "minutes": mpg, "started": 0,
                     "rookie": bool(r.IS_ROOKIE), "name": r.PLAYER})
+    # Take players in order until their projected minutes ADD UP to a game,
+    # rather than taking a fixed twelve and rescaling them down to fit. Twelve
+    # projected rotation players sum to ~311 minutes, so the rescale multiplied
+    # everyone by 0.77 and a 36-minute star came out at 27 — a flat rotation
+    # nobody actually plays. Cutting at the cumulative total keeps each player's
+    # own projection and lets the roster end where a real rotation ends.
     out.sort(key=lambda x: -x["minutes"])
     out = [p for p in out if p["minutes"] >= ROT_MIN_MPG][:ROT_MAX]
+    keep, run = [], 0.0
+    for q in out:
+        keep.append(q)
+        run += q["minutes"]
+        if run >= 240.0:
+            break
+    out = keep
     for i, p in enumerate(out):
         p["started"] = int(i < 5)
     return out or None
