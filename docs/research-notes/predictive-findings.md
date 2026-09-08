@@ -870,3 +870,31 @@ projected minutes    n   actual    sim    bias
 Bench players are over-predicted by three quarters of a point and heavy-minute players under-predicted by nearly two. Script 159 corrected the SPLIT against the rate book; this says the book itself, or the minutes attached to it, still squeezes the ends toward the middle. Against the production props model on shared rows the simulator is 5.007 to 4.911 — still behind the incumbent.
 
 **This reframes the work.** The calibration metrics that have looked strong — coverage 80.0/52.4, PIT 0.062, box totals within 4% — measure whether the DISTRIBUTIONS are honest, and they are. They say nothing about whether the central estimate is any good, and measured against reality it is not yet better than a season average. Chasing individual players, as the Jokic thread did, cannot find this; only scoring the whole population against real outcomes can.
+
+### CORRECTION: that comparison was unfair, and it was my evaluation's fault
+
+The table above scored the simulator on a PRIOR-SEASON rate book while the baseline it was compared against — the player's season-to-date average — knows the current season. Script 125 applies in-season updating (131) and the league-drift correction (153); script 161 did not. Given the same inputs the production pipeline uses:
+
+```
+stat   sim MAE   to-date   better    corr        (unfair run)
+PTS      4.842     4.912    +1.4%   0.711          (-1.0%)
+REB      1.990     2.034    +2.2%   0.675          (+0.2%)
+FGA      2.852     3.015    +5.4%   0.791          (+0.6%)
+AST      1.396     1.394    -0.2%   0.708          (-4.0%)
+FTA      1.651     1.617    -2.1%   0.601          (-4.7%)
+BLK      0.574     0.521   -10.2%   0.449         (-12.0%)
+
+points vs the props model:  sim 4.897 bias -0.029 | props 4.910 bias +0.163
+```
+
+It beats the naive baseline on six of ten stats, ties two, and now edges the production props model on points with a fifth of its bias. **"Worse than a naive baseline" was mostly a defect in how I measured it**, and the lesson is the same one this file keeps recording: a comparison is only as honest as the inputs each side is given.
+
+What survives the correction is the compression — bench +0.67 points, 34+ minute players −1.21 — and the block rate at −10.2%.
+
+### The compression is NOT a predictable game-level effect
+
+A plausible mechanism: a player's season per-36 includes his big nights, so in a short appearance he should produce less per minute, and since minutes are projected before tip-off the engine could condition on it. Within players the correlation between extra minutes and extra per-36 is real, +0.136 — a player 8+ minutes above his average scores 1.38 more per 36, and 8+ below scores 2.25 fewer.
+
+**It is not usable.** Repeated against PROJECTED minutes, which is what a forecast actually has, the effect vanishes: correlation +0.003, and per-36 relative to a player's own norm is flat at 0.96-1.05 across the whole range of projected-minute ratios. The within-player correlation is reverse causation — a coach leaves a player on the floor BECAUSE he is producing, and that cannot be known beforehand. Not built.
+
+The rate book itself is only mildly compressed against players' own season rates (1.037 at the bottom tier, 0.983 at the top), so it is not the source either. The remaining output compression is unexplained, and the open lead is that low-projected-minute players are disproportionately ones the book knows least — fallback and slot profiles rather than real projections.

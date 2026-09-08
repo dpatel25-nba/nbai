@@ -93,6 +93,25 @@ def _one(idx):
         return []
     if G["dqg"]:
         sim.defq = G["dqg"].get(gid, {})
+    # In-season rates (131) and the league-drift correction (153), exactly as
+    # script 125 applies them. Without these the model is scored on a
+    # prior-season book while the baseline it is compared against knows the
+    # current season — which is not a fair contest, and the first run of this
+    # script made it look worse than a naive average partly for that reason.
+    base_r, fac = G["base_rates"], G["drift"].get(gid, {})
+    if G["game_rates"] or fac:
+        ov = dict(base_r)
+        for tag in sides:
+            for q in sides[tag]:
+                merged = dict(base_r[q["pid"]])
+                gr = G["game_rates"].get((gid, q["pid"]))
+                if gr:
+                    merged.update(gr)
+                ov[q["pid"]] = G["S"].apply_drift(merged, fac)
+        sim.rates = G["S"].RateBook(ov, base_r.fallback, base_r.slot_of,
+                                    base_r.slot_profiles)
+        sim.rates.share_cal = base_r.share_cal if hasattr(base_r, "share_cal") else {}
+        sim.share_cal = G["share_cal"]
     anc = G["anchors"].get(gid)
     _, box, _ = sim.simulate(sides["H"], sides["A"], g.HOME_TEAM_ID, g.AWAY_TEAM_ID,
                              n_sims=G["ns"],
@@ -157,8 +176,20 @@ def main() -> None:
     s1 = pd.read_parquet(SIM1)[["GAME_ID", "MU_HOME", "MU_AWAY"]]
     anchors = {r.GAME_ID: (r.MU_HOME, r.MU_AWAY) for r in s1.itertuples()}
 
+    IGR = ROOT / "data" / "parquet" / "ingame_rates" / f"{args.season}.parquet"
+    game_rates = {}
+    if IGR.exists():
+        ig = pd.read_parquet(IGR)
+        rc = [c for c in ig.columns
+              if c not in ("GAME_ID", "PLAYER_ID", "SEASON", "m_todate")]
+        for r in ig.itertuples():
+            game_rates[(r.GAME_ID, int(r.PLAYER_ID))] = {c: getattr(r, c) for c in rc}
+    drift = S.league_drift(args.season)
+    print(f"  in-season rates {len(game_rates):,} rows; drift {len(drift):,} games")
     _G.update(gs=gs, pg=season_pg[season_pg.GAME_ID.isin(gids)], sim=sim,
-              gids=gids, pmin=pmin, anchors=anchors, dqg=dqg, ns=args.sims)
+              gids=gids, pmin=pmin, anchors=anchors, dqg=dqg, ns=args.sims,
+              base_rates=rates, game_rates=game_rates, drift=drift, S=S,
+              share_cal=dict(sim.share_cal))
     w = max(1, (os.cpu_count() or 2) - 2)
     with mp.get_context("fork").Pool(w) as pool:
         rows = [x for sub in pool.map(_one, range(len(gids))) for x in sub]
@@ -206,6 +237,18 @@ def main() -> None:
               f"{s.p_PTS.mean()-s.a_PTS.mean():>+8.2f}"
               f"{float((s.p_PTS-s.a_PTS).abs().mean()):>10.3f}"
               f"{float((s.b_PTS[ok]-s.a_PTS[ok]).abs().mean()):>10.3f}")
+
+    # Decompose the tier bias. A points miss is either the wrong number of
+    # minutes or the wrong rate inside them, and the two need different fixes.
+    print("\n  IS THE TIER BIAS MINUTES OR RATE?")
+    print(f"  {'minutes':<9}{'proj min':>10}{'act min':>9}{'min ratio':>11}"
+          f"{'sim /36':>9}{'act /36':>9}{'rate ratio':>12}")
+    for t, s2 in d.groupby("tier", observed=True):
+        pm, am = s2.proj_min.mean(), s2.act_min.mean()
+        sr = float((s2.p_PTS / s2.proj_min.clip(lower=1e-9)).mean() * 36)
+        ar = float((s2.a_PTS / s2.act_min.clip(lower=1e-9)).mean() * 36)
+        print(f"  {str(t):<9}{pm:>10.1f}{am:>9.1f}{pm/am:>11.3f}"
+              f"{sr:>9.2f}{ar:>9.2f}{sr/ar:>12.3f}")
 
     e = d[[(g, p) in ppts for g, p in zip(d.gid, d.pid)]].copy()
     if len(e) > 100:
