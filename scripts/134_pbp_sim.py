@@ -58,6 +58,7 @@ DUR_CV = 0.56          # sd/mean of possession length, from the observed spread
 PERIOD_LEN = 720.0
 OT_LEN = 300.0
 PACE_RAPM = ROOT / "data" / "parquet" / "pace_rapm.parquet"
+PBP_FT_TRIM = 0.066   # see the note at its use site in possession()
 
 
 def load124():
@@ -88,7 +89,8 @@ class PbpGame:
         centre = 5.0 * (float(t.OFF_SEC.mean()) + float(t.DEF_SEC.mean()))
         return off, dfn, centre
 
-    def __init__(self, S, sim, sides, home_tid, away_tid, pace_pair, rng):
+    def __init__(self, S, sim, sides, home_tid, away_tid, pace_pair, rng,
+                 season=None):
         self.S, self.sim, self.sides = S, sim, sides
         self.tid = {"H": home_tid, "A": away_tid}
         self.rng = rng
@@ -100,6 +102,7 @@ class PbpGame:
         self.box = {t: defaultdict(lambda: defaultdict(float)) for t in ("H", "A")}
         self.qscore = defaultdict(lambda: {"H": 0, "A": 0})
         self.true_poss = {"H": 0, "A": 0}
+        self.tfoul = {"H": 0, "A": 0}      # team fouls, reset every period
         # rotation occupancy -> a concrete five per 30s slot
         self.lu = {}
         for t in ("H", "A"):
@@ -107,6 +110,7 @@ class PbpGame:
             self.lu[t] = sim._lineups(pids, M, rng)
         self.on = {t: list(self.lu[t][0]) for t in ("H", "A")}
         self.p_off, self.p_def, self.p_centre = self._load_pace_effects()
+        self.clock_mult = self._load_clock_profile(season)
 
     def _state_scale(self, period, rem, own_margin) -> float:
         """Clock management. Measured against a 12.1s baseline, pace is flat all
@@ -127,6 +131,38 @@ class PbpGame:
         if own_margin > 0:
             return 0.75      # being fouled ends possessions fast anyway
         return 1.0
+
+    def _load_clock_profile(self, season):
+        """How long each team lets a possession run, relative to the league.
+
+        Script 150: this is a team property repeating at split-half r = +0.973,
+        and 151 turns it into a multiplier. It deliberately does NOT touch any
+        scoring rate — the engine already calibrates each team to its observed
+        efficiency, so a clock penalty on top would double-count. All this does
+        is make the emitted clock look like the team that is playing.
+
+        The PRIOR season is used, not the one being rendered: a forecast cannot
+        know how fast a team played in a game it has not seen. Year-over-year
+        persistence is +0.575, which is what makes that legitimate.
+
+        The pair is normalised to mean 1.0 so total game length — and therefore
+        the pace calibration in _pace_scale — is untouched.
+        """
+        flat = {"H": 1.0, "A": 1.0}
+        f = ROOT / "data" / "parquet" / "team_clock_profile.parquet"
+        if not f.exists() or season is None:
+            return flat
+        prof = pd.read_parquet(f)
+        prior = sorted(x for x in prof.SEASON.unique() if x < season)
+        if not prior:
+            return flat
+        cur = prof[prof.SEASON == prior[-1]]
+        m = {int(r.TEAM_ID): float(r.mult) for r in cur.itertuples()}
+        out = {t: m.get(int(self.tid[t]), 1.0) for t in ("H", "A")}
+        avg = (out["H"] + out["A"]) / 2.0
+        if avg <= 0:
+            return flat
+        return {t: out[t] / avg for t in out}
 
     # ---- duration ----
     def _duration(self, start_kind: str, scale: float) -> float:
@@ -186,6 +222,7 @@ class PbpGame:
             rem = plen
             self.log(period, rem, None, f"--- Start of {'Q' if period<=4 else 'OT'}"
                                         f"{period if period<=4 else period-4} ---")
+            self.tfoul = {"H": 0, "A": 0}
             while rem > 0:
                 self.sub_check(period, rem, elapsed_total)
                 own = self.score[off] - self.score[dfn]
@@ -197,9 +234,15 @@ class PbpGame:
                         + sum(self.p_def.get(int(q), 0.0) for q in self.on[dfn])
                         - self.p_centre)
                 dur = min(max(self._duration(
-                    start_kind, scale * self._state_scale(period, rem, own)) + padj, 1.0), rem)
+                    start_kind, scale * self._state_scale(period, rem, own)
+                    * self.clock_mult[off]) + padj, 1.0), rem)
                 rem -= dur
                 elapsed_total += dur
+                # floor time, so the box score can report minutes. Both teams
+                # are on the court for the same possession.
+                for _t in ("H", "A"):
+                    for _q in self.on[_t]:
+                        self.box[_t][int(_q)]["SEC"] += dur
                 start_kind = self.possession(off, dfn, period, rem)
                 self.qscore[period]["H"] = self.score["H"]
                 self.qscore[period]["A"] = self.score["A"]
@@ -226,8 +269,16 @@ class PbpGame:
                        + 0.44 * rates[p]["FTA_36"] + rates[p]["TOV_36"] for p in on])
         user = int(on[self.rng.choice(5, p=uw / uw.sum())])
         r = rates[user]
-        upp = max(r["FG2A_36"] + r["FG3A_36"] + 0.44 * r["FTA_36"] + r["TOV_36"], 1e-9)
-        q = np.array([r["FG2A_36"], r["FG3A_36"], 0.44 * r["FTA_36"], r["TOV_36"]]) / upp
+        # The engine trims the base free-throw branch because the penalty branch
+        # supplies that share instead. The renderer needs a SMALLER trim than
+        # the engine's 0.137: it accumulates team fouls over real periods rather
+        # than over an approximated possession index, so it reaches the penalty
+        # less often and its penalty branch supplies fewer shots. Measured on
+        # this matchup, trim 0.0 gives 1.084 of the league free-throw rate and
+        # 0.137 gives 0.909; PBP_FT_TRIM is the value that lands on 1.0.
+        _ftw = 0.44 * r["FTA_36"] * (1.0 - PBP_FT_TRIM)
+        q = np.array([r["FG2A_36"], r["FG3A_36"], _ftw, r["TOV_36"]])
+        q = q / q.sum()
 
         opos = sim.pos.get(user, "F")
         aw = np.array([sim.aff[S.POSITIONS.index(sim.pos.get(d, "F"))]
@@ -235,11 +286,34 @@ class PbpGame:
         defender = int(dv[self.rng.choice(5, p=aw / aw.sum())])
         adj = 1.0 - 0.010 * sim.defq.get(defender, 0.0)
 
+        # NON-SHOOTING FOULS AND THE PENALTY, ported from the possession engine.
+        # The renderer booked a personal foul only on a shooting foul, so it
+        # produced 17.6 fouls per game against a real 37.2 — a ratio of 0.47 —
+        # and correspondingly too few free throws (0.92). Once a team passes the
+        # limit these fouls also become two shots, which is what puts free
+        # throws in the last two minutes of a close game.
+        if self.rng.random() < S.NONSHOOT_FOUL:
+            fw = np.array([rates[d]["PF_36"] + 1e-6 for d in dv])
+            fl = int(dv[self.rng.choice(5, p=fw / fw.sum())])
+            self.box[dfn][fl]["PF"] += 1
+            self.tfoul[dfn] += 1
+            if self.tfoul[dfn] > S.PENALTY_LIMIT:
+                made = sum(1 for _ in range(2)
+                           if self.rng.random() < float(np.clip(r["FT_PCT"], .3, .99)))
+                self.box[off][user]["FTA"] += 2
+                self.box[off][user]["FTM"] += made
+                self.box[off][user]["PTS"] += made
+                self.score[off] += made
+                self.log(period, rem, dfn, f"{self.name(fl)} Foul (penalty) — "
+                                           f"{self.name(user)} {made}/2 FT")
+                return "make" if made else "rebound"
+            self.log(period, rem, dfn, f"{self.name(fl)} Foul")
+
         k = self.rng.choice(4, p=q)
         if k == 3:
             live = self.rng.random() < S.LG["live_to_share"]
             self.box[off][user]["TOV"] += 1
-            if live and self.rng.random() < S.LG["stl_share"]:
+            if self.rng.random() < S.LG["stl_share"]:
                 sw = np.array([rates[d]["STL_36"] + 1e-6 for d in dv])
                 th = int(dv[self.rng.choice(5, p=sw / sw.sum())])
                 self.box[dfn][th]["STL"] += 1
@@ -255,9 +329,11 @@ class PbpGame:
                        if self.rng.random() < float(np.clip(r["FT_PCT"], .3, .99)))
             self.box[off][user]["PTS"] += made
             self.box[off][user]["FTA"] += nft
+            self.box[off][user]["FTM"] += made
             self.box[dfn][defender]["PF"] += 1
+            self.tfoul[dfn] += 1
             self.score[off] += made
-            self.log(period, rem, off, f"{self.name(defender)} Foul — "
+            self.log(period, rem, dfn, f"{self.name(defender)} Foul — "
                                        f"{self.name(user)} {made}/{nft} FT")
             return "make" if made else "rebound"
 
@@ -265,10 +341,14 @@ class PbpGame:
         pct = r["FG3_PCT"] if three else r["FG2_PCT"]
         made = self.rng.random() < float(np.clip(pct * adj, .05, .95))
         self.box[off][user]["FGA"] += 1
+        if three:
+            self.box[off][user]["FG3A"] += 1
         val = 3 if three else 2
         label = "3PT Jump Shot" if three else "Layup" if self.rng.random() < .45 else "Jump Shot"
         if made:
             self.box[off][user]["FGM"] += 1
+            if three:
+                self.box[off][user]["FG3M"] += 1
             self.box[off][user]["PTS"] += val
             self.score[off] += val
             ast_txt = ""
@@ -285,7 +365,7 @@ class PbpGame:
             return "make"
 
         # miss -> rebound
-        if not three and self.rng.random() < S.LG["blk_share"]:
+        if (not three) and (not made) and self.rng.random() < S.LG["blk_share"]:
             bw = np.array([rates[d]["BLK_36"] + 1e-6 for d in dv])
             b = int(dv[self.rng.choice(5, p=bw / bw.sum())])
             self.box[dfn][b]["BLK"] += 1
@@ -297,17 +377,66 @@ class PbpGame:
         def_s = sum(rates[p]["DREB_36"] for p in dv) / sim._ref["DREB_36"]
         odds = (S.LG["oreb"] / (1 - S.LG["oreb"])) * (off_s / max(def_s, 1e-6))
         p_o = float(np.clip(odds / (1 + odds), .06, .50))
+        # A share of misses go out of bounds or are booked deadball and are
+        # credited to NO player. The possession engine models this (LG["team_reb"])
+        # and the renderer did not, which inflated individual rebounds by ~7% —
+        # 102 in a game against a real league average near 88.
+        team_reb = self.rng.random() < S.LG["team_reb"]
         if self.rng.random() < p_o:
-            w = np.array([rates[p]["OREB_36"] + 1e-6 for p in on])
-            g = int(on[self.rng.choice(5, p=w / w.sum())])
-            self.box[off][g]["REB"] += 1
-            self.log(period, rem, off, f"{self.name(g)} REBOUND (Off)")
+            if not team_reb:
+                w = np.array([rates[p]["OREB_36"] + 1e-6 for p in on])
+                g = int(on[self.rng.choice(5, p=w / w.sum())])
+                self.box[off][g]["REB"] += 1
+                self.box[off][g]["OREB"] += 1
+                self.log(period, rem, off, f"{self.name(g)} REBOUND (Off)")
+            else:
+                self.log(period, rem, off, "TEAM REBOUND (Off)")
             return "rebound_off"
-        w = np.array([rates[p]["DREB_36"] + 1e-6 for p in dv])
-        g = int(dv[self.rng.choice(5, p=w / w.sum())])
-        self.box[dfn][g]["REB"] += 1
-        self.log(period, rem, dfn, f"{self.name(g)} REBOUND (Def)")
+        if not team_reb:
+            w = np.array([rates[p]["DREB_36"] + 1e-6 for p in dv])
+            g = int(dv[self.rng.choice(5, p=w / w.sum())])
+            self.box[dfn][g]["REB"] += 1
+            self.box[dfn][g]["DREB"] += 1
+            self.log(period, rem, dfn, f"{self.name(g)} REBOUND (Def)")
+        else:
+            self.log(period, rem, dfn, "TEAM REBOUND (Def)")
         return "rebound"
+
+
+def print_box(game, names, labels):
+    """A full box score in the shape a reader expects from a game page."""
+    hdr = (f"{'PLAYER':<22}{'MIN':>5}{'FG':>8}{'3PT':>8}{'FT':>8}"
+           f"{'OR':>4}{'DR':>4}{'REB':>5}{'AST':>5}{'STL':>4}{'BLK':>4}"
+           f"{'TO':>4}{'PF':>4}{'PTS':>5}")
+    for t in ("A", "H"):
+        rows = sorted(game.box[t].items(), key=lambda kv: -kv[1]["SEC"])
+        print(f"\n{labels[t]}")
+        print("  " + hdr)
+        print("  " + "-" * len(hdr))
+        tot = {}
+        for pid, v in rows:
+            if v["SEC"] < 1 and v["PTS"] == 0 and v["FGA"] == 0:
+                continue
+            for k in ("FGM", "FGA", "FG3M", "FG3A", "FTM", "FTA", "OREB", "DREB",
+                      "REB", "AST", "STL", "BLK", "TOV", "PF", "PTS", "SEC"):
+                tot[k] = tot.get(k, 0.0) + v[k]
+            mm = int(v["SEC"] // 60)
+            print(f"  {names.get(pid, str(pid))[:20]:<22}{mm:>5}"
+                  f"{int(v['FGM']):>4}-{int(v['FGA']):<3}"
+                  f"{int(v['FG3M']):>4}-{int(v['FG3A']):<3}"
+                  f"{int(v['FTM']):>4}-{int(v['FTA']):<3}"
+                  f"{int(v['OREB']):>4}{int(v['DREB']):>4}{int(v['REB']):>5}"
+                  f"{int(v['AST']):>5}{int(v['STL']):>4}{int(v['BLK']):>4}"
+                  f"{int(v['TOV']):>4}{int(v['PF']):>4}{int(v['PTS']):>5}")
+        if tot:
+            print("  " + "-" * len(hdr))
+            print(f"  {'TOTALS':<22}{int(tot['SEC']//60):>5}"
+                  f"{int(tot['FGM']):>4}-{int(tot['FGA']):<3}"
+                  f"{int(tot['FG3M']):>4}-{int(tot['FG3A']):<3}"
+                  f"{int(tot['FTM']):>4}-{int(tot['FTA']):<3}"
+                  f"{int(tot['OREB']):>4}{int(tot['DREB']):>4}{int(tot['REB']):>5}"
+                  f"{int(tot['AST']):>5}{int(tot['STL']):>4}{int(tot['BLK']):>4}"
+                  f"{int(tot['TOV']):>4}{int(tot['PF']):>4}{int(tot['PTS']):>5}")
 
 
 def main() -> None:
@@ -345,7 +474,8 @@ def main() -> None:
     pace_ig = S.team_pace_ingame(g.SEASON)
     pp = (pace_ig.get((args.game, g.HOME_TEAM_ID)), pace_ig.get((args.game, g.AWAY_TEAM_ID)))
     game = PbpGame(S, sim, sides, g.HOME_TEAM_ID, g.AWAY_TEAM_ID,
-                   pp if pp[0] else None, np.random.default_rng(args.seed))
+                   pp if pp[0] else None, np.random.default_rng(args.seed),
+                   season=g.SEASON)
     ev = game.run(names)
 
     print(f"\n{g.AWAY_TEAM} @ {g.HOME_TEAM}  {str(g.GAME_DATE)[:10]}   "
@@ -373,11 +503,7 @@ def main() -> None:
                   f"{g.AWAY_TEAM} {a-prev['A']:>3}   {g.HOME_TEAM} {h-prev['H']:>3}")
             prev = {"H": h, "A": a}
 
-    print("\nTop scorers:")
-    for t, lbl in (("A", g.AWAY_TEAM), ("H", g.HOME_TEAM)):
-        top = sorted(game.box[t].items(), key=lambda kv: -kv[1]["PTS"])[:5]
-        line = "  ".join(f"{names.get(p, p)} {int(v['PTS'])}" for p, v in top)
-        print(f"  {lbl}: {line}")
+    print_box(game, names, {"A": g.AWAY_TEAM, "H": g.HOME_TEAM})
 
 
 if __name__ == "__main__":

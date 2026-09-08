@@ -55,6 +55,19 @@ HUS = ROOT / "data" / "parquet" / "player_hustle.parquet"
 ZONES_F = ROOT / "data" / "parquet" / "shot_zones.parquet"
 BIO = ROOT / "data" / "parquet" / "player_bio.parquet"
 ROOKIE = ROOT / "data" / "parquet" / "rookie_priors.parquet"
+AGING = ROOT / "data" / "parquet" / "aging_curves.parquet"
+# Only columns whose age adjustment beat the age-blind projection WALK-FORWARD
+# (script 139). Usage and role age predictably; rebounding, steals, blocks and
+# three-point accuracy do not, and adjusting them made projections worse.
+# Columns whose age adjustment beat the age-blind projection walk-forward with a
+# 95% cluster-bootstrap interval ENTIRELY BELOW ZERO (script 139). An earlier
+# version of this list was chosen on the SIGN of the held-out change alone and
+# included five columns — AST_36, FGA_36, TOV_36, PF_36, FT_PCT — whose intervals
+# comfortably span zero. Of the rate columns the engine consumes, only these two
+# survive a real test. PTS_36 and TS_PCT also validate but are not engine inputs;
+# the engine builds scoring from attempts and percentages, none of which clear
+# significance individually, which is why no efficiency ageing is applied here.
+AGE_APPLY = {"MPG": 1.0, "FTA_36": 1.0}
 
 RECENCY = {1: 5.0, 2: 4.0, 3: 3.0}
 K = 1000.0
@@ -63,22 +76,117 @@ POSITIONS = ["G", "F", "C"]
 
 # league constants, calibrated from our own data in calibrate()
 USE_SHRINK = 0.72     # damping on per-game usage variation
+MIN_JITTER_SD = 0.24     # per-player minutes resampling spread
 MIN_JITTER_SHRINK = 1.0  # damping on per-player minutes variation (no effect on team spread)
 FOUL_OUT = 6          # personal fouls that disqualify
 NONSHOOT_FOUL = 0.092 # per-possession chance of a non-shooting foul
 FOUL_BENCH = 5        # coaches sit a player on this many fouls until late
+# THE PENALTY (script 144). After PENALTY_LIMIT team fouls in a period, every
+# non-shooting defensive foul is two free throws. Player FTA_36 ALREADY contains
+# these attempts, so this is a SPLIT, not an addition: PEN_FT_TRIM is removed
+# from the base free-throw branch and re-routed through the team-foul counter.
+# Same season total, but now concentrated late in periods and responsive to
+# intentional fouling, which is where win probability is decided.
+# MEAN REVERSION. The engine's independent team-score variance is 141.7 against
+# a real 126.0 (script 143 decomposition), and its floor with every injected
+# noise source at zero is 139.3 — so the excess is the possession-level binomial
+# floor and CANNOT be removed by turning knobs down. Real possessions must carry
+# a small negative serial correlation, about -0.0011 per pair.
+#
+# Strength is DERIVED, not tuned. Feeding a team's running deviation from
+# expectation back into its scoring rate makes that deviation an AR(1); its
+# variance after n possessions is sigma^2 (1-e^-2nk)/(2k), so the ratio to the
+# independent n*sigma^2 is (1-e^-2nk)/(2nk). Setting that to 126.0/141.7 = 0.889
+# at n=98 gives 2nk = 0.24, k = 0.00122 points per point of deviation, and as a
+# multiplier on a 1.13 ppp offence, kappa = 0.00108. A team 10 points above its
+# expected pace has its scoring rate cut by 1.1%.
+#
+# The MECHANISM is unidentified — script 147 could not confirm own-deviation
+# reversion directly, because demeaning a team by its own game mean manufactures
+# an identical pattern. The MAGNITUDE is measured from game-level moments, which
+# that artifact does not touch.
+# 0.00108 was DERIVED to match the unconditional league margin spread (15.88).
+# That was the wrong target. A simulator forecasting a KNOWN matchup should
+# match its own conditional error, not the league-wide spread which also
+# contains the variation between good and bad matchups that the forecast is
+# supposed to PREDICT rather than sample. Swept on 2023-24 and confirmed on
+# 2024-25 (script 148), the derived value was worse than no reversion at all on
+# both seasons; 0.0055 drives the ratio of predictive sd to residual sd to
+# 1.013 and improves held-out log-loss and Brier on a season it never saw.
+MEAN_REVERT = 0.0055      # strength on the DIFFERENTIAL (margin) deviation
+# A team's deviation from expectation splits into a part it SHARES with its
+# opponent (both scoring above pace -> a high-total game) and a part that is
+# differential (one team ahead -> margin). Reverting the raw own-deviation
+# applies one strength to both, and at the value that calibrates margin it
+# over-compressed totals: predictive total sd 17.06 against a realised RMSE of
+# 18.43, a ratio of 0.926. Splitting them lets margin stay calibrated while
+# totals keep the spread they actually need.
+MEAN_REVERT_TOT = 0.0030  # strength on the COMMON (total) deviation
+PENALTY_LIMIT = 5
+PEN_FT_TRIM = 0.137   # measured share of all FTs coming from penalty fouls
+# Penalty free-throw TRIPS per possession, measured FROM THE ENGINE rather than
+# from real games. The anchor has to expect what the simulator actually does:
+# real games reach the penalty on 21.4% of non-shooting fouls but this engine
+# reaches it on 14.0%, and the non-shooting draw fires inside the putback loop
+# so its effective per-possession rate is 0.102, not NONSHOOT_FOUL's 0.092.
+# Using the real-game numbers here over-credited the anchor by 0.8 pts/team and
+# pulled the engine 1.8 points below its target — the anchor breaking a fourth
+# time, in the usual way: a closed form that did not know what was added.
+PEN_TRIPS = 0.0142
+# diagnostic counters: the anchor's closed form assumes how often the engine is
+# actually in the penalty, and that assumption has to be checked against the
+# engine rather than against real games, which foul at a different rate
+PEN_DIAG = {"nonshoot": 0, "in_pen": 0, "ft": 0}
 GARBAGE_MARGIN = 18   # lead that empties the benches late
 # The lineup sampler redraws every 30s slot, so without strong persistence it
 # substitutes constantly: at the old value of 1.85 it produced 116 substitutions
 # per team per game against a real 24.4, nearly 5x too many. That was invisible
 # until the cold-start feature needed to know how long a player had been on the
 # floor. 35 reproduces roughly the real rate.
-LINEUP_PERSISTENCE = 35.0
+# Random walk on the systematic-sampling offset. Systematic pi-ps gives exactly
+# the right marginal inclusion probability in every slot, but with a FIXED
+# offset the joint distribution across slots is severely correlated: a marginal
+# player is either in for long stretches or out for the whole game, depending on
+# where u happens to fall. Minutes come out right on average and BIMODAL across
+# simulations, which is what left the engine giving low-minute players zero shot
+# attempts 46.9% of the time against a real 26.7%.
+# Drifting u decorrelates the draws without touching the marginals. At 0.06 the
+# overall P(0 points) lands on 12.1%, exactly the observed rate, and the
+# substitution count barely moves (31.2 -> 31.7 per team-game) because churn is
+# driven by the occupancy curves rather than by u.
+LINEUP_DRIFT = 0.06
+# A random walk MIXES TOO SLOWLY to decorrelate a game. With step 0.06 it needs
+# roughly (1/0.06)^2 ~ 280 moves to traverse the unit interval, and a game has
+# only ~19 redraw windows, so u barely travels and a marginal player's inclusion
+# stays correlated from tip-off to final buzzer. Adding a golden-ratio increment
+# sweeps u across the whole interval in a low-discrepancy sequence instead: each
+# player then receives close to his marginal share of windows in EVERY
+# simulation rather than all-or-nothing across simulations. 0.0 recovers the
+# pure random walk.
+# TESTED AND REJECTED at 0.618. The mixing diagnosis was right — a random walk
+# of step 0.06 cannot traverse the interval in ~19 windows — but the fix trades
+# one error for a larger one. Sweeping removes minutes variance EVERYWHERE,
+# while only the bottom tier has too much of it:
+#     tier      (0,8]   (8,14]  (14,20]     zero-rate gap vs actual
+#     sweep 0    +6.4     -2.6     -1.1
+#     sweep .618 +2.3     -9.9     -5.4
+# Weighted by tier size the sweep more than doubles total error, because the
+# middle tiers hold four times as many players and genuinely NEED the
+# all-or-nothing variation the sweep removes. The bottom tier's excess is a
+# different defect and needs a different instrument.
+LINEUP_SWEEP = 0.0
+LINEUP_HOLD = 5        # slots the five is held before redrawing (30s each).
+                       # 1 -> 44 substitutions per team-game, 5 -> ~25 against a
+                       # real 24.4; minutes accuracy is flat across the range,
+                       # so this trades nothing to buy rotation realism.
+LINEUP_PERSISTENCE = 35.0  # retained for reference; the pi-ps sampler in
+                       # _lineups no longer uses it
 # Shooting luck splits into a SHARED game component (both teams shoot well in
 # the same loose game) and a TEAM-specific one. Only the team-specific part moves
 # the margin; the shared part moves the total. Drawing it all as team-specific
 # over-dispersed the margin (sd 17.8 against an actual residual sd of ~14.5),
 # which makes win probabilities under-confident.
+PACE_SD = 4.0         # game-to-game possession noise, SHARED by both teams
 SHOOT_SD_SHARED = 0.045
 SHOOT_SD_TEAM = 0.012
 # measured from game logs, 2023-24+. The offensive-rebound rate was hardcoded at
@@ -220,6 +328,7 @@ def build_rates(season: str) -> tuple[dict, dict]:
         for (pid, s), v in proj[c].items():
             if s == season:
                 rates[pid][c] = v
+    _apply_aging(rates, season)
     full = {p: r for p, r in rates.items() if len(r) == len(cols)}
     # replacement profile = median of every projected rate, with usage damped:
     # a player with no track record is a low-usage bench body, not a median starter
@@ -228,6 +337,77 @@ def build_rates(season: str) -> tuple[dict, dict]:
         med[c] *= 0.80
     med["MPG"] = 12.0
     return RateBook(full, med, *rookie_profiles(cols, med)), pos
+
+
+def _apply_aging(rates: dict, season: str) -> None:
+    """Shift each projection by one year of ageing, in place.
+
+    A Marcel projection describes what a player has recently done; the target
+    season is a year later, so the adjustment is curve(age) - curve(age-1).
+    Applied only to the columns that validated walk-forward.
+    """
+    if not (AGING.exists() and BIO.exists()):
+        return
+    cur = pd.read_parquet(AGING)
+    cur = cur[cur.pos == "ALL"]
+    by = defaultdict(dict)
+    for r in cur.itertuples():
+        by[r.metric][int(r.age)] = float(r.effect)
+    bio = pd.read_parquet(BIO, columns=["PLAYER_ID", "BIRTHDATE"]).dropna()
+    mid = pd.Timestamp(int(season[:4]) + 1, 2, 1)
+    age = {int(r.PLAYER_ID): (mid - r.BIRTHDATE).days / 365.25
+           for r in bio.itertuples()}
+    lo, hi = 20, 38
+    for pid, prof in rates.items():
+        a = age.get(int(pid))
+        if a is None:
+            continue
+        an, ap = int(np.clip(round(a), lo, hi)), int(np.clip(round(a - 1), lo, hi))
+        for col, w in AGE_APPLY.items():
+            if w <= 0 or col not in prof or col not in by:
+                continue
+            d = by[col].get(an)
+            q = by[col].get(ap)
+            if d is None or q is None:
+                continue
+            prof[col] = max(prof[col] + w * (d - q), 0.0)
+
+
+DRIFT_COLS = ("FG2A_36", "FG3A_36", "FTA_36", "TOV_36", "OREB_36",
+              "DREB_36", "AST_36", "PF_36")
+
+
+def league_drift(season: str) -> dict:
+    """Per-game factors pinning the rate book's LEAGUE LEVEL to the season.
+
+    Script 153. The book projects from prior seasons and lags real league
+    trends: in 2024-25 it under-projected three-point attempts by 4.2% and
+    offensive rebounds by 5.2% while over-projecting free throws by 3.1% and
+    fouls by 3.5%, even after in-season updating. Scaling every player's rate by
+    the same factor moves the aggregate without touching the SPREAD across
+    players, which is the part the book is good at.
+
+    Each game's factor uses only games played strictly before its date.
+    """
+    f = ROOT / "data" / "parquet" / "league_drift.parquet"
+    if not f.exists():
+        return {}
+    d = pd.read_parquet(f)
+    d = d[d.SEASON == season]
+    cols = [c for c in DRIFT_COLS if c in d.columns]
+    return {r.GAME_ID: {c: float(getattr(r, c)) for c in cols}
+            for r in d.itertuples()}
+
+
+def apply_drift(prof: dict, fac: dict) -> dict:
+    """Scale one player's rate profile by the league factors."""
+    if not fac:
+        return prof
+    out = dict(prof)
+    for c, m in fac.items():
+        if c in out and np.isfinite(m) and m > 0:
+            out[c] = out[c] * m
+    return out
 
 
 def rookie_profiles(cols, med):
@@ -622,10 +802,11 @@ class Simulator:
         num = den = 0.0
         for p in players:
             r = self.rates[p["pid"]]
-            upp = r["FG2A_36"] + r["FG3A_36"] + 0.44 * r["FTA_36"] + r["TOV_36"]
+            ftw = self._ftw(r)
+            upp = r["FG2A_36"] + r["FG3A_36"] + ftw + r["TOV_36"]
             if upp <= 0:
                 continue
-            q = np.array([r["FG2A_36"], r["FG3A_36"], 0.44 * r["FTA_36"], r["TOV_36"]]) / upp
+            q = np.array([r["FG2A_36"], r["FG3A_36"], ftw, r["TOV_36"]]) / upp
             # the engine now resolves shots by ZONE, so the closed form has to
             # value them the same way or the calibration drifts
             v2 = self._zone_value(p["pid"], False)
@@ -638,7 +819,18 @@ class Simulator:
             w = p["minutes"] * upp          # possessions this player is likely to use
             num += w * ppp
             den += w
-        return num / den if den > 0 else 0.0
+        if den <= 0:
+            return 0.0
+        # The penalty branch does not ADD possessions, it REPLACES them: a
+        # possession that would have produced the ordinary mix instead produces
+        # a two-shot trip. So the anchor takes the INCREMENT, not the total.
+        # Adding the total pulled the engine 1.1 points per team below target,
+        # because the closed form then expected penalty points on top of every
+        # normal possession rather than instead of a few of them.
+        base = num / den
+        ftp = sum(x["minutes"] * self.rates[x["pid"]]["FT_PCT"] for x in players) \
+            / max(sum(x["minutes"] for x in players), 1e-9)
+        return base + PEN_TRIPS * (2.0 * ftp - base)
 
     def _pdraw(self, pool, seed, sim, pid, salt):
         """COMMON RANDOM NUMBERS: a player's draw is keyed to (seed, sim, player),
@@ -651,13 +843,27 @@ class Simulator:
         r = np.random.default_rng([int(seed), int(sim), int(pid), int(salt)])
         return float(pool[r.integers(len(pool))])
 
-    def _jitter(self, M, rng, buckets=None, sd=0.24, pids=None, seed=0, sim=0):
+    def _jitter(self, M, rng, buckets=None, sd=None, pids=None, seed=0, sim=0):
         """Perturb a rotation, then restore the 5-on-court constraint.
 
         Draws each player's minutes multiplier from the EMPIRICAL ratio pool for
         his projected-minutes band, so bench volatility and early exits are
         represented at their real frequency instead of a uniform Gaussian.
+
+        TWO TRAPS AROUND `sd`, BOTH OF WHICH SILENTLY BROKE AN ABLATION.
+
+        It was declared `sd=MIN_JITTER_SD`, a default argument, and Python binds
+        those once when the function is DEFINED — so setting the module constant
+        afterwards changed nothing. It now resolves the global at CALL time.
+
+        More importantly, `sd` only reaches the fallback Gaussian branch below.
+        Whenever the empirical pools are loaded, which is the normal path, the
+        spread is governed by MIN_JITTER_SHRINK instead and `sd` is unused. The
+        variance budget in script 143 reported minutes jitter as contributing
+        0.00% of margin spread; that was not a fact about the model, it was two
+        layers of the knob not being connected to anything.
         """
+        sd = MIN_JITTER_SD if sd is None else sd
         if self.min_pools is not None and buckets is not None:
             if pids is not None:
                 f = np.array([self._pdraw(self.min_pools[b], seed, sim, q, 1)
@@ -679,18 +885,82 @@ class Simulator:
         return Mj
 
     def _lineups(self, pids, M, rng):
-        """Sample a concrete on-court five per slot, sticky across slots."""
+        """Sample a concrete on-court five per slot, sticky across slots.
+
+        M[:, s] is already the MARGINAL INCLUSION PROBABILITY of each player in
+        slot s: `occupancy` builds it so every column sums to exactly five with
+        every entry in [0, 1], and each row sums to that player's minutes.
+
+        The previous implementation drew five without replacement with those as
+        weights, multiplying the incumbent five by 1 + LINEUP_PERSISTENCE first.
+        Weighted sampling WITHOUT REPLACEMENT does not reproduce its weights as
+        marginal inclusion probabilities — heavy items crowd out light ones —
+        and a 36x incumbency bonus made the crowding severe. Measured against
+        assigned minutes, a player given 6 minutes received 2.5 (ratio 0.42)
+        while starters got 7% MORE than assigned. Total minutes still summed to
+        240, so nothing downstream flagged it; the minutes were silently
+        redistributed from the bench to the starters, which is why the engine
+        produced far too many scoreless bench lines.
+
+        Systematic pi-ps sampling hits the marginals EXACTLY. Cumulate the
+        probabilities to five, then take the players crossed by the five points
+        u, u+1, ..., u+4. Because no probability exceeds one, consecutive points
+        cannot land on the same player, so exactly five distinct bodies come
+        back. Holding u across slots supplies persistence for free — the five
+        change only as the occupancy curves themselves change — and a small
+        random walk on u adds the residual churn real rotations show.
+        """
         out = np.zeros((N_SLOTS, 5), dtype=np.int64)
-        prev = set()
         arr = np.array(pids)
+        n = len(arr)
+        if n <= 5:
+            out[:] = np.resize(arr, 5)
+            return out
+        # ORDER MATTERS for churn. Systematic sampling walks a cumulative sum,
+        # so which players sit next to each other decides who swaps for whom
+        # when the curves shift. In an arbitrary order a tiny change in one
+        # player's occupancy flips a crossing between two unrelated players and
+        # the five churns far faster than a real rotation. Sorting by total
+        # minutes puts similar players adjacent, so a crossing that does move
+        # moves between plausible substitutes.
+        order = np.argsort(-M.sum(axis=1))
+        arr = arr[order]
+        M = M[order]
+        u = float(rng.random())
+        offs = np.arange(5, dtype=float)
+        # Coaches do not reconsider the lineup every thirty seconds. Re-drawing
+        # each slot made the five churn about 44 times a team-game against a
+        # real 24.4, because the sampler responds to every small movement in the
+        # occupancy curves. Holding the draw across LINEUP_HOLD slots and using
+        # the window's MEAN occupancy keeps the marginals right — the average of
+        # the probabilities over the window is what the player is owed — while
+        # cutting the substitution rate to something a rotation would produce.
         for s in range(N_SLOTS):
-            w = M[:, s].astype(float).copy()
-            if prev:
-                w *= np.where(np.isin(arr, list(prev)), 1.0 + LINEUP_PERSISTENCE, 1.0)
-            w = np.clip(w, 1e-9, None)
-            pick = rng.choice(len(arr), 5, replace=False, p=w / w.sum())
-            out[s] = arr[pick]
-            prev = set(arr[pick].tolist())
+            if s % LINEUP_HOLD:
+                out[s] = out[s - 1]
+                continue
+            win = M[:, s:s + LINEUP_HOLD]
+            pi = np.clip(win.mean(axis=1).astype(float), 1e-12, 1.0)
+            tot = pi.sum()
+            if tot <= 0:
+                pi = np.full(n, 5.0 / n)
+            else:
+                pi *= 5.0 / tot
+            np.clip(pi, 0.0, 1.0, out=pi)
+            # clipping at 1 loses mass; push it back onto players with headroom
+            for _ in range(20):
+                d = 5.0 - pi.sum()
+                if abs(d) < 1e-9:
+                    break
+                room = pi < 1.0
+                if not room.any() or pi[room].sum() <= 0:
+                    break
+                pi[room] += d * pi[room] / pi[room].sum()
+                np.clip(pi, 0.0, 1.0, out=pi)
+            idx = np.clip(np.searchsorted(np.cumsum(pi), u + offs, side="right"),
+                          0, n - 1)
+            out[s] = arr[idx]
+            u = (u + LINEUP_SWEEP + rng.normal(0.0, LINEUP_DRIFT)) % 1.0
         return out
 
     # ---- possession outcome ----
@@ -724,10 +994,18 @@ class Simulator:
         i = rng.choice(len(names), p=w / w.sum())
         return names[i], z.get(f"fg_{names[i]}", 0.4)
 
+    @staticmethod
+    def _ftw(r):
+        """Possession-ending free-throw trips, less the share the penalty now
+        supplies. Used by BOTH the possession mix and the anchor's closed form —
+        trimming only one of them is how the anchor gets broken."""
+        return 0.44 * r["FTA_36"] * (1.0 - PEN_FT_TRIM)
+
     def _profile(self, pid):
         r = self.rates[pid]
-        upp = max(r["FG2A_36"] + r["FG3A_36"] + 0.44 * r["FTA_36"] + r["TOV_36"], 1e-6)
-        return (np.array([r["FG2A_36"], r["FG3A_36"], 0.44 * r["FTA_36"], r["TOV_36"]]) / upp,
+        ftw = self._ftw(r)
+        upp = max(r["FG2A_36"] + r["FG3A_36"] + ftw + r["TOV_36"], 1e-6)
+        return (np.array([r["FG2A_36"], r["FG3A_36"], ftw, r["TOV_36"]]) / upp,
                 upp, r)
 
     def simulate(self, home_players, away_players, home_tid, away_tid,
@@ -774,6 +1052,9 @@ class Simulator:
                 self.team_scale[tag] = float(np.clip(scale * (1.0 + (d_bpm / 100.0) / ppp),
                                                      0.55, 1.35))
 
+        # expected points so far, used as the reference the offence reverts to
+        mu_t = ({"H": float(anchor[0]), "A": float(anchor[1])}
+                if anchor is not None and all(np.isfinite(anchor)) else None)
         res = {"H": np.zeros(n_sims), "A": np.zeros(n_sims)}
         box = {t: defaultdict(lambda: defaultdict(lambda: np.zeros(n_sims)))
                for t in ("H", "A")}
@@ -783,7 +1064,7 @@ class Simulator:
             # replicate from an identical state; pace in particular is then a
             # shared draw rather than an independent one
             rng = np.random.default_rng([int(seed), int(sim), 99991])
-            npos = max(60, int(rng.normal(pace, 4.0)))
+            npos = max(60, int(rng.normal(pace, PACE_SD)))
             # per-simulation usage variation: some nights a role player never
             # gets going, which is what produces genuine scoreless outings
             if self.use_pool is not None:
@@ -812,6 +1093,10 @@ class Simulator:
             self._hot = {t: shared * float(np.exp(rng.normal(0, SHOOT_SD_TEAM)))
                          for t in sides}
             fouls = {t: defaultdict(int) for t in sides}
+            # team fouls reset every period, which is what makes the penalty
+            # path-dependent rather than a flat per-possession rate
+            tfoul = {t: [0] for t in sides}
+            cur_period = 0
             out = {t: set() for t in sides}
             trans = {t: False for t in sides}
             entered = {t: {} for t in sides}      # pid -> slot he came on
@@ -821,6 +1106,11 @@ class Simulator:
             # garbage time can be detected as it happens
             for i in range(npos):
                 slot = min(int(i / npos * N_SLOTS), N_SLOTS - 1)
+                per_i = min(int(i / npos * 4), 3)
+                if per_i != cur_period:
+                    cur_period = per_i
+                    for t in tfoul:
+                        tfoul[t][0] = 0
                 for t in sides:
                     # A player counts as newly ENTERED only after a real absence.
                     # The lineup sampler redraws every 30s slot, so a one-slot
@@ -843,7 +1133,12 @@ class Simulator:
                         off, dfn, on, dv, rng, box, sim, fouls[dfn], out[dfn],
                         rem=npos - i, margin=res[off][sim] - res[dfn][sim],
                         transition=trans.get(off, False),
-                        cold={q: slot - e for q, e in entered[off].items()})
+                        cold={q: slot - e for q, e in entered[off].items()},
+                        tfoul=tfoul[dfn],
+                        dev=(res[off][sim] - mu_t[off] * (i / npos)
+                             if mu_t is not None else 0.0),
+                        dev_opp=(res[dfn][sim] - mu_t[dfn] * (i / npos)
+                                 if mu_t is not None else 0.0))
                     res[off][sim] += pts_p
                     # a live-ball turnover hands the OTHER team a fast break
                     trans[dfn] = live_to
@@ -856,6 +1151,8 @@ class Simulator:
             while res["H"][sim] == res["A"][sim] and ot < 4:
                 ot += 1
                 extra = max(6, int(npos * 5.0 / 48.0))
+                for t in tfoul:
+                    tfoul[t][0] = 0
                 for off, dfn in (("H", "A"), ("A", "H")):
                     for _ in range(extra):
                         on = self._active(lu[off][N_SLOTS - 1], out[off],
@@ -863,7 +1160,8 @@ class Simulator:
                         dv = self._active(lu[dfn][N_SLOTS - 1], out[dfn],
                                           sides[dfn]["pids"], rng, False)
                         pts_p, _ = self._possession(off, dfn, on, dv, rng,
-                                                    box, sim, fouls[dfn], out[dfn])
+                                                    box, sim, fouls[dfn], out[dfn],
+                                                    tfoul=tfoul[dfn])
                         res[off][sim] += pts_p
         return res, box, sides
 
@@ -897,7 +1195,8 @@ class Simulator:
 
     def _possession(self, off, dfn, on, dfive, rng, box, sim,
                     dfouls=None, dout=None, rem=99, margin=0.0,
-                    transition=False, cold=None):
+                    transition=False, cold=None, tfoul=None, dev=0.0,
+                    dev_opp=0.0):
         """One possession, played out through offensive rebounds.
 
         A possession is not one shot: ~23% of misses are rebounded by the offense
@@ -934,6 +1233,13 @@ class Simulator:
             # your studies show on-ball defence is a modest slice of the outcome)
             adj = ((1.0 - 0.010 * self.defq.get(defender, 0.0))
                    * self.team_scale[off] * getattr(self, "_hot", {}).get(off, 1.0))
+            if dev or dev_opp:
+                # split the deviation: the half shared with the opponent drives
+                # the TOTAL, the half that differs drives the MARGIN
+                common = 0.5 * (dev + dev_opp)
+                diff = 0.5 * (dev - dev_opp)
+                pull = MEAN_REVERT * diff + MEAN_REVERT_TOT * common
+                adj *= float(np.clip(1.0 - pull, 0.85, 1.15))
             if transition:
                 adj *= LG["trans_make"]
             # two 30-second slots = the first minute on the floor
@@ -946,13 +1252,28 @@ class Simulator:
                     return                       # already disqualified — cannot foul again
                 dfouls[d] += 1
                 box[dfn][d]["PF"][sim] += 1
+                if tfoul is not None:
+                    tfoul[0] += 1            # team fouls drive the penalty
                 if dfouls[d] >= FOUL_OUT and dout is not None:
                     dout.add(int(d))
 
-            # non-shooting fouls, weighted by how foul-prone each defender is
+            # non-shooting fouls, weighted by how foul-prone each defender is.
+            # Under the limit these only book a personal foul. Once the defence
+            # is in the penalty the same foul is two free throws and ends the
+            # possession — the bonus, which the engine previously could not
+            # represent at all.
             if dfouls is not None and rng.random() < NONSHOOT_FOUL:
                 fw = np.array([self.rates[d]["PF_36"] + 1e-6 for d in dfive])
                 charge(int(dfive[rng.choice(5, p=fw / fw.sum())]))
+                PEN_DIAG["nonshoot"] += 1
+                if tfoul is not None and tfoul[0] > PENALTY_LIMIT:
+                    pts = sum(1 for _ in range(2)
+                              if rng.random() < np.clip(r["FT_PCT"], 0.3, 0.99))
+                    box[off][user]["FTA"][sim] += 2
+                    PEN_DIAG["ft"] += 2
+                    if pts:
+                        box[off][user]["PTS"][sim] += pts
+                    return total + pts, live_to
 
             # endgame: a trailing offence chases threes, and a trailing DEFENCE
             # fouls deliberately to get the ball back
@@ -975,6 +1296,8 @@ class Simulator:
                 if dout is None or charge_target not in dout:
                     dfouls[charge_target] += 1
                     box[dfn][charge_target]["PF"][sim] += 1
+                    if tfoul is not None:
+                        tfoul[0] += 1
                 nft = 2
                 pts = sum(1 for _ in range(nft)
                           if rng.random() < np.clip(r["FT_PCT"], 0.3, 0.99))

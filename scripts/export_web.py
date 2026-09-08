@@ -33,6 +33,8 @@ PROPS_F = ROOT / "data" / "features" / "props_predictions.parquet"
 DEFV2_F = ROOT / "data" / "parquet" / "defender_quality_v2.parquet"
 SYN_F = ROOT / "data" / "parquet" / "team_synergy.parquet"
 OUT = ROOT / "web" / "data.js"
+WEB_SIM_F = ROOT / "data" / "features" / "web_sim.json"
+SIM_EVAL_F = ROOT / "data" / "features" / "sim_eval_summary.json"
 BURN_IN = "2013-14"
 LATEST = "2025-26"
 
@@ -293,6 +295,22 @@ def synergy(season: str = LATEST) -> dict:
             "league_def": lg_def, "teams": teams}
 
 
+def simulator() -> dict:
+    """The possession simulator's exported state (scripts 155 and 125).
+
+    Both files are optional: the site simply hides the section if they are
+    absent, so a stale checkout renders rather than breaks. They are separate
+    because one is expensive to regenerate (30 team simulations) and the other
+    is a held-out evaluation, and they should be refreshable independently.
+    """
+    out = {}
+    if WEB_SIM_F.exists():
+        out.update(json.loads(WEB_SIM_F.read_text()))
+    if SIM_EVAL_F.exists():
+        out["eval"] = json.loads(SIM_EVAL_F.read_text())
+    return out
+
+
 def main() -> None:
     players = player_ratings()
     data = {"generated": date.today().isoformat(),
@@ -307,9 +325,14 @@ def main() -> None:
                      for t, pl in json.loads(WOWY_F.read_text()).items()},
             "props": props(),
             "defenders": defenders(),
-            "synergy": synergy()}
+            "synergy": synergy(),
+            "sim": simulator()}
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text("window.NBAI_DATA = " + json.dumps(data, indent=2) + ";\n")
+    sm = data.get("sim") or {}
+    print(f"  simulator: {len(sm.get('teams', {}))} teams, "
+          f"{len((sm.get('sample') or {}).get('events', []))} pbp events, "
+          f"eval {'yes' if sm.get('eval') else 'MISSING'}")
     print(f"Wrote {OUT} — {len(data['teams'])} teams, "
           f"model acc {data['model']['accuracy']}, generated {data['generated']}")
 

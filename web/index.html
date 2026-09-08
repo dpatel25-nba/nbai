@@ -120,6 +120,121 @@
   .bar > i { position: absolute; top: 0; bottom: 0; display: block; }
   .pos { color: var(--good); } .neg { color: var(--bad); }
 
+  /* ---- possession simulator ---- */
+  (function simulatorTab() {
+    const SIM = (window.NBAI_DATA || {}).sim || {};
+    if (!SIM.teams || !Object.keys(SIM.teams).length) return;   // hide if unexported
+    const T = SIM.teams, abbrs = Object.keys(T).sort();
+
+    /* held-out scorecard */
+    const ev = SIM.eval;
+    if (ev) {
+      const rows = [
+        ["Possession sim", ev.sim, ev.margin_mae, ev.total_mae],
+        ["Mode-1 (top-down)", ev.mode1, ev.mode1_margin_mae, ev.mode1_total_mae],
+        ["Elo baseline", ev.elo, null, null]];
+      const best = (k, v) => {
+        const all = rows.map(r => r[1] && r[1][k]).filter(x => x != null);
+        return all.length && v === Math.min(...all) ? ' class="best"' : "";
+      };
+      document.querySelector("#simEvalTbl tbody").innerHTML = rows.map(r => {
+        const m = r[1] || {};
+        const n = x => x == null ? "—" : x.toFixed(x < 1 ? 4 : 2);
+        return `<tr><td class="tleft">${r[0]}</td>
+          <td>${m.acc == null ? "—" : m.acc.toFixed(3)}</td>
+          <td${best("logloss", m.logloss)}>${n(m.logloss)}</td>
+          <td${best("brier", m.brier)}>${n(m.brier)}</td>
+          <td>${n(r[2])}</td><td>${n(r[3])}</td></tr>`;
+      }).join("");
+      document.getElementById("simEvalNote").textContent =
+        `${ev.games} games · ${ev.season} · ${ev.sims} sims each · projected minutes`;
+      document.getElementById("simEvalCal").innerHTML =
+        `Interval coverage <b>${ev.cover80}%</b> against an 80% target and
+         <b>${ev.cover50}%</b> against 50%. Player points MAE <b>${ev.player_pts_mae}</b>
+         versus the dedicated props model's <b>${ev.props_pts_mae}</b> on identical rows.
+         The engine wins on margin and total error and on both proper scoring rules
+         against Elo, and trails the top-down model on win probability — it is built
+         to allocate a game across players, not to replace a team rating.`;
+    }
+
+    /* projected box score for any pairing */
+    const hs = document.getElementById("simHome"), as = document.getElementById("simAway");
+    const opts = abbrs.map(a => `<option value="${a}">${a}</option>`).join("");
+    hs.innerHTML = opts; as.innerHTML = opts;
+    hs.value = abbrs.includes("OKC") ? "OKC" : abbrs[0];
+    as.value = abbrs.includes("BOS") ? "BOS" : abbrs[1];
+
+    const SCALED = ["PTS", "FGA", "FGM", "FG3A", "FG3M", "FTA", "FTM"];
+    function proj(h, a, home) {
+      return SIM.mu0 + T[h].off - T[a].def + (home ? SIM.hca : 0);
+    }
+    function boxFor(t, target) {
+      const k = target / (T[t].baseline_total || target);
+      return T[t].players.map(p => {
+        const o = {name: p.name, MIN: p.MIN};
+        SCALED.forEach(c => o[c] = (p[c] || 0) * k);
+        ["REB","OREB","DREB","AST","STL","BLK","TOV","PF"].forEach(c => o[c] = p[c] || 0);
+        return o;
+      });
+    }
+    function tbl(abbr, rows, total) {
+      const f1 = x => x.toFixed(1);
+      const body = rows.map(p => `<tr>
+          <td class="tleft">${p.name}</td><td>${f1(p.MIN)}</td>
+          <td>${f1(p.FGM)}-${f1(p.FGA)}</td>
+          <td>${f1(p.FG3M)}-${f1(p.FG3A)}</td>
+          <td>${f1(p.FTM)}-${f1(p.FTA)}</td>
+          <td>${f1(p.REB)}</td><td>${f1(p.AST)}</td><td>${f1(p.STL)}</td>
+          <td>${f1(p.BLK)}</td><td>${f1(p.TOV)}</td>
+          <td><b>${f1(p.PTS)}</b></td></tr>`).join("");
+      return `<div class="panel" style="margin-top:14px">
+        <div class="panel-head"><h2>${abbr}</h2>
+          <span class="eyebrow">projected ${total.toFixed(1)} points</span></div>
+        <div class="tblwrap"><table><thead><tr>
+          <th class="tleft">Player</th><th>MIN</th><th>FG</th><th>3PT</th><th>FT</th>
+          <th>REB</th><th>AST</th><th>STL</th><th>BLK</th><th>TO</th><th>PTS</th>
+        </tr></thead><tbody>${body}</tbody></table></div></div>`;
+    }
+    function draw() {
+      const h = hs.value, a = as.value;
+      if (h === a) {
+        document.getElementById("simVerdict").textContent = "Pick two different teams.";
+        document.getElementById("simBoxes").innerHTML = ""; return;
+      }
+      const mh = proj(h, a, true), ma = proj(a, h, false);
+      document.getElementById("simHomeProj").textContent =
+        `off ${T[h].off >= 0 ? "+" : ""}${T[h].off.toFixed(1)} · def ${T[h].def >= 0 ? "+" : ""}${T[h].def.toFixed(1)}`;
+      document.getElementById("simAwayProj").textContent =
+        `off ${T[a].off >= 0 ? "+" : ""}${T[a].off.toFixed(1)} · def ${T[a].def >= 0 ? "+" : ""}${T[a].def.toFixed(1)}`;
+      const fav = mh >= ma ? h : a, by = Math.abs(mh - ma);
+      document.getElementById("simVerdict").innerHTML =
+        `<b>${h} ${mh.toFixed(1)} — ${ma.toFixed(1)} ${a}</b>
+         <span class="mgn">&nbsp;·&nbsp; ${fav} by ${by.toFixed(1)}
+         &nbsp;·&nbsp; total ${(mh + ma).toFixed(1)}</span>`;
+      document.getElementById("simBoxes").innerHTML =
+        tbl(h, boxFor(h, mh), mh) + tbl(a, boxFor(a, ma), ma);
+    }
+    hs.addEventListener("change", draw); as.addEventListener("change", draw); draw();
+
+    /* the sample play-by-play */
+    const smp = SIM.sample;
+    if (smp && smp.events) {
+      document.getElementById("simPbpNote").textContent =
+        `${smp.away} @ ${smp.home} — final ${smp.score.A}-${smp.score.H} · ${smp.events.length} events`;
+      document.querySelector("#simPbpTbl tbody").innerHTML = smp.events.map(e => {
+        const tag = e.t == null ? "" : (e.t === "H" ? smp.home : smp.away);
+        return `<tr><td class="tleft mono">${e.c}</td><td class="tleft">${tag}</td>
+                <td class="tleft">${e.x}</td>
+                <td class="mono">${e.a}-${e.h}</td></tr>`;
+      }).join("");
+    }
+  })();
+
+  /* ---- simulator tab ---- */
+  .note { color: var(--muted, #8b93a7); font-size: 13px; line-height: 1.6;
+          margin-top: 12px; max-width: 78ch; }
+  .note b { color: var(--fg, #e8ecf5); font-weight: 600; }
+  td.best { color: #7ee2a8; font-weight: 700; }
   /* ---- matchup predictor ---- */
   .matchup { display: grid; grid-template-columns: 1fr; gap: 18px; }
   .mk-card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
@@ -271,6 +386,7 @@
       <button class="tab" data-view="shots" role="tab">Shot Charts</button>
       <button class="tab" data-view="impact" role="tab">Impact</button>
       <button class="tab" data-view="predict" role="tab">Matchup</button>
+      <button class="tab" data-view="simulator" role="tab">Simulator</button>
       <button class="tab" data-view="roadmap" role="tab">Roadmap</button>
     </nav>
   </div>
@@ -635,6 +751,73 @@
   </section>
 
   <!-- ============ ROADMAP ============ -->
+  <section class="view" id="simulator">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">Possession Engine</div>
+        <h1>Game Simulator</h1>
+      </div>
+      <div class="sub">Every possession played out one at a time — rotations, matchups,
+        fouls, the bonus, offensive rebounds. Pick any two teams for a projected box
+        score, or read a full play-by-play the engine generated.</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h2>Held-out accuracy</h2>
+        <span class="eyebrow" id="simEvalNote"></span></div>
+      <div class="tblwrap">
+        <table id="simEvalTbl">
+          <thead><tr>
+            <th class="tleft">Model</th><th>Accuracy</th><th>Log-loss</th>
+            <th>Brier</th><th>Margin MAE</th><th>Total MAE</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="note" id="simEvalCal"></div>
+    </div>
+
+    <div class="panel" style="margin-top:18px">
+      <div class="panel-head"><h2>Projected box score</h2>
+        <span class="eyebrow">Any two teams</span></div>
+      <div class="vs-grid" style="margin:6px 0 14px">
+        <div class="side">
+          <label class="eyebrow" for="simHome">Home</label>
+          <select id="simHome"></select>
+          <div class="sel-elo mono" id="simHomeProj"></div>
+        </div>
+        <div class="vs-col"><div class="vs">VS</div></div>
+        <div class="side">
+          <label class="eyebrow" for="simAway">Away</label>
+          <select id="simAway"></select>
+          <div class="sel-elo mono" id="simAwayProj"></div>
+        </div>
+      </div>
+      <div class="verdict" id="simVerdict"></div>
+      <div id="simBoxes"></div>
+      <div class="note">Team strength is the same rating the engine anchors to.
+        Player lines come from running the possession engine against a league-median
+        opponent, then scaling the scoring columns to this matchup's projected total —
+        minutes, rebounds, assists, steals, blocks and turnovers are left as simulated,
+        because they track pace and role rather than efficiency. A full per-matchup
+        simulation would differ slightly in the defensive terms.</div>
+    </div>
+
+    <div class="panel" style="margin-top:18px">
+      <div class="panel-head"><h2>Play-by-play</h2>
+        <span class="eyebrow" id="simPbpNote"></span></div>
+      <div class="tblwrap" style="max-height:460px;overflow:auto">
+        <table id="simPbpTbl">
+          <thead><tr><th class="tleft">Clock</th><th class="tleft">Team</th>
+            <th class="tleft">Play</th><th>Score</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="note">Generated by the engine, not a recording — substitutions,
+        rebounds, assists and fouls are all decided possession by possession.</div>
+    </div>
+  </section>
+
   <section class="view" id="roadmap">
     <div class="page-head">
       <div>
@@ -998,6 +1181,116 @@
     wowySel.addEventListener("change", renderWowy);
     renderWowy();
   }
+
+  /* ---- possession simulator ---- */
+  (function simulatorTab() {
+    const SIM = (window.NBAI_DATA || {}).sim || {};
+    if (!SIM.teams || !Object.keys(SIM.teams).length) return;   // hide if unexported
+    const T = SIM.teams, abbrs = Object.keys(T).sort();
+
+    /* held-out scorecard */
+    const ev = SIM.eval;
+    if (ev) {
+      const rows = [
+        ["Possession sim", ev.sim, ev.margin_mae, ev.total_mae],
+        ["Mode-1 (top-down)", ev.mode1, ev.mode1_margin_mae, ev.mode1_total_mae],
+        ["Elo baseline", ev.elo, null, null]];
+      const best = (k, v) => {
+        const all = rows.map(r => r[1] && r[1][k]).filter(x => x != null);
+        return all.length && v === Math.min(...all) ? ' class="best"' : "";
+      };
+      document.querySelector("#simEvalTbl tbody").innerHTML = rows.map(r => {
+        const m = r[1] || {};
+        const n = x => x == null ? "—" : x.toFixed(x < 1 ? 4 : 2);
+        return `<tr><td class="tleft">${r[0]}</td>
+          <td>${m.acc == null ? "—" : m.acc.toFixed(3)}</td>
+          <td${best("logloss", m.logloss)}>${n(m.logloss)}</td>
+          <td${best("brier", m.brier)}>${n(m.brier)}</td>
+          <td>${n(r[2])}</td><td>${n(r[3])}</td></tr>`;
+      }).join("");
+      document.getElementById("simEvalNote").textContent =
+        `${ev.games} games · ${ev.season} · ${ev.sims} sims each · projected minutes`;
+      document.getElementById("simEvalCal").innerHTML =
+        `Interval coverage <b>${ev.cover80}%</b> against an 80% target and
+         <b>${ev.cover50}%</b> against 50%. Player points MAE <b>${ev.player_pts_mae}</b>
+         versus the dedicated props model's <b>${ev.props_pts_mae}</b> on identical rows.
+         The engine wins on margin and total error and on both proper scoring rules
+         against Elo, and trails the top-down model on win probability — it is built
+         to allocate a game across players, not to replace a team rating.`;
+    }
+
+    /* projected box score for any pairing */
+    const hs = document.getElementById("simHome"), as = document.getElementById("simAway");
+    const opts = abbrs.map(a => `<option value="${a}">${a}</option>`).join("");
+    hs.innerHTML = opts; as.innerHTML = opts;
+    hs.value = abbrs.includes("OKC") ? "OKC" : abbrs[0];
+    as.value = abbrs.includes("BOS") ? "BOS" : abbrs[1];
+
+    const SCALED = ["PTS", "FGA", "FGM", "FG3A", "FG3M", "FTA", "FTM"];
+    function proj(h, a, home) {
+      return SIM.mu0 + T[h].off - T[a].def + (home ? SIM.hca : 0);
+    }
+    function boxFor(t, target) {
+      const k = target / (T[t].baseline_total || target);
+      return T[t].players.map(p => {
+        const o = {name: p.name, MIN: p.MIN};
+        SCALED.forEach(c => o[c] = (p[c] || 0) * k);
+        ["REB","OREB","DREB","AST","STL","BLK","TOV","PF"].forEach(c => o[c] = p[c] || 0);
+        return o;
+      });
+    }
+    function tbl(abbr, rows, total) {
+      const f1 = x => x.toFixed(1);
+      const body = rows.map(p => `<tr>
+          <td class="tleft">${p.name}</td><td>${f1(p.MIN)}</td>
+          <td>${f1(p.FGM)}-${f1(p.FGA)}</td>
+          <td>${f1(p.FG3M)}-${f1(p.FG3A)}</td>
+          <td>${f1(p.FTM)}-${f1(p.FTA)}</td>
+          <td>${f1(p.REB)}</td><td>${f1(p.AST)}</td><td>${f1(p.STL)}</td>
+          <td>${f1(p.BLK)}</td><td>${f1(p.TOV)}</td>
+          <td><b>${f1(p.PTS)}</b></td></tr>`).join("");
+      return `<div class="panel" style="margin-top:14px">
+        <div class="panel-head"><h2>${abbr}</h2>
+          <span class="eyebrow">projected ${total.toFixed(1)} points</span></div>
+        <div class="tblwrap"><table><thead><tr>
+          <th class="tleft">Player</th><th>MIN</th><th>FG</th><th>3PT</th><th>FT</th>
+          <th>REB</th><th>AST</th><th>STL</th><th>BLK</th><th>TO</th><th>PTS</th>
+        </tr></thead><tbody>${body}</tbody></table></div></div>`;
+    }
+    function draw() {
+      const h = hs.value, a = as.value;
+      if (h === a) {
+        document.getElementById("simVerdict").textContent = "Pick two different teams.";
+        document.getElementById("simBoxes").innerHTML = ""; return;
+      }
+      const mh = proj(h, a, true), ma = proj(a, h, false);
+      document.getElementById("simHomeProj").textContent =
+        `off ${T[h].off >= 0 ? "+" : ""}${T[h].off.toFixed(1)} · def ${T[h].def >= 0 ? "+" : ""}${T[h].def.toFixed(1)}`;
+      document.getElementById("simAwayProj").textContent =
+        `off ${T[a].off >= 0 ? "+" : ""}${T[a].off.toFixed(1)} · def ${T[a].def >= 0 ? "+" : ""}${T[a].def.toFixed(1)}`;
+      const fav = mh >= ma ? h : a, by = Math.abs(mh - ma);
+      document.getElementById("simVerdict").innerHTML =
+        `<b>${h} ${mh.toFixed(1)} — ${ma.toFixed(1)} ${a}</b>
+         <span class="mgn">&nbsp;·&nbsp; ${fav} by ${by.toFixed(1)}
+         &nbsp;·&nbsp; total ${(mh + ma).toFixed(1)}</span>`;
+      document.getElementById("simBoxes").innerHTML =
+        tbl(h, boxFor(h, mh), mh) + tbl(a, boxFor(a, ma), ma);
+    }
+    hs.addEventListener("change", draw); as.addEventListener("change", draw); draw();
+
+    /* the sample play-by-play */
+    const smp = SIM.sample;
+    if (smp && smp.events) {
+      document.getElementById("simPbpNote").textContent =
+        `${smp.away} @ ${smp.home} — final ${smp.score.A}-${smp.score.H} · ${smp.events.length} events`;
+      document.querySelector("#simPbpTbl tbody").innerHTML = smp.events.map(e => {
+        const tag = e.t == null ? "" : (e.t === "H" ? smp.home : smp.away);
+        return `<tr><td class="tleft mono">${e.c}</td><td class="tleft">${tag}</td>
+                <td class="tleft">${e.x}</td>
+                <td class="mono">${e.a}-${e.h}</td></tr>`;
+      }).join("");
+    }
+  })();
 
   /* ---- matchup predictor ---- */
   const homeSel = document.getElementById("home"), awaySel = document.getElementById("away");

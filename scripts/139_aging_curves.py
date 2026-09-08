@@ -64,7 +64,11 @@ PS = ROOT / "data" / "parquet" / "player_seasons.parquet"
 BIO = ROOT / "data" / "parquet" / "player_bio.parquet"
 OUT = ROOT / "data" / "parquet" / "aging_curves.parquet"
 
-METRICS = ["PTS_36", "REB_36", "AST_36", "MPG", "TS_PCT", "FG3_PCT"]
+# the diagnostic set plus every rate column the simulator consumes, so only
+# the ones that validate walk-forward get applied
+METRICS = ["PTS_36", "REB_36", "AST_36", "MPG", "TS_PCT", "FG3_PCT",
+           "FGA_36", "FG3A_36", "FTA_36", "TOV_36", "OREB_36", "DREB_36",
+           "PF_36", "STL_36", "BLK_36", "FT_PCT", "FG_PCT"]
 import os
 MIN_MIN = int(os.environ.get("AGE_MIN_MIN", 400))
 AGE_LO, AGE_HI = 20, 38
@@ -118,6 +122,9 @@ def smooth_curve(ages, vals, wts):
         k = np.exp(-0.5 * ((ages - a) / SMOOTH) ** 2) * wts
         out.append(float(np.sum(k * vals) / np.sum(k)) if np.sum(k) > 0 else np.nan)
     return grid, np.array(out)
+
+
+N_BOOT = 2000        # cluster-bootstrap resamples for the walk-forward test
 
 
 def main() -> None:
@@ -255,7 +262,11 @@ def main() -> None:
     # ---- WALK-FORWARD: build the curve on early seasons, apply to later ones ----
     cut = sorted(ps.SEASON.unique())[len(ps.SEASON.unique()) * 2 // 3]
     print(f"\nWALK-FORWARD — curve fitted on seasons < {cut}, scored on >= {cut}")
-    print(f"  {'metric':<10}{'age-blind':>12}{'age-adj':>10}{'change':>10}   holds?")
+    print("  Paired and CLUSTERED BY PLAYER: the same player appears in several")
+    print("  seasons, so rows are not independent and an unclustered interval")
+    print("  would be far too narrow. 2,000 resamples of players with replacement.")
+    print(f"  {'metric':<10}{'age-blind':>11}{'age-adj':>10}{'change':>9}"
+          f"{'z':>7}{'95% CI on change':>20}   verdict")
     early = ps[ps.SEASON < cut]
     for m in ms:
         # refit the curve using only the early seasons
@@ -285,13 +296,31 @@ def main() -> None:
         late = late.dropna(subset=["proj", m])
         an = late.age.round().clip(AGE_LO, AGE_HI).astype(int).map(cum).fillna(0.0)
         ap = (late.age - 1).round().clip(AGE_LO, AGE_HI).astype(int).map(cum).fillna(0.0)
-        e0 = np.abs(late[m] - late.proj).mean()
-        e1 = np.abs(late[m] - (late.proj + (an - ap))).mean()
-        print(f"  {m:<10}{e0:>12.4f}{e1:>10.4f}{(e1/e0-1)*100:>9.2f}%"
-              f"   {'YES' if e1 < e0 else 'no'}")
+        a0 = np.abs(late[m] - late.proj).to_numpy()
+        a1 = np.abs(late[m] - (late.proj + (an - ap))).to_numpy()
+        e0, e1 = a0.mean(), a1.mean()
+        # Cluster bootstrap over PLAYERS, not rows: a player contributes several
+        # seasons and his errors are correlated across them, so resampling rows
+        # would give an interval far too narrow and call noise a result.
+        uniq, inv = np.unique(late.PLAYER_ID.to_numpy(), return_inverse=True)
+        idx_by = [np.flatnonzero(inv == i) for i in range(len(uniq))]
+        rng = np.random.default_rng(7)
+        boot = np.empty(N_BOOT)
+        for b in range(N_BOOT):
+            sel = np.concatenate([idx_by[i] for i in
+                                  rng.integers(0, len(uniq), len(uniq))])
+            boot[b] = (a1[sel].mean() / a0[sel].mean() - 1.0) * 100.0
+        ch = (e1 / e0 - 1.0) * 100.0
+        se = boot.std(ddof=1)
+        lo, hi = np.percentile(boot, [2.5, 97.5])
+        verdict = "REAL" if hi < 0 else ("WORSE" if lo > 0 else "noise")
+        print(f"  {m:<10}{e0:>11.4f}{e1:>10.4f}{ch:>8.2f}%"
+              f"{ch/max(se,1e-9):>7.1f}{f'[{lo:+.2f},{hi:+.2f}]':>20}   {verdict}")
 
-    print("\n  NOTE: in-sample for the curve — it shows the curve is real, not that")
-    print("  it generalises. Bio coverage is now the full 1,706-player archive.")
+    print("\n  REAL  = the 95% interval on the change lies entirely below zero.")
+    print("  noise = the interval spans zero. The SIGN of the point estimate is")
+    print("          not evidence, and a column must not be applied on it alone.")
+    print("  Only the REAL columns belong in AGE_APPLY (script 124).")
 
 
 if __name__ == "__main__":

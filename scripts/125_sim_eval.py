@@ -34,6 +34,8 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import multiprocessing as mp
+import os
 import importlib.util
 import math
 from pathlib import Path
@@ -42,6 +44,7 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
+MPG_FALLBACK = 0.83   # see the note at its use site
 GAMES = ROOT / "data" / "parquet" / "games.parquet"
 PG = ROOT / "data" / "parquet" / "player_games.parquet"
 PS = ROOT / "data" / "parquet" / "player_seasons.parquet"
@@ -69,12 +72,143 @@ def metrics(p, y):
             np.mean((p - y) ** 2))
 
 
+_G = {}
+
+
+def _eval_game(idx):
+    """Simulate one game. A Pool needs a module-level callable, so context
+    arrives through the forked-in _G rather than through closure.
+
+    The seed is a function of (base seed, game INDEX), never of a generator
+    advanced in visit order: a pool does not guarantee that order, and
+    order-dependent seeds would silently break the common random numbers that
+    every paired comparison in this project relies on.
+    """
+    G = _G
+    args, sim, S = G["args"], G["sim"], G["S"]
+    gid = G["gids"][idx]
+    rg = np.random.default_rng([args.seed, idx, 7])
+    g = G["gs"][G["gs"].GAME_ID == gid].iloc[0]
+    rr = G["pg"][G["pg"].GAME_ID == gid]
+
+    sides, ok = {}, True
+    for tag, tid in (("H", g.HOME_TEAM_ID), ("A", g.AWAY_TEAM_ID)):
+        dd = rr[(rr.TEAM_ID == tid) & (rr.MIN > 0)]
+        pl = []
+        for r in dd.itertuples():
+            pid = int(r.PLAYER_ID)
+            mins = (float(r.MIN) if args.minutes == "actual"
+                    else float(G["pmin"].get((gid, pid), np.nan)))
+            if not np.isfinite(mins):
+                # NO PROJECTION IS NOT NO PLAYER. Dropping him and rescaling the
+                # rest to 240 team-minutes inflates everyone who remains: only
+                # 9.34 of 10.69 players per team-game carry a props projection,
+                # covering 217.8 of 241.3 actual minutes, so the rescale is a
+                # factor of ~1.108. Worse, `occupancy` caps a player at one slot,
+                # so the surplus cannot go to starters and lands on the
+                # mid-rotation instead — which is precisely where the engine
+                # appeared to over-predict by 1.0-1.4 points. Fall back to the
+                # rate book's MPG, which is leakage-safe (prior seasons plus
+                # in-season updates) and keeps the roster whole.
+                # Scaled: an unprojected player's SEASON MPG overstates his role
+                # in the specific game he was left out of (props omits exactly
+                # the players whose minutes are erratic). Unscaled it puts the
+                # roster at 246.0 team-minutes against a real 241.3, so the 240
+                # rescale then DEFLATES everyone by 0.975 and starters lose most
+                # in absolute points. 0.83 lands the roster on the real total.
+                mins = MPG_FALLBACK * float(sim.rates[pid].get("MPG", 0.0) or 0.0)
+                if not np.isfinite(mins) or mins <= 0:
+                    continue
+            pl.append({"pid": pid, "minutes": mins,
+                       "started": int(isinstance(r.position, str)
+                                      and bool(r.position.strip()))})
+        if len(pl) < 6:
+            ok = False
+        tot = sum(q["minutes"] for q in pl)
+        if tot > 0:
+            for q in pl:
+                q["minutes"] *= 240.0 / tot
+        sides[tag] = pl
+    if not ok:
+        return None, []
+
+    if G["defq_by_game"]:
+        sim.defq = G["defq_by_game"].get(gid, {})
+    fac = G["drift"].get(gid, {})
+    if G["game_rates"] or fac:
+        base = G["base_rates"]
+        ov = dict(base)
+        for tag in sides:
+            for q in sides[tag]:
+                merged = dict(base[q["pid"]])
+                gr = G["game_rates"].get((gid, q["pid"]))
+                if gr:
+                    merged.update(gr)
+                # league correction LAST, so it pins the in-season updated
+                # rates and not merely the prior-season book
+                ov[q["pid"]] = S.apply_drift(merged, fac)
+        sim.rates = S.RateBook(ov, base.fallback)
+
+    pace_ig = G["pace_ig"]
+    res, box, _ = sim.simulate(
+        sides["H"], sides["A"], g.HOME_TEAM_ID, g.AWAY_TEAM_ID,
+        n_sims=args.sims,
+        seed=int(np.random.default_rng([args.seed, idx]).integers(1 << 30)),
+        anchor=G["anchors"].get(gid),
+        pace_pair=(pace_ig.get((gid, g.HOME_TEAM_ID)),
+                   pace_ig.get((gid, g.AWAY_TEAM_ID)))
+        if (gid, g.HOME_TEAM_ID) in pace_ig else None)
+    h, a = res["H"], res["A"]
+    m = h - a
+    # team-level box totals, so BOX REALISM is checked on the pipeline the
+    # evaluation actually uses. Diagnosing free throws on the lean harness —
+    # which omits in-season rate updating — produced a 2.9 FT/game "excess"
+    # that the real pipeline does not necessarily have.
+    box_tot = {}
+    for _k in ("FTA", "FGA", "FG3M", "TOV", "AST", "REB", "PF"):
+        box_tot["sim_" + _k] = float(sum(st[_k].mean() for t in ("H", "A")
+                                         for _, st in box[t].items()))
+    row = {"GAME_ID": gid, "p_home": float((m > 0).mean()), **box_tot,
+           "pred_margin": float(m.mean()), "pred_total": float((h + a).mean()),
+           "act_margin": float(g.MARGIN), "act_total": float(g.TOTAL),
+           "home_win": int(g.HOME_WIN)}
+
+    plines = []
+    actual_pts = {int(r.PLAYER_ID): r.points for r in rr.itertuples()}
+    for tag in ("H", "A"):
+        for pid, st in box[tag].items():
+            if pid not in actual_pts:
+                continue
+            dpt = st["PTS"]
+            plines.append({"GAME_ID": gid, "PLAYER_ID": pid,
+                           "pred": float(dpt.mean()),
+                           "actual": float(actual_pts[pid]),
+                           "p10": float(np.percentile(dpt, 10)),
+                           "p90": float(np.percentile(dpt, 90)),
+                           "p25": float(np.percentile(dpt, 25)),
+                           "p75": float(np.percentile(dpt, 75)),
+                           "pit": float((dpt < actual_pts[pid]).mean()
+                                        + rg.random()
+                                        * (dpt == actual_pts[pid]).mean()),
+                           "p_zero": float((dpt <= 0.5).mean()),
+                           "sim_min": float(np.percentile(dpt, 0)),
+                           "predmin": float(G["pmin"].get((gid, pid), np.nan)),
+                           "engine": G["ppts"].get((gid, pid), np.nan)})
+    return row, plines
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--games", type=int, default=120)
     ap.add_argument("--sims", type=int, default=150)
     ap.add_argument("--minutes", choices=["projected", "actual"], default="projected")
     ap.add_argument("--seed", type=int, default=11)
+    ap.add_argument("--dump", default="", help="write per-game rows here for "
+                    "paired comparison between configurations")
+    ap.add_argument("--no-drift", action="store_true",
+                    help="disable the league drift correction (script 153)")
+    ap.add_argument("--lineup-drift", type=float, default=None,
+                    help="override LINEUP_DRIFT in the engine")
     ap.add_argument("--season", default=DEFAULT_SEASON,
                     help="evaluate on a season the parameters were NOT tuned on")
     ap.add_argument("--ingame", choices=["on", "off"], default="on",
@@ -134,84 +268,37 @@ def main() -> None:
     pmin = {(r.GAME_ID, int(r.PLAYER_ID)): r.pred_min for r in props.itertuples()}
     ppts = {(r.GAME_ID, int(r.PLAYER_ID)): r.pred_points for r in props.itertuples()}
 
-    rows, plines = [], []
-    for n, gid in enumerate(gids, 1):
-        g = gs[gs.GAME_ID == gid].iloc[0]
-        rr = pg[pg.GAME_ID == gid]
-        sides, ok = {}, True
-        for tag, tid in (("H", g.HOME_TEAM_ID), ("A", g.AWAY_TEAM_ID)):
-            d = rr[(rr.TEAM_ID == tid) & (rr.MIN > 0)]
-            pl = []
-            for r in d.itertuples():
-                pid = int(r.PLAYER_ID)
-                mins = (float(r.MIN) if args.minutes == "actual"
-                        else float(pmin.get((gid, pid), np.nan)))
-                if not np.isfinite(mins):
-                    continue
-                pl.append({"pid": pid, "minutes": mins,
-                           "started": int(isinstance(r.position, str) and bool(r.position.strip()))})
-            if len(pl) < 6:
-                ok = False
-            # rescale to a legal 240 team-minutes
-            tot = sum(p["minutes"] for p in pl)
-            if tot > 0:
-                for p in pl:
-                    p["minutes"] *= 240.0 / tot
-            sides[tag] = pl
-        if not ok:
-            continue
-
-        if defq_by_game:
-            sim.defq = defq_by_game.get(gid, {})
-        if game_rates:
-            ov = dict(base_rates)
-            for tag in sides:
-                for pl in sides[tag]:
-                    gr = game_rates.get((gid, pl["pid"]))
-                    if gr:
-                        merged = dict(base_rates[pl["pid"]])
-                        merged.update(gr)
-                        ov[pl["pid"]] = merged
-            sim.rates = S.RateBook(ov, base_rates.fallback)
-        res, box, _ = sim.simulate(sides["H"], sides["A"], g.HOME_TEAM_ID,
-                                   g.AWAY_TEAM_ID, n_sims=args.sims,
-                                   seed=int(rng.integers(1 << 30)),
-                                   anchor=anchors.get(gid),
-                                   pace_pair=(pace_ig.get((gid, g.HOME_TEAM_ID)),
-                                              pace_ig.get((gid, g.AWAY_TEAM_ID)))
-                                   if (gid, g.HOME_TEAM_ID) in pace_ig else None)
-        h, a = res["H"], res["A"]
-        m = h - a
-        rows.append({"GAME_ID": gid, "p_home": float((m > 0).mean()),
-                     "pred_margin": float(m.mean()), "pred_total": float((h + a).mean()),
-                     "act_margin": float(g.MARGIN), "act_total": float(g.TOTAL),
-                     "home_win": int(g.HOME_WIN)})
-        actual_pts = {int(r.PLAYER_ID): r.points for r in rr.itertuples()}
-        for tag in ("H", "A"):
-            for pid, st in box[tag].items():
-                if pid in actual_pts:
-                    d = st["PTS"]
-                    plines.append({"GAME_ID": gid, "PLAYER_ID": pid,
-                                   "pred": float(d.mean()), "actual": float(actual_pts[pid]),
-                                   "p10": float(np.percentile(d, 10)),
-                                   "p90": float(np.percentile(d, 90)),
-                                   "p25": float(np.percentile(d, 25)),
-                                   "p75": float(np.percentile(d, 75)),
-                                   "pit": float((d < actual_pts[pid]).mean()
-                                                + np.random.random()
-                                                * (d == actual_pts[pid]).mean()),
-                                   "p_zero": float((d <= 0.5).mean()),
-                                   "sim_min": float(np.percentile(d, 0)),
-                                   "predmin": float(pmin.get((gid, pid), np.nan)),
-                                   "engine": ppts.get((gid, pid), np.nan)})
-        if n % 10 == 0:
-            print(f"  simulated {n}/{len(gids)} games", flush=True)
+    if args.lineup_drift is not None:
+        S.LINEUP_DRIFT = float(args.lineup_drift)
+        print(f"LINEUP_DRIFT overridden to {S.LINEUP_DRIFT}", flush=True)
+    drift = {} if args.no_drift else S.league_drift(SEASON)
+    print(f"league drift factors loaded for {len(drift):,} games", flush=True)
+    _G.update(dict(drift=drift,
+                   gs=gs, pg=pg, sim=sim, S=S, args=args, pmin=pmin, ppts=ppts,
+                   anchors=anchors, pace_ig=pace_ig, game_rates=game_rates,
+                   base_rates=base_rates, defq_by_game=defq_by_game, gids=gids))
+    workers = max(1, min((os.cpu_count() or 2) - 2, len(gids)))
+    if workers > 1:
+        # fork so the built Simulator is inherited copy-on-write; spawn would
+        # re-import this module and rebuild projections in every worker
+        with mp.get_context("fork").Pool(workers) as pool:
+            out = pool.map(_eval_game, range(len(gids)),
+                           chunksize=max(1, len(gids) // (workers * 4)))
+    else:
+        out = [_eval_game(i) for i in range(len(gids))]
+    rows = [r for r, _ in out if r is not None]
+    plines = [q for _, ps in out for q in ps]
+    print(f"  simulated {len(rows)}/{len(gids)} games on {workers} workers",
+          flush=True)
 
     d = pd.DataFrame(rows)
     pl = pd.DataFrame(plines)
     print(f"\n{'='*70}\nSIMULATOR EVALUATION — {SEASON}, {len(d)} games, "
           f"{args.sims} sims each, minutes={args.minutes}\n{'='*70}")
 
+    if args.dump:
+        d.to_parquet(args.dump, index=False)
+        print(f"per-game rows -> {args.dump}", flush=True)
     y = d.home_win.to_numpy()
     elo = pd.read_parquet(ELO)[["GAME_ID", "P_HOME"]].rename(columns={"P_HOME": "p_elo"})
     s1 = pd.read_parquet(SIM1)[["GAME_ID", "P_HOME", "pred_margin", "pred_total"]].rename(
@@ -241,6 +328,11 @@ def main() -> None:
                   for m in d.pred_margin]
     d["_held"] = ~d.GAME_ID.isin(cg)
 
+    # Machine-readable summary, so the website cannot silently show numbers
+    # from an older model than the one in the repository.
+    SUMMARY = {"season": SEASON, "games": int(len(d)),
+               "sims": int(args.sims), "minutes": args.minutes}
+
     print("\n1. WIN PROBABILITY")
     print(f"   {'model':<26}{'acc':>8}{'logloss':>10}{'brier':>9}")
     for nm, col in [("possession sim", "p_home"),
@@ -249,6 +341,9 @@ def main() -> None:
         if len(v) > 10:
             acc, ll, br = metrics(v.to_numpy(), d.loc[v.index, "home_win"].to_numpy())
             print(f"   {nm:<26}{acc:>8.3f}{ll:>10.4f}{br:>9.4f}")
+            SUMMARY[{"possession sim": "sim", "Elo baseline": "elo",
+                     "Mode-1 sim": "mode1"}[nm]] = {
+                "acc": round(acc, 4), "logloss": round(ll, 4), "brier": round(br, 4)}
 
     # The width-recalibration that used to sit here is gone. Fitted on half the
     # games it produced sd = 9.00, 11.00, 13.50 and 17.75 across four runs, and
@@ -265,6 +360,11 @@ def main() -> None:
     if len(v) > 10:
         print(f"   {'Mode-1 sim':<26}{(v.m_s1 - v.act_margin).abs().mean():>9.2f}"
               f"{(v.t_s1 - v.act_total).abs().mean():>9.2f}")
+    SUMMARY["margin_mae"] = round(float((d.pred_margin - d.act_margin).abs().mean()), 3)
+    SUMMARY["total_mae"] = round(float((d.pred_total - d.act_total).abs().mean()), 3)
+    if len(v) > 10:
+        SUMMARY["mode1_margin_mae"] = round(float((v.m_s1 - v.act_margin).abs().mean()), 3)
+        SUMMARY["mode1_total_mae"] = round(float((v.t_s1 - v.act_total).abs().mean()), 3)
     print(f"   mean predicted total {d.pred_total.mean():.1f} vs actual {d.act_total.mean():.1f} "
           f"(bias {d.pred_total.mean()-d.act_total.mean():+.1f})")
 
@@ -276,15 +376,59 @@ def main() -> None:
         print(f"   {'props engine (71)':<26}{(e.engine - e.actual).abs().mean():>9.3f}"
               f"   [same {len(e):,} rows]")
         print(f"   {'possession sim, same rows':<26}{(e.pred - e.actual).abs().mean():>9.3f}")
+        SUMMARY["player_pts_mae"] = round(float((e.pred - e.actual).abs().mean()), 3)
+        SUMMARY["props_pts_mae"] = round(float((e.engine - e.actual).abs().mean()), 3)
+
+    # ---- box realism on the same games ----
+    BOXMAP = {"FTA": "freeThrowsAttempted", "FGA": "fieldGoalsAttempted",
+              "FG3M": "threePointersMade", "TOV": "turnovers",
+              "AST": "assists", "REB": "reboundsTotal", "PF": "foulsPersonal"}
+    try:
+        _bp = pd.read_parquet(PG, columns=["GAME_ID"] + list(BOXMAP.values()))
+        _bp = _bp[_bp.GAME_ID.isin(set(d.GAME_ID))]
+        _act = _bp.groupby("GAME_ID").sum().mean()
+        print("\n3b. BOX REALISM  (per game, both teams)")
+        print(f"   {'stat':<8}{'sim':>9}{'actual':>9}{'ratio':>8}")
+        for k, col in BOXMAP.items():
+            sk = "sim_" + k
+            if sk not in d.columns:
+                continue
+            sv, av = float(d[sk].mean()), float(_act[col])
+            print(f"   {k:<8}{sv:>9.2f}{av:>9.2f}{sv/av if av else float('nan'):>8.3f}")
+            SUMMARY.setdefault("box", {})[k] = {"sim": round(sv, 2),
+                                                "actual": round(av, 2),
+                                                "ratio": round(sv / av, 3) if av else None}
+    except (KeyError, ValueError) as e:
+        print(f"\n3b. BOX REALISM unavailable ({e})")
 
     print("\n4. DISTRIBUTIONAL CALIBRATION  (the simulator's real job)")
     c80 = ((pl.actual >= pl.p10) & (pl.actual <= pl.p90)).mean()
     c50 = ((pl.actual >= pl.p25) & (pl.actual <= pl.p75)).mean()
-    print(f"   player points 80% interval coverage : {c80*100:5.1f}%   (target 80%)")
-    print(f"   player points 50% interval coverage : {c50*100:5.1f}%   (target 50%)")
+    # Points are INTEGERS and p10/p90 usually are too, so a player whose actual
+    # lands exactly on a band edge counts as covered — and 14-15% of them do.
+    # That inflated these numbers by ~7 points and made the intervals look far
+    # too wide for a long time. The continuity-corrected figures below add
+    # U(-0.5, 0.5) to the outcome, which is how a discrete target must be
+    # scored against a continuous band, and they are the honest ones.
+    _rj = np.random.default_rng(4242)
+    _aj = pl.actual.to_numpy() + _rj.uniform(-0.5, 0.5, len(pl))
+    j80 = float(((_aj >= pl.p10.to_numpy()) & (_aj <= pl.p90.to_numpy())).mean())
+    j50 = float(((_aj >= pl.p25.to_numpy()) & (_aj <= pl.p75.to_numpy())).mean())
+    SUMMARY["cover80"] = round(j80 * 100, 1)
+    SUMMARY["cover50"] = round(j50 * 100, 1)
+    print(f"   player points 80% interval coverage : {j80*100:5.1f}%   (target 80%)"
+          f"   [{c80*100:.1f}% counting band-edge ties as covered]")
+    print(f"   player points 50% interval coverage : {j50*100:5.1f}%   (target 50%)"
+          f"   [{c50*100:.1f}% counting band-edge ties as covered]")
     hist = np.histogram(pl.pit, bins=10, range=(0, 1))[0] / len(pl)
     print(f"   PIT histogram (flat = calibrated)   : "
           + " ".join(f"{x*100:.0f}" for x in hist))
+    SUMMARY["pit_dev"] = round(float(np.abs(hist - 0.1).sum()), 4)
+    import json as _json
+    _sp = ROOT / "data" / "features" / "sim_eval_summary.json"
+    _sp.parent.mkdir(parents=True, exist_ok=True)
+    _sp.write_text(_json.dumps(SUMMARY, indent=2))
+    print(f"   summary -> {_sp}")
     print(f"   PIT deviation from uniform          : {np.abs(hist - 0.1).sum():.3f}"
           f"   (0 = perfect)")
     # ---- split-conformal calibration (CQR) ----
@@ -301,11 +445,36 @@ def main() -> None:
     print("\n   --- conformal prediction (split-CQR) ---")
     if len(cal) > 50 and len(tst) > 50:
         for lvl, lo_c, hi_c in [(0.80, "p10", "p90"), (0.50, "p25", "p75")]:
-            E = np.maximum(cal[lo_c] - cal.actual, cal.actual - cal[hi_c])
+            # Jitter the OUTCOME, not the score. Points are integers, so a
+            # deterministic band's coverage is a STEP function: 15% of players
+            # sit exactly on p10/p90, and shrinking the band by any epsilon
+            # drops that entire atom at once — the 50% band fell 59.9% -> 44.6%
+            # on a width change of 0.1 points. No band can hit 50% exactly.
+            # Adding U(-0.5, 0.5) to the outcome makes it continuous at integer
+            # resolution, which is the standard treatment for discrete targets
+            # and the only way conformal's guarantee means anything here.
+            rj = np.random.default_rng(int(lvl * 1000))
+            a_cal = cal.actual.to_numpy() + rj.uniform(-0.5, 0.5, len(cal))
+            a_tst = tst.actual.to_numpy() + rj.uniform(-0.5, 0.5, len(tst))
+            E = np.maximum(cal[lo_c].to_numpy() - a_cal, a_cal - cal[hi_c].to_numpy())
             n = len(E)
+            neg, zero = float((E < 0).mean()), float((E == 0).mean())
+            # CONTINUITY CORRECTION. Points are integers and the simulated
+            # percentiles usually are too, so every player whose actual lands
+            # exactly on p10 or p90 scores exactly 0. That atom holds 14-15% of
+            # the mass, and the target quantile falls INSIDE it — which is why
+            # this step returned q=+0.00 and did nothing at all while the bands
+            # over-covered by 7 points. Conformal prediction assumes a
+            # continuous score; jittering by U(-0.5, 0.5) restores that without
+            # changing the distribution at integer resolution.
             q = float(np.quantile(E, min(1.0, np.ceil((n + 1) * lvl) / n)))
-            raw = ((tst.actual >= tst[lo_c]) & (tst.actual <= tst[hi_c])).mean()
-            con = ((tst.actual >= tst[lo_c] - q) & (tst.actual <= tst[hi_c] + q)).mean()
+            print(f"   [{int(lvl*100)}%] conformity score: {neg*100:.1f}% below 0, "
+                  f"{zero*100:.1f}% EXACTLY 0, {(1-neg-zero)*100:.1f}% above"
+                  f"  -> q={q:+.2f} after continuity correction")
+            raw = float(((a_tst >= tst[lo_c].to_numpy())
+                         & (a_tst <= tst[hi_c].to_numpy())).mean())
+            con = float(((a_tst >= tst[lo_c].to_numpy() - q)
+                         & (a_tst <= tst[hi_c].to_numpy() + q)).mean())
             wr = (tst[hi_c] - tst[lo_c]).mean()
             print(f"   {int(lvl*100)}% band: raw {raw*100:5.1f}%  ->  conformal "
                   f"{con*100:5.1f}%   (target {int(lvl*100)}%)   "
