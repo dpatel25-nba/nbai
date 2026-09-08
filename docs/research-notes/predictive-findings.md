@@ -641,3 +641,23 @@ Mode-1                           11.68      14.26       +0.93
 Within half a point of a purpose-built model on margin, comparable on totals, better on bias in 2024-25 — and it works for matchups that never happened, which the lookup cannot.
 
 **Two display bugs found by reading the output**, both invisible to any metric. Player names were rendered with `split()[-1]`, so anyone called "... Jr." appeared in the box score as literally **"Jr."**. And every foul line was tagged to the OFFENSIVE team while naming the defender who committed it, so "OKC Hartenstein Foul" printed as "DEN Hartenstein Foul". Neither affects a single number the model produces; both would be immediately obvious to anyone reading a box score, which is the point of building the thing.
+
+## Rosters, rookies, and a play-by-play that ignored team strength
+
+Three defects surfaced from one observation — that Jaylen Brown was still on Boston.
+
+**1. Rosters were inferred from box scores.** `154` derived a roster from who last PLAYED for a team, which learns the rotation correctly and the roster wrongly. Our game data ends 2026-06-13, so the entire offseason was invisible. Script `156_pull_rosters.py` now pulls the real roster (586 players, 30 teams, 86 rookies) and refuses to write a partial file, because a short roster would receive enormous minutes from the 240-minute rescale.
+
+**2. The rookie priors had never been used.** Script 141 built draft-slot priors so a player with no NBA history gets a plausible rate profile, and 124 wires them in through `RateBook.__missing__`. But that lookup needs a draft slot from the bio archive, and a rookie who has never played has no row in `player_games` either — so the roster builder never proposed him and the priors sat unused **for exactly the players they were built for**. The roster pull carries `HOW_ACQUIRED` ("#40 Pick in 2026 Draft"), which supplies slots for 67 players the archive does not know.
+
+**3. THE PLAY-BY-PLAY WAS NEVER ANCHORED.** The renderer had no `team_scale` at all: it played out the rate book and ignored team strength, so the projected score displayed beside it was decorative. A matchup projected OKC 120.5 / DEN 113.5 rendered as DEN 138 — OKC 119. This is the product's headline output and it had no connection to the ratings the site shows next to it.
+
+Porting the engine's closed-form anchor solve fixes it, and the same mechanism handles the roster staleness for free. The anchor calibrates against a REFERENCE roster and applies the BPM difference to what is actually playing — built for injuries, but an offseason is the same problem with last season's roster as the reference. Roster turnover is worth **2.10 pts/100 on average and up to 7.07** (WAS +7.07, CHA −4.03, BOS −3.94), so leaving the reference unset applies a stale rating at full strength.
+
+**The calibration hunt found a real bug under two tuned constants.** Anchoring left a +9.3 point bias. Two passes of a scale correction removed only half of it and then saturated — a much larger factor moved the bias by 0.4 points, which meant the scale was not the lever. It was the possession COUNT: 113 against a pace target of 102.9.
+
+The cause was a default. `padj` reads each on-court player's pace effect with `.get(pid, 0.0)`, while the centring term subtracts the mean for ten average players — so **every player missing from the pace model leaves the sum short by one mean and pushes the adjustment negative**, shortening possessions and manufacturing more of them. It was invisible while rosters came from played games, because everyone in such a roster has a pace estimate by construction. On a current roster full of rookies and new signings it ran the game 8% fast. Defaulting to the league mean took possessions from 1.078 of pace to 1.027 and the bias from +9.3 to +5.5 with **both tuned constants back at 1.0**.
+
+A residual +1.7 remains on the anchored path only, absorbed by one constant that cannot touch an unanchored render — verified by re-measuring box realism afterwards (points 1.004, possessions 0.988, unchanged).
+
+**The lesson is the one this file keeps recording.** A constant that removes half an error and then stops responding is not a calibration, it is a symptom. Two of them stacked would have hidden a genuine bug behind plausible-looking numbers, and the tell was the saturation, not the size of the residual.

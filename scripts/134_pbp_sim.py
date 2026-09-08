@@ -59,6 +59,20 @@ PERIOD_LEN = 720.0
 OT_LEN = 300.0
 PACE_RAPM = ROOT / "data" / "parquet" / "pace_rapm.parquet"
 PBP_FT_TRIM = 0.066   # see the note at its use site in possession()
+# The renderer generates its own possessions from the clock, and the anchor
+# assumes a team gets `pace` of them. Adding the penalty branch created a
+# possession-ending path that `_pace_scale`'s analytic `cycles` term does not
+# model, so the game ran 10% long (113 possessions against a 102.9 target) and
+# every anchored score came out 10% high. Correcting the SCALE for that was
+# treating the symptom — the fix belongs on the possession count.
+PBP_POSS_CAL = 1.0
+# Residual after the pace-default fix: +5.5 points per team. The renderer is a
+# second implementation of the same game — its own foul, free-throw and rebound
+# paths — so its points per possession sits a few percent above the engine's
+# closed form, and it still runs 2.7% more possessions than pace on a current
+# roster. This applies ONLY on the anchored path (an unanchored render gets a
+# flat 1.0), so it cannot disturb the box-score realism measured without it.
+PBP_ANCHOR_CAL = 0.955
 
 
 def load124():
@@ -86,11 +100,20 @@ class PbpGame:
         t = pd.read_parquet(PACE_RAPM)
         off = {int(r.PLAYER_ID): float(r.OFF_SEC) for r in t.itertuples()}
         dfn = {int(r.PLAYER_ID): float(r.DEF_SEC) for r in t.itertuples()}
-        centre = 5.0 * (float(t.OFF_SEC.mean()) + float(t.DEF_SEC.mean()))
+        # An UNKNOWN player must default to the league mean, not to zero. The
+        # centring term subtracts the mean for ten average players, so a missing
+        # player contributing 0 leaves the sum short by one mean and pushes the
+        # adjustment negative — shortening every possession and manufacturing
+        # extra ones. It went unnoticed while rosters were derived from played
+        # games, because everyone in them had a pace estimate by construction.
+        # On a current roster full of rookies and new signings it ran the game
+        # 8% fast (110 possessions against a 102 pace).
+        self._pace_mu = (float(t.OFF_SEC.mean()), float(t.DEF_SEC.mean()))
+        centre = 5.0 * (self._pace_mu[0] + self._pace_mu[1])
         return off, dfn, centre
 
     def __init__(self, S, sim, sides, home_tid, away_tid, pace_pair, rng,
-                 season=None):
+                 season=None, anchor=None, anchor_ref=None):
         self.S, self.sim, self.sides = S, sim, sides
         self.tid = {"H": home_tid, "A": away_tid}
         self.rng = rng
@@ -111,6 +134,7 @@ class PbpGame:
         self.on = {t: list(self.lu[t][0]) for t in ("H", "A")}
         self.p_off, self.p_def, self.p_centre = self._load_pace_effects()
         self.clock_mult = self._load_clock_profile(season)
+        self.team_scale = self._solve_anchor(anchor, anchor_ref)
 
     def _state_scale(self, period, rem, own_margin) -> float:
         """Clock management. Measured against a 12.1s baseline, pace is flat all
@@ -131,6 +155,41 @@ class PbpGame:
         if own_margin > 0:
             return 0.75      # being fouled ends possessions fast anyway
         return 1.0
+
+    def _solve_anchor(self, anchor, anchor_ref):
+        """Scale each team so the game lands on its projected points.
+
+        The renderer had NO anchor: it played out the rate book and ignored team
+        strength entirely, so the projected score shown alongside it was
+        decorative. The engine solves this in closed form and the same solve
+        works here — calibrate the level against a REFERENCE roster, then apply
+        the BPM difference between that reference and who is actually playing.
+
+        The reference is what makes this handle two different problems with one
+        mechanism. For an injury it is the healthy roster, so ruling a star out
+        costs his impact instead of being rescaled away. Across an offseason it
+        is LAST SEASON'S roster, the one the rating was fitted on, so a team that
+        traded its second-best player is not still carrying his rating.
+        """
+        flat = {"H": 1.0, "A": 1.0}
+        if anchor is None or not all(np.isfinite(x) for x in anchor):
+            return flat
+        sim, ref = self.sim, (anchor_ref or {})
+        out = {}
+        for tag, target in (("H", anchor[0]), ("A", anchor[1])):
+            other = "A" if tag == "H" else "H"
+            base = ref.get(tag) or self.sides[tag]
+            base_opp = ref.get(other) or self.sides[other]
+            ppp = sim._team_ppp(base, base_opp)
+            if ppp <= 0 or self.pace <= 0:
+                out[tag] = 1.0
+                continue
+            scale = float(np.clip((target / self.pace) / ppp, 0.80, 1.25))
+            d_bpm = sim.team_bpm(self.sides[tag]) - sim.team_bpm(base)
+            out[tag] = float(np.clip(scale * PBP_ANCHOR_CAL
+                                     * (1.0 + (d_bpm / 100.0) / ppp),
+                                     0.55, 1.35))
+        return out
 
     def _load_clock_profile(self, season):
         """How long each team lets a possession run, relative to the league.
@@ -187,7 +246,7 @@ class PbpGame:
         # over-counted cycles and ran the game ~4% fast.
         p_cont = 0.78 * 0.53 * self.S.LG["oreb"]   # P(shot) x P(miss) x P(oreb)
         cycles = 1.0 / max(1.0 - p_cont, 1e-6)
-        return (target_spp / cycles) / self._observed_mean_dur
+        return (target_spp / cycles) / self._observed_mean_dur * PBP_POSS_CAL
 
     _observed_mean_dur = 12.2
 
@@ -230,8 +289,9 @@ class PbpGame:
                 # Trae Young and De'Aaron Fox shorten their own, Mitchell Robinson
                 # and Bam Adebayo lengthen them, and pests like VanVleet force the
                 # opponent to burn clock. Validated at -4.2% held-out (script 136).
-                padj = (sum(self.p_off.get(int(q), 0.0) for q in self.on[off])
-                        + sum(self.p_def.get(int(q), 0.0) for q in self.on[dfn])
+                mo, md = self._pace_mu
+                padj = (sum(self.p_off.get(int(q), mo) for q in self.on[off])
+                        + sum(self.p_def.get(int(q), md) for q in self.on[dfn])
                         - self.p_centre)
                 dur = min(max(self._duration(
                     start_kind, scale * self._state_scale(period, rem, own)
@@ -284,7 +344,7 @@ class PbpGame:
         aw = np.array([sim.aff[S.POSITIONS.index(sim.pos.get(d, "F"))]
                        [S.POSITIONS.index(opos)] for d in dv])
         defender = int(dv[self.rng.choice(5, p=aw / aw.sum())])
-        adj = 1.0 - 0.010 * sim.defq.get(defender, 0.0)
+        adj = (1.0 - 0.010 * sim.defq.get(defender, 0.0)) * self.team_scale[off]
 
         # NON-SHOOTING FOULS AND THE PENALTY, ported from the possession engine.
         # The renderer booked a personal foul only on a shooting foul, so it

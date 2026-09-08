@@ -153,7 +153,11 @@ def main() -> None:
                            rates=rates, rseason=rseason)
     surname = {int(k): str(v).split()[-1] for k, v in full.items()}
     game = M.PbpGame(S, sim, sides, hid, aid, None, np.random.default_rng(5),
-                     season=season)
+                     season=season,
+                     anchor=(mu0 + off[hid] - dfn[aid] + hca,
+                             mu0 + off[aid] - dfn[hid]),
+                     anchor_ref=MU.prior_roster(season, hid, aid)
+                     if rseason else None)
     ev = game.run(surname)
     pbp = [{"c": e["clock"], "t": e["team"], "x": e["text"],
             "a": int(e["A"]), "h": int(e["H"])} for e in ev]

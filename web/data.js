@@ -76681,8 +76681,8 @@ window.NBAI_DATA = {
       "home": "UTA",
       "away": "MIA",
       "score": {
-        "H": 111,
-        "A": 140
+        "H": 98,
+        "A": 127
       },
       "events": [
         {
@@ -76693,3516 +76693,3271 @@ window.NBAI_DATA = {
           "h": 0
         },
         {
-          "c": "Q1 11:58.2",
+          "c": "Q1 11:57.9",
           "t": "A",
           "x": "Thompson Jump Shot (2 PTS) (Wiggins AST)",
           "a": 2,
           "h": 0
         },
         {
-          "c": "Q1 11:35.7",
+          "c": "Q1 11:35.1",
           "t": "H",
           "x": "MISS Jr. Jump Shot",
           "a": 2,
           "h": 0
         },
         {
-          "c": "Q1 11:35.7",
+          "c": "Q1 11:35.1",
           "t": "A",
           "x": "Wiggins REBOUND (Def)",
           "a": 2,
           "h": 0
         },
         {
-          "c": "Q1 11:16.3",
+          "c": "Q1 11:15.4",
           "t": "A",
           "x": "Wiggins Jump Shot (2 PTS) (Thompson AST)",
           "a": 4,
           "h": 0
         },
         {
-          "c": "Q1 10:51.9",
+          "c": "Q1 10:50.7",
           "t": "H",
           "x": "MISS Green Jump Shot",
           "a": 4,
           "h": 0
         },
         {
-          "c": "Q1 10:51.9",
+          "c": "Q1 10:50.7",
           "t": "A",
           "x": "Jr. REBOUND (Def)",
           "a": 4,
           "h": 0
         },
         {
-          "c": "Q1 10:47.9",
+          "c": "Q1 10:46.5",
           "t": "A",
           "x": "Adebayo Turnover (Green STEAL)",
           "a": 4,
           "h": 0
         },
         {
-          "c": "Q1 10:35.9",
+          "c": "Q1 10:34.2",
           "t": "A",
           "x": "Jr. Foul",
           "a": 4,
           "h": 0
         },
         {
-          "c": "Q1 10:35.9",
+          "c": "Q1 10:34.2",
           "t": "A",
           "x": "Wiggins Foul \u2014 Markkanen 3/3 FT",
           "a": 4,
           "h": 3
         },
         {
-          "c": "Q1 10:16.1",
+          "c": "Q1 10:14.1",
           "t": "A",
           "x": "Jr. Layup (2 PTS) (Thompson AST)",
           "a": 6,
           "h": 3
         },
         {
-          "c": "Q1 10:00.7",
+          "c": "Q1 09:58.4",
           "t": "H",
           "x": "MISS Jr. Layup",
           "a": 6,
           "h": 3
         },
         {
-          "c": "Q1 10:00.7",
+          "c": "Q1 09:58.4",
           "t": "A",
           "x": "Wiggins REBOUND (Def)",
           "a": 6,
           "h": 3
         },
         {
-          "c": "Q1 09:54.0",
+          "c": "Q1 09:51.5",
           "t": "A",
           "x": "Adebayo Layup (2 PTS)",
           "a": 8,
           "h": 3
         },
         {
-          "c": "Q1 09:37.9",
+          "c": "Q1 09:35.0",
           "t": "A",
           "x": "Wiggins Foul \u2014 Jr. 2/2 FT",
           "a": 8,
           "h": 5
         },
         {
-          "c": "Q1 09:08.2",
+          "c": "Q1 09:05.1",
           "t": "H",
           "x": "Green Foul \u2014 Antetokounmpo 2/2 FT",
           "a": 10,
           "h": 5
         },
         {
-          "c": "Q1 08:59.2",
+          "c": "Q1 08:55.8",
           "t": "H",
           "x": "MISS George Jump Shot",
           "a": 10,
           "h": 5
         },
         {
-          "c": "Q1 08:59.2",
+          "c": "Q1 08:55.8",
           "t": "A",
           "x": "Antetokounmpo REBOUND (Def)",
           "a": 10,
           "h": 5
         },
         {
-          "c": "Q1 08:53.0",
+          "c": "Q1 08:49.3",
           "t": "A",
           "x": "MISS Antetokounmpo Jump Shot",
           "a": 10,
           "h": 5
         },
         {
-          "c": "Q1 08:53.0",
+          "c": "Q1 08:49.3",
           "t": "H",
           "x": "Markkanen REBOUND (Def)",
           "a": 10,
           "h": 5
         },
         {
-          "c": "Q1 08:44.8",
+          "c": "Q1 08:40.8",
           "t": "H",
           "x": "Jr. 3PT Jump Shot (5 PTS) (George AST)",
           "a": 10,
           "h": 8
         },
         {
-          "c": "Q1 08:34.4",
+          "c": "Q1 08:30.1",
           "t": "A",
           "x": "MISS Wiggins Layup",
           "a": 10,
           "h": 8
         },
         {
-          "c": "Q1 08:34.4",
+          "c": "Q1 08:30.1",
           "t": "A",
           "x": "Antetokounmpo REBOUND (Off)",
           "a": 10,
           "h": 8
         },
         {
-          "c": "Q1 08:26.7",
+          "c": "Q1 08:22.2",
           "t": "H",
           "x": "Markkanen Foul",
           "a": 10,
           "h": 8
         },
         {
-          "c": "Q1 08:26.7",
+          "c": "Q1 08:22.2",
           "t": "A",
           "x": "Antetokounmpo Jump Shot (4 PTS)",
           "a": 12,
           "h": 8
         },
         {
-          "c": "Q1 08:13.3",
+          "c": "Q1 08:08.5",
           "t": "H",
           "x": "George Turnover",
           "a": 12,
           "h": 8
         },
         {
-          "c": "Q1 08:08.8",
+          "c": "Q1 08:03.7",
           "t": "A",
           "x": "MISS Wiggins 3PT Jump Shot",
           "a": 12,
           "h": 8
         },
         {
-          "c": "Q1 08:08.8",
+          "c": "Q1 08:03.7",
           "t": "H",
           "x": "Jr. REBOUND (Def)",
           "a": 12,
           "h": 8
         },
         {
-          "c": "Q1 07:58.8",
+          "c": "Q1 07:53.4",
           "t": "A",
           "x": "Antetokounmpo Foul",
           "a": 12,
           "h": 8
         },
         {
-          "c": "Q1 07:58.8",
+          "c": "Q1 07:53.4",
           "t": "H",
           "x": "Jr. Jump Shot (7 PTS) (Markkanen AST)",
           "a": 12,
           "h": 10
         },
         {
-          "c": "Q1 07:46.2",
+          "c": "Q1 07:40.5",
           "t": "A",
           "x": "Adebayo Jump Shot (4 PTS) (Antetokounmpo AST)",
           "a": 14,
           "h": 10
         },
         {
-          "c": "Q1 07:36.6",
+          "c": "Q1 07:30.7",
           "t": "A",
           "x": "Wiggins Foul \u2014 Jr. 2/2 FT",
           "a": 14,
           "h": 12
         },
         {
-          "c": "Q1 07:18.8",
+          "c": "Q1 07:12.6",
           "t": "A",
           "x": "Thompson Layup (4 PTS)",
           "a": 16,
           "h": 12
         },
         {
-          "c": "Q1 07:06.4",
+          "c": "Q1 06:59.9",
           "t": "H",
           "x": "Jr. Turnover (Wiggins STEAL)",
           "a": 16,
           "h": 12
         },
         {
-          "c": "Q1 06:46.4",
-          "t": "A",
-          "x": "MISS Antetokounmpo Layup",
-          "a": 16,
-          "h": 12
-        },
-        {
-          "c": "Q1 06:46.4",
-          "t": "H",
-          "x": "Green REBOUND (Def)",
-          "a": 16,
-          "h": 12
-        },
-        {
-          "c": "Q1 06:46.4",
+          "c": "Q1 06:59.9",
           "t": "H",
           "x": "SUB: Sensabaugh FOR Jr.",
           "a": 16,
           "h": 12
         },
         {
-          "c": "Q1 06:46.4",
+          "c": "Q1 06:59.9",
           "t": "A",
           "x": "SUB: Jovi\u0107 FOR Thompson",
           "a": 16,
           "h": 12
         },
         {
-          "c": "Q1 06:36.9",
+          "c": "Q1 06:39.6",
+          "t": "A",
+          "x": "MISS Antetokounmpo Layup",
+          "a": 16,
+          "h": 12
+        },
+        {
+          "c": "Q1 06:39.6",
+          "t": "H",
+          "x": "Green REBOUND (Def)",
+          "a": 16,
+          "h": 12
+        },
+        {
+          "c": "Q1 06:29.8",
           "t": "H",
           "x": "MISS Sensabaugh 3PT Jump Shot",
           "a": 16,
           "h": 12
         },
         {
-          "c": "Q1 06:36.9",
+          "c": "Q1 06:29.8",
           "t": "A",
           "x": "TEAM REBOUND (Def)",
           "a": 16,
           "h": 12
         },
         {
-          "c": "Q1 06:32.4",
+          "c": "Q1 06:25.0",
           "t": "A",
           "x": "Adebayo Layup (6 PTS) (Antetokounmpo AST)",
           "a": 18,
           "h": 12
         },
         {
-          "c": "Q1 06:06.4",
+          "c": "Q1 05:58.6",
           "t": "A",
           "x": "Adebayo Foul (penalty) \u2014 Peterson 0/2 FT",
           "a": 18,
           "h": 12
         },
         {
-          "c": "Q1 05:58.0",
+          "c": "Q1 05:50.0",
           "t": "A",
           "x": "MISS Antetokounmpo Layup",
           "a": 18,
           "h": 12
         },
         {
-          "c": "Q1 05:58.0",
+          "c": "Q1 05:50.0",
           "t": "H",
           "x": "Peterson REBOUND (Def)",
           "a": 18,
           "h": 12
         },
         {
-          "c": "Q1 05:54.5",
+          "c": "Q1 05:46.2",
           "t": "H",
           "x": "MISS Markkanen 3PT Jump Shot",
           "a": 18,
           "h": 12
         },
         {
-          "c": "Q1 05:54.5",
+          "c": "Q1 05:46.2",
           "t": "A",
           "x": "Antetokounmpo REBOUND (Def)",
           "a": 18,
           "h": 12
         },
         {
-          "c": "Q1 05:48.7",
+          "c": "Q1 05:40.2",
           "t": "A",
           "x": "Adebayo Jump Shot (8 PTS)",
           "a": 20,
           "h": 12
         },
         {
-          "c": "Q1 05:33.8",
+          "c": "Q1 05:24.9",
           "t": "A",
           "x": "Jovi\u0107 Foul (penalty) \u2014 George 2/2 FT",
           "a": 20,
           "h": 14
         },
         {
-          "c": "Q1 05:28.9",
+          "c": "Q1 05:19.8",
           "t": "A",
           "x": "Antetokounmpo Layup (6 PTS)",
           "a": 22,
           "h": 14
         },
         {
-          "c": "Q1 05:17.6",
+          "c": "Q1 05:08.1",
           "t": "H",
           "x": "Sensabaugh Turnover (Adebayo STEAL)",
           "a": 22,
           "h": 14
         },
         {
-          "c": "Q1 05:00.1",
+          "c": "Q1 04:50.4",
           "t": "A",
           "x": "Antetokounmpo Turnover (Green STEAL)",
           "a": 22,
           "h": 14
         },
         {
-          "c": "Q1 04:51.1",
+          "c": "Q1 04:41.1",
           "t": "H",
           "x": "Markkanen Turnover (Antetokounmpo STEAL)",
           "a": 22,
           "h": 14
         },
         {
-          "c": "Q1 04:45.2",
+          "c": "Q1 04:34.9",
           "t": "A",
           "x": "MISS Wiggins 3PT Jump Shot",
           "a": 22,
           "h": 14
         },
         {
-          "c": "Q1 04:45.2",
+          "c": "Q1 04:34.9",
           "t": "A",
           "x": "Adebayo REBOUND (Off)",
           "a": 22,
           "h": 14
         },
         {
-          "c": "Q1 04:43.7",
+          "c": "Q1 04:33.1",
           "t": "H",
           "x": "Markkanen Foul \u2014 Antetokounmpo 2/3 FT",
           "a": 24,
           "h": 14
         },
         {
-          "c": "Q1 04:14.0",
+          "c": "Q1 04:03.2",
           "t": "H",
           "x": "Markkanen Jump Shot (5 PTS) (Green AST)",
           "a": 24,
           "h": 16
         },
         {
-          "c": "Q1 04:14.0",
+          "c": "Q1 04:03.2",
           "t": "H",
           "x": "SUB: Bailey FOR Markkanen",
           "a": 24,
           "h": 16
         },
         {
-          "c": "Q1 04:14.0",
+          "c": "Q1 04:03.2",
           "t": "H",
           "x": "SUB: Nurki\u0107 FOR Peterson",
           "a": 24,
           "h": 16
         },
         {
-          "c": "Q1 04:14.0",
+          "c": "Q1 04:03.2",
           "t": "H",
           "x": "SUB: Gray FOR Green",
           "a": 24,
           "h": 16
         },
         {
-          "c": "Q1 04:14.0",
+          "c": "Q1 04:03.2",
           "t": "A",
           "x": "SUB: Young FOR Antetokounmpo",
           "a": 24,
           "h": 16
         },
         {
-          "c": "Q1 04:14.0",
+          "c": "Q1 04:03.2",
           "t": "A",
           "x": "SUB: Richards FOR Wiggins",
           "a": 24,
           "h": 16
         },
         {
-          "c": "Q1 04:14.0",
+          "c": "Q1 04:03.2",
           "t": "A",
           "x": "SUB: Johnson FOR Jovi\u0107",
           "a": 24,
           "h": 16
         },
         {
-          "c": "Q1 03:49.3",
+          "c": "Q1 03:37.3",
           "t": "A",
           "x": "Young Layup (2 PTS)",
           "a": 26,
           "h": 16
         },
         {
-          "c": "Q1 03:21.5",
+          "c": "Q1 03:08.4",
           "t": "H",
           "x": "George Layup (4 PTS) (Bailey AST)",
           "a": 26,
           "h": 18
         },
         {
-          "c": "Q1 03:02.4",
+          "c": "Q1 02:48.2",
           "t": "A",
           "x": "MISS Young Layup",
           "a": 26,
           "h": 18
         },
         {
-          "c": "Q1 03:02.4",
+          "c": "Q1 02:48.2",
           "t": "H",
           "x": "Nurki\u0107 REBOUND (Def)",
           "a": 26,
           "h": 18
         },
         {
-          "c": "Q1 02:52.8",
+          "c": "Q1 02:37.4",
           "t": "H",
           "x": "MISS George 3PT Jump Shot",
           "a": 26,
           "h": 18
         },
         {
-          "c": "Q1 02:52.8",
+          "c": "Q1 02:37.4",
           "t": "H",
           "x": "Sensabaugh REBOUND (Off)",
           "a": 26,
           "h": 18
         },
         {
-          "c": "Q1 02:51.8",
+          "c": "Q1 02:35.5",
           "t": "A",
           "x": "Richards Foul (penalty) \u2014 Nurki\u0107 2/2 FT",
           "a": 26,
           "h": 20
         },
         {
-          "c": "Q1 02:44.6",
+          "c": "Q1 02:27.2",
           "t": "A",
           "x": "MISS Adebayo Layup",
           "a": 26,
           "h": 20
         },
         {
-          "c": "Q1 02:44.6",
+          "c": "Q1 02:27.2",
           "t": "H",
           "x": "Nurki\u0107 REBOUND (Def)",
           "a": 26,
           "h": 20
         },
         {
-          "c": "Q1 02:42.5",
+          "c": "Q1 02:24.0",
           "t": "H",
           "x": "MISS Gray Layup",
           "a": 26,
           "h": 20
         },
         {
-          "c": "Q1 02:42.5",
+          "c": "Q1 02:24.0",
           "t": "A",
           "x": "Adebayo REBOUND (Def)",
           "a": 26,
           "h": 20
         },
         {
-          "c": "Q1 02:30.6",
+          "c": "Q1 02:10.9",
           "t": "A",
           "x": "Adebayo Jump Shot (10 PTS)",
           "a": 28,
           "h": 20
         },
         {
-          "c": "Q1 02:06.8",
+          "c": "Q1 01:46.0",
           "t": "H",
           "x": "MISS Bailey Layup (Richards BLOCK)",
           "a": 28,
           "h": 20
         },
         {
-          "c": "Q1 02:06.8",
+          "c": "Q1 01:46.0",
           "t": "A",
           "x": "Richards REBOUND (Def)",
           "a": 28,
           "h": 20
         },
         {
-          "c": "Q1 01:56.4",
-          "t": "A",
-          "x": "Jr. 3PT Jump Shot (5 PTS)",
-          "a": 31,
-          "h": 20
-        },
-        {
-          "c": "Q1 01:56.4",
+          "c": "Q1 01:46.0",
           "t": "H",
           "x": "SUB: Collier FOR George",
-          "a": 31,
+          "a": 28,
           "h": 20
         },
         {
-          "c": "Q1 01:56.4",
+          "c": "Q1 01:46.0",
           "t": "H",
           "x": "SUB: Filipowski FOR Nurki\u0107",
-          "a": 31,
+          "a": 28,
           "h": 20
         },
         {
-          "c": "Q1 01:56.4",
+          "c": "Q1 01:46.0",
           "t": "A",
           "x": "SUB: Antetokounmpo FOR Adebayo",
-          "a": 31,
+          "a": 28,
           "h": 20
         },
         {
-          "c": "Q1 01:56.4",
+          "c": "Q1 01:46.0",
           "t": "A",
           "x": "SUB: Portis FOR Young",
-          "a": 31,
+          "a": 28,
           "h": 20
         },
         {
-          "c": "Q1 01:56.4",
+          "c": "Q1 01:46.0",
           "t": "A",
           "x": "SUB: Jovi\u0107 FOR Richards",
-          "a": 31,
+          "a": 28,
           "h": 20
         },
         {
-          "c": "Q1 01:56.4",
+          "c": "Q1 01:46.0",
           "t": "A",
           "x": "SUB: Mitchell FOR Jr.",
+          "a": 28,
+          "h": 20
+        },
+        {
+          "c": "Q1 01:35.1",
+          "t": "A",
+          "x": "Mitchell 3PT Jump Shot (3 PTS) (Portis AST)",
           "a": 31,
           "h": 20
         },
         {
-          "c": "Q1 01:40.4",
+          "c": "Q1 01:05.1",
           "t": "H",
-          "x": "MISS Sensabaugh Layup",
+          "x": "Collier Turnover",
           "a": 31,
           "h": 20
         },
         {
-          "c": "Q1 01:40.4",
+          "c": "Q1 01:00.8",
           "t": "A",
-          "x": "Jovi\u0107 REBOUND (Def)",
+          "x": "MISS Jovi\u0107 3PT Jump Shot",
           "a": 31,
           "h": 20
         },
         {
-          "c": "Q1 01:30.1",
+          "c": "Q1 01:00.8",
+          "t": "A",
+          "x": "TEAM REBOUND (Off)",
+          "a": 31,
+          "h": 20
+        },
+        {
+          "c": "Q1 00:54.1",
+          "t": "A",
+          "x": "MISS Portis 3PT Jump Shot",
+          "a": 31,
+          "h": 20
+        },
+        {
+          "c": "Q1 00:54.1",
+          "t": "A",
+          "x": "Portis REBOUND (Off)",
+          "a": 31,
+          "h": 20
+        },
+        {
+          "c": "Q1 00:53.1",
+          "t": "A",
+          "x": "MISS Jovi\u0107 Jump Shot",
+          "a": 31,
+          "h": 20
+        },
+        {
+          "c": "Q1 00:53.1",
           "t": "H",
-          "x": "Bailey Foul",
+          "x": "Gray REBOUND (Def)",
           "a": 31,
           "h": 20
         },
         {
-          "c": "Q1 01:30.1",
-          "t": "A",
-          "x": "Portis Layup (2 PTS) (Jovi\u0107 AST)",
-          "a": 33,
-          "h": 20
-        },
-        {
-          "c": "Q1 01:20.4",
+          "c": "Q1 00:35.0",
           "t": "H",
-          "x": "MISS Filipowski 3PT Jump Shot",
-          "a": 33,
+          "x": "MISS Bailey Jump Shot",
+          "a": 31,
           "h": 20
         },
         {
-          "c": "Q1 01:20.4",
-          "t": "A",
-          "x": "Jovi\u0107 REBOUND (Def)",
-          "a": 33,
+          "c": "Q1 00:35.0",
+          "t": "H",
+          "x": "Sensabaugh REBOUND (Off)",
+          "a": 31,
           "h": 20
         },
         {
-          "c": "Q1 01:04.5",
-          "t": "A",
-          "x": "Antetokounmpo Layup (10 PTS)",
-          "a": 35,
-          "h": 20
-        },
-        {
-          "c": "Q1 00:49.6",
-          "t": "A",
-          "x": "Jovi\u0107 Foul \u2014 Filipowski 2/3 FT",
-          "a": 35,
+          "c": "Q1 00:27.8",
+          "t": "H",
+          "x": "Bailey Layup (2 PTS) (Sensabaugh AST)",
+          "a": 31,
           "h": 22
-        },
-        {
-          "c": "Q1 00:34.8",
-          "t": "A",
-          "x": "Johnson Layup (2 PTS)",
-          "a": 37,
-          "h": 22
-        },
-        {
-          "c": "Q1 00:30.2",
-          "t": "H",
-          "x": "Filipowski 3PT Jump Shot (5 PTS) (Collier AST)",
-          "a": 37,
-          "h": 25
-        },
-        {
-          "c": "Q1 00:23.8",
-          "t": "A",
-          "x": "Antetokounmpo Jump Shot (12 PTS) (Portis AST)",
-          "a": 39,
-          "h": 25
-        },
-        {
-          "c": "Q1 00:01.9",
-          "t": "H",
-          "x": "Bailey Jump Shot (2 PTS) (Sensabaugh AST)",
-          "a": 39,
-          "h": 27
         },
         {
           "c": "Q1 00:00.0",
           "t": "A",
-          "x": "Portis Turnover",
-          "a": 39,
-          "h": 27
+          "x": "Antetokounmpo Layup (10 PTS)",
+          "a": 33,
+          "h": 22
         },
         {
           "c": "Q2 12:00.0",
           "t": null,
           "x": "--- Start of Q2 ---",
-          "a": 39,
-          "h": 27
+          "a": 33,
+          "h": 22
         },
         {
-          "c": "Q2 11:51.8",
+          "c": "Q2 11:40.6",
           "t": "H",
-          "x": "Gray Turnover",
-          "a": 39,
-          "h": 27
+          "x": "MISS Bailey 3PT Jump Shot",
+          "a": 33,
+          "h": 22
         },
         {
-          "c": "Q2 11:47.7",
+          "c": "Q2 11:40.6",
           "t": "A",
-          "x": "Antetokounmpo Layup (14 PTS)",
-          "a": 41,
-          "h": 27
+          "x": "Portis REBOUND (Def)",
+          "a": 33,
+          "h": 22
         },
         {
-          "c": "Q2 11:25.7",
+          "c": "Q2 11:32.3",
+          "t": "A",
+          "x": "MISS Mitchell 3PT Jump Shot",
+          "a": 33,
+          "h": 22
+        },
+        {
+          "c": "Q2 11:32.3",
           "t": "H",
-          "x": "Filipowski Layup (7 PTS) (Collier AST)",
-          "a": 41,
-          "h": 29
+          "x": "Bailey REBOUND (Def)",
+          "a": 33,
+          "h": 22
         },
         {
-          "c": "Q2 11:25.7",
+          "c": "Q2 11:26.0",
+          "t": "H",
+          "x": "MISS Bailey Layup",
+          "a": 33,
+          "h": 22
+        },
+        {
+          "c": "Q2 11:26.0",
+          "t": "A",
+          "x": "Johnson REBOUND (Def)",
+          "a": 33,
+          "h": 22
+        },
+        {
+          "c": "Q2 11:26.0",
           "t": "H",
           "x": "SUB: Peterson FOR Bailey",
-          "a": 41,
-          "h": 29
+          "a": 33,
+          "h": 22
         },
         {
-          "c": "Q2 11:25.7",
+          "c": "Q2 11:26.0",
           "t": "H",
           "x": "SUB: Nurki\u0107 FOR Filipowski",
-          "a": 41,
-          "h": 29
+          "a": 33,
+          "h": 22
         },
         {
-          "c": "Q2 11:25.7",
+          "c": "Q2 11:26.0",
           "t": "A",
           "x": "SUB: Richards FOR Mitchell",
-          "a": 41,
-          "h": 29
+          "a": 33,
+          "h": 22
         },
         {
-          "c": "Q2 11:10.3",
+          "c": "Q2 11:07.8",
           "t": "A",
-          "x": "Antetokounmpo Layup (16 PTS)",
-          "a": 43,
-          "h": 29
+          "x": "Richards Layup (2 PTS)",
+          "a": 35,
+          "h": 22
         },
         {
-          "c": "Q2 11:06.8",
+          "c": "Q2 10:38.3",
           "t": "H",
-          "x": "Collier Layup (2 PTS) (Peterson AST)",
-          "a": 43,
-          "h": 31
+          "x": "MISS Peterson 3PT Jump Shot",
+          "a": 35,
+          "h": 22
         },
         {
-          "c": "Q2 11:01.6",
-          "t": "A",
-          "x": "Johnson Jump Shot (4 PTS)",
-          "a": 45,
-          "h": 31
-        },
-        {
-          "c": "Q2 10:48.7",
-          "t": "H",
-          "x": "MISS Peterson Layup",
-          "a": 45,
-          "h": 31
-        },
-        {
-          "c": "Q2 10:48.7",
+          "c": "Q2 10:38.3",
           "t": "A",
           "x": "Portis REBOUND (Def)",
-          "a": 45,
-          "h": 31
+          "a": 35,
+          "h": 22
         },
         {
-          "c": "Q2 10:46.2",
-          "t": "A",
-          "x": "Antetokounmpo Jump Shot (18 PTS) (Portis AST)",
-          "a": 47,
-          "h": 31
-        },
-        {
-          "c": "Q2 10:25.0",
+          "c": "Q2 10:16.0",
           "t": "H",
-          "x": "MISS Collier Layup (Portis BLOCK)",
-          "a": 47,
-          "h": 31
+          "x": "Collier Foul \u2014 Antetokounmpo 2/3 FT",
+          "a": 37,
+          "h": 22
         },
         {
-          "c": "Q2 10:25.0",
+          "c": "Q2 09:53.9",
+          "t": "H",
+          "x": "MISS Sensabaugh 3PT Jump Shot",
+          "a": 37,
+          "h": 22
+        },
+        {
+          "c": "Q2 09:53.9",
           "t": "A",
           "x": "Portis REBOUND (Def)",
-          "a": 47,
-          "h": 31
+          "a": 37,
+          "h": 22
         },
         {
-          "c": "Q2 10:13.0",
-          "t": "A",
-          "x": "Antetokounmpo Layup (20 PTS)",
-          "a": 49,
-          "h": 31
-        },
-        {
-          "c": "Q2 09:59.2",
+          "c": "Q2 09:44.0",
           "t": "H",
-          "x": "Sensabaugh 3PT Jump Shot (3 PTS) (Peterson AST)",
-          "a": 49,
-          "h": 34
+          "x": "Gray Foul",
+          "a": 37,
+          "h": 22
         },
         {
-          "c": "Q2 09:42.4",
-          "t": "A",
-          "x": "Portis Turnover",
-          "a": 49,
-          "h": 34
-        },
-        {
-          "c": "Q2 09:31.1",
-          "t": "A",
-          "x": "Portis Foul",
-          "a": 49,
-          "h": 34
-        },
-        {
-          "c": "Q2 09:31.1",
+          "c": "Q2 09:44.0",
           "t": "H",
-          "x": "Peterson Jump Shot (2 PTS) (Nurki\u0107 AST)",
-          "a": 49,
-          "h": 36
+          "x": "Peterson Foul \u2014 Antetokounmpo 1/2 FT",
+          "a": 38,
+          "h": 22
+        },
+        {
+          "c": "Q2 09:41.4",
+          "t": "H",
+          "x": "Gray Jump Shot (2 PTS)",
+          "a": 38,
+          "h": 24
+        },
+        {
+          "c": "Q2 09:29.2",
+          "t": "A",
+          "x": "Antetokounmpo Layup (15 PTS)",
+          "a": 40,
+          "h": 24
+        },
+        {
+          "c": "Q2 09:17.8",
+          "t": "H",
+          "x": "Nurki\u0107 3PT Jump Shot (5 PTS) (Gray AST)",
+          "a": 40,
+          "h": 27
         },
         {
           "c": "Q2 09:13.7",
           "t": "A",
-          "x": "Johnson 3PT Jump Shot (7 PTS)",
-          "a": 52,
-          "h": 36
+          "x": "Jovi\u0107 3PT Jump Shot (3 PTS) (Antetokounmpo AST)",
+          "a": 43,
+          "h": 27
         },
         {
-          "c": "Q2 08:53.7",
+          "c": "Q2 08:45.1",
           "t": "H",
-          "x": "Collier Turnover",
-          "a": 52,
-          "h": 36
+          "x": "Collier Jump Shot (2 PTS) (Peterson AST)",
+          "a": 43,
+          "h": 29
         },
         {
-          "c": "Q2 08:53.7",
+          "c": "Q2 08:45.1",
           "t": "H",
           "x": "SUB: George FOR Peterson",
-          "a": 52,
-          "h": 36
+          "a": 43,
+          "h": 29
         },
         {
-          "c": "Q2 08:53.7",
+          "c": "Q2 08:45.1",
           "t": "H",
           "x": "SUB: Bailey FOR Collier",
-          "a": 52,
-          "h": 36
+          "a": 43,
+          "h": 29
         },
         {
-          "c": "Q2 08:53.7",
+          "c": "Q2 08:45.1",
           "t": "A",
           "x": "SUB: Adebayo FOR Antetokounmpo",
-          "a": 52,
-          "h": 36
+          "a": 43,
+          "h": 29
         },
         {
-          "c": "Q2 08:53.7",
+          "c": "Q2 08:45.1",
           "t": "A",
           "x": "SUB: Thompson FOR Portis",
-          "a": 52,
-          "h": 36
+          "a": 43,
+          "h": 29
         },
         {
-          "c": "Q2 08:53.7",
+          "c": "Q2 08:45.1",
           "t": "A",
           "x": "SUB: Young FOR Jovi\u0107",
-          "a": 52,
-          "h": 36
+          "a": 43,
+          "h": 29
         },
         {
-          "c": "Q2 08:49.1",
+          "c": "Q2 08:27.9",
           "t": "A",
-          "x": "Adebayo Layup (12 PTS)",
-          "a": 54,
-          "h": 36
+          "x": "MISS Thompson 3PT Jump Shot",
+          "a": 43,
+          "h": 29
         },
         {
-          "c": "Q2 08:34.4",
+          "c": "Q2 08:27.9",
           "t": "A",
-          "x": "Johnson Foul",
-          "a": 54,
-          "h": 36
+          "x": "Richards REBOUND (Off)",
+          "a": 43,
+          "h": 29
         },
         {
-          "c": "Q2 08:34.4",
+          "c": "Q2 08:23.2",
+          "t": "A",
+          "x": "MISS Thompson 3PT Jump Shot",
+          "a": 43,
+          "h": 29
+        },
+        {
+          "c": "Q2 08:23.2",
           "t": "H",
-          "x": "Bailey Turnover",
-          "a": 54,
-          "h": 36
+          "x": "Gray REBOUND (Def)",
+          "a": 43,
+          "h": 29
         },
         {
-          "c": "Q2 08:24.1",
+          "c": "Q2 08:13.0",
           "t": "A",
-          "x": "Young Turnover (Gray STEAL)",
-          "a": 54,
-          "h": 36
+          "x": "Thompson Foul",
+          "a": 43,
+          "h": 29
         },
         {
-          "c": "Q2 08:16.0",
-          "t": "H",
-          "x": "Gray Turnover (Young STEAL)",
-          "a": 54,
-          "h": 36
-        },
-        {
-          "c": "Q2 08:06.2",
-          "t": "H",
-          "x": "Gray Foul",
-          "a": 54,
-          "h": 36
-        },
-        {
-          "c": "Q2 08:06.2",
-          "t": "A",
-          "x": "MISS Richards Jump Shot",
-          "a": 54,
-          "h": 36
-        },
-        {
-          "c": "Q2 08:06.2",
-          "t": "A",
-          "x": "Johnson REBOUND (Off)",
-          "a": 54,
-          "h": 36
-        },
-        {
-          "c": "Q2 08:05.2",
-          "t": "A",
-          "x": "MISS Adebayo Jump Shot (Nurki\u0107 BLOCK)",
-          "a": 54,
-          "h": 36
-        },
-        {
-          "c": "Q2 08:05.2",
-          "t": "A",
-          "x": "Johnson REBOUND (Off)",
-          "a": 54,
-          "h": 36
-        },
-        {
-          "c": "Q2 08:02.7",
-          "t": "A",
-          "x": "Thompson Jump Shot (6 PTS)",
-          "a": 56,
-          "h": 36
-        },
-        {
-          "c": "Q2 07:33.7",
-          "t": "A",
-          "x": "Richards Foul",
-          "a": 56,
-          "h": 36
-        },
-        {
-          "c": "Q2 07:33.7",
-          "t": "H",
-          "x": "Gray Jump Shot (2 PTS) (George AST)",
-          "a": 56,
-          "h": 38
-        },
-        {
-          "c": "Q2 07:21.5",
-          "t": "H",
-          "x": "Nurki\u0107 Foul \u2014 Thompson 2/2 FT",
-          "a": 58,
-          "h": 38
-        },
-        {
-          "c": "Q2 07:18.8",
-          "t": "H",
-          "x": "MISS Nurki\u0107 Jump Shot",
-          "a": 58,
-          "h": 38
-        },
-        {
-          "c": "Q2 07:18.8",
-          "t": "H",
-          "x": "Nurki\u0107 REBOUND (Off)",
-          "a": 58,
-          "h": 38
-        },
-        {
-          "c": "Q2 07:17.3",
-          "t": "A",
-          "x": "Johnson Foul",
-          "a": 58,
-          "h": 38
-        },
-        {
-          "c": "Q2 07:17.3",
-          "t": "H",
-          "x": "MISS Sensabaugh 3PT Jump Shot",
-          "a": 58,
-          "h": 38
-        },
-        {
-          "c": "Q2 07:17.3",
-          "t": "A",
-          "x": "Adebayo REBOUND (Def)",
-          "a": 58,
-          "h": 38
-        },
-        {
-          "c": "Q2 07:04.5",
-          "t": "A",
-          "x": "Johnson Layup (9 PTS)",
-          "a": 60,
-          "h": 38
-        },
-        {
-          "c": "Q2 06:53.3",
-          "t": "H",
-          "x": "MISS Bailey Jump Shot",
-          "a": 60,
-          "h": 38
-        },
-        {
-          "c": "Q2 06:53.3",
-          "t": "A",
-          "x": "Thompson REBOUND (Def)",
-          "a": 60,
-          "h": 38
-        },
-        {
-          "c": "Q2 06:43.1",
-          "t": "A",
-          "x": "Thompson Jump Shot (10 PTS)",
-          "a": 62,
-          "h": 38
-        },
-        {
-          "c": "Q2 06:28.0",
-          "t": "H",
-          "x": "MISS Nurki\u0107 3PT Jump Shot",
-          "a": 62,
-          "h": 38
-        },
-        {
-          "c": "Q2 06:28.0",
-          "t": "A",
-          "x": "Thompson REBOUND (Def)",
-          "a": 62,
-          "h": 38
-        },
-        {
-          "c": "Q2 06:28.0",
-          "t": "H",
-          "x": "SUB: Jr. FOR Sensabaugh",
-          "a": 62,
-          "h": 38
-        },
-        {
-          "c": "Q2 06:28.0",
-          "t": "H",
-          "x": "SUB: Green FOR Bailey",
-          "a": 62,
-          "h": 38
-        },
-        {
-          "c": "Q2 06:28.0",
-          "t": "H",
-          "x": "SUB: Alexander FOR Gray",
-          "a": 62,
-          "h": 38
-        },
-        {
-          "c": "Q2 06:28.0",
-          "t": "A",
-          "x": "SUB: Antetokounmpo FOR Young",
-          "a": 62,
-          "h": 38
-        },
-        {
-          "c": "Q2 06:28.0",
-          "t": "A",
-          "x": "SUB: Portis FOR Johnson",
-          "a": 62,
-          "h": 38
-        },
-        {
-          "c": "Q2 06:22.4",
-          "t": "A",
-          "x": "Antetokounmpo Jump Shot (22 PTS)",
-          "a": 64,
-          "h": 38
-        },
-        {
-          "c": "Q2 06:16.7",
+          "c": "Q2 08:13.0",
           "t": "H",
           "x": "MISS George 3PT Jump Shot",
-          "a": 64,
-          "h": 38
+          "a": 43,
+          "h": 29
         },
         {
-          "c": "Q2 06:16.7",
+          "c": "Q2 08:13.0",
           "t": "A",
-          "x": "TEAM REBOUND (Def)",
-          "a": 64,
-          "h": 38
+          "x": "Johnson REBOUND (Def)",
+          "a": 43,
+          "h": 29
+        },
+        {
+          "c": "Q2 08:01.1",
+          "t": "A",
+          "x": "Johnson 3PT Jump Shot (3 PTS)",
+          "a": 46,
+          "h": 29
+        },
+        {
+          "c": "Q2 07:39.5",
+          "t": "H",
+          "x": "Bailey Turnover",
+          "a": 46,
+          "h": 29
+        },
+        {
+          "c": "Q2 07:33.8",
+          "t": "A",
+          "x": "Adebayo Layup (12 PTS)",
+          "a": 48,
+          "h": 29
+        },
+        {
+          "c": "Q2 07:18.0",
+          "t": "A",
+          "x": "Johnson Foul",
+          "a": 48,
+          "h": 29
+        },
+        {
+          "c": "Q2 07:18.0",
+          "t": "H",
+          "x": "Bailey Turnover",
+          "a": 48,
+          "h": 29
+        },
+        {
+          "c": "Q2 07:06.5",
+          "t": "A",
+          "x": "Young Turnover (Gray STEAL)",
+          "a": 48,
+          "h": 29
+        },
+        {
+          "c": "Q2 06:57.3",
+          "t": "H",
+          "x": "Gray Turnover (Young STEAL)",
+          "a": 48,
+          "h": 29
+        },
+        {
+          "c": "Q2 06:46.3",
+          "t": "H",
+          "x": "Gray Foul",
+          "a": 48,
+          "h": 29
+        },
+        {
+          "c": "Q2 06:46.3",
+          "t": "A",
+          "x": "MISS Richards Jump Shot",
+          "a": 48,
+          "h": 29
+        },
+        {
+          "c": "Q2 06:46.3",
+          "t": "A",
+          "x": "Johnson REBOUND (Off)",
+          "a": 48,
+          "h": 29
+        },
+        {
+          "c": "Q2 06:44.2",
+          "t": "A",
+          "x": "MISS Adebayo Jump Shot (Nurki\u0107 BLOCK)",
+          "a": 48,
+          "h": 29
+        },
+        {
+          "c": "Q2 06:44.2",
+          "t": "A",
+          "x": "Johnson REBOUND (Off)",
+          "a": 48,
+          "h": 29
+        },
+        {
+          "c": "Q2 06:40.6",
+          "t": "A",
+          "x": "Thompson Jump Shot (6 PTS)",
+          "a": 50,
+          "h": 29
+        },
+        {
+          "c": "Q2 06:10.4",
+          "t": "A",
+          "x": "Richards Foul",
+          "a": 50,
+          "h": 29
+        },
+        {
+          "c": "Q2 06:10.4",
+          "t": "H",
+          "x": "Gray Jump Shot (4 PTS) (George AST)",
+          "a": 50,
+          "h": 31
+        },
+        {
+          "c": "Q2 06:10.4",
+          "t": "H",
+          "x": "SUB: Jr. FOR Sensabaugh",
+          "a": 50,
+          "h": 31
+        },
+        {
+          "c": "Q2 06:10.4",
+          "t": "H",
+          "x": "SUB: Green FOR Bailey",
+          "a": 50,
+          "h": 31
+        },
+        {
+          "c": "Q2 06:10.4",
+          "t": "H",
+          "x": "SUB: Alexander FOR Gray",
+          "a": 50,
+          "h": 31
+        },
+        {
+          "c": "Q2 06:10.4",
+          "t": "A",
+          "x": "SUB: Antetokounmpo FOR Young",
+          "a": 50,
+          "h": 31
+        },
+        {
+          "c": "Q2 06:10.4",
+          "t": "A",
+          "x": "SUB: Portis FOR Johnson",
+          "a": 50,
+          "h": 31
         },
         {
           "c": "Q2 05:57.2",
           "t": "H",
-          "x": "Jr. Foul \u2014 Adebayo 1/2 FT",
-          "a": 65,
-          "h": 38
+          "x": "Nurki\u0107 Foul \u2014 Thompson 2/2 FT",
+          "a": 52,
+          "h": 31
         },
         {
-          "c": "Q2 05:33.7",
+          "c": "Q2 05:53.1",
+          "t": "H",
+          "x": "MISS Nurki\u0107 Jump Shot",
+          "a": 52,
+          "h": 31
+        },
+        {
+          "c": "Q2 05:53.1",
+          "t": "H",
+          "x": "Nurki\u0107 REBOUND (Off)",
+          "a": 52,
+          "h": 31
+        },
+        {
+          "c": "Q2 05:50.2",
+          "t": "A",
+          "x": "Portis Foul",
+          "a": 52,
+          "h": 31
+        },
+        {
+          "c": "Q2 05:50.2",
+          "t": "H",
+          "x": "Jr. Jump Shot (11 PTS)",
+          "a": 52,
+          "h": 33
+        },
+        {
+          "c": "Q2 05:39.5",
+          "t": "H",
+          "x": "Jr. Foul (penalty) \u2014 Adebayo 2/2 FT",
+          "a": 54,
+          "h": 33
+        },
+        {
+          "c": "Q2 05:26.9",
+          "t": "H",
+          "x": "MISS Nurki\u0107 Jump Shot",
+          "a": 54,
+          "h": 33
+        },
+        {
+          "c": "Q2 05:26.9",
+          "t": "A",
+          "x": "Thompson REBOUND (Def)",
+          "a": 54,
+          "h": 33
+        },
+        {
+          "c": "Q2 05:15.6",
+          "t": "A",
+          "x": "Antetokounmpo Jump Shot (17 PTS)",
+          "a": 56,
+          "h": 33
+        },
+        {
+          "c": "Q2 04:59.0",
+          "t": "H",
+          "x": "MISS Nurki\u0107 3PT Jump Shot",
+          "a": 56,
+          "h": 33
+        },
+        {
+          "c": "Q2 04:59.0",
+          "t": "A",
+          "x": "Antetokounmpo REBOUND (Def)",
+          "a": 56,
+          "h": 33
+        },
+        {
+          "c": "Q2 04:53.2",
+          "t": "A",
+          "x": "Antetokounmpo Jump Shot (19 PTS)",
+          "a": 58,
+          "h": 33
+        },
+        {
+          "c": "Q2 04:47.2",
+          "t": "H",
+          "x": "MISS George 3PT Jump Shot",
+          "a": 58,
+          "h": 33
+        },
+        {
+          "c": "Q2 04:47.2",
+          "t": "A",
+          "x": "TEAM REBOUND (Def)",
+          "a": 58,
+          "h": 33
+        },
+        {
+          "c": "Q2 04:27.4",
+          "t": "H",
+          "x": "Jr. Foul \u2014 Adebayo 1/2 FT",
+          "a": 59,
+          "h": 33
+        },
+        {
+          "c": "Q2 04:03.7",
           "t": "H",
           "x": "MISS Jr. 3PT Jump Shot",
-          "a": 65,
-          "h": 38
+          "a": 59,
+          "h": 33
         },
         {
-          "c": "Q2 05:33.7",
+          "c": "Q2 04:03.7",
           "t": "H",
           "x": "Jr. REBOUND (Off)",
-          "a": 65,
-          "h": 38
+          "a": 59,
+          "h": 33
         },
         {
-          "c": "Q2 05:27.5",
+          "c": "Q2 03:57.2",
           "t": "H",
           "x": "Alexander Jump Shot (2 PTS) (Jr. AST)",
-          "a": 65,
-          "h": 40
+          "a": 59,
+          "h": 35
         },
         {
-          "c": "Q2 05:01.8",
-          "t": "A",
-          "x": "Adebayo Turnover (Green STEAL)",
-          "a": 65,
-          "h": 40
-        },
-        {
-          "c": "Q2 04:52.4",
-          "t": "H",
-          "x": "MISS George Jump Shot",
-          "a": 65,
-          "h": 40
-        },
-        {
-          "c": "Q2 04:52.4",
-          "t": "A",
-          "x": "Adebayo REBOUND (Def)",
-          "a": 65,
-          "h": 40
-        },
-        {
-          "c": "Q2 04:35.3",
-          "t": "A",
-          "x": "Portis Jump Shot (4 PTS)",
-          "a": 67,
-          "h": 40
-        },
-        {
-          "c": "Q2 04:33.3",
-          "t": "H",
-          "x": "Green Layup (2 PTS) (Nurki\u0107 AST)",
-          "a": 67,
-          "h": 42
-        },
-        {
-          "c": "Q2 04:24.1",
-          "t": "A",
-          "x": "MISS Richards Jump Shot",
-          "a": 67,
-          "h": 42
-        },
-        {
-          "c": "Q2 04:24.1",
-          "t": "A",
-          "x": "Portis REBOUND (Off)",
-          "a": 67,
-          "h": 42
-        },
-        {
-          "c": "Q2 04:21.0",
-          "t": "A",
-          "x": "MISS Portis 3PT Jump Shot",
-          "a": 67,
-          "h": 42
-        },
-        {
-          "c": "Q2 04:21.0",
-          "t": "A",
-          "x": "Antetokounmpo REBOUND (Off)",
-          "a": 67,
-          "h": 42
-        },
-        {
-          "c": "Q2 04:14.5",
-          "t": "A",
-          "x": "MISS Portis Layup",
-          "a": 67,
-          "h": 42
-        },
-        {
-          "c": "Q2 04:14.5",
-          "t": "H",
-          "x": "Jr. REBOUND (Def)",
-          "a": 67,
-          "h": 42
-        },
-        {
-          "c": "Q2 04:04.3",
-          "t": "H",
-          "x": "Jr. Turnover (Antetokounmpo STEAL)",
-          "a": 67,
-          "h": 42
-        },
-        {
-          "c": "Q2 03:49.6",
-          "t": "A",
-          "x": "Antetokounmpo Jump Shot (24 PTS)",
-          "a": 69,
-          "h": 42
-        },
-        {
-          "c": "Q2 03:49.6",
+          "c": "Q2 03:57.2",
           "t": "H",
           "x": "SUB: Peterson FOR Green",
-          "a": 69,
-          "h": 42
+          "a": 59,
+          "h": 35
         },
         {
-          "c": "Q2 03:49.6",
+          "c": "Q2 03:57.2",
           "t": "H",
           "x": "SUB: Collier FOR Nurki\u0107",
-          "a": 69,
-          "h": 42
+          "a": 59,
+          "h": 35
         },
         {
-          "c": "Q2 03:49.6",
+          "c": "Q2 03:57.2",
           "t": "A",
           "x": "SUB: Wiggins FOR Thompson",
-          "a": 69,
-          "h": 42
+          "a": 59,
+          "h": 35
         },
         {
-          "c": "Q2 03:49.6",
+          "c": "Q2 03:57.2",
           "t": "A",
           "x": "SUB: Jr. FOR Portis",
-          "a": 69,
-          "h": 42
+          "a": 59,
+          "h": 35
         },
         {
-          "c": "Q2 03:49.6",
+          "c": "Q2 03:57.2",
           "t": "A",
           "x": "SUB: Jovi\u0107 FOR Richards",
-          "a": 69,
-          "h": 42
+          "a": 59,
+          "h": 35
         },
         {
-          "c": "Q2 03:44.0",
-          "t": "H",
-          "x": "MISS George Layup (Adebayo BLOCK)",
-          "a": 69,
-          "h": 42
-        },
-        {
-          "c": "Q2 03:44.0",
-          "t": "H",
-          "x": "Jr. REBOUND (Off)",
-          "a": 69,
-          "h": 42
-        },
-        {
-          "c": "Q2 03:39.3",
+          "c": "Q2 03:31.0",
           "t": "A",
-          "x": "Antetokounmpo Foul \u2014 George 1/2 FT",
-          "a": 69,
-          "h": 43
+          "x": "Adebayo Turnover (Jr. STEAL)",
+          "a": 59,
+          "h": 35
         },
         {
-          "c": "Q2 03:12.3",
-          "t": "A",
-          "x": "MISS Jr. Jump Shot (Alexander BLOCK)",
-          "a": 69,
-          "h": 43
-        },
-        {
-          "c": "Q2 03:12.3",
+          "c": "Q2 03:21.2",
           "t": "H",
-          "x": "Peterson REBOUND (Def)",
-          "a": 69,
-          "h": 43
+          "x": "MISS George Jump Shot",
+          "a": 59,
+          "h": 35
         },
         {
-          "c": "Q2 02:57.3",
-          "t": "H",
-          "x": "MISS Alexander 3PT Jump Shot",
-          "a": 69,
-          "h": 43
-        },
-        {
-          "c": "Q2 02:57.3",
+          "c": "Q2 03:21.2",
           "t": "A",
           "x": "Adebayo REBOUND (Def)",
-          "a": 69,
-          "h": 43
+          "a": 59,
+          "h": 35
         },
         {
-          "c": "Q2 02:47.9",
+          "c": "Q2 03:03.7",
           "t": "A",
-          "x": "MISS Jr. 3PT Jump Shot",
-          "a": 69,
-          "h": 43
+          "x": "Jr. Jump Shot (4 PTS)",
+          "a": 61,
+          "h": 35
         },
         {
-          "c": "Q2 02:47.9",
+          "c": "Q2 03:01.2",
           "t": "H",
-          "x": "Jr. REBOUND (Def)",
-          "a": 69,
-          "h": 43
+          "x": "Peterson Layup (2 PTS) (Collier AST)",
+          "a": 61,
+          "h": 37
         },
         {
-          "c": "Q2 02:45.5",
-          "t": "H",
-          "x": "MISS Jr. 3PT Jump Shot",
-          "a": 69,
-          "h": 43
-        },
-        {
-          "c": "Q2 02:45.5",
+          "c": "Q2 02:51.7",
           "t": "A",
-          "x": "Jovi\u0107 REBOUND (Def)",
-          "a": 69,
-          "h": 43
+          "x": "MISS Jovi\u0107 Jump Shot",
+          "a": 61,
+          "h": 37
         },
         {
-          "c": "Q2 02:35.2",
-          "t": "H",
-          "x": "Collier Foul",
-          "a": 69,
-          "h": 43
-        },
-        {
-          "c": "Q2 02:35.2",
-          "t": "A",
-          "x": "Adebayo Turnover (Alexander STEAL)",
-          "a": 69,
-          "h": 43
-        },
-        {
-          "c": "Q2 02:19.4",
-          "t": "A",
-          "x": "Antetokounmpo Foul \u2014 George 2/2 FT",
-          "a": 69,
-          "h": 45
-        },
-        {
-          "c": "Q2 02:04.5",
-          "t": "A",
-          "x": "Jr. 3PT Jump Shot (8 PTS) (Jovi\u0107 AST)",
-          "a": 72,
-          "h": 45
-        },
-        {
-          "c": "Q2 01:45.0",
-          "t": "H",
-          "x": "Peterson Jump Shot (4 PTS) (George AST)",
-          "a": 72,
-          "h": 47
-        },
-        {
-          "c": "Q2 01:31.0",
-          "t": "A",
-          "x": "Adebayo 3PT Jump Shot (16 PTS) (Antetokounmpo AST)",
-          "a": 75,
-          "h": 47
-        },
-        {
-          "c": "Q2 01:08.5",
-          "t": "H",
-          "x": "MISS George Layup",
-          "a": 75,
-          "h": 47
-        },
-        {
-          "c": "Q2 01:08.5",
-          "t": "A",
-          "x": "Jr. REBOUND (Def)",
-          "a": 75,
-          "h": 47
-        },
-        {
-          "c": "Q2 01:08.5",
-          "t": "H",
-          "x": "SUB: Green FOR Collier",
-          "a": 75,
-          "h": 47
-        },
-        {
-          "c": "Q2 01:08.5",
-          "t": "A",
-          "x": "SUB: Thompson FOR Jr.",
-          "a": 75,
-          "h": 47
-        },
-        {
-          "c": "Q2 01:08.5",
-          "t": "A",
-          "x": "SUB: Portis FOR Jovi\u0107",
-          "a": 75,
-          "h": 47
-        },
-        {
-          "c": "Q2 00:59.1",
-          "t": "A",
-          "x": "MISS Adebayo Jump Shot",
-          "a": 75,
-          "h": 47
-        },
-        {
-          "c": "Q2 00:59.1",
+          "c": "Q2 02:51.7",
           "t": "A",
           "x": "Wiggins REBOUND (Off)",
-          "a": 75,
-          "h": 47
+          "a": 61,
+          "h": 37
         },
         {
-          "c": "Q2 00:50.0",
+          "c": "Q2 02:48.1",
           "t": "A",
-          "x": "Thompson Turnover (George STEAL)",
-          "a": 75,
-          "h": 47
+          "x": "MISS Jr. 3PT Jump Shot",
+          "a": 61,
+          "h": 37
         },
         {
-          "c": "Q2 00:35.5",
-          "t": "H",
-          "x": "MISS Peterson Layup",
-          "a": 75,
-          "h": 47
-        },
-        {
-          "c": "Q2 00:35.5",
-          "t": "A",
-          "x": "Portis REBOUND (Def)",
-          "a": 75,
-          "h": 47
-        },
-        {
-          "c": "Q2 00:34.5",
-          "t": "A",
-          "x": "MISS Wiggins 3PT Jump Shot",
-          "a": 75,
-          "h": 47
-        },
-        {
-          "c": "Q2 00:34.5",
+          "c": "Q2 02:48.1",
           "t": "H",
           "x": "Jr. REBOUND (Def)",
-          "a": 75,
-          "h": 47
+          "a": 61,
+          "h": 37
         },
         {
-          "c": "Q2 00:27.4",
+          "c": "Q2 02:30.9",
           "t": "H",
-          "x": "MISS Jr. Layup",
-          "a": 75,
-          "h": 47
+          "x": "MISS Collier 3PT Jump Shot",
+          "a": 61,
+          "h": 37
         },
         {
-          "c": "Q2 00:27.4",
-          "t": "H",
-          "x": "Green REBOUND (Off)",
-          "a": 75,
-          "h": 47
-        },
-        {
-          "c": "Q2 00:23.6",
-          "t": "H",
-          "x": "Jr. 3PT Jump Shot (12 PTS) (Green AST)",
-          "a": 75,
-          "h": 50
-        },
-        {
-          "c": "Q2 00:03.3",
+          "c": "Q2 02:30.9",
           "t": "A",
-          "x": "MISS Adebayo Layup",
-          "a": 75,
-          "h": 50
+          "x": "Wiggins REBOUND (Def)",
+          "a": 61,
+          "h": 37
         },
         {
-          "c": "Q2 00:03.3",
+          "c": "Q2 02:23.6",
+          "t": "A",
+          "x": "Wiggins 3PT Jump Shot (5 PTS)",
+          "a": 64,
+          "h": 37
+        },
+        {
+          "c": "Q2 01:59.1",
           "t": "H",
-          "x": "TEAM REBOUND (Def)",
-          "a": 75,
-          "h": 50
+          "x": "MISS Peterson 3PT Jump Shot",
+          "a": 64,
+          "h": 37
+        },
+        {
+          "c": "Q2 01:59.1",
+          "t": "A",
+          "x": "Adebayo REBOUND (Def)",
+          "a": 64,
+          "h": 37
+        },
+        {
+          "c": "Q2 01:52.6",
+          "t": "A",
+          "x": "Adebayo Turnover (Alexander STEAL)",
+          "a": 64,
+          "h": 37
+        },
+        {
+          "c": "Q2 01:30.8",
+          "t": "A",
+          "x": "Adebayo Foul",
+          "a": 64,
+          "h": 37
+        },
+        {
+          "c": "Q2 01:30.8",
+          "t": "H",
+          "x": "George Layup (6 PTS) (Alexander AST)",
+          "a": 64,
+          "h": 39
+        },
+        {
+          "c": "Q2 01:17.9",
+          "t": "H",
+          "x": "George Foul (penalty) \u2014 Adebayo 2/2 FT",
+          "a": 66,
+          "h": 39
+        },
+        {
+          "c": "Q2 01:17.9",
+          "t": "H",
+          "x": "SUB: Green FOR Collier",
+          "a": 66,
+          "h": 39
+        },
+        {
+          "c": "Q2 01:17.9",
+          "t": "A",
+          "x": "SUB: Thompson FOR Jr.",
+          "a": 66,
+          "h": 39
+        },
+        {
+          "c": "Q2 01:17.9",
+          "t": "A",
+          "x": "SUB: Portis FOR Jovi\u0107",
+          "a": 66,
+          "h": 39
+        },
+        {
+          "c": "Q2 01:01.8",
+          "t": "A",
+          "x": "Portis Foul (penalty) \u2014 Alexander 0/2 FT",
+          "a": 66,
+          "h": 39
+        },
+        {
+          "c": "Q2 00:56.6",
+          "t": "A",
+          "x": "MISS Portis Layup",
+          "a": 66,
+          "h": 39
+        },
+        {
+          "c": "Q2 00:56.6",
+          "t": "A",
+          "x": "Wiggins REBOUND (Off)",
+          "a": 66,
+          "h": 39
+        },
+        {
+          "c": "Q2 00:55.6",
+          "t": "A",
+          "x": "Adebayo Turnover (Jr. STEAL)",
+          "a": 66,
+          "h": 39
+        },
+        {
+          "c": "Q2 00:52.8",
+          "t": "H",
+          "x": "MISS George 3PT Jump Shot",
+          "a": 66,
+          "h": 39
+        },
+        {
+          "c": "Q2 00:52.8",
+          "t": "A",
+          "x": "Portis REBOUND (Def)",
+          "a": 66,
+          "h": 39
+        },
+        {
+          "c": "Q2 00:42.3",
+          "t": "H",
+          "x": "Green Foul (penalty) \u2014 Adebayo 1/2 FT",
+          "a": 67,
+          "h": 39
+        },
+        {
+          "c": "Q2 00:14.2",
+          "t": "H",
+          "x": "MISS George 3PT Jump Shot",
+          "a": 67,
+          "h": 39
+        },
+        {
+          "c": "Q2 00:14.2",
+          "t": "A",
+          "x": "Wiggins REBOUND (Def)",
+          "a": 67,
+          "h": 39
+        },
+        {
+          "c": "Q2 00:05.9",
+          "t": "A",
+          "x": "Portis Layup (2 PTS) (Thompson AST)",
+          "a": 69,
+          "h": 39
         },
         {
           "c": "Q2 00:00.0",
           "t": "H",
-          "x": "Jr. Turnover",
-          "a": 75,
-          "h": 50
+          "x": "Peterson Jump Shot (4 PTS) (George AST)",
+          "a": 69,
+          "h": 41
         },
         {
           "c": "Q3 12:00.0",
           "t": null,
           "x": "--- Start of Q3 ---",
-          "a": 75,
-          "h": 50
+          "a": 69,
+          "h": 41
         },
         {
-          "c": "Q3 11:54.3",
+          "c": "Q3 11:45.7",
           "t": "A",
-          "x": "MISS Wiggins Layup",
-          "a": 75,
-          "h": 50
+          "x": "Adebayo 3PT Jump Shot (21 PTS) (Antetokounmpo AST)",
+          "a": 72,
+          "h": 41
         },
         {
-          "c": "Q3 11:54.3",
-          "t": "A",
-          "x": "Adebayo REBOUND (Off)",
-          "a": 75,
-          "h": 50
-        },
-        {
-          "c": "Q3 11:51.5",
-          "t": "A",
-          "x": "MISS Antetokounmpo Jump Shot",
-          "a": 75,
-          "h": 50
-        },
-        {
-          "c": "Q3 11:51.5",
+          "c": "Q3 11:22.6",
           "t": "H",
-          "x": "Peterson REBOUND (Def)",
-          "a": 75,
-          "h": 50
+          "x": "MISS George Layup",
+          "a": 72,
+          "h": 41
         },
         {
-          "c": "Q3 11:42.6",
-          "t": "H",
-          "x": "MISS Jr. Layup",
-          "a": 75,
-          "h": 50
-        },
-        {
-          "c": "Q3 11:42.6",
+          "c": "Q3 11:22.6",
           "t": "A",
-          "x": "Wiggins REBOUND (Def)",
-          "a": 75,
-          "h": 50
+          "x": "Thompson REBOUND (Def)",
+          "a": 72,
+          "h": 41
         },
         {
-          "c": "Q3 11:41.0",
+          "c": "Q3 11:12.7",
           "t": "A",
-          "x": "Adebayo Layup (18 PTS)",
-          "a": 77,
-          "h": 50
+          "x": "MISS Adebayo Jump Shot",
+          "a": 72,
+          "h": 41
         },
         {
-          "c": "Q3 11:26.0",
-          "t": "H",
-          "x": "MISS Jr. Jump Shot",
-          "a": 77,
-          "h": 50
-        },
-        {
-          "c": "Q3 11:26.0",
+          "c": "Q3 11:12.7",
           "t": "A",
-          "x": "Antetokounmpo REBOUND (Def)",
-          "a": 77,
-          "h": 50
+          "x": "Wiggins REBOUND (Off)",
+          "a": 72,
+          "h": 41
         },
         {
-          "c": "Q3 11:16.0",
-          "t": "H",
-          "x": "Jr. Foul",
-          "a": 77,
-          "h": 50
-        },
-        {
-          "c": "Q3 11:16.0",
-          "t": "H",
-          "x": "Green Foul \u2014 Antetokounmpo 2/2 FT",
-          "a": 79,
-          "h": 50
+          "c": "Q3 11:03.0",
+          "t": "A",
+          "x": "Thompson Turnover (George STEAL)",
+          "a": 72,
+          "h": 41
         },
         {
           "c": "Q3 10:47.9",
           "t": "H",
-          "x": "MISS George 3PT Jump Shot",
-          "a": 79,
-          "h": 50
-        },
-        {
-          "c": "Q3 10:47.9",
-          "t": "A",
-          "x": "Wiggins REBOUND (Def)",
-          "a": 79,
-          "h": 50
+          "x": "Peterson Layup (6 PTS) (Alexander AST)",
+          "a": 72,
+          "h": 43
         },
         {
           "c": "Q3 10:47.9",
           "t": "H",
           "x": "SUB: Markkanen FOR Green",
-          "a": 79,
-          "h": 50
+          "a": 72,
+          "h": 43
         },
         {
           "c": "Q3 10:47.9",
           "t": "H",
           "x": "SUB: Collier FOR Alexander",
-          "a": 79,
-          "h": 50
+          "a": 72,
+          "h": 43
         },
         {
           "c": "Q3 10:47.9",
           "t": "A",
           "x": "SUB: Jr. FOR Portis",
-          "a": 79,
-          "h": 50
+          "a": 72,
+          "h": 43
         },
         {
-          "c": "Q3 10:24.9",
+          "c": "Q3 10:29.1",
           "t": "A",
-          "x": "Antetokounmpo Layup (28 PTS) (Thompson AST)",
-          "a": 81,
-          "h": 50
+          "x": "MISS Jr. Jump Shot",
+          "a": 72,
+          "h": 43
         },
         {
-          "c": "Q3 09:57.7",
-          "t": "H",
-          "x": "Jr. Layup (14 PTS) (George AST)",
-          "a": 81,
-          "h": 52
-        },
-        {
-          "c": "Q3 09:41.5",
-          "t": "A",
-          "x": "Jr. Layup (10 PTS)",
-          "a": 83,
-          "h": 52
-        },
-        {
-          "c": "Q3 09:24.3",
-          "t": "H",
-          "x": "MISS Peterson Jump Shot",
-          "a": 83,
-          "h": 52
-        },
-        {
-          "c": "Q3 09:24.3",
-          "t": "A",
-          "x": "Adebayo REBOUND (Def)",
-          "a": 83,
-          "h": 52
-        },
-        {
-          "c": "Q3 09:16.9",
-          "t": "A",
-          "x": "Jr. 3PT Jump Shot (13 PTS) (Antetokounmpo AST)",
-          "a": 86,
-          "h": 52
-        },
-        {
-          "c": "Q3 08:52.0",
-          "t": "H",
-          "x": "MISS Collier 3PT Jump Shot",
-          "a": 86,
-          "h": 52
-        },
-        {
-          "c": "Q3 08:52.0",
-          "t": "A",
-          "x": "Adebayo REBOUND (Def)",
-          "a": 86,
-          "h": 52
-        },
-        {
-          "c": "Q3 08:43.9",
-          "t": "A",
-          "x": "Antetokounmpo Turnover (Jr. STEAL)",
-          "a": 86,
-          "h": 52
-        },
-        {
-          "c": "Q3 08:28.0",
-          "t": "H",
-          "x": "MISS Markkanen 3PT Jump Shot",
-          "a": 86,
-          "h": 52
-        },
-        {
-          "c": "Q3 08:28.0",
-          "t": "H",
-          "x": "Peterson REBOUND (Off)",
-          "a": 86,
-          "h": 52
-        },
-        {
-          "c": "Q3 08:28.0",
-          "t": "H",
-          "x": "SUB: Green FOR George",
-          "a": 86,
-          "h": 52
-        },
-        {
-          "c": "Q3 08:28.0",
-          "t": "H",
-          "x": "SUB: Sensabaugh FOR Collier",
-          "a": 86,
-          "h": 52
-        },
-        {
-          "c": "Q3 08:21.8",
-          "t": "H",
-          "x": "Jr. Turnover (Wiggins STEAL)",
-          "a": 86,
-          "h": 52
-        },
-        {
-          "c": "Q3 08:07.9",
-          "t": "H",
-          "x": "Sensabaugh Foul \u2014 Antetokounmpo 2/2 FT",
-          "a": 88,
-          "h": 52
-        },
-        {
-          "c": "Q3 08:03.2",
-          "t": "H",
-          "x": "MISS Sensabaugh Jump Shot",
-          "a": 88,
-          "h": 52
-        },
-        {
-          "c": "Q3 08:03.2",
-          "t": "A",
-          "x": "Jr. REBOUND (Def)",
-          "a": 88,
-          "h": 52
-        },
-        {
-          "c": "Q3 07:53.3",
-          "t": "A",
-          "x": "Thompson Jump Shot (12 PTS) (Adebayo AST)",
-          "a": 90,
-          "h": 52
-        },
-        {
-          "c": "Q3 07:32.8",
-          "t": "H",
-          "x": "MISS Markkanen 3PT Jump Shot",
-          "a": 90,
-          "h": 52
-        },
-        {
-          "c": "Q3 07:32.8",
-          "t": "A",
-          "x": "Jr. REBOUND (Def)",
-          "a": 90,
-          "h": 52
-        },
-        {
-          "c": "Q3 07:18.4",
-          "t": "A",
-          "x": "MISS Thompson Jump Shot (Jr. BLOCK)",
-          "a": 90,
-          "h": 52
-        },
-        {
-          "c": "Q3 07:18.4",
+          "c": "Q3 10:29.1",
           "t": "H",
           "x": "Jr. REBOUND (Def)",
-          "a": 90,
-          "h": 52
+          "a": 72,
+          "h": 43
         },
         {
-          "c": "Q3 06:59.0",
+          "c": "Q3 10:21.8",
           "t": "H",
-          "x": "MISS Markkanen Jump Shot",
-          "a": 90,
-          "h": 52
+          "x": "MISS Jr. Layup",
+          "a": 72,
+          "h": 43
         },
         {
-          "c": "Q3 06:59.0",
-          "t": "A",
-          "x": "Antetokounmpo REBOUND (Def)",
-          "a": 90,
-          "h": 52
-        },
-        {
-          "c": "Q3 06:46.5",
-          "t": "H",
-          "x": "Jr. Foul",
-          "a": 90,
-          "h": 52
-        },
-        {
-          "c": "Q3 06:46.5",
-          "t": "A",
-          "x": "MISS Thompson Jump Shot (Jr. BLOCK)",
-          "a": 90,
-          "h": 52
-        },
-        {
-          "c": "Q3 06:46.5",
-          "t": "H",
-          "x": "TEAM REBOUND (Def)",
-          "a": 90,
-          "h": 52
-        },
-        {
-          "c": "Q3 06:45.5",
-          "t": "H",
-          "x": "Jr. Layup (16 PTS)",
-          "a": 90,
-          "h": 54
-        },
-        {
-          "c": "Q3 06:28.2",
-          "t": "A",
-          "x": "MISS Jr. 3PT Jump Shot",
-          "a": 90,
-          "h": 54
-        },
-        {
-          "c": "Q3 06:28.2",
-          "t": "H",
-          "x": "Markkanen REBOUND (Def)",
-          "a": 90,
-          "h": 54
-        },
-        {
-          "c": "Q3 06:17.3",
-          "t": "H",
-          "x": "Sensabaugh Jump Shot (5 PTS) (Green AST)",
-          "a": 90,
-          "h": 56
-        },
-        {
-          "c": "Q3 06:02.8",
-          "t": "A",
-          "x": "Adebayo Jump Shot (20 PTS) (Antetokounmpo AST)",
-          "a": 92,
-          "h": 56
-        },
-        {
-          "c": "Q3 06:00.5",
-          "t": "H",
-          "x": "MISS Peterson 3PT Jump Shot",
-          "a": 92,
-          "h": 56
-        },
-        {
-          "c": "Q3 06:00.5",
+          "c": "Q3 10:21.8",
           "t": "H",
           "x": "Markkanen REBOUND (Off)",
-          "a": 92,
+          "a": 72,
+          "h": 43
+        },
+        {
+          "c": "Q3 10:17.9",
+          "t": "H",
+          "x": "Peterson 3PT Jump Shot (9 PTS) (Collier AST)",
+          "a": 72,
+          "h": 46
+        },
+        {
+          "c": "Q3 09:56.9",
+          "t": "A",
+          "x": "MISS Adebayo Layup",
+          "a": 72,
+          "h": 46
+        },
+        {
+          "c": "Q3 09:56.9",
+          "t": "H",
+          "x": "TEAM REBOUND (Def)",
+          "a": 72,
+          "h": 46
+        },
+        {
+          "c": "Q3 09:48.7",
+          "t": "H",
+          "x": "Jr. Turnover",
+          "a": 72,
+          "h": 46
+        },
+        {
+          "c": "Q3 09:42.3",
+          "t": "A",
+          "x": "MISS Wiggins Layup",
+          "a": 72,
+          "h": 46
+        },
+        {
+          "c": "Q3 09:42.3",
+          "t": "A",
+          "x": "Adebayo REBOUND (Off)",
+          "a": 72,
+          "h": 46
+        },
+        {
+          "c": "Q3 09:38.9",
+          "t": "A",
+          "x": "MISS Antetokounmpo Jump Shot",
+          "a": 72,
+          "h": 46
+        },
+        {
+          "c": "Q3 09:38.9",
+          "t": "H",
+          "x": "Peterson REBOUND (Def)",
+          "a": 72,
+          "h": 46
+        },
+        {
+          "c": "Q3 09:29.8",
+          "t": "H",
+          "x": "MISS Jr. Layup",
+          "a": 72,
+          "h": 46
+        },
+        {
+          "c": "Q3 09:29.8",
+          "t": "A",
+          "x": "Adebayo REBOUND (Def)",
+          "a": 72,
+          "h": 46
+        },
+        {
+          "c": "Q3 09:27.5",
+          "t": "A",
+          "x": "Adebayo Layup (23 PTS)",
+          "a": 74,
+          "h": 46
+        },
+        {
+          "c": "Q3 09:12.3",
+          "t": "H",
+          "x": "MISS Jr. Jump Shot",
+          "a": 74,
+          "h": 46
+        },
+        {
+          "c": "Q3 09:12.3",
+          "t": "A",
+          "x": "Antetokounmpo REBOUND (Def)",
+          "a": 74,
+          "h": 46
+        },
+        {
+          "c": "Q3 09:01.6",
+          "t": "H",
+          "x": "Jr. Foul",
+          "a": 74,
+          "h": 46
+        },
+        {
+          "c": "Q3 09:01.6",
+          "t": "H",
+          "x": "Markkanen Foul \u2014 Antetokounmpo 2/2 FT",
+          "a": 76,
+          "h": 46
+        },
+        {
+          "c": "Q3 08:33.4",
+          "t": "H",
+          "x": "MISS George 3PT Jump Shot",
+          "a": 76,
+          "h": 46
+        },
+        {
+          "c": "Q3 08:33.4",
+          "t": "A",
+          "x": "Adebayo REBOUND (Def)",
+          "a": 76,
+          "h": 46
+        },
+        {
+          "c": "Q3 08:10.1",
+          "t": "A",
+          "x": "Antetokounmpo Layup (23 PTS) (Thompson AST)",
+          "a": 78,
+          "h": 46
+        },
+        {
+          "c": "Q3 08:10.1",
+          "t": "H",
+          "x": "SUB: Green FOR George",
+          "a": 78,
+          "h": 46
+        },
+        {
+          "c": "Q3 08:10.1",
+          "t": "H",
+          "x": "SUB: Sensabaugh FOR Collier",
+          "a": 78,
+          "h": 46
+        },
+        {
+          "c": "Q3 07:43.1",
+          "t": "H",
+          "x": "Jr. Layup (13 PTS)",
+          "a": 78,
+          "h": 48
+        },
+        {
+          "c": "Q3 07:27.5",
+          "t": "A",
+          "x": "Wiggins Layup (7 PTS) (Jr. AST)",
+          "a": 80,
+          "h": 48
+        },
+        {
+          "c": "Q3 07:10.5",
+          "t": "H",
+          "x": "Peterson Jump Shot (11 PTS)",
+          "a": 80,
+          "h": 50
+        },
+        {
+          "c": "Q3 06:46.8",
+          "t": "A",
+          "x": "Adebayo Turnover (Peterson STEAL)",
+          "a": 80,
+          "h": 50
+        },
+        {
+          "c": "Q3 06:30.4",
+          "t": "H",
+          "x": "Markkanen Turnover",
+          "a": 80,
+          "h": 50
+        },
+        {
+          "c": "Q3 06:25.2",
+          "t": "H",
+          "x": "Jr. Foul",
+          "a": 80,
+          "h": 50
+        },
+        {
+          "c": "Q3 06:25.2",
+          "t": "A",
+          "x": "Antetokounmpo Jump Shot (25 PTS) (Jr. AST)",
+          "a": 82,
+          "h": 50
+        },
+        {
+          "c": "Q3 06:21.5",
+          "t": "H",
+          "x": "MISS Jr. 3PT Jump Shot",
+          "a": 82,
+          "h": 50
+        },
+        {
+          "c": "Q3 06:21.5",
+          "t": "A",
+          "x": "Antetokounmpo REBOUND (Def)",
+          "a": 82,
+          "h": 50
+        },
+        {
+          "c": "Q3 06:04.0",
+          "t": "A",
+          "x": "Antetokounmpo Jump Shot (27 PTS)",
+          "a": 84,
+          "h": 50
+        },
+        {
+          "c": "Q3 05:57.9",
+          "t": "H",
+          "x": "MISS Jr. Jump Shot",
+          "a": 84,
+          "h": 50
+        },
+        {
+          "c": "Q3 05:57.9",
+          "t": "A",
+          "x": "Wiggins REBOUND (Def)",
+          "a": 84,
+          "h": 50
+        },
+        {
+          "c": "Q3 05:57.9",
+          "t": "H",
+          "x": "SUB: Bailey FOR Green",
+          "a": 84,
+          "h": 50
+        },
+        {
+          "c": "Q3 05:57.9",
+          "t": "H",
+          "x": "SUB: Nurki\u0107 FOR Markkanen",
+          "a": 84,
+          "h": 50
+        },
+        {
+          "c": "Q3 05:57.9",
+          "t": "H",
+          "x": "SUB: Gray FOR Sensabaugh",
+          "a": 84,
+          "h": 50
+        },
+        {
+          "c": "Q3 05:57.9",
+          "t": "A",
+          "x": "SUB: Young FOR Wiggins",
+          "a": 84,
+          "h": 50
+        },
+        {
+          "c": "Q3 05:57.9",
+          "t": "A",
+          "x": "SUB: Mitchell FOR Jr.",
+          "a": 84,
+          "h": 50
+        },
+        {
+          "c": "Q3 05:54.1",
+          "t": "A",
+          "x": "MISS Mitchell Jump Shot",
+          "a": 84,
+          "h": 50
+        },
+        {
+          "c": "Q3 05:54.1",
+          "t": "H",
+          "x": "Gray REBOUND (Def)",
+          "a": 84,
+          "h": 50
+        },
+        {
+          "c": "Q3 05:43.4",
+          "t": "H",
+          "x": "Nurki\u0107 Jump Shot (7 PTS) (Bailey AST)",
+          "a": 84,
+          "h": 52
+        },
+        {
+          "c": "Q3 05:21.3",
+          "t": "A",
+          "x": "Antetokounmpo Jump Shot (29 PTS) (Mitchell AST)",
+          "a": 86,
+          "h": 52
+        },
+        {
+          "c": "Q3 04:58.0",
+          "t": "H",
+          "x": "Nurki\u0107 Jump Shot (9 PTS) (Peterson AST)",
+          "a": 86,
+          "h": 54
+        },
+        {
+          "c": "Q3 04:50.6",
+          "t": "A",
+          "x": "MISS Young 3PT Jump Shot",
+          "a": 86,
+          "h": 54
+        },
+        {
+          "c": "Q3 04:50.6",
+          "t": "H",
+          "x": "Nurki\u0107 REBOUND (Def)",
+          "a": 86,
+          "h": 54
+        },
+        {
+          "c": "Q3 04:46.9",
+          "t": "H",
+          "x": "MISS Jr. Jump Shot",
+          "a": 86,
+          "h": 54
+        },
+        {
+          "c": "Q3 04:46.9",
+          "t": "A",
+          "x": "Adebayo REBOUND (Def)",
+          "a": 86,
+          "h": 54
+        },
+        {
+          "c": "Q3 04:40.7",
+          "t": "A",
+          "x": "Mitchell Jump Shot (5 PTS)",
+          "a": 88,
+          "h": 54
+        },
+        {
+          "c": "Q3 04:12.3",
+          "t": "H",
+          "x": "Jr. Jump Shot (15 PTS) (Nurki\u0107 AST)",
+          "a": 88,
           "h": 56
         },
         {
-          "c": "Q3 05:59.3",
+          "c": "Q3 03:43.5",
           "t": "H",
-          "x": "Jr. Jump Shot (18 PTS)",
-          "a": 92,
-          "h": 58
+          "x": "Peterson Foul \u2014 Antetokounmpo 2/2 FT",
+          "a": 90,
+          "h": 56
         },
         {
-          "c": "Q3 05:59.3",
+          "c": "Q3 03:27.9",
           "t": "H",
-          "x": "SUB: Bailey FOR Green",
-          "a": 92,
-          "h": 58
+          "x": "Gray 3PT Jump Shot (7 PTS) (Bailey AST)",
+          "a": 90,
+          "h": 59
         },
         {
-          "c": "Q3 05:59.3",
-          "t": "H",
-          "x": "SUB: Nurki\u0107 FOR Markkanen",
-          "a": 92,
-          "h": 58
-        },
-        {
-          "c": "Q3 05:59.3",
-          "t": "H",
-          "x": "SUB: Gray FOR Sensabaugh",
-          "a": 92,
-          "h": 58
-        },
-        {
-          "c": "Q3 05:59.3",
-          "t": "A",
-          "x": "SUB: Young FOR Wiggins",
-          "a": 92,
-          "h": 58
-        },
-        {
-          "c": "Q3 05:59.3",
-          "t": "A",
-          "x": "SUB: Mitchell FOR Jr.",
-          "a": 92,
-          "h": 58
-        },
-        {
-          "c": "Q3 05:49.5",
-          "t": "A",
-          "x": "MISS Thompson 3PT Jump Shot",
-          "a": 92,
-          "h": 58
-        },
-        {
-          "c": "Q3 05:49.5",
-          "t": "H",
-          "x": "Jr. REBOUND (Def)",
-          "a": 92,
-          "h": 58
-        },
-        {
-          "c": "Q3 05:43.8",
-          "t": "H",
-          "x": "Peterson Layup (6 PTS)",
-          "a": 92,
-          "h": 60
-        },
-        {
-          "c": "Q3 05:34.0",
-          "t": "H",
-          "x": "Peterson Foul \u2014 Antetokounmpo 1/3 FT",
-          "a": 93,
-          "h": 60
-        },
-        {
-          "c": "Q3 05:21.4",
-          "t": "H",
-          "x": "MISS Bailey Layup",
-          "a": 93,
-          "h": 60
-        },
-        {
-          "c": "Q3 05:21.4",
-          "t": "A",
-          "x": "Antetokounmpo REBOUND (Def)",
-          "a": 93,
-          "h": 60
-        },
-        {
-          "c": "Q3 05:16.1",
-          "t": "A",
-          "x": "Adebayo Layup (22 PTS) (Mitchell AST)",
-          "a": 95,
-          "h": 60
-        },
-        {
-          "c": "Q3 04:58.3",
-          "t": "H",
-          "x": "Jr. Jump Shot (20 PTS)",
-          "a": 95,
-          "h": 62
-        },
-        {
-          "c": "Q3 04:29.0",
-          "t": "H",
-          "x": "Jr. Foul \u2014 Antetokounmpo 3/3 FT",
-          "a": 98,
-          "h": 62
-        },
-        {
-          "c": "Q3 04:18.6",
-          "t": "H",
-          "x": "MISS Jr. Jump Shot",
-          "a": 98,
-          "h": 62
-        },
-        {
-          "c": "Q3 04:18.6",
-          "t": "A",
-          "x": "Antetokounmpo REBOUND (Def)",
-          "a": 98,
-          "h": 62
-        },
-        {
-          "c": "Q3 04:11.5",
-          "t": "A",
-          "x": "MISS Antetokounmpo Layup",
-          "a": 98,
-          "h": 62
-        },
-        {
-          "c": "Q3 04:11.5",
-          "t": "H",
-          "x": "Nurki\u0107 REBOUND (Def)",
-          "a": 98,
-          "h": 62
-        },
-        {
-          "c": "Q3 04:10.5",
-          "t": "A",
-          "x": "Adebayo Foul",
-          "a": 98,
-          "h": 62
-        },
-        {
-          "c": "Q3 04:10.5",
-          "t": "H",
-          "x": "MISS Jr. Layup (Thompson BLOCK)",
-          "a": 98,
-          "h": 62
-        },
-        {
-          "c": "Q3 04:10.5",
-          "t": "A",
-          "x": "TEAM REBOUND (Def)",
-          "a": 98,
-          "h": 62
-        },
-        {
-          "c": "Q3 03:56.9",
-          "t": "A",
-          "x": "MISS Mitchell 3PT Jump Shot",
-          "a": 98,
-          "h": 62
-        },
-        {
-          "c": "Q3 03:56.9",
-          "t": "H",
-          "x": "Peterson REBOUND (Def)",
-          "a": 98,
-          "h": 62
-        },
-        {
-          "c": "Q3 03:45.8",
-          "t": "H",
-          "x": "Gray 3PT Jump Shot (5 PTS) (Bailey AST)",
-          "a": 98,
-          "h": 65
-        },
-        {
-          "c": "Q3 03:16.5",
-          "t": "H",
-          "x": "Bailey Foul \u2014 Antetokounmpo 3/3 FT",
-          "a": 101,
-          "h": 65
-        },
-        {
-          "c": "Q3 03:16.5",
+          "c": "Q3 03:27.9",
           "t": "H",
           "x": "SUB: Collier FOR Jr.",
-          "a": 101,
-          "h": 65
+          "a": 90,
+          "h": 59
         },
         {
-          "c": "Q3 03:16.5",
+          "c": "Q3 03:27.9",
           "t": "H",
           "x": "SUB: Filipowski FOR Peterson",
-          "a": 101,
-          "h": 65
+          "a": 90,
+          "h": 59
         },
         {
-          "c": "Q3 03:16.5",
+          "c": "Q3 03:27.9",
           "t": "H",
           "x": "SUB: Sensabaugh FOR Nurki\u0107",
-          "a": 101,
-          "h": 65
+          "a": 90,
+          "h": 59
         },
         {
-          "c": "Q3 03:16.5",
+          "c": "Q3 03:27.9",
           "t": "A",
           "x": "SUB: Portis FOR Adebayo",
-          "a": 101,
-          "h": 65
+          "a": 90,
+          "h": 59
         },
         {
-          "c": "Q3 03:16.5",
+          "c": "Q3 03:27.9",
           "t": "A",
           "x": "SUB: Richards FOR Antetokounmpo",
-          "a": 101,
-          "h": 65
+          "a": 90,
+          "h": 59
         },
         {
-          "c": "Q3 03:16.5",
+          "c": "Q3 03:27.9",
           "t": "A",
           "x": "SUB: Johnson FOR Thompson",
-          "a": 101,
-          "h": 65
+          "a": 90,
+          "h": 59
         },
         {
-          "c": "Q3 03:16.5",
+          "c": "Q3 03:27.9",
           "t": "A",
           "x": "SUB: Fontecchio FOR Mitchell",
-          "a": 101,
+          "a": 90,
+          "h": 59
+        },
+        {
+          "c": "Q3 03:00.9",
+          "t": "H",
+          "x": "Bailey Foul",
+          "a": 90,
+          "h": 59
+        },
+        {
+          "c": "Q3 03:00.9",
+          "t": "A",
+          "x": "Richards Turnover (Sensabaugh STEAL)",
+          "a": 90,
+          "h": 59
+        },
+        {
+          "c": "Q3 02:47.4",
+          "t": "A",
+          "x": "Portis Foul \u2014 Gray 2/2 FT",
+          "a": 90,
+          "h": 61
+        },
+        {
+          "c": "Q3 02:40.4",
+          "t": "A",
+          "x": "Portis Jump Shot (4 PTS)",
+          "a": 92,
+          "h": 61
+        },
+        {
+          "c": "Q3 02:30.9",
+          "t": "H",
+          "x": "MISS Sensabaugh 3PT Jump Shot",
+          "a": 92,
+          "h": 61
+        },
+        {
+          "c": "Q3 02:30.9",
+          "t": "A",
+          "x": "Portis REBOUND (Def)",
+          "a": 92,
+          "h": 61
+        },
+        {
+          "c": "Q3 02:24.9",
+          "t": "A",
+          "x": "Richards Layup (4 PTS)",
+          "a": 94,
+          "h": 61
+        },
+        {
+          "c": "Q3 02:15.5",
+          "t": "A",
+          "x": "Richards Foul \u2014 Collier 2/3 FT",
+          "a": 94,
+          "h": 63
+        },
+        {
+          "c": "Q3 02:02.4",
+          "t": "A",
+          "x": "MISS Portis Layup",
+          "a": 94,
+          "h": 63
+        },
+        {
+          "c": "Q3 02:02.4",
+          "t": "A",
+          "x": "Richards REBOUND (Off)",
+          "a": 94,
+          "h": 63
+        },
+        {
+          "c": "Q3 02:00.4",
+          "t": "A",
+          "x": "Portis Layup (6 PTS) (Fontecchio AST)",
+          "a": 96,
+          "h": 63
+        },
+        {
+          "c": "Q3 01:42.8",
+          "t": "H",
+          "x": "Filipowski Jump Shot (2 PTS) (Sensabaugh AST)",
+          "a": 96,
           "h": 65
         },
         {
-          "c": "Q3 02:54.9",
-          "t": "H",
-          "x": "Filipowski Jump Shot (9 PTS) (Sensabaugh AST)",
-          "a": 101,
-          "h": 67
-        },
-        {
-          "c": "Q3 02:48.9",
+          "c": "Q3 01:31.1",
           "t": "A",
-          "x": "Portis Jump Shot (6 PTS)",
-          "a": 103,
-          "h": 67
+          "x": "Portis Jump Shot (8 PTS) (Young AST)",
+          "a": 98,
+          "h": 65
         },
         {
-          "c": "Q3 02:33.6",
-          "t": "H",
-          "x": "Collier Turnover",
-          "a": 103,
-          "h": 67
-        },
-        {
-          "c": "Q3 02:31.7",
-          "t": "A",
-          "x": "MISS Fontecchio Layup",
-          "a": 103,
-          "h": 67
-        },
-        {
-          "c": "Q3 02:31.7",
-          "t": "H",
-          "x": "Collier REBOUND (Def)",
-          "a": 103,
-          "h": 67
-        },
-        {
-          "c": "Q3 02:15.7",
-          "t": "H",
-          "x": "Gray 3PT Jump Shot (8 PTS) (Filipowski AST)",
-          "a": 103,
-          "h": 70
-        },
-        {
-          "c": "Q3 02:09.2",
-          "t": "A",
-          "x": "MISS Young Layup",
-          "a": 103,
-          "h": 70
-        },
-        {
-          "c": "Q3 02:09.2",
-          "t": "H",
-          "x": "Filipowski REBOUND (Def)",
-          "a": 103,
-          "h": 70
-        },
-        {
-          "c": "Q3 02:02.8",
+          "c": "Q3 01:08.3",
           "t": "H",
           "x": "MISS Sensabaugh 3PT Jump Shot",
-          "a": 103,
-          "h": 70
+          "a": 98,
+          "h": 65
         },
         {
-          "c": "Q3 02:02.8",
-          "t": "A",
-          "x": "Portis REBOUND (Def)",
-          "a": 103,
-          "h": 70
-        },
-        {
-          "c": "Q3 01:55.6",
-          "t": "H",
-          "x": "Bailey Foul (penalty) \u2014 Portis 1/2 FT",
-          "a": 104,
-          "h": 70
-        },
-        {
-          "c": "Q3 01:37.2",
-          "t": "A",
-          "x": "Richards Foul",
-          "a": 104,
-          "h": 70
-        },
-        {
-          "c": "Q3 01:37.2",
-          "t": "H",
-          "x": "Collier Jump Shot (4 PTS)",
-          "a": 104,
-          "h": 72
-        },
-        {
-          "c": "Q3 01:19.2",
-          "t": "A",
-          "x": "Richards Layup (2 PTS)",
-          "a": 106,
-          "h": 72
-        },
-        {
-          "c": "Q3 01:08.9",
-          "t": "H",
-          "x": "MISS Gray 3PT Jump Shot",
-          "a": 106,
-          "h": 72
-        },
-        {
-          "c": "Q3 01:08.9",
-          "t": "A",
-          "x": "Portis REBOUND (Def)",
-          "a": 106,
-          "h": 72
-        },
-        {
-          "c": "Q3 00:54.4",
-          "t": "A",
-          "x": "Portis Jump Shot (9 PTS) (Young AST)",
-          "a": 108,
-          "h": 72
-        },
-        {
-          "c": "Q3 00:50.8",
-          "t": "H",
-          "x": "MISS Sensabaugh 3PT Jump Shot",
-          "a": 108,
-          "h": 72
-        },
-        {
-          "c": "Q3 00:50.8",
-          "t": "A",
-          "x": "Johnson REBOUND (Def)",
-          "a": 108,
-          "h": 72
-        },
-        {
-          "c": "Q3 00:48.8",
-          "t": "A",
-          "x": "MISS Young Jump Shot (Bailey BLOCK)",
-          "a": 108,
-          "h": 72
-        },
-        {
-          "c": "Q3 00:48.8",
-          "t": "A",
-          "x": "Fontecchio REBOUND (Off)",
-          "a": 108,
-          "h": 72
-        },
-        {
-          "c": "Q3 00:41.9",
-          "t": "A",
-          "x": "MISS Portis Jump Shot",
-          "a": 108,
-          "h": 72
-        },
-        {
-          "c": "Q3 00:41.9",
-          "t": "H",
-          "x": "Filipowski REBOUND (Def)",
-          "a": 108,
-          "h": 72
-        },
-        {
-          "c": "Q3 00:29.9",
-          "t": "H",
-          "x": "Bailey Layup (4 PTS) (Collier AST)",
-          "a": 108,
-          "h": 74
-        },
-        {
-          "c": "Q3 00:27.8",
-          "t": "A",
-          "x": "Richards Layup (4 PTS) (Young AST)",
-          "a": 110,
-          "h": 74
-        },
-        {
-          "c": "Q3 00:19.9",
-          "t": "H",
-          "x": "MISS Bailey Jump Shot",
-          "a": 110,
-          "h": 74
-        },
-        {
-          "c": "Q3 00:19.9",
-          "t": "A",
-          "x": "Portis REBOUND (Def)",
-          "a": 110,
-          "h": 74
-        },
-        {
-          "c": "Q3 00:10.1",
-          "t": "A",
-          "x": "MISS Richards Layup",
-          "a": 110,
-          "h": 74
-        },
-        {
-          "c": "Q3 00:10.1",
-          "t": "H",
-          "x": "Gray REBOUND (Def)",
-          "a": 110,
-          "h": 74
-        },
-        {
-          "c": "Q3 00:01.3",
-          "t": "H",
-          "x": "MISS Sensabaugh 3PT Jump Shot",
-          "a": 110,
-          "h": 74
-        },
-        {
-          "c": "Q3 00:01.3",
+          "c": "Q3 01:08.3",
           "t": "A",
           "x": "Fontecchio REBOUND (Def)",
-          "a": 110,
-          "h": 74
+          "a": 98,
+          "h": 65
+        },
+        {
+          "c": "Q3 00:55.6",
+          "t": "A",
+          "x": "Fontecchio Jump Shot (2 PTS) (Johnson AST)",
+          "a": 100,
+          "h": 65
+        },
+        {
+          "c": "Q3 00:29.5",
+          "t": "H",
+          "x": "Sensabaugh 3PT Jump Shot (3 PTS) (Bailey AST)",
+          "a": 100,
+          "h": 68
         },
         {
           "c": "Q3 00:00.0",
           "t": "A",
-          "x": "MISS Johnson Jump Shot",
-          "a": 110,
-          "h": 74
-        },
-        {
-          "c": "Q3 00:00.0",
-          "t": "H",
-          "x": "Filipowski REBOUND (Def)",
-          "a": 110,
-          "h": 74
+          "x": "Portis Layup (10 PTS)",
+          "a": 102,
+          "h": 68
         },
         {
           "c": "Q4 12:00.0",
           "t": null,
           "x": "--- Start of Q4 ---",
-          "a": 110,
-          "h": 74
+          "a": 102,
+          "h": 68
         },
         {
-          "c": "Q4 11:52.7",
+          "c": "Q4 11:30.6",
           "t": "H",
-          "x": "Collier 3PT Jump Shot (7 PTS) (Filipowski AST)",
-          "a": 110,
-          "h": 77
+          "x": "Gray Layup (11 PTS) (Sensabaugh AST)",
+          "a": 102,
+          "h": 70
         },
         {
-          "c": "Q4 11:42.6",
-          "t": "A",
-          "x": "Portis Layup (11 PTS)",
-          "a": 112,
-          "h": 77
+          "c": "Q4 11:24.7",
+          "t": "H",
+          "x": "Bailey Foul",
+          "a": 102,
+          "h": 70
         },
         {
           "c": "Q4 11:24.7",
           "t": "A",
-          "x": "Young Foul \u2014 Collier 2/2 FT",
-          "a": 112,
-          "h": 79
+          "x": "MISS Young Jump Shot",
+          "a": 102,
+          "h": 70
         },
         {
-          "c": "Q4 11:16.1",
+          "c": "Q4 11:24.7",
+          "t": "H",
+          "x": "TEAM REBOUND (Def)",
+          "a": 102,
+          "h": 70
+        },
+        {
+          "c": "Q4 11:12.6",
+          "t": "H",
+          "x": "Collier Turnover",
+          "a": 102,
+          "h": 70
+        },
+        {
+          "c": "Q4 10:56.8",
           "t": "A",
-          "x": "MISS Portis Jump Shot",
-          "a": 112,
-          "h": 79
+          "x": "MISS Young Jump Shot",
+          "a": 102,
+          "h": 70
         },
         {
-          "c": "Q4 11:16.1",
+          "c": "Q4 10:56.8",
           "t": "H",
           "x": "Filipowski REBOUND (Def)",
-          "a": 112,
+          "a": 102,
+          "h": 70
+        },
+        {
+          "c": "Q4 10:52.0",
+          "t": "A",
+          "x": "Fontecchio Foul",
+          "a": 102,
+          "h": 70
+        },
+        {
+          "c": "Q4 10:52.0",
+          "t": "H",
+          "x": "MISS Filipowski Jump Shot",
+          "a": 102,
+          "h": 70
+        },
+        {
+          "c": "Q4 10:52.0",
+          "t": "A",
+          "x": "Portis REBOUND (Def)",
+          "a": 102,
+          "h": 70
+        },
+        {
+          "c": "Q4 10:48.2",
+          "t": "H",
+          "x": "Gray Foul",
+          "a": 102,
+          "h": 70
+        },
+        {
+          "c": "Q4 10:48.2",
+          "t": "A",
+          "x": "MISS Young Jump Shot",
+          "a": 102,
+          "h": 70
+        },
+        {
+          "c": "Q4 10:48.2",
+          "t": "H",
+          "x": "Sensabaugh REBOUND (Def)",
+          "a": 102,
+          "h": 70
+        },
+        {
+          "c": "Q4 10:35.8",
+          "t": "H",
+          "x": "MISS Filipowski Layup (Richards BLOCK)",
+          "a": 102,
+          "h": 70
+        },
+        {
+          "c": "Q4 10:35.8",
+          "t": "A",
+          "x": "Portis REBOUND (Def)",
+          "a": 102,
+          "h": 70
+        },
+        {
+          "c": "Q4 10:27.0",
+          "t": "A",
+          "x": "MISS Young 3PT Jump Shot",
+          "a": 102,
+          "h": 70
+        },
+        {
+          "c": "Q4 10:27.0",
+          "t": "H",
+          "x": "TEAM REBOUND (Def)",
+          "a": 102,
+          "h": 70
+        },
+        {
+          "c": "Q4 10:27.0",
+          "t": "H",
+          "x": "SUB: Peterson FOR Bailey",
+          "a": 102,
+          "h": 70
+        },
+        {
+          "c": "Q4 10:27.0",
+          "t": "H",
+          "x": "SUB: Nurki\u0107 FOR Filipowski",
+          "a": 102,
+          "h": 70
+        },
+        {
+          "c": "Q4 10:27.0",
+          "t": "A",
+          "x": "SUB: Jr. FOR Portis",
+          "a": 102,
+          "h": 70
+        },
+        {
+          "c": "Q4 10:27.0",
+          "t": "A",
+          "x": "SUB: Mitchell FOR Johnson",
+          "a": 102,
+          "h": 70
+        },
+        {
+          "c": "Q4 10:00.0",
+          "t": "H",
+          "x": "Nurki\u0107 Layup (11 PTS) (Collier AST)",
+          "a": 102,
+          "h": 72
+        },
+        {
+          "c": "Q4 09:52.2",
+          "t": "A",
+          "x": "Jr. Layup (6 PTS) (Young AST)",
+          "a": 104,
+          "h": 72
+        },
+        {
+          "c": "Q4 09:43.9",
+          "t": "H",
+          "x": "MISS Peterson 3PT Jump Shot",
+          "a": 104,
+          "h": 72
+        },
+        {
+          "c": "Q4 09:43.9",
+          "t": "H",
+          "x": "Gray REBOUND (Off)",
+          "a": 104,
+          "h": 72
+        },
+        {
+          "c": "Q4 09:41.0",
+          "t": "H",
+          "x": "Peterson Turnover",
+          "a": 104,
+          "h": 72
+        },
+        {
+          "c": "Q4 09:26.6",
+          "t": "A",
+          "x": "Fontecchio Jump Shot (4 PTS) (Mitchell AST)",
+          "a": 106,
+          "h": 72
+        },
+        {
+          "c": "Q4 09:10.8",
+          "t": "A",
+          "x": "Jr. Foul",
+          "a": 106,
+          "h": 72
+        },
+        {
+          "c": "Q4 09:10.8",
+          "t": "H",
+          "x": "Collier 3PT Jump Shot (7 PTS) (Sensabaugh AST)",
+          "a": 106,
+          "h": 75
+        },
+        {
+          "c": "Q4 09:02.5",
+          "t": "H",
+          "x": "Sensabaugh Foul \u2014 Richards 2/2 FT",
+          "a": 108,
+          "h": 75
+        },
+        {
+          "c": "Q4 08:59.4",
+          "t": "H",
+          "x": "Peterson Jump Shot (13 PTS) (Gray AST)",
+          "a": 108,
+          "h": 77
+        },
+        {
+          "c": "Q4 08:29.3",
+          "t": "A",
+          "x": "MISS Jr. 3PT Jump Shot",
+          "a": 108,
+          "h": 77
+        },
+        {
+          "c": "Q4 08:29.3",
+          "t": "H",
+          "x": "Nurki\u0107 REBOUND (Def)",
+          "a": 108,
+          "h": 77
+        },
+        {
+          "c": "Q4 08:11.5",
+          "t": "H",
+          "x": "MISS Gray Layup",
+          "a": 108,
+          "h": 77
+        },
+        {
+          "c": "Q4 08:11.5",
+          "t": "H",
+          "x": "Collier REBOUND (Off)",
+          "a": 108,
+          "h": 77
+        },
+        {
+          "c": "Q4 08:10.5",
+          "t": "H",
+          "x": "Nurki\u0107 Layup (13 PTS) (Collier AST)",
+          "a": 108,
           "h": 79
         },
         {
-          "c": "Q4 11:12.2",
-          "t": "H",
-          "x": "Gray Jump Shot (10 PTS)",
-          "a": 112,
-          "h": 81
-        },
-        {
-          "c": "Q4 11:02.2",
+          "c": "Q4 08:00.4",
           "t": "A",
-          "x": "Portis Turnover",
-          "a": 112,
-          "h": 81
+          "x": "MISS Jr. Jump Shot",
+          "a": 108,
+          "h": 79
         },
         {
-          "c": "Q4 10:52.8",
+          "c": "Q4 08:00.4",
           "t": "H",
-          "x": "MISS Collier Layup",
-          "a": 112,
-          "h": 81
+          "x": "Peterson REBOUND (Def)",
+          "a": 108,
+          "h": 79
         },
         {
-          "c": "Q4 10:52.8",
+          "c": "Q4 07:50.0",
           "t": "H",
-          "x": "Bailey REBOUND (Off)",
-          "a": 112,
-          "h": 81
+          "x": "MISS Nurki\u0107 3PT Jump Shot",
+          "a": 108,
+          "h": 79
         },
         {
-          "c": "Q4 10:51.8",
-          "t": "H",
-          "x": "Bailey Jump Shot (6 PTS) (Collier AST)",
-          "a": 112,
-          "h": 83
-        },
-        {
-          "c": "Q4 10:48.5",
-          "t": "A",
-          "x": "Young Jump Shot (4 PTS) (Portis AST)",
-          "a": 114,
-          "h": 83
-        },
-        {
-          "c": "Q4 10:35.6",
-          "t": "H",
-          "x": "Bailey Turnover (Johnson STEAL)",
-          "a": 114,
-          "h": 83
-        },
-        {
-          "c": "Q4 10:28.5",
-          "t": "H",
-          "x": "Gray Foul",
-          "a": 114,
-          "h": 83
-        },
-        {
-          "c": "Q4 10:28.5",
-          "t": "A",
-          "x": "Johnson 3PT Jump Shot (12 PTS)",
-          "a": 117,
-          "h": 83
-        },
-        {
-          "c": "Q4 10:28.5",
-          "t": "H",
-          "x": "SUB: Peterson FOR Bailey",
-          "a": 117,
-          "h": 83
-        },
-        {
-          "c": "Q4 10:28.5",
-          "t": "H",
-          "x": "SUB: Nurki\u0107 FOR Filipowski",
-          "a": 117,
-          "h": 83
-        },
-        {
-          "c": "Q4 10:28.5",
-          "t": "A",
-          "x": "SUB: Jr. FOR Portis",
-          "a": 117,
-          "h": 83
-        },
-        {
-          "c": "Q4 10:28.5",
-          "t": "A",
-          "x": "SUB: Mitchell FOR Johnson",
-          "a": 117,
-          "h": 83
-        },
-        {
-          "c": "Q4 10:13.0",
-          "t": "H",
-          "x": "Sensabaugh Turnover (Mitchell STEAL)",
-          "a": 117,
-          "h": 83
-        },
-        {
-          "c": "Q4 10:03.7",
-          "t": "A",
-          "x": "Jr. Turnover (Gray STEAL)",
-          "a": 117,
-          "h": 83
-        },
-        {
-          "c": "Q4 09:41.7",
-          "t": "H",
-          "x": "Nurki\u0107 Jump Shot (4 PTS) (Peterson AST)",
-          "a": 117,
-          "h": 85
-        },
-        {
-          "c": "Q4 09:17.2",
-          "t": "A",
-          "x": "MISS Jr. 3PT Jump Shot",
-          "a": 117,
-          "h": 85
-        },
-        {
-          "c": "Q4 09:17.2",
-          "t": "H",
-          "x": "Gray REBOUND (Def)",
-          "a": 117,
-          "h": 85
-        },
-        {
-          "c": "Q4 09:08.5",
-          "t": "H",
-          "x": "Nurki\u0107 Turnover",
-          "a": 117,
-          "h": 85
-        },
-        {
-          "c": "Q4 08:52.5",
-          "t": "A",
-          "x": "MISS Richards Jump Shot",
-          "a": 117,
-          "h": 85
-        },
-        {
-          "c": "Q4 08:52.5",
-          "t": "H",
-          "x": "Nurki\u0107 REBOUND (Def)",
-          "a": 117,
-          "h": 85
-        },
-        {
-          "c": "Q4 08:48.1",
-          "t": "H",
-          "x": "Collier Jump Shot (11 PTS)",
-          "a": 117,
-          "h": 87
-        },
-        {
-          "c": "Q4 08:19.6",
-          "t": "A",
-          "x": "Fontecchio Layup (2 PTS)",
-          "a": 119,
-          "h": 87
-        },
-        {
-          "c": "Q4 08:13.6",
-          "t": "H",
-          "x": "MISS Nurki\u0107 Jump Shot (Richards BLOCK)",
-          "a": 119,
-          "h": 87
-        },
-        {
-          "c": "Q4 08:13.6",
+          "c": "Q4 07:50.0",
           "t": "A",
           "x": "Richards REBOUND (Def)",
-          "a": 119,
-          "h": 87
+          "a": 108,
+          "h": 79
         },
         {
-          "c": "Q4 08:05.8",
-          "t": "A",
-          "x": "Young Jump Shot (6 PTS)",
-          "a": 121,
-          "h": 87
-        },
-        {
-          "c": "Q4 08:02.4",
-          "t": "H",
-          "x": "Sensabaugh 3PT Jump Shot (8 PTS) (Collier AST)",
-          "a": 121,
-          "h": 90
-        },
-        {
-          "c": "Q4 07:53.6",
-          "t": "A",
-          "x": "Richards Layup (6 PTS)",
-          "a": 123,
-          "h": 90
-        },
-        {
-          "c": "Q4 07:53.6",
+          "c": "Q4 07:50.0",
           "t": "H",
           "x": "SUB: George FOR Peterson",
-          "a": 123,
-          "h": 90
+          "a": 108,
+          "h": 79
         },
         {
-          "c": "Q4 07:53.6",
+          "c": "Q4 07:50.0",
           "t": "H",
           "x": "SUB: Bailey FOR Nurki\u0107",
-          "a": 123,
-          "h": 90
+          "a": 108,
+          "h": 79
         },
         {
-          "c": "Q4 07:53.6",
+          "c": "Q4 07:50.0",
           "t": "H",
           "x": "SUB: Filipowski FOR Sensabaugh",
-          "a": 123,
-          "h": 90
+          "a": 108,
+          "h": 79
         },
         {
-          "c": "Q4 07:53.6",
+          "c": "Q4 07:50.0",
           "t": "A",
           "x": "SUB: Antetokounmpo FOR Jr.",
-          "a": 123,
-          "h": 90
+          "a": 108,
+          "h": 79
         },
         {
-          "c": "Q4 07:53.6",
+          "c": "Q4 07:50.0",
           "t": "A",
           "x": "SUB: Portis FOR Young",
-          "a": 123,
-          "h": 90
+          "a": 108,
+          "h": 79
         },
         {
-          "c": "Q4 07:53.6",
+          "c": "Q4 07:50.0",
           "t": "A",
           "x": "SUB: Jovi\u0107 FOR Richards",
-          "a": 123,
-          "h": 90
+          "a": 108,
+          "h": 79
         },
         {
-          "c": "Q4 07:26.3",
-          "t": "H",
-          "x": "MISS Collier 3PT Jump Shot",
-          "a": 123,
-          "h": 90
-        },
-        {
-          "c": "Q4 07:26.3",
+          "c": "Q4 07:43.6",
           "t": "A",
-          "x": "Fontecchio REBOUND (Def)",
-          "a": 123,
-          "h": 90
+          "x": "Antetokounmpo Turnover (Bailey STEAL)",
+          "a": 108,
+          "h": 79
         },
         {
-          "c": "Q4 07:00.8",
-          "t": "A",
-          "x": "Antetokounmpo Jump Shot (39 PTS)",
-          "a": 125,
-          "h": 90
-        },
-        {
-          "c": "Q4 06:57.4",
+          "c": "Q4 07:29.9",
           "t": "H",
-          "x": "George 3PT Jump Shot (10 PTS) (Collier AST)",
-          "a": 125,
-          "h": 93
+          "x": "MISS Gray 3PT Jump Shot",
+          "a": 108,
+          "h": 79
         },
         {
-          "c": "Q4 06:43.2",
+          "c": "Q4 07:29.9",
           "t": "A",
-          "x": "Fontecchio 3PT Jump Shot (5 PTS) (Jovi\u0107 AST)",
-          "a": 128,
-          "h": 93
+          "x": "Jovi\u0107 REBOUND (Def)",
+          "a": 108,
+          "h": 79
         },
         {
-          "c": "Q4 06:27.0",
+          "c": "Q4 07:24.4",
+          "t": "A",
+          "x": "MISS Jovi\u0107 3PT Jump Shot",
+          "a": 108,
+          "h": 79
+        },
+        {
+          "c": "Q4 07:24.4",
           "t": "H",
-          "x": "Gray Turnover (Fontecchio STEAL)",
-          "a": 128,
-          "h": 93
+          "x": "Filipowski REBOUND (Def)",
+          "a": 108,
+          "h": 79
+        },
+        {
+          "c": "Q4 07:10.2",
+          "t": "H",
+          "x": "Filipowski Jump Shot (4 PTS) (George AST)",
+          "a": 108,
+          "h": 81
+        },
+        {
+          "c": "Q4 07:03.0",
+          "t": "H",
+          "x": "Bailey Foul",
+          "a": 108,
+          "h": 81
+        },
+        {
+          "c": "Q4 07:03.0",
+          "t": "A",
+          "x": "Jovi\u0107 Jump Shot (5 PTS)",
+          "a": 110,
+          "h": 81
+        },
+        {
+          "c": "Q4 06:34.7",
+          "t": "A",
+          "x": "Portis Foul",
+          "a": 110,
+          "h": 81
+        },
+        {
+          "c": "Q4 06:34.7",
+          "t": "H",
+          "x": "George 3PT Jump Shot (9 PTS) (Bailey AST)",
+          "a": 110,
+          "h": 84
+        },
+        {
+          "c": "Q4 06:22.6",
+          "t": "A",
+          "x": "MISS Portis 3PT Jump Shot",
+          "a": 110,
+          "h": 84
+        },
+        {
+          "c": "Q4 06:22.6",
+          "t": "H",
+          "x": "George REBOUND (Def)",
+          "a": 110,
+          "h": 84
         },
         {
           "c": "Q4 06:16.8",
-          "t": "A",
-          "x": "Antetokounmpo Layup (41 PTS) (Mitchell AST)",
-          "a": 130,
-          "h": 93
-        },
-        {
-          "c": "Q4 06:12.1",
           "t": "H",
-          "x": "MISS Collier Jump Shot",
-          "a": 130,
-          "h": 93
+          "x": "Filipowski Jump Shot (6 PTS)",
+          "a": 110,
+          "h": 86
         },
         {
-          "c": "Q4 06:12.1",
+          "c": "Q4 05:47.3",
           "t": "A",
-          "x": "TEAM REBOUND (Def)",
-          "a": 130,
-          "h": 93
+          "x": "Antetokounmpo Layup (33 PTS)",
+          "a": 112,
+          "h": 86
         },
         {
-          "c": "Q4 06:02.5",
-          "t": "A",
-          "x": "Antetokounmpo Turnover (Filipowski STEAL)",
-          "a": 130,
-          "h": 93
-        },
-        {
-          "c": "Q4 05:57.3",
+          "c": "Q4 05:26.8",
           "t": "H",
-          "x": "Collier Layup (13 PTS)",
-          "a": 130,
-          "h": 95
+          "x": "Filipowski Layup (8 PTS)",
+          "a": 112,
+          "h": 88
         },
         {
-          "c": "Q4 05:47.0",
-          "t": "A",
-          "x": "MISS Mitchell Layup",
-          "a": 130,
-          "h": 95
-        },
-        {
-          "c": "Q4 05:47.0",
-          "t": "H",
-          "x": "Gray REBOUND (Def)",
-          "a": 130,
-          "h": 95
-        },
-        {
-          "c": "Q4 05:31.8",
-          "t": "H",
-          "x": "Bailey Jump Shot (8 PTS) (George AST)",
-          "a": 130,
-          "h": 97
-        },
-        {
-          "c": "Q4 05:18.1",
-          "t": "A",
-          "x": "MISS Antetokounmpo Jump Shot",
-          "a": 130,
-          "h": 97
-        },
-        {
-          "c": "Q4 05:18.1",
-          "t": "A",
-          "x": "Fontecchio REBOUND (Off)",
-          "a": 130,
-          "h": 97
-        },
-        {
-          "c": "Q4 05:18.1",
+          "c": "Q4 05:26.8",
           "t": "H",
           "x": "SUB: Jr. FOR George",
-          "a": 130,
-          "h": 97
+          "a": 112,
+          "h": 88
         },
         {
-          "c": "Q4 05:18.1",
+          "c": "Q4 05:26.8",
           "t": "H",
           "x": "SUB: Green FOR Bailey",
-          "a": 130,
-          "h": 97
+          "a": 112,
+          "h": 88
         },
         {
-          "c": "Q4 05:18.1",
+          "c": "Q4 05:26.8",
           "t": "H",
           "x": "SUB: Nurki\u0107 FOR Filipowski",
-          "a": 130,
-          "h": 97
+          "a": 112,
+          "h": 88
         },
         {
-          "c": "Q4 05:18.1",
+          "c": "Q4 05:26.8",
           "t": "H",
           "x": "SUB: Alexander FOR Gray",
-          "a": 130,
-          "h": 97
+          "a": 112,
+          "h": 88
         },
         {
-          "c": "Q4 05:18.1",
+          "c": "Q4 05:26.8",
           "t": "A",
           "x": "SUB: Adebayo FOR Antetokounmpo",
-          "a": 130,
-          "h": 97
+          "a": 112,
+          "h": 88
         },
         {
-          "c": "Q4 05:18.1",
+          "c": "Q4 05:26.8",
           "t": "A",
           "x": "SUB: Thompson FOR Portis",
-          "a": 130,
-          "h": 97
+          "a": 112,
+          "h": 88
         },
         {
-          "c": "Q4 05:18.1",
+          "c": "Q4 05:26.8",
           "t": "A",
           "x": "SUB: Young FOR Jovi\u0107",
-          "a": 130,
-          "h": 97
+          "a": 112,
+          "h": 88
         },
         {
-          "c": "Q4 05:18.1",
+          "c": "Q4 05:26.8",
           "t": "A",
           "x": "SUB: Richards FOR Mitchell",
-          "a": 130,
-          "h": 97
+          "a": 112,
+          "h": 88
         },
         {
-          "c": "Q4 05:11.6",
+          "c": "Q4 05:11.3",
           "t": "A",
-          "x": "MISS Fontecchio 3PT Jump Shot",
-          "a": 130,
-          "h": 97
+          "x": "MISS Thompson Layup",
+          "a": 112,
+          "h": 88
         },
         {
-          "c": "Q4 05:11.6",
-          "t": "H",
-          "x": "Collier REBOUND (Def)",
-          "a": 130,
-          "h": 97
-        },
-        {
-          "c": "Q4 05:07.6",
-          "t": "A",
-          "x": "Richards Foul \u2014 Jr. 2/2 FT",
-          "a": 130,
-          "h": 99
-        },
-        {
-          "c": "Q4 04:38.9",
-          "t": "A",
-          "x": "Young Layup (8 PTS)",
-          "a": 132,
-          "h": 99
-        },
-        {
-          "c": "Q4 04:32.1",
-          "t": "H",
-          "x": "Jr. Turnover",
-          "a": 132,
-          "h": 99
-        },
-        {
-          "c": "Q4 04:11.2",
-          "t": "A",
-          "x": "Thompson Turnover",
-          "a": 132,
-          "h": 99
-        },
-        {
-          "c": "Q4 04:04.5",
-          "t": "A",
-          "x": "Young Foul \u2014 Jr. 2/3 FT",
-          "a": 132,
-          "h": 101
-        },
-        {
-          "c": "Q4 03:43.6",
-          "t": "H",
-          "x": "Green Foul \u2014 Richards 2/3 FT",
-          "a": 134,
-          "h": 101
-        },
-        {
-          "c": "Q4 03:14.3",
-          "t": "H",
-          "x": "Green 3PT Jump Shot (5 PTS) (Alexander AST)",
-          "a": 134,
-          "h": 104
-        },
-        {
-          "c": "Q4 02:52.9",
-          "t": "A",
-          "x": "MISS Adebayo Jump Shot",
-          "a": 134,
-          "h": 104
-        },
-        {
-          "c": "Q4 02:52.9",
-          "t": "H",
-          "x": "Collier REBOUND (Def)",
-          "a": 134,
-          "h": 104
-        },
-        {
-          "c": "Q4 02:52.9",
-          "t": "H",
-          "x": "SUB: Filipowski FOR Nurki\u0107",
-          "a": 134,
-          "h": 104
-        },
-        {
-          "c": "Q4 02:42.1",
-          "t": "H",
-          "x": "Jr. 3PT Jump Shot (27 PTS) (Green AST)",
-          "a": 134,
-          "h": 107
-        },
-        {
-          "c": "Q4 02:26.9",
-          "t": "A",
-          "x": "MISS Thompson Jump Shot",
-          "a": 134,
-          "h": 107
-        },
-        {
-          "c": "Q4 02:26.9",
-          "t": "H",
-          "x": "Alexander REBOUND (Def)",
-          "a": 134,
-          "h": 107
-        },
-        {
-          "c": "Q4 02:02.5",
-          "t": "H",
-          "x": "MISS Alexander 3PT Jump Shot",
-          "a": 134,
-          "h": 107
-        },
-        {
-          "c": "Q4 02:02.5",
-          "t": "A",
-          "x": "TEAM REBOUND (Def)",
-          "a": 134,
-          "h": 107
-        },
-        {
-          "c": "Q4 02:00.2",
-          "t": "H",
-          "x": "Jr. Foul \u2014 Young 1/2 FT",
-          "a": 135,
-          "h": 107
-        },
-        {
-          "c": "Q4 01:47.7",
-          "t": "H",
-          "x": "MISS Alexander Jump Shot",
-          "a": 135,
-          "h": 107
-        },
-        {
-          "c": "Q4 01:47.7",
-          "t": "A",
-          "x": "Adebayo REBOUND (Def)",
-          "a": 135,
-          "h": 107
-        },
-        {
-          "c": "Q4 01:42.0",
-          "t": "H",
-          "x": "Jr. Foul \u2014 Thompson 3/3 FT",
-          "a": 138,
-          "h": 107
-        },
-        {
-          "c": "Q4 01:26.0",
-          "t": "H",
-          "x": "Collier Jump Shot (15 PTS) (Filipowski AST)",
-          "a": 138,
-          "h": 109
-        },
-        {
-          "c": "Q4 01:13.1",
-          "t": "A",
-          "x": "MISS Adebayo Layup",
-          "a": 138,
-          "h": 109
-        },
-        {
-          "c": "Q4 01:13.1",
-          "t": "H",
-          "x": "Alexander REBOUND (Def)",
-          "a": 138,
-          "h": 109
-        },
-        {
-          "c": "Q4 01:08.8",
-          "t": "H",
-          "x": "Collier Turnover (Young STEAL)",
-          "a": 138,
-          "h": 109
-        },
-        {
-          "c": "Q4 00:52.9",
-          "t": "A",
-          "x": "MISS Thompson 3PT Jump Shot",
-          "a": 138,
-          "h": 109
-        },
-        {
-          "c": "Q4 00:52.9",
-          "t": "H",
-          "x": "Collier REBOUND (Def)",
-          "a": 138,
-          "h": 109
-        },
-        {
-          "c": "Q4 00:23.4",
-          "t": "H",
-          "x": "MISS Jr. Layup",
-          "a": 138,
-          "h": 109
-        },
-        {
-          "c": "Q4 00:23.4",
-          "t": "H",
-          "x": "Jr. REBOUND (Off)",
-          "a": 138,
-          "h": 109
-        },
-        {
-          "c": "Q4 00:23.4",
-          "t": "H",
-          "x": "SUB: Bailey FOR Green",
-          "a": 138,
-          "h": 109
-        },
-        {
-          "c": "Q4 00:23.4",
-          "t": "H",
-          "x": "SUB: Gray FOR Alexander",
-          "a": 138,
-          "h": 109
-        },
-        {
-          "c": "Q4 00:23.4",
-          "t": "A",
-          "x": "SUB: Antetokounmpo FOR Adebayo",
-          "a": 138,
-          "h": 109
-        },
-        {
-          "c": "Q4 00:23.4",
-          "t": "A",
-          "x": "SUB: Portis FOR Thompson",
-          "a": 138,
-          "h": 109
-        },
-        {
-          "c": "Q4 00:23.4",
-          "t": "A",
-          "x": "SUB: Jovi\u0107 FOR Young",
-          "a": 138,
-          "h": 109
-        },
-        {
-          "c": "Q4 00:23.4",
-          "t": "A",
-          "x": "SUB: Mitchell FOR Richards",
-          "a": 138,
-          "h": 109
-        },
-        {
-          "c": "Q4 00:19.8",
-          "t": "H",
-          "x": "MISS Gray Layup",
-          "a": 138,
-          "h": 109
-        },
-        {
-          "c": "Q4 00:19.8",
-          "t": "A",
-          "x": "Portis REBOUND (Def)",
-          "a": 138,
-          "h": 109
-        },
-        {
-          "c": "Q4 00:15.9",
-          "t": "A",
-          "x": "Antetokounmpo Layup (43 PTS) (Portis AST)",
-          "a": 140,
-          "h": 109
-        },
-        {
-          "c": "Q4 00:10.1",
-          "t": "H",
-          "x": "Gray Layup (12 PTS) (Collier AST)",
-          "a": 140,
-          "h": 111
-        },
-        {
-          "c": "Q4 00:06.0",
-          "t": "A",
-          "x": "MISS Jovi\u0107 3PT Jump Shot",
-          "a": 140,
-          "h": 111
-        },
-        {
-          "c": "Q4 00:06.0",
+          "c": "Q4 05:11.3",
           "t": "H",
           "x": "Jr. REBOUND (Def)",
-          "a": 140,
-          "h": 111
+          "a": 112,
+          "h": 88
+        },
+        {
+          "c": "Q4 05:01.2",
+          "t": "H",
+          "x": "Jr. Jump Shot (17 PTS)",
+          "a": 112,
+          "h": 90
+        },
+        {
+          "c": "Q4 04:30.9",
+          "t": "A",
+          "x": "MISS Young Jump Shot (Nurki\u0107 BLOCK)",
+          "a": 112,
+          "h": 90
+        },
+        {
+          "c": "Q4 04:30.9",
+          "t": "A",
+          "x": "Richards REBOUND (Off)",
+          "a": 112,
+          "h": 90
+        },
+        {
+          "c": "Q4 04:26.3",
+          "t": "A",
+          "x": "Richards Turnover (Nurki\u0107 STEAL)",
+          "a": 112,
+          "h": 90
+        },
+        {
+          "c": "Q4 04:16.6",
+          "t": "H",
+          "x": "Jr. Turnover (Fontecchio STEAL)",
+          "a": 112,
+          "h": 90
+        },
+        {
+          "c": "Q4 03:52.3",
+          "t": "A",
+          "x": "Young Jump Shot (4 PTS)",
+          "a": 114,
+          "h": 90
+        },
+        {
+          "c": "Q4 03:30.8",
+          "t": "H",
+          "x": "MISS Collier Jump Shot",
+          "a": 114,
+          "h": 90
+        },
+        {
+          "c": "Q4 03:30.8",
+          "t": "A",
+          "x": "Richards REBOUND (Def)",
+          "a": 114,
+          "h": 90
+        },
+        {
+          "c": "Q4 03:24.4",
+          "t": "A",
+          "x": "MISS Young 3PT Jump Shot",
+          "a": 114,
+          "h": 90
+        },
+        {
+          "c": "Q4 03:24.4",
+          "t": "H",
+          "x": "Nurki\u0107 REBOUND (Def)",
+          "a": 114,
+          "h": 90
+        },
+        {
+          "c": "Q4 03:16.6",
+          "t": "H",
+          "x": "Collier Turnover (Thompson STEAL)",
+          "a": 114,
+          "h": 90
+        },
+        {
+          "c": "Q4 03:11.2",
+          "t": "A",
+          "x": "Thompson Jump Shot (10 PTS)",
+          "a": 116,
+          "h": 90
+        },
+        {
+          "c": "Q4 02:43.0",
+          "t": "H",
+          "x": "Nurki\u0107 Layup (15 PTS) (Collier AST)",
+          "a": 116,
+          "h": 92
+        },
+        {
+          "c": "Q4 02:43.0",
+          "t": "H",
+          "x": "SUB: Filipowski FOR Nurki\u0107",
+          "a": 116,
+          "h": 92
+        },
+        {
+          "c": "Q4 02:24.6",
+          "t": "H",
+          "x": "Green Foul \u2014 Richards 1/2 FT",
+          "a": 117,
+          "h": 92
+        },
+        {
+          "c": "Q4 02:12.5",
+          "t": "H",
+          "x": "MISS Green Jump Shot",
+          "a": 117,
+          "h": 92
+        },
+        {
+          "c": "Q4 02:12.5",
+          "t": "A",
+          "x": "TEAM REBOUND (Def)",
+          "a": 117,
+          "h": 92
+        },
+        {
+          "c": "Q4 02:09.6",
+          "t": "A",
+          "x": "Richards Layup (9 PTS)",
+          "a": 119,
+          "h": 92
+        },
+        {
+          "c": "Q4 01:46.4",
+          "t": "H",
+          "x": "MISS Alexander 3PT Jump Shot",
+          "a": 119,
+          "h": 92
+        },
+        {
+          "c": "Q4 01:46.4",
+          "t": "A",
+          "x": "Adebayo REBOUND (Def)",
+          "a": 119,
+          "h": 92
+        },
+        {
+          "c": "Q4 01:37.2",
+          "t": "A",
+          "x": "Adebayo Jump Shot (25 PTS)",
+          "a": 121,
+          "h": 92
+        },
+        {
+          "c": "Q4 01:29.0",
+          "t": "H",
+          "x": "Alexander Layup (4 PTS)",
+          "a": 121,
+          "h": 94
+        },
+        {
+          "c": "Q4 01:23.3",
+          "t": "A",
+          "x": "Young Jump Shot (6 PTS)",
+          "a": 123,
+          "h": 94
+        },
+        {
+          "c": "Q4 01:18.9",
+          "t": "A",
+          "x": "Fontecchio Foul",
+          "a": 123,
+          "h": 94
+        },
+        {
+          "c": "Q4 01:18.9",
+          "t": "H",
+          "x": "Collier Turnover",
+          "a": 123,
+          "h": 94
+        },
+        {
+          "c": "Q4 01:06.3",
+          "t": "H",
+          "x": "Alexander Foul (penalty) \u2014 Young 2/2 FT",
+          "a": 125,
+          "h": 94
+        },
+        {
+          "c": "Q4 00:54.5",
+          "t": "H",
+          "x": "Jr. Jump Shot (19 PTS) (Collier AST)",
+          "a": 125,
+          "h": 96
+        },
+        {
+          "c": "Q4 00:24.3",
+          "t": "A",
+          "x": "Young Jump Shot (10 PTS)",
+          "a": 127,
+          "h": 96
+        },
+        {
+          "c": "Q4 00:24.3",
+          "t": "H",
+          "x": "SUB: Bailey FOR Green",
+          "a": 127,
+          "h": 96
+        },
+        {
+          "c": "Q4 00:24.3",
+          "t": "H",
+          "x": "SUB: Gray FOR Alexander",
+          "a": 127,
+          "h": 96
+        },
+        {
+          "c": "Q4 00:24.3",
+          "t": "A",
+          "x": "SUB: Antetokounmpo FOR Adebayo",
+          "a": 127,
+          "h": 96
+        },
+        {
+          "c": "Q4 00:24.3",
+          "t": "A",
+          "x": "SUB: Portis FOR Thompson",
+          "a": 127,
+          "h": 96
+        },
+        {
+          "c": "Q4 00:24.3",
+          "t": "A",
+          "x": "SUB: Jovi\u0107 FOR Young",
+          "a": 127,
+          "h": 96
+        },
+        {
+          "c": "Q4 00:24.3",
+          "t": "A",
+          "x": "SUB: Mitchell FOR Richards",
+          "a": 127,
+          "h": 96
+        },
+        {
+          "c": "Q4 00:00.0",
+          "t": "A",
+          "x": "Portis Foul",
+          "a": 127,
+          "h": 96
         },
         {
           "c": "Q4 00:00.0",
           "t": "H",
-          "x": "MISS Gray 3PT Jump Shot",
-          "a": 140,
-          "h": 111
-        },
-        {
-          "c": "Q4 00:00.0",
-          "t": "H",
-          "x": "Gray REBOUND (Off)",
-          "a": 140,
-          "h": 111
+          "x": "Collier Layup (9 PTS)",
+          "a": 127,
+          "h": 98
         }
       ],
       "box": {
         "H": [
           {
-            "name": "Jr.",
-            "FGM": 8,
-            "FGA": 18,
-            "FG3M": 3,
-            "FG3A": 5,
-            "FTM": 8,
-            "FTA": 9,
-            "OREB": 3,
-            "DREB": 7,
-            "REB": 10,
-            "AST": 1,
-            "STL": 1,
-            "BLK": 2,
-            "TOV": 5,
-            "PF": 6,
-            "PTS": 27,
+            "name": "Collier",
+            "FGM": 3,
+            "FGA": 5,
+            "FG3M": 1,
+            "FG3A": 2,
+            "FTM": 2,
+            "FTA": 3,
+            "OREB": 1,
+            "DREB": 0,
+            "REB": 1,
+            "AST": 6,
+            "STL": 0,
+            "BLK": 0,
+            "TOV": 4,
+            "PF": 1,
+            "PTS": 9,
             "MIN": 25
           },
           {
             "name": "Peterson",
-            "FGM": 3,
-            "FGA": 7,
-            "FG3M": 0,
-            "FG3A": 1,
+            "FGM": 6,
+            "FGA": 9,
+            "FG3M": 1,
+            "FG3A": 4,
             "FTM": 0,
             "FTA": 2,
-            "OREB": 1,
-            "DREB": 4,
-            "REB": 5,
-            "AST": 3,
-            "STL": 0,
-            "BLK": 0,
-            "TOV": 0,
-            "PF": 1,
-            "PTS": 6,
-            "MIN": 25
-          },
-          {
-            "name": "Collier",
-            "FGM": 6,
-            "FGA": 11,
-            "FG3M": 1,
-            "FG3A": 3,
-            "FTM": 2,
-            "FTA": 2,
             "OREB": 0,
-            "DREB": 4,
-            "REB": 4,
-            "AST": 7,
-            "STL": 0,
+            "DREB": 3,
+            "REB": 3,
+            "AST": 2,
+            "STL": 1,
             "BLK": 0,
-            "TOV": 3,
-            "PF": 1,
-            "PTS": 15,
+            "TOV": 1,
+            "PF": 2,
+            "PTS": 13,
             "MIN": 25
           },
           {
             "name": "George",
-            "FGM": 2,
-            "FGA": 9,
+            "FGM": 3,
+            "FGA": 12,
             "FG3M": 1,
-            "FG3A": 4,
-            "FTM": 5,
-            "FTA": 6,
+            "FG3A": 7,
+            "FTM": 2,
+            "FTA": 2,
             "OREB": 0,
-            "DREB": 0,
-            "REB": 0,
-            "AST": 5,
+            "DREB": 1,
+            "REB": 1,
+            "AST": 4,
             "STL": 1,
             "BLK": 0,
             "TOV": 1,
-            "PF": 0,
-            "PTS": 10,
+            "PF": 1,
+            "PTS": 9,
+            "MIN": 25
+          },
+          {
+            "name": "Jr.",
+            "FGM": 7,
+            "FGA": 16,
+            "FG3M": 1,
+            "FG3A": 3,
+            "FTM": 4,
+            "FTA": 4,
+            "OREB": 1,
+            "DREB": 4,
+            "REB": 5,
+            "AST": 1,
+            "STL": 2,
+            "BLK": 0,
+            "TOV": 3,
+            "PF": 4,
+            "PTS": 19,
             "MIN": 25
           },
           {
             "name": "Gray",
-            "FGM": 5,
-            "FGA": 9,
-            "FG3M": 2,
-            "FG3A": 4,
-            "FTM": 0,
-            "FTA": 0,
+            "FGM": 4,
+            "FGA": 7,
+            "FG3M": 1,
+            "FG3A": 2,
+            "FTM": 2,
+            "FTA": 2,
             "OREB": 1,
             "DREB": 3,
             "REB": 4,
-            "AST": 0,
-            "STL": 2,
+            "AST": 2,
+            "STL": 1,
             "BLK": 0,
-            "TOV": 3,
-            "PF": 2,
-            "PTS": 12,
+            "TOV": 1,
+            "PF": 3,
+            "PTS": 11,
             "MIN": 22
           },
           {
             "name": "Sensabaugh",
-            "FGM": 3,
-            "FGA": 10,
-            "FG3M": 2,
-            "FG3A": 7,
+            "FGM": 1,
+            "FGA": 5,
+            "FG3M": 1,
+            "FG3A": 5,
             "FTM": 0,
             "FTA": 0,
-            "OREB": 1,
-            "DREB": 0,
-            "REB": 1,
-            "AST": 2,
-            "STL": 0,
+            "OREB": 2,
+            "DREB": 1,
+            "REB": 3,
+            "AST": 4,
+            "STL": 1,
             "BLK": 0,
-            "TOV": 2,
+            "TOV": 1,
             "PF": 1,
-            "PTS": 8,
+            "PTS": 3,
             "MIN": 22
           },
           {
             "name": "Green",
-            "FGM": 2,
-            "FGA": 3,
-            "FG3M": 1,
-            "FG3A": 1,
-            "FTM": 0,
-            "FTA": 0,
-            "OREB": 1,
-            "DREB": 1,
-            "REB": 2,
-            "AST": 4,
-            "STL": 3,
-            "BLK": 0,
-            "TOV": 0,
-            "PF": 3,
-            "PTS": 5,
-            "MIN": 20
-          },
-          {
-            "name": "Bailey",
-            "FGM": 4,
-            "FGA": 8,
+            "FGM": 0,
+            "FGA": 2,
             "FG3M": 0,
             "FG3A": 0,
             "FTM": 0,
             "FTA": 0,
-            "OREB": 1,
-            "DREB": 0,
+            "OREB": 0,
+            "DREB": 1,
             "REB": 1,
-            "AST": 2,
-            "STL": 0,
-            "BLK": 1,
-            "TOV": 2,
+            "AST": 1,
+            "STL": 2,
+            "BLK": 0,
+            "TOV": 0,
             "PF": 3,
-            "PTS": 8,
-            "MIN": 17
+            "PTS": 0,
+            "MIN": 19
           },
           {
             "name": "Nurki\u0107",
-            "FGM": 1,
-            "FGA": 4,
-            "FG3M": 0,
-            "FG3A": 1,
+            "FGM": 6,
+            "FGA": 10,
+            "FG3M": 1,
+            "FG3A": 3,
             "FTM": 2,
             "FTA": 2,
             "OREB": 1,
-            "DREB": 4,
-            "REB": 5,
-            "AST": 2,
-            "STL": 0,
-            "BLK": 1,
-            "TOV": 1,
+            "DREB": 5,
+            "REB": 6,
+            "AST": 1,
+            "STL": 1,
+            "BLK": 2,
+            "TOV": 0,
             "PF": 1,
-            "PTS": 4,
+            "PTS": 15,
             "MIN": 17
           },
           {
-            "name": "Filipowski",
-            "FGM": 3,
-            "FGA": 4,
-            "FG3M": 1,
-            "FG3A": 2,
-            "FTM": 2,
-            "FTA": 3,
+            "name": "Bailey",
+            "FGM": 1,
+            "FGA": 5,
+            "FG3M": 0,
+            "FG3A": 1,
+            "FTM": 0,
+            "FTA": 0,
             "OREB": 0,
-            "DREB": 4,
-            "REB": 4,
-            "AST": 3,
+            "DREB": 1,
+            "REB": 1,
+            "AST": 5,
             "STL": 1,
             "BLK": 0,
-            "TOV": 0,
-            "PF": 0,
-            "PTS": 9,
+            "TOV": 2,
+            "PF": 3,
+            "PTS": 2,
+            "MIN": 17
+          },
+          {
+            "name": "Markkanen",
+            "FGM": 1,
+            "FGA": 2,
+            "FG3M": 0,
+            "FG3A": 1,
+            "FTM": 3,
+            "FTA": 3,
+            "OREB": 1,
+            "DREB": 1,
+            "REB": 2,
+            "AST": 1,
+            "STL": 0,
+            "BLK": 0,
+            "TOV": 2,
+            "PF": 3,
+            "PTS": 5,
             "MIN": 12
           },
           {
-            "name": "Alexander",
-            "FGM": 1,
-            "FGA": 4,
+            "name": "Filipowski",
+            "FGM": 4,
+            "FGA": 6,
             "FG3M": 0,
-            "FG3A": 2,
+            "FG3A": 0,
             "FTM": 0,
             "FTA": 0,
             "OREB": 0,
             "DREB": 2,
             "REB": 2,
-            "AST": 1,
-            "STL": 1,
-            "BLK": 1,
+            "AST": 0,
+            "STL": 0,
+            "BLK": 0,
             "TOV": 0,
             "PF": 0,
-            "PTS": 2,
+            "PTS": 8,
             "MIN": 12
           },
           {
-            "name": "Markkanen",
-            "FGM": 1,
-            "FGA": 5,
+            "name": "Alexander",
+            "FGM": 2,
+            "FGA": 3,
             "FG3M": 0,
-            "FG3A": 3,
-            "FTM": 3,
-            "FTA": 3,
-            "OREB": 1,
-            "DREB": 2,
-            "REB": 3,
-            "AST": 1,
-            "STL": 0,
+            "FG3A": 1,
+            "FTM": 0,
+            "FTA": 2,
+            "OREB": 0,
+            "DREB": 0,
+            "REB": 0,
+            "AST": 2,
+            "STL": 1,
             "BLK": 0,
-            "TOV": 1,
-            "PF": 2,
-            "PTS": 5,
+            "TOV": 0,
+            "PF": 1,
+            "PTS": 4,
             "MIN": 12
           }
         ],
         "A": [
           {
             "name": "Adebayo",
-            "FGM": 10,
-            "FGA": 16,
+            "FGM": 9,
+            "FGA": 13,
             "FG3M": 1,
             "FG3A": 1,
-            "FTM": 1,
-            "FTA": 2,
+            "FTM": 6,
+            "FTA": 8,
             "OREB": 2,
             "DREB": 7,
             "REB": 9,
-            "AST": 1,
+            "AST": 0,
             "STL": 1,
-            "BLK": 1,
-            "TOV": 3,
+            "BLK": 0,
+            "TOV": 5,
             "PF": 2,
-            "PTS": 22,
+            "PTS": 25,
             "MIN": 32
           },
           {
             "name": "Antetokounmpo",
-            "FGM": 14,
-            "FGA": 20,
+            "FGM": 11,
+            "FGA": 15,
             "FG3M": 0,
             "FG3A": 0,
-            "FTM": 15,
-            "FTA": 18,
-            "OREB": 2,
-            "DREB": 6,
-            "REB": 8,
-            "AST": 5,
-            "STL": 2,
+            "FTM": 11,
+            "FTA": 14,
+            "OREB": 1,
+            "DREB": 5,
+            "REB": 6,
+            "AST": 4,
+            "STL": 1,
             "BLK": 0,
-            "TOV": 3,
-            "PF": 3,
-            "PTS": 43,
+            "TOV": 2,
+            "PF": 1,
+            "PTS": 33,
             "MIN": 30
           },
           {
             "name": "Thompson",
-            "FGM": 5,
-            "FGA": 10,
+            "FGM": 4,
+            "FGA": 7,
             "FG3M": 0,
             "FG3A": 2,
-            "FTM": 5,
-            "FTA": 5,
+            "FTM": 2,
+            "FTA": 2,
             "OREB": 0,
             "DREB": 2,
             "REB": 2,
-            "AST": 3,
-            "STL": 0,
-            "BLK": 1,
-            "TOV": 2,
-            "PF": 0,
-            "PTS": 15,
-            "MIN": 25
+            "AST": 4,
+            "STL": 1,
+            "BLK": 0,
+            "TOV": 1,
+            "PF": 1,
+            "PTS": 10,
+            "MIN": 24
           },
           {
             "name": "Richards",
             "FGM": 3,
-            "FGA": 7,
+            "FGA": 4,
             "FG3M": 0,
             "FG3A": 0,
-            "FTM": 2,
-            "FTA": 3,
-            "OREB": 0,
-            "DREB": 2,
-            "REB": 2,
+            "FTM": 3,
+            "FTA": 4,
+            "OREB": 3,
+            "DREB": 3,
+            "REB": 6,
             "AST": 0,
             "STL": 0,
             "BLK": 2,
-            "TOV": 0,
-            "PF": 4,
-            "PTS": 8,
+            "TOV": 2,
+            "PF": 3,
+            "PTS": 9,
             "MIN": 22
           },
           {
             "name": "Jr.",
-            "FGM": 5,
-            "FGA": 9,
-            "FG3M": 3,
-            "FG3A": 6,
+            "FGM": 3,
+            "FGA": 7,
+            "FG3M": 0,
+            "FG3A": 2,
             "FTM": 0,
             "FTA": 0,
             "OREB": 0,
-            "DREB": 4,
-            "REB": 4,
-            "AST": 0,
+            "DREB": 1,
+            "REB": 1,
+            "AST": 2,
             "STL": 0,
             "BLK": 0,
-            "TOV": 1,
-            "PF": 1,
-            "PTS": 13,
+            "TOV": 0,
+            "PF": 2,
+            "PTS": 6,
             "MIN": 20
           },
           {
             "name": "Young",
             "FGM": 4,
-            "FGA": 7,
+            "FGA": 12,
             "FG3M": 0,
-            "FG3A": 0,
-            "FTM": 1,
+            "FG3A": 3,
+            "FTM": 2,
             "FTA": 2,
             "OREB": 0,
             "DREB": 0,
             "REB": 0,
             "AST": 2,
-            "STL": 2,
+            "STL": 1,
             "BLK": 0,
             "TOV": 1,
-            "PF": 2,
-            "PTS": 9,
-            "MIN": 19
+            "PF": 0,
+            "PTS": 10,
+            "MIN": 20
+          },
+          {
+            "name": "Wiggins",
+            "FGM": 3,
+            "FGA": 7,
+            "FG3M": 1,
+            "FG3A": 3,
+            "FTM": 0,
+            "FTA": 0,
+            "OREB": 3,
+            "DREB": 5,
+            "REB": 8,
+            "AST": 1,
+            "STL": 1,
+            "BLK": 0,
+            "TOV": 0,
+            "PF": 3,
+            "PTS": 7,
+            "MIN": 17
           },
           {
             "name": "Portis",
             "FGM": 5,
             "FGA": 9,
             "FG3M": 0,
-            "FG3A": 1,
-            "FTM": 1,
-            "FTA": 2,
-            "OREB": 1,
-            "DREB": 7,
-            "REB": 8,
-            "AST": 4,
-            "STL": 0,
-            "BLK": 1,
-            "TOV": 3,
-            "PF": 1,
-            "PTS": 11,
-            "MIN": 17
-          },
-          {
-            "name": "Wiggins",
-            "FGM": 1,
-            "FGA": 6,
-            "FG3M": 0,
-            "FG3A": 3,
+            "FG3A": 2,
             "FTM": 0,
             "FTA": 0,
             "OREB": 1,
-            "DREB": 4,
-            "REB": 5,
+            "DREB": 7,
+            "REB": 8,
             "AST": 1,
-            "STL": 2,
+            "STL": 0,
             "BLK": 0,
             "TOV": 0,
-            "PF": 3,
-            "PTS": 2,
+            "PF": 5,
+            "PTS": 10,
             "MIN": 17
           },
           {
             "name": "Fontecchio",
+            "FGM": 2,
+            "FGA": 2,
+            "FG3M": 0,
+            "FG3A": 0,
+            "FTM": 0,
+            "FTA": 0,
+            "OREB": 0,
+            "DREB": 1,
+            "REB": 1,
+            "AST": 1,
+            "STL": 1,
+            "BLK": 0,
+            "TOV": 0,
+            "PF": 2,
+            "PTS": 4,
+            "MIN": 15
+          },
+          {
+            "name": "Johnson",
+            "FGM": 1,
+            "FGA": 1,
+            "FG3M": 1,
+            "FG3A": 1,
+            "FTM": 0,
+            "FTA": 0,
+            "OREB": 2,
+            "DREB": 2,
+            "REB": 4,
+            "AST": 1,
+            "STL": 0,
+            "BLK": 0,
+            "TOV": 0,
+            "PF": 1,
+            "PTS": 3,
+            "MIN": 14
+          },
+          {
+            "name": "Jovi\u0107",
+            "FGM": 2,
+            "FGA": 6,
+            "FG3M": 1,
+            "FG3A": 3,
+            "FTM": 0,
+            "FTA": 0,
+            "OREB": 0,
+            "DREB": 1,
+            "REB": 1,
+            "AST": 0,
+            "STL": 0,
+            "BLK": 0,
+            "TOV": 0,
+            "PF": 1,
+            "PTS": 5,
+            "MIN": 13
+          },
+          {
+            "name": "Mitchell",
             "FGM": 2,
             "FGA": 4,
             "FG3M": 1,
             "FG3A": 2,
             "FTM": 0,
             "FTA": 0,
-            "OREB": 2,
-            "DREB": 2,
-            "REB": 4,
-            "AST": 0,
-            "STL": 1,
-            "BLK": 0,
-            "TOV": 0,
-            "PF": 0,
-            "PTS": 5,
-            "MIN": 15
-          },
-          {
-            "name": "Johnson",
-            "FGM": 5,
-            "FGA": 6,
-            "FG3M": 2,
-            "FG3A": 2,
-            "FTM": 0,
-            "FTA": 0,
-            "OREB": 2,
-            "DREB": 1,
-            "REB": 3,
-            "AST": 0,
-            "STL": 1,
-            "BLK": 0,
-            "TOV": 0,
-            "PF": 2,
-            "PTS": 12,
-            "MIN": 14
-          },
-          {
-            "name": "Jovi\u0107",
-            "FGM": 0,
-            "FGA": 1,
-            "FG3M": 0,
-            "FG3A": 1,
-            "FTM": 0,
-            "FTA": 0,
-            "OREB": 0,
-            "DREB": 3,
-            "REB": 3,
-            "AST": 3,
-            "STL": 0,
-            "BLK": 0,
-            "TOV": 0,
-            "PF": 2,
-            "PTS": 0,
-            "MIN": 13
-          },
-          {
-            "name": "Mitchell",
-            "FGM": 0,
-            "FGA": 2,
-            "FG3M": 0,
-            "FG3A": 1,
-            "FTM": 0,
-            "FTA": 0,
             "OREB": 0,
             "DREB": 0,
             "REB": 0,
             "AST": 2,
-            "STL": 1,
+            "STL": 0,
             "BLK": 0,
             "TOV": 0,
             "PF": 0,
-            "PTS": 0,
+            "PTS": 5,
             "MIN": 10
           }
         ]

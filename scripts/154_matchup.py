@@ -167,6 +167,29 @@ def current_roster(tid: int, rates, rseason: str):
     return out or None
 
 
+def prior_roster(season, home_tid, away_tid):
+    """The roster the TEAM RATING was fitted on.
+
+    Ratings are solved from last season's results, so they describe last
+    season's team. The engine already knows how to reconcile a rating with a
+    different roster — that is exactly what it does for injuries: it calibrates
+    the level against a REFERENCE roster and then applies the BPM difference
+    between reference and actual. Handing it last season's roster as the
+    reference makes the offseason the same problem, and no engine change is
+    needed. Roster turnover this year is worth 2.10 pts/100 on average and up to
+    7.07, so leaving the reference unset (delta = 0) applies a stale rating at
+    full strength.
+    """
+    out = {}
+    for tag, tid in (("H", home_tid), ("A", away_tid)):
+        pl, _ = roster(season, tid)
+        tot = sum(x["minutes"] for x in pl) or 1.0
+        for x in pl:
+            x["minutes"] *= 240.0 / tot
+        out[tag] = pl
+    return out
+
+
 def build_sides(season, home_tid, away_tid, out_ids, before=None,
                 rates=None, rseason=None):
     sides = {}
@@ -279,7 +302,9 @@ def main() -> None:
     if args.sims > 0:
         res, box, _ = sim.simulate(sides["H"], sides["A"], hid, aid,
                                    n_sims=args.sims, seed=args.seed,
-                                   anchor=(mu_home, mu_away))
+                                   anchor=(mu_home, mu_away),
+                                   anchor_ref=prior_roster(season, hid, aid)
+                                   if rseason else None)
         h, a = res["H"], res["A"]
         print(f"\n{args.sims} simulations")
         print(f"  {args.home} {h.mean():.1f}   {args.away} {a.mean():.1f}"
@@ -294,8 +319,15 @@ def main() -> None:
                   f"{np.percentile(d,10):>6.0f}{np.percentile(d,90):>6.0f}")
         return
 
+    aref = prior_roster(season, hid, aid) if rseason else None
+    if aref:
+        d = (sim.team_bpm(sides["H"]) - sim.team_bpm(aref["H"]),
+             sim.team_bpm(sides["A"]) - sim.team_bpm(aref["A"]))
+        print(f"  roster change vs the rating's season: "
+              f"{args.home} {d[0]:+.2f}  {args.away} {d[1]:+.2f} pts/100")
     game = M.PbpGame(S, sim, sides, hid, aid, None,
-                     np.random.default_rng(args.seed), season=season)
+                     np.random.default_rng(args.seed), season=season,
+                     anchor=(mu_home, mu_away), anchor_ref=aref)
     ev = game.run(names)
     print(f"\nsimulated play-by-play ({len(ev):,} events)")
     print(f"\n{'clock':<12}{'':<4}{'play':<54}{'score':>10}")
