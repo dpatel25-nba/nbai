@@ -18,10 +18,16 @@ because doing so runs the possession engine 30 times. Two files feed that tab an
 both are snapshots of whatever the engine was when they were written:
 
 ```
+python scripts/156_pull_rosters.py --season 2026-27   # who is actually on each team
 python scripts/155_export_sim.py           # ~4 min: ratings, per-team boxes, one play-by-play
 python scripts/125_sim_eval.py --games 245 --sims 150 --season 2024-25   # ~8 min: held-out scorecard
 python scripts/export_web.py               # folds both into web/data.js
 ```
+
+Run `156` after any trade, signing or draft. Rosters are NOT derived from game
+data — doing that can only learn where a player last *played*, so across an
+offseason it keeps traded players on their old team and cannot see a drafted
+rookie at all.
 
 **If you change the simulator and skip these, the Simulator tab keeps showing the
 old engine while the rest of the site updates.** The scorecard is read from

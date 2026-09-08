@@ -99,14 +99,30 @@ def main() -> None:
     ps = pd.read_parquet(PS, columns=["PLAYER_ID", "SEASON", "PLAYER"])
     full = {int(r.PLAYER_ID): r.PLAYER for r in ps[ps.SEASON == season].itertuples()}
 
-    ref_side, _ = MU.roster(season, ref)
+    # current rosters, so the exported boxes reflect this season's teams rather
+    # than whoever last played for them
+    rseason = ""
+    RF = ROOT / "data" / "parquet" / "team_rosters.parquet"
+    if RF.exists():
+        _rs = pd.read_parquet(RF)
+        rseason = sorted(_rs.SEASON.unique())[-1]
+        _a = _rs[(_rs.SEASON == rseason) & _rs.DRAFT_SLOT.notna()]
+        rates.slot_of.update({int(r.PLAYER_ID): int(r.DRAFT_SLOT)
+                              for r in _a.itertuples()
+                              if int(r.PLAYER_ID) not in rates})
+        for r in _rs[_rs.SEASON == rseason].itertuples():
+            full.setdefault(int(r.PLAYER_ID), r.PLAYER)
+        print(f"roster season {rseason}: {len(_rs[_rs.SEASON == rseason])} players")
+    ref_side = (MU.current_roster(ref, rates, rseason) if rseason else None) \
+        or MU.roster(season, ref)[0]
     tot = sum(p["minutes"] for p in ref_side) or 1.0
     for p in ref_side:
         p["minutes"] *= 240.0 / tot
 
     teams = {}
     for abbr, tid in sorted(code.items()):
-        sides = MU.build_sides(season, tid, ref, set())
+        sides = MU.build_sides(season, tid, ref, set(),
+                               rates=rates, rseason=rseason)
         sides["A"] = ref_side
         mu_h = mu0 + off[tid] - dfn[ref]
         mu_a = mu0 + off[ref] - dfn[tid]
@@ -133,7 +149,8 @@ def main() -> None:
     # one real play-by-play so the page shows engine output, not a mock-up
     top = sorted(code, key=lambda a: -net[code[a]])[:2]
     hid, aid = code[top[0]], code[top[1]]
-    sides = MU.build_sides(season, hid, aid, set())
+    sides = MU.build_sides(season, hid, aid, set(),
+                           rates=rates, rseason=rseason)
     surname = {int(k): str(v).split()[-1] for k, v in full.items()}
     game = M.PbpGame(S, sim, sides, hid, aid, None, np.random.default_rng(5),
                      season=season)

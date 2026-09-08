@@ -50,6 +50,7 @@ ROOT = Path(__file__).resolve().parents[1]
 GAMES = ROOT / "data" / "parquet" / "games.parquet"
 PG = ROOT / "data" / "parquet" / "player_games.parquet"
 PS = ROOT / "data" / "parquet" / "player_seasons.parquet"
+ROSTERS = ROOT / "data" / "parquet" / "team_rosters.parquet"
 
 RECENT_GAMES = 20      # how far back to read a rotation
 HALFLIFE = 8.0         # games; recency weight on minutes
@@ -124,10 +125,57 @@ def roster(season: str, tid: int, before=None, n_games=RECENT_GAMES):
     return out, dates[-1]
 
 
-def build_sides(season, home_tid, away_tid, out_ids, before=None):
+# A roster has ~19 players and a rotation has ~10. Everyone on the roster gets a
+# projected MPG, but handing all 19 a share of 240 minutes would give the whole
+# team bench-level minutes, so the rotation is cut at these bounds first.
+ROT_MIN_MPG = 6.0
+ROT_MAX = 12
+
+
+def current_roster(tid: int, rates, rseason: str):
+    """Who is ACTUALLY on the team, from the league's roster endpoint.
+
+    Deriving a roster from box scores learns the rotation correctly and the
+    roster wrongly: it can only know where a player last PLAYED. Across an
+    offseason that is every trade, signing and draft pick — Jaylen Brown showed
+    up on Boston because his last game was in a Boston uniform.
+
+    Minutes come from the rate book, whose MPG is a Marcel projection, and for a
+    rookie the book's draft-slot fallback supplies both his rates and his
+    minutes — which is the first time those priors reach the players they were
+    built for, since a player who has never appeared cannot be found in a box
+    score at all.
+    """
+    if not ROSTERS.exists():
+        return None
+    rs = pd.read_parquet(ROSTERS)
+    rs = rs[(rs.SEASON == rseason) & (rs.TEAM_ID == tid)]
+    if rs.empty:
+        return None
+    out = []
+    for r in rs.itertuples():
+        pid = int(r.PLAYER_ID)
+        mpg = float(rates[pid].get("MPG", 0.0) or 0.0)
+        if not np.isfinite(mpg):
+            mpg = 0.0
+        out.append({"pid": pid, "minutes": mpg, "started": 0,
+                    "rookie": bool(r.IS_ROOKIE), "name": r.PLAYER})
+    out.sort(key=lambda x: -x["minutes"])
+    out = [p for p in out if p["minutes"] >= ROT_MIN_MPG][:ROT_MAX]
+    for i, p in enumerate(out):
+        p["started"] = int(i < 5)
+    return out or None
+
+
+def build_sides(season, home_tid, away_tid, out_ids, before=None,
+                rates=None, rseason=None):
     sides = {}
     for tag, tid in (("H", home_tid), ("A", away_tid)):
-        pl, asof = roster(season, tid, before)
+        pl = None
+        if rates is not None and rseason:
+            pl = current_roster(tid, rates, rseason)
+        if pl is None:
+            pl, _ = roster(season, tid, before)
         pl = [p for p in pl if p["pid"] not in out_ids]
         tot = sum(p["minutes"] for p in pl)
         pl = [p for p in pl if p["minutes"] >= MIN_SHARE * tot / max(len(pl), 1)]
@@ -177,11 +225,25 @@ def main() -> None:
     print(f"  {args.away:<4} offence {off[aid]:+6.2f}  defence {dfn[aid]:+6.2f}"
           f"   projected {mu_away:6.1f}")
 
-    sides = build_sides(season, hid, aid, out_ids)
+    rseason = ""
+    if ROSTERS.exists():
+        _rs = pd.read_parquet(ROSTERS)
+        rseason = sorted(_rs.SEASON.unique())[-1]
     if out_ids:
         print(f"  ruled OUT: {sorted(out_ids)}")
 
     rates, pos = S.build_rates(season)
+    if rseason:
+        # 2026 draftees are not in the bio archive, so the rate book cannot map
+        # them to a draft slot on its own; the roster pull carries the slot.
+        _rs = pd.read_parquet(ROSTERS)
+        _rs = _rs[(_rs.SEASON == rseason) & _rs.DRAFT_SLOT.notna()]
+        add = {int(r.PLAYER_ID): int(r.DRAFT_SLOT) for r in _rs.itertuples()
+               if int(r.PLAYER_ID) not in rates}
+        rates.slot_of.update(add)
+        print(f"  roster season {rseason}; {len(add)} players given a draft-slot "
+              f"profile (no NBA history)")
+    sides = build_sides(season, hid, aid, out_ids, rates=rates, rseason=rseason)
     tmpl = pd.read_parquet(ROOT / "data/parquet/rotation_templates.parquet")
     aff = pd.read_parquet(ROOT / "data/parquet/assignment_affinity.parquet") \
         .set_index("dpos")[S.POSITIONS].to_numpy()
@@ -208,6 +270,11 @@ def main() -> None:
 
     names = {int(r.PLAYER_ID): surname(r.PLAYER)
              for r in ps[ps.SEASON == season].itertuples()}
+    # A 2026 draftee has no row in player_seasons, so his box-score line came
+    # out as a raw player ID. The roster pull carries the name.
+    if rseason:
+        for r in pd.read_parquet(ROSTERS).query("SEASON == @rseason").itertuples():
+            names.setdefault(int(r.PLAYER_ID), surname(r.PLAYER))
 
     if args.sims > 0:
         res, box, _ = sim.simulate(sides["H"], sides["A"], hid, aid,
