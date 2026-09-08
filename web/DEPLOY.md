@@ -11,6 +11,23 @@ same folder. To refresh the numbers after the model changes:
 python scripts/export_web.py     # regenerates web/data.js
 ```
 
+### Refreshing the Simulator tab
+
+`export_web.py` only *reads* the simulator payload; it does not regenerate it,
+because doing so runs the possession engine 30 times. Two files feed that tab and
+both are snapshots of whatever the engine was when they were written:
+
+```
+python scripts/155_export_sim.py           # ~4 min: ratings, per-team boxes, one play-by-play
+python scripts/125_sim_eval.py --games 245 --sims 150 --season 2024-25   # ~8 min: held-out scorecard
+python scripts/export_web.py               # folds both into web/data.js
+```
+
+**If you change the simulator and skip these, the Simulator tab keeps showing the
+old engine while the rest of the site updates.** The scorecard is read from
+`data/features/sim_eval_summary.json`, which script 125 writes, so the published
+numbers always come from a real evaluation run rather than being typed in by hand.
+
 ## Put it online with Vercel (recommended, free)
 
 **One-time setup:**

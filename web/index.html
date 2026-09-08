@@ -230,6 +230,15 @@
     }
   })();
 
+  .subtabs { display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0 0;
+    padding-top: 10px; border-top: 1px solid var(--line, #222838); }
+  .subtabs[hidden] { display: none; }
+  .subtab { appearance: none; border: 0; background: none; color: var(--muted);
+    font: inherit; font-weight: 600; font-size: 12.5px; padding: 6px 10px;
+    border-radius: 7px; cursor: pointer; }
+  .subtab:hover { color: var(--text); background: var(--panel-2); }
+  .subtab.active { color: var(--text); background: var(--panel-2); }
+  .subtab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   /* ---- simulator tab ---- */
   .note { color: var(--muted, #8b93a7); font-size: 13px; line-height: 1.6;
           margin-top: 12px; max-width: 78ch; }
@@ -376,25 +385,28 @@
 <header>
   <div class="nav">
     <div class="brand"><span class="ball" aria-hidden="true"></span>NBAI
-      <small>NBA Ratings &amp; Prediction Engine</small></div>
+      <small>Possession-level game simulator</small></div>
     <nav class="tabs" role="tablist" aria-label="Sections">
-      <button class="tab active" data-view="ratings" role="tab">Team Ratings</button>
-      <button class="tab" data-view="players" role="tab">Players</button>
-      <button class="tab" data-view="props" role="tab">Props</button>
-      <button class="tab" data-view="defense" role="tab">Defense</button>
-      <button class="tab" data-view="playtypes" role="tab">Play Types</button>
-      <button class="tab" data-view="shots" role="tab">Shot Charts</button>
-      <button class="tab" data-view="impact" role="tab">Impact</button>
-      <button class="tab" data-view="predict" role="tab">Matchup</button>
-      <button class="tab" data-view="simulator" role="tab">Simulator</button>
+      <button class="tab active" data-view="simulator" role="tab">Simulator</button>
+      <button class="tab" data-group="research" role="tab">Research</button>
       <button class="tab" data-view="roadmap" role="tab">Roadmap</button>
+    </nav>
+    <nav class="subtabs" id="researchNav" role="tablist" aria-label="Research sections" hidden>
+      <button class="subtab active" data-view="ratings" role="tab">Team Ratings</button>
+      <button class="subtab" data-view="players" role="tab">Players</button>
+      <button class="subtab" data-view="props" role="tab">Props</button>
+      <button class="subtab" data-view="defense" role="tab">Defense</button>
+      <button class="subtab" data-view="playtypes" role="tab">Play Types</button>
+      <button class="subtab" data-view="shots" role="tab">Shot Charts</button>
+      <button class="subtab" data-view="impact" role="tab">Impact</button>
+      <button class="subtab" data-view="predict" role="tab">Elo Matchup</button>
     </nav>
   </div>
 </header>
 
 <main>
   <!-- ============ TEAM RATINGS ============ -->
-  <section class="view active" id="ratings">
+  <section class="view" id="ratings">
     <div class="page-head">
       <div>
         <div class="eyebrow">2025–26 · through season's end</div>
@@ -751,15 +763,16 @@
   </section>
 
   <!-- ============ ROADMAP ============ -->
-  <section class="view" id="simulator">
+  <section class="view active" id="simulator">
     <div class="page-head">
       <div>
         <div class="eyebrow">Possession Engine</div>
         <h1>Game Simulator</h1>
       </div>
-      <div class="sub">Every possession played out one at a time — rotations, matchups,
-        fouls, the bonus, offensive rebounds. Pick any two teams for a projected box
-        score, or read a full play-by-play the engine generated.</div>
+      <div class="sub">Pick any two teams and the engine plays the game out one
+        possession at a time — rotations, matchups, fouls, the bonus, offensive
+        rebounds — and returns a projected box score for every player. Calibrated
+        against held-out seasons, not fitted to them.</div>
     </div>
 
     <div class="panel">
@@ -917,13 +930,36 @@
   }
 
   /* ---- tabs ---- */
+  // Two tiers: the simulator is the product and gets a top-level tab of its own,
+  // while the exploratory work sits behind one "Research" entry so nine
+  // experiments do not read as nine peers of the thing that actually ships.
   const tabs = document.querySelectorAll(".tab");
+  const subtabs = document.querySelectorAll(".subtab");
   const views = document.querySelectorAll(".view");
-  tabs.forEach(t => t.addEventListener("click", () => {
-    tabs.forEach(x => x.classList.remove("active"));
+  const researchNav = document.getElementById("researchNav");
+
+  function show(id) {
     views.forEach(v => v.classList.remove("active"));
+    const el = document.getElementById(id);
+    if (el) el.classList.add("active");
+  }
+  function setTop(btn) {
+    tabs.forEach(x => x.classList.remove("active"));
+    btn.classList.add("active");
+    const isResearch = btn.dataset.group === "research";
+    researchNav.hidden = !isResearch;
+    if (isResearch) {
+      const cur = document.querySelector(".subtab.active") || subtabs[0];
+      show(cur.dataset.view);
+    } else {
+      show(btn.dataset.view);
+    }
+  }
+  tabs.forEach(t => t.addEventListener("click", () => setTop(t)));
+  subtabs.forEach(t => t.addEventListener("click", () => {
+    subtabs.forEach(x => x.classList.remove("active"));
     t.classList.add("active");
-    document.getElementById(t.dataset.view).classList.add("active");
+    show(t.dataset.view);
   }));
 
   /* ---- ratings table ---- */
