@@ -1668,6 +1668,11 @@
     const el = id => document.getElementById(id);
 
     let state = null;
+    // Seeds must NOT restart at 1 when a new matchup begins, or "Simulate game"
+    // replays the identical game every time it is pressed. This advances across
+    // resets so each press is a genuinely new game, while the warm-up seeds
+    // below stay fixed so the projected level does not wobble between clicks.
+    let seedBase = 1;
 
     function newState(h, a) {
       const mu = {H: proj(h, a, true), A: proj(a, h, false)};
@@ -1689,8 +1694,9 @@
         scale = {H: scale.H * mu.H / Math.max(tot.H / W, 1),
                  A: scale.A * mu.A / Math.max(tot.A / W, 1), mu};
       }
+      seedBase += 1000003;              // a large stride keeps runs independent
       return {h, a, H, A, pace, scale, mu, n: 0, sum: {}, mn: {}, mx: {},
-              wins: 0, sc: [], first: null, seed: 1};
+              wins: 0, sc: [], first: null, seed: seedBase};
     }
 
     function accumulate(g) {
