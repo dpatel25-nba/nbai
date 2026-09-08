@@ -834,3 +834,39 @@ The apparent points win vanishes and the rebounding win appears. `DREB_36` and `
 His remaining gap is not a defect. The book projects 12.61 per 36 against prior seasons of 12.7, 12.8 and 12.5; he is having a career-best 13.3 season. **A forecast that matched it would be reading the future**, and the honest description of the residual is irreducible rather than fixable.
 
 Held out afterwards: player points 4.721 against the props model's 4.708 on identical rows, rebounds 1.000, assists 1.004, coverage 80.0%/52.4%, PIT deviation 0.062 — the best recorded.
+
+## The honest player-level picture (161)
+
+Everything measured so far has been either team-level (win probability, box totals) or FIDELITY — whether the engine reproduces the rate book it was handed. Neither answers the question a reader of a box score actually has: across all players and all stats, how close are the numbers to what those players did?
+
+Scored on 200 held-out games, 3,916 rotation player-games, against the player's own **season-to-date average** — leakage-safe, and what anyone would guess without a model:
+
+```
+stat   actual    sim    bias   sim MAE  to-date MAE   better    corr
+PTS     11.33  11.33   +0.00     4.963       4.914    -1.0%    0.694
+REB      4.40   4.29   -0.10     2.031       2.034    +0.2%    0.653
+AST      2.64   2.57   -0.07     1.449       1.394    -4.0%    0.679
+STL      0.82   0.75   -0.06     0.746       0.754    +1.0%    0.293
+BLK      0.48   0.58   +0.10     0.583       0.521   -12.0%    0.453
+TOV      1.33   1.33   +0.00     0.925       0.923    -0.1%    0.533
+FGA      8.91   8.88   -0.03     2.996       3.015    +0.6%    0.768
+FTA      2.15   2.26   +0.11     1.693       1.618    -4.7%    0.580
+FG3M     1.36   1.22   -0.14     0.959       0.934    -2.7%    0.551
+PF       1.83   1.89   +0.06     1.098       1.101    +0.3%    0.348
+```
+
+**On six of ten stats the simulator is WORSE than simply averaging a player's season to date, and on the rest it is a wash.** Blocks are 12% worse. Aggregate bias is near zero on every stat and the correlations are respectable (shots 0.768, points 0.694), so it ranks players sensibly and lands the league totals — it just does not beat a naive per-game baseline.
+
+**And the compression is still there against reality**, even though fidelity to the book was fixed:
+
+```
+projected minutes    n   actual    sim    bias
+10-18             1106     5.23   6.00   +0.77
+18-26             1215     9.40   9.65   +0.25
+26-34             1197    15.42  15.07   -0.35
+34+                398    21.85  20.03   -1.83
+```
+
+Bench players are over-predicted by three quarters of a point and heavy-minute players under-predicted by nearly two. Script 159 corrected the SPLIT against the rate book; this says the book itself, or the minutes attached to it, still squeezes the ends toward the middle. Against the production props model on shared rows the simulator is 5.007 to 4.911 — still behind the incumbent.
+
+**This reframes the work.** The calibration metrics that have looked strong — coverage 80.0/52.4, PIT 0.062, box totals within 4% — measure whether the DISTRIBUTIONS are honest, and they are. They say nothing about whether the central estimate is any good, and measured against reality it is not yet better than a season average. Chasing individual players, as the Jokic thread did, cannot find this; only scoring the whole population against real outcomes can.
