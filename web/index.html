@@ -230,24 +230,24 @@
     }
   })();
 
-  .subtabs { display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0 0;
-    padding-top: 10px; border-top: 1px solid var(--line, #222838); }
-  .subtabs[hidden] { display: none; }
-  .subtab { appearance: none; border: 0; background: none; color: var(--muted);
-    font: inherit; font-weight: 600; font-size: 12.5px; padding: 6px 10px;
-    border-radius: 7px; cursor: pointer; }
-  .subtab:hover { color: var(--text); background: var(--panel-2); }
-  .subtab.active { color: var(--text); background: var(--panel-2); }
-  .subtab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .subgroup { font-size: 10.5px; font-weight: 700; letter-spacing: .08em;
-    text-transform: uppercase; color: var(--muted); opacity: .72;
-    align-self: center; padding: 0 8px 0 2px; white-space: nowrap; }
-  .subsep { width: 1px; align-self: stretch; margin: 2px 8px;
-    background: var(--line, #222838); }
-  @media (max-width: 720px) {
-    .subsep { display: none; }
-    .subgroup { width: 100%; padding: 8px 2px 2px; }
-  }
+  .rgroup { margin-top: 22px; }
+  .rgroup .eyebrow { margin-bottom: 10px; display: block; }
+  .rgrid { display: grid; gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(248px, 1fr)); }
+  .rcard { text-align: left; appearance: none; cursor: pointer;
+    background: var(--panel, #12151d); border: 1px solid var(--line, #222838);
+    border-radius: 12px; padding: 16px 18px; color: inherit; font: inherit;
+    transition: border-color .15s ease, background .15s ease, transform .15s ease; }
+  .rcard:hover { border-color: var(--accent); background: var(--panel-2);
+    transform: translateY(-1px); }
+  .rcard:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .rc-t { font-weight: 700; font-size: 15px; margin-bottom: 5px; }
+  .rc-d { color: var(--muted); font-size: 13px; line-height: 1.5; }
+  .backlink { appearance: none; border: 0; background: none; cursor: pointer;
+    color: var(--muted); font: inherit; font-size: 13px; font-weight: 600;
+    padding: 2px 0; margin-bottom: 10px; }
+  .backlink:hover { color: var(--accent); }
+  .backlink:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   /* ---- simulator tab ---- */
   .note { color: var(--muted, #8b93a7); font-size: 13px; line-height: 1.6;
           margin-top: 12px; max-width: 78ch; }
@@ -397,29 +397,24 @@
       <small>Possession-level game simulator</small></div>
     <nav class="tabs" role="tablist" aria-label="Sections">
       <button class="tab active" data-view="simulator" role="tab">Simulator</button>
-      <button class="tab" data-group="research" role="tab">Research</button>
+      <button class="tab" data-view="research" role="tab">Research</button>
       <button class="tab" data-view="roadmap" role="tab">Roadmap</button>
-    </nav>
-    <nav class="subtabs" id="researchNav" role="tablist" aria-label="Research sections" hidden>
-      <span class="subgroup">Teams</span>
-      <button class="subtab active" data-view="ratings" role="tab">Power Ratings</button>
-      <button class="subtab" data-view="predict" role="tab">Elo Matchup</button>
-      <span class="subsep" aria-hidden="true"></span>
-      <span class="subgroup">Players</span>
-      <button class="subtab" data-view="players" role="tab">Ratings</button>
-      <button class="subtab" data-view="impact" role="tab">Impact</button>
-      <button class="subtab" data-view="props" role="tab">Props</button>
-      <span class="subsep" aria-hidden="true"></span>
-      <span class="subgroup">Matchup detail</span>
-      <button class="subtab" data-view="defense" role="tab">Perimeter D</button>
-      <button class="subtab" data-view="shots" role="tab">Shot Charts</button>
-      <button class="subtab" data-view="playtypes" role="tab">Play Types</button>
     </nav>
   </div>
 </header>
 
 <main>
   <!-- ============ TEAM RATINGS ============ -->
+  <section class="view" id="research">
+    <div class="page-head">
+      <div><div class="eyebrow">Exploratory work</div><h1>Research</h1></div>
+      <div class="sub">Models and measurements behind the simulator. These are investigations rather than products — some fed the engine, some were tested and rejected.</div>
+    </div>
+    <div class="rgroup"><div class="eyebrow">Teams</div><div class="rgrid"><button class="rcard" data-view="ratings"><div class="rc-t">Power Ratings</div><div class="rc-d">Elo power ratings and Four Factors for all 30 teams.</div></button><button class="rcard" data-view="predict"><div class="rc-t">Elo Matchup</div><div class="rc-d">Team-vs-team win probability from the Elo baseline.</div></button></div></div>
+    <div class="rgroup"><div class="eyebrow">Players</div><div class="rgrid"><button class="rcard" data-view="players"><div class="rc-t">Player Ratings</div><div class="rc-d">WAR leaderboard and clutch-situation splits.</div></button><button class="rcard" data-view="impact"><div class="rc-t">Impact</div><div class="rc-d">With-or-without-you on/off impact for each rotation.</div></button><button class="rcard" data-view="props"><div class="rc-t">Props</div><div class="rc-d">Projected season lines from the production props model.</div></button></div></div>
+    <div class="rgroup"><div class="eyebrow">Matchup detail</div><div class="rgrid"><button class="rcard" data-view="defense"><div class="rc-t">Perimeter Defense</div><div class="rc-d">Defender quality measured over 2.2M possessions.</div></button><button class="rcard" data-view="shots"><div class="rc-t">Shot Charts</div><div class="rc-d">Shot location and efficiency across 1.6M attempts.</div></button><button class="rcard" data-view="playtypes"><div class="rc-t">Play Types</div><div class="rc-d">Synergy play-type frequency and matchup edges.</div></button></div></div>
+  </section>
+
   <section class="view" id="ratings">
     <div class="page-head">
       <div>
@@ -944,37 +939,38 @@
   }
 
   /* ---- tabs ---- */
-  // Two tiers: the simulator is the product and gets a top-level tab of its own,
-  // while the exploratory work sits behind one "Research" entry so nine
-  // experiments do not read as nine peers of the thing that actually ships.
+  // Three top-level tabs. "Research" opens an INDEX of the exploratory views
+  // rather than spilling eight more buttons into the header, which is what the
+  // previous two-tier nav did — thirteen controls in a strip is worse than the
+  // flat list it replaced. Each research view gets a back link injected below.
   const tabs = document.querySelectorAll(".tab");
-  const subtabs = document.querySelectorAll(".subtab");
   const views = document.querySelectorAll(".view");
-  const researchNav = document.getElementById("researchNav");
+  const RESEARCH_IDS = ["ratings","predict","players","impact","props",
+                        "defense","shots","playtypes"];
 
   function show(id) {
     views.forEach(v => v.classList.remove("active"));
     const el = document.getElementById(id);
     if (el) el.classList.add("active");
+    tabs.forEach(x => x.classList.toggle("active",
+      x.dataset.view === id || (x.dataset.view === "research"
+                                && RESEARCH_IDS.includes(id))));
+    window.scrollTo({top: 0, behavior: "instant"});
   }
-  function setTop(btn) {
-    tabs.forEach(x => x.classList.remove("active"));
-    btn.classList.add("active");
-    const isResearch = btn.dataset.group === "research";
-    researchNav.hidden = !isResearch;
-    if (isResearch) {
-      const cur = document.querySelector(".subtab.active") || subtabs[0];
-      show(cur.dataset.view);
-    } else {
-      show(btn.dataset.view);
-    }
-  }
-  tabs.forEach(t => t.addEventListener("click", () => setTop(t)));
-  subtabs.forEach(t => t.addEventListener("click", () => {
-    subtabs.forEach(x => x.classList.remove("active"));
-    t.classList.add("active");
-    show(t.dataset.view);
-  }));
+  tabs.forEach(t => t.addEventListener("click", () => show(t.dataset.view)));
+  document.querySelectorAll(".rcard").forEach(c =>
+    c.addEventListener("click", () => show(c.dataset.view)));
+
+  // one back link per research view, added here so eight HTML blocks stay untouched
+  RESEARCH_IDS.forEach(id => {
+    const sec = document.getElementById(id);
+    if (!sec) return;
+    const a = document.createElement("button");
+    a.className = "backlink";
+    a.innerHTML = "\u2190 Research";
+    a.addEventListener("click", () => show("research"));
+    sec.insertBefore(a, sec.firstChild);
+  });
 
   /* ---- ratings table ---- */
   const maxDev = Math.max(...TEAMS.map(t => Math.abs(t.elo - 1500)));
