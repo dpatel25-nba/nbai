@@ -21,6 +21,22 @@ assert.deepEqual([...new Set(Object.values(counts))],[82]);
 assert.equal(E.makeSchedule(D,false).length,1200);
 assert.deepEqual(schedule.filter(g=>!g.provisional),D.schedule);
 const membership = E.assignments(D);
+for (const p of Object.values(D.players)) {
+  assert.ok(Number.isFinite(p.bpm), 'every rostered player needs finite impact');
+  assert.ok(p.impactSource, 'impact provenance must be exported');
+  if (p.impactSeason) {
+    assert.ok(p.impactSeason < D.season, 'no future impact evidence');
+    assert.ok(p.impactSeasonGap >= 1 && p.impactSeasonGap <= 3);
+  }
+}
+const haliburton=Object.values(D.players).find(p=>p.n==='Tyrese Haliburton');
+assert.equal(haliburton.impactSource,'historical_carry_forward');
+assert.equal(haliburton.impactSeason,'2024-25');
+assert.ok(haliburton.bpm>0, 'a missed season must not replace known impact with -1.5');
+const impactBase=new E.Season(D);
+const impactTransfer=new E.Season(D,{membership:{...membership,[haliburton.id]:'NYK'}});
+assert.ok(impactTransfer.delta.IND<impactBase.delta.IND, 'removing Haliburton must lower Indiana target strength');
+assert.ok(impactTransfer.delta.NYK>impactBase.delta.NYK, 'adding Haliburton must raise New York target strength');
 const crowded = {players:{}};
 for(let i=0;i<12;i++) crowded.players[i]={id:i,n:String(i),MPG:36-i};
 const crowdedRotation=E.rotation(crowded,'TEST',Object.fromEntries(Object.keys(crowded.players).map(id=>[id,'TEST'])));

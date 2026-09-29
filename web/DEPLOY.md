@@ -83,3 +83,14 @@ results; roster edits still restart the preseason scenario. Ship
 `tests/check_team_hub_browser.py` for all 25 weekly boundaries, all 30 team records
 and responsive layout checks. No simulation-model or schedule changes accompany
 this interface update.
+
+
+### Rebuilding season inputs
+
+The season exporter and impact selection helper are now versioned in `scripts/`.
+With the cached schedule PDF/receipt and research parquet inputs present, run
+`python scripts/226_export_season_sim.py`, then deploy the updated season payload.
+PyMuPDF is required to parse the official schedule. The payload records input
+and model-source hashes; retain them when comparing results across revisions.
+See `docs/research-notes/season-impact-fallback-2026-09-29.md` for the returning-player
+correction and its full-league diagnostic.

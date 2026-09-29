@@ -1,0 +1,967 @@
+{
+  "seeds": 30,
+  "gamesSimulated": 110700,
+  "teams": 30,
+  "changedPlayers": [
+    {
+      "id": 202681,
+      "name": "Kyrie Irving",
+      "team": "DAL",
+      "before": -1.5,
+      "after": 1.0224,
+      "source": "2024-25"
+    },
+    {
+      "id": 203081,
+      "name": "Damian Lillard",
+      "team": "POR",
+      "before": -1.5,
+      "after": 2.4192,
+      "source": "2024-25"
+    },
+    {
+      "id": 1626168,
+      "name": "Trey Lyles",
+      "team": "MIN",
+      "before": -1.5,
+      "after": -1.1038,
+      "source": "2024-25"
+    },
+    {
+      "id": 1627732,
+      "name": "Ben Simmons",
+      "team": "SAC",
+      "before": -1.5,
+      "after": -0.9483,
+      "source": "2024-25"
+    },
+    {
+      "id": 1627777,
+      "name": "Georges Niang",
+      "team": "GSW",
+      "before": -1.5,
+      "after": -1.4609,
+      "source": "2024-25"
+    },
+    {
+      "id": 1627832,
+      "name": "Fred VanVleet",
+      "team": "HOU",
+      "before": -1.5,
+      "after": -1.679,
+      "source": "2024-25"
+    },
+    {
+      "id": 1630169,
+      "name": "Tyrese Haliburton",
+      "team": "IND",
+      "before": -1.5,
+      "after": 1.8663,
+      "source": "2024-25"
+    },
+    {
+      "id": 1641745,
+      "name": "Adam Flagler",
+      "team": "SAC",
+      "before": -1.5,
+      "after": -1.5525,
+      "source": "2024-25"
+    }
+  ],
+  "impactPolicy": {
+    "version": 2,
+    "lookbackSeasons": 3,
+    "prior": -1.5,
+    "sources": {
+      "previous_season": 489,
+      "no_history_prior": 86,
+      "stale_history_prior": 3,
+      "historical_carry_forward": 8
+    },
+    "note": "Impact uses the latest finite pre-season rating within three seasons. Missing recent seasons carry historical impact forward; older or absent history uses a labeled prior. Historical carry-forward is not an injury-recovery forecast or an age-adjusted impact projection."
+  },
+  "teamsAffected": {
+    "IND": {
+      "team": "IND",
+      "before_original": {
+        "mean": 28.6,
+        "min": 23,
+        "max": 36,
+        "standardError": 0.6601985072427212
+      },
+      "fixed_original": {
+        "mean": 33.333333333333336,
+        "min": 27,
+        "max": 40,
+        "standardError": 0.5839487722243925
+      },
+      "fixed_transfer": {
+        "mean": 31.133333333333333,
+        "min": 22,
+        "max": 39,
+        "standardError": 0.6499042075007694
+      },
+      "transferWinDifference": {
+        "mean": -2.2,
+        "min": -14,
+        "max": 5,
+        "standardError": 0.7602177546484684
+      },
+      "targetStrengthChange": -1.269633788479167,
+      "transferPointDifferentialChange": {
+        "mean": -1.7955284552845527,
+        "min": -6.2560975609756095,
+        "max": 0.3780487804878049,
+        "standardError": 0.27294102750018306
+      },
+      "seedsWithMoreWinsAfterTransfer": 9
+    },
+    "NYK": {
+      "team": "NYK",
+      "before_original": {
+        "mean": 47,
+        "min": 37,
+        "max": 52,
+        "standardError": 0.727142099031481
+      },
+      "fixed_original": {
+        "mean": 46.9,
+        "min": 37,
+        "max": 53,
+        "standardError": 0.7601421524649341
+      },
+      "fixed_transfer": {
+        "mean": 53.4,
+        "min": 40,
+        "max": 62,
+        "standardError": 0.9572470104839502
+      },
+      "transferWinDifference": {
+        "mean": 6.5,
+        "min": -9,
+        "max": 14,
+        "standardError": 1.023572737730586
+      },
+      "targetStrengthChange": 2.891218100833333,
+      "transferPointDifferentialChange": {
+        "mean": 3.194308943089431,
+        "min": -3.3658536585365852,
+        "max": 7.2560975609756095,
+        "standardError": 0.40329993181611523
+      },
+      "seedsWithMoreWinsAfterTransfer": 27
+    }
+  },
+  "league": [
+    {
+      "team": "ATL",
+      "before_original": {
+        "mean": 44.166666666666664,
+        "min": 33,
+        "max": 52,
+        "standardError": 0.8510754971891205
+      },
+      "fixed_original": {
+        "mean": 43.7,
+        "min": 32,
+        "max": 51,
+        "standardError": 0.8971858941911827
+      },
+      "fixed_transfer": {
+        "mean": 43.1,
+        "min": 34,
+        "max": 50,
+        "standardError": 0.711724472066214
+      },
+      "transferWinDifference": {
+        "mean": -0.6,
+        "min": -5,
+        "max": 3,
+        "standardError": 0.3732430104202706
+      }
+    },
+    {
+      "team": "BKN",
+      "before_original": {
+        "mean": 29.666666666666668,
+        "min": 20,
+        "max": 37,
+        "standardError": 0.8648079094842469
+      },
+      "fixed_original": {
+        "mean": 28.766666666666666,
+        "min": 19,
+        "max": 38,
+        "standardError": 0.9367139105359603
+      },
+      "fixed_transfer": {
+        "mean": 28.266666666666666,
+        "min": 18,
+        "max": 36,
+        "standardError": 0.8826987527591763
+      },
+      "transferWinDifference": {
+        "mean": -0.5,
+        "min": -3,
+        "max": 2,
+        "standardError": 0.2906591794880899
+      }
+    },
+    {
+      "team": "BOS",
+      "before_original": {
+        "mean": 47.266666666666666,
+        "min": 37,
+        "max": 54,
+        "standardError": 0.7333333333333334
+      },
+      "fixed_original": {
+        "mean": 47.03333333333333,
+        "min": 38,
+        "max": 54,
+        "standardError": 0.7070796884536813
+      },
+      "fixed_transfer": {
+        "mean": 46.733333333333334,
+        "min": 39,
+        "max": 55,
+        "standardError": 0.7317642565765734
+      },
+      "transferWinDifference": {
+        "mean": -0.3,
+        "min": -5,
+        "max": 3,
+        "standardError": 0.34954814839443366
+      }
+    },
+    {
+      "team": "CHA",
+      "before_original": {
+        "mean": 36.1,
+        "min": 28,
+        "max": 48,
+        "standardError": 0.7402236381545502
+      },
+      "fixed_original": {
+        "mean": 35.7,
+        "min": 26,
+        "max": 46,
+        "standardError": 0.7352378612691801
+      },
+      "fixed_transfer": {
+        "mean": 35.53333333333333,
+        "min": 25,
+        "max": 46,
+        "standardError": 0.7976017692905895
+      },
+      "transferWinDifference": {
+        "mean": -0.16666666666666666,
+        "min": -4,
+        "max": 3,
+        "standardError": 0.275778243969214
+      }
+    },
+    {
+      "team": "CHI",
+      "before_original": {
+        "mean": 29.2,
+        "min": 22,
+        "max": 35,
+        "standardError": 0.5899542160299343
+      },
+      "fixed_original": {
+        "mean": 28.6,
+        "min": 20,
+        "max": 36,
+        "standardError": 0.7121281041930653
+      },
+      "fixed_transfer": {
+        "mean": 28.533333333333335,
+        "min": 19,
+        "max": 34,
+        "standardError": 0.6355978872915656
+      },
+      "transferWinDifference": {
+        "mean": -0.06666666666666667,
+        "min": -4,
+        "max": 3,
+        "standardError": 0.30675660849969894
+      }
+    },
+    {
+      "team": "CLE",
+      "before_original": {
+        "mean": 57.5,
+        "min": 49,
+        "max": 68,
+        "standardError": 0.806225774829855
+      },
+      "fixed_original": {
+        "mean": 56.9,
+        "min": 49,
+        "max": 68,
+        "standardError": 0.8197981248558948
+      },
+      "fixed_transfer": {
+        "mean": 56.36666666666667,
+        "min": 49,
+        "max": 67,
+        "standardError": 0.7957983533264493
+      },
+      "transferWinDifference": {
+        "mean": -0.5333333333333333,
+        "min": -3,
+        "max": 2,
+        "standardError": 0.2432223018610863
+      }
+    },
+    {
+      "team": "DAL",
+      "before_original": {
+        "mean": 27.366666666666667,
+        "min": 17,
+        "max": 44,
+        "standardError": 0.9278368531447972
+      },
+      "fixed_original": {
+        "mean": 29.766666666666666,
+        "min": 20,
+        "max": 40,
+        "standardError": 0.9609422259875064
+      },
+      "fixed_transfer": {
+        "mean": 29.666666666666668,
+        "min": 19,
+        "max": 39,
+        "standardError": 0.9794830132167054
+      },
+      "transferWinDifference": {
+        "mean": -0.1,
+        "min": -3,
+        "max": 2,
+        "standardError": 0.24611930571102741
+      }
+    },
+    {
+      "team": "DEN",
+      "before_original": {
+        "mean": 46.36666666666667,
+        "min": 40,
+        "max": 57,
+        "standardError": 0.7708531373659792
+      },
+      "fixed_original": {
+        "mean": 46.4,
+        "min": 39,
+        "max": 56,
+        "standardError": 0.7769672843302607
+      },
+      "fixed_transfer": {
+        "mean": 46.13333333333333,
+        "min": 38,
+        "max": 55,
+        "standardError": 0.7469991049762036
+      },
+      "transferWinDifference": {
+        "mean": -0.26666666666666666,
+        "min": -2,
+        "max": 2,
+        "standardError": 0.21936865173489276
+      }
+    },
+    {
+      "team": "DET",
+      "before_original": {
+        "mean": 48.833333333333336,
+        "min": 39,
+        "max": 57,
+        "standardError": 0.7080543737373439
+      },
+      "fixed_original": {
+        "mean": 48.333333333333336,
+        "min": 38,
+        "max": 56,
+        "standardError": 0.7260875051494136
+      },
+      "fixed_transfer": {
+        "mean": 48.833333333333336,
+        "min": 40,
+        "max": 57,
+        "standardError": 0.6362305179969374
+      },
+      "transferWinDifference": {
+        "mean": 0.5,
+        "min": -2,
+        "max": 3,
+        "standardError": 0.31713516462807806
+      }
+    },
+    {
+      "team": "GSW",
+      "before_original": {
+        "mean": 42.93333333333333,
+        "min": 33,
+        "max": 53,
+        "standardError": 0.792106653293337
+      },
+      "fixed_original": {
+        "mean": 42.4,
+        "min": 34,
+        "max": 52,
+        "standardError": 0.79307346270152
+      },
+      "fixed_transfer": {
+        "mean": 41.9,
+        "min": 33,
+        "max": 53,
+        "standardError": 0.8500845123638706
+      },
+      "transferWinDifference": {
+        "mean": -0.5,
+        "min": -4,
+        "max": 2,
+        "standardError": 0.2286894194638498
+      }
+    },
+    {
+      "team": "HOU",
+      "before_original": {
+        "mean": 46.233333333333334,
+        "min": 36,
+        "max": 56,
+        "standardError": 0.7576177626808271
+      },
+      "fixed_original": {
+        "mean": 45.06666666666667,
+        "min": 35,
+        "max": 53,
+        "standardError": 0.8079110758699931
+      },
+      "fixed_transfer": {
+        "mean": 44.96666666666667,
+        "min": 36,
+        "max": 53,
+        "standardError": 0.812946016690924
+      },
+      "transferWinDifference": {
+        "mean": -0.1,
+        "min": -2,
+        "max": 2,
+        "standardError": 0.21629056658902696
+      }
+    },
+    {
+      "team": "IND",
+      "before_original": {
+        "mean": 28.6,
+        "min": 23,
+        "max": 36,
+        "standardError": 0.6601985072427212
+      },
+      "fixed_original": {
+        "mean": 33.333333333333336,
+        "min": 27,
+        "max": 40,
+        "standardError": 0.5839487722243925
+      },
+      "fixed_transfer": {
+        "mean": 31.133333333333333,
+        "min": 22,
+        "max": 39,
+        "standardError": 0.6499042075007694
+      },
+      "transferWinDifference": {
+        "mean": -2.2,
+        "min": -14,
+        "max": 5,
+        "standardError": 0.7602177546484684
+      }
+    },
+    {
+      "team": "LAC",
+      "before_original": {
+        "mean": 37.03333333333333,
+        "min": 26,
+        "max": 43,
+        "standardError": 0.7633611900754519
+      },
+      "fixed_original": {
+        "mean": 36.766666666666666,
+        "min": 26,
+        "max": 43,
+        "standardError": 0.7651659474931338
+      },
+      "fixed_transfer": {
+        "mean": 36.666666666666664,
+        "min": 25,
+        "max": 43,
+        "standardError": 0.7601169500660919
+      },
+      "transferWinDifference": {
+        "mean": -0.1,
+        "min": -3,
+        "max": 2,
+        "standardError": 0.24140393963016743
+      }
+    },
+    {
+      "team": "LAL",
+      "before_original": {
+        "mean": 44.13333333333333,
+        "min": 37,
+        "max": 55,
+        "standardError": 0.7345861816271444
+      },
+      "fixed_original": {
+        "mean": 43.93333333333333,
+        "min": 39,
+        "max": 55,
+        "standardError": 0.7685384447092862
+      },
+      "fixed_transfer": {
+        "mean": 44.3,
+        "min": 39,
+        "max": 57,
+        "standardError": 0.7210305523840611
+      },
+      "transferWinDifference": {
+        "mean": 0.36666666666666664,
+        "min": -3,
+        "max": 2,
+        "standardError": 0.22734516435321267
+      }
+    },
+    {
+      "team": "MEM",
+      "before_original": {
+        "mean": 38.166666666666664,
+        "min": 26,
+        "max": 48,
+        "standardError": 0.7966645024738555
+      },
+      "fixed_original": {
+        "mean": 37.8,
+        "min": 26,
+        "max": 48,
+        "standardError": 0.8000000000000003
+      },
+      "fixed_transfer": {
+        "mean": 37.766666666666666,
+        "min": 29,
+        "max": 46,
+        "standardError": 0.7711513013033925
+      },
+      "transferWinDifference": {
+        "mean": -0.03333333333333333,
+        "min": -4,
+        "max": 3,
+        "standardError": 0.2732660416186316
+      }
+    },
+    {
+      "team": "MIA",
+      "before_original": {
+        "mean": 48.86666666666667,
+        "min": 37,
+        "max": 58,
+        "standardError": 0.9404490653110589
+      },
+      "fixed_original": {
+        "mean": 48.1,
+        "min": 35,
+        "max": 59,
+        "standardError": 1.0420470569823213
+      },
+      "fixed_transfer": {
+        "mean": 47.166666666666664,
+        "min": 35,
+        "max": 57,
+        "standardError": 0.9578272026788397
+      },
+      "transferWinDifference": {
+        "mean": -0.9333333333333333,
+        "min": -4,
+        "max": 3,
+        "standardError": 0.31779894364578287
+      }
+    },
+    {
+      "team": "MIL",
+      "before_original": {
+        "mean": 28.3,
+        "min": 20,
+        "max": 35,
+        "standardError": 0.6680732288308369
+      },
+      "fixed_original": {
+        "mean": 27.7,
+        "min": 19,
+        "max": 35,
+        "standardError": 0.681698352409745
+      },
+      "fixed_transfer": {
+        "mean": 27.3,
+        "min": 21,
+        "max": 35,
+        "standardError": 0.6816983524097451
+      },
+      "transferWinDifference": {
+        "mean": -0.4,
+        "min": -4,
+        "max": 3,
+        "standardError": 0.32377088536015175
+      }
+    },
+    {
+      "team": "MIN",
+      "before_original": {
+        "mean": 48.96666666666667,
+        "min": 40,
+        "max": 56,
+        "standardError": 0.7767946715096751
+      },
+      "fixed_original": {
+        "mean": 48.3,
+        "min": 39,
+        "max": 58,
+        "standardError": 0.8082192714880025
+      },
+      "fixed_transfer": {
+        "mean": 48.86666666666667,
+        "min": 40,
+        "max": 58,
+        "standardError": 0.7961593633191574
+      },
+      "transferWinDifference": {
+        "mean": 0.5666666666666667,
+        "min": -3,
+        "max": 3,
+        "standardError": 0.2655868943819196
+      }
+    },
+    {
+      "team": "NOP",
+      "before_original": {
+        "mean": 31.533333333333335,
+        "min": 24,
+        "max": 38,
+        "standardError": 0.7283003885339465
+      },
+      "fixed_original": {
+        "mean": 30.966666666666665,
+        "min": 24,
+        "max": 38,
+        "standardError": 0.698904451946181
+      },
+      "fixed_transfer": {
+        "mean": 31.133333333333333,
+        "min": 25,
+        "max": 39,
+        "standardError": 0.6690761057226914
+      },
+      "transferWinDifference": {
+        "mean": 0.16666666666666666,
+        "min": -2,
+        "max": 2,
+        "standardError": 0.19817172010996167
+      }
+    },
+    {
+      "team": "NYK",
+      "before_original": {
+        "mean": 47,
+        "min": 37,
+        "max": 52,
+        "standardError": 0.727142099031481
+      },
+      "fixed_original": {
+        "mean": 46.9,
+        "min": 37,
+        "max": 53,
+        "standardError": 0.7601421524649341
+      },
+      "fixed_transfer": {
+        "mean": 53.4,
+        "min": 40,
+        "max": 62,
+        "standardError": 0.9572470104839502
+      },
+      "transferWinDifference": {
+        "mean": 6.5,
+        "min": -9,
+        "max": 14,
+        "standardError": 1.023572737730586
+      }
+    },
+    {
+      "team": "OKC",
+      "before_original": {
+        "mean": 66.5,
+        "min": 58,
+        "max": 73,
+        "standardError": 0.6021990353370882
+      },
+      "fixed_original": {
+        "mean": 66.43333333333334,
+        "min": 58,
+        "max": 73,
+        "standardError": 0.6152904805690783
+      },
+      "fixed_transfer": {
+        "mean": 66.5,
+        "min": 59,
+        "max": 72,
+        "standardError": 0.6041047332504789
+      },
+      "transferWinDifference": {
+        "mean": 0.06666666666666667,
+        "min": -2,
+        "max": 2,
+        "standardError": 0.1656289533613338
+      }
+    },
+    {
+      "team": "ORL",
+      "before_original": {
+        "mean": 44.233333333333334,
+        "min": 35,
+        "max": 53,
+        "standardError": 0.9537383594244011
+      },
+      "fixed_original": {
+        "mean": 44.03333333333333,
+        "min": 34,
+        "max": 54,
+        "standardError": 0.9474507033345018
+      },
+      "fixed_transfer": {
+        "mean": 43.233333333333334,
+        "min": 34,
+        "max": 54,
+        "standardError": 0.9168704057805382
+      },
+      "transferWinDifference": {
+        "mean": -0.8,
+        "min": -3,
+        "max": 2,
+        "standardError": 0.23683739996670394
+      }
+    },
+    {
+      "team": "PHI",
+      "before_original": {
+        "mean": 44.03333333333333,
+        "min": 36,
+        "max": 54,
+        "standardError": 0.7054522203870666
+      },
+      "fixed_original": {
+        "mean": 43.733333333333334,
+        "min": 36,
+        "max": 54,
+        "standardError": 0.7935564256978099
+      },
+      "fixed_transfer": {
+        "mean": 43.96666666666667,
+        "min": 37,
+        "max": 54,
+        "standardError": 0.7588305178294242
+      },
+      "transferWinDifference": {
+        "mean": 0.23333333333333334,
+        "min": -3,
+        "max": 4,
+        "standardError": 0.2864099358279949
+      }
+    },
+    {
+      "team": "PHX",
+      "before_original": {
+        "mean": 47.06666666666667,
+        "min": 39,
+        "max": 56,
+        "standardError": 0.7045555105404755
+      },
+      "fixed_original": {
+        "mean": 46.13333333333333,
+        "min": 39,
+        "max": 56,
+        "standardError": 0.6742101949490085
+      },
+      "fixed_transfer": {
+        "mean": 46.2,
+        "min": 38,
+        "max": 58,
+        "standardError": 0.7277741218357473
+      },
+      "transferWinDifference": {
+        "mean": 0.06666666666666667,
+        "min": -3,
+        "max": 2,
+        "standardError": 0.2623209113593472
+      }
+    },
+    {
+      "team": "POR",
+      "before_original": {
+        "mean": 31.166666666666668,
+        "min": 23,
+        "max": 37,
+        "standardError": 0.6832702522047134
+      },
+      "fixed_original": {
+        "mean": 35.9,
+        "min": 29,
+        "max": 42,
+        "standardError": 0.6014350654318673
+      },
+      "fixed_transfer": {
+        "mean": 35.63333333333333,
+        "min": 29,
+        "max": 41,
+        "standardError": 0.5920611441966387
+      },
+      "transferWinDifference": {
+        "mean": -0.26666666666666666,
+        "min": -3,
+        "max": 2,
+        "standardError": 0.20862623088806298
+      }
+    },
+    {
+      "team": "SAC",
+      "before_original": {
+        "mean": 18.466666666666665,
+        "min": 11,
+        "max": 27,
+        "standardError": 0.6551885458792309
+      },
+      "fixed_original": {
+        "mean": 17.9,
+        "min": 12,
+        "max": 27,
+        "standardError": 0.6684172418447942
+      },
+      "fixed_transfer": {
+        "mean": 17.766666666666666,
+        "min": 10,
+        "max": 28,
+        "standardError": 0.7391877078475739
+      },
+      "transferWinDifference": {
+        "mean": -0.13333333333333333,
+        "min": -2,
+        "max": 1,
+        "standardError": 0.1840373108931074
+      }
+    },
+    {
+      "team": "SAS",
+      "before_original": {
+        "mean": 55.93333333333333,
+        "min": 47,
+        "max": 64,
+        "standardError": 0.7012850820340648
+      },
+      "fixed_original": {
+        "mean": 56.03333333333333,
+        "min": 48,
+        "max": 65,
+        "standardError": 0.6720757574520818
+      },
+      "fixed_transfer": {
+        "mean": 55.56666666666667,
+        "min": 47,
+        "max": 64,
+        "standardError": 0.7218802609235905
+      },
+      "transferWinDifference": {
+        "mean": -0.4666666666666667,
+        "min": -2,
+        "max": 2,
+        "standardError": 0.1776819665189848
+      }
+    },
+    {
+      "team": "TOR",
+      "before_original": {
+        "mean": 44.666666666666664,
+        "min": 32,
+        "max": 52,
+        "standardError": 0.8740621684580003
+      },
+      "fixed_original": {
+        "mean": 44.333333333333336,
+        "min": 33,
+        "max": 50,
+        "standardError": 0.8378040993049989
+      },
+      "fixed_transfer": {
+        "mean": 44.5,
+        "min": 34,
+        "max": 51,
+        "standardError": 0.8492728465081714
+      },
+      "transferWinDifference": {
+        "mean": 0.16666666666666666,
+        "min": -2,
+        "max": 2,
+        "standardError": 0.2401308710870848
+      }
+    },
+    {
+      "team": "UTA",
+      "before_original": {
+        "mean": 30.633333333333333,
+        "min": 21,
+        "max": 38,
+        "standardError": 0.7678651302393852
+      },
+      "fixed_original": {
+        "mean": 30.4,
+        "min": 21,
+        "max": 38,
+        "standardError": 0.7974095992433985
+      },
+      "fixed_transfer": {
+        "mean": 30.533333333333335,
+        "min": 21,
+        "max": 39,
+        "standardError": 0.7652410533497277
+      },
+      "transferWinDifference": {
+        "mean": 0.13333333333333333,
+        "min": -2,
+        "max": 3,
+        "standardError": 0.23844965411569105
+      }
+    },
+    {
+      "team": "WAS",
+      "before_original": {
+        "mean": 39.06666666666667,
+        "min": 30,
+        "max": 49,
+        "standardError": 0.7993292207001655
+      },
+      "fixed_original": {
+        "mean": 38.63333333333333,
+        "min": 29,
+        "max": 48,
+        "standardError": 0.731057073315377
+      },
+      "fixed_transfer": {
+        "mean": 38.333333333333336,
+        "min": 28,
+        "max": 48,
+        "standardError": 0.7926868804398468
+      },
+      "transferWinDifference": {
+        "mean": -0.3,
+        "min": -5,
+        "max": 4,
+        "standardError": 0.3292275878441859
+      }
+    }
+  ]
+}

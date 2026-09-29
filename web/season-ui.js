@@ -40,6 +40,7 @@
   $("sourceNote").textContent=`1,200 official games · Schedule published ${data.scheduleAsOf} · 30 teams`;
   $("modelNote").textContent=data.modelNote;
   $("dataNote").textContent=`Roster snapshot: ${data.rosterAsOf}. Player history through ${data.ratesThrough}; team ratings from ${data.ratingsSeason}. ${Object.keys(data.players).length} rostered players, including rookies and bench players. Players without NBA history use rookie or replacement priors. Roster snapshot date is the local roster file date.`;
+  if (data.impactPolicy) $("dataNote").textContent+=" "+data.impactPolicy.note;
   function edited() { return Object.keys(original).filter(id=>membership[id]!==original[id]).length; }
   function persist() {
     try {localStorage.setItem(storageKey,JSON.stringify({hash:sourceIdentity,myTeam,membership,seed:Number($("seed").value),complete:$("completeSchedule").checked,compare:$("compare").checked}));} catch (_) {}
