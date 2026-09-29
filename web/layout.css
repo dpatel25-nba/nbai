@@ -1,0 +1,18 @@
+/* Keep navigation and labels readable when the viewport or text size changes. */
+.nav { height: auto; min-height: 60px; padding-top: 10px; padding-bottom: 10px; flex-wrap: wrap; gap: 12px 24px; }
+.brand, .brand .ball { flex-shrink: 0; }
+nav.tabs { min-width: 0; }
+.tab { text-decoration: none; line-height: 1.5; }
+.panel-head, .mk-meta { flex-wrap: wrap; }
+.panel-head > *, .card, .kpi, .metric-card { min-width: 0; }
+.card > .flag { position: static; display: table; margin: 0 0 10px auto; }
+.modal-head { padding-right: 24px; }
+.modal-head h2 { overflow-wrap: anywhere; }
+.kpi .v { overflow-wrap: anywhere; }
+@media (max-width: 600px) {
+  .nav { gap: 8px; padding: 12px 16px; }
+  nav.tabs { width: 100%; margin-left: 0; justify-content: flex-start; }
+  nav.tabs .tab { padding: 8px 10px; }
+  .panel-head { align-items: flex-start; gap: 6px 12px; }
+  .panel-head .eyebrow { line-height: 1.6; }
+}

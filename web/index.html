@@ -1,3 +1,7 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NBAI — NBA Ratings & Prediction Engine</title>
 <style>
   :root {
@@ -314,6 +318,7 @@
     .brand small { display: none; }
   }
 </style>
+<link rel="stylesheet" href="layout.css">
 
 <header>
   <div class="nav">
@@ -321,6 +326,7 @@
       <small>Possession-level game simulator</small></div>
     <nav class="tabs" role="tablist" aria-label="Sections">
       <button class="tab active" data-view="simulator" role="tab">Simulator</button>
+      <a class="tab" href="season.html">Season simulator</a>
       <button class="tab" data-view="research" role="tab">Research</button>
       <button class="tab" data-view="roadmap" role="tab">Roadmap</button>
     </nav>
@@ -888,7 +894,7 @@
   // rather than spilling eight more buttons into the header, which is what the
   // previous two-tier nav did — thirteen controls in a strip is worse than the
   // flat list it replaced. Each research view gets a back link injected below.
-  const tabs = document.querySelectorAll(".tab");
+  const tabs = document.querySelectorAll("button.tab");
   const views = document.querySelectorAll(".view");
   const RESEARCH_IDS = ["ratings","predict","players","impact","props",
                         "defense","shots","playtypes"];

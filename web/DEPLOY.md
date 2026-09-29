@@ -50,7 +50,7 @@ numbers always come from a real evaluation run rather than being typed in by han
 4. You get a live URL like `nbai.vercel.app` in ~30 seconds.
 
 **Every future update:** run `python scripts/export_web.py`, then
-`git add -A && git commit -m "update data" && git push` — Vercel redeploys automatically.
+stage only the intended web assets, commit, and push to `main` — Vercel redeploys automatically.
 
 ## Custom domain
 In Vercel → your project → **Settings → Domains → Add**. It walks you through buying one
@@ -59,3 +59,16 @@ In Vercel → your project → **Settings → Domains → Add**. It walks you th
 ## Keeping it fresh during the season (later)
 A scheduled job (GitHub Actions) can run the scraper + `export_web.py` + push each morning,
 so the site updates itself. We'll set that up once daily games are flowing.
+
+## Season simulator
+
+The production page is https://nbai-rho.vercel.app/season.html. Deploy all
+`web/season*` files together; `season-data.js` is the generated schedule, roster
+and model snapshot. `season-possession.js` is a separate possession-engine
+snapshot so the game simulator and its published scorecard remain unchanged.
+The payload records source checksums. Its inputs and offline exporter are
+maintained in the research workspace; deploying the static page needs no build.
+
+Run `node tests/test_season_engine.cjs` to check a full league season. For an
+optional Playwright browser check, serve `web/` and set `NBAI_BASE_URL` to the
+server URL before running `tests/check_season_browser.py`.
