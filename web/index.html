@@ -319,13 +319,13 @@
   }
 </style>
 <link rel="stylesheet" href="layout.css">
+<link rel="stylesheet" href="game.css">
 
 <header>
   <div class="nav">
-    <div class="brand"><span class="ball" aria-hidden="true"></span>NBAI
-      <small>Possession-level game simulator</small></div>
+    <a class="brand" href="index.html"><span class="brand-ball" aria-hidden="true">◉</span> NBAI</a>
     <nav class="tabs" role="tablist" aria-label="Sections">
-      <button class="tab active" data-view="simulator" role="tab">Simulator</button>
+      <button class="tab active" data-view="simulator" role="tab">Game simulator</button>
       <a class="tab" href="season.html">Season simulator</a>
       <button class="tab" data-view="research" role="tab">Research</button>
       <button class="tab" data-view="roadmap" role="tab">Roadmap</button>
@@ -335,18 +335,17 @@
 
 <main>
   <section class="view active" id="simulator">
-    <div class="page-head">
-      <div>
-        <div class="eyebrow">Possession Engine</div>
-        <h1>Game Simulator</h1>
-      </div>
-      <div class="sub">Choose a matchup. The engine plays it out one possession at
-        a time — rotations, matchups, fouls, the bonus, offensive rebounds — and
-        returns a gamecast and a full box score. Run it again for the distribution.</div>
-    </div>
-
+    <section class="game-hero" aria-label="Game simulator overview">
+      <div><p class="eyebrow">NBAI / GAME DAY</p><h1>Game simulator</h1>
+        <p class="game-intro">Pick your matchup. Play every possession. See how the game unfolds.</p>
+        <span class="game-status" id="gameStatus" role="status" aria-live="polite">Ready to tip off</span></div>
+      <div class="matchup-marquee"><span>YOUR MATCHUP</span><strong id="gameMatchup">BOS @ OKC</strong><small>Away / Home</small></div>
+      <div class="game-hero-note"><p class="eyebrow">One game. Every detail.</p><h2>From tip-off to the final box.</h2><p>Follow the gamecast, explore player stats, or run the matchup again to compare outcomes.</p></div>
+    </section>
+    <div class="game-source"><span class="game-source-dot"></span><span>Possession-based simulation · All results are simulated</span><a href="season.html">Play a full season ↗</a></div>
+    <div class="game-workspace"><aside class="game-sidebar" aria-label="Matchup controls">
     <div class="panel">
-      <div class="panel-head"><h2>Choose a matchup</h2>
+      <div class="panel-head"><div><p class="eyebrow">01 / Set the court</p><h2>Choose a matchup</h2></div>
         <span class="eyebrow" id="simRunNote"></span></div>
       <div class="mk-grid">
         <div class="mk-box">
@@ -371,6 +370,10 @@
       </div>
     </div>
 
+      <div class="game-tip"><p class="eyebrow">Your next move</p><h2>Take over a season.</h2><p>Choose one team, reshape its roster, and follow the league week by week.</p><a href="season.html">Open season simulator ↗</a></div>
+    </aside><div class="game-results">
+      <section class="panel game-empty" id="gameEmpty"><p class="eyebrow">02 / Play it out</p><h2>Your game starts here.</h2><p>Choose your home and away teams, then select <b>Simulate game</b>. The gamecast and both teams’ box scores will appear here.</p><div class="game-empty-steps"><span>01 <b>Pick a matchup</b></span><span>02 <b>Simulate the game</b></span><span>03 <b>Explore the results</b></span></div></section>
+      <nav class="game-result-links" id="gameResultLinks" aria-label="Game results" hidden><a href="#simGamePanel">Gamecast ↓</a><a href="#simBoxPanel">Box score ↓</a><a href="#simAggPanel" id="gameAggregateLink" hidden>Across simulations ↓</a></nav>
     <div class="panel" style="margin-top:18px;display:none" id="simGamePanel">
       <div class="panel-head"><h2>Gamecast</h2>
         <span class="eyebrow" id="simPbpNote"></span></div>
@@ -418,6 +421,8 @@
       </div>
       <div class="note" id="simEvalCal"></div>
     </div>
+    </div></div>
+    <footer class="game-footer"><span>NBAI · Game Lab · All results are simulated</span><a href="season.html">Go to your season ↗</a></footer>
   </section>
 
   <!-- ============ TEAM RATINGS ============ -->
@@ -1383,6 +1388,7 @@
 
     function meta() {
       const h = hs.value, a = as.value;
+      el("gameMatchup").textContent = `${a} @ ${h}`;
       for (const [sel, id] of [[h, "simHomeMeta"], [a, "simAwayMeta"]]) {
         const t = T[sel];
         el(id).innerHTML = `<span>off ${t.off >= 0 ? "+" : ""}${t.off.toFixed(1)}</span>
@@ -1403,6 +1409,10 @@
       const plural = (n, w) => `${n.toLocaleString()} ${w}${n === 1 ? "" : "s"}`;
       el("simRunNote").textContent =
         label || (started ? plural(state.n, "simulation") + " run" : "");
+      el("gameStatus").textContent = label || (started ? plural(state.n, "simulation") + " complete" : "Ready to tip off");
+      el("gameEmpty").hidden = started;
+      el("gameResultLinks").hidden = !started;
+      el("gameAggregateLink").hidden = !started || state.n < 2;
     }
     // `showGame` means "replace the gamecast with a fresh one", NOT "start
     // over". Pressing Simulate game keeps every simulation already run and adds

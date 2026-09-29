@@ -83,7 +83,7 @@ with sync_playwright() as p:
     page.reload()
     assert page.locator('#editCount').inner_text() == 'Original', 'stale saved roster must not replace newer input rosters'
     page.goto(BASE_URL + '/index.html')
-    assert page.locator('a[href="season.html"]').count() == 1
+    assert page.locator('header nav a[href="season.html"]').count() == 1
     page.locator('#simRun1').click()
     page.wait_for_selector('#simBoxPanel',state='visible',timeout=30000)
     assert not errors,errors
