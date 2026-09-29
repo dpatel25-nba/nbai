@@ -28,6 +28,7 @@ with sync_playwright() as p:
     assert page.locator('.box-total').count() == 2
     page.locator('#closeBox').click()
     page.locator('#tab-players').click()
+    page.locator('#statsTeam').select_option('')
     assert page.locator('#playersBody tr').count() == 586
     page.locator('#statsMode').select_option('total')
     page.locator('#statsSearch').fill('Jok')
@@ -75,6 +76,7 @@ with sync_playwright() as p:
     page.set_viewport_size({'width':390,'height':844})
     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), 'page overflow on mobile'
     page.screenshot(path=str(OUT/'mobile.png'),full_page=True)
+    page.locator('.season-options summary').click()
     page.locator('#completeSchedule').uncheck()
     assert page.locator('#progressText').inner_text() == '0 of 1,200 games'
     page.evaluate("const saved=JSON.parse(localStorage.getItem('nbai-season-scenario-v1')); saved.hash='outdated-roster'; localStorage.setItem('nbai-season-scenario-v1',JSON.stringify(saved));")

@@ -42,3 +42,87 @@
   .game-match { grid-column: 1; grid-row: 2; }
   .game-score { grid-column: 2; grid-row: 2; }
 }
+
+/* Team-centered franchise hub. */
+:root { --accent: #176d59; --paper: #edf1ef; }
+.topbar { background: #101f25; }
+.topbar nav a.active { border-bottom-color: #beee75; }
+main { max-width: 1600px; padding-top: 28px; }
+.franchise-hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(130px, .65fr) minmax(0, 1fr); align-items: center; gap: 28px; padding: 32px; margin-bottom: 20px; border-radius: 12px; background: #152d32; color: #f5f8f2; overflow: hidden; }
+.franchise-hero::before { content: ''; position: absolute; width: 500px; height: 500px; border: 1px solid #ffffff0d; border-radius: 50%; left: 38%; top: -180px; pointer-events: none; }
+.franchise-hero > * { position: relative; min-width: 0; }
+.franchise-hero .eyebrow { color: #bce684; font-size: 10px; }
+.franchise-hero label { color: #b7c9c8; margin-bottom: 5px; }
+#myTeam { background: #233e42; color: #fff; border-color: #4b6668; width: 100%; max-width: 320px; font-size: 12px; }
+.franchise-hero h1 { font-size: clamp(26px, 3vw, 42px); line-height: 1.13; margin: 18px 0 8px; letter-spacing: -.025em; }
+.team-context { color: #b7c9c8; font-size: 12px; margin: 0; }
+.team-record { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 14px; margin-top: 20px; }
+.team-record > strong { font-size: 36px; line-height: 1.2; }
+.team-record > span { font-size: 9px; letter-spacing: 1.1px; max-width: 55px; }
+#recentForm { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; }
+#recentForm > span:first-child { font-size: 9px; color: #b7c9c8; margin-right: 5px; }
+.form-chip { display: grid; place-items: center; width: 23px; height: 23px; border-radius: 4px; font-size: 10px; font-weight: 700; }
+.form-chip.win { color: #c5f58c; background: #365249; }
+.form-chip.loss { color: #ffd3cb; background: #614b49; }
+.franchise-mark { text-align: center; transform: rotate(-8deg); padding: 28px 0; border-block: 1px solid #bce68455; }
+.franchise-mark > span { display: block; font: 700 clamp(45px, 6vw, 90px)/1.2 'Space Grotesk', sans-serif; letter-spacing: -.04em; color: #c4f087; }
+.franchise-mark small { letter-spacing: 4px; font-size: 9px; }
+.next-match { padding: 22px; border: 1px solid #597072; border-radius: 8px; background: #18353a; }
+.next-match h2 { font-size: 22px; line-height: 1.3; }
+.next-match p:not(.eyebrow) { color: #b7c9c8; font-size: 12px; line-height: 1.7; }
+.next-match a { color: #c4f087; font-size: 11px; text-underline-offset: 4px; }
+.week-panel { margin-bottom: 18px; scroll-margin-top: 20px; }
+.week-toolbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding: 22px; border-bottom: 1px solid var(--line); }
+.week-toolbar .eyebrow { margin-bottom: 4px; }
+#weekRange { font-size: 12px; color: var(--muted); margin: 5px 0 0; }
+.week-navigation { display: flex; align-items: center; gap: 16px; }
+.week-navigation .button { padding: 8px 12px; }
+.week-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; padding: 16px; }
+.calendar-day { min-width: 0; min-height: 220px; display: flex; flex-direction: column; align-items: flex-start; padding: 12px 10px; border: 1px solid var(--line); border-radius: 7px; text-align: left; background: #f4f6f3; color: var(--ink); font: inherit; }
+.calendar-date { display: flex; justify-content: space-between; gap: 8px; align-items: center; width: 100%; border-bottom: 1px solid var(--line); padding-bottom: 9px; margin-bottom: 14px; }
+.calendar-date span { font-size: 9px; text-transform: uppercase; letter-spacing: .8px; }
+.calendar-date b { font-size: 16px; }
+.matchup-day { background: #fff; }
+button.matchup-day:hover { border-color: var(--accent); background: #f1f7eb; }
+.venue { font-size: 8px; font-weight: 700; letter-spacing: 1px; color: var(--muted); }
+.opponent-code { font-size: 26px; line-height: 1.3; margin-top: 6px; }
+.opponent-name { font-size: 10px; line-height: 1.5; margin: 3px 0 14px; overflow-wrap: anywhere; }
+.calendar-score { font: 600 12px/1.5 'Space Grotesk', sans-serif; margin-top: auto; }
+.calendar-status { font-size: 9px; color: var(--muted); margin-top: 6px; }
+.calendar-day .provisional { margin: 5px 0 0; font-size: 7px; padding: 3px; max-width: 100%; }
+.game-win { border-top: 3px solid #4b875e; }
+.game-loss { border-top: 3px solid #b8735e; }
+.game-win .calendar-score { color: #28724d; }
+.game-loss .calendar-score { color: #a44635; }
+.off-label { font-size: 9px; color: #85908b; margin-top: 14px; letter-spacing: 1px; }
+.rest-line { width: 20px; height: 2px; background: #c6cec8; margin-top: 12px; }
+.week-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 0 18px 16px; font-size: 10px; color: var(--muted); }
+.week-footer p { margin: 0; font-weight: 600; color: var(--ink); }
+.season-options summary { font-size: 11px; color: var(--muted); cursor: pointer; }
+.season-options .settings { margin-top: 16px; }
+.controls .section-title { margin-bottom: 14px; }
+.button.primary { background: #176d59; }
+.button.primary:hover:not(:disabled) { background: #105440; }
+.my-team-row { background: #eef6e4; }
+.my-team-row .team-cell { box-shadow: inset 3px 0 #579746; }
+.metrics strong { font-size: 18px; }
+@media (max-width: 1250px) {
+  .week-days { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .franchise-hero { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+  .franchise-mark { display: none; }
+}
+@media (max-width: 600px) {
+  main { padding-top: 18px; }
+  .franchise-hero { grid-template-columns: minmax(0, 1fr); padding: 22px; gap: 20px; }
+  .franchise-hero h1 { font-size: 30px; }
+  .next-match { padding: 16px; }
+  .next-match h2 { font-size: 20px; }
+  .week-toolbar { padding: 18px; }
+  .week-days { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 12px; }
+  .calendar-day { min-height: 205px; padding: 12px; }
+  .rest-day { min-height: 130px; }
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .metrics > div:last-child { grid-column: 1 / -1; }
+  .metrics strong { font-size: 17px; }
+  #runWeek { width: 100%; }
+}

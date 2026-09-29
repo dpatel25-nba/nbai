@@ -11,14 +11,21 @@
     <nav aria-label="Main navigation"><a href="index.html">Game simulator</a><a class="active" href="season.html" aria-current="page">Season simulator</a></nav>
     <span class="top-note">THE LEAGUE, REIMAGINED</span></header>
   <main>
-    <div class="hero"><div><p class="eyebrow">2026–27 · Regular season</p><h1>A whole season.<br><span>Your version of it.</span></h1>
-      <p class="intro">Move a star. Build a contender. Play out every game and see where the league lands.</p></div>
-      <div class="season-stamp"><span>NBA</span><strong>26<span>/</span>27</strong><small>SEASON LAB</small></div></div>
+    <section class="franchise-hero" aria-label="Your team">
+      <div class="franchise-identity"><p class="eyebrow">NBAI / MY SEASON / 2026–27</p>
+        <label for="myTeam">Choose your team</label><select id="myTeam"></select>
+        <h1 id="teamName">Your franchise. Your season.</h1>
+        <p id="teamContext" class="team-context"></p>
+        <div class="team-record"><strong id="teamRecord">0–0</strong><span>SEASON RECORD</span><div id="recentForm" aria-label="Last five results"></div></div>
+      </div>
+      <div class="franchise-mark" aria-hidden="true"><span id="teamCode">NYK</span><small>MY SEASON</small></div>
+      <div class="next-match"><p class="eyebrow">Up next</p><h2 id="nextOpponent">Opening night</h2><p id="nextGameNote"></p><a href="#weekHub">View weekly schedule ↓</a></div>
+    </section>
     <div class="source-strip"><span class="live-dot"></span><span id="sourceNote">Loading official schedule and rosters…</span><a id="scheduleLink" href="https://pr.nba.com/2026-27-nba-regular-season-schedule" target="_blank" rel="noopener">Official schedule ↗</a></div>
     <div class="workspace">
       <aside class="roster-panel panel">
-        <div class="section-title"><div><p class="eyebrow">01 / Build your scenario</p><h2>Roster room</h2></div><span id="editCount" class="badge">Original</span></div>
-        <label for="rosterTeam">Team</label><select id="rosterTeam" data-edit></select>
+        <div class="section-title"><div><p class="eyebrow">Front office</p><h2>My roster</h2></div><span id="editCount" class="badge">Original</span></div>
+        <label for="rosterTeam">Viewing team</label><select id="rosterTeam" data-edit></select>
         <div class="roster-heading"><span id="rosterCount"></span><span>Projected role</span></div>
         <div id="rosterList" class="roster-list"></div>
         <div class="add-player"><label for="playerSearch">Find a player to add or move</label><input id="playerSearch" type="search" placeholder="Search any team’s players…" autocomplete="off" data-edit>
@@ -27,17 +34,24 @@
         <button id="resetRoster" class="text-button" data-edit>Restore original rosters</button>
       </aside>
       <div class="main-column">
+        <section id="weekHub" class="panel week-panel" aria-label="Weekly team schedule">
+          <div class="week-toolbar"><div><p class="eyebrow">Season calendar</p><h2 id="weekTitle">Week 1</h2><p id="weekRange"></p></div>
+            <div class="week-navigation"><button id="prevWeek" class="button secondary" aria-label="Previous week">←</button><button id="currentWeek" class="text-button">Current week</button><button id="nextWeek" class="button secondary" aria-label="Next week">→</button></div></div>
+          <div id="weekDays" class="week-days"></div>
+          <div class="week-footer"><p id="weekSummary"></p><span>Final scores open the full box score.</span></div>
+        </section>
         <section class="panel controls" aria-label="Simulation controls">
-          <div class="section-title"><div><p class="eyebrow">02 / Play it out</p><h2 id="runTitle">Ready for opening night</h2></div><span class="badge" id="runStatus">Not started</span></div>
-          <div class="settings"><label class="seed-label" for="seed">Season seed<input id="seed" type="number" min="0" max="4294967295" value="202627" data-edit></label>
+          <div class="section-title"><div><p class="eyebrow">Season control</p><h2 id="runTitle">Ready for opening night</h2></div><span class="badge" id="runStatus">Not started</span></div>
+          <details class="season-options"><summary>Season settings &amp; roster comparison</summary><div class="settings"><label class="seed-label" for="seed">Season seed<input id="seed" type="number" min="0" max="4294967295" value="202627" data-edit></label>
             <div class="checks"><label><input id="completeSchedule" type="checkbox" checked data-edit> Complete 82 games per team</label><label><input id="compare" type="checkbox" checked data-edit> Compare with original rosters</label></div></div>
           <p class="small-note" id="cupNote">Includes 30 provisional Cup-window games. Their matchups are generated, not official.</p>
-          <div class="actions"><button id="runSeason" class="button primary">Simulate season <span aria-hidden="true">↗</span></button><button id="runDay" class="button secondary">Next game day</button><button id="pause" class="button secondary" hidden>Pause</button><button id="resetSeason" class="text-button">Restart</button></div>
+          </details>
+          <div class="actions"><button id="runWeek" class="button primary">Simulate week 1 →</button><button id="runSeason" class="button secondary">Simulate season <span aria-hidden="true">↗</span></button><button id="runDay" class="button secondary">Next game day</button><button id="pause" class="button secondary" hidden>Pause</button><button id="resetSeason" class="text-button">Restart</button></div>
           <progress id="progress" value="0" max="1230" aria-label="Season simulation progress"></progress>
           <div class="progress-label"><span id="progressText" role="status" aria-live="polite">0 of 1,230 games</span><span id="currentDate">Opening night · Oct 20</span></div>
           <p id="message" role="alert" hidden></p>
         </section>
-        <div class="metrics"><div><span>Games played</span><strong id="gamesMetric">0</strong></div><div><span>League leader</span><strong id="leaderMetric">—</strong></div><div><span>Top scorer</span><strong id="scorerMetric">—</strong></div></div>
+        <div class="metrics"><div><span>Team games played</span><strong id="gamesMetric">0</strong></div><div><span>Conference position</span><strong id="leaderMetric">—</strong></div><div><span>Team leading scorer</span><strong id="scorerMetric">—</strong></div></div>
         <section class="panel results-panel">
           <div class="results-top"><div class="result-tabs" role="tablist" aria-label="Season results"><button class="selected" id="tab-standings" role="tab" aria-selected="true" aria-controls="view-standings" data-tab="standings">Standings</button><button id="tab-games" role="tab" aria-selected="false" aria-controls="view-games" data-tab="games">Games</button><button id="tab-players" role="tab" aria-selected="false" aria-controls="view-players" data-tab="players">Player stats</button></div><button id="download" class="text-button" disabled>Export results ↓</button></div>
           <div id="view-standings" role="tabpanel" aria-labelledby="tab-standings"><div class="filter-row"><div class="segmented"><button class="selected" data-conference="East">East</button><button data-conference="West">West</button><button data-conference="">All teams</button></div><span class="small-note">ΔW vs original rosters, same seed</span></div>
@@ -51,6 +65,6 @@
     <footer>NBAI <span>2026–27 Season Lab · All results are simulated</span><a href="index.html">Back to game simulator ↗</a></footer>
   </main>
   <dialog id="boxDialog"><div class="dialog-head"><div><p class="eyebrow" id="boxDate"></p><h2 id="boxTitle"></h2></div><button id="closeBox" class="button secondary" aria-label="Close box score">Close ×</button></div><div id="boxContent"></div></dialog>
-  <script src="season-data.js"></script><script src="season-possession.js"></script><script src="season-engine.js"></script><script src="season-ui.js"></script>
+  <script src="season-data.js"></script><script src="season-possession.js"></script><script src="season-engine.js"></script><script src="season-calendar.js"></script><script src="season-ui.js"></script>
 </body>
 </html>

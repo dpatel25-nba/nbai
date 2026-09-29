@@ -72,3 +72,14 @@ maintained in the research workspace; deploying the static page needs no build.
 Run `node tests/test_season_engine.cjs` to check a full league season. For an
 optional Playwright browser check, serve `web/` and set `NBAI_BASE_URL` to the
 server URL before running `tests/check_season_browser.py`.
+
+### Team hub
+
+The season page now opens from one team's perspective. Its Monday–Sunday calendar
+lets users browse the season and simulate the next league week. A team switch
+updates roster, record, recent form, opponent and stat filters without resetting
+results; roster edits still restart the preseason scenario. Ship
+`season-calendar.js` with the other season assets. Run
+`tests/check_team_hub_browser.py` for all 25 weekly boundaries, all 30 team records
+and responsive layout checks. No simulation-model or schedule changes accompany
+this interface update.
