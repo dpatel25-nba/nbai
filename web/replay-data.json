@@ -1,0 +1,80 @@
+{
+  "schema_version": "nba-archived-replay/v1",
+  "classification": "retrospective_plumbing_demonstration",
+  "inputs_sha256": {
+    "data/raw/props_odds/0022400077_player_points_open.json": "dab346607363062ccbc45ec3a2db9afd88a85626678cd26ddd867e02298a0bf4",
+    "data/features/props_predictions.parquet": "02bb54d51734544d3ee61bda8ed65886564dcfe54083b96b9a3d4c5d0b3729f3",
+    "data/parquet/player_games.parquet": "b345c5845306198d44ded28f3e695d7cf4e8b65d1dea1ac6662c167a10db0357",
+    "data/parquet/games.parquet": "9902080922ac678dc3f87c0ab038d3021bd6bcbc69ce4203c81b678d498a06cc",
+    "agent-workspace/scripts/research_replay.py": "f0a00d04c589528a1f37255e6cfadd3d242f5ae455ec9d233eb14379a82b0ed8"
+  },
+  "selection": "Fixed game/player/book example chosen to test wiring, not selected for profitability.",
+  "game": {
+    "id": "0022400077",
+    "home": "Orlando Magic",
+    "away": "Brooklyn Nets",
+    "starts_at": "2024-10-25T23:10:00Z"
+  },
+  "player": "Cameron Johnson",
+  "quote": {
+    "bookmaker_id": "draftkings",
+    "bookmaker_event_id": "7cdee69a4e2927c0b2c17e7bfbfd6ab0",
+    "market_id": "player_points",
+    "player_id": 1629661,
+    "game_id": "0022400077",
+    "side": "over",
+    "line": 14.5,
+    "price_format": "american",
+    "price": -125,
+    "quote_at": "2024-10-25T11:04:38Z",
+    "source_ref": "data/raw/props_odds/0022400077_player_points_open.json",
+    "payload_hash": "dab346607363062ccbc45ec3a2db9afd88a85626678cd26ddd867e02298a0bf4"
+  },
+  "archive_snapshot_at": "2024-10-25T11:05:39Z",
+  "original_retrieved_at": null,
+  "source_family": "The Odds API historical response already on disk; original download time and authenticity were not independently verified.",
+  "forecast": {
+    "point_estimate": 13.777599383753065,
+    "model_version": "saved-props-file:02bb54d51734544d3ee61bda8ed65886564dcfe54083b96b9a3d4c5d0b3729f3",
+    "source_ref": "data/features/props_predictions.parquet",
+    "created_at": null,
+    "input_cutoff": null
+  },
+  "decision": {
+    "id": "ec50a99f3641e6dd03def426e6bc054c205185f1247997933c1c8bf4774bdf41",
+    "action": "pass",
+    "recorded_at": "2026-10-04T01:49:50.631626+00:00",
+    "record_class": "retrospective",
+    "reasons": [
+      "HISTORICAL_REPLAY",
+      "PREGAME_PROVENANCE_UNVERIFIED",
+      "RETROSPECTIVE_AVAILABILITY",
+      "PROBABILITY_UNAVAILABLE",
+      "UNCERTAINTY_UNAVAILABLE",
+      "NOT_AN_APPROVED_STRATEGY"
+    ]
+  },
+  "settlement": {
+    "state": "not_applicable",
+    "actual_points": 12,
+    "stake_units": 0,
+    "net_units": 0,
+    "meaning": "A pass has no bet settlement; actual outcome retained only to verify identity/result linkage."
+  },
+  "reconciliation": {
+    "opportunities_in_demo": 1,
+    "recorded_passes": 1,
+    "processing_gaps": [],
+    "archive_receipt_sha256": "1d74df86a557988d35002a79df231317f4615fbdbe53ab8bce5273d2aaf5b0b1"
+  },
+  "forward_summary": {
+    "picks_created_by_demo": 0,
+    "stake_units": 0,
+    "net_units": 0
+  },
+  "limitations": [
+    "Single-example plumbing verification, not league-wide evaluation.",
+    "Existing props features use retrospective availability; this is not a reconstructed pregame prediction.",
+    "No probability, calibrated uncertainty, source download receipt, or profitable strategy is established."
+  ]
+}

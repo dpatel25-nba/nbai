@@ -1,0 +1,161 @@
+{
+  "classification": "retrospective_chronological_reconstruction",
+  "policy": {
+    "version": "prior-season-uncertainty-v1",
+    "initial_team_points": 100.0,
+    "rating_rate": 0.15,
+    "league_rate": 0.01,
+    "home_advantage": 2.8,
+    "season_reversion": 0.25,
+    "minimum_calibration_games": 200,
+    "rating_updates": "after the entire date batch",
+    "uncertainty": "prior-season regular-season residuals only",
+    "interpretation": "retrospective reconstruction; no untouched holdout or historical availability claim"
+  },
+  "source_sha256": "a3d0d634dfc6ab85f43e369b1c4e878de1d6d6e7217d1f05a9874601159e80d5",
+  "source_audit": {
+    "elo": {
+      "source_sha256": "55de17deb0464a34dad8a4f9d6e670fe412b9884336ba21eb0f2a4c0a312d826",
+      "saved_sha256": "651bcb4697edfb55aa9c77484f2c79633e732e0abb048b5aaeff754107956e02",
+      "games": 16758,
+      "missing_pairs": 0,
+      "max_probability_difference": 0.0,
+      "numerically_reproduced": true,
+      "historical_receipt_times_verified": false
+    },
+    "simulator": {
+      "source_sha256": "ea16f74a3071bc2ca1343d601c73e970624b3f27b94116cd3f3f725b2459a7d3",
+      "saved_sha256": "5e6e662e2efe6d1893d60280153476fada4adfcf29843b7e1ff461e421bb064e",
+      "games": 15439,
+      "missing_pairs": 0,
+      "max_probability_difference": 0.0,
+      "numerically_reproduced": true,
+      "historical_receipt_times_verified": false,
+      "issues": [
+        "MARGIN_SD and TOTAL_SD fitted on the entire evaluated period, including future games.",
+        "Initial league average uses the first 200 outcomes; corrected replay uses a fixed seed.",
+        "Same-date game ordering lacks result availability times; corrected replay delays updates until the next date."
+      ]
+    }
+  },
+  "aggregate": {
+    "version": "common-population-v1",
+    "population": 6150,
+    "eligible": 6150,
+    "excluded": {},
+    "scores": {
+      "corrected": {
+        "n": 6150,
+        "brier": 0.21762316733019813,
+        "log_loss": 0.6261652314903168
+      },
+      "saved_simulator": {
+        "n": 6150,
+        "brier": 0.21723353746122392,
+        "log_loss": 0.6248009800076719
+      },
+      "saved_elo": {
+        "n": 6150,
+        "brier": 0.22026689984396572,
+        "log_loss": 0.6318257867682762
+      }
+    },
+    "policy": "Common population; log loss clips only at 1e-15 and 1-1e-15. No price, timing, training-lineage or betting validity is inferred."
+  },
+  "by_season": [
+    {
+      "season": "2021-22",
+      "games": 1230,
+      "scored_totals": 1230,
+      "total_mae": 14.710340712856135,
+      "interval80_coverage": 0.7975609756097561
+    },
+    {
+      "season": "2022-23",
+      "games": 1230,
+      "scored_totals": 1230,
+      "total_mae": 14.855649466291108,
+      "interval80_coverage": 0.7861788617886178
+    },
+    {
+      "season": "2023-24",
+      "games": 1230,
+      "scored_totals": 1230,
+      "total_mae": 14.59399089351486,
+      "interval80_coverage": 0.8040650406504065
+    },
+    {
+      "season": "2024-25",
+      "games": 1230,
+      "scored_totals": 1230,
+      "total_mae": 14.792939373004868,
+      "interval80_coverage": 0.7926829268292683
+    },
+    {
+      "season": "2025-26",
+      "games": 1230,
+      "scored_totals": 1230,
+      "total_mae": 15.223068707570922,
+      "interval80_coverage": 0.7691056910569106
+    }
+  ],
+  "coverage_complete": true,
+  "folds": [
+    {
+      "season": "2021-22",
+      "evaluation_start": "2021-10-19 00:00:00",
+      "training_through": "2021-05-16 00:00:00",
+      "calibration_games": 9519,
+      "margin_sd": 12.842511557428562,
+      "total_residual_lower80": -23.00144031685888,
+      "total_residual_upper80": 23.72111398492961,
+      "prior_game_ids_sha256": "0fbcca43b7042392515ef403b80666f21410f570d10cff245f8cd0d0706750df"
+    },
+    {
+      "season": "2022-23",
+      "evaluation_start": "2022-10-18 00:00:00",
+      "training_through": "2022-04-10 00:00:00",
+      "calibration_games": 10749,
+      "margin_sd": 13.018591909341643,
+      "total_residual_lower80": -23.09054066333065,
+      "total_residual_upper80": 23.712293020897654,
+      "prior_game_ids_sha256": "0978ed19c84c2c2c69f613c3db7e6d6f4a0d1e6ae58966d35f32dfdcdf24ae35"
+    },
+    {
+      "season": "2023-24",
+      "evaluation_start": "2023-10-24 00:00:00",
+      "training_through": "2023-04-09 00:00:00",
+      "calibration_games": 11979,
+      "margin_sd": 13.038350657249955,
+      "total_residual_lower80": -23.235783403565588,
+      "total_residual_upper80": 23.73936159035942,
+      "prior_game_ids_sha256": "baae9f370334abc6539d37a57585ab3f648371cf9c7e9472d8c56b48eb9e0b1e"
+    },
+    {
+      "season": "2024-25",
+      "evaluation_start": "2024-10-22 00:00:00",
+      "training_through": "2024-04-14 00:00:00",
+      "calibration_games": 13209,
+      "margin_sd": 13.158441464059809,
+      "total_residual_lower80": -23.238081127439965,
+      "total_residual_upper80": 23.706866787125474,
+      "prior_game_ids_sha256": "ae38e06a910c44a7e30f15f05ba75b086fcd11e8a952c311704cbacc568e3cab"
+    },
+    {
+      "season": "2025-26",
+      "evaluation_start": "2025-10-21 00:00:00",
+      "training_through": "2025-04-13 00:00:00",
+      "calibration_games": 14439,
+      "margin_sd": 13.24537485930638,
+      "total_residual_lower80": -23.28185317455764,
+      "total_residual_upper80": 23.706866787125474,
+      "prior_game_ids_sha256": "a17d559a5471c2eae8af90656369fb2bd57f610a0bb070ae3a3e62f39e7d6d5d"
+    }
+  ],
+  "limitations": [
+    "Not a historically recorded forward forecast or untouched holdout; source availability times remain unknown.",
+    "Fixed model and interval choices are research assumptions; empirical coverage must be reported, not assumed.",
+    "No compatible same-book total quote/price/timing join; no ROI or actionable picks."
+  ],
+  "source_report_sha256": "159d10877d4255f74c5234a4ea9efd820940b469385e9aa01c40644948544584"
+}

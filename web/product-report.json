@@ -1,0 +1,91 @@
+{
+  "schema": "nba-daily-product/v1",
+  "generated_at": "2026-10-04T14:26:02.539658+00:00",
+  "day": "2026-10-04",
+  "collector": {
+    "status": "empty_slate",
+    "started_at": "2026-10-04T04:27:49.448751+00:00",
+    "finished_at": "2026-10-04T04:28:01.871871+00:00",
+    "scheduled_regular_games": 0
+  },
+  "paper_ledger": {
+    "available": false,
+    "source": null,
+    "as_of": null,
+    "grading": "latest",
+    "reason": "Paper ledger not configured; no counts inferred."
+  },
+  "forecasts_in_latest_run": 0,
+  "collector_errors": 0,
+  "studio": {
+    "available": true,
+    "state": "running",
+    "active_tasks": 0,
+    "registered_product_counts": {
+      "applied_code_changes": 25,
+      "real_experiment_receipts": 4,
+      "integrated_product_results": 0,
+      "github_pushes": 0,
+      "verified_live_deployments": null,
+      "recorded_research_decisions": 0,
+      "withheld_signals": 0
+    }
+  },
+  "forecast_archive": {
+    "available": true,
+    "captured_at": "2026-09-16T19:30:30.266984+00:00"
+  },
+  "remaining_gates": [
+    "Verified market identities and compatible same-book prices.",
+    "Qualified game-total probability and uncertainty model; shadow bridge currently records passes only.",
+    "Independent delivery receipts and verified publication remain separate from local changes."
+  ],
+  "model_comparison": {
+    "classification": "retrospective_saved_prediction_diagnostic",
+    "aggregate": {
+      "version": "common-population-v1",
+      "population": 6150,
+      "eligible": 6150,
+      "excluded": {},
+      "scores": {
+        "elo": {
+          "n": 6150,
+          "brier": 0.22026689984396572,
+          "log_loss": 0.6318257867682762
+        },
+        "simulator": {
+          "n": 6150,
+          "brier": 0.21723353746122392,
+          "log_loss": 0.6248009800076719
+        },
+        "prior_seasons_home_rate": {
+          "n": 6150,
+          "brier": 0.24752095423872683,
+          "log_loss": 0.6881908134907376
+        },
+        "coin_flip": {
+          "n": 6150,
+          "brier": 0.25,
+          "log_loss": 0.6931471805600152
+        }
+      },
+      "policy": "Common population; log loss clips only at 1e-15 and 1-1e-15. No price, timing, training-lineage or betting validity is inferred.",
+      "eligible_ids_sha256": "57cc0f5ba7679d94335b0be3aaf4fe3291556e467f9d87f250413609d0fe74c1"
+    },
+    "coverage_complete": true,
+    "limitations": [
+      "No model fitting, model selection or holdout claim. Previously explored seasons remain retrospective.",
+      "Saved Elo/simulator historical generation and training cutoffs are not independently verified.",
+      "Only the prior-seasons baseline cutoff is derived here. Season grouping is not proof of leakage-free models.",
+      "No quote, price or pregame availability join: these scores establish neither a tradable edge nor betting ROI."
+    ]
+  },
+  "local_source_hashes": {
+    "web/research.html": "264fbca175bf3369b3e72c716f9ee89dd633e44284ac2583bf5d82e6c5f90431",
+    "web/research-board.js": "4099ccb1ae206f595f5be50f0e65ba18df1ca0f24100749703406ab5676fde24",
+    "web/forecast.html": "59ced77587a80e196dce853a69b4958e74f02595c3ff2e8d5ab98756890d9082",
+    "web/forecast-explainer.js": "c616606dbf1e6c30c1d71c5d280415ef9da19a4957a9b9bd7a7636d6c5db82da"
+  },
+  "source_changes_since_previous_day": null,
+  "change_note": "Source changes are not deployed features; null means no earlier daily baseline."
+}

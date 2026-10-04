@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NBAI research-only quote and forecast board. Historical evidence and forward paper records are kept separate; missing data stays missing.">
+  <title>Research board · NBAI</title>
+  <link rel="stylesheet" href="research.css">
+  <script src="research-board.js" defer></script>
+  <script src="research-ui.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to research</a>
+  <header class="topbar">
+    <a class="brand" href="index.html">NBAI <span>/ Research</span></a>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Game simulator</a>
+      <a href="season.html">Season simulator</a>
+      <a href="research.html" aria-current="page">Research board</a>
+    </nav>
+  </header>
+  <main id="main">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">NBA / Evidence before outcomes</p>
+        <h1>The research board.</h1>
+        <p class="intro">A clear view of what we know, what is missing, and what still needs to be tested.</p>
+      </div>
+      <aside class="research-note" aria-label="Research status">
+        <span class="badge">Research only</span>
+        <p>No validated betting strategy is presented here. No profitability promises or real-money betting actions.</p>
+      </aside>
+    </div>
+    <nav class="section-nav" aria-label="Research sections">
+      <a href="#historical">01 Historical evidence</a>
+      <a href="#signals">02 Research signals</a>
+      <a href="#forward">03 Forward record</a>
+    </nav>
+    <noscript><p class="data-status">JavaScript is disabled. The snapshot cannot be loaded or freshness checked. No current quotes or verified forward results are shown.</p></noscript>
+    <div id="researchBoard">
+      <p class="data-status" role="status">Data unavailable — waiting for a valid snapshot. No picks loaded.</p>
+      <section id="historical"><p class="eyebrow">01 / Historical evidence</p><h2>Retrospective research</h2><p>No historical summaries loaded. Minutes-model evidence is not betting validation.</p></section>
+      <section id="signals"><p class="eyebrow">02 / Research signals</p><h2>Quote &amp; forecast board</h2><p>No research signals. Actual quotes and forecasts are unavailable.</p></section>
+      <section id="forward"><p class="eyebrow">03 / Forward evidence</p><h2>Forward paper record</h2><p class="metric">0 verified forward observations</p><p>No persisted ledger is connected. Performance is unvalidated.</p></section>
+    </div>
+    <footer>
+      <p>NBAI · Research is not a recommendation</p>
+      <a href="research-contract-v1.md">Data contract v1</a>
+      <a href="research-data.json">Published snapshot (JSON)</a>
+      <a href="research-evidence.json">Historical evidence and limitations (JSON)</a>
+      <a href="replay.html">Archived workflow example (not a current pick)</a>
+      <a href="forecast.html">Forecast context and daily progress</a>
+    </footer>
+  </main>
+</body>
+</html>

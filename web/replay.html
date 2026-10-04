@@ -1,0 +1,80 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Archived workflow replay · NBAI</title><style>body{font:17px/1.6 system-ui;margin:0;background:#f7f8f2;color:#273d32}main{max-width:850px;margin:auto;padding:24px}a{color:#275d49}table{width:100%;border-collapse:collapse}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #ccd5c7;padding:12px;overflow-wrap:anywhere}th{width:40%}.label{font-weight:bold}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}summary{cursor:pointer}</style></head><body><main><a href="research.html">Back to research</a><h1>Archived workflow replay</h1><p class="label">Historical plumbing demonstration · Not a current pick or forward result</p><p>This example links a stored book quote, a saved point estimate, an immutable pass and the observed result. Missing evidence remains visible.</p><table><tr><th scope="row">Game</th><td>Brooklyn Nets at Orlando Magic</td></tr><tr><th scope="row">Player</th><td>Cameron Johnson</td></tr><tr><th scope="row">Archived quote</th><td>draftkings · over 14.5 points · -125 American</td></tr><tr><th scope="row">Quote timestamp</th><td>2024-10-25T11:04:38Z</td></tr><tr><th scope="row">Saved point estimate</th><td>13.78</td></tr><tr><th scope="row">Decision</th><td>PASS — historical replay</td></tr><tr><th scope="row">Recorded now at</th><td>2026-10-04T01:49:50.631626+00:00</td></tr><tr><th scope="row">Actual points</th><td>12</td></tr><tr><th scope="row">Bet settlement</th><td>Not applicable — no stake</td></tr><tr><th scope="row">Forward picks created</th><td>0</td></tr></table><ul><li>Single-example plumbing verification, not league-wide evaluation.</li><li>Existing props features use retrospective availability; this is not a reconstructed pregame prediction.</li><li>No probability, calibrated uncertainty, source download receipt, or profitable strategy is established.</li></ul><details><summary>Input hashes and decision evidence</summary><pre>{
+  &quot;schema_version&quot;: &quot;nba-archived-replay/v1&quot;,
+  &quot;classification&quot;: &quot;retrospective_plumbing_demonstration&quot;,
+  &quot;inputs_sha256&quot;: {
+    &quot;data/raw/props_odds/0022400077_player_points_open.json&quot;: &quot;dab346607363062ccbc45ec3a2db9afd88a85626678cd26ddd867e02298a0bf4&quot;,
+    &quot;data/features/props_predictions.parquet&quot;: &quot;02bb54d51734544d3ee61bda8ed65886564dcfe54083b96b9a3d4c5d0b3729f3&quot;,
+    &quot;data/parquet/player_games.parquet&quot;: &quot;b345c5845306198d44ded28f3e695d7cf4e8b65d1dea1ac6662c167a10db0357&quot;,
+    &quot;data/parquet/games.parquet&quot;: &quot;9902080922ac678dc3f87c0ab038d3021bd6bcbc69ce4203c81b678d498a06cc&quot;,
+    &quot;agent-workspace/scripts/research_replay.py&quot;: &quot;f0a00d04c589528a1f37255e6cfadd3d242f5ae455ec9d233eb14379a82b0ed8&quot;
+  },
+  &quot;selection&quot;: &quot;Fixed game/player/book example chosen to test wiring, not selected for profitability.&quot;,
+  &quot;game&quot;: {
+    &quot;id&quot;: &quot;0022400077&quot;,
+    &quot;home&quot;: &quot;Orlando Magic&quot;,
+    &quot;away&quot;: &quot;Brooklyn Nets&quot;,
+    &quot;starts_at&quot;: &quot;2024-10-25T23:10:00Z&quot;
+  },
+  &quot;player&quot;: &quot;Cameron Johnson&quot;,
+  &quot;quote&quot;: {
+    &quot;bookmaker_id&quot;: &quot;draftkings&quot;,
+    &quot;bookmaker_event_id&quot;: &quot;7cdee69a4e2927c0b2c17e7bfbfd6ab0&quot;,
+    &quot;market_id&quot;: &quot;player_points&quot;,
+    &quot;player_id&quot;: 1629661,
+    &quot;game_id&quot;: &quot;0022400077&quot;,
+    &quot;side&quot;: &quot;over&quot;,
+    &quot;line&quot;: 14.5,
+    &quot;price_format&quot;: &quot;american&quot;,
+    &quot;price&quot;: -125,
+    &quot;quote_at&quot;: &quot;2024-10-25T11:04:38Z&quot;,
+    &quot;source_ref&quot;: &quot;data/raw/props_odds/0022400077_player_points_open.json&quot;,
+    &quot;payload_hash&quot;: &quot;dab346607363062ccbc45ec3a2db9afd88a85626678cd26ddd867e02298a0bf4&quot;
+  },
+  &quot;archive_snapshot_at&quot;: &quot;2024-10-25T11:05:39Z&quot;,
+  &quot;original_retrieved_at&quot;: null,
+  &quot;source_family&quot;: &quot;The Odds API historical response already on disk; original download time and authenticity were not independently verified.&quot;,
+  &quot;forecast&quot;: {
+    &quot;point_estimate&quot;: 13.777599383753065,
+    &quot;model_version&quot;: &quot;saved-props-file:02bb54d51734544d3ee61bda8ed65886564dcfe54083b96b9a3d4c5d0b3729f3&quot;,
+    &quot;source_ref&quot;: &quot;data/features/props_predictions.parquet&quot;,
+    &quot;created_at&quot;: null,
+    &quot;input_cutoff&quot;: null
+  },
+  &quot;decision&quot;: {
+    &quot;id&quot;: &quot;ec50a99f3641e6dd03def426e6bc054c205185f1247997933c1c8bf4774bdf41&quot;,
+    &quot;action&quot;: &quot;pass&quot;,
+    &quot;recorded_at&quot;: &quot;2026-10-04T01:49:50.631626+00:00&quot;,
+    &quot;record_class&quot;: &quot;retrospective&quot;,
+    &quot;reasons&quot;: [
+      &quot;HISTORICAL_REPLAY&quot;,
+      &quot;PREGAME_PROVENANCE_UNVERIFIED&quot;,
+      &quot;RETROSPECTIVE_AVAILABILITY&quot;,
+      &quot;PROBABILITY_UNAVAILABLE&quot;,
+      &quot;UNCERTAINTY_UNAVAILABLE&quot;,
+      &quot;NOT_AN_APPROVED_STRATEGY&quot;
+    ]
+  },
+  &quot;settlement&quot;: {
+    &quot;state&quot;: &quot;not_applicable&quot;,
+    &quot;actual_points&quot;: 12,
+    &quot;stake_units&quot;: 0,
+    &quot;net_units&quot;: 0,
+    &quot;meaning&quot;: &quot;A pass has no bet settlement; actual outcome retained only to verify identity/result linkage.&quot;
+  },
+  &quot;reconciliation&quot;: {
+    &quot;opportunities_in_demo&quot;: 1,
+    &quot;recorded_passes&quot;: 1,
+    &quot;processing_gaps&quot;: [],
+    &quot;archive_receipt_sha256&quot;: &quot;1d74df86a557988d35002a79df231317f4615fbdbe53ab8bce5273d2aaf5b0b1&quot;
+  },
+  &quot;forward_summary&quot;: {
+    &quot;picks_created_by_demo&quot;: 0,
+    &quot;stake_units&quot;: 0,
+    &quot;net_units&quot;: 0
+  },
+  &quot;limitations&quot;: [
+    &quot;Single-example plumbing verification, not league-wide evaluation.&quot;,
+    &quot;Existing props features use retrospective availability; this is not a reconstructed pregame prediction.&quot;,
+    &quot;No probability, calibrated uncertainty, source download receipt, or profitable strategy is established.&quot;
+  ]
+}</pre></details></main></body></html>

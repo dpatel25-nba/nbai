@@ -1,0 +1,75 @@
+{
+  "experiment_evidence_id": "851dca99c71443369e5f729ddc95d780",
+  "counts": {
+    "full": 171428,
+    "valid": 159613,
+    "invalid": 11815
+  },
+  "seasons": [
+    "2021-22",
+    "2022-23",
+    "2023-24",
+    "2024-25",
+    "2025-26"
+  ],
+  "aggregate": {
+    "counts": {
+      "full": 171428,
+      "invalid": 11815,
+      "valid": 159613
+    },
+    "paired_mae_bound": {
+      "counts": {
+        "full": 171428,
+        "invalid": 11815,
+        "valid": 159613
+      },
+      "kind": "deterministic_missing_label_bound_not_ci",
+      "lower": -0.9421215040623195,
+      "ranking": "a_strict",
+      "status": "defined",
+      "upper": -0.43277108423347055,
+      "valid_scores": {
+        "mae_a": 5.973106524117112,
+        "mae_b": 6.711439512740754,
+        "paired_delta": -0.7383329886236418,
+        "status": "defined"
+      },
+      "valid_weight_fraction": 0.9310789369297897
+    },
+    "row_counts": {
+      "forecastable": 159876,
+      "nonforecastable": 11552
+    },
+    "valid_label_scores": {
+      "counts": {
+        "full": 171428,
+        "invalid": 11815,
+        "valid": 159613
+      },
+      "scores": {
+        "boosting": {
+          "mae": 5.973106524117111,
+          "rmse": 8.712695107208308
+        },
+        "rolling": {
+          "mae": 6.711439512740753,
+          "rmse": 9.593380517987537
+        }
+      },
+      "status": "defined"
+    }
+  },
+  "report_sha256": "d427ec6f1f9e7fd605a56a2760c980537c14c3f01c7001a0369dfda569b4c95b",
+  "remaining_gates": [
+    "historical pregame input provenance",
+    "corrected-history build lineage",
+    "saved chronological training cutoff receipts",
+    "sampling uncertainty",
+    "market-price validation and future paper record"
+  ],
+  "limitations": "Fixed retrospective predictions; deterministic missing-label bounds, not confidence intervals, future accuracy, betting profitability or deployed content. Frozen-output hashes were recorded now, not at original generation.",
+  "schema": "nba-retrospective-evidence/v1",
+  "source_manifest_sha256": "780a192a3f153d81db3a3281b1a96a37b3ab5d99b5ae5e3b44dd976208db4124",
+  "source_manifest_path": "research-inputs/780a192a3f153d81db3a3281b1a96a37b3ab5d99b5ae5e3b44dd976208db4124.json"
+}
