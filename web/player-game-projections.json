@@ -1,0 +1,314 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-05T22:53:07.703Z",
+  "scope": "game",
+  "runs": 200,
+  "seedPrefix": "market-matchups-v1:",
+  "inputGeneratedAt": "2026-09-30T00:40:36.000655+00:00",
+  "sourceHashes": {
+    "web/season-data.js": "7847b02317e0c9b77b53c94db3e65086dea6171cf03e0ca97669b0616f9f686d",
+    "web/season-engine.js": "a623f27b7ad27119b2a8da861c285af6081fff61e94c337ddb3f029ef3dc3270",
+    "web/season-possession.js": "779e01554fad0059b78249738aeb829bdcc24b8dc08bfcfe39ff8efe42378b77",
+    "web/season-availability.json": "a2ebd5a3bd2fb4b2642bb138c59fc6d696e8f23a3a21de89a3658c02f3fdc67c",
+    "web/player-consensus.json": "2b8ce9e2b914990db12a68ea6bdfa4db0cf294bf681f41b207b11016ef6641d8"
+  },
+  "assumptions": "Matchup-specific possession scenarios conditional on playing. Historical injury spells affect rotations; current medical status, confirmed starters and minutes restrictions are not connected. Not calibrated betting probabilities. Ranges are individual-game scenario outcomes.",
+  "events": [
+    {
+      "eventId": "26b036ff107f3c658258eaf4a6f26228",
+      "gameId": "0022600001",
+      "home": "DET",
+      "away": "BOS",
+      "startsAt": "2026-10-20T19:00:00.000Z",
+      "reviewRequired": null,
+      "players": [
+        {
+          "id": 1628369,
+          "name": "Jayson Tatum",
+          "team": "BOS",
+          "playedScenarios": 199,
+          "minutes": {
+            "mean": 35.4909982328163,
+            "p10": 28.606060606060584,
+            "p90": 42.40776699029125
+          },
+          "stats": {
+            "PTS": {
+              "mean": 29.56281407035176,
+              "p10": 19,
+              "p90": 41
+            },
+            "AST": {
+              "mean": 5.341708542713568,
+              "p10": 2,
+              "p90": 9
+            },
+            "REB": {
+              "mean": 9.92964824120603,
+              "p10": 6,
+              "p90": 14
+            },
+            "STL": {
+              "mean": 1.120603015075377,
+              "p10": 0,
+              "p90": 3
+            },
+            "BLK": {
+              "mean": 0.6733668341708543,
+              "p10": 0,
+              "p90": 2
+            },
+            "FG_PCT": {
+              "mean": 42.80051058906218,
+              "p10": 28.571428571428573,
+              "p90": 56.52173913043478
+            },
+            "FT_PCT": {
+              "mean": 81.97929552142286,
+              "p10": 60,
+              "p90": 100
+            },
+            "FG3_PCT": {
+              "mean": 33.31982249081289,
+              "p10": 12.5,
+              "p90": 54.54545454545455
+            }
+          }
+        },
+        {
+          "id": 1630595,
+          "name": "Cade Cunningham",
+          "team": "DET",
+          "playedScenarios": 184,
+          "minutes": {
+            "mean": 34.39850489449776,
+            "p10": 28.32000000000002,
+            "p90": 40.5
+          },
+          "stats": {
+            "PTS": {
+              "mean": 27.13586956521739,
+              "p10": 17,
+              "p90": 38
+            },
+            "AST": {
+              "mean": 8.445652173913043,
+              "p10": 5,
+              "p90": 12
+            },
+            "REB": {
+              "mean": 6.880434782608695,
+              "p10": 3,
+              "p90": 11
+            },
+            "STL": {
+              "mean": 0.9239130434782609,
+              "p10": 0,
+              "p90": 2
+            },
+            "BLK": {
+              "mean": 0.6956521739130435,
+              "p10": 0,
+              "p90": 2
+            },
+            "FG_PCT": {
+              "mean": 47.002389521589116,
+              "p10": 33.333333333333336,
+              "p90": 60
+            },
+            "FT_PCT": {
+              "mean": 82.23888455397328,
+              "p10": 50,
+              "p90": 100
+            },
+            "FG3_PCT": {
+              "mean": 33.56950301403624,
+              "p10": 0,
+              "p90": 60
+            }
+          }
+        }
+      ]
+    },
+    {
+      "eventId": "2b042ddad3d3c6c6fe5b7005dc26c775",
+      "gameId": "0022600002",
+      "home": "NYK",
+      "away": "PHI",
+      "startsAt": "2026-10-20T23:00:00.000Z",
+      "reviewRequired": null,
+      "players": [
+        {
+          "id": 1628973,
+          "name": "Jalen Brunson",
+          "team": "NYK",
+          "playedScenarios": 194,
+          "minutes": {
+            "mean": 35.069027320190045,
+            "p10": 29.760000000000023,
+            "p90": 40.57731958762878
+          },
+          "stats": {
+            "PTS": {
+              "mean": 25.283505154639176,
+              "p10": 15,
+              "p90": 35
+            },
+            "AST": {
+              "mean": 6.319587628865979,
+              "p10": 3,
+              "p90": 9
+            },
+            "REB": {
+              "mean": 2.7061855670103094,
+              "p10": 1,
+              "p90": 5
+            },
+            "STL": {
+              "mean": 0.5876288659793815,
+              "p10": 0,
+              "p90": 2
+            },
+            "BLK": {
+              "mean": 0.12371134020618557,
+              "p10": 0,
+              "p90": 1
+            },
+            "FG_PCT": {
+              "mean": 45.97434073799165,
+              "p10": 32,
+              "p90": 61.53846153846154
+            },
+            "FT_PCT": {
+              "mean": 83.02361923392999,
+              "p10": 60,
+              "p90": 100
+            },
+            "FG3_PCT": {
+              "mean": 33.40596831576213,
+              "p10": 11.11111111111111,
+              "p90": 57.142857142857146
+            }
+          }
+        }
+      ]
+    },
+    {
+      "eventId": "bccd283de56915e29af1788beb0abfc9",
+      "gameId": "0022600003",
+      "home": "SAS",
+      "away": "OKC",
+      "startsAt": "2026-10-21T01:30:00.000Z",
+      "reviewRequired": null,
+      "players": [
+        {
+          "id": 1641705,
+          "name": "Victor Wembanyama",
+          "team": "SAS",
+          "playedScenarios": 199,
+          "minutes": {
+            "mean": 31.369600848323426,
+            "p10": 24.672897196261648,
+            "p90": 37.7692307692307
+          },
+          "stats": {
+            "PTS": {
+              "mean": 23.472361809045225,
+              "p10": 13,
+              "p90": 34
+            },
+            "AST": {
+              "mean": 3.628140703517588,
+              "p10": 1,
+              "p90": 7
+            },
+            "REB": {
+              "mean": 10.894472361809045,
+              "p10": 7,
+              "p90": 16
+            },
+            "STL": {
+              "mean": 1.2060301507537687,
+              "p10": 0,
+              "p90": 3
+            },
+            "BLK": {
+              "mean": 4.100502512562814,
+              "p10": 2,
+              "p90": 7
+            },
+            "FG_PCT": {
+              "mean": 46.65887910367498,
+              "p10": 30.76923076923077,
+              "p90": 66.66666666666667
+            },
+            "FT_PCT": {
+              "mean": 84.66954649889361,
+              "p10": 60,
+              "p90": 100
+            },
+            "FG3_PCT": {
+              "mean": 34.204783212320905,
+              "p10": 0,
+              "p90": 66.66666666666667
+            }
+          }
+        },
+        {
+          "id": 1628983,
+          "name": "Shai Gilgeous-Alexander",
+          "team": "OKC",
+          "playedScenarios": 196,
+          "minutes": {
+            "mean": 33.38556611596677,
+            "p10": 27.029126213592225,
+            "p90": 40.16831683168318
+          },
+          "stats": {
+            "PTS": {
+              "mean": 32.14795918367347,
+              "p10": 21,
+              "p90": 44
+            },
+            "AST": {
+              "mean": 5.801020408163265,
+              "p10": 3,
+              "p90": 9
+            },
+            "REB": {
+              "mean": 4.454081632653061,
+              "p10": 2,
+              "p90": 7
+            },
+            "STL": {
+              "mean": 1.1377551020408163,
+              "p10": 0,
+              "p90": 3
+            },
+            "BLK": {
+              "mean": 0.8367346938775511,
+              "p10": 0,
+              "p90": 2
+            },
+            "FG_PCT": {
+              "mean": 49.48594811202953,
+              "p10": 35.714285714285715,
+              "p90": 64.28571428571429
+            },
+            "FT_PCT": {
+              "mean": 88.0061276296667,
+              "p10": 72.72727272727273,
+              "p90": 100
+            },
+            "FG3_PCT": {
+              "mean": 38.244352513583266,
+              "p10": 0,
+              "p90": 71.42857142857143
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": []
+}
