@@ -9,8 +9,8 @@
     if(!data)return;const q=A.normalize($('search').value),rows=data.players.filter(p=>A.normalize(p.name).includes(q));
     if(!q)rows.sort((a,b)=>Number(hasLines(b))-Number(hasLines(a))||(b.stats.PTS.average?.mean??-1)-(a.stats.PTS.average?.mean??-1));
     $('playerResults').replaceChildren();
-    for(const p of rows.slice(0,12)){const b=el('button',p.name+' · '+p.team+(hasLines(p)?' · Lines available':''));b.type='button';b.setAttribute('aria-pressed',String(selected?.id===p.id));b.onclick=()=>{selected=p;eventId=null;$('manualLine').value='';search();render();};$('playerResults').append(b);}
-    $('searchCount').textContent=rows.length?`${rows.length} matching players${rows.length>12?' · Keep typing to narrow the list':''}`:'No matching player. Try a surname.';
+    for(const p of rows.slice(0,q?12:5)){const b=el('button',p.name+' · '+p.team+(hasLines(p)?' · Lines available':''));b.type='button';b.setAttribute('aria-pressed',String(selected?.id===p.id));b.onclick=()=>{selected=p;eventId=null;$('manualLine').value='';search();render();};$('playerResults').append(b);}
+    $('searchCount').textContent=rows.length?`${rows.length} matching players${rows.length>(q?12:5)?' · Keep typing to narrow the list':''}`:'No matching player. Try a surname.';
   }
   function manual(){
     const value=$('manualLine').value;
@@ -113,7 +113,7 @@
   fetch('player-projections.json').then(r=>{if(!r.ok)throw Error();return r.json();}).then(d=>{
     if(d.schemaVersion!==1||!d.players?.length)throw Error();data=d;
     selected=d.players.find(p=>p.id===1628973)||d.players[0];
-    $('projectionStatus').textContent=`${d.season} · ${d.players.length} players · ${d.runs} full-league scenarios · Built ${new Date(d.generatedAt).toLocaleDateString()}`;
+    $('projectionStatus').textContent=`${d.season} season profiles · ${d.players.length} players · ${d.runs} full-league scenarios · Built ${new Date(d.generatedAt).toLocaleDateString()}`;
     $('method').textContent=d.assumptions;$('provenance').textContent=`Input snapshot: ${d.inputGeneratedAt}. Projected line = the average simulated outcome across ${d.runs} seasons, not a bookmaker line or a calibrated fair-price estimate.`;
     search();render();
   }).catch(()=>{$('projectionStatus').textContent='Player projections unavailable. No projections or picks are being invented.';});
