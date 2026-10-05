@@ -1,7 +1,7 @@
 (()=>{
   'use strict';const $=id=>document.getElementById(id),A=NBAI_PROPS;
   const el=(tag,value,cls)=>{const n=document.createElement(tag);if(value!=null)n.textContent=value;if(cls)n.className=cls;return n;};
-  const names={PTS:'Points',AST:'Assists',REB:'Rebounds'},fmt=n=>Number.isFinite(n)?n.toFixed(1):'—',cents=n=>Number.isFinite(n)?(n*100).toFixed(1)+'¢':'Unavailable';
+  const names={PTS:'Points',AST:'Assists',REB:'Rebounds',STL:'Steals',BLK:'Blocks',FG_PCT:'Field goal %',FT_PCT:'Free throw %',FG3_PCT:'Three-point %'},fmt=n=>Number.isFinite(n)?n.toFixed(1):'—',cents=n=>Number.isFinite(n)?(n*100).toFixed(1)+'¢':'Unavailable';
   let data=null,selected=null,quotes=null,live=false;
   function search(){
     if(!data)return;const q=A.normalize($('search').value),rows=data.players.filter(p=>A.normalize(p.name).includes(q));
@@ -13,16 +13,17 @@
   function manual(){
     const value=$('manualLine').value;
     if(!selected||value===''){$('manualCall').textContent='Enter a season line to compare.';return;}
-    const call=A.compare(selected,$('manualStat').value,$('units').value,Number(value));
-    $('manualCall').textContent=`${call.label} · Manual ${$('units').value==='average'?'per-game average':'season total'} line. ${call.reason}`;
+    const call=A.compare(selected,$('manualStat').value,'average',Number(value));
+    $('manualCall').textContent=`${call.label} · Manual ${$('manualStat').value.endsWith('_PCT')?'shooting percentage':'per-game average'} line. ${call.reason}`;
   }
   function render(){
     if(!selected)return;$('playerPanel').hidden=false;$('playerName').textContent=selected.name;$('playerTeam').textContent=selected.team+' / '+data.season;
     $('playerAssumptions').textContent=`Scenario: ${fmt(selected.games.mean)} games played · ${fmt(selected.minutes?.mean)} minutes per game · Historical injury/illness scenarios; rotations adjust. Projection inputs saved ${new Date(data.inputGeneratedAt).toLocaleDateString()}. ${selected.reviewRequired||""}`;
     $('projections').replaceChildren();
     for(const stat of Object.keys(names)){
-      const p=selected.stats[stat][$('units').value],card=el('article',null,'card');
-      card.append(el('p',names[stat],'eyebrow'),el('h3','Our season projection'),el('p',fmt(p?.mean),'value'),el('p',p?`Scenario range ${fmt(p.p10)}–${fmt(p.p90)} · ${$('units').value==='average'?'per game':'season total'}`:'No projected rotation minutes; projection unavailable.','note'));
+      const model=selected.stats[stat],p=model?.average,percent=stat.endsWith('_PCT'),card=el('article',null,'card');
+      card.append(el('h3',names[stat]),el('p',p?fmt(p.mean)+(percent?'%':''):'—','value'),el('p',percent?'Season shooting percentage':'Per game','stat-unit'),el('p',p?`Scenario range ${fmt(p.p10)}–${fmt(p.p90)}${percent?'%':''}`:'No projected minutes or attempts; unavailable.','note'));
+      if(percent)card.append(el('p',`${fmt(model?.attemptsPerGame?.mean)} attempts per game · Descriptive projection`,'note'));
       $('projections').append(card);
     }
     manual();markets();
@@ -54,8 +55,8 @@
   }
   const refresh=NBAI_QUOTES.watch('player','player-markets.json',(d,ok)=>{quotes=d;live=ok;markets();});
   $('refreshQuotes').onclick=refresh;setInterval(markets,15000);
-  $('search').oninput=search;$('units').onchange=()=>{$('manualLine').value='';render();};
-  $('manualStat').onchange=manual;$('manualLine').oninput=manual;
+  $('search').oninput=search;
+  $('manualStat').onchange=()=>{const percent=$('manualStat').value.endsWith('_PCT');$('manualLine').value='';$('lineUnit').textContent='Over / under line · '+(percent?'percentage (0–100)':'per game');if(percent)$('manualLine').max=100;else $('manualLine').removeAttribute('max');manual();};$('manualLine').oninput=manual;
   $('period').onchange=markets;$('marketStat').onchange=markets;
   fetch('player-projections.json').then(r=>{if(!r.ok)throw Error();return r.json();}).then(d=>{
     if(d.schemaVersion!==1||!d.players?.length)throw Error();data=d;
