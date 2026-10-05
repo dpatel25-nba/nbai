@@ -35,8 +35,8 @@
     }
     return games.sort((a,b) => a.tip.localeCompare(b.tip) || a.id.localeCompare(b.id));
   }
-  function rotation(data, team, membership) {
-    const available = Object.values(data.players).filter(p => membership[p.id] === team)
+  function rotation(data, team, membership, excluded = new Set()) {
+    const available = Object.values(data.players).filter(p => membership[p.id] === team && !excluded.has(String(p.id)))
       .sort((a,b) => b.MPG-a.MPG || a.id-b.id).slice(0,12);
     if (available.length < 5) throw new Error(`${team} needs at least five players. Add players before simulating.`);
     // Preserve projected starter roles; the marginal bench player absorbs an
@@ -66,6 +66,30 @@
         if (!data.players[id] || (team !== null && !data.teams[team])) throw new Error("Invalid roster assignment");
       }
       this.schedule = makeSchedule(data, options.complete !== false);
+      this.injuries = options.injuries !== false;
+      if (this.injuries && (!data.availability || data.availability.season !== data.season)) throw new Error('Matching injury scenario data is required. No healthy fallback is assumed.');
+      this.absenceWindows = options.absenceWindows || [];
+      for (const w of this.absenceWindows) {
+        if (!data.players[w.playerId] || !/^\d{4}-\d{2}-\d{2}$/.test(w.start) || !/^\d{4}-\d{2}-\d{2}$/.test(w.end) || w.start>w.end) throw new Error('Invalid absence window');
+      }
+      this.health = new Map();this.healthExclusions = 0;
+      const teamGames = Object.fromEntries(Object.keys(data.teams).map(t=>[t,this.schedule.filter(g=>g.home===t||g.away===t)]));
+      for (const p of Object.values(data.players)) {
+        const team=this.membership[p.id];if(!team)continue;
+        const profile=data.availability?.profiles[p.id]||data.availability?.league;
+        const random=global.NBAI_SIM.rng(hash(this.seed+':health:'+p.id));
+        let out=false;
+        for (const [i,g] of teamGames[team].entries()) {
+          if(this.injuries){
+            const rate=profile.outRate,stay=profile.continuation;
+            if(!Number.isFinite(rate)||rate<0||rate>=1||!Number.isFinite(stay)||stay<0||stay>1)throw new Error('Invalid injury profile');
+            const onset=clamp(rate*(1-stay)/(1-rate),0,1);
+            out=random()<(i===0?rate:out?stay:onset);
+          }
+          const forced=this.absenceWindows.some(w=>String(w.playerId)===String(p.id)&&g.date>=w.start&&g.date<=w.end);
+          if(out||forced){if(!this.health.has(g.id))this.health.set(g.id,new Set());this.health.get(g.id).add(String(p.id));}
+        }
+      }
       this.rosters = {}; this.delta = {}; this.calibrated = new Map();
       for (const team of Object.keys(data.teams)) {
         this.rosters[team] = rotation(data,team,this.membership);
@@ -78,12 +102,17 @@
         {id:p.id,team:this.membership[p.id],gp:0,...Object.fromEntries(global.NBAI_SIM.BOX.map(k => [k,0]))}]));
     }
     matchup(game) {
-      const key = `${game.home}:${game.away}:${game.neutral}`;
-      if (this.calibrated.has(key)) return this.calibrated.get(key);
       const d = this.data, h = d.teams[game.home], a = d.teams[game.away];
-      const H = this.rosters[game.home], A = this.rosters[game.away];
+      const excluded=this.health.get(game.id)||new Set();
+      const H = excluded.size?rotation(d,game.home,this.membership,excluded):this.rosters[game.home];
+      const A = excluded.size?rotation(d,game.away,this.membership,excluded):this.rosters[game.away];
+      // Include actual player IDs and minutes: cached healthy rotations must never mask absences.
+      const signature=roster=>roster.map(p=>`${p.id}@${p.min}`).join(',');
+      const key = `${game.home}:${game.away}:${game.neutral}:${signature(H)}:${signature(A)}`;
+      if (this.calibrated.has(key)) return this.calibrated.get(key);
       const pace = (h.pace+a.pace)/2;
-      const adjustment = (this.delta[game.home]-this.delta[game.away])*pace/200;
+      const impact=(roster,team)=>roster.reduce((n,p)=>n+p.min*d.players[p.id].bpm/48,0)-d.teams[team].baseBpm;
+      const adjustment = (impact(H,game.home)-impact(A,game.away))*pace/200;
       const mu = {H:clamp(d.mu0+h.off-a.defense+(game.neutral?0:d.hca)+adjustment,75,160),
                   A:clamp(d.mu0+a.off-h.defense-adjustment,75,160)};
       const scale = {H:1,A:1,mu};
@@ -99,7 +128,9 @@
         }
         for (const side of ["H","A"]) scale[side] = clamp(scale[side]*mu[side]/(total[side]/8),.55,1.6);
       }
-      const state = {H,A,pace,scale};this.calibrated.set(key,state);return state;
+      const state = {H,A,pace,scale};
+      if(this.calibrated.size>=20000)this.calibrated.delete(this.calibrated.keys().next().value);
+      this.calibrated.set(key,state);return state;
     }
     next() {
       if (this.index >= this.schedule.length) return null;
@@ -117,7 +148,8 @@
           for (const stat of global.NBAI_SIM.BOX) p[stat] += box[stat];
         }
       }
-      const stored = {...game,score:result.score,box:result.box,ot:result.ot};
+      const unavailable=[...(this.health.get(game.id)||[])];this.healthExclusions+=unavailable.length;
+      const stored = {...game,score:result.score,box:result.box,ot:result.ot,unavailable};
       this.results.push(stored);this.index++;return stored;
     }
     ranked(conference) {
@@ -128,6 +160,7 @@
       return {version:1,season:this.data.season,seed:this.seed,scheduleSource:this.data.scheduleSource,
         scheduleSha256:this.data.scheduleSha256,sourceHashes:this.data.sourceHashes,
         generated:this.data.generated,modelNote:this.data.modelNote,
+        availability:{enabled:this.injuries,version:this.data.availability?.version||null,sourceSha256:this.data.availability?.sourceSha256||null,absenceWindows:this.absenceWindows,excludedPlayerGames:this.healthExclusions,note:this.data.availability?.note},
         membership:this.membership,provisionalGames:this.schedule.filter(g=>g.provisional).length,
         completed:this.index,scheduled:this.schedule.length,standings:this.ranked(),
         players:Object.values(this.players),games:this.results};

@@ -21,6 +21,7 @@
       <div class="franchise-mark" aria-hidden="true"><span id="teamCode">NYK</span><small>MY SEASON</small></div>
       <div class="next-match"><p class="eyebrow">Up next</p><h2 id="nextOpponent">Opening night</h2><p id="nextGameNote"></p><a href="#weekHub">View weekly schedule ↓</a></div>
     </section>
+    <p id="healthNote" class="small-note" role="status"></p>
     <div class="source-strip"><span class="live-dot"></span><span id="sourceNote">Loading official schedule and rosters…</span><a id="scheduleLink" href="https://pr.nba.com/2026-27-nba-regular-season-schedule" target="_blank" rel="noopener">Official schedule ↗</a></div>
     <div class="workspace">
       <aside class="roster-panel panel">
@@ -45,7 +46,7 @@
         <section class="panel controls" aria-label="Simulation controls">
           <div class="section-title"><div><p class="eyebrow">Season control</p><h2 id="runTitle">Ready for opening night</h2></div><span class="badge" id="runStatus">Not started</span></div>
           <details class="season-options"><summary>Season settings &amp; roster comparison</summary><div class="settings"><label class="seed-label" for="seed">Season seed<input id="seed" type="number" min="0" max="4294967295" value="202627" data-edit></label>
-            <div class="checks"><label><input id="completeSchedule" type="checkbox" checked data-edit> Complete 82 games per team</label><label><input id="compare" type="checkbox" checked data-edit> Compare with original rosters</label></div></div>
+            <div class="checks"><label><input id="injuries" type="checkbox" checked data-edit> Include historical injury scenarios</label><label><input id="completeSchedule" type="checkbox" checked data-edit> Complete 82 games per team</label><label><input id="compare" type="checkbox" checked data-edit> Compare with original rosters</label></div></div>
           <p class="small-note" id="cupNote">Includes 30 provisional Cup-window games. Their matchups are generated, not official.</p>
           </details>
           <div class="actions"><button id="runWeek" class="button primary">Simulate week 1 →</button><button id="runSeason" class="button secondary">Simulate season <span aria-hidden="true">↗</span></button><button id="runDay" class="button secondary">Next game day</button><button id="pause" class="button secondary" hidden>Pause</button><button id="resetSeason" class="text-button">Restart</button></div>

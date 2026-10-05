@@ -1,6 +1,7 @@
 (function(root){
   const normalize=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
   function compare(player,stat,unit,line){
+    if(player?.reviewRequired)return {label:'Pass',reason:player.reviewRequired};
     const p=player?.stats?.[stat]?.[unit];
     if(!p||!Number.isFinite(line)||line<0)return {label:'Pass',reason:'A valid line and supported season projection are required.'};
     // Use both simulated spread and a separate 10% production stress. This is a research screen, not a calibrated probability.

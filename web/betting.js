@@ -3,7 +3,7 @@
   'use strict';
   const $ = id => document.getElementById(id);
   const PAGE_SIZE = 12;
-  let rows = [], visible = PAGE_SIZE, generatedAt = null, live = false;
+  let rows = [], visible = PAGE_SIZE, generatedAt = null, live = false, winProjections = null;
   const searchText = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   function updateFreshness() {
     const time = Date.parse(generatedAt), age = Date.now() - time;
@@ -18,7 +18,7 @@
       if(!response.ok)throw Error('Missing research');
       const data=await response.json();
       if(data.schemaVersion!==1 || !Array.isArray(data.items))throw Error('Invalid research');
-      $('shortlistStatus').textContent=`${data.simulationSeasons} full-league scenario runs · ${data.teams} teams · No trade-ready recommendations`;
+      $('shortlistStatus').textContent=data.status || `${data.simulationSeasons} full-league scenario runs · ${data.teams} teams · No trade-ready recommendations`;
       $('shortlistCards').replaceChildren();
       for(const item of data.items.filter(x=>!x.ticker.startsWith('KXNBAMVP'))){
         const current=rows.find(row=>row.ticker===item.ticker);
@@ -45,6 +45,12 @@
       const card = node('article', null, 'card');
       const title = row.category === 'Team wins' ? row.title.replace(/^Will the /,'').replace(' Pro Basketball team win at least ', ' · ').replace(/ games in the \d{4}-\d{2} regular season\?$/, '+ wins') : row.title;
       card.append(node('p', row.category, 'eyebrow'), node('h3', title), node('p', row.outcome, 'outcome'));
+      const team=row.category==='Team wins'?row.ticker.split('-')[1]?.slice(2):null;
+      const projection=winProjections?.teams[team];
+      if(projection?.reviewRequired){card.append(node("p",projection.reviewRequired,"prop-call"));}
+      else if(projection){
+        card.append(node('p',`Our injury scenario: ${projection.injuries.mean.toFixed(1)} wins · 10–90% scenario range ${projection.injuries.p10}–${projection.injuries.p90}.`),node('p',`Healthy comparison: ${projection.healthy.mean.toFixed(1)} wins. ${winProjections.runs} paired runs; historical injury coverage is incomplete. Research only, no validated over/under pick.`,'note'));
+      }
       const p = node('div', null, 'probability');
       p.append(node('strong', row.marketProbability == null ? '—' : `${Math.round(row.marketProbability * 100)}%`), node('span', row.marketProbability == null ? 'No two-sided reference' : 'Market reference'));
       const meter = node('div', null, 'meter'), fill = node('div'); fill.style.width = `${(row.marketProbability ?? 0) * 100}%`; meter.append(fill);
@@ -68,4 +74,5 @@
     updateFreshness();render();loadShortlist();
   });
   setInterval(updateFreshness,15000);
+  fetch('season-win-projections.json').then(r=>{if(!r.ok)throw Error();return r.json();}).then(d=>{if(d.schemaVersion===1&&d.availabilityVersion){winProjections=d;render();}}).catch(()=>{});
 })();

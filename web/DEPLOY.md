@@ -90,7 +90,28 @@ PLAYWRIGHT_BROWSERS_PATH=agent-workspace/.runtime/browsers \
 The exporter runs 200 seasons across all 30 teams. It records input hashes,
 protocol and samples under `data/features/player_props/runs/`. Per-game and
 total units are separate; no minutes projects as unavailable. These are
-fixed-roster, all-available scenarios, not calibrated betting probabilities.
+fixed-roster scenarios with sampled historical injury/illness absences, not
+calibrated betting probabilities. Run `scripts/build_season_availability.py`
+first to rebuild the five-season health prior and update the saved season input.
+The player exporter also creates `season-win-projections.json`: 200 injury runs
+paired with 200 healthy diagnostic runs using the same game seeds.
+
+Health profiles use explicit injury/illness, concussion, reconditioning and
+health/safety non-participation comments in 2021–22 through 2025–26 game records.
+Coach DNPs, generic missing rows and rest are not diagnosed as injuries. This
+incomplete observation population can understate true missed-game risk; rates
+must not be presented as medically validated forecasts. Player spells are
+independent. The season engine rebuilds rotations, recalculates available-player
+impact and uses roster-sensitive calibration keys; excluded players receive no
+box-score minutes. Insufficient healthy players cause an explicit error instead
+of silently bringing an injured player back. Explicit `absenceWindows` can be
+supplied to the engine for a dated scenario; no stale current injury file is read.
+
+The healthy setting is diagnostic only. Previous all-healthy shortlist leans
+are withdrawn. Historical team ratings already include some availability
+effects; combined injury adjustments and replacement rotations need validation
+before recommending win-total bets. Known current injuries and recovery windows
+remain a separate integration requirement.
 
 October 5 discovery found game points contracts but no season over/under
 contracts in the supported points/assists/rebounds series. The page distinguishes

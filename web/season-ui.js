@@ -29,6 +29,7 @@
       if (Number.isInteger(saved.seed) && saved.seed>=0 && saved.seed<=4294967295) $("seed").value=saved.seed;
       $("completeSchedule").checked=saved.complete!==false;
       $("compare").checked=saved.compare!==false;
+      $("injuries").checked=saved.injuries!==false;
       $("autoPickup").checked=saved.autoPickup!==false;
       releases=Array.isArray(saved.releases)?saved.releases.filter(t=>data.players[t.playerId] && teams.includes(t.from) && (t.to===null||teams.includes(t.to)) && Array.isArray(t.candidates)).slice(-50):[];
     }
@@ -43,13 +44,15 @@
   $("scheduleLink").href=data.scheduleSource;
   $("sourceNote").textContent=`1,200 official games · Schedule published ${data.scheduleAsOf} · 30 teams`;
   $("modelNote").textContent=data.modelNote;
+  $("healthNote").textContent=data.availability?.note||"Injury scenario data unavailable.";
   $("dataNote").textContent=`Roster snapshot: ${data.rosterAsOf}. Player history through ${data.ratesThrough}; team ratings from ${data.ratingsSeason}. ${Object.keys(data.players).length} rostered players, including rookies and bench players. Players without NBA history use rookie or replacement priors. Roster snapshot date is the local roster file date.`;
   if (data.impactPolicy) $("dataNote").textContent+=" "+data.impactPolicy.note;
   function edited() { return Object.keys(original).filter(id=>membership[id]!==original[id]).length; }
   function persist() {
-    try {localStorage.setItem(storageKey,JSON.stringify({hash:sourceIdentity,myTeam,membership,autoPickup:$("autoPickup").checked,releases,seed:Number($("seed").value),complete:$("completeSchedule").checked,compare:$("compare").checked}));} catch (_) {}
+    try {localStorage.setItem(storageKey,JSON.stringify({hash:sourceIdentity,myTeam,membership,autoPickup:$("autoPickup").checked,releases,seed:Number($("seed").value),complete:$("completeSchedule").checked,compare:$("compare").checked,injuries:$("injuries").checked}));} catch (_) {}
   }
   function reset() {
+    $("healthNote").textContent=$("injuries").checked?(data.availability?.note||"Injury scenario data unavailable. Simulation will not assume everyone is healthy."):"Healthy diagnostic only: injuries are disabled. Do not use this setting for season-win picks.";
     if (running) return;
     season=baseline=null;page=0;viewedWeek=0;error("");persist();render();
   }
@@ -158,6 +161,7 @@
     }).join("");
   }
   function render() {
+    $("healthNote").textContent=$("injuries").checked?`Historical injury scenarios on · ${season?season.healthExclusions:0} simulated player-game absences so far. Rotations adjust; current injury reports and return dates are not included.`:"Healthy diagnostic only · Injuries disabled. Not suitable for season-win picks.";
     const n=season?season.index:0,total=season?season.schedule.length:($("completeSchedule").checked?1230:1200);
     $("progress").max=total;$("progress").value=n;
     $("progressText").textContent=`${number(n)} of ${number(total)} games`;
@@ -183,7 +187,7 @@
   function start() {
     const seed=Number($("seed").value);
     if (!Number.isInteger(seed)||seed<0||seed>4294967295||$("seed").value==="") throw new Error("Enter a whole-number seed from 0 to 4,294,967,295.");
-    const options={seed,membership,complete:$("completeSchedule").checked};
+    const options={seed,membership,complete:$("completeSchedule").checked,injuries:$("injuries").checked};
     season=new api.Season(data,options);
     baseline=$("compare").checked?(edited()?new api.Season(data,{...options,membership:original}):season):null;
   }
@@ -218,7 +222,8 @@
       const cells=b=>`<td>${fmt(b.MIN)}</td><td>${b.FGM}–${b.FGA}</td><td>${b.FG3M}–${b.FG3A}</td><td>${b.FTM}–${b.FTA}</td>${["OREB","DREB","REB","AST","STL","BLK","TOV","PF","PTS"].map(k=>`<td>${b[k]}</td>`).join("")}`;
       const rows=Object.entries(game.box[side]).sort((a,b)=>b[1].MIN-a[1].MIN).map(([pid,b])=>{for(const k of window.NBAI_SIM.BOX)total[k]+=b[k];return `<tr><td class="left">${esc(data.players[pid].n)}</td>${cells(b)}</tr>`;}).join("");
       return `<div class="box-heading"><strong>${esc(data.teams[team].name)}</strong><span>${game.score[side]} PTS</span></div><div class="table-wrap"><table><thead><tr><th class="left">Player</th>${["MIN","FG","3PT","FT","OREB","DREB","REB","AST","STL","BLK","TOV","PF","PTS"].map(k=>`<th>${k}</th>`).join("")}</tr></thead><tbody>${rows}<tr class="box-total"><td class="left">Team totals</td>${cells(total)}</tr></tbody></table></div>`;
-    }).join("");$("boxDialog").showModal();
+    }).join("");$("boxContent").insertAdjacentHTML("afterbegin",`<p class="small-note">Simulated health absences: ${(game.unavailable||[]).map(id=>esc(data.players[id].n)).join(", ")||"None"}. These are scenario outcomes, not current injury reports.</p>`);
+    $("boxDialog").showModal();
   }
   $("runWeek").onclick=()=>run("week");$("runSeason").onclick=()=>run("season");$("runDay").onclick=()=>run("day");$("pause").onclick=()=>{pauseRequested=true;};
   $("resetSeason").onclick=reset;$("rosterTeam").onchange=()=>selectTeam($("rosterTeam").value);
@@ -239,7 +244,7 @@
   $("undoRelease").onclick=()=>{if(running||!undoMembership)return;membership=undoMembership;financials=undoFinancials;undoMembership=undoFinancials=null;releases.pop();reset();renderRoster();};
   $("addPlayer").onclick=()=>{const id=$("playerChoice").value;if(!id||running)return;undoMembership=undoFinancials=null;financials=null;membership[id]=$("rosterTeam").value;$("playerSearch").value="";reset();renderRoster();};
   $("resetRoster").onclick=()=>{undoMembership=undoFinancials=null;financials=window.NBAI_MARKET_DATA?.financials||null;releases=[];membership={...original};reset();renderRoster();};
-  for (const id of ["seed","completeSchedule","compare"]) $(id).onchange=reset;
+  for (const id of ["seed","completeSchedule","compare","injuries"]) $(id).onchange=reset;
   document.querySelectorAll("[data-tab]").forEach(b=>{b.onclick=()=>{tab=b.dataset.tab;document.querySelectorAll("[data-tab]").forEach(t=>{t.classList.toggle("selected",t===b);t.setAttribute("aria-selected",String(t===b));$("view-"+t.dataset.tab).hidden=t!==b;});render();};});
   document.querySelectorAll("[data-conference]").forEach(b=>{b.onclick=()=>{conference=b.dataset.conference;document.querySelectorAll("[data-conference]").forEach(t=>t.classList.toggle("selected",t===b));renderStandings();};});
   for (const id of ["gamesTeam","gamesMonth"]) $(id).onchange=()=>{page=0;renderGames();};

@@ -18,7 +18,7 @@
   }
   function render(){
     if(!selected)return;$('playerPanel').hidden=false;$('playerName').textContent=selected.name;$('playerTeam').textContent=selected.team+' / '+data.season;
-    $('playerAssumptions').textContent=`Scenario: ${fmt(selected.games.mean)} games played · ${fmt(selected.minutes?.mean)} minutes per game · Everyone available; fixed rotation. Projection inputs saved ${new Date(data.inputGeneratedAt).toLocaleDateString()}.`;
+    $('playerAssumptions').textContent=`Scenario: ${fmt(selected.games.mean)} games played · ${fmt(selected.minutes?.mean)} minutes per game · Historical injury/illness scenarios; rotations adjust. Projection inputs saved ${new Date(data.inputGeneratedAt).toLocaleDateString()}. ${selected.reviewRequired||""}`;
     $('projections').replaceChildren();
     for(const stat of Object.keys(names)){
       const p=selected.stats[stat][$('units').value],card=el('article',null,'card');
