@@ -1,31 +1,32 @@
 {
   "schema": "nba-daily-product/v1",
-  "generated_at": "2026-10-04T14:26:02.539658+00:00",
-  "day": "2026-10-04",
+  "generation_id": "b7340cacf53effdd9136fb2ee125a61d",
+  "generated_at": "2026-10-05T18:35:39.938325+00:00",
+  "day": "2026-10-05",
   "collector": {
     "status": "empty_slate",
-    "started_at": "2026-10-04T04:27:49.448751+00:00",
-    "finished_at": "2026-10-04T04:28:01.871871+00:00",
+    "started_at": "2026-10-05T18:35:23.570791+00:00",
+    "finished_at": "2026-10-05T18:35:39.851608+00:00",
     "scheduled_regular_games": 0
   },
   "paper_ledger": {
     "available": false,
-    "source": null,
+    "source": "paper-ledger.sqlite3",
     "as_of": null,
     "grading": "latest",
-    "reason": "Paper ledger not configured; no counts inferred."
+    "reason": "Paper ledger missing, unreadable, active/unsupported, or inconsistent; no counts inferred."
   },
   "forecasts_in_latest_run": 0,
   "collector_errors": 0,
   "studio": {
     "available": true,
     "state": "running",
-    "active_tasks": 0,
+    "active_tasks": 1,
     "registered_product_counts": {
-      "applied_code_changes": 25,
+      "applied_code_changes": 29,
       "real_experiment_receipts": 4,
       "integrated_product_results": 0,
-      "github_pushes": 0,
+      "github_pushes": 1,
       "verified_live_deployments": null,
       "recorded_research_decisions": 0,
       "withheld_signals": 0
@@ -81,11 +82,13 @@
     ]
   },
   "local_source_hashes": {
-    "web/research.html": "264fbca175bf3369b3e72c716f9ee89dd633e44284ac2583bf5d82e6c5f90431",
+    "web/research.html": "151e00a19a20eac6f6ee51fe93f498dca85e04d82564489dc35e36aa1d7c5e3d",
     "web/research-board.js": "4099ccb1ae206f595f5be50f0e65ba18df1ca0f24100749703406ab5676fde24",
     "web/forecast.html": "59ced77587a80e196dce853a69b4958e74f02595c3ff2e8d5ab98756890d9082",
     "web/forecast-explainer.js": "c616606dbf1e6c30c1d71c5d280415ef9da19a4957a9b9bd7a7636d6c5db82da"
   },
-  "source_changes_since_previous_day": null,
+  "source_changes_since_previous_day": [
+    "web/research.html"
+  ],
   "change_note": "Source changes are not deployed features; null means no earlier daily baseline."
 }

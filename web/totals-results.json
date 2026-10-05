@@ -1,0 +1,71 @@
+{
+  "aggregate": {
+    "corrected_model": {
+      "bets": 4548,
+      "losses": 2219,
+      "max_daily_close_drawdown_units": 168.20676844430534,
+      "net_units": -136.49147004563088,
+      "opportunities": 6059,
+      "pushes": 38,
+      "roi": -0.030011317072478207,
+      "roi_date_cluster_95": [
+        -0.05890871859785786,
+        -0.0020511950597303626
+      ],
+      "wins": 2291
+    },
+    "half_model_half_market": {
+      "bets": 3155,
+      "losses": 1515,
+      "max_daily_close_drawdown_units": 101.14152955057261,
+      "net_units": -46.661306933399885,
+      "opportunities": 6059,
+      "pushes": 25,
+      "roi": -0.014789637696798696,
+      "roi_date_cluster_95": [
+        -0.04919345607718473,
+        0.02047222396062534
+      ],
+      "wins": 1615
+    },
+    "market_no_vig": {
+      "bets": 0,
+      "losses": 0,
+      "max_daily_close_drawdown_units": 0.0,
+      "net_units": 0.0,
+      "opportunities": 6059,
+      "pushes": 0,
+      "roi": null,
+      "roi_date_cluster_95": null,
+      "wins": 0
+    }
+  },
+  "eligible_games": 6059,
+  "excluded_games": {
+    "ambiguous_provider_identity": 36,
+    "no_provider_quotes": 55
+  },
+  "interval_policy": "2000 game-date cluster bootstrap resamples, fixed seed 417",
+  "limitations": [
+    "All seasons have previously been examined; later seasons are chronological confirmation, not an untouched holdout.",
+    "Historical input receipt times and actual account access, limits, liquidity and execution are unverified.",
+    "Independent listed starts and final-score agreement corroborate identity, not actual tipoff or bookmaker opening/closing.",
+    "Missing games remain excluded and coverage is not full league completeness; no synthetic prices are supplied.",
+    "Bootstrap intervals cluster games by date but do not capture every model-selection or season-regime uncertainty.",
+    "No forward paper picks, live strategy approval, production model changes or website deployment."
+  ],
+  "original_sha256": "ef6168eaeb7d3d8fdf844509db58f4f740994dd6e6cdd8ccf5fac203e16b0be1",
+  "quote_selection": "latest eligible same-local-game-date snapshot; same-book, same-line, same-update-time pair",
+  "run_id": "1503e03be0fc4892a621ea215f4ecf07",
+  "scheduled_games": 6150,
+  "schema": "nba-totals-results/v1",
+  "seasons": [
+    "2021-22",
+    "2022-23",
+    "2023-24",
+    "2024-25",
+    "2025-26"
+  ],
+  "source_generated_at": "2026-10-04T17:15:06.514730+00:00",
+  "status": "operator_reported_independent_acceptance_pending"
+}

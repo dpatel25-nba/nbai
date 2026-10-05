@@ -1,0 +1,1705 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game simulator · NBAI</title>
+<style>
+  :root {
+    --bg: #EEF1F6; --panel: #FFFFFF; --panel-2: #F6F8FB; --border: #DBE1EA;
+    --text: #12161C; --muted: #59636F; --accent: #B4611A; --accent-2: #C9721F;
+    --accent-soft: rgba(180,97,26,.10); --cool: #3E6FB0; --cool-soft: rgba(62,111,176,.12);
+    --grid: rgba(15,20,28,.05); --shadow: 0 1px 2px rgba(15,20,28,.06), 0 8px 24px rgba(15,20,28,.05);
+    --good: #2E7D52; --bad: #B23A3A;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0E1116; --panel: #161B22; --panel-2: #1B212B; --border: #262E39;
+      --text: #E7ECF3; --muted: #8A97A8; --accent: #E8945A; --accent-2: #F0A268;
+      --accent-soft: rgba(232,148,90,.13); --cool: #5B93D6; --cool-soft: rgba(91,147,214,.15);
+      --grid: rgba(255,255,255,.05); --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.35);
+      --good: #4FB07E; --bad: #E0685F;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #EEF1F6; --panel: #FFFFFF; --panel-2: #F6F8FB; --border: #DBE1EA;
+    --text: #12161C; --muted: #59636F; --accent: #B4611A; --accent-2: #C9721F;
+    --accent-soft: rgba(180,97,26,.10); --cool: #3E6FB0; --cool-soft: rgba(62,111,176,.12);
+    --grid: rgba(15,20,28,.05); --shadow: 0 1px 2px rgba(15,20,28,.06), 0 8px 24px rgba(15,20,28,.05);
+    --good: #2E7D52; --bad: #B23A3A;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0E1116; --panel: #161B22; --panel-2: #1B212B; --border: #262E39;
+    --text: #E7ECF3; --muted: #8A97A8; --accent: #E8945A; --accent-2: #F0A268;
+    --accent-soft: rgba(232,148,90,.13); --cool: #5B93D6; --cool-soft: rgba(91,147,214,.15);
+    --grid: rgba(255,255,255,.05); --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.35);
+    --good: #4FB07E; --bad: #E0685F;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased;
+  }
+  .mono { font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+          font-variant-numeric: tabular-nums; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .14em; font-size: 11px;
+             font-weight: 700; color: var(--muted); }
+
+  /* ---- top nav ---- */
+  header {
+    position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--panel) 88%, transparent);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
+  }
+  .nav { max-width: 1160px; margin: 0 auto; padding: 0 20px; height: 60px;
+         display: flex; align-items: center; gap: 28px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800;
+           letter-spacing: .16em; text-transform: uppercase; font-size: 15px; }
+  .brand .ball { width: 20px; height: 20px; border-radius: 50%;
+    background: radial-gradient(circle at 32% 30%, var(--accent-2), var(--accent) 70%);
+    position: relative; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--accent) 60%, #000); }
+  .brand .ball::before, .brand .ball::after { content: ""; position: absolute; inset: 0;
+    border-radius: 50%; border: 0; }
+  .brand .ball::before { border-left: 1.5px solid color-mix(in srgb, var(--accent) 55%, #000);
+    border-right: 1.5px solid color-mix(in srgb, var(--accent) 55%, #000); margin: 0 8.5px; }
+  .brand small { color: var(--muted); font-weight: 600; letter-spacing: .04em;
+                 text-transform: none; font-size: 11px; }
+  nav.tabs { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; justify-content: flex-end; }
+  .tab { appearance: none; border: 0; background: none; color: var(--muted);
+    font: inherit; font-weight: 600; font-size: 13.5px; padding: 8px 12px; border-radius: 8px;
+    cursor: pointer; letter-spacing: .01em; }
+  .tab:hover { color: var(--text); background: var(--panel-2); }
+  .tab.active { color: var(--accent); background: var(--accent-soft); }
+  .tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  main { max-width: 1160px; margin: 0 auto; padding: 28px 20px 80px; }
+  .view { display: none; }
+  .view.active { display: block; animation: fade .28s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .view.active { animation: none; } }
+  /* sub-navigation inside a group of related research views */
+  .subtabs { display: flex; gap: 4px; flex-wrap: wrap; margin: 0 0 18px;
+             border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+  .subtab { background: none; border: 1px solid transparent; border-radius: 7px;
+            padding: 6px 12px; font: inherit; font-size: 13px; cursor: pointer;
+            color: var(--muted); }
+  .subtab:hover { color: var(--fg); background: var(--chip); }
+  .subtab.active { color: var(--fg); background: var(--chip);
+                   border-color: var(--line); font-weight: 600; }
+  /* availability under each team picker */
+  .inj { margin-top: 6px; font-size: 12px; line-height: 1.5; }
+  .inj .out  { color: #d64545; font-weight: 600; }
+  .inj .dtd  { color: var(--muted); }
+  .inj .none { color: var(--muted); opacity: .75; }
+
+  .page-head { display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+  h1 { font-size: 26px; margin: 4px 0 0; letter-spacing: -.01em; text-wrap: balance; font-weight: 800; }
+  .sub { color: var(--muted); font-size: 13.5px; max-width: 62ch; }
+
+  /* ---- KPI strip ---- */
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 0 0 22px; }
+  .kpi { background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+    padding: 14px 16px; box-shadow: var(--shadow); }
+  .kpi .v { font-size: 26px; font-weight: 700; letter-spacing: -.02em; }
+  .kpi .l { margin-top: 2px; }
+  .kpi .v em { font-style: normal; color: var(--accent); }
+
+  /* ---- table ---- */
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+    box-shadow: var(--shadow); overflow: hidden; }
+  .panel-head { display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px; border-bottom: 1px solid var(--border); gap: 12px; }
+  .panel-head h2 { font-size: 14px; margin: 0; letter-spacing: .04em; text-transform: uppercase; }
+  .tblwrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  thead th { background: var(--panel-2); text-align: right;
+    font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted);
+    font-weight: 700; padding: 10px 14px; cursor: pointer; white-space: nowrap;
+    border-bottom: 1px solid var(--border); user-select: none; }
+  thead th:first-child, thead th.tleft { text-align: left; }
+  thead th:hover { color: var(--text); }
+  thead th[aria-sort] { color: var(--accent); }
+  thead th .arw { opacity: .5; font-size: 9px; }
+  tbody td { padding: 9px 14px; text-align: right; border-bottom: 1px solid var(--grid);
+    white-space: nowrap; }
+  tbody tr:hover { background: var(--panel-2); }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.tleft { text-align: left; }
+  .rk { color: var(--muted); width: 34px; }
+  .team { display: inline-flex; align-items: center; gap: 9px; font-weight: 600; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: none;
+    box-shadow: 0 0 0 1px var(--border) inset, 0 0 0 2px var(--panel); }
+  .abbr { color: var(--muted); font-size: 12px; width: 34px; display: inline-block; }
+  .rate { font-weight: 700; }
+  .barcell { width: 130px; }
+  .bar { height: 7px; border-radius: 4px; background: var(--panel-2);
+    position: relative; overflow: hidden; }
+  .bar > i { position: absolute; top: 0; bottom: 0; display: block; }
+  .pos { color: var(--good); } .neg { color: var(--bad); }
+
+  /* ---- research index ---- */
+  .rgroup { margin-top: 22px; }
+  .rgroup .eyebrow { margin-bottom: 10px; display: block; }
+  .rgrid { display: grid; gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(248px, 1fr)); }
+  .rcard { text-align: left; appearance: none; cursor: pointer;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px 18px; color: inherit; font: inherit;
+    transition: border-color .15s ease, background .15s ease, transform .15s ease; }
+  .rcard:hover { border-color: var(--accent); background: var(--panel-2);
+    transform: translateY(-1px); }
+  .rcard:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .rc-t { font-weight: 700; font-size: 15px; margin-bottom: 5px; }
+  .rc-d { color: var(--muted); font-size: 13px; line-height: 1.5; }
+  .backlink { appearance: none; border: 0; background: none; cursor: pointer;
+    color: var(--muted); font: inherit; font-size: 13px; font-weight: 600;
+    padding: 2px 0; margin-bottom: 10px; }
+  .backlink:hover { color: var(--accent); }
+
+  /* ---- simulator ---- */
+  .note { color: var(--muted); font-size: 13px; line-height: 1.6;
+    margin-top: 12px; max-width: 78ch; }
+  .note b { color: var(--text); font-weight: 600; }
+  td.best { color: #7ee2a8; font-weight: 700; }
+  .simbtns { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 2px; }
+  .simbtn { appearance: none; border: 1px solid var(--line); cursor: pointer;
+    background: var(--panel-2); color: var(--text); font: inherit; font-weight: 600;
+    font-size: 13px; padding: 9px 16px; border-radius: 9px; }
+  .simbtn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+  .simbtn.primary { background: var(--accent); border-color: var(--accent);
+    color: #08111f; }
+  .simbtn.primary:hover:not(:disabled) { filter: brightness(1.08); color: #08111f; }
+  .simbtn.ghost { background: none; color: var(--muted); }
+  .simbtn:disabled { opacity: .38; cursor: default; }
+  .mk-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px;
+    align-items: center; margin: 6px 0 12px; }
+  .mk-box { background: var(--panel-2); border: 1px solid var(--line);
+    border-radius: 12px; padding: 14px 16px; }
+  .mk-box select { width: 100%; margin-top: 6px; }
+  .mk-at { font-weight: 800; color: var(--muted); font-size: 15px; }
+  .mk-meta { display: flex; gap: 12px; margin-top: 9px; color: var(--muted);
+    font-size: 12px; font-variant-numeric: tabular-nums; }
+  .mk-proj { text-align: center; font-size: 15px; margin: 4px 0 14px; }
+  .mk-proj b { color: var(--accent); font-size: 17px; }
+  .mk-proj .mgn, .mk-proj .warn { color: var(--muted); font-size: 13px; }
+  .linescore { margin-bottom: 14px; }
+  table.ls { width: auto; }
+  table.ls th, table.ls td { padding: 5px 14px; }
+  .bx { margin-top: 14px; }
+  .bx-h { font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+  .bx-h span { color: var(--muted); font-weight: 500; font-size: 12px;
+    margin-left: 8px; }
+  .avg { font-variant-numeric: tabular-nums; }
+  .rng { display: block; font-size: 10.5px; color: var(--muted); margin-top: 1px; }
+  @media (max-width: 700px) { .mk-grid { grid-template-columns: 1fr; }
+    .mk-at { text-align: center; } }
+
+  /* ---- matchup predictor ---- */
+  .matchup { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  .mk-card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+    box-shadow: var(--shadow); padding: 22px; }
+  .vs-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: center; }
+  .side { text-align: center; }
+  .side label { display: block; margin-bottom: 8px; }
+  select { width: 100%; font: inherit; font-weight: 600; padding: 10px 12px; border-radius: 10px;
+    border: 1px solid var(--border); background: var(--panel-2); color: var(--text);
+    cursor: pointer; -webkit-appearance: none; appearance: none; text-align: center; }
+  select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .side .sel-elo { margin-top: 8px; font-size: 13px; color: var(--muted); }
+  .vs-col { display: flex; flex-direction: column; align-items: center; gap: 12px; padding-top: 22px; }
+  .vs { font-weight: 800; color: var(--muted); letter-spacing: .1em; font-size: 13px; }
+  .venue { display: flex; gap: 6px; justify-content: center; }
+  .venue button { appearance: none; border: 1px solid var(--border); background: var(--panel-2);
+    color: var(--muted); font: inherit; font-size: 12px; font-weight: 600; padding: 4px 10px;
+    border-radius: 999px; cursor: pointer; }
+  .venue button.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+
+  .result { margin-top: 24px; padding-top: 22px; border-top: 1px dashed var(--border); }
+  .probbar { height: 40px; border-radius: 10px; overflow: hidden; display: flex;
+    font-weight: 700; font-size: 14px; color: #fff; }
+  .probbar .h { background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+  .probbar .a { background: linear-gradient(90deg, var(--cool), color-mix(in srgb, var(--cool) 70%, #fff)); }
+  .probbar span { display: flex; align-items: center; padding: 0 14px;
+    text-shadow: 0 1px 2px rgba(0,0,0,.35); }
+  .probbar .a span { width: 100%; justify-content: flex-end; }
+  .verdict { text-align: center; margin-top: 16px; font-size: 15px; }
+  .verdict b { color: var(--accent); font-size: 17px; }
+  .verdict .mgn { color: var(--muted); }
+
+  /* ---- matchup projection preview ---- */
+  .badge-preview { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--accent); background: var(--accent-soft); padding: 3px 9px; border-radius: 999px;
+    vertical-align: middle; margin-left: 8px; }
+  .preview-wrap { display: flex; flex-direction: column; gap: 16px; }
+  .cmp-head { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    font-weight: 700; margin-bottom: 16px; }
+  .cmp-head span:last-child { text-align: right; }
+  .cmp-season { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--muted); padding: 0 14px; }
+  .cmp-row { display: grid; grid-template-columns: 52px 1fr 52px; align-items: center; gap: 14px;
+    padding: 7px 0; }
+  .cmp-val { font-family: ui-monospace, Menlo, monospace; font-variant-numeric: tabular-nums;
+    font-weight: 600; font-size: 15px; color: var(--muted); }
+  .cmp-val.right { text-align: right; }
+  .cmp-val.lead { color: var(--accent); }
+  .cmp-mid { text-align: center; }
+  .cmp-label { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+    margin-bottom: 5px; font-weight: 700; }
+  .cmp-bar { height: 6px; border-radius: 3px; display: flex; overflow: hidden; background: var(--panel-2); }
+  .cmp-bar i { display: block; height: 100%; }
+  .cmp-bar .a { background: var(--accent); }
+  .cmp-bar .b { background: var(--cool); }
+  .ptables { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .pt-head { font-weight: 700; padding: 2px 2px 12px; font-size: 14px; }
+  .pt-head small { color: var(--muted); font-weight: 600; font-size: 11px;
+    text-transform: uppercase; letter-spacing: .05em; margin-left: 6px; }
+  .ptbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .ptbl th { text-align: right; font-size: 10px; letter-spacing: .05em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; padding: 4px 5px; border-bottom: 1px solid var(--border); }
+  .ptbl th:first-child { text-align: left; }
+  .ptbl td { text-align: right; padding: 7px 5px; border-bottom: 1px solid var(--grid);
+    font-family: ui-monospace, Menlo, monospace; font-variant-numeric: tabular-nums; }
+  .ptbl td:first-child { text-align: left; font-family: inherit; font-weight: 600; }
+  .ptbl tr:last-child td { border-bottom: 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .chip { font-size: 12.5px; padding: 7px 12px; border-radius: 999px; background: var(--panel-2);
+    border: 1px solid var(--border); }
+  .chip b { color: var(--accent); }
+  @media (max-width: 720px) { .ptables { grid-template-columns: 1fr; } }
+
+  /* ---- four factors + shots ---- */
+  #fftable th.dsplit, #fftable td.dsplit { border-left: 2px solid var(--border); }
+  #fftable td.o1 { color: var(--accent); font-weight: 700; }
+  .shot-legend { display: flex; gap: 14px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
+  .shot-legend i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; vertical-align: -1px; margin-right: 4px; }
+  #ptable tbody tr { cursor: pointer; }
+
+  /* ---- player modal ---- */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 100;
+    display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .modal-overlay[hidden] { display: none; }
+  .modal-card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px;
+    box-shadow: var(--shadow); max-width: 520px; width: 100%; padding: 24px; position: relative;
+    max-height: 90vh; overflow-y: auto; animation: fade .2s ease; }
+  .modal-x { position: absolute; top: 12px; right: 16px; background: none; border: 0;
+    color: var(--muted); font-size: 26px; cursor: pointer; line-height: 1; }
+  .modal-x:hover { color: var(--text); }
+  .modal-head { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+  .dot.big { width: 16px; height: 16px; }
+  .modal-head h2 { margin: 0; font-size: 22px; }
+  .stat-line { display: flex; gap: 20px; padding: 14px 0; margin: 14px 0 16px;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .stat-line .v { font-size: 19px; font-weight: 700; font-family: ui-monospace, Menlo, monospace;
+    font-variant-numeric: tabular-nums; }
+  .stat-line .l { font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .metric-card { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 11px 13px; }
+  .metric-card .mv { font-size: 18px; font-weight: 700; color: var(--accent);
+    font-family: ui-monospace, Menlo, monospace; font-variant-numeric: tabular-nums; }
+  .metric-card .ml { font-size: 12px; font-weight: 700; margin-top: 2px; }
+  .metric-card .mb { font-size: 11.5px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+  @media (max-width: 520px) { .metric-grid { grid-template-columns: 1fr; } }
+
+  /* ---- WOWY impact ---- */
+  #wtable tbody tr { cursor: pointer; }
+  .wmates { margin-top: 18px; }
+  .wmate-head { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  .wmate { display: grid; grid-template-columns: 1fr auto 56px; gap: 14px; align-items: center;
+    padding: 8px 0; border-top: 1px solid var(--grid); font-size: 14px; }
+  .wmate span:first-child { font-weight: 600; }
+  .wmate .mono { text-align: right; }
+  .wmate-note { font-size: 13px; color: var(--muted); padding-top: 6px; }
+
+  /* ---- roadmap ---- */
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+    padding: 20px; box-shadow: var(--shadow); position: relative; }
+  .card h3 { margin: 8px 0 6px; font-size: 17px; }
+  .card p { color: var(--muted); font-size: 13.5px; margin: 0; }
+  .flag { position: absolute; top: 16px; right: 16px; font-size: 10px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
+    background: var(--accent-soft); padding: 3px 8px; border-radius: 999px; }
+  .flag.live { color: var(--good); background: color-mix(in srgb, var(--good) 14%, transparent); }
+
+  .foot { color: var(--muted); font-size: 12px; margin-top: 26px; line-height: 1.6; }
+  .foot b { color: var(--text); font-weight: 600; }
+
+  @media (max-width: 720px) {
+    .kpis { grid-template-columns: repeat(2, 1fr); }
+    .cards { grid-template-columns: 1fr; }
+    nav.tabs .tab { padding: 8px 8px; font-size: 12.5px; }
+    .brand small { display: none; }
+  }
+</style>
+<link rel="stylesheet" href="layout.css">
+<link rel="stylesheet" href="game.css">
+
+<link rel="stylesheet" href="site.css"><script src="site.js" defer></script>
+<!-- site-header:start --><header class="site-header"><div class="site-header-inner"><a class="site-brand" href="index.html" aria-label="NBAI home"><span class="site-mark" aria-hidden="true">◉</span> NBAI</a><nav class="site-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="insights.html">Research</a><a href="betting.html">Season picks</a><details class="site-menu is-current"><summary>Simulators</summary><div class="site-dropdown"><a href="simulators.html">Explore simulators<small>Choose where to start</small></a><a href="game.html" aria-current="page">Game simulator<small>One matchup, every detail</small></a><a href="season.html">Season simulator<small>Your team, week by week</small></a></div></details></nav></div></header><!-- site-header:end -->
+<nav class="sim-switch" aria-label="Simulator selection"><a href="simulators.html">← Simulators</a><a href="game.html" aria-current="page">Single game</a><a href="season.html">Full season</a></nav>
+
+<main>
+  <section class="view active" id="simulator">
+    <section class="game-hero" aria-label="Game simulator overview">
+      <div><p class="eyebrow">NBAI / GAME DAY</p><h1>Game simulator</h1>
+        <p class="game-intro">Pick your matchup. Play every possession. See how the game unfolds.</p>
+        <span class="game-status" id="gameStatus" role="status" aria-live="polite">Ready to tip off</span></div>
+      <div class="matchup-marquee"><span>YOUR MATCHUP</span><strong id="gameMatchup">BOS @ OKC</strong><small>Away / Home</small></div>
+      <div class="game-hero-note"><p class="eyebrow">One game. Every detail.</p><h2>From tip-off to the final box.</h2><p>Follow the gamecast, explore player stats, or run the matchup again to compare outcomes.</p></div>
+    </section>
+    <div class="game-source"><span class="game-source-dot"></span><span>Possession-based simulation · All results are simulated</span><a href="season.html">Play a full season ↗</a></div>
+    <div class="game-workspace"><aside class="game-sidebar" aria-label="Matchup controls">
+    <div class="panel">
+      <div class="panel-head"><div><p class="eyebrow">01 / Set the court</p><h2>Choose a matchup</h2></div>
+        <span class="eyebrow" id="simRunNote"></span></div>
+      <div class="mk-grid">
+        <div class="mk-box">
+          <div class="eyebrow">Away</div>
+          <select id="simAway" aria-label="Away team"></select>
+          <div class="mk-meta" id="simAwayMeta"></div>
+        </div>
+        <div class="mk-at">@</div>
+        <div class="mk-box">
+          <div class="eyebrow">Home</div>
+          <select id="simHome" aria-label="Home team"></select>
+          <div class="mk-meta" id="simHomeMeta"></div>
+        </div>
+      </div>
+      <div class="mk-proj" id="simProj"></div>
+      <div class="simbtns">
+        <button class="simbtn primary" id="simRun1">Simulate game</button>
+        <button class="simbtn" id="simRun10" disabled>+10 simulations</button>
+        <button class="simbtn" id="simRun100" disabled>+100</button>
+        <button class="simbtn" id="simRun1000" disabled>+1000</button>
+        <button class="simbtn ghost" id="simReset" disabled>Reset</button>
+      </div>
+    </div>
+
+      <div class="game-tip"><p class="eyebrow">Your next move</p><h2>Take over a season.</h2><p>Choose one team, reshape its roster, and follow the league week by week.</p><a href="season.html">Open season simulator ↗</a></div>
+    </aside><div class="game-results">
+      <section class="panel game-empty" id="gameEmpty"><p class="eyebrow">02 / Play it out</p><h2>Your game starts here.</h2><p>Choose your home and away teams, then select <b>Simulate game</b>. The gamecast and both teams’ box scores will appear here.</p><div class="game-empty-steps"><span>01 <b>Pick a matchup</b></span><span>02 <b>Simulate the game</b></span><span>03 <b>Explore the results</b></span></div></section>
+      <nav class="game-result-links" id="gameResultLinks" aria-label="Game results" hidden><a href="#simGamePanel">Gamecast ↓</a><a href="#simBoxPanel">Box score ↓</a><a href="#simAggPanel" id="gameAggregateLink" hidden>Across simulations ↓</a></nav>
+    <div class="panel" style="margin-top:18px;display:none" id="simGamePanel">
+      <div class="panel-head"><h2>Gamecast</h2>
+        <span class="eyebrow" id="simPbpNote"></span></div>
+      <div class="linescore" id="simLine"></div>
+      <div class="tblwrap" style="max-height:420px;overflow:auto">
+        <table id="simPbpTbl">
+          <thead><tr><th class="tleft">Q</th><th class="tleft">Team</th>
+            <th class="tleft">Play</th><th>Score</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:18px;display:none" id="simBoxPanel">
+      <div class="panel-head"><h2>Box score</h2>
+        <span class="eyebrow">that game</span></div>
+      <div id="simBoxes"></div>
+    </div>
+
+    <div class="panel" style="margin-top:18px;display:none" id="simAggPanel">
+      <div class="panel-head"><h2>Across all simulations</h2>
+        <span class="eyebrow" id="simAggNote"></span></div>
+      <div class="tblwrap">
+        <table id="simTeamTbl">
+          <thead><tr><th class="tleft">Team</th><th>Avg score</th><th>Low</th>
+            <th>High</th><th>Win %</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="note" id="simAggSummary"></div>
+      <div id="simAggBoxes"></div>
+    </div>
+
+    <div class="panel" style="margin-top:18px">
+      <div class="panel-head"><h2>Held-out accuracy</h2>
+        <span class="eyebrow" id="simEvalNote"></span></div>
+      <div class="tblwrap">
+        <table id="simEvalTbl">
+          <thead><tr>
+            <th class="tleft">Model</th><th>Accuracy</th><th>Log-loss</th>
+            <th>Brier</th><th>Margin MAE</th><th>Total MAE</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="note" id="simEvalCal"></div>
+    </div>
+    </div></div>
+    <footer class="game-footer"><span>NBAI · Game Lab · All results are simulated</span><a href="season.html">Go to your season ↗</a></footer>
+  </section>
+
+  <!-- ============ TEAM RATINGS ============ -->
+  <section class="view" id="research">
+    <div class="page-head">
+      <div><div class="eyebrow">Original NBAI statistics</div><h1>Beyond the box score.</h1></div>
+      <div class="sub">Explore our player-value formulas, with-or-without-you impact and matchup analysis. Historical measurements describe what happened; they do not guarantee future results.</div>
+    </div>
+    <p id="researchSnapshot" class="foot"></p>
+    <div id="researchHighlights" class="rgrid" aria-label="Featured original statistics"></div>
+    <div class="rgroup"><div class="eyebrow">Teams</div><div class="rgrid"><button class="rcard" data-view="ratings"><div class="rc-t">Power Ratings</div><div class="rc-d">Elo ratings, Four Factors and the Elo matchup baseline for all 30 teams.</div></button><button class="rcard" data-view="defense"><div class="rc-t">Matchup Detail</div><div class="rc-d">Defender quality, shot charts and play-type edges &mdash; 2.2M possessions and 1.6M attempts.</div></button></div></div>
+    <div class="rgroup"><div class="eyebrow">Players</div><div class="rgrid"><button class="rcard" data-view="players"><div class="rc-t">Player Ratings</div><div class="rc-d">WAR leaderboard and clutch-situation splits.</div></button><button class="rcard" data-view="impact"><div class="rc-t">Impact</div><div class="rc-d">With-or-without-you on/off impact for each rotation.</div></button><button class="rcard" data-view="props"><div class="rc-t">Props</div><div class="rc-d">Projected season lines from the production props model.</div></button></div></div>
+    
+  </section>
+
+  <section class="view" id="ratings">
+    <div class="subtabs"><button class="subtab" data-view="ratings">Power Ratings</button><button class="subtab" data-view="predict">Elo Matchup</button></div>
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">2025–26 · through season's end</div>
+        <h1>Team Power Ratings</h1>
+      </div>
+      <div class="sub">Live Elo ratings from our walk-forward-backtested model. 1500 is a
+        league-average team; the bar shows projected point margin vs. an average opponent.</div>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi"><div class="v mono" id="kpiGames">16,758</div><div class="l eyebrow">Games in database</div></div>
+      <div class="kpi"><div class="v mono" id="kpiSeasons">13</div><div class="l eyebrow">Seasons · 2013–2026</div></div>
+      <div class="kpi"><div class="v mono" id="kpiAcc"><em>65.2%</em></div><div class="l eyebrow">Backtest accuracy</div></div>
+      <div class="kpi"><div class="v mono" id="kpiLoss">0.626</div><div class="l eyebrow">Log-loss (out-of-sample)</div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Power Ratings</h2>
+        <span class="eyebrow">Click a column to sort</span>
+      </div>
+      <div class="tblwrap">
+        <table id="rtable">
+          <thead>
+            <tr>
+              <th class="tleft" data-k="rank">Rk</th>
+              <th class="tleft" data-k="name">Team</th>
+              <th data-k="elo" aria-sort="descending">Rating <span class="arw">▼</span></th>
+              <th data-k="margin" class="tleft barcell">Margin vs avg</th>
+              <th data-k="w">W</th>
+              <th data-k="l">L</th>
+              <th data-k="pct">Win%</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:18px">
+      <div class="panel-head"><h2>Four Factors</h2><span class="eyebrow">Offense · Defense — 2025-26</span></div>
+      <div class="tblwrap">
+        <table id="fftable">
+          <thead><tr>
+            <th class="tleft" data-k="team">Team</th>
+            <th data-k="o_efg">eFG%</th><th data-k="o_tov">TOV%</th><th data-k="o_orb">ORB%</th><th data-k="o_ftr">FTr</th>
+            <th data-k="d_efg" class="dsplit">eFG%</th><th data-k="d_tov">TOV%</th><th data-k="d_orb">ORB%</th><th data-k="d_ftr">FTr</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="foot"><b>Four Factors</b> (Dean Oliver): shooting <b>eFG%</b>, ball control <b>TOV%</b>,
+      rebounding <b>ORB%</b>, and <b>FTr</b> (free-throw rate) — the left block is a team's offense,
+      the right block (shaded) is what they allow on defense. This is *why* a team's rating is what it is.</p>
+  </section>
+
+  <!-- ============ PLAYERS ============ -->
+  <section class="view" id="players">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">2025–26 · our models</div>
+        <h1>Player Ratings</h1>
+      </div>
+      <div class="sub">Top players by our WAR, alongside shot-making and defensive value —
+        every column is a model we built and backtested, not a box-score average.</div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>Player Leaderboard</h2><span class="eyebrow">Click a column to sort</span></div>
+      <div class="tblwrap">
+        <table id="ptable">
+          <thead><tr>
+            <th class="tleft" data-k="rank">Rk</th>
+            <th class="tleft" data-k="player">Player</th>
+            <th data-k="war" aria-sort="descending">WAR <span class="arw">▼</span></th>
+            <th data-k="off">Off</th>
+            <th data-k="poe">Shot+</th>
+            <th data-k="def">Def</th>
+            <th data-k="mpg">MPG</th>
+            <th data-k="pts">PTS</th>
+            <th data-k="floor">Floor</th>
+            <th data-k="ceil">Ceil</th>
+            <th data-k="reb">REB</th>
+            <th data-k="ast">AST</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:16px">
+      <div class="panel-head"><h2>Clutch Leaders</h2><span class="eyebrow">Last 5 min · within 5 · 2025-26</span></div>
+      <div class="tblwrap">
+        <table id="cltable">
+          <thead><tr><th class="tleft">Rk</th><th class="tleft">Player</th>
+            <th>Clutch PTS</th><th>Shooting Lift</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="foot"><b>WAR</b> — wins above replacement, <b>v4</b>: our blend of box scores,
+      play-type efficiency, playmaking, rim protection and hustle defense. Offensive and
+      defensive components are standardized and combined, then converted to season value
+      using minutes and replacement level. This is a descriptive player-value estimate,
+      not a probability of winning MVP or a verified betting edge. <b>Off / Def</b> — the
+      offensive and defensive components in points/100 above average. <b>Shot+</b> —
+      points over expected on the same shots. <b>Floor / Ceil</b> — 20th/80th-percentile scoring
+      nights (props reliability). <b>Clutch</b> — points in the last 5 min within 5, with each
+      player's shooting lift vs. their season eFG%.</p>
+  </section>
+
+  <!-- ============ PROPS ============ -->
+  <section class="view" id="props">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">2025–26 · projection engine</div>
+        <h1>Player Props</h1>
+      </div>
+      <div class="sub">Pre-game projections for every player — projected <b>minutes</b> drive
+        projected points, rebounds, assists. Honest walk-forward accuracy (never trained on the
+        future), and the numbers use <b>projected</b> minutes, not hindsight.</div>
+    </div>
+    <div class="kpis" id="propKpis"></div>
+    <div class="panel" style="margin-top:16px">
+      <div class="panel-head"><h2>Projected Season Lines</h2><span class="eyebrow">proj vs actual · click a column to sort</span></div>
+      <div class="tblwrap">
+        <table id="proptable">
+          <thead><tr>
+            <th class="tleft" data-k="rank">Rk</th>
+            <th class="tleft" data-k="player">Player</th>
+            <th data-k="gp">GP</th>
+            <th data-k="pmin">Min</th>
+            <th data-k="ppts" aria-sort="descending">PTS <span class="arw">▼</span></th>
+            <th data-k="apts">actual</th>
+            <th data-k="preb">REB</th>
+            <th data-k="areb">actual</th>
+            <th data-k="past">AST</th>
+            <th data-k="aast">actual</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="foot"><b>How it's built:</b> a gradient-boosted minutes model (recent minutes +
+      rest + <b>who's out</b> — a teammate's absence redistributes minutes and usage) feeds
+      per-stat models that add recent form and a shot-volume vs. shooting-efficiency split.
+      The strongest single lever we found is <b>teammate availability</b>: minutes MAE dropped
+      from 4.87 to 4.60 once the model sees who's sitting. Opponent-specific signals — team
+      defense, pace, even exact matchup — were tested and add almost nothing.</p>
+  </section>
+
+  <!-- ============ DEFENSE ============ -->
+  <section class="view" id="defense">
+    <div class="subtabs"><button class="subtab" data-view="defense">Perimeter Defense</button><button class="subtab" data-view="shots">Shot Charts</button><button class="subtab" data-view="playtypes">Play Types</button></div>
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">matchup data · 2.2M possessions</div>
+        <h1>Perimeter Defense</h1>
+      </div>
+      <div class="sub">Who actually makes life hard on the man they guard — measured from every
+        defender-vs-scorer matchup, adjusted for <b>who</b> they guard and <b>how much</b> they play.
+        This is the on-ball defense box scores can't see.</div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>Defender Leaderboard</h2><span class="eyebrow">2025-26 · click a column to sort</span></div>
+      <div class="tblwrap">
+        <table id="deftable">
+          <thead><tr>
+            <th class="tleft" data-k="rank">Rk</th>
+            <th class="tleft" data-k="player">Player</th>
+            <th data-k="rating" aria-sort="descending">Def Rating <span class="arw">▼</span></th>
+            <th data-k="mpg">MPG</th>
+            <th data-k="poss">Poss Guarded</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="foot"><b>Def Rating</b> — points saved per matchup vs. what the offensive players
+      "should" score, standardized across the league (higher = better). We <b>residualize out
+      minutes and assignment difficulty</b>, because raw matchup numbers reward bench players hidden
+      on weak scorers. Honest caveat: this is <b>on-ball</b> defense only — it doesn't capture rim
+      protection, help, or scheme, so it's a descriptive lens, not a full defensive rating.</p>
+  </section>
+
+  <!-- ============ PLAY TYPES ============ -->
+  <section class="view" id="playtypes">
+    <div class="subtabs"><button class="subtab" data-view="defense">Perimeter Defense</button><button class="subtab" data-view="shots">Shot Charts</button><button class="subtab" data-view="playtypes">Play Types</button></div>
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">Synergy · 2025–26</div>
+        <h1>Play-Type Matchups</h1>
+      </div>
+      <div class="sub">Every team's offense broken into how <b>often</b> they run each play type and
+        how <b>efficiently</b> — matched against how the opponent <b>defends</b> that play type. Pick
+        an offense and a defense to see the bottom-up scouting grid.</div>
+    </div>
+    <div class="mk-card">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px">
+        <label class="eyebrow" for="synOff">Offense</label>
+        <select id="synOff" aria-label="Offense team" style="width:auto;min-width:170px"></select>
+        <label class="eyebrow" for="synDef">Defense</label>
+        <select id="synDef" aria-label="Defense team" style="width:auto;min-width:170px"></select>
+      </div>
+      <div class="tblwrap">
+        <table id="syntable">
+          <thead><tr>
+            <th class="tleft">Play Type</th>
+            <th>Off Freq</th><th>Off PPP</th>
+            <th>Def PPP</th><th>vs Lg</th><th>Matchup</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="foot"><b>Reading it:</b> <b>Off Freq</b> = share of the offense's possessions in that
+      play type; <b>Off PPP</b> = their points per possession on it; <b>Def PPP</b> = what the defense
+      allows on it; <b>vs Lg</b> = how the defense compares to league average (green = stingy);
+      <b>Matchup</b> = the offense's efficiency shifted by this defense's strength on that play type.
+      An honest note we found in backtests: this grid is a superb <b>scouting</b> tool, but at the
+      team level it doesn't out-predict the simple rating difference — great defenses tend to be
+      great everywhere.</p>
+  </section>
+
+  <!-- ============ SHOT CHARTS ============ -->
+  <section class="view" id="shots">
+    <div class="subtabs"><button class="subtab" data-view="defense">Perimeter Defense</button><button class="subtab" data-view="shots">Shot Charts</button><button class="subtab" data-view="playtypes">Play Types</button></div>
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">2025–26 · 1.6M shots</div>
+        <h1>Shot Charts</h1>
+      </div>
+      <div class="sub">Where each team shoots and how well — cells sized by volume, colored by
+        efficiency vs. the league at that range. Built from every shot's court coordinates.</div>
+    </div>
+    <div class="mk-card">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px">
+        <label class="eyebrow" for="shotTeam">Team</label>
+        <select id="shotTeam" aria-label="Team" style="width:auto;min-width:200px"></select>
+        <div class="shot-legend">
+          <span><i style="background:var(--cool)"></i> below league</span>
+          <span><i style="background:var(--muted)"></i> average</span>
+          <span><i style="background:var(--accent)"></i> above league</span>
+        </div>
+      </div>
+      <div style="overflow-x:auto"><canvas id="shotCanvas" width="500" height="470"
+        style="max-width:100%;display:block;margin:0 auto"></canvas></div>
+    </div>
+    <p class="foot"><b>Reading it:</b> bigger cell = more shots from that spot; amber = the team
+      scores more points-per-shot there than the league average from that range, blue = less.
+      A big amber cluster behind the arc is an elite, high-volume shooting team.</p>
+  </section>
+
+  <!-- ============ IMPACT (WOWY) ============ -->
+  <section class="view" id="impact">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">2025–26 · With-Or-Without-You</div>
+        <h1>Player Impact</h1>
+      </div>
+      <div class="sub">How much better or worse a team is in games a player <b>plays</b> vs.
+        <b>misses</b> — and which teammates pick up the slack. This is the injury/absence impact,
+        measured from games played vs. sat out.</div>
+    </div>
+    <div class="mk-card">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px">
+        <label class="eyebrow" for="wowyTeam">Team</label>
+        <select id="wowyTeam" style="width:auto;min-width:200px"></select>
+      </div>
+      <div class="tblwrap">
+        <table id="wtable">
+          <thead><tr><th class="tleft">Player</th><th>Impact</th>
+            <th>Team w/</th><th>Team w/o</th><th>G in</th><th>G out</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="wmates" class="wmates"></div>
+    </div>
+    <p class="foot"><b>Impact</b> = the team's average point margin per game <em>with</em> the player
+      minus <em>without</em> (positive = better with them). Click a player to see how teammates'
+      scoring changes when they sit. <b>Caveat:</b> players miss few games, so big numbers on a tiny
+      "G out" are noisy — this is descriptive, not a controlled on/off (which needs lineup data).</p>
+  </section>
+
+  <!-- ============ MATCHUP ============ -->
+  <section class="view" id="predict">
+    <div class="subtabs"><button class="subtab" data-view="ratings">Power Ratings</button><button class="subtab" data-view="predict">Elo Matchup</button></div>
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">Prediction Engine</div>
+        <h1>Matchup Predictor</h1>
+      </div>
+      <div class="sub">Pick any two teams. This runs our Elo win-probability model live —
+        the same model, computing in your browser. Home court = +100 rating points (~3.5 pts).</div>
+    </div>
+
+    <div class="matchup">
+      <div class="mk-card">
+        <div class="vs-grid">
+          <div class="side">
+            <label class="eyebrow" for="home">Home</label>
+            <select id="home" aria-label="Home team"></select>
+            <div class="sel-elo mono" id="homeElo"></div>
+          </div>
+          <div class="vs-col">
+            <div class="vs">VS</div>
+            <div class="venue">
+              <button id="neutralBtn" type="button">Neutral site</button>
+            </div>
+          </div>
+          <div class="side">
+            <label class="eyebrow" for="away">Away</label>
+            <select id="away" aria-label="Away team"></select>
+            <div class="sel-elo mono" id="awayElo"></div>
+          </div>
+        </div>
+
+        <div class="result">
+          <div class="probbar" id="probbar">
+            <div class="h" id="pbHome"><span id="pbHomeTxt"></span></div>
+            <div class="a" id="pbAway"><span id="pbAwayTxt"></span></div>
+          </div>
+          <div class="verdict" id="verdict"></div>
+        </div>
+      </div>
+    </div>
+    <p class="foot"><b>How it works:</b> win probability = 1 / (1 + 10^(−ΔElo/400)), where ΔElo
+      includes the home-court bonus. Projected margin = ΔElo / 28. This is our Stage-1 baseline;
+      the bottom-up matchup simulator (next) will project individual player and team stat lines.</p>
+
+    <div class="page-head" style="margin-top: 44px">
+      <div>
+        <div class="eyebrow">Coming soon · the full vision</div>
+        <h1>Projected Box Score <span class="badge-preview">Preview</span></h1>
+      </div>
+      <div class="sub">The depth we're building toward — a team comparison plus player-by-player
+        lines for any matchup. Shown here with <b>real 2021-22 season data</b> (Celtics vs Warriors)
+        as a stand-in; the live tool will <b>project</b> these opponent-adjusted for current rosters.</div>
+    </div>
+
+    <div class="preview-wrap">
+      <div class="mk-card">
+        <div class="cmp-head"><span>Boston Celtics</span>
+          <span class="cmp-season">2021-22 · per game</span><span>Golden State Warriors</span></div>
+        <div id="cmpRows"></div>
+      </div>
+      <div class="ptables">
+        <div class="mk-card"><div class="pt-head">Boston Celtics <small>2021-22 avg</small></div>
+          <table class="ptbl" id="ptA"></table></div>
+        <div class="mk-card"><div class="pt-head">Golden State Warriors <small>2021-22 avg</small></div>
+          <table class="ptbl" id="ptB"></table></div>
+      </div>
+      <div class="mk-card">
+        <div class="eyebrow">Key matchup edges</div>
+        <div class="chips" id="edges"></div>
+      </div>
+    </div>
+    <p class="foot"><b>What makes it a projection (next):</b> each line gets adjusted for the specific
+      opponent — pace, defensive rating faced, and the deep per-player splits (perimeter defense,
+      shooting vs. taller/shorter defenders) — then regressed with shrinkage so small samples don't mislead.</p>
+  </section>
+
+  <!-- ============ ROADMAP ============ -->
+
+
+  <section class="view" id="roadmap">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">On the roadmap</div>
+        <h1>Players, WAR &amp; the Matchup Simulator</h1>
+      </div>
+      <div class="sub">What the data pipeline is being built to power — shown here as designed
+        placeholders so the shape is clear before the numbers land.</div>
+    </div>
+    <div class="cards">
+      <div class="card"><span class="flag live">Live</span>
+        <div class="eyebrow">Stage 1</div>
+        <h3>Team Ratings &amp; Predictions</h3>
+        <p>Elo power ratings and game win-probabilities, validated on 15,000+ games with a
+          leakage-free walk-forward backtest. Working today.</p></div>
+      <div class="card"><span class="flag">Building</span>
+        <div class="eyebrow">Player value</div>
+        <h3>Basketball WAR</h3>
+        <p>Wins Above Replacement, bake-off style: several frameworks (VORP, RAPM, blended)
+          backtested head-to-head, with the most predictive one promoted.</p></div>
+      <div class="card"><span class="flag">Building</span>
+        <div class="eyebrow">The big one</div>
+        <h3>Matchup Simulator</h3>
+        <p>Deep per-player split profiles — perimeter defense, shooting vs. taller/shorter
+          defenders, home/road, by zone — to project every player's line in a given matchup.</p></div>
+      <div class="card"><span class="flag">Building</span>
+        <div class="eyebrow">Shot &amp; lineup</div>
+        <h3>Shot Quality &amp; Lineups</h3>
+        <p>Expected-points (xPTS) from 1.6M shot coordinates, plus on/off and lineup ratings
+          from reconstructed play-by-play stints.</p></div>
+    </div>
+    <p class="foot"><b>NBAI</b> reads from a three-layer parquet pipeline
+      (raw → clean facts → leakage-safe features) — the same data engine behind every rating,
+      prediction, and metric on this site.</p>
+  </section>
+</main>
+
+<div id="pmodal" class="modal-overlay" hidden>
+  <div class="modal-card">
+    <button class="modal-x" aria-label="Close" id="pmClose">&times;</button>
+    <div class="modal-head">
+      <span class="dot big" id="pmDot"></span>
+      <div><h2 id="pmName"></h2><div class="sub" id="pmTeam"></div></div>
+    </div>
+    <div class="stat-line" id="pmLine"></div>
+    <div class="metric-grid" id="pmMetrics"></div>
+    <div class="eyebrow" style="margin:18px 0 8px">Shot Chart · 2025-26</div>
+    <div style="overflow-x:auto"><canvas id="pmChart" width="500" height="470"
+      style="max-width:100%;display:block;margin:0 auto"></canvas></div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="sim.js"></script>
+<script>
+  const FALLBACK_TEAMS = [
+    {name:"New York Knicks",abbr:"NYK",elo:1799,w:53,l:29,c:"#F58426"},
+    {name:"San Antonio Spurs",abbr:"SAS",elo:1776,w:62,l:20,c:"#9EA8B0"},
+    {name:"Oklahoma City Thunder",abbr:"OKC",elo:1761,w:64,l:18,c:"#007AC1"},
+    {name:"Detroit Pistons",abbr:"DET",elo:1689,w:60,l:22,c:"#C8102E"},
+    {name:"Boston Celtics",abbr:"BOS",elo:1656,w:56,l:26,c:"#007A33"},
+    {name:"Charlotte Hornets",abbr:"CHA",elo:1631,w:44,l:38,c:"#00788C"},
+    {name:"Denver Nuggets",abbr:"DEN",elo:1631,w:54,l:28,c:"#0E2240"},
+    {name:"Cleveland Cavaliers",abbr:"CLE",elo:1624,w:52,l:30,c:"#860038"},
+    {name:"Houston Rockets",abbr:"HOU",elo:1612,w:52,l:30,c:"#CE1141"},
+    {name:"Los Angeles Lakers",abbr:"LAL",elo:1592,w:53,l:29,c:"#552583"},
+    {name:"Minnesota Timberwolves",abbr:"MIN",elo:1586,w:49,l:33,c:"#236192"},
+    {name:"Atlanta Hawks",abbr:"ATL",elo:1567,w:46,l:36,c:"#E03A3E"},
+    {name:"Toronto Raptors",abbr:"TOR",elo:1561,w:46,l:36,c:"#CE1141"},
+    {name:"Orlando Magic",abbr:"ORL",elo:1559,w:45,l:37,c:"#0077C0"},
+    {name:"Philadelphia 76ers",abbr:"PHI",elo:1551,w:45,l:37,c:"#006BB6"},
+    {name:"Phoenix Suns",abbr:"PHX",elo:1542,w:45,l:37,c:"#E56020"},
+    {name:"LA Clippers",abbr:"LAC",elo:1534,w:42,l:40,c:"#C8102E"},
+    {name:"Portland Trail Blazers",abbr:"POR",elo:1516,w:42,l:40,c:"#E03A3E"},
+    {name:"Miami Heat",abbr:"MIA",elo:1507,w:43,l:39,c:"#98002E"},
+    {name:"Golden State Warriors",abbr:"GSW",elo:1423,w:37,l:45,c:"#1D428A"},
+    {name:"New Orleans Pelicans",abbr:"NOP",elo:1397,w:26,l:56,c:"#85714D"},
+    {name:"Chicago Bulls",abbr:"CHI",elo:1348,w:31,l:51,c:"#CE1141"},
+    {name:"Milwaukee Bucks",abbr:"MIL",elo:1344,w:32,l:50,c:"#00471B"},
+    {name:"Dallas Mavericks",abbr:"DAL",elo:1335,w:26,l:56,c:"#00538C"},
+    {name:"Indiana Pacers",abbr:"IND",elo:1334,w:19,l:63,c:"#FDBB30"},
+    {name:"Sacramento Kings",abbr:"SAC",elo:1325,w:22,l:60,c:"#5A2D81"},
+    {name:"Memphis Grizzlies",abbr:"MEM",elo:1277,w:25,l:57,c:"#5D76A9"},
+    {name:"Utah Jazz",abbr:"UTA",elo:1275,w:22,l:60,c:"#00471B"},
+    {name:"Brooklyn Nets",abbr:"BKN",elo:1250,w:20,l:62,c:"#777777"},
+    {name:"Washington Wizards",abbr:"WAS",elo:1199,w:17,l:65,c:"#002B5C"},
+  ];
+
+  /* ---- data: generated web/data.js if present, else fallback ---- */
+  const D = window.NBAI_DATA || {};
+  const TEAMS = (D.teams && D.teams.length) ? D.teams : FALLBACK_TEAMS;
+  if (D.model) {
+    const set = (id, v) => { const e = document.getElementById(id); if (e) e.innerHTML = v; };
+    set("kpiGames", D.model.games);
+    set("kpiSeasons", D.model.seasons);
+    set("kpiAcc", "<em>" + D.model.accuracy + "</em>");
+    set("kpiLoss", D.model.logloss);
+  }
+
+  /* ---- tabs ---- */
+  // Three top-level tabs. "Research" opens an INDEX of the exploratory views
+  // rather than spilling eight more buttons into the header, which is what the
+  // previous two-tier nav did — thirteen controls in a strip is worse than the
+  // flat list it replaced. Each research view gets a back link injected below.
+  const tabs = document.querySelectorAll("button.tab");
+  const views = document.querySelectorAll(".view");
+  const RESEARCH_IDS = ["ratings","predict","players","impact","props",
+                        "defense","shots","playtypes"];
+
+  function show(id) {
+    views.forEach(v => v.classList.remove("active"));
+    const el = document.getElementById(id);
+    if (el) el.classList.add("active");
+    tabs.forEach(x => x.classList.toggle("active",
+      x.dataset.view === id || (x.dataset.view === "research"
+                                && RESEARCH_IDS.includes(id))));
+    // the three matchup-detail views share one card, so keep their sub-tab
+    // bar in step with whichever of them is showing
+    document.querySelectorAll(".subtab").forEach(b =>
+      b.classList.toggle("active", b.dataset.view === id));
+    window.scrollTo({top: 0, behavior: "instant"});
+  }
+  tabs.forEach(t => t.addEventListener("click", () => show(t.dataset.view)));
+  // Link directly to original research from the season and betting pages.
+  const followHash = () => {
+    const id = window.location.hash.slice(1);
+    if (["research", "simulator", "roadmap", ...RESEARCH_IDS].includes(id)) show(id);
+  };
+  window.addEventListener("hashchange", followHash);
+  followHash();
+  // Feature the saved original metrics; do not refit or turn rankings into odds.
+  document.getElementById("researchSnapshot").textContent =
+    `Historical ${D.season} research · Snapshot ${D.generated} · Leaders among the ${D.players.length} displayed players (500+ minutes). Historical team labels are not current roster assignments.`;
+  for (const [key, title, unit, description] of [
+    ["war", "Total season value", "wins above replacement", "Our WAR v4 combines player impact with playing time. It is a descriptive estimate, not an MVP probability."],
+    ["off", "Offensive contribution", "points / 100 above average", "Our offensive blend combines box scores, play-type efficiency and creation."],
+    ["def", "Defensive contribution", "points / 100 above average", "Our defensive blend adds rim protection, deflections, charges and box-outs to box-score defense."]
+  ]) {
+    const leader = D.players.filter(p => Number.isFinite(p[key])).sort((a,b) => b[key]-a[key])[0];
+    if (!leader) continue;
+    const card = document.createElement("button"); card.className = "rcard"; card.dataset.view = "players";
+    const heading = document.createElement("div"); heading.className = "rc-t"; heading.textContent = title;
+    const result = document.createElement("p"); result.textContent = `${leader.player} · ${leader[key]} ${unit}`;
+    const note = document.createElement("div"); note.className = "rc-d"; note.textContent = description;
+    card.append(heading,result,note); document.getElementById("researchHighlights").append(card);
+  }
+  document.querySelectorAll(".rcard").forEach(c =>
+    c.addEventListener("click", () => show(c.dataset.view)));
+  document.querySelectorAll(".subtab").forEach(b =>
+    b.addEventListener("click", () => show(b.dataset.view)));
+
+  // one back link per research view, added here so eight HTML blocks stay untouched
+  RESEARCH_IDS.forEach(id => {
+    const sec = document.getElementById(id);
+    if (!sec) return;
+    const a = document.createElement("button");
+    a.className = "backlink";
+    a.innerHTML = "\u2190 Research";
+    a.addEventListener("click", () => show("research"));
+    sec.insertBefore(a, sec.firstChild);
+  });
+
+  /* ---- ratings table ---- */
+  const maxDev = Math.max(...TEAMS.map(t => Math.abs(t.elo - 1500)));
+  let sortK = "elo", sortDir = -1;
+  const rows = TEAMS.map((t, i) => ({...t, rank: i + 1, margin: (t.elo - 1500) / 28,
+    pct: t.w / (t.w + t.l)}));
+
+  function render() {
+    const s = [...rows].sort((a, b) => {
+      const av = a[sortK], bv = b[sortK];
+      const cmp = typeof av === "string" ? av.localeCompare(bv) : av - bv;
+      return cmp * sortDir;
+    });
+    const tb = document.querySelector("#rtable tbody");
+    tb.innerHTML = s.map(t => {
+      const dev = t.elo - 1500;
+      const w = Math.abs(dev) / maxDev * 100;
+      const col = dev >= 0 ? "var(--accent)" : "var(--cool)";
+      const bar = `<div class="bar"><i style="${dev>=0?'left:50%':'right:50%'};
+        width:${w/2}%;background:${col}"></i>
+        <i style="left:50%;width:1px;background:var(--border)"></i></div>`;
+      const mgn = (t.margin >= 0 ? "+" : "") + t.margin.toFixed(1);
+      return `<tr>
+        <td class="tleft rk mono">${t.rank}</td>
+        <td class="tleft"><span class="team"><span class="dot" style="background:${t.c}"></span>
+          <span class="abbr mono">${t.abbr}</span>${t.name}</span></td>
+        <td class="rate mono">${Math.round(t.elo)}</td>
+        <td class="tleft barcell"><div style="display:flex;align-items:center;gap:8px">
+          ${bar}<span class="mono ${t.margin>=0?'pos':'neg'}" style="font-size:12px;width:38px">${mgn}</span></div></td>
+        <td class="mono">${t.w}</td>
+        <td class="mono">${t.l}</td>
+        <td class="mono">${t.pct.toFixed(3).slice(1)}</td>
+      </tr>`;
+    }).join("");
+    document.querySelectorAll("#rtable thead th").forEach(th => {
+      th.removeAttribute("aria-sort");
+      const a = th.querySelector(".arw"); if (a) a.remove();
+      if (th.dataset.k === sortK) {
+        th.setAttribute("aria-sort", sortDir < 0 ? "descending" : "ascending");
+        th.insertAdjacentHTML("beforeend", ` <span class="arw">${sortDir<0?"▼":"▲"}</span>`);
+      }
+    });
+  }
+  document.querySelectorAll("#rtable thead th").forEach(th => {
+    th.addEventListener("click", () => {
+      const k = th.dataset.k;
+      if (k === sortK) sortDir *= -1;
+      else { sortK = k; sortDir = (k === "name" || k === "rank" || k === "l") ? 1 : -1; }
+      render();
+    });
+  });
+  render();
+
+  /* ---- players leaderboard ---- */
+  const FALLBACK_PLAYERS = [{"rank":1,"id":203999,"player":"Nikola Jokić","team":"DEN","war":10.4,"off":4.3,"poe":22.3,"def":-0.1,"mpg":34.8,"pts":27.7,"reb":12.9,"ast":10.7,"floor":21.8,"ceil":34.2,"cpts":107.0,"cd":0.47,"c":"#0E2240"},{"rank":2,"id":1641705,"player":"Victor Wembanyama","team":"SAS","war":9.9,"off":4.7,"poe":-2.3,"def":3.9,"mpg":29.2,"pts":25.0,"reb":11.5,"ast":3.1,"floor":17.0,"ceil":32.0,"cpts":83.0,"cd":0.55,"c":"#9EA8B0"},{"rank":3,"id":1629029,"player":"Luka Dončić","team":"LAL","war":9.5,"off":5.9,"poe":14.4,"def":-0.6,"mpg":35.8,"pts":33.5,"reb":7.7,"ast":8.3,"floor":26.6,"ceil":41.0,"cpts":37.0,"cd":0.67,"c":"#552583"},{"rank":4,"id":1626157,"player":"Karl-Anthony Towns","team":"NYK","war":9.3,"off":2.6,"poe":2.2,"def":-2.1,"mpg":31.0,"pts":20.1,"reb":11.9,"ast":3.0,"floor":14.0,"ceil":25.0,"cpts":27.0,"cd":0.57,"c":"#F58426"},{"rank":5,"id":1627759,"player":"Jaylen Brown","team":"BOS","war":8.1,"off":5.1,"poe":6.3,"def":-1.3,"mpg":34.4,"pts":28.7,"reb":6.9,"ast":5.1,"floor":23.0,"ceil":33.0,"cpts":66.0,"cd":0.58,"c":"#007A33"},{"rank":6,"id":1630552,"player":"Jalen Johnson","team":"ATL","war":7.8,"off":2.1,"poe":1.0,"def":-0.4,"mpg":35.2,"pts":22.5,"reb":10.3,"ast":7.9,"floor":17.0,"ceil":29.0,"cpts":78.0,"cd":0.58,"c":"#E03A3E"},{"rank":7,"id":202695,"player":"Kawhi Leonard","team":"LAC","war":7.5,"off":5.3,"poe":13.2,"def":1.2,"mpg":32.1,"pts":27.9,"reb":6.4,"ast":3.6,"floor":22.8,"ceil":33.0,"cpts":25.0,"cd":0.47,"c":"#C8102E"},{"rank":8,"id":1631105,"player":"Jalen Duren","team":"DET","war":7.0,"off":3.3,"poe":9.9,"def":-0.8,"mpg":28.2,"pts":19.5,"reb":10.5,"ast":2.0,"floor":14.0,"ceil":24.2,"cpts":24.0,"cd":0.35,"c":"#C8102E"},{"rank":9,"id":1628389,"player":"Bam Adebayo","team":"MIA","war":6.8,"off":1.8,"poe":-7.3,"def":0.7,"mpg":32.4,"pts":20.1,"reb":10.0,"ast":3.2,"floor":14.0,"ceil":25.0,"cpts":37.0,"cd":0.66,"c":"#98002E"},{"rank":10,"id":1628983,"player":"Shai Gilgeous-Alexander","team":"OKC","war":6.7,"off":6.1,"poe":14.4,"def":1.1,"mpg":33.2,"pts":31.1,"reb":4.3,"ast":6.6,"floor":25.0,"ceil":35.6,"cpts":102.0,"cd":0.49,"c":"#007AC1"},{"rank":11,"id":1631094,"player":"Paolo Banchero","team":"ORL","war":6.2,"off":2.4,"poe":-5.5,"def":-0.9,"mpg":34.7,"pts":22.2,"reb":8.4,"ast":5.2,"floor":16.0,"ceil":28.8,"cpts":60.0,"cd":0.57,"c":"#0077C0"},{"rank":12,"id":1630578,"player":"Alperen Sengun","team":"HOU","war":6.1,"off":2.4,"poe":2.6,"def":-1.1,"mpg":33.3,"pts":20.4,"reb":8.9,"ast":6.2,"floor":14.0,"ceil":27.8,"cpts":92.0,"cd":0.46,"c":"#CE1141"}];
+  const PLAYERS = (D.players && D.players.length) ? D.players : FALLBACK_PLAYERS;
+  let pK = "war", pDir = -1, pRendered = [];
+  const pf = v => (v === null || v === undefined) ? "—" : v;
+  function renderPlayers() {
+    const tb = document.querySelector("#ptable tbody");
+    if (!tb) return;
+    const s = [...PLAYERS].sort((a, b) => {
+      const av = a[pK], bv = b[pK];
+      const c = typeof av === "string" ? av.localeCompare(bv) : ((av ?? -999) - (bv ?? -999));
+      return c * pDir;
+    });
+    pRendered = s;
+    tb.innerHTML = s.map((p, i) => `<tr data-i="${i}">
+      <td class="tleft rk mono">${i + 1}</td>
+      <td class="tleft"><span class="team"><span class="dot" style="background:${p.c || '#888'}"></span>
+        ${p.player} <span class="abbr mono">${p.team}</span></span></td>
+      <td class="rate mono">${pf(p.war)}</td>
+      <td class="mono">${pf(p.off)}</td>
+      <td class="mono">${pf(p.poe)}</td><td class="mono">${pf(p.def)}</td>
+      <td class="mono">${pf(p.mpg)}</td><td class="mono">${pf(p.pts)}</td>
+      <td class="mono">${pf(p.floor)}</td><td class="mono">${pf(p.ceil)}</td>
+      <td class="mono">${pf(p.reb)}</td><td class="mono">${pf(p.ast)}</td></tr>`).join("");
+    document.querySelectorAll("#ptable thead th").forEach(th => {
+      th.removeAttribute("aria-sort"); const a = th.querySelector(".arw"); if (a) a.remove();
+      if (th.dataset.k === pK) {
+        th.setAttribute("aria-sort", pDir < 0 ? "descending" : "ascending");
+        th.insertAdjacentHTML("beforeend", ` <span class="arw">${pDir < 0 ? "▼" : "▲"}</span>`);
+      }
+    });
+  }
+  document.querySelectorAll("#ptable thead th").forEach(th => {
+    th.addEventListener("click", () => {
+      const k = th.dataset.k;
+      if (k === pK) pDir *= -1; else { pK = k; pDir = (k === "player" || k === "rank") ? 1 : -1; }
+      renderPlayers();
+    });
+  });
+  renderPlayers();
+
+  /* ---- clutch leaders ---- */
+  function renderClutch() {
+    const tb = document.querySelector("#cltable tbody"); if (!tb) return;
+    const cl = PLAYERS.filter(p => p.cpts).sort((a, b) => (b.cpts || 0) - (a.cpts || 0)).slice(0, 10);
+    tb.innerHTML = cl.map((p, i) => `<tr>
+      <td class="tleft rk mono">${i + 1}</td>
+      <td class="tleft"><span class="team"><span class="dot" style="background:${p.c || '#888'}"></span>
+        ${p.player} <span class="abbr mono">${p.team}</span></span></td>
+      <td class="rate mono">${pf(p.cpts)}</td>
+      <td class="mono ${(p.cd || 0) >= 0 ? 'pos' : 'neg'}">${(p.cd >= 0 ? '+' : '')}${pf(p.cd)}</td></tr>`).join("");
+  }
+  renderClutch();
+
+  /* ---- player detail modal ---- */
+  const pmodal = document.getElementById("pmodal");
+  function openPlayer(p) {
+    document.getElementById("pmName").textContent = p.player;
+    document.getElementById("pmTeam").textContent = p.team + " · 2025-26";
+    document.getElementById("pmDot").style.background = p.c || "#888";
+    document.getElementById("pmLine").innerHTML = [
+      ["PTS", pf(p.pts)], ["REB", pf(p.reb)], ["AST", pf(p.ast)], ["MPG", pf(p.mpg)],
+      ["Floor–Ceil", `${pf(p.floor)}–${pf(p.ceil)}`]
+    ].map(([l, v]) => `<div><div class="v">${v}</div><div class="l">${l}</div></div>`).join("");
+    const M = [
+      ["WAR", pf(p.war), "Wins above replacement — total value"],
+      ["Off", pf(p.off), "Offensive plus-minus (pts/100 above avg)"],
+      ["Shot+", pf(p.poe), "Points over expected on their shots"],
+      ["Def", pf(p.def), "Defensive points saved / 100"],
+      ["Clutch PTS", pf(p.cpts), "Points, last 5 min within 5"],
+      ["Clutch lift", (p.cd >= 0 ? "+" : "") + pf(p.cd), "Clutch eFG% vs their season"],
+    ];
+    document.getElementById("pmMetrics").innerHTML = M.map(([l, v, b]) =>
+      `<div class="metric-card"><div class="mv">${v}</div><div class="ml">${l}</div><div class="mb">${b}</div></div>`).join("");
+    pmodal.hidden = false;
+    drawChart(document.getElementById("pmChart"), PSHOTS[p.id], "Shot chart on the live site");
+  }
+  document.querySelector("#ptable tbody").addEventListener("click", e => {
+    const tr = e.target.closest("tr"); if (!tr) return;
+    const p = pRendered[+tr.dataset.i]; if (p) openPlayer(p);
+  });
+  const closeModal = () => { pmodal.hidden = true; };
+  document.getElementById("pmClose").addEventListener("click", closeModal);
+  pmodal.addEventListener("click", e => { if (e.target === pmodal) closeModal(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !pmodal.hidden) closeModal(); });
+
+  /* ---- four factors ---- */
+  const FALLBACK_FACTORS = [{"team":"BOS","c":"#007A33","o_efg":55.3,"o_tov":11.2,"o_orb":29.2,"o_ftr":20.7,"d_efg":52.3,"d_tov":11.4,"d_orb":24.3,"d_ftr":24.5},{"team":"CLE","c":"#860038","o_efg":56.1,"o_tov":12.2,"o_orb":26.9,"o_ftr":26.5,"d_efg":54.3,"d_tov":13.1,"d_orb":25.6,"d_ftr":26.3},{"team":"DEN","c":"#0E2240","o_efg":57.7,"o_tov":11.5,"o_orb":23.6,"o_ftr":29.4,"d_efg":54.3,"d_tov":10.4,"d_orb":24.7,"d_ftr":25.4},{"team":"LAL","c":"#552583","o_efg":57.3,"o_tov":13.2,"o_orb":23.9,"o_ftr":32.0,"d_efg":55.5,"d_tov":13.0,"d_orb":25.7,"d_ftr":24.1},{"team":"MIN","c":"#236192","o_efg":55.9,"o_tov":12.9,"o_orb":25.7,"o_ftr":28.5,"d_efg":52.9,"d_tov":13.0,"d_orb":26.3,"d_ftr":28.2},{"team":"NYK","c":"#F58426","o_efg":55.7,"o_tov":12.1,"o_orb":29.3,"o_ftr":23.8,"d_efg":54.1,"d_tov":13.1,"d_orb":23.3,"d_ftr":26.5},{"team":"OKC","c":"#007AC1","o_efg":56.1,"o_tov":11.2,"o_orb":22.3,"o_ftr":26.1,"d_efg":51.9,"d_tov":14.6,"d_orb":25.6,"d_ftr":24.8},{"team":"MEM","c":"#5D76A9","o_efg":53.3,"o_tov":13.0,"o_orb":24.7,"o_ftr":25.1,"d_efg":56.2,"d_tov":13.3,"d_orb":29.1,"d_ftr":26.2}];
+  const FACTORS = (D.factors && D.factors.length) ? D.factors : FALLBACK_FACTORS;
+  let fK = "o_efg", fDir = -1;
+  function renderFactors() {
+    const tb = document.querySelector("#fftable tbody"); if (!tb) return;
+    const s = [...FACTORS].sort((a, b) => {
+      const av = a[fK], bv = b[fK];
+      const c = typeof av === "string" ? av.localeCompare(bv) : (av - bv); return c * fDir;
+    });
+    tb.innerHTML = s.map(t => `<tr>
+      <td class="tleft"><span class="team"><span class="dot" style="background:${t.c}"></span>
+        <span class="abbr mono">${t.team}</span></span></td>
+      <td class="mono">${t.o_efg}</td><td class="mono">${t.o_tov}</td><td class="mono">${t.o_orb}</td><td class="mono">${t.o_ftr}</td>
+      <td class="mono dsplit">${t.d_efg}</td><td class="mono">${t.d_tov}</td><td class="mono">${t.d_orb}</td><td class="mono">${t.d_ftr}</td>
+    </tr>`).join("");
+  }
+  document.querySelectorAll("#fftable thead th").forEach(th =>
+    th.addEventListener("click", () => {
+      const k = th.dataset.k;
+      if (k === fK) fDir *= -1; else { fK = k; fDir = (k === "team") ? 1 : -1; }
+      renderFactors();
+    }));
+  renderFactors();
+
+  /* ---- shot charts ---- */
+  const FALLBACK_SHOTS = {"BOS":[{"x":-250,"y":0,"n":13,"re":0.7},{"x":-250,"y":25,"n":13,"re":0.24},{"x":-250,"y":50,"n":11,"re":0.28},{"x":-225,"y":-25,"n":23,"re":-0.32},{"x":-225,"y":0,"n":99,"re":0.13},{"x":-225,"y":25,"n":89,"re":0.25},{"x":-225,"y":50,"n":64,"re":-0.49},{"x":-225,"y":75,"n":34,"re":0.26},{"x":-225,"y":100,"n":16,"re":0.41},{"x":-225,"y":125,"n":36,"re":0.27},{"x":-225,"y":150,"n":19,"re":0.71},{"x":-200,"y":150,"n":41,"re":0.23},{"x":-200,"y":175,"n":53,"re":-0.06},{"x":-200,"y":200,"n":23,"re":0.54},{"x":-175,"y":175,"n":71,"re":0.18},{"x":-175,"y":200,"n":98,"re":0.01},{"x":-175,"y":225,"n":30,"re":0.27},{"x":-150,"y":200,"n":127,"re":0.05},{"x":-150,"y":225,"n":112,"re":-0.06},{"x":-150,"y":250,"n":21,"re":-0.08},{"x":-125,"y":225,"n":133,"re":-0.05},{"x":-125,"y":250,"n":77,"re":-0.17},{"x":-100,"y":225,"n":55,"re":-0.05},{"x":-100,"y":250,"n":100,"re":0.09},{"x":-75,"y":250,"n":82,"re":-0.08},{"x":-50,"y":0,"n":42,"re":0.08},{"x":-50,"y":25,"n":99,"re":-0.17},{"x":-50,"y":250,"n":55,"re":0.03},{"x":-50,"y":275,"n":47,"re":-0.01},{"x":-25,"y":0,"n":154,"re":0.12},{"x":-25,"y":25,"n":196,"re":-0.05},{"x":-25,"y":275,"n":73,"re":0.29},{"x":0,"y":0,"n":581,"re":-0.01},{"x":0,"y":25,"n":340,"re":0.0},{"x":0,"y":100,"n":69,"re":0.25},{"x":0,"y":275,"n":78,"re":0.05},{"x":25,"y":0,"n":213,"re":0.16},{"x":25,"y":25,"n":258,"re":0.17},{"x":25,"y":250,"n":45,"re":0.07},{"x":25,"y":275,"n":46,"re":0.02},{"x":50,"y":25,"n":108,"re":0.14},{"x":50,"y":250,"n":63,"re":0.32},{"x":50,"y":275,"n":50,"re":-0.19},{"x":75,"y":250,"n":95,"re":-0.08},{"x":100,"y":225,"n":55,"re":0.01},{"x":100,"y":250,"n":103,"re":-0.03},{"x":125,"y":225,"n":145,"re":-0.05},{"x":125,"y":250,"n":76,"re":0.2},{"x":150,"y":200,"n":73,"re":-0.08},{"x":150,"y":225,"n":91,"re":-0.0},{"x":150,"y":250,"n":37,"re":0.28},{"x":175,"y":175,"n":55,"re":-0.21},{"x":175,"y":200,"n":75,"re":-0.06},{"x":200,"y":150,"n":47,"re":0.06},{"x":200,"y":175,"n":56,"re":-0.37},{"x":225,"y":0,"n":72,"re":0.02},{"x":225,"y":25,"n":86,"re":-0.36},{"x":225,"y":50,"n":65,"re":-0.08},{"x":225,"y":75,"n":47,"re":0.26}]};
+  const SHOTS = D.shots || FALLBACK_SHOTS;
+  const FALLBACK_PSHOTS = {"203999":[{"x":-240,"y":30,"n":8,"re":0.56},{"x":-210,"y":150,"n":4,"re":-0.34},{"x":-180,"y":150,"n":4,"re":-0.34},{"x":-180,"y":180,"n":8,"re":0.0},{"x":-180,"y":210,"n":5,"re":0.78},{"x":-150,"y":60,"n":5,"re":-0.06},{"x":-150,"y":210,"n":10,"re":-0.46},{"x":-120,"y":30,"n":4,"re":0.11},{"x":-120,"y":60,"n":4,"re":0.56},{"x":-120,"y":90,"n":4,"re":-0.38},{"x":-120,"y":120,"n":4,"re":0.0},{"x":-120,"y":210,"n":5,"re":0.11},{"x":-120,"y":240,"n":12,"re":0.44},{"x":-90,"y":30,"n":7,"re":-0.32},{"x":-90,"y":240,"n":21,"re":0.08},{"x":-60,"y":30,"n":8,"re":0.89},{"x":-60,"y":60,"n":7,"re":0.28},{"x":-60,"y":90,"n":4,"re":0.0},{"x":-60,"y":120,"n":5,"re":-0.08},{"x":-60,"y":240,"n":10,"re":0.41},{"x":-60,"y":270,"n":6,"re":-1.02},{"x":-30,"y":0,"n":17,"re":0.28},{"x":-30,"y":30,"n":40,"re":0.23},{"x":-30,"y":60,"n":31,"re":0.24},{"x":-30,"y":90,"n":14,"re":0.0},{"x":-30,"y":120,"n":9,"re":0.18},{"x":-30,"y":150,"n":6,"re":0.8},{"x":-30,"y":240,"n":9,"re":-0.09},{"x":-30,"y":270,"n":10,"re":-0.46},{"x":0,"y":0,"n":160,"re":-0.17},{"x":0,"y":30,"n":107,"re":0.42},{"x":0,"y":60,"n":83,"re":0.48},{"x":0,"y":90,"n":53,"re":0.24},{"x":0,"y":120,"n":18,"re":0.4},{"x":0,"y":150,"n":11,"re":0.41},{"x":0,"y":180,"n":6,"re":0.86},{"x":0,"y":240,"n":19,"re":-0.14},{"x":0,"y":270,"n":32,"re":-0.31},{"x":30,"y":0,"n":36,"re":0.2},{"x":30,"y":30,"n":53,"re":0.2},{"x":30,"y":60,"n":41,"re":0.46},{"x":30,"y":90,"n":10,"re":0.11},{"x":30,"y":120,"n":10,"re":-0.09},{"x":30,"y":150,"n":5,"re":0.34},{"x":30,"y":240,"n":9,"re":-0.09},{"x":30,"y":270,"n":22,"re":0.2},{"x":60,"y":0,"n":8,"re":0.0},{"x":60,"y":30,"n":31,"re":0.31},{"x":60,"y":60,"n":21,"re":-0.1},{"x":60,"y":90,"n":12,"re":0.95},{"x":60,"y":120,"n":4,"re":0.0},{"x":60,"y":240,"n":18,"re":0.55},{"x":60,"y":270,"n":10,"re":0.0},{"x":90,"y":30,"n":6,"re":-0.56},{"x":90,"y":60,"n":6,"re":0.1},{"x":90,"y":240,"n":21,"re":-0.49},{"x":120,"y":30,"n":4,"re":0.11},{"x":120,"y":210,"n":11,"re":0.28},{"x":120,"y":240,"n":19,"re":0.04},{"x":150,"y":180,"n":4,"re":1.16},{"x":150,"y":210,"n":12,"re":0.0},{"x":180,"y":180,"n":5,"re":-0.46},{"x":240,"y":30,"n":4,"re":-0.19}],"1641705":[{"x":-210,"y":120,"n":5,"re":-1.09},{"x":-210,"y":150,"n":5,"re":0.14},{"x":-180,"y":180,"n":17,"re":0.52},{"x":-180,"y":210,"n":6,"re":0.0},{"x":-150,"y":0,"n":5,"re":-0.08},{"x":-150,"y":210,"n":20,"re":0.14},{"x":-150,"y":240,"n":10,"re":0.48},{"x":-120,"y":0,"n":4,"re":0.0},{"x":-120,"y":30,"n":7,"re":-0.04},{"x":-120,"y":60,"n":4,"re":0.11},{"x":-120,"y":90,"n":11,"re":-0.32},{"x":-120,"y":120,"n":8,"re":-0.58},{"x":-120,"y":150,"n":4,"re":-0.3},{"x":-120,"y":210,"n":8,"re":-0.71},{"x":-120,"y":240,"n":22,"re":0.03},{"x":-120,"y":270,"n":7,"re":0.35},{"x":-90,"y":30,"n":6,"re":0.0},{"x":-90,"y":60,"n":7,"re":-0.32},{"x":-90,"y":150,"n":4,"re":0.2},{"x":-90,"y":180,"n":4,"re":0.7},{"x":-90,"y":240,"n":20,"re":-0.16},{"x":-60,"y":0,"n":8,"re":-0.1},{"x":-60,"y":30,"n":14,"re":0.15},{"x":-60,"y":60,"n":6,"re":0.47},{"x":-60,"y":90,"n":7,"re":0.55},{"x":-60,"y":120,"n":9,"re":0.22},{"x":-60,"y":150,"n":7,"re":0.27},{"x":-60,"y":180,"n":4,"re":0.2},{"x":-60,"y":240,"n":16,"re":-0.31},{"x":-60,"y":270,"n":7,"re":-0.17},{"x":-30,"y":0,"n":49,"re":-0.16},{"x":-30,"y":30,"n":22,"re":-0.16},{"x":-30,"y":60,"n":15,"re":-0.33},{"x":-30,"y":90,"n":5,"re":-0.89},{"x":-30,"y":120,"n":6,"re":-0.27},{"x":-30,"y":150,"n":7,"re":-0.29},{"x":-30,"y":240,"n":10,"re":0.41},{"x":-30,"y":270,"n":14,"re":0.05},{"x":0,"y":0,"n":358,"re":0.02},{"x":0,"y":30,"n":73,"re":0.09},{"x":0,"y":60,"n":14,"re":0.0},{"x":0,"y":90,"n":14,"re":-0.17},{"x":0,"y":120,"n":10,"re":0.0},{"x":0,"y":150,"n":15,"re":-0.46},{"x":0,"y":180,"n":10,"re":0.6},{"x":0,"y":240,"n":12,"re":-0.59},{"x":0,"y":270,"n":27,"re":-0.47},{"x":30,"y":0,"n":36,"re":-0.33},{"x":30,"y":30,"n":30,"re":0.09},{"x":30,"y":60,"n":9,"re":0.7},{"x":30,"y":90,"n":5,"re":0.32},{"x":30,"y":150,"n":5,"re":-0.07},{"x":30,"y":180,"n":5,"re":-0.8},{"x":30,"y":240,"n":6,"re":-0.09},{"x":30,"y":270,"n":12,"re":0.69},{"x":60,"y":0,"n":4,"re":-0.35},{"x":60,"y":30,"n":13,"re":-0.24},{"x":60,"y":60,"n":14,"re":-0.01},{"x":60,"y":120,"n":10,"re":-0.28},{"x":60,"y":150,"n":6,"re":0.0},{"x":60,"y":180,"n":6,"re":0.0},{"x":60,"y":240,"n":15,"re":0.71},{"x":60,"y":270,"n":13,"re":0.13},{"x":90,"y":0,"n":10,"re":-0.29},{"x":90,"y":90,"n":8,"re":0.0},{"x":90,"y":120,"n":5,"re":0.32},{"x":90,"y":150,"n":6,"re":-0.14},{"x":90,"y":240,"n":31,"re":0.19},{"x":120,"y":0,"n":5,"re":-0.49},{"x":120,"y":30,"n":8,"re":0.56},{"x":120,"y":60,"n":5,"re":-0.09},{"x":120,"y":120,"n":6,"re":-0.16},{"x":120,"y":150,"n":5,"re":0.02},{"x":120,"y":210,"n":10,"re":0.11},{"x":120,"y":240,"n":24,"re":0.0},{"x":150,"y":90,"n":4,"re":-0.33},{"x":150,"y":210,"n":31,"re":-0.1},{"x":150,"y":240,"n":11,"re":0.34},{"x":180,"y":150,"n":4,"re":-1.09},{"x":180,"y":180,"n":14,"re":0.22},{"x":180,"y":210,"n":4,"re":-0.27},{"x":210,"y":180,"n":5,"re":-0.42},{"x":240,"y":0,"n":9,"re":0.77},{"x":240,"y":30,"n":9,"re":-0.23},{"x":240,"y":60,"n":5,"re":-0.55}],"1629029":[{"x":-240,"y":0,"n":9,"re":-0.57},{"x":-240,"y":30,"n":4,"re":-0.19},{"x":-240,"y":60,"n":6,"re":-1.15},{"x":-240,"y":90,"n":7,"re":-0.23},{"x":-210,"y":120,"n":6,"re":-0.59},{"x":-210,"y":150,"n":23,"re":-0.28},{"x":-210,"y":180,"n":14,"re":0.9},{"x":-210,"y":210,"n":6,"re":0.06},{"x":-180,"y":180,"n":34,"re":0.08},{"x":-180,"y":210,"n":37,"re":-0.29},{"x":-180,"y":240,"n":12,"re":0.06},{"x":-150,"y":30,"n":5,"re":0.74},{"x":-150,"y":210,"n":42,"re":-0.21},{"x":-150,"y":240,"n":32,"re":-0.09},{"x":-150,"y":270,"n":4,"re":0.0},{"x":-120,"y":0,"n":6,"re":0.0},{"x":-120,"y":30,"n":11,"re":-0.35},{"x":-120,"y":60,"n":10,"re":0.11},{"x":-120,"y":90,"n":8,"re":0.14},{"x":-120,"y":150,"n":5,"re":-0.8},{"x":-120,"y":180,"n":4,"re":-0.24},{"x":-120,"y":210,"n":11,"re":0.82},{"x":-120,"y":240,"n":35,"re":0.14},{"x":-120,"y":270,"n":15,"re":-0.14},{"x":-90,"y":0,"n":7,"re":-0.6},{"x":-90,"y":30,"n":9,"re":0.0},{"x":-90,"y":60,"n":5,"re":0.3},{"x":-90,"y":90,"n":10,"re":0.31},{"x":-90,"y":120,"n":7,"re":-0.58},{"x":-90,"y":150,"n":5,"re":0.37},{"x":-90,"y":180,"n":6,"re":0.22},{"x":-90,"y":240,"n":18,"re":0.44},{"x":-90,"y":270,"n":14,"re":0.47},{"x":-60,"y":0,"n":5,"re":0.35},{"x":-60,"y":30,"n":11,"re":0.05},{"x":-60,"y":60,"n":12,"re":0.44},{"x":-60,"y":90,"n":10,"re":0.3},{"x":-60,"y":120,"n":29,"re":0.14},{"x":-60,"y":150,"n":8,"re":0.63},{"x":-60,"y":240,"n":7,"re":0.22},{"x":-60,"y":270,"n":21,"re":0.4},{"x":-60,"y":330,"n":4,"re":0.0},{"x":-30,"y":0,"n":12,"re":0.36},{"x":-30,"y":30,"n":23,"re":0.07},{"x":-30,"y":60,"n":12,"re":0.48},{"x":-30,"y":90,"n":17,"re":0.06},{"x":-30,"y":120,"n":12,"re":0.23},{"x":-30,"y":150,"n":5,"re":-0.46},{"x":-30,"y":240,"n":6,"re":0.0},{"x":-30,"y":270,"n":17,"re":0.03},{"x":-30,"y":300,"n":5,"re":0.9},{"x":0,"y":0,"n":39,"re":0.2},{"x":0,"y":30,"n":66,"re":0.5},{"x":0,"y":60,"n":19,"re":0.52},{"x":0,"y":90,"n":23,"re":0.5},{"x":0,"y":120,"n":26,"re":0.37},{"x":0,"y":150,"n":14,"re":0.27},{"x":0,"y":240,"n":7,"re":1.06},{"x":0,"y":270,"n":18,"re":0.31},{"x":30,"y":0,"n":23,"re":0.34},{"x":30,"y":30,"n":41,"re":0.34},{"x":30,"y":60,"n":25,"re":0.1},{"x":30,"y":90,"n":14,"re":0.12},{"x":30,"y":120,"n":15,"re":-0.14},{"x":30,"y":150,"n":8,"re":-0.12},{"x":30,"y":180,"n":4,"re":0.0},{"x":30,"y":240,"n":9,"re":0.58},{"x":30,"y":270,"n":11,"re":0.34},{"x":30,"y":300,"n":5,"re":0.9},{"x":60,"y":30,"n":19,"re":-0.01},{"x":60,"y":60,"n":18,"re":0.56},{"x":60,"y":90,"n":14,"re":0.1},{"x":60,"y":120,"n":22,"re":0.2},{"x":60,"y":150,"n":6,"re":-0.2},{"x":60,"y":240,"n":6,"re":0.91},{"x":60,"y":270,"n":14,"re":0.0},{"x":90,"y":0,"n":6,"re":0.44},{"x":90,"y":30,"n":9,"re":0.0},{"x":90,"y":60,"n":6,"re":0.1},{"x":90,"y":90,"n":4,"re":0.0},{"x":90,"y":120,"n":6,"re":0.47},{"x":90,"y":150,"n":9,"re":-0.16},{"x":90,"y":240,"n":24,"re":0.19},{"x":90,"y":270,"n":11,"re":0.06},{"x":120,"y":0,"n":6,"re":0.0},{"x":120,"y":60,"n":7,"re":-0.02},{"x":120,"y":120,"n":4,"re":0.0},{"x":120,"y":150,"n":4,"re":-0.3},{"x":120,"y":210,"n":10,"re":0.11},{"x":120,"y":240,"n":31,"re":0.14},{"x":120,"y":270,"n":5,"re":-0.43},{"x":150,"y":210,"n":21,"re":-0.06},{"x":150,"y":240,"n":12,"re":0.22},{"x":180,"y":180,"n":13,"re":0.09},{"x":180,"y":210,"n":12,"re":0.73},{"x":180,"y":240,"n":5,"re":-0.34},{"x":210,"y":150,"n":5,"re":0.71},{"x":210,"y":180,"n":6,"re":-0.52},{"x":210,"y":210,"n":5,"re":0.17},{"x":240,"y":60,"n":6,"re":-0.65}],"1626157":[{"x":-240,"y":0,"n":13,"re":0.38},{"x":-210,"y":150,"n":5,"re":1.91},{"x":-180,"y":180,"n":6,"re":0.0},{"x":-150,"y":210,"n":17,"re":0.52},{"x":-150,"y":240,"n":5,"re":0.78},{"x":-120,"y":0,"n":5,"re":-0.54},{"x":-120,"y":210,"n":6,"re":-1.09},{"x":-120,"y":240,"n":30,"re":0.0},{"x":-90,"y":30,"n":9,"re":0.23},{"x":-90,"y":240,"n":18,"re":-0.23},{"x":-90,"y":270,"n":11,"re":-0.48},{"x":-60,"y":0,"n":5,"re":-0.48},{"x":-60,"y":30,"n":13,"re":0.38},{"x":-60,"y":60,"n":5,"re":-0.46},{"x":-60,"y":240,"n":15,"re":0.31},{"x":-60,"y":270,"n":7,"re":0.69},{"x":-30,"y":0,"n":51,"re":-0.39},{"x":-30,"y":30,"n":53,"re":-0.18},{"x":-30,"y":60,"n":8,"re":0.0},{"x":-30,"y":90,"n":6,"re":0.0},{"x":-30,"y":240,"n":12,"re":-0.34},{"x":-30,"y":270,"n":12,"re":0.44},{"x":0,"y":0,"n":330,"re":-0.16},{"x":0,"y":30,"n":128,"re":0.0},{"x":0,"y":60,"n":36,"re":-0.07},{"x":0,"y":90,"n":10,"re":0.33},{"x":0,"y":240,"n":19,"re":0.97},{"x":0,"y":270,"n":33,"re":-0.21},{"x":0,"y":300,"n":6,"re":0.0},{"x":30,"y":0,"n":46,"re":-0.25},{"x":30,"y":30,"n":43,"re":0.19},{"x":30,"y":60,"n":8,"re":0.15},{"x":30,"y":240,"n":7,"re":0.2},{"x":30,"y":270,"n":24,"re":0.1},{"x":60,"y":0,"n":4,"re":0.0},{"x":60,"y":30,"n":13,"re":0.07},{"x":60,"y":60,"n":5,"re":-0.09},{"x":60,"y":240,"n":10,"re":0.44},{"x":60,"y":270,"n":7,"re":0.26},{"x":90,"y":240,"n":7,"re":0.22},{"x":90,"y":270,"n":7,"re":-1.03},{"x":120,"y":240,"n":17,"re":-0.14},{"x":150,"y":210,"n":5,"re":-0.49},{"x":180,"y":180,"n":8,"re":-0.31},{"x":180,"y":210,"n":7,"re":-0.17}],"1627759":[{"x":-240,"y":0,"n":4,"re":-0.48},{"x":-240,"y":30,"n":13,"re":-0.08},{"x":-240,"y":60,"n":9,"re":-0.82},{"x":-180,"y":0,"n":5,"re":0.37},{"x":-180,"y":180,"n":23,"re":0.09},{"x":-180,"y":210,"n":5,"re":-0.42},{"x":-150,"y":60,"n":5,"re":0.73},{"x":-150,"y":180,"n":5,"re":0.71},{"x":-150,"y":210,"n":30,"re":0.14},{"x":-150,"y":240,"n":11,"re":-0.21},{"x":-120,"y":0,"n":6,"re":-0.27},{"x":-120,"y":90,"n":6,"re":-0.21},{"x":-120,"y":120,"n":7,"re":0.03},{"x":-120,"y":150,"n":9,"re":-0.36},{"x":-120,"y":180,"n":4,"re":0.0},{"x":-120,"y":210,"n":9,"re":-0.42},{"x":-120,"y":240,"n":30,"re":-0.16},{"x":-120,"y":270,"n":5,"re":-0.34},{"x":-90,"y":30,"n":6,"re":0.11},{"x":-90,"y":60,"n":5,"re":-0.08},{"x":-90,"y":120,"n":16,"re":-0.24},{"x":-90,"y":150,"n":24,"re":0.0},{"x":-90,"y":180,"n":13,"re":0.43},{"x":-90,"y":240,"n":20,"re":0.44},{"x":-90,"y":270,"n":6,"re":1.47},{"x":-60,"y":0,"n":14,"re":0.0},{"x":-60,"y":30,"n":17,"re":-0.38},{"x":-60,"y":60,"n":12,"re":0.3},{"x":-60,"y":90,"n":14,"re":-0.32},{"x":-60,"y":120,"n":14,"re":0.27},{"x":-60,"y":150,"n":18,"re":-0.2},{"x":-60,"y":180,"n":7,"re":0.91},{"x":-60,"y":240,"n":6,"re":-0.56},{"x":-60,"y":270,"n":15,"re":0.57},{"x":-30,"y":0,"n":46,"re":0.39},{"x":-30,"y":30,"n":56,"re":-0.04},{"x":-30,"y":60,"n":24,"re":0.14},{"x":-30,"y":90,"n":12,"re":0.62},{"x":-30,"y":120,"n":13,"re":0.34},{"x":-30,"y":150,"n":19,"re":-0.13},{"x":-30,"y":180,"n":13,"re":0.12},{"x":-30,"y":270,"n":14,"re":0.05},{"x":0,"y":0,"n":121,"re":0.06},{"x":0,"y":30,"n":88,"re":0.11},{"x":0,"y":60,"n":40,"re":-0.1},{"x":0,"y":90,"n":30,"re":0.04},{"x":0,"y":120,"n":28,"re":0.0},{"x":0,"y":150,"n":26,"re":-0.02},{"x":0,"y":180,"n":18,"re":0.06},{"x":0,"y":240,"n":5,"re":0.11},{"x":0,"y":270,"n":15,"re":-0.22},{"x":30,"y":0,"n":69,"re":0.02},{"x":30,"y":30,"n":74,"re":0.08},{"x":30,"y":60,"n":18,"re":0.48},{"x":30,"y":90,"n":13,"re":-0.11},{"x":30,"y":120,"n":21,"re":-0.04},{"x":30,"y":150,"n":25,"re":0.09},{"x":30,"y":180,"n":8,"re":0.45},{"x":30,"y":270,"n":5,"re":0.18},{"x":60,"y":0,"n":13,"re":0.05},{"x":60,"y":30,"n":35,"re":0.07},{"x":60,"y":60,"n":17,"re":-0.51},{"x":60,"y":90,"n":12,"re":0.27},{"x":60,"y":120,"n":17,"re":0.52},{"x":60,"y":150,"n":29,"re":0.37},{"x":60,"y":180,"n":7,"re":-0.8},{"x":60,"y":240,"n":6,"re":0.0},{"x":60,"y":270,"n":10,"re":0.0},{"x":90,"y":30,"n":6,"re":0.0},{"x":90,"y":120,"n":18,"re":0.14},{"x":90,"y":150,"n":28,"re":0.1},{"x":90,"y":180,"n":11,"re":-0.23},{"x":90,"y":240,"n":25,"re":-0.1},{"x":90,"y":270,"n":6,"re":0.47},{"x":120,"y":30,"n":5,"re":-0.89},{"x":120,"y":60,"n":4,"re":-0.88},{"x":120,"y":120,"n":11,"re":-0.1},{"x":120,"y":240,"n":30,"re":-0.12},{"x":150,"y":30,"n":7,"re":-0.02},{"x":150,"y":210,"n":21,"re":-0.63},{"x":150,"y":240,"n":9,"re":-0.03},{"x":180,"y":180,"n":11,"re":-0.52},{"x":180,"y":210,"n":8,"re":0.1},{"x":210,"y":150,"n":6,"re":-0.09},{"x":240,"y":0,"n":8,"re":-0.11},{"x":240,"y":30,"n":12,"re":-0.23}],"1630552":[{"x":-240,"y":0,"n":5,"re":-0.03},{"x":-210,"y":150,"n":6,"re":-1.09},{"x":-180,"y":180,"n":19,"re":0.18},{"x":-180,"y":210,"n":6,"re":0.0},{"x":-150,"y":210,"n":18,"re":-0.23},{"x":-150,"y":240,"n":5,"re":-1.02},{"x":-120,"y":30,"n":4,"re":0.11},{"x":-120,"y":60,"n":4,"re":0.0},{"x":-120,"y":210,"n":9,"re":-0.09},{"x":-120,"y":240,"n":21,"re":-0.06},{"x":-90,"y":30,"n":6,"re":0.12},{"x":-90,"y":60,"n":5,"re":-0.08},{"x":-90,"y":120,"n":4,"re":0.14},{"x":-90,"y":150,"n":5,"re":0.77},{"x":-90,"y":240,"n":17,"re":0.17},{"x":-90,"y":270,"n":5,"re":-1.03},{"x":-60,"y":0,"n":5,"re":0.32},{"x":-60,"y":30,"n":14,"re":0.14},{"x":-60,"y":60,"n":13,"re":0.37},{"x":-60,"y":90,"n":9,"re":-0.23},{"x":-60,"y":120,"n":10,"re":0.31},{"x":-60,"y":150,"n":4,"re":0.67},{"x":-60,"y":240,"n":14,"re":1.27},{"x":-60,"y":270,"n":4,"re":-1.02},{"x":-30,"y":0,"n":20,"re":-0.33},{"x":-30,"y":30,"n":40,"re":-0.27},{"x":-30,"y":60,"n":22,"re":-0.21},{"x":-30,"y":90,"n":16,"re":-0.01},{"x":-30,"y":120,"n":13,"re":-0.32},{"x":-30,"y":240,"n":10,"re":0.11},{"x":-30,"y":270,"n":13,"re":0.09},{"x":0,"y":0,"n":198,"re":0.06},{"x":0,"y":30,"n":119,"re":-0.11},{"x":0,"y":60,"n":52,"re":0.19},{"x":0,"y":90,"n":30,"re":0.0},{"x":0,"y":120,"n":23,"re":0.11},{"x":0,"y":150,"n":6,"re":0.14},{"x":0,"y":240,"n":18,"re":-0.09},{"x":0,"y":270,"n":17,"re":-0.0},{"x":30,"y":0,"n":34,"re":-0.02},{"x":30,"y":30,"n":61,"re":-0.02},{"x":30,"y":60,"n":19,"re":-0.11},{"x":30,"y":90,"n":17,"re":0.41},{"x":30,"y":120,"n":27,"re":-0.42},{"x":30,"y":150,"n":4,"re":0.0},{"x":30,"y":240,"n":11,"re":-0.27},{"x":30,"y":270,"n":12,"re":0.23},{"x":60,"y":0,"n":5,"re":-0.46},{"x":60,"y":30,"n":13,"re":-0.1},{"x":60,"y":60,"n":11,"re":-0.14},{"x":60,"y":90,"n":11,"re":-0.53},{"x":60,"y":120,"n":9,"re":0.01},{"x":60,"y":240,"n":14,"re":0.0},{"x":60,"y":270,"n":8,"re":-0.27},{"x":90,"y":30,"n":10,"re":0.0},{"x":90,"y":60,"n":4,"re":-0.9},{"x":90,"y":120,"n":6,"re":0.0},{"x":90,"y":240,"n":22,"re":-0.11},{"x":120,"y":0,"n":6,"re":0.0},{"x":120,"y":30,"n":7,"re":0.21},{"x":120,"y":60,"n":5,"re":-0.08},{"x":120,"y":210,"n":8,"re":0.04},{"x":120,"y":240,"n":15,"re":-0.66},{"x":150,"y":0,"n":4,"re":0.62},{"x":150,"y":210,"n":21,"re":0.22},{"x":180,"y":180,"n":16,"re":0.25},{"x":180,"y":210,"n":4,"re":0.48},{"x":240,"y":0,"n":5,"re":-0.63},{"x":240,"y":30,"n":6,"re":-0.73}],"202695":[{"x":-240,"y":0,"n":6,"re":0.06},{"x":-240,"y":30,"n":9,"re":0.85},{"x":-240,"y":60,"n":6,"re":0.35},{"x":-240,"y":120,"n":5,"re":0.74},{"x":-210,"y":150,"n":6,"re":0.0},{"x":-180,"y":180,"n":14,"re":0.0},{"x":-180,"y":210,"n":7,"re":0.26},{"x":-150,"y":90,"n":4,"re":0.0},{"x":-150,"y":180,"n":4,"re":1.16},{"x":-150,"y":210,"n":15,"re":-0.06},{"x":-120,"y":0,"n":7,"re":0.25},{"x":-120,"y":30,"n":6,"re":0.4},{"x":-120,"y":60,"n":5,"re":-0.09},{"x":-120,"y":210,"n":11,"re":0.01},{"x":-120,"y":240,"n":29,"re":-0.13},{"x":-90,"y":0,"n":4,"re":0.11},{"x":-90,"y":30,"n":6,"re":0.11},{"x":-90,"y":150,"n":7,"re":0.32},{"x":-90,"y":240,"n":21,"re":0.08},{"x":-90,"y":270,"n":5,"re":-0.43},{"x":-60,"y":60,"n":8,"re":0.0},{"x":-60,"y":90,"n":10,"re":0.7},{"x":-60,"y":120,"n":11,"re":0.21},{"x":-60,"y":240,"n":13,"re":-0.16},{"x":-60,"y":270,"n":5,"re":0.78},{"x":-30,"y":0,"n":13,"re":0.71},{"x":-30,"y":30,"n":21,"re":0.17},{"x":-30,"y":60,"n":6,"re":0.14},{"x":-30,"y":90,"n":11,"re":0.03},{"x":-30,"y":120,"n":15,"re":0.13},{"x":-30,"y":150,"n":4,"re":0.0},{"x":-30,"y":180,"n":4,"re":-0.8},{"x":-30,"y":240,"n":10,"re":1.01},{"x":-30,"y":270,"n":10,"re":1.38},{"x":0,"y":0,"n":83,"re":-0.03},{"x":0,"y":30,"n":75,"re":0.17},{"x":0,"y":60,"n":22,"re":0.15},{"x":0,"y":90,"n":26,"re":0.11},{"x":0,"y":120,"n":28,"re":0.28},{"x":0,"y":150,"n":12,"re":0.0},{"x":0,"y":180,"n":12,"re":0.36},{"x":0,"y":240,"n":5,"re":0.71},{"x":0,"y":270,"n":18,"re":-0.06},{"x":0,"y":300,"n":5,"re":0.26},{"x":30,"y":0,"n":20,"re":0.0},{"x":30,"y":30,"n":41,"re":0.2},{"x":30,"y":60,"n":22,"re":0.32},{"x":30,"y":90,"n":24,"re":0.28},{"x":30,"y":120,"n":16,"re":0.56},{"x":30,"y":150,"n":6,"re":0.13},{"x":30,"y":180,"n":6,"re":0.0},{"x":30,"y":240,"n":10,"re":0.11},{"x":30,"y":270,"n":17,"re":-0.36},{"x":60,"y":0,"n":4,"re":0.0},{"x":60,"y":30,"n":13,"re":0.37},{"x":60,"y":60,"n":16,"re":0.24},{"x":60,"y":90,"n":12,"re":0.0},{"x":60,"y":120,"n":36,"re":0.01},{"x":60,"y":150,"n":6,"re":0.17},{"x":60,"y":180,"n":5,"re":0.8},{"x":60,"y":240,"n":15,"re":0.31},{"x":60,"y":270,"n":17,"re":-0.14},{"x":90,"y":0,"n":6,"re":-0.22},{"x":90,"y":30,"n":11,"re":-0.15},{"x":90,"y":60,"n":8,"re":0.35},{"x":90,"y":90,"n":10,"re":0.11},{"x":90,"y":120,"n":5,"re":0.34},{"x":90,"y":150,"n":13,"re":-0.34},{"x":90,"y":240,"n":26,"re":-0.02},{"x":90,"y":270,"n":10,"re":-0.13},{"x":120,"y":0,"n":7,"re":0.21},{"x":120,"y":30,"n":9,"re":-0.27},{"x":120,"y":60,"n":5,"re":-0.49},{"x":120,"y":90,"n":5,"re":-0.46},{"x":120,"y":120,"n":16,"re":0.3},{"x":120,"y":150,"n":6,"re":0.0},{"x":120,"y":210,"n":7,"re":-0.66},{"x":120,"y":240,"n":35,"re":0.14},{"x":120,"y":270,"n":4,"re":0.0},{"x":150,"y":0,"n":6,"re":0.0},{"x":150,"y":60,"n":6,"re":0.0},{"x":150,"y":120,"n":5,"re":0.02},{"x":150,"y":210,"n":16,"re":0.0},{"x":150,"y":240,"n":10,"re":-0.73},{"x":180,"y":30,"n":4,"re":-0.3},{"x":180,"y":180,"n":8,"re":-0.31},{"x":180,"y":210,"n":7,"re":0.69},{"x":210,"y":120,"n":4,"re":-1.09},{"x":210,"y":150,"n":6,"re":-0.09},{"x":240,"y":0,"n":4,"re":0.35},{"x":240,"y":30,"n":7,"re":-0.38},{"x":240,"y":60,"n":4,"re":-1.15}],"1631105":[{"x":-60,"y":0,"n":12,"re":-0.04},{"x":-60,"y":30,"n":9,"re":0.26},{"x":-60,"y":120,"n":4,"re":-0.39},{"x":-30,"y":0,"n":54,"re":0.09},{"x":-30,"y":30,"n":83,"re":0.18},{"x":-30,"y":60,"n":12,"re":0.0},{"x":0,"y":0,"n":272,"re":0.01},{"x":0,"y":30,"n":130,"re":0.2},{"x":0,"y":60,"n":37,"re":0.04},{"x":0,"y":90,"n":10,"re":0.13},{"x":30,"y":0,"n":86,"re":0.21},{"x":30,"y":30,"n":95,"re":0.16},{"x":30,"y":60,"n":18,"re":-0.07},{"x":30,"y":90,"n":4,"re":0.0},{"x":60,"y":0,"n":9,"re":-0.43},{"x":60,"y":30,"n":14,"re":0.15},{"x":60,"y":60,"n":8,"re":0.0},{"x":90,"y":0,"n":4,"re":0.0}],"1628389":[{"x":-240,"y":0,"n":43,"re":-0.05},{"x":-240,"y":30,"n":25,"re":-0.15},{"x":-210,"y":0,"n":8,"re":-0.98},{"x":-210,"y":30,"n":5,"re":-1.23},{"x":-210,"y":90,"n":4,"re":1.1},{"x":-210,"y":120,"n":5,"re":-0.49},{"x":-210,"y":150,"n":4,"re":0.0},{"x":-180,"y":150,"n":4,"re":-0.34},{"x":-180,"y":180,"n":13,"re":0.09},{"x":-180,"y":210,"n":9,"re":0.31},{"x":-150,"y":210,"n":16,"re":0.06},{"x":-150,"y":240,"n":8,"re":0.1},{"x":-120,"y":30,"n":5,"re":-0.54},{"x":-120,"y":210,"n":6,"re":-0.59},{"x":-120,"y":240,"n":12,"re":-0.06},{"x":-90,"y":0,"n":5,"re":-0.49},{"x":-90,"y":30,"n":5,"re":-0.88},{"x":-90,"y":60,"n":5,"re":-0.1},{"x":-90,"y":120,"n":5,"re":-0.86},{"x":-90,"y":240,"n":14,"re":-0.42},{"x":-90,"y":270,"n":4,"re":0.0},{"x":-60,"y":0,"n":5,"re":-0.45},{"x":-60,"y":30,"n":8,"re":0.0},{"x":-60,"y":60,"n":7,"re":-0.29},{"x":-60,"y":90,"n":9,"re":-0.21},{"x":-60,"y":120,"n":9,"re":0.68},{"x":-60,"y":150,"n":5,"re":0.33},{"x":-60,"y":240,"n":5,"re":0.11},{"x":-60,"y":270,"n":5,"re":0.17},{"x":-30,"y":0,"n":30,"re":0.0},{"x":-30,"y":30,"n":25,"re":0.14},{"x":-30,"y":60,"n":12,"re":-0.02},{"x":-30,"y":90,"n":17,"re":-0.06},{"x":-30,"y":120,"n":15,"re":-0.4},{"x":-30,"y":150,"n":5,"re":-0.06},{"x":-30,"y":240,"n":8,"re":0.04},{"x":-30,"y":270,"n":6,"re":-0.06},{"x":0,"y":0,"n":159,"re":-0.15},{"x":0,"y":30,"n":64,"re":0.18},{"x":0,"y":60,"n":58,"re":-0.12},{"x":0,"y":90,"n":45,"re":-0.09},{"x":0,"y":120,"n":21,"re":0.21},{"x":0,"y":150,"n":23,"re":0.09},{"x":0,"y":240,"n":9,"re":0.91},{"x":0,"y":270,"n":14,"re":0.22},{"x":30,"y":0,"n":15,"re":-0.07},{"x":30,"y":30,"n":26,"re":0.41},{"x":30,"y":60,"n":24,"re":0.0},{"x":30,"y":90,"n":14,"re":0.0},{"x":30,"y":120,"n":13,"re":-0.32},{"x":30,"y":150,"n":7,"re":-0.29},{"x":30,"y":180,"n":5,"re":-0.0},{"x":30,"y":240,"n":11,"re":-1.09},{"x":30,"y":270,"n":6,"re":0.48},{"x":60,"y":30,"n":7,"re":0.01},{"x":60,"y":90,"n":7,"re":-0.6},{"x":60,"y":120,"n":9,"re":0.22},{"x":60,"y":240,"n":7,"re":-0.23},{"x":60,"y":270,"n":9,"re":-0.69},{"x":90,"y":150,"n":5,"re":-0.03},{"x":90,"y":240,"n":10,"re":-0.16},{"x":120,"y":120,"n":4,"re":-0.3},{"x":120,"y":210,"n":8,"re":0.0},{"x":120,"y":240,"n":8,"re":0.06},{"x":150,"y":180,"n":4,"re":-1.09},{"x":150,"y":210,"n":18,"re":0.1},{"x":180,"y":180,"n":6,"re":0.41},{"x":180,"y":210,"n":4,"re":-1.06},{"x":210,"y":120,"n":6,"re":-0.59},{"x":240,"y":0,"n":19,"re":-0.6},{"x":240,"y":30,"n":13,"re":0.01},{"x":240,"y":60,"n":7,"re":0.14}],"1628983":[{"x":-240,"y":0,"n":5,"re":-0.63},{"x":-240,"y":30,"n":5,"re":0.65},{"x":-210,"y":120,"n":6,"re":-0.09},{"x":-210,"y":150,"n":21,"re":-0.21},{"x":-180,"y":150,"n":4,"re":0.35},{"x":-180,"y":180,"n":21,"re":0.08},{"x":-180,"y":210,"n":6,"re":0.98},{"x":-150,"y":-30,"n":4,"re":0.0},{"x":-150,"y":0,"n":21,"re":-0.12},{"x":-150,"y":30,"n":10,"re":-0.06},{"x":-150,"y":60,"n":5,"re":-0.46},{"x":-150,"y":120,"n":6,"re":0.53},{"x":-150,"y":210,"n":16,"re":0.44},{"x":-150,"y":240,"n":13,"re":-0.33},{"x":-120,"y":-30,"n":16,"re":0.0},{"x":-120,"y":0,"n":24,"re":0.23},{"x":-120,"y":30,"n":8,"re":0.06},{"x":-120,"y":60,"n":10,"re":0.51},{"x":-120,"y":90,"n":5,"re":0.34},{"x":-120,"y":120,"n":17,"re":0.12},{"x":-120,"y":150,"n":13,"re":0.12},{"x":-120,"y":180,"n":5,"re":0.02},{"x":-120,"y":210,"n":11,"re":0.01},{"x":-120,"y":240,"n":21,"re":0.4},{"x":-90,"y":0,"n":12,"re":0.63},{"x":-90,"y":60,"n":5,"re":-0.08},{"x":-90,"y":90,"n":6,"re":0.0},{"x":-90,"y":120,"n":24,"re":0.05},{"x":-90,"y":150,"n":15,"re":-0.03},{"x":-90,"y":180,"n":5,"re":0.8},{"x":-90,"y":240,"n":24,"re":0.0},{"x":-60,"y":0,"n":7,"re":0.01},{"x":-60,"y":30,"n":14,"re":-0.29},{"x":-60,"y":60,"n":4,"re":0.0},{"x":-60,"y":90,"n":14,"re":0.25},{"x":-60,"y":120,"n":30,"re":0.32},{"x":-60,"y":150,"n":18,"re":0.0},{"x":-60,"y":180,"n":5,"re":0.4},{"x":-60,"y":240,"n":14,"re":-0.01},{"x":-60,"y":270,"n":7,"re":0.69},{"x":-30,"y":0,"n":63,"re":0.01},{"x":-30,"y":30,"n":40,"re":-0.12},{"x":-30,"y":60,"n":12,"re":0.0},{"x":-30,"y":90,"n":10,"re":0.72},{"x":-30,"y":120,"n":15,"re":0.31},{"x":-30,"y":150,"n":10,"re":0.34},{"x":-30,"y":180,"n":6,"re":-0.14},{"x":-30,"y":240,"n":4,"re":1.91},{"x":-30,"y":270,"n":9,"re":-0.4},{"x":0,"y":0,"n":184,"re":0.03},{"x":0,"y":30,"n":69,"re":-0.06},{"x":0,"y":60,"n":19,"re":-0.32},{"x":0,"y":90,"n":18,"re":-0.42},{"x":0,"y":120,"n":25,"re":0.18},{"x":0,"y":150,"n":24,"re":0.22},{"x":0,"y":180,"n":13,"re":0.27},{"x":0,"y":210,"n":4,"re":0.0},{"x":0,"y":240,"n":6,"re":0.41},{"x":0,"y":270,"n":10,"re":0.78},{"x":30,"y":0,"n":73,"re":0.18},{"x":30,"y":30,"n":40,"re":0.23},{"x":30,"y":60,"n":11,"re":0.78},{"x":30,"y":90,"n":10,"re":0.32},{"x":30,"y":120,"n":15,"re":0.17},{"x":30,"y":150,"n":4,"re":0.0},{"x":30,"y":180,"n":5,"re":0.4},{"x":30,"y":240,"n":8,"re":-0.71},{"x":30,"y":270,"n":7,"re":-0.6},{"x":60,"y":0,"n":7,"re":0.27},{"x":60,"y":30,"n":12,"re":0.0},{"x":60,"y":60,"n":11,"re":0.2},{"x":60,"y":90,"n":18,"re":0.44},{"x":60,"y":120,"n":34,"re":0.06},{"x":60,"y":150,"n":9,"re":0.02},{"x":60,"y":240,"n":14,"re":-0.01},{"x":60,"y":270,"n":5,"re":0.78},{"x":90,"y":0,"n":7,"re":0.26},{"x":90,"y":30,"n":6,"re":-0.55},{"x":90,"y":60,"n":8,"re":0.1},{"x":90,"y":90,"n":9,"re":0.66},{"x":90,"y":120,"n":17,"re":0.55},{"x":90,"y":150,"n":16,"re":0.0},{"x":90,"y":240,"n":23,"re":-0.02},{"x":120,"y":0,"n":25,"re":0.42},{"x":120,"y":30,"n":14,"re":-0.08},{"x":120,"y":60,"n":4,"re":0.11},{"x":120,"y":90,"n":5,"re":-0.06},{"x":120,"y":120,"n":9,"re":0.06},{"x":120,"y":150,"n":14,"re":0.06},{"x":120,"y":210,"n":12,"re":-0.34},{"x":120,"y":240,"n":18,"re":-0.06},{"x":150,"y":0,"n":5,"re":1.14},{"x":150,"y":90,"n":4,"re":0.67},{"x":150,"y":120,"n":4,"re":-0.3},{"x":150,"y":210,"n":10,"re":0.44},{"x":150,"y":240,"n":5,"re":-0.43},{"x":180,"y":180,"n":11,"re":0.3}],"1631094":[{"x":-240,"y":0,"n":12,"re":0.27},{"x":-240,"y":30,"n":5,"re":0.05},{"x":-210,"y":0,"n":5,"re":-1.23},{"x":-210,"y":150,"n":10,"re":-0.16},{"x":-210,"y":180,"n":7,"re":0.22},{"x":-180,"y":180,"n":16,"re":-0.31},{"x":-180,"y":210,"n":5,"re":-0.42},{"x":-150,"y":0,"n":4,"re":-0.38},{"x":-150,"y":180,"n":4,"re":0.41},{"x":-150,"y":210,"n":19,"re":-0.43},{"x":-120,"y":0,"n":7,"re":-0.08},{"x":-120,"y":30,"n":10,"re":-0.34},{"x":-120,"y":60,"n":4,"re":-0.38},{"x":-120,"y":120,"n":5,"re":-0.83},{"x":-120,"y":150,"n":4,"re":-0.3},{"x":-120,"y":210,"n":10,"re":-0.49},{"x":-120,"y":240,"n":15,"re":-0.02},{"x":-90,"y":0,"n":9,"re":0.44},{"x":-90,"y":30,"n":6,"re":-0.55},{"x":-90,"y":90,"n":5,"re":-0.89},{"x":-90,"y":120,"n":5,"re":0.34},{"x":-90,"y":150,"n":6,"re":-0.16},{"x":-90,"y":180,"n":6,"re":0.0},{"x":-90,"y":240,"n":7,"re":0.22},{"x":-60,"y":30,"n":5,"re":0.35},{"x":-60,"y":60,"n":5,"re":-0.07},{"x":-60,"y":90,"n":5,"re":-0.1},{"x":-60,"y":120,"n":4,"re":0.0},{"x":-60,"y":150,"n":8,"re":-0.37},{"x":-60,"y":180,"n":5,"re":-0.4},{"x":-60,"y":240,"n":5,"re":0.14},{"x":-30,"y":0,"n":42,"re":0.1},{"x":-30,"y":30,"n":45,"re":-0.04},{"x":-30,"y":60,"n":18,"re":-0.3},{"x":-30,"y":90,"n":9,"re":-0.44},{"x":-30,"y":120,"n":8,"re":-0.19},{"x":-30,"y":150,"n":7,"re":-0.29},{"x":-30,"y":180,"n":4,"re":0.0},{"x":-30,"y":240,"n":10,"re":-0.19},{"x":-30,"y":270,"n":7,"re":0.26},{"x":0,"y":0,"n":177,"re":-0.15},{"x":0,"y":30,"n":113,"re":-0.08},{"x":0,"y":60,"n":45,"re":-0.23},{"x":0,"y":90,"n":18,"re":-0.33},{"x":0,"y":120,"n":9,"re":-0.05},{"x":0,"y":150,"n":11,"re":-0.68},{"x":0,"y":180,"n":7,"re":0.34},{"x":0,"y":240,"n":8,"re":-0.34},{"x":0,"y":270,"n":14,"re":0.0},{"x":30,"y":0,"n":68,"re":0.13},{"x":30,"y":30,"n":86,"re":-0.02},{"x":30,"y":60,"n":20,"re":-0.15},{"x":30,"y":90,"n":11,"re":-0.15},{"x":30,"y":120,"n":10,"re":0.0},{"x":30,"y":150,"n":7,"re":0.56},{"x":30,"y":240,"n":4,"re":-1.09},{"x":30,"y":270,"n":5,"re":0.74},{"x":60,"y":0,"n":5,"re":-0.48},{"x":60,"y":30,"n":10,"re":0.0},{"x":60,"y":60,"n":10,"re":-0.09},{"x":60,"y":90,"n":11,"re":0.01},{"x":60,"y":120,"n":5,"re":-0.09},{"x":60,"y":150,"n":5,"re":0.34},{"x":60,"y":240,"n":12,"re":-0.56},{"x":60,"y":270,"n":9,"re":-0.02},{"x":90,"y":0,"n":4,"re":0.0},{"x":90,"y":30,"n":9,"re":-0.22},{"x":90,"y":60,"n":7,"re":-0.32},{"x":90,"y":90,"n":4,"re":-0.39},{"x":90,"y":120,"n":6,"re":-0.2},{"x":90,"y":150,"n":6,"re":0.0},{"x":90,"y":240,"n":13,"re":-0.14},{"x":90,"y":270,"n":6,"re":0.0},{"x":120,"y":0,"n":7,"re":-0.04},{"x":120,"y":30,"n":10,"re":0.26},{"x":120,"y":120,"n":7,"re":0.03},{"x":120,"y":240,"n":14,"re":0.0},{"x":150,"y":0,"n":6,"re":-0.54},{"x":150,"y":30,"n":5,"re":-0.08},{"x":150,"y":210,"n":14,"re":0.01},{"x":180,"y":180,"n":5,"re":0.74},{"x":180,"y":210,"n":7,"re":-0.6},{"x":240,"y":0,"n":10,"re":0.27},{"x":240,"y":30,"n":7,"re":0.48}],"1630578":[{"x":-180,"y":180,"n":5,"re":-0.46},{"x":-180,"y":210,"n":4,"re":0.0},{"x":-150,"y":210,"n":7,"re":-0.17},{"x":-120,"y":240,"n":8,"re":-0.65},{"x":-90,"y":120,"n":5,"re":-0.46},{"x":-60,"y":30,"n":6,"re":-0.19},{"x":-60,"y":60,"n":4,"re":1.13},{"x":-60,"y":90,"n":8,"re":0.35},{"x":-60,"y":120,"n":7,"re":-0.89},{"x":-30,"y":0,"n":39,"re":0.04},{"x":-30,"y":30,"n":50,"re":0.19},{"x":-30,"y":60,"n":36,"re":0.0},{"x":-30,"y":90,"n":19,"re":-0.26},{"x":-30,"y":120,"n":22,"re":0.0},{"x":-30,"y":150,"n":4,"re":0.0},{"x":-30,"y":270,"n":5,"re":0.18},{"x":0,"y":0,"n":189,"re":-0.14},{"x":0,"y":30,"n":163,"re":0.21},{"x":0,"y":60,"n":99,"re":0.18},{"x":0,"y":90,"n":48,"re":-0.06},{"x":0,"y":120,"n":25,"re":-0.25},{"x":0,"y":150,"n":11,"re":0.23},{"x":0,"y":240,"n":4,"re":-0.34},{"x":0,"y":270,"n":12,"re":0.23},{"x":30,"y":0,"n":38,"re":0.18},{"x":30,"y":30,"n":63,"re":0.23},{"x":30,"y":60,"n":40,"re":-0.06},{"x":30,"y":90,"n":22,"re":0.11},{"x":30,"y":120,"n":17,"re":-0.47},{"x":30,"y":150,"n":8,"re":0.0},{"x":30,"y":180,"n":4,"re":-0.8},{"x":30,"y":270,"n":4,"re":0.0},{"x":60,"y":30,"n":17,"re":0.32},{"x":60,"y":60,"n":16,"re":0.0},{"x":60,"y":90,"n":14,"re":-0.02},{"x":60,"y":120,"n":18,"re":0.11},{"x":60,"y":150,"n":5,"re":0.33},{"x":60,"y":240,"n":7,"re":-0.21},{"x":60,"y":270,"n":5,"re":0.18},{"x":90,"y":0,"n":4,"re":-0.39},{"x":90,"y":30,"n":7,"re":0.25},{"x":90,"y":90,"n":5,"re":-0.49},{"x":90,"y":150,"n":4,"re":-0.8},{"x":90,"y":240,"n":5,"re":0.14},{"x":120,"y":120,"n":6,"re":0.0},{"x":120,"y":240,"n":4,"re":0.44},{"x":150,"y":210,"n":7,"re":0.22},{"x":150,"y":240,"n":4,"re":-0.28},{"x":180,"y":180,"n":4,"re":-0.31}]};
+  const PSHOTS = D.pshots || FALLBACK_PSHOTS;
+  const shotSel = document.getElementById("shotTeam");
+  const shotTeams = Object.keys(SHOTS).sort();
+  const cssv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const SC = 0.9, mapX = x => 250 + x * SC, mapY = y => 460 - (y + 40) * SC;
+  function drawCourt(ctx, line) {
+    ctx.strokeStyle = line; ctx.lineWidth = 1.4;
+    ctx.strokeRect(mapX(-80), mapY(190), 160 * SC, 230 * SC);          // paint
+    ctx.beginPath(); ctx.arc(mapX(0), mapY(190), 60 * SC, 0, 7); ctx.stroke();  // FT circle
+    ctx.beginPath(); ctx.arc(mapX(0), mapY(0), 7.5 * SC, 0, 7); ctx.stroke();   // hoop
+    ctx.beginPath(); ctx.moveTo(mapX(-250), mapY(-40)); ctx.lineTo(mapX(250), mapY(-40)); ctx.stroke(); // baseline
+    const yc = Math.sqrt(237.5 ** 2 - 220 ** 2);                        // corner-3 y
+    ctx.beginPath();
+    ctx.moveTo(mapX(-220), mapY(-40)); ctx.lineTo(mapX(-220), mapY(yc));
+    const hx = mapX(0), hy = mapY(0), R = 237.5 * SC;
+    const a1 = Math.atan2(mapY(yc) - hy, mapX(220) - hx);
+    const a2 = Math.atan2(mapY(yc) - hy, mapX(-220) - hx);
+    ctx.arc(hx, hy, R, a1, a2, true);
+    ctx.lineTo(mapX(220), mapY(-40)); ctx.stroke();
+  }
+  function drawChart(cv, cells, emptyMsg) {
+    if (!cv) return;
+    const ctx = cv.getContext("2d");
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    ctx.fillStyle = cssv("--panel-2"); ctx.fillRect(0, 0, cv.width, cv.height);
+    drawCourt(ctx, cssv("--border"));
+    if (!cells || !cells.length) {
+      ctx.fillStyle = cssv("--muted"); ctx.font = "14px system-ui"; ctx.textAlign = "center";
+      ctx.fillText(emptyMsg || "No shot data", cv.width / 2, cv.height / 2);
+      return;
+    }
+    const accent = cssv("--accent"), cool = cssv("--cool");
+    for (const c of cells) {
+      const r = Math.max(2, Math.min(13, 2 + Math.sqrt(c.n) * 0.85));
+      ctx.globalAlpha = Math.max(0.35, Math.min(0.92, 0.35 + Math.abs(c.re) * 1.3));
+      ctx.fillStyle = c.re >= 0 ? accent : cool;
+      ctx.beginPath(); ctx.arc(mapX(c.x), mapY(c.y), r, 0, 7); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+  function drawShots() {
+    drawChart(document.getElementById("shotCanvas"),
+              SHOTS[shotSel && shotSel.value], "Shot data loads on the live site");
+  }
+  if (shotSel) {
+    shotSel.innerHTML = (shotTeams.length ? shotTeams : ["BOS"]).map(t => `<option>${t}</option>`).join("");
+    shotSel.value = shotTeams.includes("BOS") ? "BOS" : (shotTeams[0] || "BOS");
+    shotSel.addEventListener("change", drawShots);
+  }
+  // querySelector took only the FIRST match. That was fine when one card
+  // opened the shot charts; now three sub-tab bars each carry a shots button,
+  // and binding one of them left the canvas unpainted when the view was
+  // reached from either of the other two.
+  document.querySelectorAll('[data-view="shots"]').forEach(
+    el => el.addEventListener("click", () => setTimeout(drawShots, 0)));
+  drawShots();
+
+  /* ---- WOWY impact ---- */
+  const FALLBACK_WOWY = {"DEN":[{"player":"C. Johnson","gp_in":54,"gp_out":28,"margin_in":7.8,"margin_out":-0.0,"impact":7.9,"mates":[{"name":"P. Watson","pin":10.7,"pout":19.8,"delta":9.1},{"name":"C. Braun","pin":13.0,"pout":6.6,"delta":-6.4},{"name":"J. Pickett","pin":2.8,"pout":7.8,"delta":5.0},{"name":"Z. Nnaji","pin":1.5,"pout":6.2,"delta":4.7},{"name":"J. Murray","pin":24.4,"pout":27.8,"delta":3.4}]},{"player":"N. Jokić","gp_in":65,"gp_out":17,"margin_in":6.6,"margin_out":-0.2,"impact":6.8,"mates":[{"name":"P. Watson","pin":11.7,"pout":22.1,"delta":10.4},{"name":"J. Valančiūnas","pin":8.0,"pout":16.8,"delta":8.8},{"name":"J. Pickett","pin":3.1,"pout":9.4,"delta":6.3},{"name":"Z. Nnaji","pin":1.8,"pout":7.9,"delta":6.1},{"name":"J. Murray","pin":25.0,"pout":27.8,"delta":2.8}]},{"player":"J. Valančiūnas","gp_in":65,"gp_out":17,"margin_in":6.5,"margin_out":-0.1,"impact":6.6,"mates":[{"name":"P. Watson","pin":12.6,"pout":20.2,"delta":7.6},{"name":"J. Pickett","pin":3.5,"pout":10.0,"delta":6.5},{"name":"Z. Nnaji","pin":2.1,"pout":8.4,"delta":6.3},{"name":"J. Murray","pin":24.4,"pout":30.4,"delta":6.0},{"name":"C. Braun","pin":12.8,"pout":8.1,"delta":-4.7}]},{"player":"Z. Nnaji","gp_in":52,"gp_out":30,"margin_in":7.1,"margin_out":1.7,"impact":5.4,"mates":[{"name":"P. Watson","pin":17.2,"pout":8.9,"delta":-8.3},{"name":"A. Gordon","pin":13.3,"pout":19.8,"delta":6.4},{"name":"J. Pickett","pin":5.6,"pout":3.0,"delta":-2.6},{"name":"J. Valančiūnas","pin":9.7,"pout":7.3,"delta":-2.4},{"name":"N. Jokić","pin":26.6,"pout":29.0,"delta":2.4}]},{"player":"C. Braun","gp_in":44,"gp_out":38,"margin_in":6.8,"margin_out":3.3,"impact":3.5,"mates":[{"name":"P. Watson","pin":10.9,"pout":17.0,"delta":6.1},{"name":"J. Pickett","pin":2.8,"pout":7.1,"delta":4.3},{"name":"S. Jones","pin":3.4,"pout":7.1,"delta":3.7},{"name":"C. Johnson","pin":11.1,"pout":14.6,"delta":3.5},{"name":"N. Jokić","pin":26.8,"pout":29.2,"delta":2.4}]},{"player":"J. Pickett","gp_in":50,"gp_out":32,"margin_in":6.1,"margin_out":3.7,"impact":2.3,"mates":[{"name":"A. Gordon","pin":13.5,"pout":20.4,"delta":7.0},{"name":"N. Jokić","pin":25.1,"pout":30.3,"delta":5.3},{"name":"P. Watson","pin":16.4,"pout":11.1,"delta":-5.2},{"name":"J. Valančiūnas","pin":10.2,"pout":6.7,"delta":-3.5},{"name":"C. Johnson","pin":11.4,"pout":13.0,"delta":1.5}]},{"player":"J. Strawther","gp_in":57,"gp_out":25,"margin_in":5.8,"margin_out":3.8,"impact":2.0,"mates":[{"name":"A. Gordon","pin":14.0,"pout":20.0,"delta":6.0},{"name":"C. Braun","pin":12.8,"pout":7.6,"delta":-5.2},{"name":"D. Holmes II","pin":3.2,"pout":6.5,"delta":3.3},{"name":"P. Watson","pin":13.3,"pout":16.4,"delta":3.2},{"name":"B. Brown","pin":8.7,"pout":6.2,"delta":-2.5}]},{"player":"A. Gordon","gp_in":36,"gp_out":46,"margin_in":6.3,"margin_out":4.3,"impact":2.0,"mates":[{"name":"J. Strawther","pin":3.8,"pout":9.6,"delta":5.7},{"name":"S. Jones","pin":3.4,"pout":7.0,"delta":3.6},{"name":"P. Watson","pin":12.9,"pout":16.1,"delta":3.1},{"name":"J. Murray","pin":24.2,"pout":26.4,"delta":2.2},{"name":"C. Johnson","pin":11.4,"pout":12.9,"delta":1.5}]},{"player":"D. Holmes II","gp_in":25,"gp_out":57,"margin_in":4.4,"margin_out":5.5,"impact":-1.1,"mates":[{"name":"A. Gordon","pin":12.2,"pout":17.9,"delta":5.7},{"name":"P. Watson","pin":17.9,"pout":13.2,"delta":-4.6},{"name":"N. Jokić","pin":24.2,"pout":28.7,"delta":4.5},{"name":"H. Tyson","pin":4.0,"pout":1.1,"delta":-2.9},{"name":"J. Murray","pin":23.4,"pout":26.1,"delta":2.7}]}]};
+  const WOWY = D.wowy || FALLBACK_WOWY;
+  const wowySel = document.getElementById("wowyTeam");
+  const wowyTeams = Object.keys(WOWY).sort();
+  const sgn = v => (v >= 0 ? "+" : "") + v;
+  function renderWowy() {
+    const players = WOWY[wowySel && wowySel.value] || [];
+    const tb = document.querySelector("#wtable tbody"); if (!tb) return;
+    tb.innerHTML = players.map((p, i) => `<tr data-i="${i}">
+      <td class="tleft" style="font-weight:600">${p.player}</td>
+      <td class="rate mono ${p.impact >= 0 ? 'pos' : 'neg'}">${sgn(p.impact)}</td>
+      <td class="mono">${sgn(p.margin_in)}</td><td class="mono">${sgn(p.margin_out)}</td>
+      <td class="mono">${p.gp_in}</td><td class="mono">${p.gp_out}</td></tr>`).join("");
+    document.getElementById("wmates").innerHTML = "";
+  }
+  const wtb = document.querySelector("#wtable tbody");
+  if (wtb) wtb.addEventListener("click", e => {
+    const tr = e.target.closest("tr"); if (!tr) return;
+    const p = (WOWY[wowySel.value] || [])[+tr.dataset.i]; if (!p) return;
+    const el = document.getElementById("wmates");
+    if (!p.mates || !p.mates.length) {
+      el.innerHTML = `<div class="wmate-note">Not enough missed games to break down teammates for ${p.player}.</div>`;
+      return;
+    }
+    el.innerHTML = `<div class="wmate-head">When <b>${p.player}</b> sits, teammate scoring:</div>` +
+      p.mates.map(m => `<div class="wmate"><span>${m.name}</span>
+        <span class="mono">${m.pin} → ${m.pout}</span>
+        <span class="mono ${m.delta >= 0 ? 'pos' : 'neg'}">${sgn(m.delta)}</span></div>`).join("");
+  });
+  if (wowySel && wowyTeams.length) {
+    wowySel.innerHTML = wowyTeams.map(t => `<option>${t}</option>`).join("");
+    wowySel.value = wowyTeams.includes("DEN") ? "DEN" : wowyTeams[0];
+    wowySel.addEventListener("change", renderWowy);
+    renderWowy();
+  }
+
+  /* ---- possession simulator ---- */
+  (function simulatorTab() {
+    const SIM = (window.NBAI_DATA || {}).sim || {};
+    const E = SIM.engine, T = SIM.teams || {};
+
+    /* held-out scorecard (model credibility, kept at the foot of the page) */
+    const ev = SIM.eval;
+    if (ev) {
+      const rows = [
+        ["Possession sim", ev.sim, ev.margin_mae, ev.total_mae],
+        ["Mode-1 (top-down)", ev.mode1, ev.mode1_margin_mae, ev.mode1_total_mae],
+        ["Elo baseline", ev.elo, null, null]];
+      const best = (k, v) => {
+        const all = rows.map(r => r[1] && r[1][k]).filter(x => x != null);
+        return all.length && v === Math.min(...all) ? ' class="best"' : "";
+      };
+      document.querySelector("#simEvalTbl tbody").innerHTML = rows.map(r => {
+        const m = r[1] || {}, n = x => x == null ? "—" : x.toFixed(x < 1 ? 4 : 2);
+        return `<tr><td class="tleft">${r[0]}</td>
+          <td>${m.acc == null ? "—" : m.acc.toFixed(3)}</td>
+          <td${best("logloss", m.logloss)}>${n(m.logloss)}</td>
+          <td${best("brier", m.brier)}>${n(m.brier)}</td>
+          <td>${n(r[2])}</td><td>${n(r[3])}</td></tr>`;
+      }).join("");
+      document.getElementById("simEvalNote").textContent =
+        `${ev.games} games · ${ev.season} · ${ev.minutes} minutes · actual participants known`;
+      document.getElementById("simEvalCal").innerHTML =
+        `Interval coverage <b>${ev.cover80}%</b> against an 80% target and
+         <b>${ev.cover50}%</b> against 50%. Player points MAE <b>${ev.player_pts_mae}</b>
+         versus the dedicated props model's <b>${ev.props_pts_mae}</b> on identical
+         rows. This benchmark assumes perfect knowledge of who played; it does
+         not measure the accuracy of pregame availability forecasts.
+         Training cutoffs for its fitted model components have not been verified,
+         so this is a retrospective benchmark, not an independent holdout.
+         The in-page engine is a simplified browser port of the evaluated Python
+         simulator.`;
+    }
+
+    if (!E || !window.NBAI_SIM || !Object.keys(T).length) return;
+    const abbrs = Object.keys(T).sort();
+    const hs = document.getElementById("simHome"), as = document.getElementById("simAway");
+    const opts = abbrs.map(a => `<option value="${a}">${a}</option>`).join("");
+    hs.innerHTML = opts; as.innerHTML = opts;
+    hs.value = abbrs.includes("OKC") ? "OKC" : abbrs[0];
+    as.value = abbrs.includes("BOS") ? "BOS" : abbrs[1];
+
+    const ratesOf = id => E.players[String(id)];
+    const nameOf = pid => (E.players[String(pid)] || {}).n || String(pid);
+    const sideOf = t => E.teams[t].roster.map(x =>
+      ({id: x.id, n: nameOf(x.id), min: x.min}));
+    const proj = (h, a, home) => SIM.mu0 + T[h].off - T[a].def + (home ? SIM.hca : 0);
+    const F = (x, d) => (Math.round(x * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d);
+    const el = id => document.getElementById(id);
+
+    let state = null;
+    // Seeds must NOT restart at 1 when a new matchup begins, or "Simulate game"
+    // replays the identical game every time it is pressed. This advances across
+    // resets so each press is a genuinely new game, while the warm-up seeds
+    // below stay fixed so the projected level does not wobble between clicks.
+    let seedBase = 1;
+
+    function newState(h, a) {
+      const mu = {H: proj(h, a, true), A: proj(a, h, false)};
+      const H = sideOf(h), A = sideOf(a);
+      const pace = (E.teams[h].pace + E.teams[a].pace) / 2;
+      // Solve the level EMPIRICALLY: run warm-up games, see what this
+      // implementation actually produces, scale to the projection. Three passes
+      // because scaling a make probability does not move points linearly, so one
+      // under-corrects and two still left some matchups 4 points high. Being
+      // self-correcting, the port's own offsets cannot drift the displayed level.
+      let scale = {H: 1, A: 1, mu}, W = 16;
+      for (let pass = 0; pass < 3; pass++) {
+        const tot = {H: 0, A: 0};
+        for (let i = 0; i < W; i++) {
+          const g = window.NBAI_SIM.playGame(H, A, ratesOf, E.const, E.lg, pace,
+                                             scale, 1000 + pass * 97 + i, false,
+                                             E.cal);
+          tot.H += g.score.H; tot.A += g.score.A;
+        }
+        scale = {H: scale.H * mu.H / Math.max(tot.H / W, 1),
+                 A: scale.A * mu.A / Math.max(tot.A / W, 1), mu};
+      }
+      seedBase += 1000003;              // a large stride keeps runs independent
+      return {h, a, H, A, pace, scale, mu, n: 0, sum: {}, mn: {}, mx: {},
+              wins: 0, sc: [], first: null, seed: seedBase};
+    }
+
+    function accumulate(g) {
+      state.n += 1;
+      if (g.score.H > g.score.A) state.wins += 1;
+      state.sc.push([g.score.H, g.score.A]);
+      for (const t of ["H", "A"]) for (const pid in g.box[t]) {
+        const k = t + "|" + pid, v = g.box[t][pid];
+        if (!state.sum[k]) { state.sum[k] = {}; state.mn[k] = {}; state.mx[k] = {}; }
+        for (const f of window.NBAI_SIM.BOX) {
+          state.sum[k][f] = (state.sum[k][f] || 0) + v[f];
+          state.mn[k][f] = state.mn[k][f] == null ? v[f] : Math.min(state.mn[k][f], v[f]);
+          state.mx[k][f] = state.mx[k][f] == null ? v[f] : Math.max(state.mx[k][f], v[f]);
+        }
+      }
+    }
+
+    function boxTable(abbr, rows, sub) {
+      return `<div class="bx"><div class="bx-h">${abbr}<span>${sub}</span></div>
+        <div class="tblwrap"><table><thead><tr>
+          <th class="tleft">Player</th><th>MIN</th><th>FG</th><th>3PT</th><th>FT</th>
+          <th>REB</th><th>AST</th><th>STL</th><th>BLK</th><th>TO</th><th>PF</th><th>PTS</th>
+        </tr></thead><tbody>${rows}</tbody></table></div></div>`;
+    }
+
+    function drawGame() {
+      const g = state.first, h = state.h, a = state.a;
+      el("simGamePanel").style.display = "";
+      el("simBoxPanel").style.display = "";
+      const q = [0, 0, 0, 0].map((_, i) => {
+        const upto = (g.log || []).filter(e => e.p <= i);
+        const last = upto[upto.length - 1];
+        return last ? {H: last.H, A: last.A} : {H: 0, A: 0};
+      });
+      let prev = {H: 0, A: 0}, cells = {H: [], A: []};
+      for (const s2 of q) { for (const t of ["H", "A"]) {
+        cells[t].push(s2[t] - prev[t]); prev[t] = s2[t]; } }
+      el("simLine").innerHTML =
+        `<table class="ls"><thead><tr><th></th><th>Q1</th><th>Q2</th><th>Q3</th>
+          <th>Q4</th><th>Final</th></tr></thead><tbody>
+          <tr><td class="tleft">${a}</td>${cells.A.map(x => `<td>${x}</td>`).join("")}
+            <td><b>${g.score.A}</b></td></tr>
+          <tr><td class="tleft">${h}</td>${cells.H.map(x => `<td>${x}</td>`).join("")}
+            <td><b>${g.score.H}</b></td></tr></tbody></table>`;
+      el("simPbpNote").textContent =
+        `${a} ${g.score.A} — ${g.score.H} ${h} · ${(g.log || []).length} plays`;
+      document.querySelector("#simPbpTbl tbody").innerHTML = (g.log || []).map(e =>
+        `<tr><td class="tleft mono">Q${e.p + 1}</td>
+          <td class="tleft">${e.t === "H" ? h : a}</td>
+          <td class="tleft">${e.x}</td>
+          <td class="mono">${e.A}-${e.H}</td></tr>`).join("");
+
+      let html = "";
+      for (const t of ["A", "H"]) {
+        const abbr = t === "H" ? h : a;
+        const rows = Object.entries(g.box[t]).filter(([, v]) => v.MIN >= 1)
+          .sort((x, y) => y[1].MIN - x[1].MIN)
+          .map(([pid, v]) => `<tr><td class="tleft">${nameOf(pid)}</td>
+            <td>${Math.round(v.MIN)}</td>
+            <td>${Math.round(v.FGM)}-${Math.round(v.FGA)}</td>
+            <td>${Math.round(v.FG3M)}-${Math.round(v.FG3A)}</td>
+            <td>${Math.round(v.FTM)}-${Math.round(v.FTA)}</td>
+            <td>${Math.round(v.REB)}</td><td>${Math.round(v.AST)}</td>
+            <td>${Math.round(v.STL)}</td><td>${Math.round(v.BLK)}</td>
+            <td>${Math.round(v.TOV)}</td><td>${Math.round(v.PF)}</td>
+            <td><b>${Math.round(v.PTS)}</b></td></tr>`).join("");
+        html += boxTable(abbr, rows, `${g.score[t]} points`);
+      }
+      el("simBoxes").innerHTML = html;
+    }
+
+    function drawAgg() {
+      const n = state.n, h = state.h, a = state.a;
+      if (n < 2) { el("simAggPanel").style.display = "none"; return; }
+      el("simAggPanel").style.display = "";
+      const hs2 = state.sc.map(x => x[0]), as2 = state.sc.map(x => x[1]);
+      const mean = v => v.reduce((s, x) => s + x, 0) / v.length;
+      const mh = mean(hs2), ma = mean(as2);
+      const marg = mean(state.sc.map(x => x[0] - x[1]));
+      const tot = mean(state.sc.map(x => x[0] + x[1]));
+      el("simAggNote").textContent =
+        `${n.toLocaleString()} simulation${n === 1 ? "" : "s"}`;
+      document.querySelector("#simTeamTbl tbody").innerHTML =
+        `<tr><td class="tleft">${a}</td><td>${F(ma,1)}</td><td>${Math.min(...as2)}</td>
+           <td>${Math.max(...as2)}</td><td>${F(100-state.wins/n*100,1)}%</td></tr>
+         <tr><td class="tleft">${h}</td><td>${F(mh,1)}</td><td>${Math.min(...hs2)}</td>
+           <td>${Math.max(...hs2)}</td><td>${F(state.wins/n*100,1)}%</td></tr>`;
+      el("simAggSummary").innerHTML =
+        `Average margin <b>${h} ${marg >= 0 ? "+" : ""}${F(marg,1)}</b> ·
+         average total <b>${F(tot,1)}</b> ·
+         closest game ${(() => { const c = Math.min(...state.sc.map(
+           x => Math.abs(x[0]-x[1]))); return `${c} point${c === 1 ? "" : "s"}`; })()},
+         widest ${Math.max(...state.sc.map(x => Math.abs(x[0]-x[1])))}.
+         Player rows show the average with the lowest and highest single game beneath.`;
+      let html = "";
+      for (const t of ["A", "H"]) {
+        const abbr = t === "H" ? h : a;
+        const keys = Object.keys(state.sum).filter(k => k.startsWith(t + "|"))
+          .filter(k => state.sum[k].MIN / n >= 1)
+          .sort((x, y) => state.sum[y].MIN - state.sum[x].MIN);
+        const rows = keys.map(k => {
+          const pid = k.split("|")[1], s2 = state.sum[k],
+                mn = state.mn[k], mx = state.mx[k];
+          const c = f => `<td><span class="avg">${F(s2[f] / n, 1)}</span>
+            <span class="rng">${Math.round(mn[f])}–${Math.round(mx[f])}</span></td>`;
+          return `<tr><td class="tleft">${nameOf(pid)}</td>
+            <td>${F(s2.MIN / n, 1)}</td>
+            <td><span class="avg">${F(s2.FGM/n,1)}-${F(s2.FGA/n,1)}</span></td>
+            <td><span class="avg">${F(s2.FG3M/n,1)}-${F(s2.FG3A/n,1)}</span></td>
+            <td><span class="avg">${F(s2.FTM/n,1)}-${F(s2.FTA/n,1)}</span></td>
+            ${c("REB")}${c("AST")}${c("STL")}${c("BLK")}${c("TOV")}
+            <td>${F(s2.PF / n, 1)}</td>${c("PTS")}</tr>`;
+        }).join("");
+        html += boxTable(abbr, rows, `average over ${n.toLocaleString()} sims`);
+      }
+      el("simAggBoxes").innerHTML = html;
+    }
+
+    // Players excluded from a roster have to be NAMED. A lineup quietly
+    // missing its best player reads as a bug; saying he is out turns the same
+    // fact into information. Day-to-day men are still IN the simulation —
+    // most of them play — so they are listed separately rather than removed.
+    function injLine(abbr) {
+      const list = (SIM.engine && SIM.engine.injuries
+                    && SIM.engine.injuries[abbr]) || [];
+      if (!list.length) return `<div class="inj none">no reported injuries</div>`;
+      const out = list.filter(x => x.o).map(x => x.n);
+      const dtd = list.filter(x => !x.o).map(x => x.n);
+      let h = `<div class="inj">`;
+      if (out.length) h += `<div class="out">Out: ${out.join(", ")}</div>`;
+      if (dtd.length) h += `<div class="dtd">Day-to-day (still simulated): `
+                        + `${dtd.join(", ")}</div>`;
+      return h + `</div>`;
+    }
+
+    function meta() {
+      const h = hs.value, a = as.value;
+      el("gameMatchup").textContent = `${a} @ ${h}`;
+      for (const [sel, id] of [[h, "simHomeMeta"], [a, "simAwayMeta"]]) {
+        const t = T[sel];
+        el(id).innerHTML = `<span>off ${t.off >= 0 ? "+" : ""}${t.off.toFixed(1)}</span>
+          <span>def ${t.def >= 0 ? "+" : ""}${t.def.toFixed(1)}</span>`
+          + injLine(sel);
+      }
+      if (h === a) { el("simProj").innerHTML =
+        `<span class="warn">Pick two different teams.</span>`; return; }
+      el("simProj").innerHTML =
+        `Projected <b>${a} ${F(proj(a,h,false),1)} — ${F(proj(h,a,true),1)} ${h}</b>
+         <span class="mgn">· home edge +${SIM.hca.toFixed(1)}</span>`;
+    }
+    function setBusy(on, label) {
+      const started = !!state && state.n > 0;
+      el("simRun1").textContent = started ? "Simulate another game" : "Simulate game";
+      el("simRun1").disabled = on;
+      ["simRun10","simRun100","simRun1000","simReset"].forEach(id =>
+        el(id).disabled = on || !started);
+      const plural = (n, w) => `${n.toLocaleString()} ${w}${n === 1 ? "" : "s"}`;
+      el("simRunNote").textContent =
+        label || (started ? plural(state.n, "simulation") + " run" : "");
+      el("gameStatus").textContent = label || (started ? plural(state.n, "simulation") + " complete" : "Ready to tip off");
+      el("gameEmpty").hidden = started;
+      el("gameResultLinks").hidden = !started;
+      el("gameAggregateLink").hidden = !started || state.n < 2;
+    }
+    // `showGame` means "replace the gamecast with a fresh one", NOT "start
+    // over". Pressing Simulate game keeps every simulation already run and adds
+    // this one to them; only Reset clears the totals, and only a change of
+    // matchup forces a new state because the old one is about different teams.
+    function go(k, showGame) {
+      const h = hs.value, a = as.value;
+      if (h === a) { meta(); return; }
+      setBusy(true, k >= 100 ? `running ${k.toLocaleString()}…` : "running…");
+      setTimeout(() => {
+        if (!state || state.h !== h || state.a !== a) state = newState(h, a);
+        for (let i = 0; i < k; i++) {
+          const wantLog = (showGame && i === 0) || !state.first;
+          const g = window.NBAI_SIM.playGame(state.H, state.A, ratesOf, E.const,
+                                             E.lg, state.pace, state.scale,
+                                             state.seed++, wantLog, E.cal);
+          if (wantLog) state.first = g;
+          accumulate(g);
+        }
+        drawGame(); drawAgg(); setBusy(false);
+      }, 20);
+    }
+    el("simRun1").addEventListener("click", () => go(1, true));   // fresh gamecast
+    el("simRun10").addEventListener("click", () => go(10));
+    el("simRun100").addEventListener("click", () => go(100));
+    el("simRun1000").addEventListener("click", () => go(1000));
+    el("simReset").addEventListener("click", () => {
+      state = null;
+      ["simGamePanel","simBoxPanel","simAggPanel"].forEach(x =>
+        el(x).style.display = "none");
+      setBusy(false);
+    });
+    const reset = () => { state = null;
+      ["simGamePanel","simBoxPanel","simAggPanel"].forEach(x =>
+        el(x).style.display = "none");
+      meta(); setBusy(false); };
+    hs.addEventListener("change", reset); as.addEventListener("change", reset);
+    meta(); setBusy(false);
+  })();
+
+  /* ---- matchup predictor ---- */
+  const homeSel = document.getElementById("home"), awaySel = document.getElementById("away");
+  const opts = TEAMS.map(t => `<option value="${t.abbr}">${t.name}</option>`).join("");
+  homeSel.innerHTML = opts; awaySel.innerHTML = opts;
+  homeSel.value = "OKC"; awaySel.value = "BOS";
+  let neutral = false;
+  const neutralBtn = document.getElementById("neutralBtn");
+  neutralBtn.addEventListener("click", () => {
+    neutral = !neutral; neutralBtn.classList.toggle("on", neutral); predict();
+  });
+  const byAbbr = Object.fromEntries(TEAMS.map(t => [t.abbr, t]));
+
+  function predict() {
+    const h = byAbbr[homeSel.value], a = byAbbr[awaySel.value];
+    document.getElementById("homeElo").textContent = "Elo " + Math.round(h.elo);
+    document.getElementById("awayElo").textContent = "Elo " + Math.round(a.elo);
+    const hca = neutral ? 0 : 100;
+    const diff = (h.elo + hca) - a.elo;
+    const pHome = 1 / (1 + Math.pow(10, -diff / 400));
+    const margin = diff / 28;
+    const ph = Math.round(pHome * 100), pa = 100 - ph;
+    document.getElementById("pbHome").style.width = ph + "%";
+    document.getElementById("pbAway").style.width = pa + "%";
+    document.getElementById("pbHomeTxt").textContent = h.abbr + " " + ph + "%";
+    document.getElementById("pbAwayTxt").textContent = pa + "% " + a.abbr;
+    const favTeam = margin >= 0 ? h : a;
+    const favP = Math.max(ph, pa);
+    document.getElementById("verdict").innerHTML =
+      `<b>${favTeam.name}</b> favored &nbsp;·&nbsp; ${favP}% win probability
+       <span class="mgn">&nbsp;·&nbsp; projected by ${Math.abs(margin).toFixed(1)} pts
+       ${neutral ? "(neutral court)" : "(" + h.abbr + " home)"}</span>`;
+  }
+  homeSel.addEventListener("change", predict);
+  awaySel.addEventListener("change", predict);
+  predict();
+
+  /* ---- projection preview (real 2021-22 season baselines) ---- */
+  const MATCHUP_EX = {"teams":{"BOS":{"team":{"pts":111.8,"ortg":113.7,"drtg":106.2,"pace":97.2,"efg":54.3,"reb":46.1},"players":[{"name":"J. Tatum","min":35.9,"pts":26.9,"reb":8.0,"ast":4.4,"fgp":45.3,"fg3":3.0},{"name":"J. Brown","min":33.6,"pts":23.6,"reb":6.1,"ast":3.5,"fgp":47.3,"fg3":2.5},{"name":"M. Smart","min":32.3,"pts":12.1,"reb":3.8,"ast":5.9,"fgp":41.8,"fg3":1.7},{"name":"D. Schröder","min":29.2,"pts":14.4,"reb":3.3,"ast":4.2,"fgp":44.0,"fg3":1.4},{"name":"R. Williams III","min":29.1,"pts":9.8,"reb":9.5,"ast":2.0,"fgp":73.6,"fg3":0.0},{"name":"A. Horford","min":28.6,"pts":10.0,"reb":7.6,"ast":3.3,"fgp":46.7,"fg3":1.3}]},"GSW":{"team":{"pts":111.0,"ortg":112.1,"drtg":106.7,"pace":98.7,"efg":55.2,"reb":45.5},"players":[{"name":"S. Curry","min":34.5,"pts":25.5,"reb":5.2,"ast":6.3,"fgp":43.7,"fg3":4.5},{"name":"A. Wiggins","min":31.5,"pts":17.0,"reb":4.4,"ast":2.2,"fgp":46.6,"fg3":2.1},{"name":"J. Poole","min":30.0,"pts":18.5,"reb":3.4,"ast":4.0,"fgp":44.8,"fg3":2.8},{"name":"D. Green","min":28.9,"pts":7.5,"reb":7.3,"ast":7.0,"fgp":52.5,"fg3":0.3},{"name":"K. Thompson","min":27.7,"pts":19.2,"reb":3.7,"ast":2.6,"fgp":42.9,"fg3":3.4},{"name":"K. Looney","min":21.1,"pts":6.0,"reb":7.3,"ast":2.0,"fgp":57.1,"fg3":0.0}]}}};
+  (function renderPreview() {
+    const A = MATCHUP_EX.teams.BOS, B = MATCHUP_EX.teams.GSW;
+    const metrics = [
+      {k: "pts", label: "Points"}, {k: "ortg", label: "Off Rtg"},
+      {k: "drtg", label: "Def Rtg", lower: true}, {k: "pace", label: "Pace"},
+      {k: "efg", label: "eFG%"}, {k: "reb", label: "Rebounds"},
+    ];
+    document.getElementById("cmpRows").innerHTML = metrics.map(m => {
+      const a = A.team[m.k], b = B.team[m.k];
+      const aw = a / (a + b) * 100;
+      const aLead = m.lower ? a < b : a > b;
+      return `<div class="cmp-row">
+        <div class="cmp-val ${aLead ? "lead" : ""}">${a}</div>
+        <div class="cmp-mid"><div class="cmp-label">${m.label}</div>
+          <div class="cmp-bar"><i class="a" style="width:${aw}%"></i>
+            <i class="b" style="width:${100 - aw}%"></i></div></div>
+        <div class="cmp-val right ${!aLead ? "lead" : ""}">${b}</div></div>`;
+    }).join("");
+
+    const ptbl = (pl) => `<thead><tr><th>Player</th><th>MIN</th><th>PTS</th><th>REB</th>
+      <th>AST</th><th>FG%</th><th>3PM</th></tr></thead><tbody>` +
+      pl.map(p => `<tr><td>${p.name}</td><td>${p.min}</td><td>${p.pts}</td><td>${p.reb}</td>
+        <td>${p.ast}</td><td>${p.fgp}</td><td>${p.fg3}</td></tr>`).join("") + "</tbody>";
+    document.getElementById("ptA").innerHTML = ptbl(A.players);
+    document.getElementById("ptB").innerHTML = ptbl(B.players);
+
+    document.getElementById("edges").innerHTML = [
+      `<b>Shooting</b> — GSW ${B.team.efg}% eFG vs BOS ${A.team.efg}%`,
+      `<b>Defense</b> — BOS ${A.team.drtg} Def Rtg (elite)`,
+      `<b>Pace</b> — GSW ${B.team.pace} vs BOS ${A.team.pace}`,
+      `<b>Stars</b> — Tatum ${A.players[0].pts} vs Curry ${B.players[0].pts} PPG`,
+    ].map(e => `<span class="chip">${e}</span>`).join("");
+  })();
+
+  /* ---- props ---- */
+  (function () {
+    const P = D.props; if (!P || !P.rows) return;
+    const k = document.getElementById("propKpis");
+    if (k) k.innerHTML = [
+      ["pts", "Points MAE"], ["reb", "Rebounds MAE"], ["ast", "Assists MAE"], ["min", "Minutes MAE"],
+    ].map(([m, l]) => `<div class="kpi"><div class="v mono"><em>${P.acc[m]}</em></div>
+      <div class="l eyebrow">${l}</div></div>`).join("");
+    let sk = "ppts", sd = -1;
+    const tb = document.querySelector("#proptable tbody");
+    const pair = new Set(["apts", "areb", "aast"]);
+    function draw() {
+      const s = [...P.rows].sort((a, b) => {
+        const av = a[sk], bv = b[sk];
+        return (typeof av === "string" ? av.localeCompare(bv) : av - bv) * sd;
+      });
+      tb.innerHTML = s.map((p, i) => `<tr>
+        <td class="tleft rk mono">${i + 1}</td>
+        <td class="tleft"><span class="team"><span class="dot" style="background:${p.c}"></span>
+          ${p.player} <span class="abbr mono">${p.team}</span></span></td>
+        <td class="mono">${p.gp}</td>
+        <td class="mono">${p.pmin}</td>
+        <td class="mono" style="font-weight:700">${p.ppts}</td>
+        <td class="mono" style="color:var(--muted)">${p.apts}</td>
+        <td class="mono" style="font-weight:700">${p.preb}</td>
+        <td class="mono" style="color:var(--muted)">${p.areb}</td>
+        <td class="mono" style="font-weight:700">${p.past}</td>
+        <td class="mono" style="color:var(--muted)">${p.aast}</td></tr>`).join("");
+      document.querySelectorAll("#proptable thead th").forEach(th => {
+        th.removeAttribute("aria-sort"); const a = th.querySelector(".arw"); if (a) a.remove();
+        if (th.dataset.k === sk) { th.setAttribute("aria-sort", sd < 0 ? "descending" : "ascending");
+          th.insertAdjacentHTML("beforeend", ` <span class="arw">${sd < 0 ? "▼" : "▲"}</span>`); }
+      });
+    }
+    document.querySelectorAll("#proptable thead th").forEach(th => th.addEventListener("click", () => {
+      const key = th.dataset.k; if (!key) return;
+      if (key === sk) sd *= -1; else { sk = key; sd = (key === "player" || key === "rank") ? 1 : -1; }
+      draw();
+    }));
+    draw();
+  })();
+
+  /* ---- defense leaderboard ---- */
+  (function () {
+    const DF = D.defenders; if (!DF || !DF.length) return;
+    let sk = "rating", sd = -1;
+    const tb = document.querySelector("#deftable tbody");
+    const maxr = Math.max(...DF.map(d => Math.abs(d.rating)));
+    function draw() {
+      const s = [...DF].sort((a, b) => (typeof a[sk] === "string"
+        ? a[sk].localeCompare(b[sk]) : a[sk] - b[sk]) * sd);
+      tb.innerHTML = s.map((d, i) => {
+        const w = Math.abs(d.rating) / maxr * 100;
+        return `<tr>
+        <td class="tleft rk mono">${i + 1}</td>
+        <td class="tleft"><span class="team"><span class="dot" style="background:${d.c}"></span>
+          ${d.player} <span class="abbr mono">${d.team}</span></span></td>
+        <td class="tleft barcell"><div style="display:flex;align-items:center;gap:8px">
+          <div class="bar"><i style="left:0;width:${w}%;background:var(--accent)"></i></div>
+          <span class="mono pos" style="width:38px">+${d.rating.toFixed(2)}</span></div></td>
+        <td class="mono">${d.mpg}</td>
+        <td class="mono">${d.poss.toLocaleString()}</td></tr>`;
+      }).join("");
+      document.querySelectorAll("#deftable thead th").forEach(th => {
+        th.removeAttribute("aria-sort"); const a = th.querySelector(".arw"); if (a) a.remove();
+        if (th.dataset.k === sk) { th.setAttribute("aria-sort", sd < 0 ? "descending" : "ascending");
+          th.insertAdjacentHTML("beforeend", ` <span class="arw">${sd < 0 ? "▼" : "▲"}</span>`); }
+      });
+    }
+    document.querySelectorAll("#deftable thead th").forEach(th => th.addEventListener("click", () => {
+      const key = th.dataset.k; if (!key) return;
+      if (key === sk) sd *= -1; else { sk = key; sd = (key === "player" || key === "rank") ? 1 : -1; }
+      draw();
+    }));
+    draw();
+  })();
+
+  /* ---- play-type matchups ---- */
+  (function () {
+    const S = D.synergy; if (!S || !S.teams) return;
+    const abbrs = Object.keys(S.teams).sort();
+    const NAMES = {}; (D.teams || []).forEach(t => { NAMES[t.abbr] = t.name; });
+    const offSel = document.getElementById("synOff"), defSel = document.getElementById("synDef");
+    const opt = a => `<option value="${a}">${NAMES[a] || a}</option>`;
+    offSel.innerHTML = abbrs.map(opt).join(""); defSel.innerHTML = abbrs.map(opt).join("");
+    offSel.value = abbrs.includes("OKC") ? "OKC" : abbrs[0];
+    defSel.value = abbrs.includes("BOS") ? "BOS" : abbrs[1];
+    const tb = document.querySelector("#syntable tbody");
+    function draw() {
+      const o = S.teams[offSel.value], d = S.teams[defSel.value];
+      const rows = S.types.filter(t => o.off[t] && d.def[t] != null).map(t => {
+        const [freq, offppp] = o.off[t], defppp = d.def[t], lg = S.league_def[t];
+        const vsLg = defppp - lg;                      // <0 = stingy defense
+        const matchup = offppp + vsLg;                 // offense efficiency shifted by defense
+        return { t, freq, offppp, defppp, vsLg, matchup };
+      }).sort((a, b) => b.freq - a.freq);
+      tb.innerHTML = rows.map(r => {
+        const vsCol = r.vsLg < 0 ? "var(--accent)" : "var(--cool)";
+        return `<tr>
+          <td class="tleft">${S.labels[r.t]}</td>
+          <td class="mono">${(r.freq * 100).toFixed(1)}%</td>
+          <td class="mono">${r.offppp.toFixed(2)}</td>
+          <td class="mono">${r.defppp.toFixed(2)}</td>
+          <td class="mono" style="color:${vsCol}">${r.vsLg >= 0 ? "+" : ""}${r.vsLg.toFixed(2)}</td>
+          <td class="mono" style="font-weight:700">${r.matchup.toFixed(2)}</td></tr>`;
+      }).join("");
+    }
+    offSel.addEventListener("change", draw); defSel.addEventListener("change", draw);
+    draw();
+  })();
+</script>

@@ -58,7 +58,7 @@
    * scores. */
   const LEVEL_CAL = 1.0;
   // Used only if the payload predates the reference export.
-  const REF_FALLBACK = {OREB_36: 12.5, DREB_36: 25.0, AST_36: 25.0};
+  const REF_FALLBACK = {OREB_36: 12.5, DREB_36: 25.0, AST_36: 25.0, BLK_36: 3.84};
 
   /* Systematic pi-ps lineup sampling: exactly the engine's approach. Marginal
    * inclusion probabilities are hit exactly, the offset is held for LINEUP_HOLD
@@ -148,6 +148,13 @@
           return (q.FG2A_36 + q.FG3A_36 + 0.44 * q.FTA_36 * (1 - C.PEN_FT_TRIM)
                   + q.TOV_36) * cal(p.id, "USE") + 1e-9;
         });
+        // Sharpen the split, mirroring the engine's USE_POW: exact
+        // proportionality gave bench players too many possessions and stars
+        // too few, monotonically across the rotation.
+        const usePow = (C && C.USE_POW) || 1.0;
+        if (usePow !== 1.0) {
+          for (let i = 0; i < uw.length; i++) uw[i] = Math.pow(uw[i], usePow);
+        }
         const user = on[pick(r, uw)];
         const q = ratesOf(user.id);
         const ftw = 0.44 * q.FTA_36 * (1 - C.PEN_FT_TRIM);
@@ -198,7 +205,11 @@
                            .map(p => ratesOf(p.id).AST_36 * cal(p.id, "AST") + 1e-6);
               const aS = on.reduce((s2, p) => s2 + ratesOf(p.id).AST_36, 0)
                          / ((CAL && CAL.__ref) || REF_FALLBACK).AST_36;
-              const pAst = clamp((three ? LG.ast3 : LG.ast2) * aS, 0.05, 0.95);
+              // ...and on WHO SCORED: a roll-man is finished by someone else
+              // on nearly every basket, a ball-dominant guard creates his own.
+              // Mirrors the engine's per-scorer assisted-share factors.
+              const sf = (three ? q.af3 : q.af2) || 1.0;
+              const pAst = clamp((three ? LG.ast3 : LG.ast2) * aS * sf, 0.05, 0.95);
               if (r() < pAst) {
                 const mates = on.filter(p => p.id !== user.id);
                 box[off][mates[pick(r, aw)].id].AST += 1;
@@ -244,9 +255,18 @@
           else if (made) break;
 
           // a miss is live: does the offence keep it?
-          if (k === 0 && r() < LG.blk_share) {
-            const bw = dv.map(p => ratesOf(p.id).BLK_36 * cal(p.id, "BLK") + 1e-6);
-            box[dfn][dv[pick(r, bw)].id].BLK += 1;
+          // Block rate scales with the five actually defending, rather than
+          // being a league constant that team-mates divide up. Mirrors the
+          // engine: two rim protectors block more, they do not share a fixed
+          // total. Allocation still uses the calibrated weights.
+          if (k === 0) {
+            const refB = ((CAL && CAL.__ref) || REF_FALLBACK).BLK_36 || 3.84;
+            const bS = dv.reduce((a, p) => a + ratesOf(p.id).BLK_36, 0) / refB;
+            const pB = Math.min(0.60, Math.max(0.02, LG.blk_share * bS));
+            if (r() < pB) {
+              const bw = dv.map(p => ratesOf(p.id).BLK_36 * cal(p.id, "BLK") + 1e-6);
+              box[dfn][dv[pick(r, bw)].id].BLK += 1;
+            }
           }
           // Both sides are normalised by the league reference, so the ratio
           // sits near one for an average pair of fives. Comparing the raw sums
@@ -290,10 +310,13 @@
     // aggregate view reported "closest game 0 points" on a real basketball
     // scoreline that cannot happen.
     let ot = 0;
-    while (score.H === score.A && ot < 4) {
+    while (score.H === score.A) {
+      if (ot >= 100) throw new Error("Unable to resolve overtime");
       ot += 1;
       const extra = Math.max(6, Math.round(npos * 5 / 48));
       for (let i = 0; i < extra; i++) {
+        for (const t of ["H", "A"])
+          for (const k of lu[t][C.N_SLOTS - 1]) box[t][teams[t][k].id].MIN += 5 / extra;
         for (const [off, dfn] of [["H", "A"], ["A", "H"]]) {
           const on = lu[off][C.N_SLOTS - 1].map(k => teams[off][k]);
           const uw = on.map(p => {
@@ -301,7 +324,14 @@
             return q.FG2A_36 + q.FG3A_36 + 0.44 * q.FTA_36 * (1 - C.PEN_FT_TRIM)
                    + q.TOV_36 + 1e-9;
           });
-          const user = on[pick(r, uw)];
+          // Sharpen the split, mirroring the engine's USE_POW: exact
+        // proportionality gave bench players too many possessions and stars
+        // too few, monotonically across the rotation.
+        const usePow = (C && C.USE_POW) || 1.0;
+        if (usePow !== 1.0) {
+          for (let i = 0; i < uw.length; i++) uw[i] = Math.pow(uw[i], usePow);
+        }
+        const user = on[pick(r, uw)];
           const q = ratesOf(user.id);
           const mix = [q.FG2A_36, q.FG3A_36,
                        0.44 * q.FTA_36 * (1 - C.PEN_FT_TRIM), q.TOV_36];

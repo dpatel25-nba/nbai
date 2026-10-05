@@ -6,6 +6,8 @@
   <meta name="description" content="NBAI research-only quote and forecast board. Historical evidence and forward paper records are kept separate; missing data stays missing.">
   <title>Research board · NBAI</title>
   <link rel="stylesheet" href="research.css">
+  <link rel="stylesheet" href="totals-coverage.css">
+  <link rel="stylesheet" href="totals-results.css">
   <script src="research-board.js" defer></script>
   <script src="research-ui.js" defer></script>
 </head>
@@ -14,9 +16,12 @@
   <header class="topbar">
     <a class="brand" href="index.html">NBAI <span>/ Research</span></a>
     <nav aria-label="Main navigation">
-      <a href="index.html">Game simulator</a>
+      <a href="game.html">Game simulator</a>
       <a href="season.html">Season simulator</a>
+      <a href="insights.html">Original statistics</a>
+      <a href="betting.html">Season betting</a>
       <a href="research.html" aria-current="page">Research board</a>
+      <a href="kalshi-lab.html">Kalshi lab</a>
     </nav>
   </header>
   <main id="main">
@@ -37,6 +42,53 @@
       <a href="#forward">03 Forward record</a>
     </nav>
     <noscript><p class="data-status">JavaScript is disabled. The snapshot cannot be loaded or freshness checked. No current quotes or verified forward results are shown.</p></noscript>
+<!-- totals-coverage:start -->
+<section id="totals-coverage" class="totals-coverage" aria-labelledby="totals-coverage-title">
+<p class="eyebrow">Historical totals / Coverage only</p>
+<h2 id="totals-coverage-title">Historical totals candidates</h2>
+<p class="badge">Operator-reported · independently unqualified</p>
+<p>Collection-stage snapshot: <time>2026-10-04T15:07:27.963967+00:00</time>. These are earlier collection-stage candidates, not the later 6,059-game evaluated population.</p>
+<p class="metric">6,083 / 6,150 candidate games</p>
+<p>Five regular seasons · 30 teams · 150 team-season cells. Candidates are not betting signals or a validated strategy.</p>
+<ul class="warnings"><li>Opening status: unverified. First observed snapshots are not proof of bookmaker opening quotes.</li>
+<li>Timing status: unverified. Provider timestamp semantics and independent pregame identity/timing qualification remain unresolved.</li>
+<li>Summary accounting only, not raw quote validation. No evaluation, new picks or forward outcomes are implied.</li></ul>
+<p>67 excluded games: <strong>63 with no accepted pregame quotes</strong> (operator category; pregame status remains unverified), and <strong>4 with ambiguous provider identity</strong>.</p>
+<dl class="quote-grid"><div><dt>2021-22</dt><dd>1,226 / 1,230 candidates; 4 excluded</dd></div><div><dt>2022-23</dt><dd>1,175 / 1,230 candidates; 55 excluded</dd></div><div><dt>2023-24</dt><dd>1,230 / 1,230 candidates; 0 excluded</dd></div><div><dt>2024-25</dt><dd>1,226 / 1,230 candidates; 4 excluded</dd></div><div><dt>2025-26</dt><dd>1,226 / 1,230 candidates; 4 excluded</dd></div></dl>
+<details><summary>All 150 team-season cells</summary>
+<div class="coverage-table" tabindex="0" role="region" aria-label="Team-season candidate coverage, scroll horizontally">
+<table><caption>Operator-reported candidate / scheduled team appearances. Each game appears for two teams.</caption>
+<thead><tr><th scope="col">Team</th><th scope="col">2021-22</th><th scope="col">2022-23</th><th scope="col">2023-24</th><th scope="col">2024-25</th><th scope="col">2025-26</th></tr></thead>
+<tbody><tr><th scope="row">ATL</th><td>82 / 82</td><td>80 / 82</td><td>82 / 82</td><td>81 / 82</td><td>82 / 82</td></tr><tr><th scope="row">BKN</th><td>81 / 82</td><td>81 / 82</td><td>82 / 82</td><td>82 / 82</td><td>82 / 82</td></tr><tr><th scope="row">BOS</th><td>81 / 82</td><td>81 / 82</td><td>82 / 82</td><td>82 / 82</td><td>82 / 82</td></tr><tr><th scope="row">CHA</th><td>82 / 82</td><td>78 / 82</td><td>82 / 82</td><td>82 / 82</td><td>82 / 82</td></tr><tr><th scope="row">CHI</th><td>82 / 82</td><td>81 / 82</td><td>82 / 82</td><td>82 / 82</td><td>82 / 82</td></tr><tr><th scope="row">CLE</th><td>82 / 82</td><td>79 / 82</td><td>82 / 82</td><td>82 / 82</td><td>82 / 82</td></tr><tr><th scope="row">DAL</th><td>81 / 82</td><td>79 / 82</td><td>82 / 82</td><td>82 / 82</td><td>81 / 82</td></tr><tr><th scope="row">DEN</th><td>82 / 82</td><td>77 / 82</td><td>82 / 82</td><td>82 / 82</td><td>82 / 82</td></tr><tr><th scope="row">DET</th><td>82 / 82</td><td>81 / 82</td><td>82 / 82</td><td>82 / 82</td><td>81 / 82</td></tr><tr><th scope="row">GSW</th><td>81 / 82</td><td>80 / 82</td><td>82 / 82</td><td>82 / 82</td><td>82 / 82</td></tr><tr><th scope="row">HOU</th><td>82 / 82</td><td>78 / 82</td><td>82 / 82</td><td>81 / 82</td><td>82 / 82</td></tr><tr><th scope="row">IND</th><td>82 / 82</td><td>80 / 82</td><td>82 / 82</td><td>81 / 82</td><td>82 / 82</td></tr><tr><th scope="row">LAC</th><td>82 / 82</td><td>79 / 82</td><td>82 / 82</td><td>82 / 82</td><td>82 / 82</td></tr><tr><th scope="row">LAL</th><td>81 / 82</td><td>77 / 82</td><td>82 / 82</td><td>82 / 82</td><td>82 / 82</td></tr><tr><th scope="row">MEM</th><td>82 / 82</td><td>74 / 82</td><td>82 / 82</td><td>82 / 82</td><td>81 / 82</td></tr><tr><th scope="row">MIA</th><td>82 / 82</td><td>81 / 82</td><td>82 / 82</td><td>81 / 82</td><td>82 / 82</td></tr><tr><th scope="row">MIL</th><td>82 / 82</td><td>80 / 82</td><td>82 / 82</td><td>81 / 82</td><td>82 / 82</td></tr><tr><th scope="row">MIN</th><td>82 / 82</td><td>74 / 82</td><td>82 / 82</td><td>82 / 82</td><td>82 / 82</td></tr><tr><th scope="row">NOP</th><td>82 / 82</td><td>80 / 82</td><td>82 / 82</td><td>82 / 82</td><td>82 / 82</td></tr><tr><th scope="row">NYK</th><td>82 / 82</td><td>76 / 82</td><td>82 / 82</td><td>82 / 82</td><td>81 / 82</td></tr><tr><th scope="row">OKC</th><td>82 / 82</td><td>78 / 82</td><td>82 / 82</td><td>81 / 82</td><td>81 / 82</td></tr><tr><th scope="row">ORL</th><td>82 / 82</td><td>79 / 82</td><td>82 / 82</td><td>82 / 82</td><td>80 / 82</td></tr><tr><th scope="row">PHI</th><td>81 / 82</td><td>80 / 82</td><td>82 / 82</td><td>82 / 82</td><td>82 / 82</td></tr><tr><th scope="row">PHX</th><td>81 / 82</td><td>76 / 82</td><td>82 / 82</td><td>82 / 82</td><td>82 / 82</td></tr><tr><th scope="row">POR</th><td>82 / 82</td><td>76 / 82</td><td>82 / 82</td><td>82 / 82</td><td>82 / 82</td></tr><tr><th scope="row">SAC</th><td>82 / 82</td><td>79 / 82</td><td>82 / 82</td><td>82 / 82</td><td>82 / 82</td></tr><tr><th scope="row">SAS</th><td>82 / 82</td><td>78 / 82</td><td>82 / 82</td><td>81 / 82</td><td>81 / 82</td></tr><tr><th scope="row">TOR</th><td>82 / 82</td><td>76 / 82</td><td>82 / 82</td><td>82 / 82</td><td>82 / 82</td></tr><tr><th scope="row">UTA</th><td>81 / 82</td><td>76 / 82</td><td>82 / 82</td><td>82 / 82</td><td>82 / 82</td></tr><tr><th scope="row">WAS</th><td>82 / 82</td><td>76 / 82</td><td>82 / 82</td><td>81 / 82</td><td>82 / 82</td></tr></tbody></table></div></details>
+<details><summary>Source snapshot and hash provenance</summary>
+<p>Source generated at <time>2026-10-04T15:07:27.963967+00:00</time>. Static historical snapshot, not live coverage.</p>
+<p>Unchanged originals are staged outside the public web folder. Original SHA-256 hashes:</p>
+<ul class="source"><li>coverage.json: <code>77760d8d3b89105141b111aacfdac73690a154a90386ee54683470315a331d79</code></li><li>team_season_coverage.csv: <code>bad5924d8fd6d16888862c88cd1f7695809f93629bc71f382a36c4a63fbb44ab</code></li><li>missing_or_unpaired_games.csv: <code>80d507b96e40a024470b35306c751d27ef9c8ba8909a5218b794f2c46c461a7d</code></li></ul>
+<p><a href="totals-coverage.json">Derived public aggregate (JSON)</a> · <a href="totals-coverage-provenance.json">Original versus derived hash manifest</a></p>
+<p>Hashes bind bytes, not source truth. Team appearances reconcile to twice the game count; gap identities reconcile to team-season shortfalls.</p>
+</details></section>
+<!-- totals-coverage:end -->
+<!-- totals-results:start -->
+<section id="totals-results" class="totals-results" aria-labelledby="totals-results-title">
+<p class="eyebrow">Historical totals / Retrospective results</p>
+<h2 id="totals-results-title">Both betting strategies lost</h2>
+<p class="badge">Operator-reported retrospective results · Independent acceptance pending</p>
+<p>Five regular seasons, 2021–22 through 2025–26, targeting all 30 teams. This is not full league completeness.</p>
+<p class="metric">6,059 / 6,150 evaluated games</p>
+<p>91 exclusions: <strong>55 with no provider quotes</strong> + <strong>36 with ambiguous provider identity</strong>. Separate from the earlier collection-stage coverage above.</p>
+<ul class="warnings"><li>Latest eligible snapshots are not proven openings. Same-book, same-line, same-update-time pairs are operator-reported; historical availability and execution remain unverified.</li>
+<li>All seasons were previously examined. The first three are development; the last two are retrospective confirmation, not an untouched holdout.</li>
+<li>Summary display, not raw-bet validation, strategy approval or a forward paper record. No profitability claim or betting recommendation.</li></ul>
+<div class="results-cards"><article data-method="corrected_model"><h3>Corrected model</h3><dl><div><dt>Eligible opportunities</dt><dd>6,059</dd></div><div><dt>Bets</dt><dd>4,548</dd></div><div><dt>Wins</dt><dd>2,291</dd></div><div><dt>Losses</dt><dd>2,219</dd></div><div><dt>Pushes</dt><dd>38</dd></div><div><dt>Net return</dt><dd>-136.49 units</dd></div><div><dt>ROI (net / units staked)</dt><dd>-3.00%</dd></div><div><dt>Reported 95% ROI interval</dt><dd>-5.89% to -0.21%</dd></div><div><dt>Max daily-close drawdown</dt><dd>168.21 units</dd></div></dl></article><article data-method="half_model_half_market"><h3>Half model / half market</h3><dl><div><dt>Eligible opportunities</dt><dd>6,059</dd></div><div><dt>Bets</dt><dd>3,155</dd></div><div><dt>Wins</dt><dd>1,615</dd></div><div><dt>Losses</dt><dd>1,515</dd></div><div><dt>Pushes</dt><dd>25</dd></div><div><dt>Net return</dt><dd>-46.66 units</dd></div><div><dt>ROI (net / units staked)</dt><dd>-1.48%</dd></div><div><dt>Reported 95% ROI interval</dt><dd>-4.92% to +2.05%</dd></div><div><dt>Max daily-close drawdown</dt><dd>101.14 units</dd></div></dl></article><article data-method="market_no_vig"><h3>No-vig market baseline</h3><dl><div><dt>Eligible opportunities</dt><dd>6,059</dd></div><div><dt>Bets</dt><dd>0</dd></div><div><dt>Wins</dt><dd>0</dd></div><div><dt>Losses</dt><dd>0</dd></div><div><dt>Pushes</dt><dd>0</dd></div><div><dt>Net return</dt><dd>+0.00 units</dd></div><div><dt>ROI (net / units staked)</dt><dd>Unavailable (zero bets)</dd></div><div><dt>Reported 95% ROI interval</dt><dd>Unavailable (zero bets)</dd></div><div><dt>Max daily-close drawdown</dt><dd>0.00 units</dd></div></dl></article></div>
+<p>One unit staked per bet, at most one bet per game per method. The baseline placed zero bets; its ROI and interval are unavailable, not 0%.</p>
+<p>Reported intervals: 2,000 game-date cluster bootstrap resamples, fixed seed 417. They do not capture all model-selection or season-regime uncertainty. Drawdown uses daily-close equity, not intraday peaks.</p>
+<details><summary>Original summary and derived hash provenance</summary>
+<p>Run <code>1503e03be0fc4892a621ea215f4ecf07</code> · snapshot <time>2026-10-04T17:15:06.514730+00:00</time>.</p>
+<p>Original finished.json SHA-256: <code>ef6168eaeb7d3d8fdf844509db58f4f740994dd6e6cdd8ccf5fac203e16b0be1</code>. Unchanged original staged outside the public web folder.</p>
+<p><a href="totals-results.json">Derived public results (JSON)</a> · <a href="totals-results-provenance.json">Original versus derived hashes</a></p>
+<p>Hashes bind bytes, not truth. Counts and returns reconcile across summary seasons and periods; intervals and drawdown are copied from the reported aggregate, not independently recomputed from bets.</p>
+</details></section>
+<!-- totals-results:end -->
     <div id="researchBoard">
       <p class="data-status" role="status">Data unavailable — waiting for a valid snapshot. No picks loaded.</p>
       <section id="historical"><p class="eyebrow">01 / Historical evidence</p><h2>Retrospective research</h2><p>No historical summaries loaded. Minutes-model evidence is not betting validation.</p></section>

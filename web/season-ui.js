@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  const $ = id => document.getElementById(id), data = window.NBAI_SEASON_DATA, api = window.NBAI_SEASON, calendar = window.NBAI_CALENDAR;
+  const $ = id => document.getElementById(id), data = window.NBAI_SEASON_DATA, api = window.NBAI_SEASON, calendar = window.NBAI_CALENDAR, market = window.NBAI_MARKET;
   const esc = x => String(x == null ? "" : x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const fmt = (n,d=1) => Number(n).toFixed(d), number = n => n.toLocaleString();
   const dayLabel = day => new Date(day+"T12:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric"});
@@ -8,7 +8,7 @@
   const sign = n => n>0?"+"+n:String(n);
   const changeClass = n => n>0?"positive":n<0?"negative":"";
   function error(message) { $("message").textContent=message; $("message").hidden=!message; }
-  if (!data || !api || !calendar || !window.NBAI_SIM) {
+  if (!data || !api || !calendar || !market || !window.NBAI_SIM) {
     error("The season data could not load. Run the season exporter and reload this page.");
     $("runWeek").disabled=$("runSeason").disabled=$("runDay").disabled=true;return;
   }
@@ -16,8 +16,10 @@
   let membership = {...original}, season=null, baseline=null, running=false, pauseRequested=false;
   let conference="East", tab="standings", page=0, myTeam="NYK", viewedWeek=0;
   const weeks=calendar.weeks(data.schedule);
+  let releases=[], undoMembership=null, undoFinancials=null;
+  let financials=window.NBAI_MARKET_DATA?.financials || null;
   const storageKey="nbai-season-scenario-v1";
-  const sourceIdentity=data.scheduleSha256+":"+data.sourceHashes["data/parquet/team_rosters.parquet"];
+  const sourceIdentity=data.scheduleSha256+":"+data.sourceHashes["data/parquet/team_rosters.parquet"]+":"+(data.rosterPolicySha256||"");
   try {
     const saved=JSON.parse(localStorage.getItem(storageKey)||"null");
     if (saved && teams.includes(saved.myTeam)) myTeam=saved.myTeam;
@@ -27,6 +29,8 @@
       if (Number.isInteger(saved.seed) && saved.seed>=0 && saved.seed<=4294967295) $("seed").value=saved.seed;
       $("completeSchedule").checked=saved.complete!==false;
       $("compare").checked=saved.compare!==false;
+      $("autoPickup").checked=saved.autoPickup!==false;
+      releases=Array.isArray(saved.releases)?saved.releases.filter(t=>data.players[t.playerId] && teams.includes(t.from) && (t.to===null||teams.includes(t.to)) && Array.isArray(t.candidates)).slice(-50):[];
     }
   } catch (_) { /* Private browsing may disable local storage. */ }
   const teamOptions=teams.map(t=>`<option value="${t}">${t} · ${esc(data.teams[t].name)}</option>`).join("");
@@ -43,7 +47,7 @@
   if (data.impactPolicy) $("dataNote").textContent+=" "+data.impactPolicy.note;
   function edited() { return Object.keys(original).filter(id=>membership[id]!==original[id]).length; }
   function persist() {
-    try {localStorage.setItem(storageKey,JSON.stringify({hash:sourceIdentity,myTeam,membership,seed:Number($("seed").value),complete:$("completeSchedule").checked,compare:$("compare").checked}));} catch (_) {}
+    try {localStorage.setItem(storageKey,JSON.stringify({hash:sourceIdentity,myTeam,membership,autoPickup:$("autoPickup").checked,releases,seed:Number($("seed").value),complete:$("completeSchedule").checked,compare:$("compare").checked}));} catch (_) {}
   }
   function reset() {
     if (running) return;
@@ -53,7 +57,7 @@
     const team=$("rosterTeam").value, q=$("playerSearch").value.toLowerCase().trim();
     const options=Object.values(data.players).filter(p=>membership[p.id]!==team && (p.n.toLowerCase().includes(q)||String(membership[p.id]||"unassigned").toLowerCase().includes(q)))
       .sort((a,b)=>a.n.localeCompare(b.n));
-    $("playerChoice").innerHTML=options.map(p=>`<option value="${p.id}">${esc(p.n)} · ${esc(membership[p.id]||"Unassigned")}</option>`).join("");
+    $("playerChoice").innerHTML=options.map(p=>`<option value="${p.id}">${esc(p.n)} · ${esc(membership[p.id]||(p.contractStatus==='unsigned_restricted_free_agent'?`Unsigned RFA · ${p.rightsTeam} rights`:"Unassigned"))}</option>`).join("");
     $("addPlayer").disabled=running||!options.length;
   }
   function renderRoster() {
@@ -62,7 +66,19 @@
     $("rosterCount").textContent=`${players.length} players · ${Object.keys(minutes).length} in rotation`;
     $("editCount").textContent=edited()?`${edited()} moved`:"Original";
     $("rosterList").innerHTML=players.map(p=>`<div class="roster-row"><span class="player-initials" aria-hidden="true">${esc(p.n.split(" ").map(s=>s[0]).slice(0,2).join(""))}</span><div class="player-info"><b title="${esc(p.n)}">${esc(p.n)}</b><small>${esc(p.pos)}${p.rookie?" · Rookie":""}${membership[p.id]!==original[p.id]?" · Added":""}</small></div><span class="roster-min">${minutes[p.id]?fmt(minutes[p.id],0)+" min":"Bench"}</span><button class="remove-player" data-remove="${p.id}" aria-label="Remove ${esc(p.n)}" ${running?"disabled":""}>×</button></div>`).join("")||'<p class="empty">Add at least five players.</p>';
-    playerChoices();
+    playerChoices();renderPickup();
+    const ready=market.readiness(data,membership,financials);
+    $("pickupAvailability").textContent=ready.ready?"Contract and team ledgers loaded for a preseason waiver claim.":"Auto-pickup unavailable: "+ready.missing[0];
+  }
+  function renderPickup() {
+    const t=releases[releases.length-1];$("pickupNotice").hidden=!t;
+    $("undoRelease").hidden=!undoMembership;$("undoRelease").disabled=running;
+    if(!t)return;
+    const p=data.players[t.playerId],fit=t.candidates.find(c=>c.team===t.to);
+    const headline=t.to?`${p.n} → ${data.teams[t.to].name}`:`${p.n} is unassigned`;
+    const why=t.to&&fit?`Claimed from ${t.from} using ${fit.route==='cap_room'?'cap room':'the minimum exception'}, with waiver priority ${fit.priority+1}: ${fmt(fit.minutes,0)} projected minutes per game and +${fmt(fit.impactGain,2)} team impact.${fit.positionNeed>.1?' Adds depth at the player’s position.':''}`:
+      t.reason==='auto_pickup_off'?`Released by ${t.from}. Auto-pickup was off.`:`Released by ${t.from}. The simulated waiver window ended without an eligible interested claimant. A new free-agent signing would require a separate contract review.`;
+    $("pickupResult").innerHTML=`<p class="eyebrow">Latest release · Simulated</p><strong>${esc(headline)}</strong><p>${esc(why)}</p>${t.to?`<p>Waiver window resolved ${esc(t.resolvedAt)}. Fit is simulated; the claim uses the reviewed financial snapshot.</p>`:''}`;
   }
   function emptyStandings() {return teams.map(team=>({team,w:0,l:0,pf:0,pa:0,homeW:0,homeL:0,awayW:0,awayL:0}));}
   function renderStandings() {
@@ -211,9 +227,18 @@
   $("nextWeek").onclick=()=>{viewedWeek++;renderTeamHub();};
   $("currentWeek").onclick=()=>{viewedWeek=nextWeekIndex();renderTeamHub();};
   $("weekDays").onclick=e=>{const b=e.target.closest("[data-game]");if(b)showBox(b.dataset.game);};$("playerSearch").oninput=playerChoices;
-  $("rosterList").onclick=e=>{const b=e.target.closest("[data-remove]");if(!b||running)return;membership[b.dataset.remove]=null;reset();renderRoster();};
-  $("addPlayer").onclick=()=>{const id=$("playerChoice").value;if(!id||running)return;membership[id]=$("rosterTeam").value;$("playerSearch").value="";reset();renderRoster();};
-  $("resetRoster").onclick=()=>{membership={...original};reset();renderRoster();};
+  $("rosterList").onclick=e=>{
+    const b=e.target.closest("[data-remove]");if(!b||running)return;
+    try {
+      const outcome=market.release(data,membership,b.dataset.remove,$("autoPickup").checked,financials);
+      undoMembership={...membership};undoFinancials=financials;membership=outcome.membership;financials=outcome.financials;
+      releases.push(outcome.transaction);releases=releases.slice(-50);reset();renderRoster();
+    } catch(e) {error(e.message);}
+  };
+  $("autoPickup").onchange=()=>{persist();renderRoster();};
+  $("undoRelease").onclick=()=>{if(running||!undoMembership)return;membership=undoMembership;financials=undoFinancials;undoMembership=undoFinancials=null;releases.pop();reset();renderRoster();};
+  $("addPlayer").onclick=()=>{const id=$("playerChoice").value;if(!id||running)return;undoMembership=undoFinancials=null;financials=null;membership[id]=$("rosterTeam").value;$("playerSearch").value="";reset();renderRoster();};
+  $("resetRoster").onclick=()=>{undoMembership=undoFinancials=null;financials=window.NBAI_MARKET_DATA?.financials||null;releases=[];membership={...original};reset();renderRoster();};
   for (const id of ["seed","completeSchedule","compare"]) $(id).onchange=reset;
   document.querySelectorAll("[data-tab]").forEach(b=>{b.onclick=()=>{tab=b.dataset.tab;document.querySelectorAll("[data-tab]").forEach(t=>{t.classList.toggle("selected",t===b);t.setAttribute("aria-selected",String(t===b));$("view-"+t.dataset.tab).hidden=t!==b;});render();};});
   document.querySelectorAll("[data-conference]").forEach(b=>{b.onclick=()=>{conference=b.dataset.conference;document.querySelectorAll("[data-conference]").forEach(t=>t.classList.toggle("selected",t===b));renderStandings();};});
@@ -223,7 +248,7 @@
   for (const id of ["statsSearch","statsTeam","statsMode","statsSort"]) $(id).addEventListener(id==="statsSearch"?"input":"change",renderPlayers);
   $("closeBox").onclick=()=>$("boxDialog").close();
   $("download").onclick=()=>{
-    if(!season)return;const payload={scenario:season.export(),baseline:baseline?baseline.export():null};
+    if(!season)return;const payload={scenario:season.export(),baseline:baseline?baseline.export():null,rosterMarket:{policy:market.POLICY,autoPickup:$("autoPickup").checked,releases}};
     const url=URL.createObjectURL(new Blob([JSON.stringify(payload)],{type:"application/json"}));
     const a=document.createElement("a");a.href=url;a.download=`nbai-${data.season}-seed-${season.seed}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   };

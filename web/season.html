@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Season Simulator · NBAI</title>
   <link rel="stylesheet" href="season.css">
+<link rel="stylesheet" href="site.css"><script src="site.js" defer></script>
 </head>
 <body>
-  <header class="topbar"><a class="brand" href="index.html"><span class="ball">◉</span> NBAI</a>
-    <nav aria-label="Main navigation"><a href="index.html">Game simulator</a><a class="active" href="season.html" aria-current="page">Season simulator</a></nav>
-    <span class="top-note">THE LEAGUE, REIMAGINED</span></header>
+  <!-- site-header:start --><header class="site-header"><div class="site-header-inner"><a class="site-brand" href="index.html" aria-label="NBAI home"><span class="site-mark" aria-hidden="true">◉</span> NBAI</a><nav class="site-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="insights.html">Research</a><a href="betting.html">Season picks</a><details class="site-menu is-current"><summary>Simulators</summary><div class="site-dropdown"><a href="simulators.html">Explore simulators<small>Choose where to start</small></a><a href="game.html">Game simulator<small>One matchup, every detail</small></a><a href="season.html" aria-current="page">Season simulator<small>Your team, week by week</small></a></div></details></nav></div></header><!-- site-header:end -->
+<nav class="sim-switch" aria-label="Simulator selection"><a href="simulators.html">← Simulators</a><a href="game.html">Single game</a><a href="season.html" aria-current="page">Full season</a></nav>
   <main>
     <section class="franchise-hero" aria-label="Your team">
       <div class="franchise-identity"><p class="eyebrow">NBAI / MY SEASON / 2026–27</p>
@@ -26,11 +26,13 @@
       <aside class="roster-panel panel">
         <div class="section-title"><div><p class="eyebrow">Front office</p><h2>My roster</h2></div><span id="editCount" class="badge">Original</span></div>
         <label for="rosterTeam">Viewing team</label><select id="rosterTeam" data-edit></select>
+        <div class="pickup-setting"><label><input id="autoPickup" type="checkbox" checked data-edit> Auto-pickup released players</label><p>Strict waiver claims · Requires matching contract, cap, roster and waiver-priority evidence. Off leaves the player unassigned.</p><p id="pickupAvailability" role="status"></p></div>
         <div class="roster-heading"><span id="rosterCount"></span><span>Projected role</span></div>
         <div id="rosterList" class="roster-list"></div>
         <div class="add-player"><label for="playerSearch">Find a player to add or move</label><input id="playerSearch" type="search" placeholder="Search any team’s players…" autocomplete="off" data-edit>
           <label for="playerChoice" class="sr-only">Player</label><select id="playerChoice" data-edit></select><button id="addPlayer" class="button secondary full" data-edit>Add to this team</button></div>
-        <p class="small-note">Adding a player moves them from their current team. Removing a player makes them unassigned. Changes restart the season.</p>
+        <p class="small-note">Adding a player moves them from their current team. Released players can join a team with space and a useful rotation role; otherwise they stay unassigned. Changes restart the season.</p>
+        <section id="pickupNotice" class="pickup-notice" aria-label="Latest release" hidden><div id="pickupResult" role="status" aria-live="polite"></div><button id="undoRelease" class="button secondary full" data-edit>Undo this release</button></section>
         <button id="resetRoster" class="text-button" data-edit>Restore original rosters</button>
       </aside>
       <div class="main-column">
@@ -61,10 +63,10 @@
         </section>
       </div>
     </div>
-    <details class="method"><summary>About this simulation &amp; its data</summary><p id="modelNote"></p><p id="dataNote"></p><p>Rotations fill 240 regulation minutes in projected-role order, using up to 12 players. Starter projections are preserved when the rotation is crowded; the last bench player takes the remaining minutes. Short rotations redistribute available minutes, capped at 48 per player. Roster changes affect minutes, possession usage and team strength. An unassigned player does not play. Player averages divide by games actually played, and shooting percentages use total makes and attempts.</p><p>Provisional games add one home and one away game for each team in December. They are placeholders for the two unassigned regular-season games, not an NBA Cup bracket. Cup championships and playoffs are not included. Overtime uses the existing simplified scoring model. One simulated season is one possible outcome, not a measured probability or a validated prediction of trade impact.</p></details>
-    <footer>NBAI <span>2026–27 Season Lab · All results are simulated</span><a href="index.html">Back to game simulator ↗</a></footer>
+    <details class="method"><summary>About this simulation &amp; its data</summary><p id="modelNote"></p><p id="dataNote"></p><p>Rotations fill 240 regulation minutes in projected-role order, using up to 12 players. Starter projections are preserved when the rotation is crowded; the last bench player takes the remaining minutes. Short rotations redistribute available minutes, capped at 48 per player. Roster changes affect minutes, possession usage and team strength. An unassigned player does not play. Auto-pickup requires a reviewed financial snapshot matching the scenario rosters. It checks supported cap-room and minimum-exception waiver claims, roster openings, hard caps and reacquisition restrictions before assessing playing time and team improvement. Interested eligible teams compete in waiver-priority order over a simulated 48-hour preseason window. Unknown contract terms, exceptions or competing eligibility block the action without changing rosters. Other exception routes, two-way claims and new contracts after clearing waivers require further review. Player averages divide by games actually played, and shooting percentages use total makes and attempts.</p><p>Provisional games add one home and one away game for each team in December. They are placeholders for the two unassigned regular-season games, not an NBA Cup bracket. Cup championships and playoffs are not included. Overtime uses the existing simplified scoring model. One simulated season is one possible outcome, not a measured probability or a validated prediction of trade impact.</p></details>
+    <footer>NBAI <span>2026–27 Season Lab · All results are simulated</span><a href="research.html">Research evidence</a><a href="game.html">Back to game simulator ↗</a></footer>
   </main>
   <dialog id="boxDialog"><div class="dialog-head"><div><p class="eyebrow" id="boxDate"></p><h2 id="boxTitle"></h2></div><button id="closeBox" class="button secondary" aria-label="Close box score">Close ×</button></div><div id="boxContent"></div></dialog>
-  <script src="season-data.js"></script><script src="season-possession.js"></script><script src="season-engine.js"></script><script src="season-calendar.js"></script><script src="season-ui.js"></script>
+  <script src="season-data.js"></script><script src="season-possession.js"></script><script src="season-engine.js"></script><script src="season-calendar.js"></script><script src="season-market.js"></script><script src="season-ui.js"></script>
 </body>
 </html>
