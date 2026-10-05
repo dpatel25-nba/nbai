@@ -3,11 +3,11 @@
   'use strict';
   const $ = id => document.getElementById(id);
   const PAGE_SIZE = 12;
-  let rows = [], visible = PAGE_SIZE, generatedAt = null;
+  let rows = [], visible = PAGE_SIZE, generatedAt = null, live = false;
   const searchText = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   function updateFreshness() {
     const time = Date.parse(generatedAt), age = Date.now() - time;
-    const state = !Number.isFinite(time) || age < -60000 ? 'Unverified snapshot time' : age > 86400000 ? 'Stale snapshot' : 'Captured snapshot';
+    const state = live && age >= -60000 && age <= 120000 ? 'Live Kalshi quotes · updates every 60 seconds' : !Number.isFinite(time) || age < -60000 ? 'Unverified snapshot time' : age > 86400000 ? 'Stale snapshot' : 'Saved snapshot · live refresh unavailable';
     $('snapshot').textContent = `${state} · ${Number.isFinite(time) ? new Date(time).toLocaleString() : 'Time unavailable'}. Refresh before acting on any price.`;
   }
   const cents = value => value == null ? 'Unavailable' : `${(value * 100).toFixed(1).replace(/\.0$/, '')}¢`;
@@ -20,7 +20,7 @@
       if(data.schemaVersion!==1 || !Array.isArray(data.items))throw Error('Invalid research');
       $('shortlistStatus').textContent=`${data.simulationSeasons} full-league scenario runs · ${data.teams} teams · No trade-ready recommendations`;
       $('shortlistCards').replaceChildren();
-      for(const item of data.items){
+      for(const item of data.items.filter(x=>!x.ticker.startsWith('KXNBAMVP'))){
         const current=rows.find(row=>row.ticker===item.ticker);
         const matched=current && current.receiptSha256===item.receiptSha256 && current.observedAt===item.observedAt && current.yesAsk===item.reviewedAsk;
         const aged=Date.now()-Date.parse(item.observedAt)>86400000;
@@ -29,7 +29,7 @@
         card.append(node('h4','The case'),node('p',item.reason),node('h4','What could break it'),node('p',item.risk));
         const details=node('details');details.append(node('summary','Evidence & next check'),node('p',item.nextCheck));
         if(item.metrics){const m=item.metrics;details.append(node('p',`Baseline scenario hit rate: ${(100*m.scenarioHitRate).toFixed(1)}%. Five-win adverse stress: ${(100*m.adverseFiveWinHitRate).toFixed(1)}%. These are outputs of an unvalidated scenario engine, not real-world odds.`),node('p',`Simulation sampling interval: ${(100*m.monteCarloInterval[0]).toFixed(1)}–${(100*m.monteCarloInterval[1]).toFixed(1)}%. This excludes model error. Mean wins: ${m.meanWins.toFixed(2)}.`));}
-        else details.append(node('p','Own MVP probability: unavailable. Historical WAR is not an award probability.'));
+
         if(item.contextUrl){const source=node('a','NBA source');source.href=item.contextUrl;source.target='_blank';source.rel='noopener noreferrer';details.append(node('p',item.context),source);}
         const link=node('a','View the exact contract ↗','market-link');link.href=item.url;link.target='_blank';link.rel='noopener noreferrer';
         card.append(details,link);$('shortlistCards').append(card);
@@ -62,13 +62,10 @@
   }
   for (const id of ['category','search','sort']) $(id).addEventListener('input', () => {visible=PAGE_SIZE;render();});
   $('more').addEventListener('click', () => {visible+=PAGE_SIZE;render();});
-  fetch('season-betting.json', {cache:'no-store'}).then(r => {if (!r.ok) throw Error('Snapshot unavailable');return r.json();}).then(data => {
-    if (data.schemaVersion !== 1 || !Array.isArray(data.markets)) throw Error('Unsupported snapshot');
-    rows = data.markets;
-    generatedAt = data.generatedAt;
-    updateFreshness();
-    setInterval(updateFreshness,60000);
-    render();
-    loadShortlist();
-  }).catch(() => {$('snapshot').textContent='Market snapshot unavailable. No prices are being estimated.';});
+  NBAI_QUOTES.watch('season','season-betting.json',(data,ok)=>{
+    if(!data){$('snapshot').textContent='Market snapshot unavailable. No prices are being estimated.';return;}
+    rows=data.markets.filter(r=>r.category!=='Player MVP');generatedAt=data.generatedAt;live=ok;
+    updateFreshness();render();loadShortlist();
+  });
+  setInterval(updateFreshness,15000);
 })();

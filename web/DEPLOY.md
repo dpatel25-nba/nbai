@@ -7,7 +7,9 @@
 - `game.html`: game simulator and retained detailed research views. Old
   `index.html#players`-style links redirect here.
 - `season.html`: team-perspective season simulator.
-- `insights.html`: original statistics, player comparisons and formula explanations.
+- `insights.html`: player search, season points/assists/rebounds scenarios, manual
+  season-line comparisons and available Kalshi player props.
+- `player-value.html`: retained historical player-value archive.
 - `betting.html`: captured preseason Kalshi markets and a conditional research watchlist.
 - `research.html`, `kalshi-history.html`, `kalshi-lab.html`: supporting evidence.
 
@@ -38,18 +40,19 @@ PLAYWRIGHT_BROWSERS_PATH=agent-workspace/.runtime/browsers \
 These steps prepare local files. Publishing still uses the existing GitHub/Vercel
 workflow; passing local checks does not mean a deployment happened.
 
-The site is a **static site**: plain files in `web/` (`index.html` + `data.js`). No server
-needed. `data.js` is generated from the model by `scripts/export_web.py`.
+The pages are plain files in `web/`, with one read-only Vercel Function for live quotes.
+Saved quote snapshots remain available without that function. `data.js` is generated from the model by `scripts/export_web.py`.
 
 ## Preview it locally
-Serve the complete folder so pages can load their JSON snapshots:
+Serve the complete folder plus the read-only quote endpoint:
 
 ```sh
-python -m http.server 8769 --bind 127.0.0.1 --directory web
+agent-workspace/.runtime/node/bin/node scripts/serve_website.cjs
 ```
 
-Open `http://127.0.0.1:8769/`. Shared navigation is ordinary HTML; after changing
-its structure in `scripts/build_site_navigation.py`, regenerate all six product
+Open `http://127.0.0.1:8770/`. A plain static server also works with saved quotes,
+but cannot serve the live API. Shared navigation is ordinary HTML; after changing
+its structure in `scripts/build_site_navigation.py`, regenerate all seven product
 headers with `python scripts/build_site_navigation.py`. New home/hub styles are
 in `home.css`; shared navigation styles and behavior are in `site.css` / `site.js`.
 
@@ -59,6 +62,43 @@ Check the home page, old research links and both simulator flows:
 PLAYWRIGHT_BROWSERS_PATH=agent-workspace/.runtime/browsers \
   agent-workspace/.venv/bin/python tests/check_home_browser.py
 ```
+
+### Player props and live quotes
+
+Vercel's project root remains `web`. Deploy `api/kalshi.js`, `lib/kalshi.cjs`
+and `vercel.json` with the pages. The function permits only public GET market
+inventory requests for fixed player-stat or team-season series. It uses no
+account keys, balances, orders or trade endpoints. Inventories are cursor-complete
+or return an error; an incomplete result never replaces a saved snapshot.
+
+The function has a 20-second retrieval deadline, 30-second cache, request
+coalescing per warm instance and a 30-second function limit. Visible browser
+pages refresh every 60 seconds. Observation times and response SHA-256 hashes
+travel with quotes. Failure retains the saved timestamp and labels quotes as
+saved; stale or closed player quotes cannot produce a directional lean. This is
+polled market data, not a streaming execution feed.
+
+Generate a new reproducible projection snapshot with:
+
+```sh
+agent-workspace/.runtime/node/bin/node scripts/build_player_projections.cjs
+agent-workspace/.runtime/node/bin/node --test tests/test_player_props.cjs
+PLAYWRIGHT_BROWSERS_PATH=agent-workspace/.runtime/browsers \
+  agent-workspace/.venv/bin/python tests/check_player_props_browser.py
+```
+
+The exporter runs 200 seasons across all 30 teams. It records input hashes,
+protocol and samples under `data/features/player_props/runs/`. Per-game and
+total units are separate; no minutes projects as unavailable. These are
+fixed-roster, all-available scenarios, not calibrated betting probabilities.
+
+October 5 discovery found game points contracts but no season over/under
+contracts in the supported points/assists/rebounds series. The page distinguishes
+empty inventories, retrieval failures and unmatched players. A manual line is
+user supplied, not a sourced bookmaker quote. Season projections never supply
+game-prop recommendations. MVP collection and shortlist research are removed.
+
+Primary API reference: [Kalshi public market data](https://docs.kalshi.com/getting_started/quick_start_market_data).
 
 To refresh the numbers after the model changes:
 
