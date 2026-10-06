@@ -17,6 +17,12 @@ with sync_playwright() as p:
   page.locator('#surplusSearch').fill('');page.locator('#surplusOrder').select_option('low');assert float(page.locator('#surplusRows tr').first.locator('td').nth(2).inner_text())<0
   page.locator('#surplusOrder').select_option('high')
   page.locator('#creationSearch').fill('jokic');assert page.locator('#creationRows tr').count()==1;assert 'Jokić' in page.locator('#creationReadout').inner_text()
+  dot=page.locator('#creationChart [data-study-point="203999"]')
+  dot.hover();assert page.locator('#creationTooltip').is_visible();assert 'Jokić' in page.locator('#creationTooltip').inner_text();assert 'assists / 36' in page.locator('#creationTooltip').inner_text()
+  bounds=page.locator('#creationTooltip').bounding_box();assert bounds['x']>=0 and bounds['x']+bounds['width']<=width
+  page.mouse.move(0,0);assert page.locator('#creationTooltip').is_hidden()
+  dot.focus();assert page.locator('#creationTooltip').is_visible();dot.press('Escape');assert page.locator('#creationTooltip').is_hidden()
+  dot.click();assert page.locator('#creationTooltip').is_visible()
   page.locator('#creationSearch').fill('')
   page.locator('#shotValueOrder').select_option('actual');page.locator('#shotValueRows button').filter(has_text='BOS').click();assert page.locator('#shotTeam').input_value()=='BOS'
   assert page.locator('#shotTeam option').count()==30
@@ -42,5 +48,5 @@ with sync_playwright() as p:
  page.goto(BASE+'/index.html');page.wait_for_function('document.querySelectorAll("#homeLeaders li").length===3');assert 'WAR v4' in page.locator('#homeSource').inner_text()
  page.route('**/visual-research.json',lambda r:r.fulfill(status=503,body='unavailable'));page.goto(BASE+'/insights.html');page.wait_for_function('document.querySelector("#researchStatus").textContent.includes("unavailable")');assert page.locator('#researchContent').is_hidden()
  assert not errors,errors;b.close()
-receipt={'passed':True,'base':BASE,'widths':[320,390,768,1440],'checks':['player search','impact and efficiency views','team filters','season filters','shot-cell inspection','SVG downloads','five visible charts','scoring surplus ranking','playmaking search','team value sorting','removed promotional sections','mobile overflow','homepage','fetch failure'],'errors':errors}
+receipt={'passed':True,'base':BASE,'widths':[320,390,768,1440],'checks':['player search','impact and efficiency views','team filters','season filters','shot-cell inspection','SVG downloads','five visible charts','scoring surplus ranking','playmaking search','hover/tap/keyboard player tooltips','team value sorting','removed promotional sections','mobile overflow','homepage','fetch failure'],'errors':errors}
 (O/('live-checks.json' if 'nbai.space' in BASE else 'local-checks.json')).write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(receipt))
