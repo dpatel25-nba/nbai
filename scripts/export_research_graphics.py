@@ -25,7 +25,7 @@ for mode in ['impact','efficiency']:
  for i in leaders:
   ax.scatter([xs[i]],[ys[i]],s=75,c=ORANGE,zorder=4)
   for dx,dy in [(8,16),(-8,16),(8,-26),(-8,-26),(8,40),(-8,40),(8,-48),(-8,-48)]:
-   annotation=ax.annotate(p[i]['name'],(xs[i],ys[i]),xytext=(dx,dy),textcoords='offset points',ha='left' if dx>0 else 'right',fontsize=10,color=INK,bbox=dict(facecolor=BG,edgecolor='none',alpha=.92,pad=2),zorder=5)
+   annotation=ax.annotate(p[i]['name'],(xs[i],ys[i]),xytext=(dx,dy),textcoords='offset points',ha='left' if dx>0 else 'right',fontsize=10,color=INK,bbox=dict(facecolor=BG,edgecolor='none',alpha=.92,pad=2),arrowprops=dict(arrowstyle='-',color='#87977d',lw=.7,shrinkA=3,shrinkB=6),zorder=5)
    fig.canvas.draw();box=annotation.get_bbox_patch().get_window_extent().expanded(1.03,1.25);bounds=ax.get_window_extent()
    if box.x0>=bounds.x0 and box.x1<=bounds.x1 and box.y0>=bounds.y0 and box.y1<=bounds.y1 and not any(box.overlaps(old) for old in labels):labels.append(box);break
    annotation.remove()
