@@ -6,10 +6,10 @@
   const C=NBAI_CONSENSUS;
   const hasLines=p=>(consensus?.quotes||[]).some(q=>C.normalize(q.player)===C.normalize(p.name));
   function search(){
-    if(!data)return;const q=A.normalize($('search').value),rows=data.players.filter(p=>A.normalize(p.name).includes(q)&&(!$('researchTeam').value||(p.team||'unassigned')===$('researchTeam').value));
+    if(!data)return;const q=A.normalize($('search').value),rows=data.players.filter(p=>A.normalize(p.name).includes(q)&&($('lineFilter').value!=='quoted'||hasLines(p))&&(!$('researchTeam').value||(p.team||'unassigned')===$('researchTeam').value));
     if(!q)rows.sort((a,b)=>Number(hasLines(b))-Number(hasLines(a))||(b.stats.PTS.average?.mean??-1)-(a.stats.PTS.average?.mean??-1));
     $('playerResults').replaceChildren();
-    for(const p of rows.slice(0,visiblePlayers)){const b=el('button',p.name+' · '+(p.team||'Roster pending')+(hasLines(p)?' · Lines available':''));b.type='button';b.setAttribute('aria-pressed',String(selected?.id===p.id));b.onclick=()=>{selected=p;eventId=null;$('manualLine').value='';search();render();};$('playerResults').append(b);}
+    for(const p of rows.slice(0,visiblePlayers)){const b=el('button',p.name+' · '+(p.team||'Roster pending')+(hasLines(p)?' · Lines available':''));b.type='button';b.setAttribute('aria-pressed',String(selected?.id===p.id));b.onclick=()=>{selected=p;eventId=$('lineFilter').value==='quoted'?C.eventsFor(p,consensus,gameForecasts).find(e=>Object.keys(names).some(stat=>Object.values(C.sources(consensus,p,e,stat)).some(Boolean)))?.id||null:null;$('manualLine').value='';search();render();};$('playerResults').append(b);}
     $('morePlayers').hidden=rows.length<=visiblePlayers;
     $('searchCount').textContent=rows.length?`${rows.length} matching players · Showing ${Math.min(visiblePlayers,rows.length)}${rows.length>visiblePlayers?' · Search, choose a team, or show more':''}`:'No matching player. Try a surname.';
   }
@@ -73,25 +73,45 @@
     $('consensusStatus').textContent=consensus?`${reloadFailed?'Reload failed · retained snapshot':'Saved bookmaker snapshot'} · Captured ${new Date(consensus.generatedAt).toLocaleString()} · ${consensus.coverage.eventsChecked} of ${consensus.coverage.eventsDiscovered} listed games checked. This is not an automatically refreshing feed.`:'Bookmaker snapshot unavailable. No consensus lines are being estimated.';
     $('matchupNote').textContent=view==='season'?'Current season-average lines from these apps are not verified. Single-game quotes are never substituted.':event&&forecast?`${gameForecasts?.runs||0} matchup scenarios · Conditional on playing · Historical injury scenarios, not current medical reports. Built ${gameForecasts?new Date(gameForecasts.generatedAt).toLocaleString():'date unavailable'}.`:event?'Matching game projection unavailable. Season averages are not substituted.':(selected.team?'No verified upcoming matchup in the current game inventory.':'Roster assignment unresolved; a team matchup cannot be chosen.');
     const gamePlayer=forecast?.players?.find(p=>p.id===selected.id);
-    $('coverageNote').textContent=view==='season'?'Our season averages are available independently of bookmaker coverage.':gamePlayer?.projectionStatus==='no_projected_minutes'?'This player receives no minutes in the current simulated rotations. We cannot estimate conditional playing stats from zero appearances.':gamePlayer?.projectionStatus==='limited_participation'?`Limited rotation role: played in ${gamePlayer.playedScenarios} of ${gameForecasts.runs} simulations. Comparisons are withheld.`:event&&!hasLines(selected)?'Our matchup projection is available. The four checked sources returned no matching lines for this player in the collected snapshot.':gameForecasts?.coverage?`Model coverage: ${gameForecasts.coverage.rosteredPlayers} rostered players across ${gameForecasts.coverage.teams} teams and ${gameForecasts.coverage.events} games. Betting-line coverage is separate.`:'';
-    const displayedProviders=Object.keys(C.PROVIDERS).filter(b=>['fanduel','prizepicks'].includes(b)||(consensus?.quotes||[]).some(q=>q.provider===b));
-    for(const b of ['draftkings','betmgm'])$(b+'Column').hidden=!displayedProviders.includes(b);
+    const entries=Object.entries(names).map(([stat,name])=>({stat,name,call:view==='game'?C.compare(consensus,selected,event,stat,forecast):null}));
+    const quoted=entries.filter(e=>e.call?.sourceCount>0),unquoted=entries.filter(e=>!e.call?.sourceCount);
+    const displayedProviders=Object.keys(C.PROVIDERS).filter(b=>quoted.some(e=>e.call.books[b]));
+    const hasConsensus=quoted.some(e=>e.call.median!=null);
+    $('comparisonHeading').textContent=quoted.length?'NBAI vs. the market':view==='season'?'Season outlook':'Matchup outlook';
+    $('marketComparison').hidden=!quoted.length;$('comparisonKey').hidden=!hasConsensus;
+    $('consensusColumn').hidden=!hasConsensus;$('differenceColumn').hidden=!hasConsensus;
+    for(const b of Object.keys(C.PROVIDERS))$(b+'Column').hidden=!displayedProviders.includes(b);
+    const coverage=view==='season'?'Season-average market lines are not available in this feed. These are our projections.':!consensus?'Bookmaker data could not load. Market availability is unknown.':!event?'No matching game is available to compare.':!quoted.length?'No bookmaker lines were returned for this player and matchup in the saved feed. Our projections are shown below; there is no market comparison yet.':`${quoted.length} of 8 stats have a saved market line for this matchup. ${hasConsensus?'Consensus requires at least two sources for the same stat.':'Only single-source lines are available; there is no consensus yet.'}`;
+    const limitation=gamePlayer?.projectionStatus==='no_projected_minutes'?' No projected rotation minutes; game statistics are unavailable.':gamePlayer?.projectionStatus==='limited_participation'?` Limited rotation role: ${gamePlayer.playedScenarios} of ${gameForecasts.runs} simulations; differences withheld.`:forecast?.reviewRequired||selected.reviewRequired?` Projection under review: ${forecast?.reviewRequired||selected.reviewRequired}`:'';
+    $('coverageNote').textContent=coverage+limitation;
+    $('browseLines').hidden=view!=='game'||quoted.length>0||!data?.players.some(hasLines);
+    $('unquotedProjections').replaceChildren();$('projectionOnly').hidden=!unquoted.length;
+    $('projectionOnlyHeading').textContent=quoted.length?'More NBAI projections':view==='season'?'Projected season averages':'Projected game stats';
+    $('projectionOnlyNote').textContent=quoted.length?'These stats have no matching line in this snapshot. Shooting percentages are descriptive projections.':'Ranges show simulated outcomes, not a confidence interval. Shooting percentages are descriptive projections.';
     const displayedSources=new Map();
-    for(const [stat,name] of Object.entries(names)){
-      const call=view==='game'?C.compare(consensus,selected,event,stat,forecast):null;
-      const p=view==='game'?call.model:selected.stats[stat]?.average,percent=stat.endsWith('_PCT'),row=el('tr');
+    for(const {stat,name,call} of entries){
+      const p=view==='game'?call.model:selected.stats[stat]?.average,percent=stat.endsWith('_PCT');
+      const value=p?p.mean.toFixed(percent?1:2)+(percent?'%':''):'—';
+      const detail=p?`${fmt(p.p10)}–${fmt(p.p90)}${percent?'%':''} scenario range`:call?.held?'Under review':call?.participation==='no_projected_minutes'||view==='season'&&selected.games?.mean===0?'No projected minutes':!selected.team?'Roster assignment unresolved':'Projection unavailable';
+      if(!call?.sourceCount){
+        const card=el('article',null,'projection-stat');card.dataset.stat=stat;
+        card.append(el('h4',name),el('p',value,'value'),el('p',detail,'note'));$('unquotedProjections').append(card);continue;
+      }
+      const row=el('tr');row.dataset.stat=stat;
       const title=el('th',name);title.scope='row';row.append(title);
-      const model=el('td',p?p.mean.toFixed(percent?1:2)+(percent?'%':''):'—','model-cell');
-      model.append(el('small',p?`${fmt(p.p10)}–${fmt(p.p90)}${percent?'%':''} scenario range`:call?.held?'Under review':call?.participation==='no_projected_minutes'||view==='season'&&selected.games?.mean===0?'No projected minutes':!selected.team?'Roster assignment unresolved':'Projection unavailable'));row.append(model);
+      const model=el('td',value,'model-cell');model.append(el('small',detail));row.append(model);
       for(const provider of displayedProviders){
-        const quote=call?.books[provider],cell=el('td',quote?String(quote.line):'—');
-        if(quote){cell.append(el('small','Observed line'));displayedSources.set(provider+':'+stat,quote);}else cell.append(el('small',percent?'Percentage market not collected':view==='season'?'Season line not verified':'No matching line returned'));
+        const quote=call.books[provider],cell=el('td',quote?String(quote.line):'—');
+        if(quote){cell.append(el('small','Saved line'));displayedSources.set(provider+':'+stat,quote);}else cell.append(el('small','Not in snapshot'));
         row.append(cell);
       }
-      const market=el('td',call?.median!=null?String(Number(call.median.toFixed(2))):'—','consensus-cell');
-      market.append(el('small',call?.median!=null?call.sourceCount+' sources · '+(call.fresh?'recent snapshot':'stale / closed'):call?.sourceCount===1?'1 source · no consensus':'No consensus'));row.append(market);
-      const gap=call?.gap??call?.snapshotGap,delta=el('td',gap!=null?(gap>0?'+':'')+gap.toFixed(2):'—','gap-cell');
-      delta.append(el('small',gap!=null?(call.fresh?'Research difference only':'Saved snapshot difference · not current'):view==='season'?'Season lines not verified':call.reason));row.append(delta);$('comparisonRows').append(row);
+      if(hasConsensus){
+        const market=el('td',call.median!=null?String(Number(call.median.toFixed(2))):'—','consensus-cell');
+        market.append(el('small',call.median!=null?call.sourceCount+' sources · '+(call.fresh?'recent snapshot':'stale / closed'):'1 source · no consensus'));row.append(market);
+        const gap=call.gap??call.snapshotGap,delta=el('td',gap!=null?(gap>0?'+':'')+gap.toFixed(2):'—','gap-cell');
+        delta.append(el('small',gap!=null?(call.fresh?'Research difference only':'Saved snapshot difference · not current'):call.reason));row.append(delta);
+      }
+      $('comparisonRows').append(row);
     }
     for(const q of displayedSources.values()){
       const odds=q.americanOdds?` · Over ${q.americanOdds.over>0?'+':''}${q.americanOdds.over} / Under ${q.americanOdds.under>0?'+':''}${q.americanOdds.under}`:'';
@@ -109,6 +129,8 @@
   }
   for(const button of document.querySelectorAll('[data-view]'))button.onclick=()=>{view=button.dataset.view;for(const b of document.querySelectorAll('[data-view]'))b.setAttribute('aria-pressed',String(b===button));comparison();};
   $('comparisonGame').onchange=()=>{eventId=$('comparisonGame').value;comparison();};
+  $('lineFilter').onchange=()=>{visiblePlayers=12;search();};
+  $('browseLines').onclick=()=>{$('search').value='';$('researchTeam').value='';$('lineFilter').value='quoted';visiblePlayers=12;search();$('lineFilter').focus();$('lineFilter').scrollIntoView({block:'center'});};
   $('reloadComparison').onclick=loadComparison;loadComparison();setInterval(comparison,30000);
   const refresh=NBAI_QUOTES.watch('player','player-markets.json',(d,ok)=>{quotes=d;live=ok;markets();});
   $('refreshQuotes').onclick=refresh;setInterval(markets,15000);
