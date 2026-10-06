@@ -246,7 +246,7 @@ publishing from this workspace, since it contains unrelated ongoing work.
 `insights.html` is now the historical research gallery. Season projections and
 player-market comparisons are no longer loaded by this page; matchup comparisons
 remain in Game day. Ship `visual-research.js`, `visual-research.css`,
-`visual-research.json`, and `research-graphics/` together. The homepage uses the
+`visual-research.json`, and `research-studies.js` together. The homepage uses the
 same historical dataset.
 
 Rebuild the three-season snapshot with `python scripts/build_visual_research.py`
@@ -258,11 +258,21 @@ shooting are historical rates. Missing coordinates and beyond-half-court attempt
 have explicit coverage counts. Input and formula hashes are in the JSON.
 
 Run `python scripts/export_research_graphics.py` with Matplotlib to regenerate
-the published 2025–26 PNG editions. Those static figures are separate from the
-interactive filters; SVG downloads capture the currently selected chart. The PNG
-edition links should be updated if the exporter is extended to a newer season.
+the archived 2025–26 PNG editions. The shareable-edition and notebook promotion
+sections have been removed from Research. SVG downloads on the two original
+interactive charts still capture the current selection.
 
 Validation: `python tests/test_visual_research.py` checks shot count reconciliation,
 coordinate exclusions and archived player metrics. `python tests/check_visual_research_browser.py`
 checks four viewport widths, player/team/season filters, exports and load failures.
 Set `NBAI_BASE_URL=https://nbai.space` for deployed browser verification.
+
+The gallery now has five visible charts. The additional studies are scoring
+surplus per 36 minutes, assists versus turnovers, and team shot-mix baseline
+versus finishing surplus. All three follow the global season selector, with visible
+searchable/sortable tables. Definitions live in `metricDefinitions` in the data
+export. Scoring surplus uses full-league TS at the player’s shooting volume; team
+shot value decomposes actual points per 100 FGA into a league-zone-rate baseline
+and a finishing residual. They are descriptive measures, not causal impact or
+validated predictions. Tests cover signed baseline examples, rate normalization,
+all-team weighted residual reconciliation, three seasons and UI filtering.

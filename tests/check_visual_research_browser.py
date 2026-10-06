@@ -6,6 +6,19 @@ with sync_playwright() as p:
  b=p.chromium.launch(args=['--host-resolver-rules=MAP nbai.space 216.198.79.65'] if 'nbai.space' in BASE else []);page=b.new_page(accept_downloads=True);errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
  for width in [320,390,768,1440]:
   page.set_viewport_size({'width':width,'height':1000});page.goto(BASE+'/insights.html');page.wait_for_selector('#researchContent:not([hidden])')
+  assert page.get_by_text('Take a chart with you.',exact=True).count()==0
+  assert page.get_by_text('A chart should start a question.',exact=True).count()==0
+  assert page.locator('#researchContent svg').count()==5
+  assert page.locator('#shotValueRows tr').count()==30
+  assert page.locator('#creationRows tr').count()==378
+  page.locator('#surplusSearch').fill('jokic');assert page.locator('#surplusRows tr').count()==1
+  assert 'Jokić' in page.locator('#surplusRows').inner_text()
+  page.locator('#surplusSearch').fill('nobody');assert 'No players match' in page.locator('#surplusRows').inner_text()
+  page.locator('#surplusSearch').fill('');page.locator('#surplusOrder').select_option('low');assert float(page.locator('#surplusRows tr').first.locator('td').nth(2).inner_text())<0
+  page.locator('#surplusOrder').select_option('high')
+  page.locator('#creationSearch').fill('jokic');assert page.locator('#creationRows tr').count()==1;assert 'Jokić' in page.locator('#creationReadout').inner_text()
+  page.locator('#creationSearch').fill('')
+  page.locator('#shotValueOrder').select_option('actual');page.locator('#shotValueRows button').filter(has_text='BOS').click();assert page.locator('#shotTeam').input_value()=='BOS'
   assert page.locator('#shotTeam option').count()==30
   assert page.locator('#playerChart circle[data-player]').count()==378
   assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
@@ -17,6 +30,8 @@ with sync_playwright() as p:
   page.locator('#shotChart circle[data-cell]').first.click(force=True);assert 'attempts' in page.locator('#shotTooltip').inner_text()
   page.locator('#shotMode').select_option('volume');assert page.locator('.court-legend').is_hidden()
   page.locator('#researchSeason').select_option('2023-24');assert page.locator('#playerChart circle[data-player]').count()==360
+  assert page.locator('#creationRows tr').count()==360
+  assert '2023-24' in page.locator('#shotValueChart').inner_text()
   assert '2023-24' in page.locator('#teamShotTitle').inner_text();assert '1,230 / 1,230' in page.locator('#researchStatus').inner_text()
   page.locator('#researchSeason').select_option('2025-26');page.locator('#impactTeam').select_option('');page.locator('[data-chart="impact"]').click();page.locator('#shotMode').select_option('relative')
   assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
@@ -27,5 +42,5 @@ with sync_playwright() as p:
  page.goto(BASE+'/index.html');page.wait_for_function('document.querySelectorAll("#homeLeaders li").length===3');assert 'WAR v4' in page.locator('#homeSource').inner_text()
  page.route('**/visual-research.json',lambda r:r.fulfill(status=503,body='unavailable'));page.goto(BASE+'/insights.html');page.wait_for_function('document.querySelector("#researchStatus").textContent.includes("unavailable")');assert page.locator('#researchContent').is_hidden()
  assert not errors,errors;b.close()
-receipt={'passed':True,'base':BASE,'widths':[320,390,768,1440],'checks':['player search','impact and efficiency views','team filters','season filters','shot-cell inspection','SVG downloads','mobile overflow','homepage','fetch failure'],'errors':errors}
+receipt={'passed':True,'base':BASE,'widths':[320,390,768,1440],'checks':['player search','impact and efficiency views','team filters','season filters','shot-cell inspection','SVG downloads','five visible charts','scoring surplus ranking','playmaking search','team value sorting','removed promotional sections','mobile overflow','homepage','fetch failure'],'errors':errors}
 (O/('live-checks.json' if 'nbai.space' in BASE else 'local-checks.json')).write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(receipt))
