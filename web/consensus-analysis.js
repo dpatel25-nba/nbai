@@ -1,7 +1,7 @@
 (function(root){
   const normalize=s=>String(s??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
   const STATS={PTS:'Points',AST:'Assists',REB:'Rebounds',STL:'Steals',BLK:'Blocks',FG_PCT:'FG%',FT_PCT:'FT%',FG3_PCT:'3P%'};
-  const PROVIDERS={fanduel:'FanDuel',prizepicks:'PrizePicks',draftkings:'DraftKings',betmgm:'BetMGM'};
+  const PROVIDERS={fanduel:'FanDuel',prizepicks:'PrizePicks',draftkings:'DraftKings',betmgm:'BetMGM',fanatics:'Fanatics',betrivers:'BetRivers',williamhill_us:'Caesars',underdog:'Underdog',espnbet:'theScore Bet',hardrockbet:'Hard Rock Bet'};
   const MAX_AGE=15*60*1000;
   function validTime(value,now){const t=Date.parse(value);return Number.isFinite(t)&&t<=now+60000;}
   function sources(data,player,event,stat,now=Date.now()){
