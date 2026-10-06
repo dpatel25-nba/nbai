@@ -17,6 +17,9 @@ for(const e of models.events){
  const event=quotes.events.find(x=>x.id===e.eventId),game=NBAI_SEASON_DATA.schedule.find(g=>g.id===e.gameId);
  assert.equal(Date.parse(e.officialStartsAt),Date.parse(game.tip));assert.ok(Math.abs(Date.parse(e.startsAt)-Date.parse(game.tip))<=15*60000);assert.equal((Date.parse(e.startsAt)-Date.parse(game.tip))/60000,e.scheduleOffsetMinutes);assert.equal(Date.parse(e.startsAt),Date.parse(event.commence_time));
  assert.equal(NBAI_SEASON_DATA.teams[e.home].name,event.home_team);assert.equal(NBAI_SEASON_DATA.teams[e.away].name,event.away_team);
+ assert.ok(e.gameProjection);assert.ok(e.gameProjection.homeWinShare>=0&&e.gameProjection.homeWinShare<=1);
+ assert.ok(Math.abs(e.gameProjection.homeScore.mean-e.gameProjection.awayScore.mean-e.gameProjection.homeMargin.mean)<1e-8);
+ if(saved){const scores=saved.find(x=>x.eventId===e.eventId).scores;assert.equal(scores.length,models.runs);assert.deepEqual(e.gameProjection.homeMargin,summary(scores.map(g=>g.H-g.A)));}
  for(const p of e.players){
   for(const stat of ['PTS','AST','REB','STL','BLK','FG_PCT','FT_PCT','FG3_PCT']){const x=p.stats[stat];if(x){assert.ok([x.mean,x.p10,x.p90].every(Number.isFinite));assert.ok(x.p10<=x.p90);assert.ok(x.mean>=0);if(stat.endsWith('_PCT'))assert.ok(x.mean<=100);}}
   if(!saved)continue;

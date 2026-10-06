@@ -196,3 +196,42 @@ In Vercel → your project → **Settings → Domains → Add**. It walks you th
 ## Keeping it fresh during the season (later)
 A scheduled job (GitHub Actions) can run the scraper + `export_web.py` + push each morning,
 so the site updates itself. We'll set that up once daily games are flowing.
+
+## Daily game board
+
+`betting.html` now hosts Game day, replacing the season-line picks page. Ship
+`betting.js`, `day-board.js`, `day-board.css`, `consensus-analysis.js`, and the shared
+site assets with it. Dates use America/New_York; game links retain the date and
+market event ID. Game and season simulators remain under Simulators.
+
+The existing six-hour `refresh-player-lines.yml` workflow now requests both player
+props and main moneyline/spread/total markets. It retains the approved 300-credit
+maximum per scan. To refresh locally:
+
+```sh
+python scripts/collect_player_consensus.py --collect --max-events 60 --max-credits 300 --game-markets
+node scripts/build_market_game_projections.cjs
+node tests/test_market_game_export.cjs
+node scripts/build_player_line_coverage.cjs
+```
+
+Publish `player-consensus.json`, `player-game-projections.json`,
+`player-line-coverage.json`, and `player-consensus-status.json` together. The cloud
+workflow retains the previous verified data bundle if collection or verification
+fails. Source receipts are retained as Actions artifacts for seven days. Do not
+publish local credentials or raw unredacted requests.
+
+Game scores and player projections come from the same 200 possession-based
+scenarios per modeled matchup. Scheduled games without a verified model remain
+visible with a pending forecast. Rotation review holds suppress forecasts and
+shortlists. Bookmaker prices are timestamped snapshots; they are not live scores
+or streaming odds. Quotes older than 15 minutes cannot enter the model watchlist.
+Current medical reports, confirmed lineups, calibrated price-based betting
+validation, and live game feeds remain launch dependencies. No trade execution is
+connected to this page.
+
+Checks: `node --test tests/test_day_board.cjs`,
+`python tests/test_game_market_quotes.py`, and
+`python tests/check_day_board_browser.py` (requires Playwright; set
+`NBAI_BASE_URL` for a deployed site). Use an explicit release file list when
+publishing from this workspace, since it contains unrelated ongoing work.

@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from urllib.parse import urlencode
 import argparse, hashlib, json, math, os
 import requests
+from game_market_quotes import normalize_game
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://api.the-odds-api.com/v4'
 MARKETS={'player_points':'PTS','player_assists':'AST','player_rebounds':'REB','player_steals':'STL','player_blocks':'BLK'}
@@ -42,7 +43,7 @@ def normalize(event,receipt):
                     sourceUrl=receipt['url'],receiptSha256=receipt['sha256'],mainLine=True))
     return output
 
-def collect(max_events,max_credits,root=ROOT,fetch=requests.get):
+def collect(max_events,max_credits,root=ROOT,fetch=requests.get,include_game_markets=False):
     if not 1<=max_events<=60 or not 5<=max_credits<=300:raise ValueError('Bounded collection required')
     key=os.environ.get('THE_ODDS_API_KEY') or (root/'data/.odds_key').read_text().strip()
     folder=root/'data/features/player_props/consensus'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ');folder.mkdir(parents=True,exist_ok=True)
@@ -79,7 +80,18 @@ def collect(max_events,max_credits,root=ROOT,fetch=requests.get):
     upcoming.sort(key=lambda e:(e['commence_time'],e['id']))
     # Prefer imminent games within the approved per-scan cap; explicitly report the window.
     # Unchecked distant games are excluded, never labeled as freshly collected.
-    for event in upcoming[:max_events]:
+    game_rows=[]
+    if include_game_markets:
+        for sport in sports_checked:
+            if used+3>max_credits:fail('Insufficient budget for game lines')
+            payload,rec=get(sport+'-game-odds',BASE+'/sports/'+sport+'/odds',dict(bookmakers=','.join(b for b in BOOKS if b not in DFS),markets='h2h,spreads,totals',oddsFormat='american'))
+            used+=rec.get('creditsUsed',3)
+            if not isinstance(payload,list):fail('Game-line collection unavailable')
+            for item in payload:
+                if any(all(item.get(k)==e.get(k) for k in ('id','sport_key','home_team','away_team','commence_time')) for e in upcoming):game_rows.extend(normalize_game(item,rec,BOOKS))
+    selected_limit=min(max_events,(max_credits-used)//len(MARKETS))
+    if upcoming and selected_limit<1:fail('Insufficient budget for player lines')
+    for event in upcoming[:selected_limit]:
         if used+len(MARKETS)>max_credits:fail('Collection credit limit reached before full scan')
         payload,rec=get('event-'+event['id'],BASE+'/sports/'+event['sport_key']+'/events/'+event['id']+'/odds',dict(bookmakers=','.join(BOOKS),markets=','.join(MARKETS),oddsFormat='american'))
         used+=rec.get('creditsUsed',len(MARKETS))
@@ -89,8 +101,8 @@ def collect(max_events,max_credits,root=ROOT,fetch=requests.get):
         event_rows=normalize(payload,rec);rows.extend(event_rows)
         events.append({**event,'competition':SPORTS[event['sport_key']],'checkedAt':rec['receivedAt'],'quoteCount':len(event_rows),'providers':sorted({r['provider'] for r in event_rows})})
     if errors:fail('Collection stopped after source failure')
-    out=dict(schemaVersion=1,generatedAt=stamp(),scope='game',season='2026-27',events=events,quotes=rows,
-        coverage=dict(eventsDiscovered=len(upcoming),eventsChecked=len(events),complete=len(events)==len(upcoming),eventsOutsideWindow=max(0,len(upcoming)-max_events),selectionPolicy='Earliest upcoming games, up to '+str(max_events)+' per scan',providers=list(BOOKS),stats=list(MARKETS.values()),creditsUsed=used,sports=sports_checked,playersWithLines=len({r['player'] for r in rows}),eventsWithLines=sum(e['quoteCount']>0 for e in events),providerQuoteCounts={b:sum(r['provider']==b for r in rows) for b in BOOKS}),
+    out=dict(schemaVersion=1,generatedAt=stamp(),scope='game',season='2026-27',events=events,quotes=rows,gameQuotes=[q for q in game_rows if any(e['id']==q['eventId'] for e in events)],
+        coverage=dict(eventsDiscovered=len(upcoming),eventsChecked=len(events),complete=len(events)==len(upcoming),eventsOutsideWindow=max(0,len(upcoming)-selected_limit),selectionPolicy='Earliest upcoming games, up to '+str(selected_limit)+' per scan',providers=list(BOOKS),stats=list(MARKETS.values()),creditsUsed=used,sports=sports_checked,playersWithLines=len({r['player'] for r in rows}),eventsWithLines=sum(e['quoteCount']>0 for e in events),providerQuoteCounts={b:sum(r['provider']==b for r in rows) for b in BOOKS}),
         refreshPolicy=('Scheduled collection every six hours. ' if os.environ.get('NBAI_SCHEDULED_COLLECTION')=='1' else 'Scheduled collection is awaiting setup. ')+'The open page checks for new snapshots every five minutes. Quotes are not live.',
         source='The Odds API',documentation='https://the-odds-api.com/sports-odds-data/bookmaker-apis.html',
         seasonAverageCoverage='Unverified: this feed provides single-game lines, not season-average markets.',
@@ -100,6 +112,6 @@ def collect(max_events,max_credits,root=ROOT,fetch=requests.get):
     status(True,'Complete scan published')
     print(json.dumps({'playersWithLines':out['coverage']['playersWithLines'],'providerQuoteCounts':out['coverage']['providerQuoteCounts'],'events':len(events),'quotes':len(rows),'creditsUsed':used,'runDir':str(folder)}))
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--collect',action='store_true');p.add_argument('--max-events',type=int,default=60);p.add_argument('--max-credits',type=int,default=300);a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--collect',action='store_true');p.add_argument('--max-events',type=int,default=60);p.add_argument('--max-credits',type=int,default=300);p.add_argument('--game-markets',action='store_true');a=p.parse_args()
     if not a.collect:p.error('Pass --collect to use existing API credits')
-    collect(a.max_events,a.max_credits)
+    collect(a.max_events,a.max_credits,include_game_markets=a.game_markets)

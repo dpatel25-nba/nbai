@@ -27,14 +27,15 @@ jobs:
       - name: Test collection and failure handling
         run: |
           python tests/test_collect_player_consensus.py
-          node --test tests/test_player_line_pipeline.cjs tests/test_consensus_analysis.cjs
+          python tests/test_game_market_quotes.py
+          node --test tests/test_player_line_pipeline.cjs tests/test_consensus_analysis.cjs tests/test_day_board.cjs
       - name: Collect supported NBA lines
         id: collect
         continue-on-error: true
         env:
           NBAI_SCHEDULED_COLLECTION: '1'
           THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
-        run: python scripts/collect_player_consensus.py --collect --max-events 60 --max-credits 300
+        run: python scripts/collect_player_consensus.py --collect --max-events 60 --max-credits 300 --game-markets
       - name: Refresh and verify matching projections
         id: projections
         if: steps.collect.outcome == 'success'

@@ -1,6 +1,8 @@
 import importlib.util,unittest
 from pathlib import Path
 P=Path(__file__).resolve().parents[1]/'scripts/collect_player_consensus.py'
+import sys
+sys.path.insert(0,str(P.parent))
 spec=importlib.util.spec_from_file_location('consensus',P);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 class NormalizeTests(unittest.TestCase):
  def payload(self,key='fanduel',market='player_points',extra=None):
@@ -55,10 +57,11 @@ class CollectionTests(unittest.TestCase):
   self.assertEqual(x['coverage']['eventsDiscovered'],2);self.assertEqual(x['coverage']['eventsChecked'],1)
   self.assertFalse(x['coverage']['complete']);self.assertEqual(x['coverage']['eventsOutsideWindow'],1)
   self.assertEqual(x['events'][0]['id'],'g')
- def test_credit_cap_does_not_publish_partial_snapshot(self):
-  with self.assertRaisesRegex(RuntimeError,'credit limit'):
-   self.run_scan([self.response([{'key':'basketball_nba','active':True}]),self.response([self.event(),self.event(id='h')]),self.response({**self.event(),'bookmakers':[]},credits=5)],max_credits=5)
-  self.assertEqual(len(self.calls),3);self.assertEqual(json.loads((self.root/'web/player-consensus.json').read_text()),{'previous':True})
+ def test_credit_cap_limits_the_selected_window(self):
+  self.run_scan([self.response([{'key':'basketball_nba','active':True}]),self.response([self.event(),self.event(id='h')]),self.response({**self.event(),'bookmakers':[]},credits=5)],max_credits=5)
+  self.assertEqual(len(self.calls),3)
+  x=json.loads((self.root/'web/player-consensus.json').read_text())
+  self.assertEqual(x['coverage']['creditsUsed'],5);self.assertEqual(x['coverage']['eventsChecked'],1);self.assertFalse(x['coverage']['complete'])
  def test_underdog_preseason_no_synthetic_prices(self):
   payload=NormalizeTests().payload(key='underdog');payload['sport_key']='basketball_nba_preseason'
   r=m.normalize(payload,dict(receivedAt='2026-10-05T22:00:10Z',url='https://api.the-odds-api.com/v4/test',sha256='a'*64))
