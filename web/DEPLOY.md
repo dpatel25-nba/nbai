@@ -246,7 +246,7 @@ publishing from this workspace, since it contains unrelated ongoing work.
 `insights.html` is now the historical research gallery. Season projections and
 player-market comparisons are no longer loaded by this page; matchup comparisons
 remain in Game day. Ship `visual-research.js`, `visual-research.css`,
-`visual-research.json`, and `research-studies.js` together. The homepage uses the
+`visual-research.json`, `research-studies.js`, and `research-tooltips.js` together. The homepage uses the
 same historical dataset.
 
 Rebuild the three-season snapshot with `python scripts/build_visual_research.py`
@@ -276,3 +276,42 @@ shot value decomposes actual points per 100 FGA into a league-zone-rate baseline
 and a finishing residual. They are descriptive measures, not causal impact or
 validated predictions. Tests cover signed baseline examples, rate normalization,
 all-team weighted residual reconciliation, three seasons and UI filtering.
+
+The shared tooltip controller provides hover, tap, keyboard focus and Escape
+dismissal on impact/efficiency dots, scoring-surplus bars, assists/turnovers dots,
+team shot-value dots and court bins. Details include identity, named metrics and
+season; filters rebuild them with the current data. Player selection and SVG
+downloads remain available. Load `research-tooltips.js` before both chart scripts.
+
+## Trading beta: historical sandbox
+
+`trading.html` is the first visitor-facing algorithm sandbox. Ship it together with
+`trading.css`, `trading.js`, `trading-engine.js`, `trading-replay.json` and the shared
+navigation assets. `python scripts/build_site_navigation.py` links it from the
+eight main product pages without changing their bodies.
+
+Rebuild the allowlisted archive with `python scripts/export_trading_sandbox.py`.
+It uses the existing 20261004-v1 Kalshi report: 813 January–June 2026 games, all
+30 teams, including the excluded observation. It exports no account data or local
+filesystem paths. The source report hash identifies the exact replay version.
+
+Visitors can replay days automatically or individually, pause, set virtual
+bankroll/daily-spend/cumulative-loss limits, inspect every decision and download
+the ledger. Only a source hash, settings and replay position persist in browser
+storage; reload reconstructs the ledger and always pauses. Hidden tabs pause too.
+No account connection, server scheduling, billing, orders or RFQs exist here.
+Combos and price timing are labeled unavailable research tracks.
+
+This is an educational historical scenario, not live paper execution or fresh
+validation. One hypothetical contract per selected game uses saved fee/cost
+scenarios and actual settlement values. Daily batch accounting reserves costs
+before crediting outcomes; actual settlement timing, depth and fills are not
+verified. Loss pauses take effect at day end, so the day's losses can overshoot.
+The original model's negative result is visible, and settings experiments must
+not be promoted as evidence of profitability.
+
+Run `node --test tests/test_trading_sandbox.cjs`. The full unrestricted replay
+must match the archived 405 hypothetical contracts, $162.87 cost and −$19.87 net
+under the 1¢ adverse-price scenario. Check the page at mobile and desktop widths,
+including reload, pause, settings validation, downloads and archive-load failure.
+Local preview: `node scripts/serve_website.cjs`, then `/trading.html`.

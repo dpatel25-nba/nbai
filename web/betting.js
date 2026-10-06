@@ -35,16 +35,36 @@ function detail(){
  gameMarkets();playerRows();shortlist();
 }
 function gameMarkets(){
- $('teamMarketRows').replaceChildren();const e=current,rows=D.gameLines(market,e).filter(q=>q.market===kind);
- const p=D.projection(e),home=e.home_team;
- $('marketSideA').textContent=kind==='totals'?'Over':e.away_team;$('marketSideB').textContent=kind==='totals'?'Under':home;
- $('gameMarketContext').textContent=kind==='spreads'?`Comparison uses ${home}’s winning margin; positive means more points in the home team’s favor.`:kind==='h2h'?`Comparison uses ${home}’s simulated win share vs. the book’s two-way, margin-adjusted probability.`:'Comparison uses combined points. Positive means our projection is higher than the book’s total.';
- if(!rows.length){const tr=el('tr'),cell=el('td','No matching lines in this snapshot.');cell.colSpan=7;tr.append(cell);$('teamMarketRows').append(tr);}
- for(const q of rows){const tr=el('tr'),name=el('th',q.providerName);name.scope='row';tr.append(name);
- for(const side of kind==='totals'?['Over','Under']:[e.away_team,home]){const o=q.outcomes.find(o=>o.name===side),cell=el('td',o?(kind==='h2h'?D.money(o.price):kind==='spreads'?signed(o.point):f(o.point)):'—');if(o&&kind!=='h2h')cell.append(el('small',D.money(o.price)));tr.append(cell);}
- const cmp=D.teamComparison(q,e),unit=kind==='h2h'?'%':'',deltaUnit=kind==='h2h'?' pp':'';
- tr.append(el('td',cmp?f(cmp.model)+unit:'—'),el('td',cmp?f(cmp.market)+unit:'—'),el('td',cmp?signed(cmp.difference)+deltaUnit:'—'));
- const updated=el('td',q.fresh?'Recent':'Saved / stale');updated.append(el('small',new Date(q.sourceUpdatedAt).toLocaleString()));updated.title='Collected '+new Date(q.observedAt).toLocaleString();tr.append(updated);$('teamMarketRows').append(tr);}
+ $('teamMarketRows').replaceChildren();$('gameMarketForecast').replaceChildren();
+ const e=current,rows=D.gameLines(market,e).filter(q=>q.market===kind),p=D.projection(e),home=e.home_team,away=e.away_team;
+ $('marketSideA').textContent=kind==='totals'?'Over':away;$('marketSideB').textContent=kind==='totals'?'Under':home;
+ const forecast=(label,value)=>{const box=el('div',null,'market-forecast-item');box.append(el('span',label),el('strong',value));$('gameMarketForecast').append(box);};
+ if(!p)forecast('NBAI forecast','Under review / unavailable');
+ else if(kind==='h2h'){forecast('NBAI · '+away,f((1-p.homeWinShare)*100)+'% to win');forecast('NBAI · '+home,f(p.homeWinShare*100)+'% to win');}
+ else if(kind==='spreads')forecast('NBAI projected margin',p.winner?p.winner+' by '+f(p.margin):'Even matchup');
+ else forecast('NBAI projected total',f(p.total.mean)+' combined points');
+ $('gameMarketContext').textContent=kind==='h2h'?'Each team’s cell shows its moneyline and the book’s win probability with its margin removed. Model difference names the team we give a higher chance than that book. It is not an expected return.':kind==='spreads'?'Team columns show the actual handicap and odds. Model difference shows which team our projected margin favors relative to that spread.':'Compare our combined-points forecast with each book’s total. Odds appear below the line.';
+ if(rows.length&&rows.every(q=>!q.fresh))$('gameMarketContext').append(el('span',' All quotes below are saved / stale; refresh before using them.','quote-caution'));
+ if(!rows.length){const tr=el('tr'),cell=el('td','No matching lines in this snapshot.');cell.colSpan=4;tr.append(cell);$('teamMarketRows').append(tr);}
+ for(const q of rows){
+  const tr=el('tr'),name=el('th',null);name.scope='row';name.append(el('strong',q.providerName));
+  const stamp=new Date(q.sourceUpdatedAt),time=Number.isFinite(stamp.getTime())?stamp.toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+' ET':'Time unavailable';
+  const updated=el('small',(q.fresh?'Recent':'Saved / stale')+' · '+time,'quote-time');updated.title='Provider update: '+q.sourceUpdatedAt+'; collected: '+q.observedAt;name.append(updated);tr.append(name);
+  const homeProb=D.probability(q.outcomes.find(o=>o.name===home)?.price),awayProb=D.probability(q.outcomes.find(o=>o.name===away)?.price);
+  for(const side of kind==='totals'?['Over','Under']:[away,home]){
+   const o=q.outcomes.find(o=>o.name===side),cell=el('td');
+   cell.append(el('strong',o?(kind==='h2h'?D.money(o.price):kind==='spreads'?signed(o.point):f(o.point)):'—','line-value'));
+   if(o&&kind!=='h2h')cell.append(el('small','Odds '+D.money(o.price)));
+   if(kind==='h2h')cell.append(el('small',homeProb!=null&&awayProb!=null?f((side===home?homeProb:awayProb)/(homeProb+awayProb)*100)+'% book win probability':'Book probability unavailable'));
+   tr.append(cell);
+  }
+  const cmp=D.teamComparison(q,e),delta=el('td',null,'model-difference');
+  if(!cmp)delta.append(el('span','No comparison'),el('small',p?'A matching two-sided line is missing':'NBAI forecast unavailable'));
+  else if(Math.abs(cmp.difference)<.05)delta.append(el('strong','In line with the book'),el('small','Less than 0.1 '+(kind==='h2h'?'percentage points':'points')+' apart'));
+  else if(kind==='totals')delta.append(el('strong',f(Math.abs(cmp.difference))+' points '+(cmp.difference>0?'higher':'lower')),el('small','NBAI total vs. sportsbook total'));
+  else {delta.append(el('strong',cmp.difference>0?home:away));delta.append(el('small',kind==='h2h'?'+'+f(Math.abs(cmp.difference))+' percentage points vs. book':f(Math.abs(cmp.difference))+' points toward this team'));}
+  tr.append(delta);$('teamMarketRows').append(tr);
+ }
 }
 function playerRows(){
  if(!current)return;

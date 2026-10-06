@@ -4,12 +4,12 @@ import re
 
 ROOT=Path(__file__).resolve().parents[1]/'web'
 PAGES={'index.html':'home','insights.html':'research','player-value.html':'research','betting.html':'picks',
-       'simulators.html':'simulators','game.html':'game','season.html':'season'}
+       'simulators.html':'simulators','game.html':'game','season.html':'season','trading.html':'trading'}
 
 
 def header(active):
     links=[]
-    for key,url,label in [('home','index.html','Home'),('picks','betting.html','Game day'),('research','insights.html','Research')]:
+    for key,url,label in [('home','index.html','Home'),('picks','betting.html','Game day'),('research','insights.html','Research'),('trading','trading.html','Trading beta')]:
         current=' aria-current="page"' if active==key else ''
         links.append(f'<a href="{url}"{current}>{label}</a>')
     menu=[]
