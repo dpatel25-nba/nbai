@@ -225,7 +225,12 @@ Game scores and player projections come from the same 200 possession-based
 scenarios per modeled matchup. Scheduled games without a verified model remain
 visible with a pending forecast. Rotation review holds suppress forecasts and
 shortlists. Bookmaker prices are timestamped snapshots; they are not live scores
-or streaming odds. Quotes older than 15 minutes cannot enter the model watchlist.
+or streaming odds. Quotes older than 15 minutes are labeled saved. The featured props can retain
+saved comparisons, while current leans require recent matching prices. Parlay
+drafts require two or three distinct player/stat selections at the same sportsbook
+and verify the model direction against each actual book line. They do not claim
+combined odds, joint win probability, or verified same-game parlay acceptance.
+The player browser includes unquoted rostered players and all eight projected stats.
 Current medical reports, confirmed lineups, calibrated price-based betting
 validation, and live game feeds remain launch dependencies. No trade execution is
 connected to this page.

@@ -31,3 +31,31 @@ test('Team watchlist preserves spread direction and withholds stale or held fore
  assert.equal(D.teamWatchlist(market,event,now+3600000).length,0);
  assert.equal(D.teamWatchlist(market,{...event,model:{...event.model,reviewRequired:true}},now).length,0);
 });
+test('Roster browsing includes unquoted players and refuses unrelated or unresolved quotes',()=>{
+ const event={...e,model:{players:[{id:1,name:'No Line',team:'Home'}]}};
+ const q={eventId:'g',homeTeam:'Home',awayTeam:'Away',startsAt:e.commence_time,playerId:2,player:'Quoted Player',identityStatus:'matched'};
+ assert.deepEqual(D.roster({quotes:[q,{...q,playerId:3,homeTeam:'Wrong'},{...q,playerId:4,identityStatus:'unresolved'}]},event).map(p=>p.name).sort(),['No Line','Quoted Player']);
+});
+function candidate(id,stat,provider='fanduel',options={}){
+ return {player:{id,name:'Player '+id},stat,model:{mean:25,p10:10,p90:35},snapshotGap:3,sourceCount:2,median:22,fresh:true,books:{[provider]:{provider,providerName:provider,line:22.5,americanOdds:{over:-110,under:-110}}},...options};
+}
+test('Featured props cap at three, label saved comparisons and exclude held/unstable forecasts',()=>{
+ const rows=[candidate(1,'PTS'),candidate(2,'PTS'),candidate(3,'PTS'),candidate(4,'PTS')];
+ assert.equal(D.featuredProps(rows,e).length,3);
+ assert.equal(D.featuredProps([candidate(1,'PTS','fanduel',{fresh:false})],e)[0].fresh,false);
+ assert.equal(D.featuredProps(rows,{...e,model:{reviewRequired:true}}).length,0);
+ assert.equal(D.featuredProps([candidate(1,'PTS','fanduel',{participation:'limited_participation'}),candidate(2,'PTS','fanduel',{snapshotGap:null})],e).length,0);
+});
+test('Parlay prefers three actual same-book legs, falls back to two and never invents a price',()=>{
+ const rows=[candidate(1,'PTS'),candidate(1,'AST'),candidate(2,'PTS'),candidate(3,'REB')];
+ const p=D.parlay(rows,e);assert.equal(p.legs.length,3);assert.equal(new Set(p.legs.map(l=>l.player.id)).size,3);assert.equal(p.provider,'fanduel');assert.equal(p.legs[0].quote.line,22.5);assert.equal(p.combinedOdds,undefined);
+ assert.equal(D.parlay(rows.slice(0,2),e).legs.length,2);assert.equal(D.parlay(rows.slice(0,1),e),null);
+ assert.equal(D.parlay([candidate(1,'PTS'),candidate(2,'PTS','draftkings')],e),null);
+ assert.equal(D.parlay([candidate(1,'PTS','prizepicks'),candidate(2,'PTS','prizepicks')],e),null);
+ assert.equal(D.parlay(rows.map(r=>({...r,fresh:false})),e).fresh,false);
+ assert.equal(D.parlay(rows,{...e,commence_time:'2020-01-01'}),null);
+ assert.equal(D.parlay(rows,{...e,model:{reviewRequired:true}}),null);
+ assert.equal(D.parlay([rows[0],rows[0]],e),null);
+ const wrong=candidate(9,'AST');wrong.books.fanduel.line=30;assert.equal(D.parlay([rows[0],wrong],e),null);
+ const missing=candidate(9,'AST');missing.books.fanduel.americanOdds={};assert.equal(D.parlay([rows[0],missing],e),null);
+});

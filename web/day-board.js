@@ -54,5 +54,36 @@
   if(Date.parse(event.commence_time)<=now||event.model?.reviewRequired)return [];
   return rows.filter(r=>r.gap!=null&&r.fresh&&Math.abs(r.gap)>.01).map(r=>({...r,direction:r.gap>0?'Over':'Under',rank:Math.abs(r.gap)/Math.max(1,(r.model.p90-r.model.p10)/2)})).sort((a,b)=>b.rank-a.rank).slice(0,3);
  }
- const api={day,money,probability,games,projection,gameLines,teamComparison,props,watchlist,teamWatchlist};if(typeof module!=='undefined')module.exports=api;else root.NBAI_DAY=api;
+ function roster(market,event){
+  const players=new Map();
+  for(const p of event?.model?.players||[])players.set(String(p.id),p);
+  for(const q of market?.quotes||[]){
+   if(q.eventId!==event?.id||q.identityStatus==='unresolved'||!Number.isInteger(q.playerId)||q.homeTeam!==event.home_team||q.awayTeam!==event.away_team||Date.parse(q.startsAt)!==Date.parse(event.commence_time))continue;
+   if(!players.has(String(q.playerId)))players.set(String(q.playerId),{id:q.playerId,name:q.canonicalPlayer||q.player});
+  }
+  return [...players.values()].sort((a,b)=>(a.team||'').localeCompare(b.team||'')||a.name.localeCompare(b.name));
+ }
+ function featuredProps(rows,event,now=Date.now(),limit=3){
+  if(Date.parse(event?.commence_time)<=now||event?.model?.reviewRequired)return [];
+  return rows.filter(r=>r.model&&r.snapshotGap!=null&&!r.held&&r.participation!=='limited_participation'&&Math.abs(r.snapshotGap)>.01).map(r=>({...r,direction:r.snapshotGap>0?'Over':'Under',rank:Math.abs(r.snapshotGap)/Math.max(1,(r.model.p90-r.model.p10)/2)})).sort((a,b)=>Number(b.fresh)-Number(a.fresh)||b.rank-a.rank||a.player.name.localeCompare(b.player.name)||a.stat.localeCompare(b.stat)).slice(0,limit);
+ }
+ function parlay(rows,event,now=Date.now()){
+  const candidates=featuredProps(rows,event,now,Infinity),choices=[];
+  for(const provider of Object.keys(C.PROVIDERS).filter(p=>!['prizepicks','underdog'].includes(p))){
+   const legs=[];
+   for(const r of candidates){
+    const quote=r.books[provider],price=quote?.americanOdds?.[r.direction.toLowerCase()];
+    if(!quote||probability(price)==null||(r.direction==='Over'?r.model.mean<=quote.line:r.model.mean>=quote.line))continue;
+    if(legs.some(l=>l.player.id===r.player.id&&l.stat===r.stat))continue;
+    legs.push({...r,quote,price});
+   }
+   // Prefer different players, then fill remaining slots with different stats.
+   const selected=[],seen=new Set();
+   for(const l of legs)if(!seen.has(l.player.id)&&selected.length<3){selected.push(l);seen.add(l.player.id);}
+   for(const l of legs)if(selected.length<3&&!selected.includes(l))selected.push(l);
+   if(selected.length>=2)choices.push({provider,providerName:C.PROVIDERS[provider],legs:selected,fresh:selected.every(l=>l.fresh),rank:selected.reduce((v,l)=>v+l.rank,0)/selected.length});
+  }
+  return choices.sort((a,b)=>Number(b.fresh)-Number(a.fresh)||b.legs.length-a.legs.length||b.rank-a.rank)[0]||null;
+ }
+ const api={day,money,probability,games,projection,gameLines,teamComparison,props,watchlist,teamWatchlist,roster,featuredProps,parlay};if(typeof module!=='undefined')module.exports=api;else root.NBAI_DAY=api;
 })(typeof window!=='undefined'?window:globalThis);
