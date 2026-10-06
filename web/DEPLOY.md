@@ -240,3 +240,29 @@ Checks: `node --test tests/test_day_board.cjs`,
 `python tests/check_day_board_browser.py` (requires Playwright; set
 `NBAI_BASE_URL` for a deployed site). Use an explicit release file list when
 publishing from this workspace, since it contains unrelated ongoing work.
+
+## Visual research gallery
+
+`insights.html` is now the historical research gallery. Season projections and
+player-market comparisons are no longer loaded by this page; matchup comparisons
+remain in Game day. Ship `visual-research.js`, `visual-research.css`,
+`visual-research.json`, and `research-graphics/` together. The homepage uses the
+same historical dataset.
+
+Rebuild the three-season snapshot with `python scripts/build_visual_research.py`
+(pandas/numpy/parquet support). It exports 2023–24 through 2025–26 regular seasons:
+all 30 teams, binned recorded shot locations, and players with at least 500 minutes.
+WAR v4 components are retained from the archived research model; they are not
+refitted or represented as causal, independently validated impact. Usage and true
+shooting are historical rates. Missing coordinates and beyond-half-court attempts
+have explicit coverage counts. Input and formula hashes are in the JSON.
+
+Run `python scripts/export_research_graphics.py` with Matplotlib to regenerate
+the published 2025–26 PNG editions. Those static figures are separate from the
+interactive filters; SVG downloads capture the currently selected chart. The PNG
+edition links should be updated if the exporter is extended to a newer season.
+
+Validation: `python tests/test_visual_research.py` checks shot count reconciliation,
+coordinate exclusions and archived player metrics. `python tests/check_visual_research_browser.py`
+checks four viewport widths, player/team/season filters, exports and load failures.
+Set `NBAI_BASE_URL=https://nbai.space` for deployed browser verification.
