@@ -20,9 +20,16 @@ for mode in ['impact','efficiency']:
  ax.axhline(0,color='#879c83',ls='--',lw=1)
  if impact:ax.axvline(0,color='#879c83',ls='--',lw=1)
  leaders=sorted(range(len(p)),key=lambda i:p[i]['war'],reverse=True)[:5]
- for j,i in enumerate(leaders):
+ labels=[]
+ ax.margins(.13)
+ for i in leaders:
   ax.scatter([xs[i]],[ys[i]],s=75,c=ORANGE,zorder=4)
-  ax.annotate(p[i]['name'],(xs[i],ys[i]),xytext=(-8,16 if j%2==0 else -23),textcoords='offset points',ha='right',fontsize=10,color=INK,bbox=dict(facecolor=BG,edgecolor='none',alpha=.8,pad=1),zorder=5)
+  for dx,dy in [(8,16),(-8,16),(8,-26),(-8,-26),(8,40),(-8,40),(8,-48),(-8,-48)]:
+   annotation=ax.annotate(p[i]['name'],(xs[i],ys[i]),xytext=(dx,dy),textcoords='offset points',ha='left' if dx>0 else 'right',fontsize=10,color=INK,bbox=dict(facecolor=BG,edgecolor='none',alpha=.92,pad=2),zorder=5)
+   fig.canvas.draw();box=annotation.get_bbox_patch().get_window_extent().expanded(1.03,1.25);bounds=ax.get_window_extent()
+   if box.x0>=bounds.x0 and box.x1<=bounds.x1 and box.y0>=bounds.y0 and box.y1<=bounds.y1 and not any(box.overlaps(old) for old in labels):labels.append(box);break
+   annotation.remove()
+  else:raise ValueError('Could not place chart label without overlap')
  ax.set_xlabel('Offensive component · points / 100' if impact else 'Usage · %',labelpad=15);ax.set_ylabel('Defensive component · points / 100' if impact else 'True shooting vs. league · percentage points',labelpad=12);ax.margins(.13)
  fig.text(.09,.12,'Larger dots = more minutes. Orange dots = top five by historical WAR v4.',fontsize=10)
  fig.text(.09,.085,'Source: NBAI historical WAR v4 & archived NBA regular-season box scores.\nDescriptive research, not causal impact or a future-performance forecast.',fontsize=9,linespacing=1.7)
