@@ -2,9 +2,9 @@
   'use strict';const $=id=>document.getElementById(id),A=NBAI_PROPS;
   const el=(tag,value,cls)=>{const n=document.createElement(tag);if(value!=null)n.textContent=value;if(cls)n.className=cls;return n;};
   const names={PTS:'Points',AST:'Assists',REB:'Rebounds',STL:'Steals',BLK:'Blocks',FG_PCT:'Field goal %',FT_PCT:'Free throw %',FG3_PCT:'Three-point %'},fmt=n=>Number.isFinite(n)?n.toFixed(1):'—',cents=n=>Number.isFinite(n)?(n*100).toFixed(1)+'¢':'Unavailable';
-  let data=null,selected=null,quotes=null,live=false,consensus=null,gameForecasts=null,view='game',eventId=null,reloadFailed=false,visiblePlayers=12,collectionStatus=null;
+  let data=null,selected=null,quotes=null,live=false,consensus=null,gameForecasts=null,view='game',eventId=null,reloadFailed=false,visiblePlayers=12,collectionStatus=null,lineCoverage=null;
   const C=NBAI_CONSENSUS;
-  const hasLines=p=>(consensus?.quotes||[]).some(q=>C.normalize(q.player)===C.normalize(p.name));
+  const hasLines=p=>(consensus?.quotes||[]).some(q=>C.matchesPlayer(q,p));
   function search(){
     if(!data)return;const q=A.normalize($('search').value),rows=data.players.filter(p=>A.normalize(p.name).includes(q)&&($('lineFilter').value!=='quoted'||hasLines(p))&&(!$('researchTeam').value||(p.team||'unassigned')===$('researchTeam').value));
     if(!q)rows.sort((a,b)=>Number(hasLines(b))-Number(hasLines(a))||(b.stats.PTS.average?.mean??-1)-(a.stats.PTS.average?.mean??-1));
@@ -73,6 +73,10 @@
     $('consensusStatus').textContent=consensus?`${reloadFailed?'Reload failed · retained snapshot':'Saved bookmaker snapshot'} · Captured ${new Date(consensus.generatedAt).toLocaleString()} · ${consensus.coverage.eventsChecked} of ${consensus.coverage.eventsDiscovered} listed games checked · ${consensus.quotes.length} lines for ${new Set(consensus.quotes.map(q=>C.normalize(q.player))).size} players. Quotes are saved snapshots, not live prices.`:'Bookmaker snapshot unavailable. No consensus lines are being estimated.';
     $('collectionStatus').textContent=collectionStatus?`${collectionStatus.success?'Last collection succeeded':'Latest collection failed · previous snapshot retained'} · ${new Date(collectionStatus.lastAttemptAt).toLocaleString()}. ${consensus?.refreshPolicy||''}`:consensus?.refreshPolicy||'';
     $('matchupNote').textContent=view==='season'?'Current season-average lines from these apps are not verified. Single-game quotes are never substituted.':event&&forecast?`${gameForecasts?.runs||0} matchup scenarios · Conditional on playing · Historical injury scenarios, not current medical reports. Built ${gameForecasts?new Date(gameForecasts.generatedAt).toLocaleString():'date unavailable'}.`:event?`${event.competition==='Preseason'?'Preseason: ':''}Matching game projection unavailable. Season averages are not substituted.`:(selected.team?'No verified upcoming matchup in the current game inventory.':'Roster assignment unresolved; a team matchup cannot be chosen.');
+    const verifiedCoverage=lineCoverage?.marketGeneratedAt===consensus?.generatedAt&&lineCoverage?.modelGeneratedAt===gameForecasts?.generatedAt;
+    const audit=verifiedCoverage?lineCoverage.summary:null,checkedEvent=verifiedCoverage?lineCoverage.events.find(e=>e.eventId===eventId):null;
+    $('coverageSummary').textContent=audit?`${audit.quoteCount} returned lines: ${audit.matchedQuotes} matched to rostered players, ${audit.unmatchedQuotes} unresolved. ${audit.eventsWithLines} of ${audit.events} checked games have lines. ${audit.eventsWithProjections} games have usable projections; ${audit.eventsUnderReview} are held for review. ${consensus.coverage.eventsOutsideWindow||0} more distant games are outside this scan’s window.`:'Coverage report is unavailable or belongs to a different snapshot. Reload to check again.';
+    $('selectedCoverage').textContent=checkedEvent?`${checkedEvent.away} at ${checkedEvent.home}: ${checkedEvent.quoteCount} returned lines, ${checkedEvent.matchedQuotes} matched. ${checkedEvent.reason||(!checkedEvent.quoteCount?'No player lines returned by the checked feed.':'')}`:'';
     const gamePlayer=forecast?.players?.find(p=>p.id===selected.id);
     const entries=Object.entries(names).map(([stat,name])=>({stat,name,call:view==='game'?C.compare(consensus,selected,event,stat,forecast):null}));
     const quoted=entries.filter(e=>e.call?.sourceCount>0),unquoted=entries.filter(e=>!e.call?.sourceCount);
@@ -123,11 +127,12 @@
   }
   async function loadComparison(){
     $('reloadComparison').disabled=true;
-    const results=await Promise.allSettled(['player-consensus.json','player-game-projections.json','player-consensus-status.json'].map(f=>fetch(f,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json();})));
+    const results=await Promise.allSettled(['player-consensus.json','player-game-projections.json','player-consensus-status.json','player-line-coverage.json'].map(f=>fetch(f,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json();})));
     const valid=results[0].status==='fulfilled'&&results[0].value.schemaVersion===1&&Array.isArray(results[0].value.quotes)&&Array.isArray(results[0].value.events)&&results[0].value.coverage;
     reloadFailed=!valid;if(valid)consensus=results[0].value;
     if(results[1].status==='fulfilled'&&results[1].value.schemaVersion===1&&results[1].value.scope==='game')gameForecasts=results[1].value;
     if(results[2].status==='fulfilled'&&results[2].value.schemaVersion===1)collectionStatus=results[2].value;
+    if(results[3].status==='fulfilled'&&results[3].value.schemaVersion===1)lineCoverage=results[3].value;
     comparisonGames();comparison();search();$('reloadComparison').disabled=false;
   }
   for(const button of document.querySelectorAll('[data-view]'))button.onclick=()=>{view=button.dataset.view;for(const b of document.querySelectorAll('[data-view]'))b.setAttribute('aria-pressed',String(b===button));comparison();};

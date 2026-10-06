@@ -1,5 +1,6 @@
 (function(root){
   const normalize=s=>String(s??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
+  const matchesPlayer=(quote,player)=>quote?.identityStatus==='unresolved'?false:quote?.playerId!=null?Number.isInteger(quote.playerId)&&quote.playerId===player?.id:normalize(quote?.player)===normalize(player?.name);
   const STATS={PTS:'Points',AST:'Assists',REB:'Rebounds',STL:'Steals',BLK:'Blocks',FG_PCT:'FG%',FT_PCT:'FT%',FG3_PCT:'3P%'};
   const PROVIDERS={fanduel:'FanDuel',prizepicks:'PrizePicks',draftkings:'DraftKings',betmgm:'BetMGM',fanatics:'Fanatics',betrivers:'BetRivers',williamhill_us:'Caesars',underdog:'Underdog',espnbet:'theScore Bet',hardrockbet:'Hard Rock Bet'};
   const MAX_AGE=15*60*1000;
@@ -7,7 +8,7 @@
   function sources(data,player,event,stat,now=Date.now()){
     const result={};
     for(const provider of Object.keys(PROVIDERS)){
-      const rows=(data?.quotes||[]).filter(q=>q.provider===provider&&q.eventId===event?.id&&normalize(q.player)===normalize(player?.name)&&q.stat===stat&&q.scope==='game'&&q.unit==='game'&&q.mainLine===true&&Number.isFinite(q.line)&&q.line>=0&&q.homeTeam===event.home_team&&q.awayTeam===event.away_team&&Date.parse(q.startsAt)===Date.parse(event.commence_time)&&validTime(q.observedAt,now)&&validTime(q.sourceUpdatedAt,now));
+      const rows=(data?.quotes||[]).filter(q=>q.provider===provider&&q.eventId===event?.id&&matchesPlayer(q,player)&&q.stat===stat&&q.scope==='game'&&q.unit==='game'&&q.mainLine===true&&Number.isFinite(q.line)&&q.line>=0&&q.homeTeam===event.home_team&&q.awayTeam===event.away_team&&Date.parse(q.startsAt)===Date.parse(event.commence_time)&&validTime(q.observedAt,now)&&validTime(q.sourceUpdatedAt,now));
       result[provider]=rows.length===1?rows[0]:null;
     }
     return result;
@@ -19,7 +20,7 @@
         choices.set(e.eventId,{id:e.eventId,home_team:e.homeName||e.home,away_team:e.awayName||e.away,commence_time:e.startsAt});
     }
     for(const e of data?.events||[]){
-      if(Date.parse(e.commence_time)>now&&(choices.has(e.id)||(data.quotes||[]).some(q=>q.eventId===e.id&&normalize(q.player)===normalize(player?.name))))choices.set(e.id,e);
+      if(Date.parse(e.commence_time)>now&&(choices.has(e.id)||(data.quotes||[]).some(q=>q.eventId===e.id&&matchesPlayer(q,player))))choices.set(e.id,e);
     }
     return [...choices.values()].sort((a,b)=>Date.parse(a.commence_time)-Date.parse(b.commence_time)||a.id.localeCompare(b.id));
   }
@@ -42,5 +43,5 @@
     const gap=fresh?snapshotGap:null;
     return {books,median,sourceCount:available.length,fresh,model:held?null:model,gap,snapshotGap,reason,held:held||null,participation:p?.projectionStatus||null,playedScenarios:p?.playedScenarios??null};
   }
-  const api={normalize,STATS,PROVIDERS,MAX_AGE,sources,eventsFor,compare};if(typeof module!=='undefined')module.exports=api;else root.NBAI_CONSENSUS=api;
+  const api={normalize,matchesPlayer,STATS,PROVIDERS,MAX_AGE,sources,eventsFor,compare};if(typeof module!=='undefined')module.exports=api;else root.NBAI_CONSENSUS=api;
 })(typeof window!=='undefined'?window:globalThis);

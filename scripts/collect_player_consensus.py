@@ -77,8 +77,8 @@ def collect(max_events,max_credits,root=ROOT,fetch=requests.get):
         upcoming.extend(e for e in inventory if e.get('sport_key')==sport and datetime.fromisoformat(e['commence_time'].replace('Z','+00:00'))>datetime.now(timezone.utc))
     if not sports_checked:fail('NBA sport discovery unavailable')
     upcoming.sort(key=lambda e:(e['commence_time'],e['id']))
-    # Publishing a partial scan would silently delete old lines for unchecked games.
-    if len(upcoming)>max_events:fail('Event inventory exceeds configured scan limit')
+    # Prefer imminent games within the approved per-scan cap; explicitly report the window.
+    # Unchecked distant games are excluded, never labeled as freshly collected.
     for event in upcoming[:max_events]:
         if used+len(MARKETS)>max_credits:fail('Collection credit limit reached before full scan')
         payload,rec=get('event-'+event['id'],BASE+'/sports/'+event['sport_key']+'/events/'+event['id']+'/odds',dict(bookmakers=','.join(BOOKS),markets=','.join(MARKETS),oddsFormat='american'))
@@ -90,7 +90,7 @@ def collect(max_events,max_credits,root=ROOT,fetch=requests.get):
         events.append({**event,'competition':SPORTS[event['sport_key']],'checkedAt':rec['receivedAt'],'quoteCount':len(event_rows),'providers':sorted({r['provider'] for r in event_rows})})
     if errors:fail('Collection stopped after source failure')
     out=dict(schemaVersion=1,generatedAt=stamp(),scope='game',season='2026-27',events=events,quotes=rows,
-        coverage=dict(eventsDiscovered=len(upcoming),eventsChecked=len(events),complete=len(events)==len(upcoming),providers=list(BOOKS),stats=list(MARKETS.values()),creditsUsed=used,sports=sports_checked,playersWithLines=len({r['player'] for r in rows}),eventsWithLines=sum(e['quoteCount']>0 for e in events),providerQuoteCounts={b:sum(r['provider']==b for r in rows) for b in BOOKS}),
+        coverage=dict(eventsDiscovered=len(upcoming),eventsChecked=len(events),complete=len(events)==len(upcoming),eventsOutsideWindow=max(0,len(upcoming)-max_events),selectionPolicy='Earliest upcoming games, up to '+str(max_events)+' per scan',providers=list(BOOKS),stats=list(MARKETS.values()),creditsUsed=used,sports=sports_checked,playersWithLines=len({r['player'] for r in rows}),eventsWithLines=sum(e['quoteCount']>0 for e in events),providerQuoteCounts={b:sum(r['provider']==b for r in rows) for b in BOOKS}),
         refreshPolicy=('Scheduled collection every six hours. ' if os.environ.get('NBAI_SCHEDULED_COLLECTION')=='1' else 'Scheduled collection is awaiting setup. ')+'The open page checks for new snapshots every five minutes. Quotes are not live.',
         source='The Odds API',documentation='https://the-odds-api.com/sports-odds-data/bookmaker-apis.html',
         seasonAverageCoverage='Unverified: this feed provides single-game lines, not season-average markets.',

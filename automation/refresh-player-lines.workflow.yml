@@ -19,10 +19,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - name: Install collector dependency
         run: python -m pip install 'requests>=2.32.3,<3'
       - name: Test collection and failure handling
-        run: python tests/test_collect_player_consensus.py
+        run: |
+          python tests/test_collect_player_consensus.py
+          node --test tests/test_player_line_pipeline.cjs tests/test_consensus_analysis.cjs
       - name: Collect supported NBA lines
         id: collect
         continue-on-error: true
@@ -30,6 +35,36 @@ jobs:
           NBAI_SCHEDULED_COLLECTION: '1'
           THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
         run: python scripts/collect_player_consensus.py --collect --max-events 60 --max-credits 300
+      - name: Refresh and verify matching projections
+        id: projections
+        if: steps.collect.outcome == 'success'
+        continue-on-error: true
+        run: |
+          node scripts/build_market_game_projections.cjs
+          node tests/test_market_game_export.cjs
+          node scripts/build_player_line_coverage.cjs
+          python - <<'PYCODE'
+          import json
+          from pathlib import Path
+          p=Path('web/player-consensus-status.json');s=json.loads(p.read_text())
+          s.update(projectionsVerified=True,coverageVerified=True,message='Lines, projections and player matching verified together')
+          p.write_text(json.dumps(s,indent=2)+'\n')
+          PYCODE
+      - name: Preserve the last verified snapshot after any pipeline failure
+        if: steps.collect.outcome == 'failure' || steps.projections.outcome == 'failure'
+        run: |
+          python - <<'PYCODE'
+          import subprocess,json
+          from pathlib import Path
+          from datetime import datetime,timezone
+          for f in ['web/player-consensus.json','web/player-game-projections.json','web/player-line-coverage.json']:
+              previous=subprocess.run(['git','show','HEAD:'+f],capture_output=True,check=True).stdout
+              Path(f).write_bytes(previous)
+          status=Path('web/player-consensus-status.json')
+          s=json.loads(status.read_text()) if status.exists() else {}
+          s.update(schemaVersion=1,lastAttemptAt=datetime.now(timezone.utc).isoformat(),success=False,projectionsVerified=False,message='Refresh failed validation; previous verified lines and projections retained')
+          status.write_text(json.dumps(s,indent=2)+'\n')
+          PYCODE
       - name: Keep redacted source receipts
         if: always()
         uses: actions/upload-artifact@v4
@@ -44,11 +79,11 @@ jobs:
         run: |
           git config user.name "$OWNER"
           git config user.email "$OWNER@users.noreply.github.com"
-          git add web/player-consensus.json web/player-consensus-status.json
+          git add web/player-consensus.json web/player-consensus-status.json web/player-game-projections.json web/player-line-coverage.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Refresh NBA player-line snapshot and collection status'
           git pull --rebase origin main
           git push origin HEAD:main
-      - name: Surface collection failure
-        if: steps.collect.outcome == 'failure'
+      - name: Surface collection or projection failure
+        if: steps.collect.outcome == 'failure' || steps.projections.outcome == 'failure'
         run: exit 1

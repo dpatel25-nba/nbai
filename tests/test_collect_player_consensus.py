@@ -48,10 +48,13 @@ class CollectionTests(unittest.TestCase):
   self.assertEqual(len(self.calls),3);self.assertEqual(json.loads((self.root/'web/player-consensus.json').read_text()),{'previous':True})
   self.assertFalse(json.loads((self.root/'web/player-consensus-status.json').read_text())['success'])
   for f in self.root.rglob('*.json'):self.assertNotIn('test-secret-never-publish',f.read_text())
- def test_scan_limit_does_not_publish_partial_inventory(self):
-  with self.assertRaisesRegex(RuntimeError,'scan limit'):
-   self.run_scan([self.response([{'key':'basketball_nba','active':True}]),self.response([self.event(),self.event(id='h')])],max_events=1)
-  self.assertEqual(len(self.calls),2);self.assertEqual(json.loads((self.root/'web/player-consensus.json').read_text()),{'previous':True})
+ def test_scan_limit_reports_a_bounded_nearest_game_window(self):
+  self.run_scan([self.response([{'key':'basketball_nba','active':True}]),self.response([self.event(),self.event(id='h')]),self.response({**self.event(),'bookmakers':[]})],max_events=1)
+  self.assertEqual(len(self.calls),3)
+  x=json.loads((self.root/'web/player-consensus.json').read_text())
+  self.assertEqual(x['coverage']['eventsDiscovered'],2);self.assertEqual(x['coverage']['eventsChecked'],1)
+  self.assertFalse(x['coverage']['complete']);self.assertEqual(x['coverage']['eventsOutsideWindow'],1)
+  self.assertEqual(x['events'][0]['id'],'g')
  def test_credit_cap_does_not_publish_partial_snapshot(self):
   with self.assertRaisesRegex(RuntimeError,'credit limit'):
    self.run_scan([self.response([{'key':'basketball_nba','active':True}]),self.response([self.event(),self.event(id='h')]),self.response({**self.event(),'bookmakers':[]},credits=5)],max_credits=5)
