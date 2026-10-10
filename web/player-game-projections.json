@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-10T05:53:50.068Z",
+  "generatedAt": "2026-10-10T21:44:43.500Z",
   "scope": "game",
   "runs": 200,
   "seedPrefix": "market-matchups-v1:",
@@ -9631,8 +9631,8 @@
     "scripts/player_projection_stats.cjs": "fbd254248c4d4ad431680b889c4e2ef3a57e5e855f8cdeb3e8629593ac242042",
     "scripts/market_projection_inputs.cjs": "58da3b9eb31972c79b7db167ff9559654155eb52d9325cf0ce9a25a4d9fedf3e"
   },
-  "marketInventoryHash": "8810ce8578de75b707be2c79092030531077d8f38a76e574f3dee7e7d00486c0",
-  "inputSignature": "cfa30a97ce0659d7f45e09cc5042fb53f4851b235a65ad15daf181796692d60a",
+  "marketInventoryHash": "155c09903cd8afdb46c5d6fccd9e3ccd2ee960a2929b6a7e1f7b4e60e4d4565e",
+  "inputSignature": "ab2d72b7ea0aa435bc1dac65a7b9cf906330d84c7ce4af8aded944e818389918",
   "assumptions": "Matchup-specific possession scenarios conditional on playing. Historical injury spells affect rotations; current medical status, confirmed starters and minutes restrictions are not connected. Not calibrated betting probabilities. Ranges are individual-game scenario outcomes.",
   "events": [
     {
@@ -85755,6 +85755,10 @@
     },
     {
       "eventId": "fe1fcaddeec9d7348d7e90485e267747",
+      "reason": "Preseason projections are not supported by the regular-season model"
+    },
+    {
+      "eventId": "4f9b60975b000e6d46c5a0cd174c34aa",
       "reason": "Preseason projections are not supported by the regular-season model"
     }
   ]
