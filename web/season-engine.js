@@ -61,6 +61,11 @@
     constructor(data, options = {}) {
       this.data = data;
       this.seed = String(options.seed == null ? "202627" : options.seed);
+      // Interactive season exploration uses a small warm-up; exported betting
+      // scenarios opt into a larger, fixed calibration independent of output seeds.
+      this.calibrationGames = options.calibrationGames ?? 8;
+      this.calibrationPasses = options.calibrationPasses ?? 2;
+      if(!Number.isInteger(this.calibrationGames)||this.calibrationGames<8||this.calibrationGames>4096||!Number.isInteger(this.calibrationPasses)||this.calibrationPasses<2||this.calibrationPasses>10)throw new Error('Invalid calibration budget');
       this.membership = {...(options.membership || assignments(data))};
       for (const [id,team] of Object.entries(this.membership)) {
         if (!data.players[id] || (team !== null && !data.teams[team])) throw new Error("Invalid roster assignment");
@@ -109,7 +114,8 @@
       // Include actual player IDs and minutes: cached healthy rotations must never mask absences.
       const signature=roster=>roster.map(p=>`${p.id}@${p.min}`).join(',');
       const key = `${game.home}:${game.away}:${game.neutral}:${signature(H)}:${signature(A)}`;
-      if (this.calibrated.has(key)) return this.calibrated.get(key);
+      const cacheKey = `${this.calibrationGames}:${this.calibrationPasses}:${key}`;
+      if (this.calibrated.has(cacheKey)) return this.calibrated.get(cacheKey);
       const pace = (h.pace+a.pace)/2;
       const impact=(roster,team)=>roster.reduce((n,p)=>n+p.min*d.players[p.id].bpm/48,0)-d.teams[team].baseBpm;
       const adjustment = (impact(H,game.home)-impact(A,game.away))*pace/200;
@@ -119,18 +125,18 @@
       // Fixed warm-up seeds keep the estimated level independent of season
       // randomness. Roster impact enters mu before calibration, so moving a
       // player cannot be calibrated back to an unchanged team rating.
-      for (let pass = 0; pass < 2; pass++) {
+      for (let pass = 0; pass < this.calibrationPasses; pass++) {
         const total = {H:0,A:0};
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < this.calibrationGames; i++) {
           const g = global.NBAI_SIM.playGame(H,A,id=>d.players[id],d.constants,d.league,pace,scale,
             hash(`calibration:${key}:${pass}:${i}`),false,d.calibration);
           total.H += g.score.H; total.A += g.score.A;
         }
-        for (const side of ["H","A"]) scale[side] = clamp(scale[side]*mu[side]/(total[side]/8),.55,1.6);
+        for (const side of ["H","A"]) scale[side] = clamp(scale[side]*mu[side]/(total[side]/this.calibrationGames),.55,1.6);
       }
       const state = {H,A,pace,scale};
       if(this.calibrated.size>=20000)this.calibrated.delete(this.calibrated.keys().next().value);
-      this.calibrated.set(key,state);return state;
+      this.calibrated.set(cacheKey,state);return state;
     }
     next() {
       if (this.index >= this.schedule.length) return null;

@@ -44,6 +44,18 @@ test('Wrong-matchup, duplicate and stale game lines never appear fresh',()=>{
  const q={eventId:'g',scope:'game',homeTeam:'Home',awayTeam:'Away',startsAt:e.commence_time,provider:'fanduel',market:'h2h',observedAt:'2026-10-05T00:00:00Z',sourceUpdatedAt:'2026-10-05T00:00:00Z'};
  assert.equal(D.gameLines({gameQuotes:[q,q]},e).length,0);assert.equal(D.gameLines({gameQuotes:[{...q,homeTeam:'Wrong'}]},e).length,0);assert.equal(D.gameLines({gameQuotes:[q]},e,Date.parse('2026-10-06')).at(0).fresh,false);
 });
+test('Period markets cannot contaminate full-game comparisons or recommendation rankings',()=>{
+ const now=Date.now(),stamp=new Date(now).toISOString();
+ const q={eventId:'g',scope:'game',homeTeam:'Home',awayTeam:'Away',startsAt:e.commence_time,provider:'fanduel',market:'spreads',observedAt:stamp,sourceUpdatedAt:stamp,outcomes:[{name:'Home',point:-3.5,price:-110},{name:'Away',point:3.5,price:-110}]};
+ const h1={...q,scope:'period',period:'h1'},h2={...h1,period:'h2'},market={gameQuotes:[q,h1,h2]};
+ assert.equal(D.gameLines(market,e,now).length,1);
+ assert.deepEqual(D.gameLines(market,e,now,'h1').map(x=>x.period),['h1']);
+ assert.deepEqual(D.gameLines(market,e,now,'h2').map(x=>x.period),['h2']);
+ assert.equal(D.teamComparison(h1,e),null);assert.equal(D.teamComparison(h2,e),null);
+ assert.equal(D.teamWatchlist({gameQuotes:[h1,h2]},e,now).length,0);
+ assert.equal(D.gameLines({gameQuotes:[h1,{...h1}]},e,now,'h1').length,0);
+ assert.equal(D.gameLines({gameQuotes:[{...h1,scope:'game'}]},e,now,'h1').length,0);
+});
 test('Shortlist excludes stale, held, started and unavailable comparisons',()=>{
  const r={gap:2,fresh:true,model:{p90:25,p10:10}};assert.equal(D.watchlist([r],e).length,1);assert.equal(D.watchlist([{...r,fresh:false}],e).length,0);assert.equal(D.watchlist([r],{...e,model:{reviewRequired:'hold'}}).length,0);assert.equal(D.watchlist([r],{...e,commence_time:'2020-01-01'}).length,0);
 });

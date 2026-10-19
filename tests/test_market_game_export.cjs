@@ -8,6 +8,7 @@ const fingerprint=require('../scripts/market_projection_inputs.cjs').inputs(proc
 assert.equal(models.inputSignature,fingerprint.inputSignature);
 assert.equal(models.marketInventoryHash,fingerprint.marketInventoryHash);
 assert.equal(models.scope,'game');assert.equal(models.runs,200);assert.equal(models.events.length+models.rejected.length,quotes.events.length);
+assert.equal(models.calibration.gamesPerPass,512);assert.equal(models.calibration.passes,4);
 assert.equal(models.coverage.teams,new Set(models.events.flatMap(e=>[e.home,e.away])).size);
 assert.equal(models.coverage.rosteredPlayers,new Set(models.events.flatMap(e=>e.players.map(p=>p.id))).size);
 for(const event of quotes.events){const matching=require('../scripts/match_market_schedule.cjs')(NBAI_SEASON_DATA,event);assert.equal(models.events.some(e=>e.eventId===event.id),!!matching);}
@@ -20,6 +21,8 @@ for(const e of models.events){
  if(e.reviewRequired){assert.equal(e.gameProjection,null);assert.ok(e.players.every(p=>p.playedScenarios===0));}
  else{
   assert.ok(e.gameProjection);assert.ok(e.gameProjection.homeWinShare>=0&&e.gameProjection.homeWinShare<=1);
+  assert.ok(Number.isFinite(e.calibrationTarget.homeMargin));
+  assert.ok(Math.abs(e.calibrationTarget.homeScore-e.calibrationTarget.awayScore-e.calibrationTarget.homeMargin)<1e-8);
   assert.ok(Math.abs(e.gameProjection.homeScore.mean-e.gameProjection.awayScore.mean-e.gameProjection.homeMargin.mean)<1e-8);
   if(saved){const scores=saved.find(x=>x.eventId===e.eventId).scores;assert.equal(scores.length,models.runs);assert.deepEqual(e.gameProjection.homeMargin,summary(scores.map(g=>g.H-g.A)));}
  }

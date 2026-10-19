@@ -13,4 +13,11 @@ class GameMarkets(unittest.TestCase):
   self.assertEqual(self.normalize('spreads',[dict(name='Home',point=-3.5,price=-110),dict(name='Away',point=4.5,price=-105)]),[])
   self.assertEqual(self.normalize('totals',[dict(name='Over',point=220.5,price=-110),dict(name='Under',point=221.5,price=-110)]),[])
   self.assertEqual(self.normalize('h2h',[dict(name='Home',price=-180),dict(name='Draw',price=300)]),[])
+ def test_halves_keep_period_identity_and_original_market_key(self):
+  for period in ('h1','h2'):
+   row=self.normalize('spreads_'+period,[dict(name='Home',point=-1.5,price=-110),dict(name='Away',point=1.5,price=-105)])[0]
+   self.assertEqual((row['scope'],row['period'],row['market'],row['marketKey']),('period',period,'spreads','spreads_'+period))
+   row=self.normalize('totals_'+period,[dict(name='Over',point=111.5,price=-110),dict(name='Under',point=111.5,price=-110)])[0]
+   self.assertEqual(row['period'],period)
+  self.assertEqual(self.normalize('spreads_q1',[dict(name='Home',point=-1.5,price=-110),dict(name='Away',point=1.5,price=-105)]),[])
 if __name__=='__main__':unittest.main()

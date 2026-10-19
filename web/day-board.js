@@ -32,11 +32,13 @@
   const p=m.gameProjection;if(![p.homeScore?.mean,p.awayScore?.mean,p.homeMargin?.mean,p.total?.mean,p.homeWinShare].every(Number.isFinite))return null;
   return {...p,winner:p.homeMargin.mean>0?event.home_team:p.homeMargin.mean<0?event.away_team:null,margin:Math.abs(p.homeMargin.mean)};
  }
- function gameLines(market,event,now=Date.now()){
-  const matched=(market?.gameQuotes||[]).filter(q=>q.eventId===event.id&&q.scope==='game'&&q.homeTeam===event.home_team&&q.awayTeam===event.away_team&&Date.parse(q.startsAt)===Date.parse(event.commence_time));
+ function gameLines(market,event,now=Date.now(),period='game'){
+  if(!['game','h1','h2'].includes(period))return [];
+  const matched=(market?.gameQuotes||[]).filter(q=>q.eventId===event.id&&(q.period||'game')===period&&q.scope===(period==='game'?'game':'period')&&q.homeTeam===event.home_team&&q.awayTeam===event.away_team&&Date.parse(q.startsAt)===Date.parse(event.commence_time));
   return matched.filter(q=>matched.filter(o=>o.provider===q.provider&&o.market===q.market).length===1).map(q=>({...q,fresh:[q.observedAt,q.sourceUpdatedAt].every(t=>Number.isFinite(Date.parse(t))&&now-Date.parse(t)>=-60000&&now-Date.parse(t)<=C.MAX_AGE)&&Date.parse(event.commence_time)>now}));
  }
  function teamComparison(quote,event){
+  if((quote.period||'game')!=='game'||(quote.scope&&quote.scope!=='game'))return null;
   const p=projection(event);if(!p)return null;
   if(quote.market==='spreads'){const home=quote.outcomes.find(o=>o.name===event.home_team);return Number.isFinite(home?.point)?{model:p.homeMargin.mean,market:-home.point,difference:p.homeMargin.mean+home.point}:null;}
   if(quote.market==='totals'){const over=quote.outcomes.find(o=>o.name==='Over');return Number.isFinite(over?.point)?{model:p.total.mean,market:over.point,difference:p.total.mean-over.point}:null;}

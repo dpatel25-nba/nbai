@@ -23,12 +23,13 @@ jobs:
         with:
           node-version: '22'
       - name: Install collector dependency
-        run: python -m pip install 'requests>=2.32.3,<3'
+        run: python -m pip install 'requests>=2.32.3,<3' 'numpy==2.0.2' 'pandas==2.3.3' 'joblib>=1.4,<2'
       - name: Test collection and failure handling
         run: |
           python tests/test_collect_player_consensus.py
           python tests/test_game_market_quotes.py
-          node --test tests/test_player_line_pipeline.cjs tests/test_consensus_analysis.cjs tests/test_day_board.cjs
+          python tests/test_game_availability.py
+          node --test tests/test_player_line_pipeline.cjs tests/test_consensus_analysis.cjs tests/test_day_board.cjs tests/test_game_availability.cjs tests/test_game_calibration.cjs
       - name: Collect supported NBA lines
         id: collect
         continue-on-error: true
@@ -41,6 +42,7 @@ jobs:
         if: steps.collect.outcome == 'success'
         continue-on-error: true
         run: |
+          python scripts/collect_game_availability.py
           node scripts/build_market_game_projections.cjs
           node tests/test_market_game_export.cjs
           node scripts/build_player_line_coverage.cjs
@@ -48,7 +50,7 @@ jobs:
           import json
           from pathlib import Path
           p=Path('web/player-consensus-status.json');s=json.loads(p.read_text())
-          s.update(projectionsVerified=True,coverageVerified=True,message='Lines, projections and player matching verified together')
+          s.update(projectionsVerified=True,coverageVerified=True,availabilityVerified=True,message='Lines, current availability, projections and player matching verified together')
           p.write_text(json.dumps(s,indent=2)+'\n')
           PYCODE
       - name: Preserve the last verified snapshot after any pipeline failure
@@ -58,12 +60,12 @@ jobs:
           import subprocess,json
           from pathlib import Path
           from datetime import datetime,timezone
-          for f in ['web/player-consensus.json','web/player-game-projections.json','web/player-line-coverage.json']:
+          for f in ['web/player-consensus.json','web/player-game-projections.json','web/player-line-coverage.json','web/game-availability.json']:
               previous=subprocess.run(['git','show','HEAD:'+f],capture_output=True,check=True).stdout
               Path(f).write_bytes(previous)
           status=Path('web/player-consensus-status.json')
           s=json.loads(status.read_text()) if status.exists() else {}
-          s.update(schemaVersion=1,lastAttemptAt=datetime.now(timezone.utc).isoformat(),success=False,projectionsVerified=False,message='Refresh failed validation; previous verified lines and projections retained')
+          s.update(schemaVersion=1,lastAttemptAt=datetime.now(timezone.utc).isoformat(),success=False,projectionsVerified=False,coverageVerified=False,availabilityVerified=False,message='Refresh failed validation; previous verified lines and projections retained')
           status.write_text(json.dumps(s,indent=2)+'\n')
           PYCODE
       - name: Keep redacted source receipts
@@ -71,7 +73,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: player-line-receipts-${{ github.run_id }}
-          path: data/features/player_props/consensus/
+          path: |
+            data/features/player_props/consensus/
+            data/features/game_availability/
           retention-days: 7
           if-no-files-found: ignore
       - name: Publish snapshot or collection failure status
@@ -80,7 +84,7 @@ jobs:
         run: |
           git config user.name "$OWNER"
           git config user.email "$OWNER@users.noreply.github.com"
-          git add web/player-consensus.json web/player-consensus-status.json web/player-game-projections.json web/player-line-coverage.json
+          git add web/player-consensus.json web/player-consensus-status.json web/player-game-projections.json web/player-line-coverage.json web/game-availability.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Refresh NBA player-line snapshot and collection status'
           git pull --rebase origin main

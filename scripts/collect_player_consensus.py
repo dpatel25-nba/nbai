@@ -12,6 +12,7 @@ from game_market_quotes import normalize_game
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://api.the-odds-api.com/v4'
 MARKETS={'player_points':'PTS','player_assists':'AST','player_rebounds':'REB','player_steals':'STL','player_blocks':'BLK'}
+PERIOD_MARKETS=[kind+'_'+period for period in ('h1','h2') for kind in ('h2h','spreads','totals')]
 BOOKS={'fanduel':'FanDuel','prizepicks':'PrizePicks','draftkings':'DraftKings','betmgm':'BetMGM','fanatics':'Fanatics','betrivers':'BetRivers','williamhill_us':'Caesars','underdog':'Underdog','espnbet':'theScore Bet','hardrockbet':'Hard Rock Bet'}
 SPORTS={'basketball_nba':'Regular season','basketball_nba_preseason':'Preseason'}
 DFS={'prizepicks','underdog'}
@@ -89,16 +90,18 @@ def collect(max_events,max_credits,root=ROOT,fetch=requests.get,include_game_mar
             if not isinstance(payload,list):fail('Game-line collection unavailable')
             for item in payload:
                 if any(all(item.get(k)==e.get(k) for k in ('id','sport_key','home_team','away_team','commence_time')) for e in upcoming):game_rows.extend(normalize_game(item,rec,BOOKS))
-    selected_limit=min(max_events,(max_credits-used)//len(MARKETS))
+    event_markets=list(MARKETS)+(PERIOD_MARKETS if include_game_markets else [])
+    selected_limit=min(max_events,(max_credits-used)//len(event_markets))
     if upcoming and selected_limit<1:fail('Insufficient budget for player lines')
     for event in upcoming[:selected_limit]:
-        if used+len(MARKETS)>max_credits:fail('Collection credit limit reached before full scan')
-        payload,rec=get('event-'+event['id'],BASE+'/sports/'+event['sport_key']+'/events/'+event['id']+'/odds',dict(bookmakers=','.join(BOOKS),markets=','.join(MARKETS),oddsFormat='american'))
-        used+=rec.get('creditsUsed',len(MARKETS))
+        if used+len(event_markets)>max_credits:fail('Collection credit limit reached before full scan')
+        payload,rec=get('event-'+event['id'],BASE+'/sports/'+event['sport_key']+'/events/'+event['id']+'/odds',dict(bookmakers=','.join(BOOKS),markets=','.join(event_markets),oddsFormat='american'))
+        used+=rec.get('creditsUsed',len(event_markets))
         if payload is None:
             errors.append({'eventId':event['id'],'status':rec.get('status'),'error':rec.get('error')});break # no repeated failed requests
         if not isinstance(payload,dict) or any(payload.get(k)!=event.get(k) for k in ('id','sport_key','home_team','away_team','commence_time')) or not isinstance(payload.get('bookmakers'),list):fail('Mismatched or malformed event response')
         event_rows=normalize(payload,rec);rows.extend(event_rows)
+        if include_game_markets:game_rows.extend(normalize_game(payload,rec,BOOKS))
         events.append({**event,'competition':SPORTS[event['sport_key']],'checkedAt':rec['receivedAt'],'quoteCount':len(event_rows),'providers':sorted({r['provider'] for r in event_rows})})
     if errors:fail('Collection stopped after source failure')
     out=dict(schemaVersion=1,generatedAt=stamp(),scope='game',season='2026-27',events=events,quotes=rows,gameQuotes=[q for q in game_rows if any(e['id']==q['eventId'] for e in events)],

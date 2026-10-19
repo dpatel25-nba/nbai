@@ -24,20 +24,22 @@ for(const event of market.events){
   games.push({eventId:event.id,providerStartsAt:event.commence_time,offsetMinutes,game,players,scores:[],availability,
     reviewRequired:availability.holdReason||review(d,NBAI_SEASON,home)||review(d,NBAI_SEASON,away)});
 }
-let cache;const runs=200,seedPrefix='market-matchups-v1:';
+let cache;const runs=200,seedPrefix='market-matchups-v1:',calibrationGames=512,calibrationPasses=4;
 for(let i=0;i<runs&&games.length;i++){
-  const season=new NBAI_SEASON.Season(d,{seed:seedPrefix+i,injuries:false});if(cache)season.calibrated=cache;
+  const season=new NBAI_SEASON.Season(d,{seed:seedPrefix+i,injuries:false,calibrationGames,calibrationPasses});if(cache)season.calibrated=cache;
   for(const entry of games){
     if(entry.reviewRequired)continue;
     season.health.set(entry.game.id,new Set(entry.availability.outIds));
     const state=season.matchup(entry.game),g=NBAI_SIM.playGame(state.H,state.A,id=>d.players[id],d.constants,d.league,state.pace,state.scale,hash(seedPrefix+i+':'+entry.game.id),false,d.calibration);
     entry.scores.push(g.score);
+    entry.calibrationTarget={homeScore:state.scale.mu.H,awayScore:state.scale.mu.A,homeMargin:state.scale.mu.H-state.scale.mu.A};
     for(const p of entry.players){const box=g.box[p.player.team===entry.game.home?'H':'A'][p.player.id];if(box?.MIN>0)p.samples.push(box);}
   }
   cache=season.calibrated;
 }
 const shooting={FG_PCT:['FGM','FGA'],FT_PCT:['FTM','FTA'],FG3_PCT:['FG3M','FG3A']};
 const output={schemaVersion:1,generatedAt:new Date().toISOString(),scope:'game',runs,seedPrefix,inputGeneratedAt:d.generated,
+  calibration:{gamesPerPass:calibrationGames,passes:calibrationPasses,note:'Fixed independent warm-up seeds; numerical calibration to model score targets, not validation against game outcomes.'},
   coverage:{events:games.length,teams:new Set(games.flatMap(e=>[e.game.home,e.game.away])).size,rosteredPlayers:new Set(games.flatMap(e=>e.players.map(p=>p.player.id))).size,playersWithProjections:new Set(games.flatMap(e=>e.players.filter(p=>p.samples.length).map(p=>p.player.id))).size},
   schedule:d.schedule.filter(g=>!g.provisional).map(g=>({id:g.id,home:g.home,away:g.away,homeName:d.teams[g.home].name,awayName:d.teams[g.away].name,startsAt:new Date(g.tip).toISOString()})),
   unassignedPlayers:Object.values(d.players).filter(p=>!p.team).map(p=>({id:p.id,name:p.n,reason:'Roster assignment unresolved; no team matchup can be selected.'})),
@@ -46,6 +48,7 @@ const output={schemaVersion:1,generatedAt:new Date().toISOString(),scope:'game',
   assumptions:'Matchup-specific possession scenarios using current roster and ESPN injury observations. Reported Out players are excluded; other players are conditional on playing. Questionable participation, confirmed starters and minutes restrictions are not modeled. Not calibrated betting probabilities.',
   events:games.map(e=>({eventId:e.eventId,gameId:e.game.id,home:e.game.home,away:e.game.away,homeName:d.teams[e.game.home].name,awayName:d.teams[e.game.away].name,startsAt:e.providerStartsAt,officialStartsAt:new Date(e.game.tip).toISOString(),scheduleOffsetMinutes:e.offsetMinutes,scheduleMatchMethod:'Unique home/away match within 15 minutes',reviewRequired:e.reviewRequired,
     availability:e.availability,
+    calibrationTarget:e.calibrationTarget||null,
     gameProjection:e.scores.length?{homeScore:summary(e.scores.map(g=>g.H)),awayScore:summary(e.scores.map(g=>g.A)),homeMargin:summary(e.scores.map(g=>g.H-g.A)),total:summary(e.scores.map(g=>g.H+g.A)),homeWinShare:e.scores.filter(g=>g.H>g.A).length/runs}:null,
     players:e.players.map(p=>({id:p.player.id,name:p.player.n,team:p.player.team,injuryStatus:e.availability.players.find(x=>x.id===p.player.id)?.status||null,playedScenarios:p.samples.length,projectionStatus:e.availability.outIds.includes(String(p.player.id))?'reported_out':p.samples.length===0?'no_projected_minutes':p.samples.length<20?'limited_participation':'available',minutes:summary(p.samples.map(b=>b.MIN)),
       stats:Object.fromEntries([...['PTS','AST','REB','STL','BLK'].map(s=>[s,summary(p.samples.map(b=>b[s]))]),...Object.entries(shooting).map(([s,[m,a]])=>[s,summary(p.samples.filter(b=>b[a]>0).map(b=>100*b[m]/b[a]))])])}))})),rejected};

@@ -3,13 +3,15 @@
 const el=(tag,text,cls)=>{const x=document.createElement(tag);if(text!=null)x.textContent=text;if(cls)x.className=cls;return x;};
 const f=n=>Number.isFinite(n)?n.toFixed(1):'—',signed=n=>(n>0?'+':'')+f(n);
 const propNumber=n=>Number.isFinite(n)?n.toFixed(2):'—',propDifference=n=>(n>0?'+':'')+propNumber(n);
-let market=null,models=null,status=null,all=[],current=null,kind='spreads',failed=false,loading=false,selectedPlayer=null,playerEvent=null;
+let market=null,models=null,status=null,all=[],current=null,kind='spreads',period='game',failed=false,loading=false,selectedPlayer=null,playerEvent=null;
 const tip=e=>new Date(e.commence_time).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+' ET';
 function url(date,id){const u=new URL('betting.html',location.href);u.searchParams.set('date',date);if(id)u.searchParams.set('game',id);return u.pathname+u.search;}
 function go(date,id){history.pushState({},'',url(date,id));render();if(id)$('detailTitle').focus();}
 function button(text,fn){const b=el('button',text,'button secondary');b.type='button';b.onclick=fn;return b;}
 function render(){
  const query=new URLSearchParams(location.search),today=D.day(Date.now()),first=all.find(e=>e.competition!=='Preseason'),defaultDay=first&&today<D.day(first.commence_time)?D.day(first.commence_time):today,requested=query.get('date'),date=requested&&/^\d{4}-\d{2}-\d{2}$/.test(requested)&&Number.isFinite(Date.parse(requested+'T12:00:00Z'))?requested:defaultDay;$('gameDate').value=date;
+ const corrected=models?.calibration?.gamesPerPass===512&&models?.calibration?.passes===4;
+ $('modelStatus').textContent=corrected?'Updated simulator · Game scores, player projections and model leans use the corrected scoring calibration. Forecast accuracy and betting performance remain under evaluation.':'';
  $('boardStatus').textContent=market?`${failed?'Reload failed · retaining saved data. ':''}${status?.success===false?'Latest collection failed · showing the last verified snapshot. ':''}Market snapshot: ${new Date(market.generatedAt).toLocaleString()} · ${market.coverage.eventsChecked} games checked. Projections: ${models?.runs||0} scenarios per modeled matchup.`:'Market data unavailable. No prices are being estimated.';
  current=all.find(e=>e.id===query.get('game'))||null;
  $('dailyBoard').hidden=!!current;$('gameDetail').hidden=!current;
@@ -31,22 +33,27 @@ function detail(){
  lead.append(el('p',p?`Home margin scenario range: ${signed(p.homeMargin.p10)} to ${signed(p.homeMargin.p90)} points.`:'Preseason games never borrow regular-season projections.','note'));
  $('forecastHero').append(lead);const scores=el('div',null,'score-pair');for(const [name,score] of [[e.away_team,p?.awayScore.mean],[e.home_team,p?.homeScore.mean]]){const cell=el('div');cell.append(el('span',name),el('strong',f(score)));scores.append(cell);}$('forecastHero').append(scores);
  const a=e.model?.availability;
+ const calibration=models?.calibration;
+ $('calibrationMethod').textContent=calibration?`Scoring calibration uses ${calibration.gamesPerPass} warm-up games across ${calibration.passes} passes, separate from the ${models.runs} scenarios shown here. This corrects numerical drift toward unrealistic scoring margins; it does not fit predictions to sportsbook lines or establish a betting edge. Displayed averages still vary with simulation sampling.`:'';
  $('gameMethod').textContent=a?`${models?.runs||0} matchup scenarios using ${a.source||'current availability'}. ${a.observedAt?'Observed '+new Date(a.observedAt).toLocaleString()+'. ':''}Reported Out: ${(a.excluded||[]).map(x=>x.name).join(', ')||'none listed'}. Other listed statuses: ${(a.uncertain||[]).map(x=>x.name+' ('+x.status+')').join(', ')||'none'}. Other players are conditional on playing; confirmed starters and minutes restrictions are not modeled. ${C.forecastHold(e.model)||'No validated betting edge.'}`:`${models?.runs||0} matchup scenarios. Current availability is not connected to this saved forecast.`;
  if(playerEvent!==e.id){selectedPlayer=null;playerEvent=e.id;$('propSearch').value='';$('playerBrowser').open=false;}
  gameMarkets();playerRows();shortlist();
 }
 function gameMarkets(){
  $('teamMarketRows').replaceChildren();$('gameMarketForecast').replaceChildren();
- const e=current,rows=D.gameLines(market,e).filter(q=>q.market===kind),p=D.projection(e),home=e.home_team,away=e.away_team;
+ const e=current,rows=D.gameLines(market,e,Date.now(),period).filter(q=>q.market===kind),p=period==='game'?D.projection(e):null,home=e.home_team,away=e.away_team;
  $('marketSideA').textContent=kind==='totals'?'Over':away;$('marketSideB').textContent=kind==='totals'?'Under':home;
  const forecast=(label,value)=>{const box=el('div',null,'market-forecast-item');box.append(el('span',label),el('strong',value));$('gameMarketForecast').append(box);};
- if(!p)forecast('NBAI forecast','Under review / unavailable');
+ if(period!=='game')forecast(period==='h1'?'1st half forecast':'2nd half forecast','Not modeled yet');
+ else if(!p)forecast('NBAI forecast','Under review / unavailable');
  else if(kind==='h2h'){forecast('NBAI · '+away,f((1-p.homeWinShare)*100)+'% to win');forecast('NBAI · '+home,f(p.homeWinShare*100)+'% to win');}
  else if(kind==='spreads')forecast('NBAI projected margin',p.winner?p.winner+' by '+f(p.margin):'Even matchup');
  else forecast('NBAI projected total',f(p.total.mean)+' combined points');
  $('gameMarketContext').textContent=kind==='h2h'?'Each team’s cell shows its moneyline and the book’s win probability with its margin removed. Model difference names the team we give a higher chance than that book. It is not an expected return.':kind==='spreads'?'Team columns show the actual handicap and odds. Model difference shows which team our projected margin favors relative to that spread.':'Compare our combined-points forecast with each book’s total. Odds appear below the line.';
+ if(period==='game')$('gameMarketContext').append(el('span',' Model differences are research estimates, not validated betting edges.'));
+ if(period!=='game')$('gameMarketContext').textContent=(period==='h1'?'First-half':'Second-half')+' sportsbook lines only. A separate forecast for this period is not available; full-game predictions are not divided in half. Book-specific overtime and settlement rules apply.';
  if(rows.length&&rows.every(q=>!q.fresh))$('gameMarketContext').append(el('span',' All quotes below are saved / stale; refresh before using them.','quote-caution'));
- if(!rows.length){const tr=el('tr'),cell=el('td','No matching lines in this snapshot.');cell.colSpan=4;tr.append(cell);$('teamMarketRows').append(tr);}
+ if(!rows.length){const tr=el('tr'),cell=el('td',period==='game'?'No matching lines in this snapshot.':'No '+(period==='h1'?'first-half':'second-half')+' '+(kind==='totals'?'over / under':kind==='h2h'?'moneyline':'spread')+' lines returned in this snapshot. They will appear when the provider publishes them.');cell.colSpan=4;tr.append(cell);$('teamMarketRows').append(tr);}
  for(const q of rows){
   const tr=el('tr'),name=el('th',null);name.scope='row';name.append(el('strong',q.providerName));
   const stamp=new Date(q.sourceUpdatedAt),time=Number.isFinite(stamp.getTime())?stamp.toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+' ET':'Time unavailable';
@@ -60,7 +67,7 @@ function gameMarkets(){
    tr.append(cell);
   }
   const cmp=D.teamComparison(q,e),delta=el('td',null,'model-difference');
-  if(!cmp)delta.append(el('span','No comparison'),el('small',p?'A matching two-sided line is missing':'NBAI forecast unavailable'));
+  if(!cmp)delta.append(el('span','No comparison'),el('small',period!=='game'?'Period forecast not available':p?'A matching two-sided line is missing':'NBAI forecast unavailable'));
   else if(Math.abs(cmp.difference)<.05)delta.append(el('strong','In line with the book'),el('small','Less than 0.1 '+(kind==='h2h'?'percentage points':'points')+' apart'));
   else if(kind==='totals')delta.append(el('strong',f(Math.abs(cmp.difference))+' points '+(cmp.difference>0?'higher':'lower')),el('small','NBAI total vs. sportsbook total'));
   else {delta.append(el('strong',cmp.difference>0?home:away));delta.append(el('small',kind==='h2h'?'+'+f(Math.abs(cmp.difference))+' percentage points vs. book':f(Math.abs(cmp.difference))+' points toward this team'));}
@@ -107,6 +114,7 @@ async function load(){
 $('gameDate').onchange=()=>go($('gameDate').value);$('todayButton').onclick=()=>go(D.day(Date.now()));$('nextGames').onclick=()=>{const next=all.find(e=>e.competition!=='Preseason'&&Date.parse(e.commence_time)>Date.now());if(next)go(D.day(next.commence_time));};$('reloadBoard').onclick=load;
 $('propSearch').oninput=playerRows;$('clearPropSearch').onclick=()=>{$('propSearch').value='';playerRows();$('propSearch').focus();};
 for(const b of document.querySelectorAll('[data-market]'))b.onclick=()=>{kind=b.dataset.market;for(const other of document.querySelectorAll('[data-market]'))other.setAttribute('aria-pressed',String(other===b));gameMarkets();};
+for(const b of document.querySelectorAll('[data-period]'))b.onclick=()=>{period=b.dataset.period;for(const other of document.querySelectorAll('[data-period]'))other.setAttribute('aria-pressed',String(other===b));gameMarkets();};
 for(const a of document.querySelectorAll('a[href="#playerBrowser"]'))a.onclick=ev=>{ev.preventDefault();$('playerBrowser').open=true;$('playerBrowser').scrollIntoView({behavior:'smooth'});$('propSearch').focus({preventScroll:true});};
 window.addEventListener('popstate',render);setInterval(()=>{if(!document.hidden)load();},300000);setInterval(()=>{if(!document.hidden){if(current)detail();else render();}},30000);load();
 })();

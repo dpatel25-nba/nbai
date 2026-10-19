@@ -24,14 +24,14 @@ class CollectionTests(unittest.TestCase):
  def response(self,payload,status=200,credits=0):
   from types import SimpleNamespace
   return SimpleNamespace(content=json.dumps(payload).encode(),status_code=status,ok=status==200,headers={'x-requests-last':str(credits),'x-requests-remaining':'90000'},json=lambda:payload)
- def run_scan(self,responses,max_events=60,max_credits=300):
+ def run_scan(self,responses,max_events=60,max_credits=300,include_game_markets=False):
   self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup);self.root=Path(self.tmp.name)
   (self.root/'web').mkdir();(self.root/'web/player-consensus.json').write_text('{"previous":true}')
   self.calls=[]
   def fetch(url,**kw):
    self.calls.append((url,kw));return responses.pop(0)
   with patch.dict(os.environ,{'THE_ODDS_API_KEY':'test-secret-never-publish'}),contextlib.redirect_stdout(io.StringIO()):
-   m.collect(max_events,max_credits,self.root,fetch)
+   m.collect(max_events,max_credits,self.root,fetch,include_game_markets=include_game_markets)
  def event(self,sport='basketball_nba',id='g'):
   return dict(id=id,sport_key=sport,home_team='New York Knicks',away_team='Philadelphia 76ers',commence_time='2099-10-20T23:00:00Z')
  def test_full_scan_preserves_competition_and_expanded_sources(self):
@@ -66,5 +66,12 @@ class CollectionTests(unittest.TestCase):
   payload=NormalizeTests().payload(key='underdog');payload['sport_key']='basketball_nba_preseason'
   r=m.normalize(payload,dict(receivedAt='2026-10-05T22:00:10Z',url='https://api.the-odds-api.com/v4/test',sha256='a'*64))
   self.assertEqual(r[0]['competition'],'Preseason');self.assertIsNone(r[0]['americanOdds'])
+ def test_period_requests_are_budgeted_and_normalized_separately(self):
+  e=self.event();half=dict(key='spreads_h1',last_update='2026-10-19T00:00:00Z',outcomes=[dict(name=e['home_team'],point=-1.5,price=-110),dict(name=e['away_team'],point=1.5,price=-110)])
+  self.run_scan([self.response([{'key':'basketball_nba','active':True}]),self.response([e,self.event(id='later')]),self.response([],credits=3),self.response({**e,'bookmakers':[dict(key='fanduel',markets=[half])]},credits=11)],max_credits=14,include_game_markets=True)
+  x=json.loads((self.root/'web/player-consensus.json').read_text())
+  self.assertEqual(x['coverage']['eventsChecked'],1);self.assertEqual(x['coverage']['creditsUsed'],14)
+  self.assertEqual(x['gameQuotes'][0]['period'],'h1');self.assertEqual(x['quotes'],[])
+  self.assertIn('totals_h2',self.calls[-1][1]['params']['markets']);self.assertEqual(len(self.calls),4)
 
 if __name__=='__main__':unittest.main()

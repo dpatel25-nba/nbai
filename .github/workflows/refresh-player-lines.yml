@@ -29,7 +29,7 @@ jobs:
           python tests/test_collect_player_consensus.py
           python tests/test_game_market_quotes.py
           python tests/test_game_availability.py
-          node --test tests/test_player_line_pipeline.cjs tests/test_consensus_analysis.cjs tests/test_day_board.cjs tests/test_game_availability.cjs
+          node --test tests/test_player_line_pipeline.cjs tests/test_consensus_analysis.cjs tests/test_day_board.cjs tests/test_game_availability.cjs tests/test_game_calibration.cjs
       - name: Collect supported NBA lines
         id: collect
         continue-on-error: true
