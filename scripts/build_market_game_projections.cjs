@@ -24,7 +24,7 @@ for(const event of market.events){
   games.push({eventId:event.id,providerStartsAt:event.commence_time,offsetMinutes,game,players,scores:[],availability,
     reviewRequired:availability.holdReason||review(d,NBAI_SEASON,home)||review(d,NBAI_SEASON,away)});
 }
-let cache;const runs=200,seedPrefix='market-matchups-v1:',calibrationGames=512,calibrationPasses=4;
+let cache;const runs=2000,seedPrefix='market-matchups-v1:',calibrationGames=512,calibrationPasses=4;
 for(let i=0;i<runs&&games.length;i++){
   const season=new NBAI_SEASON.Season(d,{seed:seedPrefix+i,injuries:false,calibrationGames,calibrationPasses});if(cache)season.calibrated=cache;
   for(const entry of games){
@@ -55,4 +55,5 @@ const output={schemaVersion:1,generatedAt:new Date().toISOString(),scope:'game',
 const dir=path.join(root,'data/features/player_props/consensus');fs.mkdirSync(dir,{recursive:true});
 fs.writeFileSync(path.join(dir,'game-projection-samples.json'),JSON.stringify(games));
 fs.writeFileSync(destination+'.tmp',JSON.stringify(output,null,2)+'\n');fs.renameSync(destination+'.tmp',destination);
+require('./export_game_watchlist.cjs').exportFile(root,output,games);
 console.log(JSON.stringify({events:games.length,players:games.reduce((n,g)=>n+g.players.length,0),simulatedGames:games.length*runs,rejected}));

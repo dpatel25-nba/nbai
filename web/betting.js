@@ -37,7 +37,7 @@ function detail(){
  $('calibrationMethod').textContent=calibration?`Scoring calibration uses ${calibration.gamesPerPass} warm-up games across ${calibration.passes} passes, separate from the ${models.runs} scenarios shown here. This corrects numerical drift toward unrealistic scoring margins; it does not fit predictions to sportsbook lines or establish a betting edge. Displayed averages still vary with simulation sampling.`:'';
  $('gameMethod').textContent=a?`${models?.runs||0} matchup scenarios using ${a.source||'current availability'}. ${a.observedAt?'Observed '+new Date(a.observedAt).toLocaleString()+'. ':''}Reported Out: ${(a.excluded||[]).map(x=>x.name).join(', ')||'none listed'}. Other listed statuses: ${(a.uncertain||[]).map(x=>x.name+' ('+x.status+')').join(', ')||'none'}. Other players are conditional on playing; confirmed starters and minutes restrictions are not modeled. ${C.forecastHold(e.model)||'No validated betting edge.'}`:`${models?.runs||0} matchup scenarios. Current availability is not connected to this saved forecast.`;
  if(playerEvent!==e.id){selectedPlayer=null;playerEvent=e.id;$('propSearch').value='';$('playerBrowser').open=false;}
- gameMarkets();playerRows();shortlist();
+ gameMarkets();playerRows();shortlist();NBAI_GAME_WATCHLIST.render(e,models);
 }
 function gameMarkets(){
  $('teamMarketRows').replaceChildren();$('gameMarketForecast').replaceChildren();

@@ -126,11 +126,12 @@
                  A: shared * Math.exp(gauss(r) * C.SHOOT_SD_TEAM)};
     const score = {H: 0, A: 0}, tfoul = {H: 0, A: 0};
     const log = [];
-    let period = 0;
+    let period = 0, firstHalf = null;
 
     for (let i = 0; i < npos; i++) {
       const slot = Math.min(Math.floor(i / npos * C.N_SLOTS), C.N_SLOTS - 1);
       const per = Math.min(Math.floor(i / npos * 4), 3);
+      if(per>=2&&firstHalf===null)firstHalf={...score};
       if (per !== period) { period = per; tfoul.H = 0; tfoul.A = 0; }
       for (const [off, dfn] of [["H", "A"], ["A", "H"]]) {
         const on = lu[off][slot].map(k => teams[off][k]);
@@ -309,6 +310,7 @@
     // distribution carries an impossible spike at exactly zero, and the
     // aggregate view reported "closest game 0 points" on a real basketball
     // scoreline that cannot happen.
+    const regulation={...score};
     let ot = 0;
     while (score.H === score.A) {
       if (ot >= 100) throw new Error("Unable to resolve overtime");
@@ -353,7 +355,8 @@
         }
       }
     }
-    return {score, box, log, npos, ot};
+    const periods={firstHalf,secondHalfRegulation:{H:regulation.H-firstHalf.H,A:regulation.A-firstHalf.A},overtime:{H:score.H-regulation.H,A:score.A-regulation.A}};
+    return {score, box, log, npos, ot, periods};
   }
 
   global.NBAI_SIM = {playGame, BOX, rng};

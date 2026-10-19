@@ -7,7 +7,7 @@ const saved=fs.existsSync(samplePath)?JSON.parse(fs.readFileSync(samplePath)):nu
 const fingerprint=require('../scripts/market_projection_inputs.cjs').inputs(process.cwd(),quotes);
 assert.equal(models.inputSignature,fingerprint.inputSignature);
 assert.equal(models.marketInventoryHash,fingerprint.marketInventoryHash);
-assert.equal(models.scope,'game');assert.equal(models.runs,200);assert.equal(models.events.length+models.rejected.length,quotes.events.length);
+assert.equal(models.scope,'game');assert.equal(models.runs,2000);assert.equal(models.events.length+models.rejected.length,quotes.events.length);
 assert.equal(models.calibration.gamesPerPass,512);assert.equal(models.calibration.passes,4);
 assert.equal(models.coverage.teams,new Set(models.events.flatMap(e=>[e.home,e.away])).size);
 assert.equal(models.coverage.rosteredPlayers,new Set(models.events.flatMap(e=>e.players.map(p=>p.id))).size);
@@ -31,7 +31,7 @@ for(const e of models.events){
   for(const stat of ['PTS','AST','REB','STL','BLK','FG_PCT','FT_PCT','FG3_PCT']){const x=p.stats[stat];if(x){assert.ok([x.mean,x.p10,x.p90].every(Number.isFinite));assert.ok(x.p10<=x.p90);assert.ok(x.mean>=0);if(stat.endsWith('_PCT'))assert.ok(x.mean<=100);}}
   if(!saved)continue;
   const samples=saved.find(x=>x.eventId===e.eventId).players.find(x=>x.player.id===p.id).samples;
-  assert.equal(p.playedScenarios,samples.length);assert.ok(samples.length<=200);
+  assert.equal(p.playedScenarios,samples.length);assert.ok(samples.length<=models.runs);
   for(const stat of ['PTS','AST','REB','STL','BLK'])assert.deepEqual(p.stats[stat],summary(samples.map(x=>x[stat])));
   for(const [stat,[made,attempts]] of Object.entries({FG_PCT:['FGM','FGA'],FT_PCT:['FTM','FTA'],FG3_PCT:['FG3M','FG3A']}))assert.deepEqual(p.stats[stat],summary(samples.filter(x=>x[attempts]>0).map(x=>100*x[made]/x[attempts])));
  }
