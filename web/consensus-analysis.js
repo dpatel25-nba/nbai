@@ -4,6 +4,12 @@
   const STATS={PTS:'Points',AST:'Assists',REB:'Rebounds',STL:'Steals',BLK:'Blocks',FG_PCT:'FG%',FT_PCT:'FT%',FG3_PCT:'3P%'};
   const PROVIDERS={fanduel:'FanDuel',prizepicks:'PrizePicks',draftkings:'DraftKings',betmgm:'BetMGM',fanatics:'Fanatics',betrivers:'BetRivers',williamhill_us:'Caesars',underdog:'Underdog',espnbet:'theScore Bet',hardrockbet:'Hard Rock Bet'};
   const MAX_AGE=15*60*1000;
+  function forecastHold(forecast,now=Date.now()){
+    if(forecast?.reviewRequired)return forecast.reviewRequired;
+    if(forecast?.availability&&(!Number.isFinite(Date.parse(forecast.availability.validUntil))||Date.parse(forecast.availability.validUntil)<=now))
+      return 'Availability observation expired; refresh required for a current forecast.';
+    return null;
+  }
   function validTime(value,now){const t=Date.parse(value);return Number.isFinite(t)&&t<=now+60000;}
   function sources(data,player,event,stat,now=Date.now()){
     const result={};
@@ -32,16 +38,16 @@
     const match=forecast?.eventId===event?.id&&Date.parse(forecast?.startsAt)===Date.parse(event?.commence_time);
     const p=match?forecast.players?.find(p=>p.id===player?.id&&normalize(p.name)===normalize(player.name)):null;
     const raw=p?.stats?.[stat],model=raw&&[raw.mean,raw.p10,raw.p90].every(Number.isFinite)?raw:null;
-    const held=forecast?.reviewRequired||player?.reviewRequired;
+    const held=forecastHold(forecast,now)||player?.reviewRequired;
     let reason='Research comparison only; no validated betting signal.';
     if(available.length<2)reason=available.length?'One source only; consensus unavailable.':'No matching lines in this snapshot.';
     else if(!fresh)reason='Saved, stale or started-game lines; refresh required for a current comparison.';
     else if(held)reason=held;
-    else if(!model)reason=p?.projectionStatus==='no_projected_minutes'?'No projected rotation minutes in these scenarios.':'Matching game projection unavailable; season averages are not substituted.';
+    else if(!model)reason=p?.projectionStatus==='reported_out'?'Reported Out; excluded from these game scenarios.':p?.projectionStatus==='no_projected_minutes'?'No projected rotation minutes in these scenarios.':'Matching game projection unavailable; season averages are not substituted.';
     else if(p?.projectionStatus==='limited_participation')reason='Too few simulated appearances for a stable comparison.';
     const snapshotGap=median!==null&&model&&!held&&p?.projectionStatus!=='limited_participation'&&Date.parse(event?.commence_time)>now?model.mean-median:null;
     const gap=fresh?snapshotGap:null;
     return {books,median,sourceCount:available.length,fresh,model:held?null:model,gap,snapshotGap,reason,held:held||null,participation:p?.projectionStatus||null,playedScenarios:p?.playedScenarios??null};
   }
-  const api={normalize,matchesPlayer,STATS,PROVIDERS,MAX_AGE,sources,eventsFor,compare};if(typeof module!=='undefined')module.exports=api;else root.NBAI_CONSENSUS=api;
+  const api={normalize,matchesPlayer,STATS,PROVIDERS,MAX_AGE,forecastHold,sources,eventsFor,compare};if(typeof module!=='undefined')module.exports=api;else root.NBAI_CONSENSUS=api;
 })(typeof window!=='undefined'?window:globalThis);

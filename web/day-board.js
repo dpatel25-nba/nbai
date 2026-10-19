@@ -14,8 +14,8 @@
   }
   return [...result.values()].sort((a,b)=>Date.parse(a.commence_time)-Date.parse(b.commence_time)||a.id.localeCompare(b.id));
  }
- function projection(event){
-  const m=event?.model;if(!m?.gameProjection||m.reviewRequired||Date.parse(m.startsAt)!==Date.parse(event.commence_time))return null;
+ function projection(event,now=Date.now()){
+  const m=event?.model;if(!m?.gameProjection||C.forecastHold(m,now)||Date.parse(m.startsAt)!==Date.parse(event.commence_time))return null;
   const p=m.gameProjection;if(![p.homeScore?.mean,p.awayScore?.mean,p.homeMargin?.mean,p.total?.mean,p.homeWinShare].every(Number.isFinite))return null;
   return {...p,winner:p.homeMargin.mean>0?event.home_team:p.homeMargin.mean<0?event.away_team:null,margin:Math.abs(p.homeMargin.mean)};
  }
@@ -41,7 +41,7 @@
   return rows;
  }
  function teamWatchlist(market,event,now=Date.now()){
-  const p=projection(event);if(!p||Date.parse(event.commence_time)<=now)return [];
+  const p=projection(event,now);if(!p||Date.parse(event.commence_time)<=now)return [];
   const choices=new Map();for(const q of gameLines(market,event,now).filter(q=>q.fresh&&q.market!=='h2h')){
    const comparison=teamComparison(q,event);if(!comparison||Math.abs(comparison.difference)<.01)continue;
    const homeSide=comparison.difference>0,range=q.market==='spreads'?p.homeMargin:p.total;
@@ -51,7 +51,7 @@
   }return [...choices.values()].sort((a,b)=>b.rank-a.rank);
  }
  function watchlist(rows,event,now=Date.now()){
-  if(Date.parse(event.commence_time)<=now||event.model?.reviewRequired)return [];
+  if(Date.parse(event.commence_time)<=now||C.forecastHold(event.model,now))return [];
   return rows.filter(r=>r.gap!=null&&r.fresh&&Math.abs(r.gap)>.01).map(r=>({...r,direction:r.gap>0?'Over':'Under',rank:Math.abs(r.gap)/Math.max(1,(r.model.p90-r.model.p10)/2)})).sort((a,b)=>b.rank-a.rank).slice(0,3);
  }
  function roster(market,event){
@@ -64,7 +64,7 @@
   return [...players.values()].sort((a,b)=>(a.team||'').localeCompare(b.team||'')||a.name.localeCompare(b.name));
  }
  function featuredProps(rows,event,now=Date.now(),limit=3){
-  if(Date.parse(event?.commence_time)<=now||event?.model?.reviewRequired)return [];
+  if(Date.parse(event?.commence_time)<=now||C.forecastHold(event?.model,now))return [];
   return rows.filter(r=>r.model&&r.snapshotGap!=null&&!r.held&&r.participation!=='limited_participation'&&Math.abs(r.snapshotGap)>.01).map(r=>({...r,direction:r.snapshotGap>0?'Over':'Under',rank:Math.abs(r.snapshotGap)/Math.max(1,(r.model.p90-r.model.p10)/2)})).sort((a,b)=>Number(b.fresh)-Number(a.fresh)||b.rank-a.rank||a.player.name.localeCompare(b.player.name)||a.stat.localeCompare(b.stat)).slice(0,limit);
  }
  function parlay(rows,event,now=Date.now()){

@@ -13,6 +13,13 @@ test('Resolved identities never fall back to a different player with the same na
  assert.equal(C.matchesPlayer({player:'Jaren Jackson Jr.',playerId:2},{id:1,name:'Jaren Jackson Jr.'}),false);
  assert.equal(C.matchesPlayer({player:'Jaren Jackson Jr.',identityStatus:'unresolved'},{id:1,name:'Jaren Jackson Jr.'}),false);
 });
+test('Reviewed nickname remains scoped to the exact NBA ID and event roster',()=>{
+ const player={id:1630529,n:'Herbert Jones',team:'MEM'},quote={player:'Herb Jones'};
+ assert.equal(resolvePlayer(quote,event,[player],teams).playerId,1630529);
+ assert.equal(resolvePlayer(quote,event,[{...player,team:'BOS'}],teams).status,'unresolved');
+ assert.equal(resolvePlayer(quote,event,[{...player,id:99}],teams).status,'unresolved');
+ assert.equal(resolvePlayer(quote,event,[player,{id:99,n:'Herb Jones',team:'NYK'}],teams).status,'unresolved');
+});
 test('Coverage separates absent quotes, unmatched identities, missing models and review holds',()=>{
  const market={events:[event,{...event,id:'empty'}],quotes:[{eventId:'g',player:'Jaren Jackson',provider:'fanduel',stat:'PTS'},{eventId:'g',player:'Unknown',provider:'prizepicks',stat:'PTS'}]};
  const {quotes,report}=build(market,{events:[{eventId:'g',reviewRequired:'Rotation review'}],rejected:[{eventId:'empty',reason:'Preseason unsupported'}]}, {players:Object.fromEntries(players.map(p=>[p.id,p])),teams});

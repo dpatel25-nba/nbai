@@ -3,10 +3,19 @@ const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..'),C=require('../web/consensus-analysis.js');
 const {sha}=require('./market_projection_inputs.cjs');
 const withoutSuffix=name=>C.normalize(String(name).replace(/\s+(?:jr\.?|sr\.?|ii|iii|iv)$/i,''));
+// This spelling is observed in the quote receipts and already has an explicit
+// NBA-ID review in the roster reconciliation. No general nickname guessing.
+const quoteAliases=require('./season_market_aliases.json').aliases.filter(a=>a.sourceName==='Herb Jones');
 function resolvePlayer(quote,event,players,teams){
  const home=Object.keys(teams).find(t=>teams[t].name===event?.home_team),away=Object.keys(teams).find(t=>teams[t].name===event?.away_team);
  if(!home||!away)return {status:'unresolved',reason:'Event teams are not in the model roster'};
  const roster=players.filter(p=>[home,away].includes(p.team));
+ const alias=quoteAliases.find(a=>C.normalize(a.sourceName)===C.normalize(quote.player));
+ if(alias){
+  const matched=roster.filter(p=>p.id===alias.playerId&&C.normalize(p.n||p.name)===C.normalize(alias.expectedNBAName));
+  const conflict=roster.some(p=>p.id!==alias.playerId&&C.normalize(p.n||p.name)===C.normalize(quote.player));
+  return matched.length===1&&!conflict?{status:'matched',playerId:alias.playerId,canonicalPlayer:matched[0].n||matched[0].name,method:'reviewed_nba_id_alias'}:{status:'unresolved',reason:'Reviewed alias conflicts with the current event roster'};
+ }
  let candidates=roster.filter(p=>C.normalize(p.n||p.name)===C.normalize(quote.player)),method='exact';
  if(!candidates.length){candidates=roster.filter(p=>withoutSuffix(p.n||p.name)===withoutSuffix(quote.player));method='unique_suffix_variant';}
  if(candidates.length!==1)return {status:'unresolved',reason:candidates.length?'Ambiguous player identity':'No matching player on either event team'};

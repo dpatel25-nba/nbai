@@ -27,10 +27,11 @@ function detail(){
  $('detailTitle').textContent=e.away_team+' at '+e.home_team;$('detailTime').textContent=(e.competition||'Regular season')+' · '+tip(e);$('detailBadge').textContent=started?'Tip time passed · pregame forecast':e.model?.reviewRequired?'Under review':'Pregame preview';
  $('forecastHero').replaceChildren();const lead=el('div');
  lead.append(el('p','NBAI GAME FORECAST','eyebrow'),el('h3',p?(p.winner?p.winner+' by '+f(p.margin):'An even matchup'):'Forecast unavailable'));
- lead.append(el('p',p?`Projected total: ${f(p.total.mean)} · Home win share: ${(p.homeWinShare*100).toFixed(0)}% of simulations.`:e.model?.reviewRequired||'A verified matchup model is not available yet. Bookmaker lines can still be shown.'));
+ lead.append(el('p',p?`Projected total: ${f(p.total.mean)} · Home win share: ${(p.homeWinShare*100).toFixed(0)}% of simulations.`:C.forecastHold(e.model)||'A verified matchup model is not available yet. Bookmaker lines can still be shown.'));
  lead.append(el('p',p?`Home margin scenario range: ${signed(p.homeMargin.p10)} to ${signed(p.homeMargin.p90)} points.`:'Preseason games never borrow regular-season projections.','note'));
  $('forecastHero').append(lead);const scores=el('div',null,'score-pair');for(const [name,score] of [[e.away_team,p?.awayScore.mean],[e.home_team,p?.homeScore.mean]]){const cell=el('div');cell.append(el('span',name),el('strong',f(score)));scores.append(cell);}$('forecastHero').append(scores);
- $('gameMethod').textContent=`${models?.runs||0} possession-based matchup scenarios, with historical injury absences. Current medical reports and confirmed lineups are not connected. ${e.model?.reviewRequired||'The forecasts have not established a validated betting edge.'}`;
+ const a=e.model?.availability;
+ $('gameMethod').textContent=a?`${models?.runs||0} matchup scenarios using ${a.source||'current availability'}. ${a.observedAt?'Observed '+new Date(a.observedAt).toLocaleString()+'. ':''}Reported Out: ${(a.excluded||[]).map(x=>x.name).join(', ')||'none listed'}. Other listed statuses: ${(a.uncertain||[]).map(x=>x.name+' ('+x.status+')').join(', ')||'none'}. Other players are conditional on playing; confirmed starters and minutes restrictions are not modeled. ${C.forecastHold(e.model)||'No validated betting edge.'}`:`${models?.runs||0} matchup scenarios. Current availability is not connected to this saved forecast.`;
  if(playerEvent!==e.id){selectedPlayer=null;playerEvent=e.id;$('propSearch').value='';$('playerBrowser').open=false;}
  gameMarkets();playerRows();shortlist();
 }
@@ -73,7 +74,7 @@ function playerRows(){
  $('playerChoices').replaceChildren();$('playerSearchStatus').textContent=players.length?`${players.length} of ${roster.length} players${query?' match your search':''} · Select a player below.`:roster.length?'No players match. Clear the search to see both rosters.':'The roster for this matchup is not available in this snapshot.';
  for(const p of players){const b=button(p.name+(p.team?' · '+p.team:''),()=>{selectedPlayer=p.id;playerRows();});b.setAttribute('aria-pressed',String(p.id===selectedPlayer));b.dataset.playerId=p.id;$('playerChoices').append(b);}
  const player=players.find(p=>p.id===selectedPlayer);$('selectedPlayerPanel').hidden=!player;$('propRows').replaceChildren();if(!player)return;
- $('selectedPlayerTitle').textContent=player.name+(player.team?' · '+player.team:'');$('propStatus').textContent='Consensus needs at least two sources. A missing betting line does not hide the player’s prediction.';
+ $('selectedPlayerTitle').textContent=player.name+(player.team?' · '+player.team:'');$('propStatus').textContent=player.projectionStatus==='reported_out'?'Reported Out — excluded from this game forecast.':`${player.injuryStatus&&player.injuryStatus!=='Not listed'?player.injuryStatus+' — projection is conditional on playing. ':''}Consensus needs at least two sources. A missing betting line does not hide the player’s prediction.`;
  for(const [stat,label] of Object.entries(C.STATS)){
   const r=C.compare(market,player,current,stat,current.model),percent=stat.endsWith('_PCT'),fmt=n=>propNumber(n)+(Number.isFinite(n)&&percent?'%':''),tr=el('tr'),name=el('th',label);name.scope='row';tr.append(name);
   const model=el('td',r.model?fmt(r.model.mean):'—');model.append(el('small',r.model?`${fmt(r.model.p10)}–${fmt(r.model.p90)} scenario range`:r.held?'Under review':player.projectionStatus==='no_projected_minutes'?'No projected minutes':'Projection unavailable'));tr.append(model);
@@ -84,7 +85,7 @@ function playerRows(){
 }
 function shortlist(){
  const comparisons=D.props(market,current),rows=D.featuredProps(comparisons,current);$('featuredProps').replaceChildren();
- $('shortlistExplanation').textContent='Up to three model leans, ranked by projection–consensus difference relative to the simulated range. Saved leans need refreshed prices. These are research selections; current injury checks and betting-edge validation are still pending.';
+ $('shortlistExplanation').textContent='Up to three model leans, ranked by projection–consensus difference relative to the simulated range. Saved leans need refreshed prices. Reported Out players are excluded; other projections are conditional on playing. Betting-edge validation remains pending.';
  if(!rows.length)$('featuredProps').append(el('p','No supported player leans yet. We need a usable projection and at least two matching sources; browse all players below for the available forecasts.','empty-message'));
  for(const [i,r] of rows.entries()){const card=el('article',null,'book-card');card.append(el('p',`#${i+1} · ${r.fresh?'Recent model lean':'Saved lean · refresh prices'}`,'eyebrow'),el('h3',r.player.name),el('p',r.direction+' '+C.STATS[r.stat].toLowerCase(),'book-line'));
  const values=el('div',null,'pick-values');for(const [label,value] of [['NBAI',propNumber(r.model.mean)],['Consensus',propNumber(r.median)],['Difference',propDifference(r.snapshotGap)]]){const cell=el('div');cell.append(el('small',label),el('strong',value));values.append(cell);}card.append(values);
@@ -106,5 +107,5 @@ $('gameDate').onchange=()=>go($('gameDate').value);$('todayButton').onclick=()=>
 $('propSearch').oninput=playerRows;$('clearPropSearch').onclick=()=>{$('propSearch').value='';playerRows();$('propSearch').focus();};
 for(const b of document.querySelectorAll('[data-market]'))b.onclick=()=>{kind=b.dataset.market;for(const other of document.querySelectorAll('[data-market]'))other.setAttribute('aria-pressed',String(other===b));gameMarkets();};
 for(const a of document.querySelectorAll('a[href="#playerBrowser"]'))a.onclick=ev=>{ev.preventDefault();$('playerBrowser').open=true;$('playerBrowser').scrollIntoView({behavior:'smooth'});$('propSearch').focus({preventScroll:true});};
-window.addEventListener('popstate',render);setInterval(()=>{if(!document.hidden)load();},300000);setInterval(()=>{if(current){gameMarkets();playerRows();shortlist();}},30000);load();
+window.addEventListener('popstate',render);setInterval(()=>{if(!document.hidden)load();},300000);setInterval(()=>{if(!document.hidden){if(current)detail();else render();}},30000);load();
 })();

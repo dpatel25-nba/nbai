@@ -21,6 +21,10 @@ assert.deepEqual([...new Set(Object.values(counts))],[82]);
 assert.equal(E.makeSchedule(D,false).length,1200);
 assert.deepEqual(schedule.filter(g=>!g.provisional),D.schedule);
 const membership = E.assignments(D);
+assert.equal(D.players['202695'].team,'TOR','current roster refresh must include Leonard’s team change');
+assert.equal(D.players['1627742'].team,'LAC');
+assert.equal(D.players['1631105'].team,'DET','the October agreement supersedes the September unsigned override');
+for(const team of Object.keys(D.teams))assert.ok(Object.values(membership).filter(t=>t===team).length<=21);
 for (const p of Object.values(D.players)) {
   assert.ok(Number.isFinite(p.bpm), 'every rostered player needs finite impact');
   assert.ok(p.impactSource, 'impact provenance must be exported');
