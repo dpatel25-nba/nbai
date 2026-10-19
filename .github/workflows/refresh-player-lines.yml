@@ -50,7 +50,7 @@ jobs:
           import json
           from pathlib import Path
           p=Path('web/player-consensus-status.json');s=json.loads(p.read_text())
-          s.update(projectionsVerified=True,coverageVerified=True,message='Lines, projections and player matching verified together')
+          s.update(projectionsVerified=True,coverageVerified=True,availabilityVerified=True,message='Lines, current availability, projections and player matching verified together')
           p.write_text(json.dumps(s,indent=2)+'\n')
           PYCODE
       - name: Preserve the last verified snapshot after any pipeline failure
@@ -65,7 +65,7 @@ jobs:
               Path(f).write_bytes(previous)
           status=Path('web/player-consensus-status.json')
           s=json.loads(status.read_text()) if status.exists() else {}
-          s.update(schemaVersion=1,lastAttemptAt=datetime.now(timezone.utc).isoformat(),success=False,projectionsVerified=False,message='Refresh failed validation; previous verified lines and projections retained')
+          s.update(schemaVersion=1,lastAttemptAt=datetime.now(timezone.utc).isoformat(),success=False,projectionsVerified=False,coverageVerified=False,availabilityVerified=False,message='Refresh failed validation; previous verified lines and projections retained')
           status.write_text(json.dumps(s,indent=2)+'\n')
           PYCODE
       - name: Keep redacted source receipts

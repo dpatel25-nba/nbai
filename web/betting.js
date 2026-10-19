@@ -3,14 +3,14 @@
 const el=(tag,text,cls)=>{const x=document.createElement(tag);if(text!=null)x.textContent=text;if(cls)x.className=cls;return x;};
 const f=n=>Number.isFinite(n)?n.toFixed(1):'—',signed=n=>(n>0?'+':'')+f(n);
 const propNumber=n=>Number.isFinite(n)?n.toFixed(2):'—',propDifference=n=>(n>0?'+':'')+propNumber(n);
-let market=null,models=null,all=[],current=null,kind='spreads',failed=false,selectedPlayer=null,playerEvent=null;
+let market=null,models=null,status=null,all=[],current=null,kind='spreads',failed=false,loading=false,selectedPlayer=null,playerEvent=null;
 const tip=e=>new Date(e.commence_time).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+' ET';
 function url(date,id){const u=new URL('betting.html',location.href);u.searchParams.set('date',date);if(id)u.searchParams.set('game',id);return u.pathname+u.search;}
 function go(date,id){history.pushState({},'',url(date,id));render();if(id)$('detailTitle').focus();}
 function button(text,fn){const b=el('button',text,'button secondary');b.type='button';b.onclick=fn;return b;}
 function render(){
  const query=new URLSearchParams(location.search),today=D.day(Date.now()),first=all.find(e=>e.competition!=='Preseason'),defaultDay=first&&today<D.day(first.commence_time)?D.day(first.commence_time):today,requested=query.get('date'),date=requested&&/^\d{4}-\d{2}-\d{2}$/.test(requested)&&Number.isFinite(Date.parse(requested+'T12:00:00Z'))?requested:defaultDay;$('gameDate').value=date;
- $('boardStatus').textContent=market?`${failed?'Reload failed · retaining saved data. ':''}Market snapshot: ${new Date(market.generatedAt).toLocaleString()} · ${market.coverage.eventsChecked} games checked. Projections: ${models?.runs||0} scenarios per modeled matchup.`:'Market data unavailable. No prices are being estimated.';
+ $('boardStatus').textContent=market?`${failed?'Reload failed · retaining saved data. ':''}${status?.success===false?'Latest collection failed · showing the last verified snapshot. ':''}Market snapshot: ${new Date(market.generatedAt).toLocaleString()} · ${market.coverage.eventsChecked} games checked. Projections: ${models?.runs||0} scenarios per modeled matchup.`:'Market data unavailable. No prices are being estimated.';
  current=all.find(e=>e.id===query.get('game'))||null;
  $('dailyBoard').hidden=!!current;$('gameDetail').hidden=!current;
  if(current){detail();return;}
@@ -99,9 +99,10 @@ function shortlist(){
 }
 
 async function load(){
- $('reloadBoard').disabled=true;const results=await Promise.allSettled(['player-consensus.json','player-game-projections.json'].map(f=>fetch(f,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json();})));
- failed=results.some(r=>r.status==='rejected');if(results[0].status==='fulfilled')market=results[0].value;if(results[1].status==='fulfilled')models=results[1].value;
- all=D.games(market,models);render();$('reloadBoard').disabled=false;
+ if(loading)return;loading=true;$('reloadBoard').disabled=true;
+ try{const next=await D.fetchSnapshot();const nextGames=D.games(next.market,next.models);({market,models,status}=next);all=nextGames;failed=false;}
+ catch(_){failed=true;}
+ finally{loading=false;$('reloadBoard').disabled=false;render();}
 }
 $('gameDate').onchange=()=>go($('gameDate').value);$('todayButton').onclick=()=>go(D.day(Date.now()));$('nextGames').onclick=()=>{const next=all.find(e=>e.competition!=='Preseason'&&Date.parse(e.commence_time)>Date.now());if(next)go(D.day(next.commence_time));};$('reloadBoard').onclick=load;
 $('propSearch').oninput=playerRows;$('clearPropSearch').onclick=()=>{$('propSearch').value='';playerRows();$('propSearch').focus();};

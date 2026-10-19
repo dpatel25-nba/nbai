@@ -3,11 +3,24 @@
  const day=t=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(t));
  const money=n=>Number.isFinite(n)?(n>0?'+':'')+n:'—';
  const probability=n=>!Number.isFinite(n)||Math.abs(n)<100?null:n>0?100/(n+100):-n/(-n+100);
+ async function fetchSnapshot(fetcher=root.fetch.bind(root)){
+  const [market,models,status]=await Promise.all(['player-consensus.json','player-game-projections.json','player-consensus-status.json'].map(async file=>{
+   const response=await fetcher(file,{cache:'no-store'});
+   if(!response.ok)throw Error('Snapshot download failed: '+file);
+   return response.json();
+  }));
+  if(!Array.isArray(market?.events)||!Array.isArray(market.quotes)||!Number.isFinite(market.coverage?.eventsChecked)||!Number.isFinite(Date.parse(market.generatedAt))||!Array.isArray(models?.events)||!Array.isArray(models.schedule)||typeof status?.success!=='boolean')throw Error('Invalid snapshot');
+  const inventory=market.events.map(e=>({id:e.id,sport:e.sport_key||'basketball_nba',home:e.home_team,away:e.away_team,start:e.commence_time})).sort((a,b)=>a.id.localeCompare(b.id));
+  const digest=await root.crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify(inventory)));
+  const hash=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
+  if(hash!==models.marketInventoryHash)throw Error('Lines and projections describe different game schedules');
+  return {market,models,status};
+ }
  function games(market,models){
   const result=new Map();
   for(const s of models?.schedule||[])result.set(s.id,{id:'schedule:'+s.id,gameId:s.id,home_team:s.homeName,away_team:s.awayName,home:s.home,away:s.away,commence_time:s.startsAt,competition:'Regular season'});
   for(const e of market?.events||[]){
-   const model=models?.events?.find(m=>m.eventId===e.id);
+   const model=models?.events?.find(m=>m.eventId===e.id&&m.homeName===e.home_team&&m.awayName===e.away_team&&Date.parse(m.startsAt)===Date.parse(e.commence_time));
    const matches=(models?.schedule||[]).filter(s=>s.homeName===e.home_team&&s.awayName===e.away_team&&Math.abs(Date.parse(s.startsAt)-Date.parse(e.commence_time))<=900000);
    const scheduled=matches.length===1?matches[0]:null,key=model?.gameId||scheduled?.id||e.id;
    result.set(key,{...e,home:model?.home||scheduled?.home,away:model?.away||scheduled?.away,gameId:model?.gameId||scheduled?.id,model:model||null});
@@ -85,5 +98,5 @@
   }
   return choices.sort((a,b)=>Number(b.fresh)-Number(a.fresh)||b.legs.length-a.legs.length||b.rank-a.rank)[0]||null;
  }
- const api={day,money,probability,games,projection,gameLines,teamComparison,props,watchlist,teamWatchlist,roster,featuredProps,parlay};if(typeof module!=='undefined')module.exports=api;else root.NBAI_DAY=api;
+ const api={fetchSnapshot,day,money,probability,games,projection,gameLines,teamComparison,props,watchlist,teamWatchlist,roster,featuredProps,parlay};if(typeof module!=='undefined')module.exports=api;else root.NBAI_DAY=api;
 })(typeof window!=='undefined'?window:globalThis);

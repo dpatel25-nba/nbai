@@ -342,7 +342,7 @@
 <main>
   <section class="view active" id="simulator">
     <section class="game-hero" aria-label="Game simulator overview">
-      <div><p class="eyebrow">NBAI / GAME DAY</p><h1>Game simulator</h1>
+      <div><p class="eyebrow">NBAI / MATCHUP SANDBOX</p><h1>Game simulator</h1>
         <p class="game-intro">Pick your matchup. Play every possession. See how the game unfolds.</p>
         <span class="game-status" id="gameStatus" role="status" aria-live="polite">Ready to tip off</span></div>
       <div class="matchup-marquee"><span>YOUR MATCHUP</span><strong id="gameMatchup">BOS @ OKC</strong><small>Away / Home</small></div>
@@ -366,6 +366,8 @@
           <div class="mk-meta" id="simHomeMeta"></div>
         </div>
       </div>
+      <p class="note" id="simSnapshot">This sandbox uses saved rosters and injury assumptions.</p>
+      <p class="note"><a href="betting.html">Open Game day for current matchup forecasts and availability ↗</a></p>
       <div class="mk-proj" id="simProj"></div>
       <div class="simbtns">
         <button class="simbtn primary" id="simRun1">Simulate game</button>
@@ -1236,6 +1238,9 @@
   (function simulatorTab() {
     const SIM = (window.NBAI_DATA || {}).sim || {};
     const E = SIM.engine, T = SIM.teams || {};
+    document.getElementById('simSnapshot').textContent =
+      `Saved roster scenario · Export ${(window.NBAI_DATA || {}).generated || 'date unavailable'} · Ratings ${SIM.season || 'season unavailable'}. ` +
+      `Injury snapshot ${E?.inj_pulled || 'unavailable'}. These saved inputs do not track current roster moves or game-day availability.`;
 
     /* held-out scorecard (model credibility, kept at the foot of the page) */
     const ev = SIM.eval;
@@ -1442,12 +1447,12 @@
     function injLine(abbr) {
       const list = (SIM.engine && SIM.engine.injuries
                     && SIM.engine.injuries[abbr]) || [];
-      if (!list.length) return `<div class="inj none">no reported injuries</div>`;
+      if (!list.length) return `<div class="inj none">No injuries listed in this saved snapshot</div>`;
       const out = list.filter(x => x.o).map(x => x.n);
       const dtd = list.filter(x => !x.o).map(x => x.n);
       let h = `<div class="inj">`;
-      if (out.length) h += `<div class="out">Out: ${out.join(", ")}</div>`;
-      if (dtd.length) h += `<div class="dtd">Day-to-day (still simulated): `
+      if (out.length) h += `<div class="out">Excluded in saved snapshot: ${out.join(", ")}</div>`;
+      if (dtd.length) h += `<div class="dtd">Other saved injury statuses (still simulated): `
                         + `${dtd.join(", ")}</div>`;
       return h + `</div>`;
     }

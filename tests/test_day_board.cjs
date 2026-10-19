@@ -10,7 +10,35 @@ test('Moneyline compares simulation share to a normalized two-way reference',()=
 });
 test('The date board uses Eastern days and merges projections with the official schedule',()=>{
  assert.equal(D.day('2026-10-21T01:30:00Z'),'2026-10-20');
- const rows=D.games({events:[{...e,id:'g'}]},{schedule:[{id:'s',startsAt:e.commence_time}],events:[{...e.model,eventId:'g',gameId:'s'}]});assert.equal(rows.length,1);assert.equal(rows[0].id,'g');
+ const rows=D.games({events:[{...e,id:'g'}]},{schedule:[{id:'s',startsAt:e.commence_time}],events:[{...e.model,eventId:'g',gameId:'s',homeName:'Home',awayName:'Away'}]});assert.equal(rows.length,1);assert.equal(rows[0].id,'g');
+});
+test('Reused event IDs never attach projections for different teams or tip times',()=>{
+ for(const change of [{homeName:'Wrong'},{awayName:'Wrong'},{startsAt:'2099-01-02T00:00:00Z'}]){
+  const model={...e.model,eventId:e.id,homeName:'Home',awayName:'Away',...change};
+  const rows=D.games({events:[e]},{events:[model]});assert.equal(rows[0].model,null);assert.equal(D.projection(rows[0]),null);
+ }
+});
+function bundle(){
+ const market={generatedAt:'2026-10-19T00:00:00Z',events:[{id:e.id,home_team:e.home_team,away_team:e.away_team,commence_time:e.commence_time}],quotes:[],coverage:{eventsChecked:1}};
+ const inventory=[{id:e.id,sport:'basketball_nba',home:e.home_team,away:e.away_team,start:e.commence_time}];
+ const models={events:[],schedule:[],marketInventoryHash:require('node:crypto').createHash('sha256').update(JSON.stringify(inventory)).digest('hex')};
+ return {'player-consensus.json':market,'player-game-projections.json':models,'player-consensus-status.json':{success:true}};
+}
+const fetchBundle=b=>async file=>({ok:!!b[file],json:async()=>b[file]});
+test('A board refresh accepts a verified schedule even when quote prices change',async()=>{
+ const b=bundle();b['player-consensus.json'].quotes=[{line:20.5}];
+ const result=await D.fetchSnapshot(fetchBundle(b));assert.equal(result.market.quotes[0].line,20.5);
+});
+test('Failed downloads and mismatched inventories reject the entire refresh',async()=>{
+ for(const file of Object.keys(bundle())){const b=bundle();delete b[file];await assert.rejects(D.fetchSnapshot(fetchBundle(b)),/download failed/);}
+ for(const change of [{id:'different'},{home_team:'Wrong'},{away_team:'Wrong'},{commence_time:'2099-01-02T00:00:00Z'},{sport_key:'basketball_nba_preseason'}]){
+  const b=bundle();Object.assign(b['player-consensus.json'].events[0],change);await assert.rejects(D.fetchSnapshot(fetchBundle(b)),/different game schedules/);
+ }
+ const b=bundle();b['player-consensus.json'].coverage=null;await assert.rejects(D.fetchSnapshot(fetchBundle(b)),/Invalid snapshot/);
+});
+test('A failed upstream collection can serve the saved verified bundle with its failure status',async()=>{
+ const b=bundle();b['player-consensus-status.json'].success=false;
+ assert.equal((await D.fetchSnapshot(fetchBundle(b))).status.success,false);
 });
 test('Wrong-matchup, duplicate and stale game lines never appear fresh',()=>{
  const q={eventId:'g',scope:'game',homeTeam:'Home',awayTeam:'Away',startsAt:e.commence_time,provider:'fanduel',market:'h2h',observedAt:'2026-10-05T00:00:00Z',sourceUpdatedAt:'2026-10-05T00:00:00Z'};

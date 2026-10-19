@@ -1,5 +1,25 @@
 # Deploying NBAI (first-timer guide)
 
+## Board refresh integrity and saved simulator inputs
+
+The game-day board loads `player-consensus.json`, `player-game-projections.json`
+and `player-consensus-status.json` together. It verifies the model's
+`marketInventoryHash` against the downloaded event IDs, teams, tip times and
+competition before replacing the displayed snapshot. Failed or mismatched
+downloads retain the entire previous pair. A failed upstream collection is
+displayed separately, even when its retained files are usable. Availability
+expiry continues to suppress forecasts on a retained pair.
+
+The independent single-game sandbox still uses the September 16 roster export
+and injury snapshot in `data.js`; its page now dates those assumptions and links
+to Game day for current matchup forecasts. Do not treat its saved exclusions as
+today's injury report.
+
+Run `node --test tests/test_day_board.cjs` and
+`python tests/check_refresh_browser.py` against a local preview or set
+`NBAI_BASE_URL` for deployment checks. Browser checks cover partial downloads,
+mismatched schedules, upstream failure, recovery, and the sandbox at four widths.
+
 ## Current product pages
 
 - `index.html`: home page, product introduction and saved research highlights.
