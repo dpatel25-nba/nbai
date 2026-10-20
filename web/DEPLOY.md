@@ -342,6 +342,32 @@ team shot-value dots and court bins. Details include identity, named metrics and
 season; filters rebuild them with the current data. Player selection and SVG
 downloads remain available. Load `research-tooltips.js` before both chart scripts.
 
+## App picks: PrizePicks and Underdog
+
+`betting.html#appPicks` now leads with an app selector, player-line research and
+editable combo drafts. Ship `app-picks-engine.js`, `app-picks.js`, `app-picks.css`
+with `betting.html` and `betting.js`. Kalshi pages are retained at their previous
+URLs; the game board no longer loads or polls the Kalshi watchlist.
+
+The existing Odds API snapshot has both apps' main player thresholds, but no
+entry-specific payout, promo, account eligibility or acceptance information.
+App candidates compare the model with that app's exact threshold and use that
+quote's own freshness. Forecast holds, expired availability, started games and
+unstable player projections are excluded. Saved lines remain visibly stale.
+Drafts rank average normalized model differences; they do not optimize joint
+probability or expected return. Two teams and distinct players are basic
+constraints, not proof of app acceptance.
+
+Georgia context was checked against the official PrizePicks availability page
+and Underdog State Eligibility page on 2026-10-20. The payout calculator requires
+a manually entered total-return multiplier; nothing is presented as an app
+quote retrieved by NBAI. It clears on changed selections, provider, format or
+source quote. Flex and leaderboard tiers need the full schedule; no expected
+return is inferred. No account connection or wager submission is implemented.
+
+Checks: `node --test tests/test_app_picks.cjs tests/test_day_board.cjs
+tests/test_consensus_analysis.cjs` and `tests/check_app_picks_browser.py`.
+
 ## Trading beta: historical sandbox
 
 `trading-history.html` retains the historical algorithm sandbox. Ship it together with

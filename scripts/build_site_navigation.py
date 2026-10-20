@@ -9,7 +9,7 @@ PAGES={'index.html':'home','insights.html':'research','player-value.html':'resea
 
 def header(active):
     links=[]
-    for key,url,label in [('home','index.html','Home'),('picks','betting.html','Game day'),('research','insights.html','Research'),('trading','trading.html','Trading beta')]:
+    for key,url,label in [('home','index.html','Home'),('picks','betting.html','Game day'),('research','insights.html','Research'),('app_picks','betting.html#appPicks','Picks')]:
         current=' aria-current="page"' if active==key else ''
         links.append(f'<a href="{url}"{current}>{label}</a>')
     menu=[]

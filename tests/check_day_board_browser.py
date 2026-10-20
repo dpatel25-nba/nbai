@@ -1,4 +1,4 @@
-"""Game-day table, prop discovery and same-book parlay browser checks."""
+"""Game-day sportsbook research and full-roster browsing checks. App drafts have a separate deterministic test."""
 from pathlib import Path
 import os,json
 from playwright.sync_api import sync_playwright
@@ -19,12 +19,9 @@ with sync_playwright() as p:
   assert page.locator('#teamMarketRows .book-card').count()==0
   page.locator('[data-market="h2h"]').click();assert '%' in page.locator('#teamMarketRows').inner_text()
   page.locator('[data-market="totals"]').click();assert page.locator('#marketSideA').inner_text()=='Over'
-  assert page.locator('#featuredProps .book-card').count()==3
-  assert page.locator('#parlayCard li').count()==2
-  assert 'Draft only' in page.locator('#parlayCard').inner_text()
-  page.locator('#featuredProps button').first.click()
+  assert page.locator('.app-line').count()>0
+  page.locator('#playerBrowser summary').click()
   assert page.locator('#playerBrowser').evaluate('(e)=>e.open')
-  assert 'Brunson' in page.locator('#selectedPlayerTitle').inner_text()
   assert page.locator('#propRows tr').count()==8
   # Search must include players without bookmaker quotes, preserving their forecasts.
   page.locator('#propSearch').fill('lebron')
@@ -45,27 +42,16 @@ with sync_playwright() as p:
  page.goto(BASE+'/betting.html?date=invalid');page.wait_for_selector('.matchup-card')
  page.goto(BASE+'/betting.html?date=2026-10-21&game=164cc0396837d5ff433215ffd3279283')
  page.wait_for_selector('#gameDetail:not([hidden])');assert 'Forecast unavailable' in page.locator('#forecastHero').inner_text()
- assert page.locator('#featuredProps .book-card').count()==0;assert page.locator('#parlayCard li').count()==0
+ assert page.locator('.app-line').count()==0;assert page.locator('.app-combo').count()==0
  fixture=json.loads((R/'web/player-consensus.json').read_text())
  for q in fixture['quotes']+fixture['gameQuotes']:q['sourceUpdatedAt']='2020-01-01T00:00:00Z'
- # Explicit fixture: a third selectable book line agrees with the consensus lean.
- for q in fixture['quotes']:
-  if q['eventId']=='2b042ddad3d3c6c6fe5b7005dc26c775' and q['stat']=='REB' and q['provider']=='fanduel':q['line']=3.5
  page.route('**/player-consensus.json',lambda r:r.fulfill(json=fixture))
  page.goto(BASE+NYK);page.wait_for_selector('#teamMarketRows tr')
  assert 'Saved / stale' in page.locator('#teamMarketRows').inner_text()
- assert 'Saved lean' in page.locator('#featuredProps').inner_text()
- assert 'Saved lines' in page.locator('#parlayCard').inner_text()
- assert page.locator('#parlayCard li').count()==3
- # Two valid priced legs yield two; one never becomes a parlay.
- fixture['quotes']=[q for q in fixture['quotes'] if q['stat']!='REB']
- page.locator('#reloadBoard').click();page.wait_for_function('document.querySelectorAll("#parlayCard li").length===2')
- fixture['quotes']=[q for q in fixture['quotes'] if q['stat']=='PTS']
- page.locator('#reloadBoard').click();page.wait_for_function('document.querySelectorAll("#parlayCard li").length===0')
- assert 'No supported parlay' in page.locator('#parlayCard').inner_text()
+ assert 'Saved lean' in page.locator('#appLines').inner_text()
  page.route('**/player-consensus.json',lambda r:r.fulfill(status=503,body='Unavailable'))
  page.locator('#reloadBoard').click();page.wait_for_function('document.querySelector("#boardStatus").textContent.includes("Reload failed")')
- assert page.locator('#featuredProps .book-card').count()==1
+ assert page.locator('.app-line').count()>0
  assert not errors,errors
  browser.close()
-print(json.dumps({'passed':True,'widths':[320,390,768,1440],'errors':errors,'checks':['compact tables','unquoted player search','three/two/insufficient parlay legs','stale labels','held forecasts','reload failure']}))
+print(json.dumps({'passed':True,'widths':[320,390,768,1440],'errors':errors,'checks':['compact tables','unquoted player search','stale labels','held forecasts','reload failure']}))

@@ -5,7 +5,7 @@ const f=n=>Number.isFinite(n)?n.toFixed(1):'—',signed=n=>(n>0?'+':'')+f(n);
 const propNumber=n=>Number.isFinite(n)?n.toFixed(2):'—',propDifference=n=>(n>0?'+':'')+propNumber(n);
 let market=null,models=null,status=null,all=[],current=null,kind='spreads',period='game',failed=false,loading=false,selectedPlayer=null,playerEvent=null;
 const tip=e=>new Date(e.commence_time).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+' ET';
-function url(date,id){const u=new URL('betting.html',location.href);u.searchParams.set('date',date);if(id)u.searchParams.set('game',id);return u.pathname+u.search;}
+function url(date,id){const u=new URL('betting.html',location.href);u.searchParams.set('date',date);if(id)u.searchParams.set('game',id);u.searchParams.set('app',$('pickApp').value);return u.pathname+u.search;}
 function go(date,id){history.pushState({},'',url(date,id));render();if(id)$('detailTitle').focus();}
 function button(text,fn){const b=el('button',text,'button secondary');b.type='button';b.onclick=fn;return b;}
 function render(){
@@ -15,6 +15,7 @@ function render(){
  $('boardStatus').textContent=market?`${failed?'Reload failed · retaining saved data. ':''}${status?.success===false?'Latest collection failed · showing the last verified snapshot. ':''}Market snapshot: ${new Date(market.generatedAt).toLocaleString()} · ${market.coverage.eventsChecked} games checked. Projections: ${models?.runs||0} scenarios per modeled matchup.`:'Market data unavailable. No prices are being estimated.';
  current=all.find(e=>e.id===query.get('game'))||null;
  $('dailyBoard').hidden=!!current;$('gameDetail').hidden=!current;
+ NBAI_APP_BOARD.render(market,current?[current]:all.filter(e=>D.day(e.commence_time)===date),date,failed);
  if(current){detail();return;}
  $('slateTitle').textContent=new Date(date+'T12:00:00Z').toLocaleDateString('en-US',{timeZone:'America/New_York',weekday:'long',month:'long',day:'numeric'});
  const games=all.filter(e=>D.day(e.commence_time)===date);$('slateCount').textContent=games.length+' games in the saved schedule';$('gameCards').replaceChildren();
@@ -37,7 +38,7 @@ function detail(){
  $('calibrationMethod').textContent=calibration?`Scoring calibration uses ${calibration.gamesPerPass} warm-up games across ${calibration.passes} passes, separate from the ${models.runs} scenarios shown here. This corrects numerical drift toward unrealistic scoring margins; it does not fit predictions to sportsbook lines or establish a betting edge. Displayed averages still vary with simulation sampling.`:'';
  $('gameMethod').textContent=a?`${models?.runs||0} matchup scenarios using ${a.source||'current availability'}. ${a.observedAt?'Observed '+new Date(a.observedAt).toLocaleString()+'. ':''}Reported Out: ${(a.excluded||[]).map(x=>x.name).join(', ')||'none listed'}. Other listed statuses: ${(a.uncertain||[]).map(x=>x.name+' ('+x.status+')').join(', ')||'none'}. Other players are conditional on playing; confirmed starters and minutes restrictions are not modeled. ${C.forecastHold(e.model)||'No validated betting edge.'}`:`${models?.runs||0} matchup scenarios. Current availability is not connected to this saved forecast.`;
  if(playerEvent!==e.id){selectedPlayer=null;playerEvent=e.id;$('propSearch').value='';$('playerBrowser').open=false;}
- gameMarkets();playerRows();shortlist();NBAI_GAME_WATCHLIST.render(e,models);
+ gameMarkets();playerRows();
 }
 function gameMarkets(){
  $('teamMarketRows').replaceChildren();$('gameMarketForecast').replaceChildren();
@@ -90,21 +91,6 @@ function playerRows(){
   const books=el('td');for(const q of Object.values(r.books).filter(Boolean)){const row=el('div',`${q.providerName}: ${q.line}`);row.title='Provider updated '+new Date(q.sourceUpdatedAt).toLocaleString();books.append(row);}if(!r.sourceCount)books.textContent=percent?'Percentage market not collected':'No matching line returned';tr.append(books);$('propRows').append(tr);
  }
 }
-function shortlist(){
- const comparisons=D.props(market,current),rows=D.featuredProps(comparisons,current);$('featuredProps').replaceChildren();
- $('shortlistExplanation').textContent='Up to three model leans, ranked by projection–consensus difference relative to the simulated range. Saved leans need refreshed prices. Reported Out players are excluded; other projections are conditional on playing. Betting-edge validation remains pending.';
- if(!rows.length)$('featuredProps').append(el('p','No supported player leans yet. We need a usable projection and at least two matching sources; browse all players below for the available forecasts.','empty-message'));
- for(const [i,r] of rows.entries()){const card=el('article',null,'book-card');card.append(el('p',`#${i+1} · ${r.fresh?'Recent model lean':'Saved lean · refresh prices'}`,'eyebrow'),el('h3',r.player.name),el('p',r.direction+' '+C.STATS[r.stat].toLowerCase(),'book-line'));
- const values=el('div',null,'pick-values');for(const [label,value] of [['NBAI',propNumber(r.model.mean)],['Consensus',propNumber(r.median)],['Difference',propDifference(r.snapshotGap)]]){const cell=el('div');cell.append(el('small',label),el('strong',value));values.append(cell);}card.append(values);
- card.append(el('small',`${r.sourceCount} sources · consensus is a reference, not a selectable line.`));for(const q of Object.values(r.books).filter(Boolean))card.append(el('small',`${q.providerName}: ${q.line}`));
- card.append(button('View player',()=>{$('propSearch').value='';selectedPlayer=r.player.id;$('playerBrowser').open=true;playerRows();$('playerBrowser').scrollIntoView({behavior:'smooth'});}));$('featuredProps').append(card);}
- const combo=D.parlay(comparisons,current);$('parlayCard').replaceChildren();
- if(!combo){$('parlayCard').append(el('p','No supported parlay draft yet. We need at least two qualifying selections with available prices at the same sportsbook.'));return;}
- $('parlayCard').append(el('p',`${combo.legs.length}-pick draft · ${combo.providerName} · ${combo.fresh?'Recent lines':'Saved lines — refresh before use'}`,'eyebrow'));
- const list=el('ol',null,'parlay-legs');for(const r of combo.legs){const li=el('li');li.append(el('strong',`${r.player.name} · ${r.direction} ${r.quote.line} ${C.STATS[r.stat].toLowerCase()}`),el('span',`${D.money(r.price)} · NBAI ${propNumber(r.model.mean)} · Consensus ${propNumber(r.median)}`));list.append(li);}$('parlayCard').append(list);
- $('parlayCard').append(el('p','Draft only. These same-game outcomes can be correlated. Combined odds, joint win probability and sportsbook acceptance have not been verified; individual prices are not multiplied into a promised payout.','note'));
-}
-
 async function load(){
  if(loading)return;loading=true;$('reloadBoard').disabled=true;
  try{const next=await D.fetchSnapshot();const nextGames=D.games(next.market,next.models);({market,models,status}=next);all=nextGames;failed=false;}
@@ -116,5 +102,5 @@ $('propSearch').oninput=playerRows;$('clearPropSearch').onclick=()=>{$('propSear
 for(const b of document.querySelectorAll('[data-market]'))b.onclick=()=>{kind=b.dataset.market;for(const other of document.querySelectorAll('[data-market]'))other.setAttribute('aria-pressed',String(other===b));gameMarkets();};
 for(const b of document.querySelectorAll('[data-period]'))b.onclick=()=>{period=b.dataset.period;for(const other of document.querySelectorAll('[data-period]'))other.setAttribute('aria-pressed',String(other===b));gameMarkets();};
 for(const a of document.querySelectorAll('a[href="#playerBrowser"]'))a.onclick=ev=>{ev.preventDefault();$('playerBrowser').open=true;$('playerBrowser').scrollIntoView({behavior:'smooth'});$('propSearch').focus({preventScroll:true});};
-window.addEventListener('popstate',render);setInterval(()=>{if(!document.hidden)load();},300000);setInterval(()=>{if(!document.hidden){if(current)detail();else render();}},30000);load();
+window.addEventListener('popstate',render);setInterval(()=>{if(!document.hidden)load();},300000);setInterval(()=>{if(!document.hidden){render();}},30000);load();
 })();
