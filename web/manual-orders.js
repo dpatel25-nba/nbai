@@ -1,7 +1,7 @@
 (()=>{
  'use strict';
  const E=window.NBAI_MANUAL_ORDERS,$=id=>document.getElementById(id);
- const state={watch:null,models:null,availability:null,reference:null,live:{},rows:[],view:'singles',busy:false,loaded:false};
+ const state={watch:null,models:null,availability:null,reference:null,live:{},rows:[],view:'singles',busy:false,loaded:false,expanded:new Set()};
  const money=n=>Number.isFinite(n)?'$'+n.toFixed(2):'—';
  const cents=n=>Number.isFinite(n)?Math.round(n*10000)/100+'¢':'—';
  const pct=n=>Number.isFinite(n)?(n*100).toFixed(1)+'%':'—';
@@ -11,46 +11,41 @@
  function detail(label,value){return append(el('div','row-data'),el('small','',label),el('span','',value));}
  function toast(message){$('copyStatus').textContent=message;clearTimeout(toast.timer);toast.timer=setTimeout(()=>{$('copyStatus').textContent='';},6500);}
  const kalshiHome='https://kalshi.com/';
- const handoff=el('dialog','handoff-dialog'),handoffMessage=el('p','hint');
- const handoffText=el('textarea');handoffText.readOnly=true;handoffText.setAttribute('aria-label','Manual worksheet details');
- const handoffTitle=el('h2','','Your worksheet');handoffTitle.id='handoffTitle';handoff.setAttribute('aria-labelledby','handoffTitle');
- const handoffLink=el('a','','Open Kalshi ↗');handoffLink.href=kalshiHome;handoffLink.target='_blank';handoffLink.rel='noopener noreferrer';
- const handoffClose=el('button','','Close');handoffClose.type='button';handoffClose.addEventListener('click',()=>handoff.close());
- append(handoff,handoffTitle,handoffMessage,handoffText,el('p','hint','Find the exact contract using these details, then enter and review your limit in Kalshi.'),append(el('div','handoff-actions'),handoffLink,handoffClose));
- document.body.append(handoff);
- function copyButton(row){
-  const b=el('button','',row.copyable?'Copy details & open Kalshi ↗':'On hold');b.type='button';b.disabled=!row.copyable;
-  b.title='Copies plain text and opens Kalshi in a new tab. Enter and submit the order there.';
-  b.addEventListener('click',async()=>{
-   let current,text;
-   try{
-    // Rebuild at click time: a visible button is not proof the data is still valid.
-    current=buildRows().find(r=>r.id===row.id);text=E.worksheet(current||{});
-   }catch(_){toast('Refresh the quotes and check forecast validity before opening a worksheet.');render();return;}
-   b.disabled=true;
-   // Reserve a tab inside the click gesture, before awaiting clipboard permission.
-   // No order parameters, credentials or account requests are sent to Kalshi.
-   let tab=null,copied=false;
-   try{
-    const copying=navigator.clipboard?.writeText(text);
-    try{tab=window.open('about:blank','_blank');if(tab)tab.opener=null;}catch(_){}
-    if(copying){await copying;copied=true;}
-   }catch(_){}
-   try{E.worksheet(current);}catch(_){
-    if(tab)tab.close();toast('This worksheet expired while opening. Refresh before continuing.');render();return;
-   }
-   let opened=false;
-   if(copied&&tab&&!tab.closed){try{tab.location.replace(kalshiHome);opened=true;}catch(_){}}
-   if(opened){
-    toast('Details copied. Find the contract in Kalshi, then enter and review your limit there.');
-   }else{
-    if(tab&&!tab.closed)tab.close();
-    handoffMessage.textContent=copied?'Details copied. Your browser blocked the new tab; use Open Kalshi below.':'Clipboard access was unavailable. Select and copy the details below, then open Kalshi.';
-    handoffText.value=text;handoff.showModal();
-    if(!copied){handoffText.focus();handoffText.select();}
-   }
-   b.disabled=false;
-  });return b;
+ const dateTime=s=>new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'}).format(new Date(s))+' ET';
+ function openKalshi(row){
+  const a=el('a','kalshi-link','Open Kalshi ↗');a.href=kalshiHome;a.target='_blank';a.rel='noopener noreferrer';
+  a.addEventListener('click',event=>{
+   try{E.worksheet(buildRows().find(r=>r.id===row.id)||{});}
+   catch(_){event.preventDefault();toast('This entry needs a refresh. Check the latest quote and forecast.');render();}
+  });return a;
+ }
+ function entryFields(row){
+  const panel=el('section','entry-fields');panel.setAttribute('aria-label','Enter in Kalshi: '+row.label);
+  append(panel,el('p','eyebrow','ENTER IN YOUR LIMIT TICKET'));
+  if(!row.copyable){append(panel,el('p','hold',row.hold||'Refresh before entering these values.'));return panel;}
+  append(panel,append(el('div','ticket-mode'),el('strong','','BUY'),el('strong','','LIMIT')),
+   el('p','fine',row.matchup+' · '+dateTime(row.startsAt)),el('p','ticket-label','Market on your ticket'),
+   el('strong','ticket-market',row.contractTitle),el('code','ticket-ticker',row.ticker));
+  const fields=el('dl','ticket-fields');
+  function field(label,value,note){
+   const dd=el('dd','',value);if(note)dd.append(el('small','',note));
+   fields.append(append(el('div','ticket-field'),el('dt','',label),dd));
+  }
+  field('Select side',row.side.toUpperCase(),row.label);
+  field('Shares',String(row.cost.quantity),'Number of shares, not dollars');
+  field('Limit price',row.limitCents+'¢',row.limitCents+' in a ¢ field · '+(row.limitCents/100).toFixed(2)+' in a $ field');
+  field('Expiration','Custom',dateTime(row.expiresAt));
+  field('Submit as resting order only','Leave unchecked','Allows a fill at your limit or better. Check only if you want to prevent an immediate fill.');
+  field('Cost (estimated)',money(row.cost.total),'Includes '+money(row.cost.fee)+' estimated fees; confirm the actual Cost in Kalshi.');
+  field('Max payout',money(row.cost.maxPayout),'Full-win payout, not profit');
+  append(panel,fields);
+  if(row.kind==='winner'){
+   const selected=row.label.replace(/ to win$/,'');
+   append(panel,el('p','ticket-identity','Side depends on the market name. On a “'+selected+' wins” ticket, YES means '+selected+' wins. The fields above use “'+row.contractTitle+'” / '+row.side.toUpperCase()+'. Match that contract before entering them.'));
+  }
+  append(panel,el('p','fine','Choose Custom expiration, not Good ’til canceled. If unavailable, cancel the unfilled remainder by the time above.'),
+   el('p','fine','Next: Review Buy in Kalshi. Check the market, side, shares, price and fees before confirming.'),openKalshi(row));
+  return panel;
  }
  function contract(row){
   const d=el('details','contract');append(d,el('summary','','Exact contract & side'),el('p','',row.contractTitle+' · BUY '+row.side.toUpperCase()),el('code','',row.ticker),el('p','','The side applies to this exact contract. Verify its settlement terms in Kalshi.'));
@@ -63,23 +58,22 @@
   const ask=append(el('div','ask-price'),el('b','',row.quoteFresh?cents(row.marketAsk):'—'),el('span','',row.quoteFresh?'Current ask':'Quote unavailable'));
   append(body,append(el('div','price-line'),price,ask),
    append(el('div','limit-info'),el('span','','Model ceiling '+(row.ceilingCents===null?'—':row.ceilingCents+'¢')),el('span','','Model chance '+pct(row.probability))));
-  const size=el('div','size-grid');
-  for(const [label,value] of [['Contracts',row.cost?.quantity??'—'],['Est. fee',money(row.cost?.fee)],['Est. total',money(row.cost?.total)]]){
-   append(size,append(el('div'),el('span','',label),el('b','',value)));
-  }
-  append(body,size,el('p','fine','Principal '+money(row.cost?.principal)+' · Full-win payout '+money(row.cost?.maxPayout)),
-   el('p','fine','Reference '+cents(row.referenceAsk)+' at '+clock(row.referenceAt)+' · Quote '+clock(row.quoteAt)),contract(row));
-  append(bottom,el('span','badge'+(row.hold?' hold':''),row.hold||row.status),el('p','fine','Review / expire by '+clock(row.expiresAt)),copyButton(row));
+  append(body,el('p','fine','Reference '+cents(row.referenceAsk)+' at '+clock(row.referenceAt)+' · Quote '+clock(row.quoteAt)));
+  append(bottom,el('span','badge'+(row.hold?' hold':''),row.hold||row.status),el('p','fine','Review / expire by '+clock(row.expiresAt)),entryFields(row));
   return append(c,body,bottom);
  }
  function compact(row){
-  const r=el('article','watch-row');
+  const r=el('article','watch-row'),wrapper=el('div','watch-entry'),fields=entryFields(row);
+  fields.id='fields-'+row.id;fields.hidden=!state.expanded.has(row.id);
+  const toggle=el('button','',row.copyable?(fields.hidden?'Show entry fields':'Hide entry fields'):'On hold');toggle.type='button';toggle.disabled=!row.copyable;
+  toggle.setAttribute('aria-controls',fields.id);toggle.setAttribute('aria-expanded',String(!fields.hidden));
+  toggle.addEventListener('click',()=>{fields.hidden=!fields.hidden;if(fields.hidden)state.expanded.delete(row.id);else state.expanded.add(row.id);toggle.textContent=fields.hidden?'Show entry fields':'Hide entry fields';toggle.setAttribute('aria-expanded',String(!fields.hidden));});
   append(r,append(el('div'),el('h3','',row.label),el('p','fine',row.matchup+' · '+clock(row.startsAt)+' · BUY '+row.side.toUpperCase()),contract(row)),
    detail('Patient limit',row.limitCents===null?'—':row.limitCents+'¢'),
    detail('Ask / ceiling',(row.quoteFresh?cents(row.marketAsk):'—')+' / '+(row.ceilingCents===null?'—':row.ceilingCents+'¢')),
    detail('Qty / est. total',(row.cost?.quantity??'—')+' / '+money(row.cost?.total)),
-   append(el('div','row-status'+(row.hold?' hold':'')),el('span','',row.hold||row.status),el('p','fine','Expires '+clock(row.expiresAt))),copyButton(row));
-  return r;
+   append(el('div','row-status'+(row.hold?' hold':'')),el('span','',row.hold||row.status),el('p','fine','Expires '+clock(row.expiresAt))),toggle);
+  return append(wrapper,r,fields);
  }
  function buildRows(){return E.build({...state,budget:Number($('orderBudget').value),discount:Number($('entryDiscount').value)});}
  function render(){

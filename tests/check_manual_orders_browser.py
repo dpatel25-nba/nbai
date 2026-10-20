@@ -14,7 +14,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 
 with sync_playwright() as p:
     browser = p.chromium.launch(args=["--host-resolver-rules=MAP nbai.space 216.198.79.65"] if "nbai.space" in BASE else [])
-    context = browser.new_context(permissions=["clipboard-read", "clipboard-write"])
+    context = browser.new_context()
     context.route("https://kalshi.com/**", lambda r: r.fulfill(body="<title>Kalshi destination test</title>", content_type="text/html"))
     page = context.new_page()
     errors, writes = [], []
@@ -31,35 +31,35 @@ with sync_playwright() as p:
         page.set_viewport_size(dict(width=width, height=900))
         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
         page.screenshot(path=str(OUT / f"mobile-{width}.png"), full_page=True)
+    fields = page.locator("#shortlist .entry-fields").first
+    assert fields.locator(".ticket-market").inner_text() == "Payton Pritchard: 15+ points"
+    assert "Shares" in fields.inner_text() and "22" in fields.inner_text()
+    assert "42 in a ¢ field" in fields.inner_text()
+    assert "Submit as resting order only" in fields.inner_text()
+    assert "Leave unchecked" in fields.inner_text()
+    assert "Expiration" in fields.inner_text() and "Custom" in fields.inner_text()
+    assert page.locator(".handoff-dialog").count() == 0
+    assert "Copy details" not in page.locator("main").inner_text()
     with page.expect_popup() as popup_info:
-        page.locator("#shortlist button").first.click()
+        fields.locator("a.kalshi-link").click()
     popup = popup_info.value
     popup.wait_for_url("https://kalshi.com/")
     assert popup.evaluate("window.opener === null")
     popup.close()
     page.bring_to_front()
-    copied = page.evaluate("navigator.clipboard.readText()")
-    assert "BUY NO" in copied and "BOSPPRITCHARD11-15" in copied and "not an order" in copied
-    page.wait_for_function("document.querySelector('#shortlist button:not(:disabled)')", timeout=40000)
-    # Popup denial still provides a working ordinary link and the exact worksheet.
-    page.evaluate("()=>{window.originalOpen=window.open; window.open=()=>null;}")
-    page.locator("#shortlist button").first.click()
-    page.wait_for_selector(".handoff-dialog[open]")
-    assert "blocked the new tab" in page.locator(".handoff-dialog").inner_text()
-    assert "BUY NO" in page.locator(".handoff-dialog textarea").input_value()
-    assert page.locator(".handoff-dialog a").get_attribute("href") == "https://kalshi.com/"
-    page.locator(".handoff-dialog button").click()
-    # Clipboard denial must not claim success; allow the user to copy the plain text.
-    page.evaluate("()=>{window.originalWrite=navigator.clipboard.writeText.bind(navigator.clipboard); navigator.clipboard.writeText=()=>Promise.reject(new Error('denied'));}")
-    page.locator("#shortlist button").first.click()
-    page.wait_for_selector(".handoff-dialog[open]")
-    assert "Clipboard access was unavailable" in page.locator(".handoff-dialog").inner_text()
-    assert "Limit: 42 cents" in page.locator(".handoff-dialog textarea").input_value()
-    page.locator(".handoff-dialog button").click()
-    page.evaluate("()=>{window.open=window.originalOpen; navigator.clipboard.writeText=window.originalWrite;}")
-    before = page.locator("#shortlist .size-grid").first.inner_text()
+    page.wait_for_selector("#shortlist .entry-fields", timeout=40000)
+    before = page.locator("#shortlist .ticket-fields").first.inner_text()
     page.locator("#orderBudget").fill("20")
-    assert page.locator("#shortlist .size-grid").first.inner_text() != before
+    assert page.locator("#shortlist .ticket-fields").first.inner_text() != before
+    page.locator("#orderBudget").fill("10")
+    # The Detroit-win worksheet uses Boston / NO. Never imply NO on Detroit.
+    page.locator("#watchRows .watch-row button").first.click()
+    det = page.locator("#watchRows .watch-entry").first.locator(".entry-fields")
+    assert det.is_visible()
+    assert det.locator(".ticket-market").inner_text() == "Boston wins"
+    assert 'On a “Detroit wins” ticket, YES means Detroit wins' in det.inner_text()
+    assert 'Boston wins” / NO' in det.inner_text()
+    assert "Shares" in det.inner_text() and "46¢" in det.inner_text()
     page.locator("#orderBudget").fill("0")
     assert page.locator("#watchRows button:enabled").count() == 0
     page.locator("#orderBudget").fill("10")
@@ -107,17 +107,19 @@ with sync_playwright() as p:
     mode["value"] = "stale"
     refresh()
     assert page.locator("#watchRows button:enabled").count() == 0
+    assert page.locator("#watchRows .ticket-field").count() == 0
     assert "stale" in page.locator("#watchRows").inner_text()
     mode["value"] = "normal"
     watch["validUntil"] = models["availabilityValidUntil"] = availability["validUntil"] = "2026-10-20T01:00:00Z"
     refresh()
     assert page.locator("#watchRows button:enabled").count() == 0
+    assert page.locator("#watchRows .ticket-field").count() == 0
     assert "forecast expired" in page.locator("#watchRows").inner_text()
     assert page.locator("#watchRows .row-data").first.inner_text() == "Patient limit\n—"
     assert not errors, errors
     assert not writes, writes
     browser.close()
     print(json.dumps(dict(passed=True, widths=[390, 768, 1440], liveQuotes=12, shortlist=3,
-                         exactNoSideCopied=True, kalshiTabOpened=True, popupAndClipboardFallbacks=True,
+                         visibleTicketFields=True, correctDetroitSide=True, kalshiTabOpened=True,
                          budgetChanges=True, failedGameIsolated=True,
                          staleQuotesHeld=True, expiredModelsHeld=True, nonReadRequests=writes, errors=errors)))

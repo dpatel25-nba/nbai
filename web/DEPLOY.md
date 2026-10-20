@@ -4,10 +4,14 @@
 
 `trading.html` now presents a research shortlist and manual-entry worksheets.
 The public historical replay remains at `trading-history.html`.
-The handoff button copies plain text and opens `https://kalshi.com/` in a new
-tab without an opener. It does not prefill or submit an order. If clipboard or
-popup access fails, a dialog provides selectable text and an ordinary link.
-Quotes use the fixed-target, public GET-only `/api/watchlist`.
+Entry panels mirror the limit ticket: BUY, LIMIT, exact market name, side,
+Shares, Limit price, Custom expiration, resting-only setting, estimated Cost
+and Max payout. Shortlist fields are always visible; other rows expand with
+“Show entry fields.” NO is explicitly tied to the named contract, including
+Boston / NO versus Detroit / YES. Unavailable or expired entries withhold fields.
+The ordinary Open Kalshi link opens `https://kalshi.com/` without an opener;
+it does not copy, prefill or submit an order. Quotes use the fixed-target,
+public GET-only `/api/watchlist`.
 Late-evening games query ESPN by Eastern calendar date.
 
 Publish `manual-order-engine.js`, `manual-orders.js`, `manual-orders.css` and
@@ -32,7 +36,7 @@ not connected.
 Run `node --test tests/test_manual_orders.cjs tests/test_watchlist_quotes.cjs`
 and `tests/check_manual_orders_browser.py` using the managed Playwright Python
 environment. The browser check uses `NBAI_BASE_URL` (default port 8770).
-It includes public quotes, responsive layouts, copied NO-side instructions,
+It includes public quotes, responsive layouts, contract-specific YES/NO instructions,
 changed sizing, expired forecasts, stale quotes and unavailable sources.
 
 ## Board refresh integrity and saved simulator inputs
