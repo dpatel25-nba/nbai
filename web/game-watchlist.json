@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-20T17:05:41.695Z",
-  "inputSignature": "9ee3d9b8bcae704e23111772e50c0d7935bfc92890edc2af0ade9523be67a13d",
-  "validUntil": "2026-10-20T23:05:13.126867+00:00",
+  "generatedAt": "2026-10-20T21:38:22.006Z",
+  "inputSignature": "2625d77867f22b4f3d930d647e8bbefc921d6b4abd0021de0d60d16f1d14a293",
+  "validUntil": "2026-10-21T03:37:59.903149+00:00",
   "expiresAt": "2026-10-21T01:40:00+00:00",
   "runs": 2000,
   "note": "Conditional simulation shares. Sampling bounds exclude model error. Watch prices reserve 5 cents of surplus and 2 cents for fees; quantity costs use an unverified general-fee scenario. No orders.",
@@ -12,7 +12,6 @@
       "home": "DET",
       "away": "BOS",
       "starts_at": "2026-10-20T19:00:00Z",
-      "eventId": "26b036ff107f3c658258eaf4a6f26228",
       "singles": [
         {
           "id": "KXNBAGAME-26OCT20BOSDET-BOS:no",
@@ -27,13 +26,8 @@
           "rules_sha256": "1eedc4f7e2d9b5bfad9e4e0c243669e4c27fa6da509e399bb05360a1da8be25d",
           "threshold": null,
           "yesTeam": "BOS",
-          "forecast": {
-            "probability": 0.5945,
-            "samplingLower": 0.5728201840017869,
-            "targetAsk": 0.5,
-            "scenarios": 2000
-          },
-          "hold": null
+          "forecast": null,
+          "hold": "Forecast bundle mismatch"
         },
         {
           "id": "KXNBATOTAL-26OCT20BOSDET-223:yes",
@@ -48,13 +42,8 @@
           "rules_sha256": "3c2b96512ae75a9f12b4e61a4f7d2658db3cd20b9408f9f53a2fac02bffc386c",
           "threshold": 222.5,
           "yesTeam": null,
-          "forecast": {
-            "probability": 0.4455,
-            "samplingLower": 0.42384222203739685,
-            "targetAsk": 0.35,
-            "scenarios": 2000
-          },
-          "hold": null
+          "forecast": null,
+          "hold": "Forecast bundle mismatch"
         },
         {
           "id": "KXNBAPTS-26OCT20BOSDET-BOSPPRITCHARD11-15:no",
@@ -69,13 +58,8 @@
           "rules_sha256": "85371b1eeda1f3fb3222a71d96871f5cfd14fb5d5a08320a9edd6026e3307e45",
           "threshold": 14.5,
           "yesTeam": null,
-          "forecast": {
-            "probability": 0.6715,
-            "samplingLower": 0.6506042321027466,
-            "targetAsk": 0.58,
-            "scenarios": 2000
-          },
-          "hold": null
+          "forecast": null,
+          "hold": "Forecast bundle mismatch"
         },
         {
           "id": "KXNBAPTS-26OCT20BOSDET-DETCCUNNINGHAM2-25:yes",
@@ -90,13 +74,8 @@
           "rules_sha256": "b21625a339b883565453408b610cf5cf1cb156cb8b8deb5e7d60d62e6f213e7a",
           "threshold": 24.5,
           "yesTeam": null,
-          "forecast": {
-            "probability": 0.569,
-            "samplingLower": 0.5471843265881073,
-            "targetAsk": 0.47,
-            "scenarios": 2000
-          },
-          "hold": null
+          "forecast": null,
+          "hold": "Forecast bundle mismatch"
         }
       ],
       "combos": [
@@ -117,14 +96,8 @@
               "event_ticker": "KXNBAPTS-26OCT20BOSDET"
             }
           ],
-          "forecast": {
-            "probability": 0.41,
-            "samplingLower": 0.3886369765603847,
-            "targetAsk": 0.31,
-            "scenarios": 2000,
-            "marginalProduct": 0.39920675
-          },
-          "hold": null,
+          "forecast": null,
+          "hold": "Aligned leg forecasts unavailable",
           "quoteStatus": "Exact combo quote unavailable",
           "settlementNote": "Joint all-win share conditional on playing; fractional/DNP settlement not modeled. No payout inferred from leg prices."
         },
@@ -145,14 +118,8 @@
               "event_ticker": "KXNBAPTS-26OCT20BOSDET"
             }
           ],
-          "forecast": {
-            "probability": 0.381,
-            "samplingLower": 0.35996353861415736,
-            "targetAsk": 0.28,
-            "scenarios": 2000,
-            "marginalProduct": 0.3820835
-          },
-          "hold": null,
+          "forecast": null,
+          "hold": "Aligned leg forecasts unavailable",
           "quoteStatus": "Exact combo quote unavailable",
           "settlementNote": "Joint all-win share conditional on playing; fractional/DNP settlement not modeled. No payout inferred from leg prices."
         },
@@ -178,14 +145,8 @@
               "event_ticker": "KXNBAPTS-26OCT20BOSDET"
             }
           ],
-          "forecast": {
-            "probability": 0.1735,
-            "samplingLower": 0.15753370728351462,
-            "targetAsk": 0.08,
-            "scenarios": 2000,
-            "marginalProduct": 0.17784660712500003
-          },
-          "hold": null,
+          "forecast": null,
+          "hold": "Aligned leg forecasts unavailable",
           "quoteStatus": "Exact combo quote unavailable",
           "settlementNote": "Joint all-win share conditional on playing; fractional/DNP settlement not modeled. No payout inferred from leg prices."
         }
