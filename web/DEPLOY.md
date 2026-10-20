@@ -1,47 +1,62 @@
 # Deploying NBAI (first-timer guide)
 
-## Kalshi Game Day (current)
+## Research-led Game Day (current)
 
-`betting.html` now leads with three distinct-player favorites and the daily game
-list. `matchup.html?game=<NBA game id>&date=YYYY-MM-DD` contains game analysis,
-winner prices, three game favorites, a correlated research combo and searchable
-player contracts. Legacy `betting.html?game=...` links redirect there. The earlier
-PrizePicks/Underdog interface is no longer the active Game Day product.
+`index.html` and `betting.html` lead with three researched player props, one
+reviewed game-script combo and game tabs. `matchup.html?game=<NBA game id>&date=YYYY-MM-DD`
+contains the matchup narrative, three reviewed props, a game script, winner asks
+and searchable player contracts. Public model percentages, simulated scores,
+model margins and automatic model-only recommendations are removed from these
+views. The separate simulators and research tools remain available.
 
-Ship `kalshi-day.js`, `kalshi-day-engine.js`, `kalshi-day.css`, the two HTML pages,
+Ship `research-picks.json`, `research-picks-engine.js`, `kalshi-day.js`,
+`kalshi-day-engine.js`, `kalshi-day.css`, `home.js`, the three HTML pages,
 `api/kalshi-board.js`, `lib/kalshi-board.cjs`, `lib/kalshi-game-identity.cjs`,
-`kalshi-board-model.json` and `kalshi-board-quotes.json`. Existing shared styles
-and navigation remain required. The local preview server supports the same
-GET-only API. It accepts no caller-supplied targets and uses no credentials.
+`kalshi-board-model.json`, `kalshi-board-quotes.json` and shared styles/navigation.
+The local preview server serves the same GET-only market API.
 
-The collector enumerates 16 allowlisted full-game NBA series with pagination,
-strict rule/identity checks and independent series failures. Partial pages never
-become a complete inventory. Protected, head-to-head, specials and period markets
-are excluded; coverage is visible. Browser quotes refresh every 30 seconds while
-visible; observations older than 75 seconds cannot produce favorites. Saved quotes
-are labeled and never given a new observation time after a failed request.
+### Publishing a research review
 
-Rankings use the lower 95% Wilson sampling bound minus the actual side's ask and
-the general estimated taker fee for one contract, rounded up to a cent. At least
-one contract of displayed size is required. This accounts for Monte Carlo noise,
-not model error, and is not validated profitability. Expired availability, started
-games, uncertain participation and missing aligned samples withhold opinions.
-Combined stats and the combo joint probability retain same-scenario correlation.
-Combo acceptance, price, payout and value are unavailable; individual prices are
-never combined into an invented combo quote.
+`research-picks.json` is a curated publication, not an automated news generator.
+Each game review must bind the exact game id/start time, reviewed timestamp,
+expiry, matchup narrative and source URLs. Each prop requires an exact ticker,
+player id/team, stat/threshold/side, thesis, counterargument, supporting evidence,
+source URLs, editorial priority and a maximum price before fees. Use archived
+box scores for longer samples, and current news/injury reports for role changes.
+Preserve raw research inputs and an immutable copy of the published review under
+`data/features/fundamental_prop_research/`. Do not replace an earlier prediction
+with a hindsight explanation after the game.
 
-`scripts/build_market_game_projections.cjs` also runs
-`scripts/export_kalshi_board_model.cjs`. Its standalone bundle validates matching
-player/game samples and is published atomically with projections by the existing
-six-hour refresh workflow. Local bundle refreshes need to be deployed to affect
-the public site. The static quote file is only a dated fallback.
+A daily selection comes only from completed editorial reviews. The browser then
+requires a fresh liquid quote, an unexpired research review and usable model
+availability, plus positive model probability minus ask and the estimated
+one-contract taker fee. This is a supporting signal, not probability calibration
+or demonstrated profitability. Price ceilings and ordering are analyst judgments.
+Currently actionable reviewed picks sort before watch candidates and closed
+pregame records. No unreviewed model-only line fills an empty slot.
 
-Checks: `node --test tests/test_kalshi_day.cjs tests/test_watchlist_quotes.cjs
-tests/test_game_watchlist_export.cjs` and
-`python tests/check_day_board_browser.py` with Playwright. Set `NBAI_BASE_URL` for
-public verification. Browser checks cover four widths, fresh/stale prices,
-forecast expiry, unavailable services, exact contract sides, player search and
-same-scenario combos. The former app-interface browser test has been retired.
+The collector enumerates 16 allowlisted full-game series with pagination and
+strict contract identity/rule checks. Browser prices refresh every 30 seconds;
+quotes older than 75 seconds are visibly saved and cannot qualify as actionable.
+Failed refreshes preserve their original timestamps. Reviews expire at their
+explicit deadline, and pregame recommendations close at the scheduled tip.
+Review expiry does not automatically trigger new news research: the AI workspace
+or a reviewer must publish a fresh, sourced review. Availability/model refreshes
+remain the existing separate projection workflow.
+
+A combo requires a reviewed winner and one reviewed player from each team.
+It displays the hypothesis and how it can fail. Exact Kalshi acceptance, combined
+price and payout are unverified. Individual prices are never multiplied or added
+into a fabricated combo price or joint probability.
+
+Checks: `node --test tests/test_research_picks.cjs tests/test_kalshi_day.cjs` and
+`python tests/check_research_picks_browser.py`. Set `NBAI_BASE_URL` for a deployed
+preview; `PLAYWRIGHT_CHROMIUM_EXECUTABLE` optionally selects an installed browser.
+The publication smoke test covers home/matchup views at four widths, all three
+opening-day games, absent research, stale prices, open evidence panels, and tipoff
+closure. Its archived research inputs live under the October 20 research folder.
+The older marketing-home/model-output browser assertions describe the retired
+layout and are not the current acceptance checks.
 
 ## Manual limit-order worksheets
 
