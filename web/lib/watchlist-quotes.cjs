@@ -28,7 +28,8 @@ async function collect(gameId,quantity,fetcher=fetch,now=Date.now()){
  if(now>=Date.parse(game.starts_at)||now>=Date.parse(targets.expires_at))return {gameId,quantity,generatedAt:new Date(now).toISOString(),status:'Pregame monitoring ended',quotes:[]};
  const signal=AbortSignal.timeout(18000);
  async function get(url){const r=await fetcher(url,{method:'GET',redirect:'error',signal,headers:{Accept:'application/json'}});if(!r.ok)throw Error('Source unavailable');const raw=await r.text();if(raw.length>2000000)throw Error('Response too large');return {payload:JSON.parse(raw),receivedAt:new Date().toISOString(),sha256:crypto.createHash('sha256').update(raw).digest('hex')};}
- const context=await get('https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates='+game.starts_at.slice(0,10).replaceAll('-',''));
+ const gameDate=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(game.starts_at)).replaceAll('-','');
+ const context=await get('https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates='+gameDate);
  const aliases={NY:'NYK',SA:'SAS',GS:'GSW',NO:'NOP',WSH:'WAS'};
  const events=(context.payload.events||[]).filter(e=>{const teams=Object.fromEntries((e.competitions?.[0]?.competitors||[]).map(c=>[c.homeAway,aliases[c.team.abbreviation]||c.team.abbreviation]));return teams.home===game.home&&teams.away===game.away;});
  if(events.length!==1||events[0].status?.type?.state!=='pre'||Date.parse(events[0].date)!==Date.parse(game.starts_at))return {gameId,quantity,generatedAt:new Date().toISOString(),status:'Pregame context unavailable or changed',quotes:[]};
@@ -37,7 +38,7 @@ async function collect(gameId,quantity,fetcher=fetch,now=Date.now()){
    const [meta,depth]=await Promise.all([get(BASE+p.ticker),get(BASE+p.ticker+'/orderbook?depth=100')]);
    const m=meta.payload.market,hash=crypto.createHash('sha256').update((m?.rules_primary||'')+'\n'+(m?.rules_secondary||'')).digest('hex');
    if(m?.ticker!==p.ticker||m.status!=='active'||m.notional_value_dollars!=='1.0000'||hash!==p.rules_sha256)throw Error('Contract changed or inactive');
-   const b=book(depth.payload,p.side);return {id:p.id,status:'Observed',receivedAt:depth.receivedAt,receiptSha256:depth.sha256,...b,cost:cost(b.asks,quantity),tradeEligible:false};
+   const b=book(depth.payload,p.side);return {id:p.id,status:'Observed',receivedAt:depth.receivedAt,receiptSha256:depth.sha256,contractTitle:m.title,yesLabel:m.yes_sub_title,noLabel:m.no_sub_title,rulesHash:hash,priceRanges:m.price_ranges,priceLevelStructure:m.price_level_structure,...b,cost:cost(b.asks,quantity),tradeEligible:false};
   }catch(_){return {id:p.id,status:'Quote unavailable or contract changed',tradeEligible:false};}
  }));
  return {gameId,quantity,generatedAt:new Date().toISOString(),status:'Observation only',feeScenario:'General fee coefficient 0.07; fill rounding and per-order accumulation. Contract applicability unverified.',quotes,actualOrders:0};

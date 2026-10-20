@@ -24,3 +24,18 @@ test('API rejects arbitrary tickers, duplicate parameters and all writes before 
   const res={setHeader(){},end(){}};await handler({method,url},res);assert.equal(res.statusCode,status);
  }
 });
+test('Late Eastern games query the local slate date, not the next UTC day',async()=>{
+ const game=targets.games.find(g=>g.starts_at.includes('2026-10-21'));
+ assert.ok(game);let scoreboardUrl;
+ const fetcher=async url=>{
+  if(url.includes('scoreboard'))scoreboardUrl=url;
+  return {ok:true,text:async()=>JSON.stringify(url.includes('scoreboard')?{events:[{
+   date:game.starts_at,status:{type:{state:'pre'}},competitions:[{competitors:[
+    {homeAway:'home',team:{abbreviation:game.home}},{homeAway:'away',team:{abbreviation:game.away}}
+   ]}]
+  }]}:{})};
+ };
+ const result=await collect(game.id,20,fetcher,Date.parse(game.starts_at)-3600000);
+ assert.ok(scoreboardUrl.endsWith('dates=20261020'));
+ assert.equal(result.status,'Observation only');assert.equal(result.quotes.length,4);
+});

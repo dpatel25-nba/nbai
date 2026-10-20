@@ -1,5 +1,38 @@
 # Deploying NBAI (first-timer guide)
 
+## Manual limit-order worksheets
+
+`trading.html` now presents a research shortlist and manual-entry worksheets.
+The public historical replay remains at `trading-history.html`.
+No worksheet is sent to an exchange; the only copy action writes plain text to
+the clipboard. Quotes use the fixed-target, public GET-only `/api/watchlist`.
+Late-evening games query ESPN by Eastern calendar date.
+
+Publish `manual-order-engine.js`, `manual-orders.js`, `manual-orders.css` and
+`manual-order-snapshot.json` with the page and updated quote helper. Keep
+`game-watchlist.json`, `player-game-projections.json` and
+`game-availability.json` coherent. After refreshing availability and projections,
+run `node scripts/build_manual_order_snapshot.cjs` to match the reference bundle
+to the refreshed model. Existing references are retained for up to six hours;
+use `--reset-reference` only to intentionally establish new reference prices.
+The captured reference is archived under
+`data/features/manual_orders/`; ordinary quote refreshes do not move entry
+limits. A changed model signature disables worksheets until a matching
+reference is captured. Expired forecasts remove model prices entirely.
+
+The default patient rule is a two-cent improvement from that reference,
+bounded by the existing model ceiling. It is an unvalidated timing hypothesis.
+Sizing is a $10-per-pick example using the general taker fee formula, capped at
+100 contracts. Actual fee applicability is unverified. Combos have no order
+worksheet because an exact combo quote and fractional-settlement model are
+not connected.
+
+Run `node --test tests/test_manual_orders.cjs tests/test_watchlist_quotes.cjs`
+and `tests/check_manual_orders_browser.py` using the managed Playwright Python
+environment. The browser check uses `NBAI_BASE_URL` (default port 8770).
+It includes public quotes, responsive layouts, copied NO-side instructions,
+changed sizing, expired forecasts, stale quotes and unavailable sources.
+
 ## Board refresh integrity and saved simulator inputs
 
 The game-day board loads `player-consensus.json`, `player-game-projections.json`
@@ -305,7 +338,7 @@ downloads remain available. Load `research-tooltips.js` before both chart script
 
 ## Trading beta: historical sandbox
 
-`trading.html` is the first visitor-facing algorithm sandbox. Ship it together with
+`trading-history.html` retains the historical algorithm sandbox. Ship it together with
 `trading.css`, `trading.js`, `trading-engine.js`, `trading-replay.json` and the shared
 navigation assets. `python scripts/build_site_navigation.py` links it from the
 eight main product pages without changing their bodies.
@@ -334,4 +367,4 @@ Run `node --test tests/test_trading_sandbox.cjs`. The full unrestricted replay
 must match the archived 405 hypothetical contracts, $162.87 cost and −$19.87 net
 under the 1¢ adverse-price scenario. Check the page at mobile and desktop widths,
 including reload, pause, settings validation, downloads and archive-load failure.
-Local preview: `node scripts/serve_website.cjs`, then `/trading.html`.
+Local preview: `node scripts/serve_website.cjs`, then `/trading-history.html`.
