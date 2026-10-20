@@ -53,6 +53,8 @@ with sync_playwright() as p:
     assert page.locator("#shortlist .ticket-fields").first.inner_text() != before
     page.locator("#orderBudget").fill("10")
     # The Detroit-win worksheet uses Boston / NO. Never imply NO on Detroit.
+    assert 'BUY NO on “Boston wins”' in page.locator("#watchRows .watch-row").first.inner_text()
+    assert "below current ask" in page.locator("#watchRows .watch-row").first.inner_text()
     page.locator("#watchRows .watch-row button").first.click()
     det = page.locator("#watchRows .watch-entry").first.locator(".entry-fields")
     assert det.is_visible()

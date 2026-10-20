@@ -9,6 +9,12 @@
  const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
  function append(parent,...nodes){parent.append(...nodes);return parent;}
  function detail(label,value){return append(el('div','row-data'),el('small','',label),el('span','',value));}
+ function sideLabel(row){return 'BUY '+row.side.toUpperCase()+' on “'+row.contractTitle+'”';}
+ function priceGap(row){
+  if(!row.quoteFresh||!Number.isFinite(row.marketAsk)||row.limitCents===null)return '';
+  const gap=Math.round((row.marketAsk*100-row.limitCents)*100)/100;
+  return gap>0?gap+'¢ below current ask · May remain unfilled':'Ask is at or below the limit · Confirm available shares';
+ }
  function toast(message){$('copyStatus').textContent=message;clearTimeout(toast.timer);toast.timer=setTimeout(()=>{$('copyStatus').textContent='';},6500);}
  const kalshiHome='https://kalshi.com/';
  const dateTime=s=>new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'}).format(new Date(s))+' ET';
@@ -31,7 +37,7 @@
    const dd=el('dd','',value);if(note)dd.append(el('small','',note));
    fields.append(append(el('div','ticket-field'),el('dt','',label),dd));
   }
-  field('Select side',row.side.toUpperCase(),row.label);
+  field('Select side',row.side.toUpperCase(),'On “'+row.contractTitle+'” — '+row.label);
   field('Shares',String(row.cost.quantity),'Number of shares, not dollars');
   field('Limit price',row.limitCents+'¢',row.limitCents+' in a ¢ field · '+(row.limitCents/100).toFixed(2)+' in a $ field');
   field('Expiration','Custom',dateTime(row.expiresAt));
@@ -53,13 +59,13 @@
  }
  function card(row){
   const c=el('article','order-card'),body=el('div','card-content'),bottom=el('div','card-bottom');
-  append(body,append(el('div','card-top'),el('span','',row.matchup),el('span','',clock(row.startsAt))),el('h3','',row.label),el('span','side','BUY '+row.side.toUpperCase()));
+  append(body,append(el('div','card-top'),el('span','',row.matchup),el('span','',clock(row.startsAt))),el('h3','',row.label),el('span','side',sideLabel(row)));
   const price=append(el('div'),el('strong','',row.limitCents===null?'—':row.limitCents+'¢'),el('span','','Patient limit / contract'));
   const ask=append(el('div','ask-price'),el('b','',row.quoteFresh?cents(row.marketAsk):'—'),el('span','',row.quoteFresh?'Current ask':'Quote unavailable'));
   append(body,append(el('div','price-line'),price,ask),
    append(el('div','limit-info'),el('span','','Model ceiling '+(row.ceilingCents===null?'—':row.ceilingCents+'¢')),el('span','','Model chance '+pct(row.probability))));
   append(body,el('p','fine','Reference '+cents(row.referenceAsk)+' at '+clock(row.referenceAt)+' · Quote '+clock(row.quoteAt)));
-  append(bottom,el('span','badge'+(row.hold?' hold':''),row.hold||row.status),el('p','fine','Review / expire by '+clock(row.expiresAt)),entryFields(row));
+  append(bottom,el('span','badge'+(row.hold?' hold':''),row.hold||row.status),el('p','fine',priceGap(row)),el('p','fine','Review / expire by '+clock(row.expiresAt)),entryFields(row));
   return append(c,body,bottom);
  }
  function compact(row){
@@ -68,11 +74,11 @@
   const toggle=el('button','',row.copyable?(fields.hidden?'Show entry fields':'Hide entry fields'):'On hold');toggle.type='button';toggle.disabled=!row.copyable;
   toggle.setAttribute('aria-controls',fields.id);toggle.setAttribute('aria-expanded',String(!fields.hidden));
   toggle.addEventListener('click',()=>{fields.hidden=!fields.hidden;if(fields.hidden)state.expanded.delete(row.id);else state.expanded.add(row.id);toggle.textContent=fields.hidden?'Show entry fields':'Hide entry fields';toggle.setAttribute('aria-expanded',String(!fields.hidden));});
-  append(r,append(el('div'),el('h3','',row.label),el('p','fine',row.matchup+' · '+clock(row.startsAt)+' · BUY '+row.side.toUpperCase()),contract(row)),
+  append(r,append(el('div'),el('h3','',row.label),el('p','fine',row.matchup+' · '+clock(row.startsAt)),el('p','fine',sideLabel(row)),contract(row)),
    detail('Patient limit',row.limitCents===null?'—':row.limitCents+'¢'),
    detail('Ask / ceiling',(row.quoteFresh?cents(row.marketAsk):'—')+' / '+(row.ceilingCents===null?'—':row.ceilingCents+'¢')),
    detail('Qty / est. total',(row.cost?.quantity??'—')+' / '+money(row.cost?.total)),
-   append(el('div','row-status'+(row.hold?' hold':'')),el('span','',row.hold||row.status),el('p','fine','Expires '+clock(row.expiresAt))),toggle);
+   append(el('div','row-status'+(row.hold?' hold':'')),el('span','',row.hold||row.status),el('p','fine',priceGap(row)),el('p','fine','Expires '+clock(row.expiresAt))),toggle);
   return append(wrapper,r,fields);
  }
  function buildRows(){return E.build({...state,budget:Number($('orderBudget').value),discount:Number($('entryDiscount').value)});}
