@@ -6,6 +6,7 @@ http.createServer((req,res)=>{
   const url=new URL(req.url,'http://localhost');
   if(url.pathname==='/api/kalshi')return handler(req,res);
   if(url.pathname==='/api/watchlist')return require('../web/api/watchlist.js')(req,res);
+  if(url.pathname==='/api/kalshi-board')return require('../web/api/kalshi-board.js')(req,res);
   if(!['GET','HEAD'].includes(req.method)){res.writeHead(405);return res.end();}
   let file;try{file=path.resolve(root,'.'+decodeURIComponent(url.pathname==='/'?'/index.html':url.pathname));}catch(_){res.writeHead(400);return res.end();}
   if(!file.startsWith(root+path.sep)||file.split(path.sep).some(x=>x.startsWith('.'))){res.writeHead(403);return res.end();}

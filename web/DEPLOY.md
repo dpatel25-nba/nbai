@@ -1,5 +1,48 @@
 # Deploying NBAI (first-timer guide)
 
+## Kalshi Game Day (current)
+
+`betting.html` now leads with three distinct-player favorites and the daily game
+list. `matchup.html?game=<NBA game id>&date=YYYY-MM-DD` contains game analysis,
+winner prices, three game favorites, a correlated research combo and searchable
+player contracts. Legacy `betting.html?game=...` links redirect there. The earlier
+PrizePicks/Underdog interface is no longer the active Game Day product.
+
+Ship `kalshi-day.js`, `kalshi-day-engine.js`, `kalshi-day.css`, the two HTML pages,
+`api/kalshi-board.js`, `lib/kalshi-board.cjs`, `lib/kalshi-game-identity.cjs`,
+`kalshi-board-model.json` and `kalshi-board-quotes.json`. Existing shared styles
+and navigation remain required. The local preview server supports the same
+GET-only API. It accepts no caller-supplied targets and uses no credentials.
+
+The collector enumerates 16 allowlisted full-game NBA series with pagination,
+strict rule/identity checks and independent series failures. Partial pages never
+become a complete inventory. Protected, head-to-head, specials and period markets
+are excluded; coverage is visible. Browser quotes refresh every 30 seconds while
+visible; observations older than 75 seconds cannot produce favorites. Saved quotes
+are labeled and never given a new observation time after a failed request.
+
+Rankings use the lower 95% Wilson sampling bound minus the actual side's ask and
+the general estimated taker fee for one contract, rounded up to a cent. At least
+one contract of displayed size is required. This accounts for Monte Carlo noise,
+not model error, and is not validated profitability. Expired availability, started
+games, uncertain participation and missing aligned samples withhold opinions.
+Combined stats and the combo joint probability retain same-scenario correlation.
+Combo acceptance, price, payout and value are unavailable; individual prices are
+never combined into an invented combo quote.
+
+`scripts/build_market_game_projections.cjs` also runs
+`scripts/export_kalshi_board_model.cjs`. Its standalone bundle validates matching
+player/game samples and is published atomically with projections by the existing
+six-hour refresh workflow. Local bundle refreshes need to be deployed to affect
+the public site. The static quote file is only a dated fallback.
+
+Checks: `node --test tests/test_kalshi_day.cjs tests/test_watchlist_quotes.cjs
+tests/test_game_watchlist_export.cjs` and
+`python tests/check_day_board_browser.py` with Playwright. Set `NBAI_BASE_URL` for
+public verification. Browser checks cover four widths, fresh/stale prices,
+forecast expiry, unavailable services, exact contract sides, player search and
+same-scenario combos. The former app-interface browser test has been retired.
+
 ## Manual limit-order worksheets
 
 `trading.html` now presents a research shortlist and manual-entry worksheets.

@@ -29,7 +29,7 @@ jobs:
           python tests/test_collect_player_consensus.py
           python tests/test_game_market_quotes.py
           python tests/test_game_availability.py
-          node --test tests/test_player_line_pipeline.cjs tests/test_consensus_analysis.cjs tests/test_day_board.cjs tests/test_game_availability.cjs tests/test_game_calibration.cjs tests/test_game_watchlist_export.cjs tests/test_watchlist_quotes.cjs tests/test_game_period_accounting.cjs tests/test_manual_orders.cjs
+          node --test tests/test_player_line_pipeline.cjs tests/test_consensus_analysis.cjs tests/test_day_board.cjs tests/test_game_availability.cjs tests/test_game_calibration.cjs tests/test_game_watchlist_export.cjs tests/test_watchlist_quotes.cjs tests/test_game_period_accounting.cjs tests/test_manual_orders.cjs tests/test_kalshi_day.cjs
       - name: Collect supported NBA lines
         id: collect
         continue-on-error: true
@@ -61,7 +61,7 @@ jobs:
           import subprocess,json
           from pathlib import Path
           from datetime import datetime,timezone
-          for f in ['web/player-consensus.json','web/player-game-projections.json','web/player-line-coverage.json','web/game-availability.json','web/game-watchlist.json','web/manual-order-snapshot.json']:
+          for f in ['web/player-consensus.json','web/player-game-projections.json','web/player-line-coverage.json','web/game-availability.json','web/game-watchlist.json','web/manual-order-snapshot.json','web/kalshi-board-model.json']:
               previous=subprocess.run(['git','show','HEAD:'+f],capture_output=True,check=True).stdout
               Path(f).write_bytes(previous)
           status=Path('web/player-consensus-status.json')
@@ -86,7 +86,7 @@ jobs:
         run: |
           git config user.name "$OWNER"
           git config user.email "$OWNER@users.noreply.github.com"
-          git add web/player-consensus.json web/player-consensus-status.json web/player-game-projections.json web/player-line-coverage.json web/game-availability.json web/game-watchlist.json web/manual-order-snapshot.json
+          git add web/player-consensus.json web/player-consensus-status.json web/player-game-projections.json web/player-line-coverage.json web/game-availability.json web/game-watchlist.json web/manual-order-snapshot.json web/kalshi-board-model.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Refresh NBA player-line snapshot and collection status'
           git pull --rebase origin main

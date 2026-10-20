@@ -3,13 +3,13 @@ from pathlib import Path
 import re
 
 ROOT=Path(__file__).resolve().parents[1]/'web'
-PAGES={'index.html':'home','insights.html':'research','player-value.html':'research','betting.html':'picks',
+PAGES={'index.html':'home','insights.html':'research','player-value.html':'research','betting.html':'picks','matchup.html':'picks',
        'simulators.html':'simulators','game.html':'game','season.html':'season','trading.html':'trading'}
 
 
 def header(active):
     links=[]
-    for key,url,label in [('home','index.html','Home'),('picks','betting.html','Game day'),('research','insights.html','Research'),('app_picks','betting.html#appPicks','Picks')]:
+    for key,url,label in [('home','index.html','Home'),('picks','betting.html','Game day'),('research','insights.html','Research'),('app_picks','betting.html#dailyPicks','Picks')]:
         current=' aria-current="page"' if active==key else ''
         links.append(f'<a href="{url}"{current}>{label}</a>')
     menu=[]

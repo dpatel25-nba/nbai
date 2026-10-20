@@ -10,7 +10,8 @@ const {forGame}=require('./game_availability.cjs');
 const fingerprint=require('./market_projection_inputs.cjs').inputs(root,market);
 const destination=path.join(root,'web/player-game-projections.json');
 let previous;try{previous=JSON.parse(fs.readFileSync(destination));}catch(_){}
-if(!process.argv.includes('--force')&&previous?.inputSignature===fingerprint.inputSignature&&Date.parse(previous.availabilityValidUntil)>Date.now()){
+if(!process.argv.includes('--force')&&previous?.inputSignature===fingerprint.inputSignature&&Date.parse(previous.availabilityValidUntil)>Date.now()&&fs.existsSync(path.join(root,'data/features/player_props/consensus/game-projection-samples.json'))){
+ require('./export_kalshi_board_model.cjs').run(root);
  console.log(JSON.stringify({reused:true,events:previous.events.length,inputSignature:fingerprint.inputSignature}));process.exit(0);
 }
 const hash=s=>{let h=2166136261;for(let i=0;i<s.length;i++)h=Math.imul(h^s.charCodeAt(i),16777619);return h>>>0;};
@@ -56,4 +57,5 @@ const dir=path.join(root,'data/features/player_props/consensus');fs.mkdirSync(di
 fs.writeFileSync(path.join(dir,'game-projection-samples.json'),JSON.stringify(games));
 fs.writeFileSync(destination+'.tmp',JSON.stringify(output,null,2)+'\n');fs.renameSync(destination+'.tmp',destination);
 require('./export_game_watchlist.cjs').exportFile(root,output,games);
+require('./export_kalshi_board_model.cjs').run(root);
 console.log(JSON.stringify({events:games.length,players:games.reduce((n,g)=>n+g.players.length,0),simulatedGames:games.length*runs,rejected}));
