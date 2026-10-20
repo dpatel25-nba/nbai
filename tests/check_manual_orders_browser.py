@@ -15,6 +15,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 with sync_playwright() as p:
     browser = p.chromium.launch(args=["--host-resolver-rules=MAP nbai.space 216.198.79.65"] if "nbai.space" in BASE else [])
     context = browser.new_context(permissions=["clipboard-read", "clipboard-write"])
+    context.route("https://kalshi.com/**", lambda r: r.fulfill(body="<title>Kalshi destination test</title>", content_type="text/html"))
     page = context.new_page()
     errors, writes = [], []
     page.on("pageerror", lambda e: errors.append(str(e)))
@@ -30,9 +31,32 @@ with sync_playwright() as p:
         page.set_viewport_size(dict(width=width, height=900))
         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
         page.screenshot(path=str(OUT / f"mobile-{width}.png"), full_page=True)
-    page.locator("#shortlist button").first.click()
+    with page.expect_popup() as popup_info:
+        page.locator("#shortlist button").first.click()
+    popup = popup_info.value
+    popup.wait_for_url("https://kalshi.com/")
+    assert popup.evaluate("window.opener === null")
+    popup.close()
+    page.bring_to_front()
     copied = page.evaluate("navigator.clipboard.readText()")
     assert "BUY NO" in copied and "BOSPPRITCHARD11-15" in copied and "not an order" in copied
+    page.wait_for_function("document.querySelector('#shortlist button:not(:disabled)')", timeout=40000)
+    # Popup denial still provides a working ordinary link and the exact worksheet.
+    page.evaluate("()=>{window.originalOpen=window.open; window.open=()=>null;}")
+    page.locator("#shortlist button").first.click()
+    page.wait_for_selector(".handoff-dialog[open]")
+    assert "blocked the new tab" in page.locator(".handoff-dialog").inner_text()
+    assert "BUY NO" in page.locator(".handoff-dialog textarea").input_value()
+    assert page.locator(".handoff-dialog a").get_attribute("href") == "https://kalshi.com/"
+    page.locator(".handoff-dialog button").click()
+    # Clipboard denial must not claim success; allow the user to copy the plain text.
+    page.evaluate("()=>{window.originalWrite=navigator.clipboard.writeText.bind(navigator.clipboard); navigator.clipboard.writeText=()=>Promise.reject(new Error('denied'));}")
+    page.locator("#shortlist button").first.click()
+    page.wait_for_selector(".handoff-dialog[open]")
+    assert "Clipboard access was unavailable" in page.locator(".handoff-dialog").inner_text()
+    assert "Limit: 42 cents" in page.locator(".handoff-dialog textarea").input_value()
+    page.locator(".handoff-dialog button").click()
+    page.evaluate("()=>{window.open=window.originalOpen; navigator.clipboard.writeText=window.originalWrite;}")
     before = page.locator("#shortlist .size-grid").first.inner_text()
     page.locator("#orderBudget").fill("20")
     assert page.locator("#shortlist .size-grid").first.inner_text() != before
@@ -94,5 +118,6 @@ with sync_playwright() as p:
     assert not writes, writes
     browser.close()
     print(json.dumps(dict(passed=True, widths=[390, 768, 1440], liveQuotes=12, shortlist=3,
-                         exactNoSideCopied=True, budgetChanges=True, failedGameIsolated=True,
+                         exactNoSideCopied=True, kalshiTabOpened=True, popupAndClipboardFallbacks=True,
+                         budgetChanges=True, failedGameIsolated=True,
                          staleQuotesHeld=True, expiredModelsHeld=True, nonReadRequests=writes, errors=errors)))

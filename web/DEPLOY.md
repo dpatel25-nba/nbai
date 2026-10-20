@@ -4,8 +4,10 @@
 
 `trading.html` now presents a research shortlist and manual-entry worksheets.
 The public historical replay remains at `trading-history.html`.
-No worksheet is sent to an exchange; the only copy action writes plain text to
-the clipboard. Quotes use the fixed-target, public GET-only `/api/watchlist`.
+The handoff button copies plain text and opens `https://kalshi.com/` in a new
+tab without an opener. It does not prefill or submit an order. If clipboard or
+popup access fails, a dialog provides selectable text and an ordinary link.
+Quotes use the fixed-target, public GET-only `/api/watchlist`.
 Late-evening games query ESPN by Eastern calendar date.
 
 Publish `manual-order-engine.js`, `manual-orders.js`, `manual-orders.css` and

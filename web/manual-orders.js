@@ -10,14 +10,46 @@
  function append(parent,...nodes){parent.append(...nodes);return parent;}
  function detail(label,value){return append(el('div','row-data'),el('small','',label),el('span','',value));}
  function toast(message){$('copyStatus').textContent=message;clearTimeout(toast.timer);toast.timer=setTimeout(()=>{$('copyStatus').textContent='';},6500);}
+ const kalshiHome='https://kalshi.com/';
+ const handoff=el('dialog','handoff-dialog'),handoffMessage=el('p','hint');
+ const handoffText=el('textarea');handoffText.readOnly=true;handoffText.setAttribute('aria-label','Manual worksheet details');
+ const handoffTitle=el('h2','','Your worksheet');handoffTitle.id='handoffTitle';handoff.setAttribute('aria-labelledby','handoffTitle');
+ const handoffLink=el('a','','Open Kalshi ↗');handoffLink.href=kalshiHome;handoffLink.target='_blank';handoffLink.rel='noopener noreferrer';
+ const handoffClose=el('button','','Close');handoffClose.type='button';handoffClose.addEventListener('click',()=>handoff.close());
+ append(handoff,handoffTitle,handoffMessage,handoffText,el('p','hint','Find the exact contract using these details, then enter and review your limit in Kalshi.'),append(el('div','handoff-actions'),handoffLink,handoffClose));
+ document.body.append(handoff);
  function copyButton(row){
-  const b=el('button','',row.copyable?'Copy worksheet':'On hold');b.type='button';b.disabled=!row.copyable;
+  const b=el('button','',row.copyable?'Copy details & open Kalshi ↗':'On hold');b.type='button';b.disabled=!row.copyable;
+  b.title='Copies plain text and opens Kalshi in a new tab. Enter and submit the order there.';
   b.addEventListener('click',async()=>{
+   let current,text;
    try{
     // Rebuild at click time: a visible button is not proof the data is still valid.
-    const current=buildRows().find(r=>r.id===row.id),text=E.worksheet(current||{});
-    await navigator.clipboard.writeText(text);toast('Worksheet copied. Nothing has been submitted to Kalshi.');
-   }catch(_){toast('Cannot copy. Refresh the quotes and check forecast validity.');render();}
+    current=buildRows().find(r=>r.id===row.id);text=E.worksheet(current||{});
+   }catch(_){toast('Refresh the quotes and check forecast validity before opening a worksheet.');render();return;}
+   b.disabled=true;
+   // Reserve a tab inside the click gesture, before awaiting clipboard permission.
+   // No order parameters, credentials or account requests are sent to Kalshi.
+   let tab=null,copied=false;
+   try{
+    const copying=navigator.clipboard?.writeText(text);
+    try{tab=window.open('about:blank','_blank');if(tab)tab.opener=null;}catch(_){}
+    if(copying){await copying;copied=true;}
+   }catch(_){}
+   try{E.worksheet(current);}catch(_){
+    if(tab)tab.close();toast('This worksheet expired while opening. Refresh before continuing.');render();return;
+   }
+   let opened=false;
+   if(copied&&tab&&!tab.closed){try{tab.location.replace(kalshiHome);opened=true;}catch(_){}}
+   if(opened){
+    toast('Details copied. Find the contract in Kalshi, then enter and review your limit there.');
+   }else{
+    if(tab&&!tab.closed)tab.close();
+    handoffMessage.textContent=copied?'Details copied. Your browser blocked the new tab; use Open Kalshi below.':'Clipboard access was unavailable. Select and copy the details below, then open Kalshi.';
+    handoffText.value=text;handoff.showModal();
+    if(!copied){handoffText.focus();handoffText.select();}
+   }
+   b.disabled=false;
   });return b;
  }
  function contract(row){
