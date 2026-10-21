@@ -29,7 +29,7 @@
   else if(row.hold){state='review';status='Availability or forecast review needed';}
   else if(!row.fresh||!row.liquid){state='wait';status='Waiting for a current offer';}
   else if(row.price>p.maxPrice+1e-9){state='price';status='Wait for a lower price';}
-  else if(!(row.edge>0)){state='review';status='Signals no longer agree at this price';}
+  else if(!(row.edge>0)||!(row.rank>0)){state='review';status='Insufficient model margin at this price';}
   return {pick:p,game,review,row,state,status};
  }
  function picks(games,data,now=Date.now()){

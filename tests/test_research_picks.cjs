@@ -82,3 +82,11 @@ test('Withdrawals retain their audit record but cannot appear as favorites or co
  assert.equal(R.combo(g,data,now),null);
  assert.equal(data.games[0].picks.length,3);
 });
+
+test('Positive average edge alone cannot promote a pick within simulation sampling noise',()=>{
+ const {g,data}=fixture(),p=data.games[0].picks[0],row=g.props.find(r=>r.market.ticker===p.ticker).yes;
+ Object.assign(row,{price:.49,edge:.005,rank:-.01,fresh:true,liquid:true,hold:null});
+ assert.equal(R.assess(p,g,data.games[0],now).state,'review');
+ row.rank=.001;assert.equal(R.assess(p,g,data.games[0],now).state,'ready');
+ row.rank=undefined;assert.equal(R.assess(p,g,data.games[0],now).state,'review');
+});
