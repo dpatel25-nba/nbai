@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T20:56:33.821Z",
+  "generatedAt": "2026-10-21T21:44:06.792Z",
   "scope": "game",
   "runs": 2000,
   "seedPrefix": "market-matchups-v1:",
@@ -9624,7 +9624,7 @@
     "web/season-engine.js": "f89ed48619d5f6987da959bba6dbe6ea0ad072ab240fa47045b7bb994090aa2d",
     "web/season-possession.js": "133537a8a45a321a3cb884fbe3140b0917b2b3a85f36de26490a5f4d8e5f05a5",
     "web/season-availability.json": "a2ebd5a3bd2fb4b2642bb138c59fc6d696e8f23a3a21de89a3658c02f3fdc67c",
-    "web/game-availability.json": "7c055bb0fd30c78dd90b3c89523226b59a98ce45256326c258f36b37ae50a94c",
+    "web/game-availability.json": "a1dbe6a333d78e26078945234ae6f8e72e3c0fa031ec452ef2b7303688536ef6",
     "scripts/game_availability.cjs": "ad4ebaddf8a1a29c1d4f9285e6694211308ac46a65d954a040ae31f212edde00",
     "scripts/build_market_game_projections.cjs": "408d494d6cef771865de74d2b11772866edc34f777372a1302928203b713dfc1",
     "scripts/match_market_schedule.cjs": "f49aa4bdf06f89d1589098030436af429a52562ea785f39198adfd8b152bcdc3",
@@ -9634,2037 +9634,11 @@
     "scripts/export_game_watchlist.cjs": "3ab0df69dd03f631fac9cd0b5a28f665f381afae4547c8b738ad66af5fd8a3b2",
     "web/lib/game-watchlist-targets.json": "54e78bb4477557b5e4c684a00fba33c6a53bafca0205f6affd07b79ca3d0770b"
   },
-  "marketInventoryHash": "27807c5b478cfc627195a8275b0912aabab21536f64714c4658fa38100cb451f",
-  "inputSignature": "6f37607a73ad7dbb9fc2b87ad7317030d2895c492932c4a737e66c82ca3971f3",
-  "availabilityValidUntil": "2026-10-22T02:55:44.696646+00:00",
+  "marketInventoryHash": "ace93b8fca639e56a1d16c648ad295b8d020294bcbef4eacb8bf93ba20108f63",
+  "inputSignature": "673fea51fa340c215fae9daed12d24fec7b0687b543f7a6e86a4ea9ac2f83818",
+  "availabilityValidUntil": "2026-10-22T03:43:38.830345+00:00",
   "assumptions": "Matchup-specific possession scenarios using current roster and ESPN injury observations. Reported Out players are excluded; other players are conditional on playing. Questionable participation, confirmed starters and minutes restrictions are not modeled. Not calibrated betting probabilities.",
   "events": [
-    {
-      "eventId": "26b036ff107f3c658258eaf4a6f26228",
-      "gameId": "0022600001",
-      "home": "DET",
-      "away": "BOS",
-      "homeName": "Detroit Pistons",
-      "awayName": "Boston Celtics",
-      "startsAt": "2026-10-20T19:00:00Z",
-      "officialStartsAt": "2026-10-20T19:00:00.000Z",
-      "scheduleOffsetMinutes": 0,
-      "scheduleMatchMethod": "Unique home/away match within 15 minutes",
-      "reviewRequired": "No current availability observation matched to this game.",
-      "availability": {
-        "holdReason": "No current availability observation matched to this game.",
-        "outIds": [],
-        "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
-      },
-      "calibrationTarget": null,
-      "gameProjection": null,
-      "players": [
-        {
-          "id": 201144,
-          "name": "Mike Conley",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 202331,
-          "name": "Paul George",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1627752,
-          "name": "Taurean Prince",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628369,
-          "name": "Jayson Tatum",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628381,
-          "name": "John Collins",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628401,
-          "name": "Derrick White",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628989,
-          "name": "Kevin Huerter",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1629011,
-          "name": "Mitchell Robinson",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1629130,
-          "name": "Duncan Robinson",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1629674,
-          "name": "Neemias Queta",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1629750,
-          "name": "Javonte Green",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630194,
-          "name": "Paul Reed",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630198,
-          "name": "Isaiah Joe",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630202,
-          "name": "Payton Pritchard",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630568,
-          "name": "Luka Garza",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630573,
-          "name": "Sam Hauser",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630595,
-          "name": "Cade Cunningham",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631105,
-          "name": "Jalen Duren",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631199,
-          "name": "Ron Harper Jr.",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631248,
-          "name": "Baylor Scheierman",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1641709,
-          "name": "Ausar Thompson",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1641759,
-          "name": "Dillon Mitchell",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1641775,
-          "name": "Jordan Walsh",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1641842,
-          "name": "Ronald Holland II",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1641989,
-          "name": "Elijah Harkless",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642269,
-          "name": "Devin Carter",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642391,
-          "name": "Ugonna Onyenso",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642403,
-          "name": "Isaac Jones",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642404,
-          "name": "Chaz Lanier",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642449,
-          "name": "Tolu Smith",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642450,
-          "name": "Daniss Jenkins",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642864,
-          "name": "Hugo González",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642873,
-          "name": "Amari Williams",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1643416,
-          "name": "Chris Cenac Jr.",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1643536,
-          "name": "Ebuka Okorie",
-          "team": "DET",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        }
-      ]
-    },
-    {
-      "eventId": "2b042ddad3d3c6c6fe5b7005dc26c775",
-      "gameId": "0022600002",
-      "home": "NYK",
-      "away": "PHI",
-      "homeName": "New York Knicks",
-      "awayName": "Philadelphia 76ers",
-      "startsAt": "2026-10-20T23:00:00Z",
-      "officialStartsAt": "2026-10-20T23:00:00.000Z",
-      "scheduleOffsetMinutes": 0,
-      "scheduleMatchMethod": "Unique home/away match within 15 minutes",
-      "reviewRequired": "No current availability observation matched to this game.",
-      "availability": {
-        "holdReason": "No current availability observation matched to this game.",
-        "outIds": [],
-        "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
-      },
-      "calibrationTarget": null,
-      "gameProjection": null,
-      "players": [
-        {
-          "id": 2544,
-          "name": "LeBron James",
-          "team": "PHI",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 203083,
-          "name": "Andre Drummond",
-          "team": "NYK",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 203484,
-          "name": "Kentavious Caldwell-Pope",
-          "team": "PHI",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 203903,
-          "name": "Jordan Clarkson",
-          "team": "NYK",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 203954,
-          "name": "Joel Embiid",
-          "team": "PHI",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1626157,
-          "name": "Karl-Anthony Towns",
-          "team": "NYK",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1627759,
-          "name": "Jaylen Brown",
-          "team": "PHI",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628384,
-          "name": "OG Anunoby",
-          "team": "NYK",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628404,
-          "name": "Josh Hart",
-          "team": "NYK",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628969,
-          "name": "Mikal Bridges",
-          "team": "NYK",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628973,
-          "name": "Jalen Brunson",
-          "team": "NYK",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1629013,
-          "name": "Landry Shamet",
-          "team": "NYK",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1629014,
-          "name": "Anfernee Simons",
-          "team": "PHI",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1629605,
-          "name": "Tacko Fall",
-          "team": "PHI",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1629731,
-          "name": "Dean Wade",
-          "team": "PHI",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630164,
-          "name": "James Wiseman",
-          "team": "NYK",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630178,
-          "name": "Tyrese Maxey",
-          "team": "PHI",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630540,
-          "name": "Miles McBride",
-          "team": "NYK",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630574,
-          "name": "Ariel Hukporti",
-          "team": "PHI",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630631,
-          "name": "Jose Alvarado",
-          "team": "NYK",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631126,
-          "name": "Caleb Love",
-          "team": "PHI",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631133,
-          "name": "Jabari Walker",
-          "team": "PHI",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631230,
-          "name": "Dominick Barlow",
-          "team": "PHI",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1641712,
-          "name": "Rayan Rupert",
-          "team": "PHI",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1641737,
-          "name": "Adem Bona",
-          "team": "PHI",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1641755,
-          "name": "Kevin McCullar Jr.",
-          "team": "NYK",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642278,
-          "name": "Tyler Kolek",
-          "team": "NYK",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642348,
-          "name": "Justin Edwards",
-          "team": "PHI",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642359,
-          "name": "Pacôme Dadiet",
-          "team": "NYK",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642845,
-          "name": "VJ Edgecombe",
-          "team": "PHI",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642885,
-          "name": "Mohamed Diawara",
-          "team": "NYK",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642889,
-          "name": "Labaron Philon",
-          "team": "PHI",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1643022,
-          "name": "Jaden Akins",
-          "team": "NYK",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1643589,
-          "name": "Tyler Nickel",
-          "team": "NYK",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        }
-      ]
-    },
-    {
-      "eventId": "bccd283de56915e29af1788beb0abfc9",
-      "gameId": "0022600003",
-      "home": "SAS",
-      "away": "OKC",
-      "homeName": "San Antonio Spurs",
-      "awayName": "Oklahoma City Thunder",
-      "startsAt": "2026-10-21T01:30:00Z",
-      "officialStartsAt": "2026-10-21T01:30:00.000Z",
-      "scheduleOffsetMinutes": 0,
-      "scheduleMatchMethod": "Unique home/away match within 15 minutes",
-      "reviewRequired": "No current availability observation matched to this game.",
-      "availability": {
-        "holdReason": "No current availability observation matched to this game.",
-        "outIds": [],
-        "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
-      },
-      "calibrationTarget": null,
-      "gameProjection": null,
-      "players": [
-        {
-          "id": 202699,
-          "name": "Tobias Harris",
-          "team": "SAS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 203084,
-          "name": "Harrison Barnes",
-          "team": "SAS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1627936,
-          "name": "Alex Caruso",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628368,
-          "name": "De'Aaron Fox",
-          "team": "SAS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628392,
-          "name": "Isaiah Hartenstein",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628436,
-          "name": "Luke Kornet",
-          "team": "SAS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628983,
-          "name": "Shai Gilgeous-Alexander",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1629026,
-          "name": "Kenrich Williams",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1629162,
-          "name": "Jordan McLaughlin",
-          "team": "SAS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1629640,
-          "name": "Keldon Johnson",
-          "team": "SAS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630170,
-          "name": "Devin Vassell",
-          "team": "SAS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630577,
-          "name": "Julian Champagnie",
-          "team": "SAS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631096,
-          "name": "Chet Holmgren",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631114,
-          "name": "Jalen Williams",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631119,
-          "name": "Jaylin Williams",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1641705,
-          "name": "Victor Wembanyama",
-          "team": "SAS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1641717,
-          "name": "Cason Wallace",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642260,
-          "name": "Nikola Topić",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642264,
-          "name": "Stephon Castle",
-          "team": "SAS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642272,
-          "name": "Jared McCain",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642349,
-          "name": "Ajay Mitchell",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642357,
-          "name": "David Jones Garcia",
-          "team": "SAS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642844,
-          "name": "Dylan Harper",
-          "team": "SAS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642850,
-          "name": "Thomas Sorber",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642868,
-          "name": "Carter Bryant",
-          "team": "SAS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642892,
-          "name": "Bennett Stirtz",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642923,
-          "name": "Otega Oweh",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642964,
-          "name": "Brooks Barnhizer",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1643519,
-          "name": "Jayden Quaintance",
-          "team": "SAS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1643530,
-          "name": "Aday Mara",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1643542,
-          "name": "Tarris Reed Jr.",
-          "team": "SAS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1643551,
-          "name": "Ja'Kobi Gillespie",
-          "team": "SAS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1643576,
-          "name": "Maliq Brown",
-          "team": "SAS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1643717,
-          "name": "Josh Dix",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        }
-      ]
-    },
     {
       "eventId": "164cc0396837d5ff433215ffd3279283",
       "gameId": "0022600086",
@@ -11681,7 +9655,7 @@
         "holdReason": "Official and injury-provider rosters differ; current membership needs review.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -12641,8 +10615,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00",
-        "observedAt": "2026-10-21T20:55:45.656000+00:00",
+        "validUntil": "2026-10-22T03:43:38.830345+00:00",
+        "observedAt": "2026-10-21T21:43:39.880114+00:00",
         "source": "ESPN current rosters and injury feed",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -14045,7 +12019,7 @@
         "holdReason": "Official and injury-provider rosters differ; current membership needs review.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -14989,8 +12963,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00",
-        "observedAt": "2026-10-21T20:55:45.656000+00:00",
+        "validUntil": "2026-10-22T03:43:38.830345+00:00",
+        "observedAt": "2026-10-21T21:43:39.880114+00:00",
         "source": "ESPN current rosters and injury feed",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -16404,7 +14378,7 @@
         "holdReason": "incomplete current roster",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -17054,7 +15028,7 @@
         "holdReason": "Official and injury-provider rosters differ; current membership needs review.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -18049,8 +16023,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00",
-        "observedAt": "2026-10-21T20:55:45.656000+00:00",
+        "validUntil": "2026-10-22T03:43:38.830345+00:00",
+        "observedAt": "2026-10-21T21:43:39.880114+00:00",
         "source": "ESPN current rosters and injury feed",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -19399,7 +17373,7 @@
         "holdReason": "Official and injury-provider rosters differ; current membership needs review.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -20106,7 +18080,7 @@
         "holdReason": "Official and injury-provider rosters differ; current membership needs review.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -20832,7 +18806,7 @@
         "holdReason": "incomplete current roster",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -21520,7 +19494,7 @@
         "holdReason": "Official and injury-provider rosters differ; current membership needs review.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -22207,8 +20181,10 @@
       "availability": {
         "holdReason": null,
         "outIds": [
+          "1631215",
           "1641772",
           "1631230",
+          "1629605",
           "1630574"
         ],
         "players": [
@@ -22216,7 +20192,7 @@
             "id": 1628386,
             "name": "Jarrett Allen",
             "team": "CLE",
-            "status": "Not listed",
+            "status": "Day-To-Day",
             "out": false
           },
           {
@@ -22230,8 +20206,8 @@
             "id": 1631215,
             "name": "Khalifa Diop",
             "team": "CLE",
-            "status": "Day-To-Day",
-            "out": false
+            "status": "Out",
+            "out": true
           },
           {
             "id": 1642400,
@@ -22258,7 +20234,7 @@
             "id": 1630241,
             "name": "Sam Merrill",
             "team": "CLE",
-            "status": "Day-To-Day",
+            "status": "Not listed",
             "out": false
           },
           {
@@ -22384,8 +20360,8 @@
             "id": 1629605,
             "name": "Tacko Fall",
             "team": "PHI",
-            "status": "Day-To-Day",
-            "out": false
+            "status": "Out",
+            "out": true
           },
           {
             "id": 1630574,
@@ -22451,11 +20427,17 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00",
-        "observedAt": "2026-10-21T20:55:45.656000+00:00",
+        "validUntil": "2026-10-22T03:43:38.830345+00:00",
+        "observedAt": "2026-10-21T21:43:39.880114+00:00",
         "source": "ESPN current rosters and injury feed",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
+          {
+            "id": 1631215,
+            "name": "Khalifa Diop",
+            "team": "CLE",
+            "status": "Out"
+          },
           {
             "id": 1641772,
             "name": "Nae'Qwan Tomlin",
@@ -22469,6 +20451,12 @@
             "status": "Out"
           },
           {
+            "id": 1629605,
+            "name": "Tacko Fall",
+            "team": "PHI",
+            "status": "Out"
+          },
+          {
             "id": 1630574,
             "name": "Ariel Hukporti",
             "team": "PHI",
@@ -22477,21 +20465,9 @@
         ],
         "uncertain": [
           {
-            "id": 1631215,
-            "name": "Khalifa Diop",
+            "id": 1628386,
+            "name": "Jarrett Allen",
             "team": "CLE",
-            "status": "Day-To-Day"
-          },
-          {
-            "id": 1630241,
-            "name": "Sam Merrill",
-            "team": "CLE",
-            "status": "Day-To-Day"
-          },
-          {
-            "id": 1629605,
-            "name": "Tacko Fall",
-            "team": "PHI",
             "status": "Day-To-Day"
           },
           {
@@ -22503,32 +20479,32 @@
         ]
       },
       "calibrationTarget": {
-        "homeScore": 116.38495950746174,
-        "awayScore": 119.01104049253824,
-        "homeMargin": -2.6260809850764986
+        "homeScore": 116.14657484687108,
+        "awayScore": 119.24942515312891,
+        "homeMargin": -3.102850306257835
       },
       "gameProjection": {
         "homeScore": {
-          "mean": 115.814,
-          "p10": 102,
-          "p90": 130
+          "mean": 116.0365,
+          "p10": 101,
+          "p90": 131
         },
         "awayScore": {
-          "mean": 119.1455,
-          "p10": 104,
+          "mean": 118.8195,
+          "p10": 103,
           "p90": 134
         },
         "homeMargin": {
-          "mean": -3.3315,
-          "p10": -20,
+          "mean": -2.783,
+          "p10": -21,
           "p90": 15
         },
         "total": {
-          "mean": 234.9595,
-          "p10": 212,
+          "mean": 234.856,
+          "p10": 211,
           "p90": 259
         },
-        "homeWinShare": 0.3955
+        "homeWinShare": 0.4205
       },
       "players": [
         {
@@ -22539,50 +20515,50 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 34.17353709783731,
+            "mean": 34.1735370978373,
             "p10": 27.78947368421056,
-            "p90": 40.444444444444365
+            "p90": 40.47058823529403
           },
           "stats": {
             "PTS": {
-              "mean": 17.74,
-              "p10": 10,
+              "mean": 17.4365,
+              "p10": 9,
               "p90": 26
             },
             "AST": {
-              "mean": 7.4245,
+              "mean": 7.4075,
               "p10": 4,
               "p90": 11
             },
             "REB": {
-              "mean": 6.0415,
+              "mean": 6.139,
               "p10": 3,
-              "p90": 9
+              "p90": 10
             },
             "STL": {
-              "mean": 0.9755,
+              "mean": 1.014,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.4235,
+              "mean": 0.4385,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 55.475007805285365,
-              "p10": 36.36363636363637,
+              "mean": 55.68070322934746,
+              "p10": 37.5,
               "p90": 75
             },
             "FT_PCT": {
-              "mean": 74.84931648212915,
+              "mean": 75.32099913390469,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 40.52010936745318,
+              "mean": 39.38785512475168,
               "p10": 0,
-              "p90": 100
+              "p90": 80
             }
           }
         },
@@ -22594,50 +20570,50 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 32.94825172888366,
+            "mean": 32.93075172888366,
             "p10": 26.35294117647055,
-            "p90": 39.92079207920795
+            "p90": 39.839999999999975
           },
           "stats": {
             "PTS": {
-              "mean": 19.462,
+              "mean": 19.369,
               "p10": 11,
               "p90": 29
             },
             "AST": {
-              "mean": 8.349,
+              "mean": 8.3725,
               "p10": 5,
               "p90": 12
             },
             "REB": {
-              "mean": 4.207,
+              "mean": 4.246,
               "p10": 2,
               "p90": 7
             },
             "STL": {
-              "mean": 1.0675,
+              "mean": 1.043,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.481,
+              "mean": 0.476,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 42.819857055882316,
+              "mean": 42.3636743224934,
               "p10": 25,
               "p90": 60
             },
             "FT_PCT": {
-              "mean": 86.54266986153135,
+              "mean": 86.86480266615506,
               "p10": 66.66666666666667,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 37.0378258205501,
-              "p10": 12.5,
-              "p90": 60
+              "mean": 37.18821200847333,
+              "p10": 14.285714285714286,
+              "p90": 62.5
             }
           }
         },
@@ -22649,48 +20625,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 26.48503624331886,
+            "mean": 26.48503624331887,
             "p10": 19.764705882352928,
-            "p90": 33.23076923076918
+            "p90": 33.26732673267329
           },
           "stats": {
             "PTS": {
-              "mean": 5.7975,
-              "p10": 2,
+              "mean": 5.903,
+              "p10": 1,
               "p90": 11
             },
             "AST": {
-              "mean": 2.0435,
+              "mean": 2.0565,
               "p10": 0,
               "p90": 4
             },
             "REB": {
-              "mean": 2.5975,
+              "mean": 2.646,
               "p10": 1,
               "p90": 5
             },
             "STL": {
-              "mean": 1.057,
+              "mean": 1.0335,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.372,
+              "mean": 0.395,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 46.88550457722215,
+              "mean": 47.36900066509333,
               "p10": 0,
-              "p90": 80
+              "p90": 83.33333333333333
             },
             "FT_PCT": {
-              "mean": 87.68762245506433,
+              "mean": 88.55738165472681,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 37.18187349552756,
+              "mean": 38.59286032180611,
               "p10": 0,
               "p90": 100
             }
@@ -22704,48 +20680,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 30.174425874248172,
+            "mean": 30.174425874248175,
             "p10": 23.094339622641535,
             "p90": 37.333333333333265
           },
           "stats": {
             "PTS": {
-              "mean": 20.309,
-              "p10": 12,
-              "p90": 30
+              "mean": 19.982,
+              "p10": 11,
+              "p90": 29
             },
             "AST": {
-              "mean": 4.0015,
-              "p10": 2,
+              "mean": 4.015,
+              "p10": 1,
               "p90": 7
             },
             "REB": {
-              "mean": 8.0105,
+              "mean": 8.1425,
               "p10": 4,
               "p90": 12
             },
             "STL": {
-              "mean": 0.767,
+              "mean": 0.7745,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 1.325,
+              "mean": 1.311,
               "p10": 0,
               "p90": 3
             },
             "FG_PCT": {
-              "mean": 52.605278850471905,
+              "mean": 52.30373606781909,
               "p10": 33.333333333333336,
               "p90": 71.42857142857143
             },
             "FT_PCT": {
-              "mean": 85.23275061902758,
+              "mean": 85.31808849133057,
               "p10": 62.5,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 36.099407407407284,
+              "mean": 35.52786067113853,
               "p10": 0,
               "p90": 100
             }
@@ -22759,48 +20735,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 24.670273268363054,
+            "mean": 24.657773268363044,
             "p10": 17.63265306122449,
-            "p90": 31.999999999999975
+            "p90": 31.999999999999947
           },
           "stats": {
             "PTS": {
-              "mean": 9.1445,
+              "mean": 9.129,
               "p10": 3,
               "p90": 16
             },
             "AST": {
-              "mean": 2.526,
+              "mean": 2.5115,
               "p10": 1,
               "p90": 5
             },
             "REB": {
-              "mean": 3.7585,
+              "mean": 3.867,
               "p10": 1,
               "p90": 7
             },
             "STL": {
-              "mean": 0.666,
+              "mean": 0.662,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.354,
+              "mean": 0.339,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 46.505885277887124,
+              "mean": 46.421436947618936,
               "p10": 20,
-              "p90": 71.42857142857143
+              "p90": 72.72727272727273
             },
             "FT_PCT": {
-              "mean": 77.22590133880459,
+              "mean": 77.37339216043746,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 33.63540083639748,
+              "mean": 34.03505327364585,
               "p10": 0,
               "p90": 100
             }
@@ -22814,48 +20790,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 33.46886625984464,
-            "p10": 27.169811320754757,
+            "mean": 33.47136625984464,
+            "p10": 27.15151515151513,
             "p90": 40.258064516129004
           },
           "stats": {
             "PTS": {
-              "mean": 19.2835,
+              "mean": 19.171,
               "p10": 11,
               "p90": 28
             },
             "AST": {
-              "mean": 3.864,
+              "mean": 3.923,
               "p10": 1,
-              "p90": 6
+              "p90": 7
             },
             "REB": {
-              "mean": 6.113,
+              "mean": 6.23,
               "p10": 3,
               "p90": 10
             },
             "STL": {
-              "mean": 0.922,
+              "mean": 0.911,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.4455,
+              "mean": 0.4585,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 50.92497744061245,
+              "mean": 51.522719757032675,
               "p10": 33.333333333333336,
               "p90": 68.75
             },
             "FT_PCT": {
-              "mean": 76.08585555746386,
+              "mean": 76.39584688580152,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 35.49778028094343,
+              "mean": 35.76427619473966,
               "p10": 0,
               "p90": 66.66666666666667
             }
@@ -22869,8 +20845,8 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 32.4365659385136,
-            "p10": 25.486725663716836,
+            "mean": 32.42156593851361,
+            "p10": 25.469387755102023,
             "p90": 38.58823529411757
           },
           "stats": {
@@ -22880,37 +20856,37 @@
               "p90": 38
             },
             "AST": {
-              "mean": 5.386,
-              "p10": 2,
-              "p90": 8
+              "mean": 5.3925,
+              "p10": 3,
+              "p90": 9
             },
             "REB": {
-              "mean": 4.2495,
+              "mean": 4.288,
               "p10": 2,
               "p90": 7
             },
             "STL": {
-              "mean": 1.316,
+              "mean": 1.324,
               "p10": 0,
               "p90": 3
             },
             "BLK": {
-              "mean": 0.263,
+              "mean": 0.254,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 46.6822938089028,
-              "p10": 33.333333333333336,
-              "p90": 61.111111111111114
+              "mean": 46.52190808714345,
+              "p10": 31.818181818181817,
+              "p90": 60
             },
             "FT_PCT": {
-              "mean": 84.01242478106772,
-              "p10": 60,
+              "mean": 84.35195550046859,
+              "p10": 57.142857142857146,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 36.722896888064625,
+              "mean": 36.69858635516529,
               "p10": 16.666666666666668,
               "p90": 57.142857142857146
             }
@@ -22920,52 +20896,52 @@
           "id": 1628386,
           "name": "Jarrett Allen",
           "team": "CLE",
-          "injuryStatus": "Not listed",
+          "injuryStatus": "Day-To-Day",
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 28.66489628540308,
-            "p10": 22.080000000000016,
+            "mean": 28.64739628540309,
+            "p10": 21.98130841121493,
             "p90": 35.294117647058755
           },
           "stats": {
             "PTS": {
-              "mean": 13.109,
+              "mean": 13.0395,
               "p10": 6,
               "p90": 20
             },
             "AST": {
-              "mean": 1.897,
+              "mean": 1.929,
               "p10": 0,
               "p90": 4
             },
             "REB": {
-              "mean": 9.252,
+              "mean": 9.2725,
               "p10": 5,
               "p90": 14
             },
             "STL": {
-              "mean": 0.869,
+              "mean": 0.8595,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.93,
+              "mean": 0.9005,
               "p10": 0,
               "p90": 2
             },
             "FG_PCT": {
-              "mean": 66.5665136405574,
+              "mean": 66.49939159977623,
               "p10": 42.857142857142854,
               "p90": 88.88888888888889
             },
             "FT_PCT": {
-              "mean": 72.57708284429616,
+              "mean": 73.01474121409645,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 7.407407407407407,
+              "mean": 8.88888888888889,
               "p10": 0,
               "p90": 0
             }
@@ -22998,49 +20974,49 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 30.627775381514247,
-            "p10": 23.076923076923055,
-            "p90": 37.71428571428571
+            "mean": 30.630275381514252,
+            "p10": 23.05882352941174,
+            "p90": 37.682242990654125
           },
           "stats": {
             "PTS": {
-              "mean": 14.5055,
+              "mean": 14.475,
               "p10": 7,
               "p90": 23
             },
             "AST": {
-              "mean": 4.2275,
+              "mean": 4.2295,
               "p10": 2,
               "p90": 7
             },
             "REB": {
-              "mean": 2.8895,
+              "mean": 2.941,
               "p10": 1,
               "p90": 5
             },
             "STL": {
-              "mean": 0.5235,
+              "mean": 0.531,
               "p10": 0,
-              "p90": 2
+              "p90": 1
             },
             "BLK": {
-              "mean": 0.134,
+              "mean": 0.1365,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 45.693111050268705,
-              "p10": 25,
+              "mean": 45.759249019615325,
+              "p10": 26.31578947368421,
               "p90": 66.66666666666667
             },
             "FT_PCT": {
-              "mean": 89.78460689296197,
+              "mean": 89.29031393130607,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 39.275278829386856,
-              "p10": 11.11111111111111,
+              "mean": 39.21450824086185,
+              "p10": 9.090909090909092,
               "p90": 66.66666666666667
             }
           }
@@ -23049,55 +21025,19 @@
           "id": 1629605,
           "name": "Tacko Fall",
           "team": "PHI",
-          "injuryStatus": "Day-To-Day",
-          "playedScenarios": 1996,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 12.49185454753145,
-            "p10": 7.058823529411765,
-            "p90": 18.461538461538456
-          },
+          "injuryStatus": "Out",
+          "playedScenarios": 0,
+          "projectionStatus": "reported_out",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 3.8276553106212425,
-              "p10": 0,
-              "p90": 8
-            },
-            "AST": {
-              "mean": 1.37374749498998,
-              "p10": 0,
-              "p90": 3
-            },
-            "REB": {
-              "mean": 1.9569138276553106,
-              "p10": 0,
-              "p90": 4
-            },
-            "STL": {
-              "mean": 0.3662324649298597,
-              "p10": 0,
-              "p90": 1
-            },
-            "BLK": {
-              "mean": 0.22294589178356713,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 48.90835387938019,
-              "p10": 0,
-              "p90": 100
-            },
-            "FT_PCT": {
-              "mean": 73.57755102040811,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 35.95609508171083,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
@@ -23127,48 +21067,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 38.1235303763992,
+            "mean": 38.126030376399235,
             "p10": 32.5871559633028,
             "p90": 43.24752475247528
           },
           "stats": {
             "PTS": {
-              "mean": 21.432,
+              "mean": 21.537,
               "p10": 12,
               "p90": 31
             },
             "AST": {
-              "mean": 6.4265,
+              "mean": 6.4815,
               "p10": 3,
               "p90": 10
             },
             "REB": {
-              "mean": 4.074,
+              "mean": 4.0955,
               "p10": 2,
               "p90": 7
             },
             "STL": {
-              "mean": 1.595,
+              "mean": 1.621,
               "p10": 0,
               "p90": 3
             },
             "BLK": {
-              "mean": 0.403,
+              "mean": 0.389,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 48.121424635536606,
-              "p10": 33.333333333333336,
+              "mean": 48.46871347341079,
+              "p10": 31.818181818181817,
               "p90": 64.28571428571429
             },
             "FT_PCT": {
-              "mean": 87.39706825823929,
+              "mean": 87.10186725318016,
               "p10": 60,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 38.27587082534455,
+              "mean": 38.40785754358235,
               "p10": 12.5,
               "p90": 66.66666666666667
             }
@@ -23178,52 +21118,52 @@
           "id": 1630241,
           "name": "Sam Merrill",
           "team": "CLE",
-          "injuryStatus": "Day-To-Day",
+          "injuryStatus": "Not listed",
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 21.883955347923088,
-            "p10": 14.943396226415093,
-            "p90": 29.076923076923034
+            "mean": 21.898955347923096,
+            "p10": 14.967741935483861,
+            "p90": 29.176470588235247
           },
           "stats": {
             "PTS": {
-              "mean": 8.733,
+              "mean": 8.702,
               "p10": 3,
               "p90": 16
             },
             "AST": {
-              "mean": 2.2125,
+              "mean": 2.1985,
               "p10": 0,
               "p90": 4
             },
             "REB": {
-              "mean": 2.0705,
+              "mean": 2.118,
               "p10": 0,
               "p90": 4
             },
             "STL": {
-              "mean": 0.541,
+              "mean": 0.525,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.1705,
+              "mean": 0.179,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 43.30456091009364,
+              "mean": 42.989585041488006,
               "p10": 16.666666666666668,
               "p90": 71.42857142857143
             },
             "FT_PCT": {
-              "mean": 89.1574934768428,
+              "mean": 88.37424316805762,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 40.6076174250353,
+              "mean": 40.24033909333014,
               "p10": 0,
               "p90": 66.66666666666667
             }
@@ -23256,48 +21196,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 31.651370868903534,
-            "p10": 25,
-            "p90": 38.11764705882345
+            "mean": 31.688870868903532,
+            "p10": 24.979591836734677,
+            "p90": 38.2135922330097
           },
           "stats": {
             "PTS": {
-              "mean": 15.6235,
+              "mean": 15.469,
               "p10": 8,
               "p90": 24
             },
             "AST": {
-              "mean": 3.5055,
+              "mean": 3.4675,
               "p10": 1,
               "p90": 6
             },
             "REB": {
-              "mean": 8.931,
+              "mean": 9.0445,
               "p10": 5,
-              "p90": 13
+              "p90": 14
             },
             "STL": {
-              "mean": 0.846,
+              "mean": 0.8225,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 1.6015,
+              "mean": 1.572,
               "p10": 0,
               "p90": 3
             },
             "FG_PCT": {
-              "mean": 56.2250137366076,
-              "p10": 36.36363636363637,
-              "p90": 76.47058823529412
+              "mean": 55.48641442978901,
+              "p10": 33.333333333333336,
+              "p90": 75
             },
             "FT_PCT": {
-              "mean": 68.3103834528497,
+              "mean": 67.60847608402824,
               "p10": 37.5,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 34.43246937017699,
+              "mean": 33.92049406192502,
               "p10": 0,
               "p90": 100
             }
@@ -23308,18 +21248,54 @@
           "name": "Caleb Love",
           "team": "PHI",
           "injuryStatus": "Not listed",
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
+          "playedScenarios": 1996,
+          "projectionStatus": "available",
+          "minutes": {
+            "mean": 12.49686456757153,
+            "p10": 7.058823529411765,
+            "p90": 18.566037735849065
+          },
           "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
+            "PTS": {
+              "mean": 4.690380761523046,
+              "p10": 0,
+              "p90": 10
+            },
+            "AST": {
+              "mean": 1.528056112224449,
+              "p10": 0,
+              "p90": 3
+            },
+            "REB": {
+              "mean": 1.3592184368737474,
+              "p10": 0,
+              "p90": 3
+            },
+            "STL": {
+              "mean": 0.34318637274549096,
+              "p10": 0,
+              "p90": 1
+            },
+            "BLK": {
+              "mean": 0.0656312625250501,
+              "p10": 0,
+              "p90": 0
+            },
+            "FG_PCT": {
+              "mean": 42.65271126835912,
+              "p10": 0,
+              "p90": 87.5
+            },
+            "FT_PCT": {
+              "mean": 74.9192799070848,
+              "p10": 50,
+              "p90": 100
+            },
+            "FG3_PCT": {
+              "mean": 34.62999452654625,
+              "p10": 0,
+              "p90": 100
+            }
           }
         },
         {
@@ -23349,48 +21325,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 25.88987729966652,
-            "p10": 19.294117647058812,
-            "p90": 32.91428571428566
+            "mean": 25.88487729966652,
+            "p10": 19.384615384615376,
+            "p90": 32.941176470588175
           },
           "stats": {
             "PTS": {
-              "mean": 8.2965,
-              "p10": 3,
+              "mean": 8.285,
+              "p10": 2,
               "p90": 14
             },
             "AST": {
-              "mean": 1.624,
+              "mean": 1.64,
               "p10": 0,
               "p90": 3
             },
             "REB": {
-              "mean": 4.1105,
+              "mean": 4.1435,
               "p10": 1,
               "p90": 7
             },
             "STL": {
-              "mean": 0.5935,
+              "mean": 0.591,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 1.453,
+              "mean": 1.412,
               "p10": 0,
               "p90": 3
             },
             "FG_PCT": {
-              "mean": 49.64066654641085,
-              "p10": 22.22222222222222,
-              "p90": 80
+              "mean": 49.18365718480327,
+              "p10": 20,
+              "p90": 77.77777777777777
             },
             "FT_PCT": {
-              "mean": 72.04407377587982,
+              "mean": 72.68261826510921,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 36.01280769017061,
+              "mean": 36.45883972305091,
               "p10": 0,
               "p90": 100
             }
@@ -23400,9 +21376,9 @@
           "id": 1631215,
           "name": "Khalifa Diop",
           "team": "CLE",
-          "injuryStatus": "Day-To-Day",
+          "injuryStatus": "Out",
           "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
+          "projectionStatus": "reported_out",
           "minutes": null,
           "stats": {
             "PTS": null,
@@ -23518,50 +21494,50 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 24.988651196558326,
+            "mean": 24.99615119655833,
             "p10": 17.760000000000012,
             "p90": 32.30769230769226
           },
           "stats": {
             "PTS": {
-              "mean": 10.798,
+              "mean": 10.7945,
               "p10": 4,
               "p90": 18
             },
             "AST": {
-              "mean": 2.3965,
+              "mean": 2.397,
               "p10": 0,
               "p90": 5
             },
             "REB": {
-              "mean": 4.4375,
+              "mean": 4.431,
               "p10": 2,
               "p90": 7
             },
             "STL": {
-              "mean": 0.673,
+              "mean": 0.678,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.3785,
+              "mean": 0.3655,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 48.52169897379907,
+              "mean": 48.308196308765396,
               "p10": 25,
-              "p90": 75
+              "p90": 71.42857142857143
             },
             "FT_PCT": {
-              "mean": 75.14686638279274,
+              "mean": 74.93508711234125,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 40.80338638000756,
+              "mean": 40.35234653832675,
               "p10": 0,
-              "p90": 85.71428571428571
+              "p90": 100
             }
           }
         },
@@ -23611,48 +21587,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 17.503658065784908,
+            "mean": 17.523658065784904,
             "p10": 10.352941176470589,
             "p90": 24.72727272727271
           },
           "stats": {
             "PTS": {
-              "mean": 7.263,
+              "mean": 7.3155,
               "p10": 2,
               "p90": 13
             },
             "AST": {
-              "mean": 1.795,
+              "mean": 1.787,
               "p10": 0,
               "p90": 4
             },
             "REB": {
-              "mean": 2.541,
+              "mean": 2.556,
               "p10": 0,
               "p90": 5
             },
             "STL": {
-              "mean": 0.4975,
+              "mean": 0.485,
               "p10": 0,
               "p90": 1
             },
             "BLK": {
-              "mean": 0.2955,
+              "mean": 0.2985,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 45.665861206322624,
+              "mean": 45.67092255576828,
               "p10": 16.666666666666668,
               "p90": 75
             },
             "FT_PCT": {
-              "mean": 81.16938132363039,
+              "mean": 80.76804129772692,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 34.268476700872505,
+              "mean": 34.448538024024955,
               "p10": 0,
               "p90": 100
             }
@@ -23666,48 +21642,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 35.117457928400604,
+            "mean": 35.11745792840061,
             "p10": 28.1212121212121,
-            "p90": 40.8712871287129
+            "p90": 40.94117647058815
           },
           "stats": {
             "PTS": {
-              "mean": 12.9265,
+              "mean": 12.851,
               "p10": 6,
               "p90": 20
             },
             "AST": {
-              "mean": 3.7795,
+              "mean": 3.814,
               "p10": 1,
               "p90": 6
             },
             "REB": {
-              "mean": 6.0595,
+              "mean": 6.1455,
               "p10": 3,
-              "p90": 9
+              "p90": 10
             },
             "STL": {
-              "mean": 1.4275,
+              "mean": 1.445,
               "p10": 0,
               "p90": 3
             },
             "BLK": {
-              "mean": 0.414,
+              "mean": 0.4165,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 47.53365429445389,
+              "mean": 47.838024848363965,
               "p10": 27.272727272727273,
               "p90": 69.23076923076923
             },
             "FT_PCT": {
-              "mean": 81.78478664192946,
+              "mean": 81.18787059337188,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 37.433637871808436,
+              "mean": 38.06103169412507,
               "p10": 0,
               "p90": 75
             }
@@ -24049,8 +22025,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00",
-        "observedAt": "2026-10-21T20:55:45.656000+00:00",
+        "validUntil": "2026-10-22T03:43:38.830345+00:00",
+        "observedAt": "2026-10-21T21:43:39.880114+00:00",
         "source": "ESPN current rosters and injury feed",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -25465,7 +23441,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -26134,7 +24110,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -26822,7 +24798,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -27529,7 +25505,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -28198,7 +26174,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -28905,7 +26881,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -29574,7 +27550,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -30224,7 +28200,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -30931,7 +28907,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -31600,7 +29576,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -32269,7 +30245,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-22T02:55:44.696646+00:00"
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -32943,6 +30919,2070 @@
           "id": 1643633,
           "name": "Graham Ike",
           "team": "GSW",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1643758,
+          "name": "AK Okereke",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        }
+      ]
+    },
+    {
+      "eventId": "9ae108f7a23e86e8102237053dd9e58d",
+      "gameId": "0022600024",
+      "home": "PHX",
+      "away": "DEN",
+      "homeName": "Phoenix Suns",
+      "awayName": "Denver Nuggets",
+      "startsAt": "2026-10-31T02:10:00Z",
+      "officialStartsAt": "2026-10-31T02:00:00.000Z",
+      "scheduleOffsetMinutes": 10,
+      "scheduleMatchMethod": "Unique home/away match within 15 minutes",
+      "reviewRequired": "No current availability observation matched to this game.",
+      "availability": {
+        "holdReason": "No current availability observation matched to this game.",
+        "outIds": [],
+        "players": [],
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
+      },
+      "calibrationTarget": null,
+      "gameProjection": null,
+      "players": [
+        {
+          "id": 201942,
+          "name": "DeMar DeRozan",
+          "team": "DEN",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 203932,
+          "name": "Aaron Gordon",
+          "team": "DEN",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 203999,
+          "name": "Nikola Jokić",
+          "team": "DEN",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1626145,
+          "name": "Tyus Jones",
+          "team": "DEN",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1626164,
+          "name": "Devin Booker",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1627750,
+          "name": "Jamal Murray",
+          "team": "DEN",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1628379,
+          "name": "Luke Kennard",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1628415,
+          "name": "Dillon Brooks",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1628963,
+          "name": "Marvin Bagley III",
+          "team": "DEN",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1628970,
+          "name": "Miles Bridges",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1629661,
+          "name": "Cameron Johnson",
+          "team": "DEN",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630192,
+          "name": "Zeke Nnaji",
+          "team": "DEN",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630224,
+          "name": "Jalen Green",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630311,
+          "name": "Pat Spencer",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630692,
+          "name": "Jordan Goodwin",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631109,
+          "name": "Mark Williams",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631123,
+          "name": "Jamaree Bouyea",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631124,
+          "name": "Julian Strawther",
+          "team": "DEN",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631128,
+          "name": "Christian Braun",
+          "team": "DEN",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631221,
+          "name": "Collin Gillespie",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1641715,
+          "name": "Cam Whitmore",
+          "team": "DEN",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1641747,
+          "name": "DaRon Holmes II",
+          "team": "DEN",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1641871,
+          "name": "Duop Reath",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642345,
+          "name": "Oso Ighodaro",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642346,
+          "name": "Ryan Dunn",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642350,
+          "name": "Trevon Brazile",
+          "team": "DEN",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642461,
+          "name": "Spencer Jones",
+          "team": "DEN",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642853,
+          "name": "Rasheer Fleming",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642863,
+          "name": "Khaman Maluach",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642886,
+          "name": "Koby Brea",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642948,
+          "name": "Ryan Nembhard",
+          "team": "DEN",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1643047,
+          "name": "CJ Huntley",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1643520,
+          "name": "Koa Peat",
+          "team": "PHX",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1643624,
+          "name": "Bryce Hopkins",
+          "team": "DEN",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1643813,
+          "name": "Alpha Diallo",
+          "team": "DEN",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        }
+      ]
+    },
+    {
+      "eventId": "85869b2fdc16ef10d3e2582bf05ead95",
+      "gameId": "0022600027",
+      "home": "CLE",
+      "away": "PHI",
+      "homeName": "Cleveland Cavaliers",
+      "awayName": "Philadelphia 76ers",
+      "startsAt": "2026-11-07T00:40:00Z",
+      "officialStartsAt": "2026-11-07T00:30:00.000Z",
+      "scheduleOffsetMinutes": 10,
+      "scheduleMatchMethod": "Unique home/away match within 15 minutes",
+      "reviewRequired": "No current availability observation matched to this game.",
+      "availability": {
+        "holdReason": "No current availability observation matched to this game.",
+        "outIds": [],
+        "players": [],
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
+      },
+      "calibrationTarget": null,
+      "gameProjection": null,
+      "players": [
+        {
+          "id": 2544,
+          "name": "LeBron James",
+          "team": "PHI",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 201935,
+          "name": "James Harden",
+          "team": "CLE",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 203484,
+          "name": "Kentavious Caldwell-Pope",
+          "team": "PHI",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 203954,
+          "name": "Joel Embiid",
+          "team": "PHI",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1626209,
+          "name": "Mario Hezonja",
+          "team": "CLE",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1627759,
+          "name": "Jaylen Brown",
+          "team": "PHI",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1628378,
+          "name": "Donovan Mitchell",
+          "team": "CLE",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1628386,
+          "name": "Jarrett Allen",
+          "team": "CLE",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1628418,
+          "name": "Thomas Bryant",
+          "team": "CLE",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1629014,
+          "name": "Anfernee Simons",
+          "team": "PHI",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1629605,
+          "name": "Tacko Fall",
+          "team": "PHI",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1629731,
+          "name": "Dean Wade",
+          "team": "PHI",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630178,
+          "name": "Tyrese Maxey",
+          "team": "PHI",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630241,
+          "name": "Sam Merrill",
+          "team": "CLE",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630574,
+          "name": "Ariel Hukporti",
+          "team": "PHI",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630596,
+          "name": "Evan Mobley",
+          "team": "CLE",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631126,
+          "name": "Caleb Love",
+          "team": "PHI",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631133,
+          "name": "Jabari Walker",
+          "team": "PHI",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631212,
+          "name": "Peyton Watson",
+          "team": "CLE",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631215,
+          "name": "Khalifa Diop",
+          "team": "CLE",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631230,
+          "name": "Dominick Barlow",
+          "team": "PHI",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1641712,
+          "name": "Rayan Rupert",
+          "team": "PHI",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1641737,
+          "name": "Adem Bona",
+          "team": "PHI",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1641772,
+          "name": "Nae'Qwan Tomlin",
+          "team": "CLE",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1641854,
+          "name": "Craig Porter Jr.",
+          "team": "CLE",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642281,
+          "name": "Jaylon Tyson",
+          "team": "CLE",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642348,
+          "name": "Justin Edwards",
+          "team": "PHI",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642400,
+          "name": "Tristan Enaruna",
+          "team": "CLE",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642434,
+          "name": "Riley Minix",
+          "team": "CLE",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642845,
+          "name": "VJ Edgecombe",
+          "team": "PHI",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642878,
+          "name": "Tyrese Proctor",
+          "team": "CLE",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642889,
+          "name": "Labaron Philon",
+          "team": "PHI",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1643509,
+          "name": "Meleek Thomas",
+          "team": "CLE",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1643640,
+          "name": "Ernest Udeh, Jr.",
+          "team": "CLE",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        }
+      ]
+    },
+    {
+      "eventId": "83d77fe350d56a036fd7a3404e78249a",
+      "gameId": "0022600032",
+      "home": "LAL",
+      "away": "POR",
+      "homeName": "Los Angeles Lakers",
+      "awayName": "Portland Trail Blazers",
+      "startsAt": "2026-11-07T03:10:00Z",
+      "officialStartsAt": "2026-11-07T03:00:00.000Z",
+      "scheduleOffsetMinutes": 10,
+      "scheduleMatchMethod": "Unique home/away match within 15 minutes",
+      "reviewRequired": "No current availability observation matched to this game.",
+      "availability": {
+        "holdReason": "No current availability observation matched to this game.",
+        "outIds": [],
+        "players": [],
+        "validUntil": "2026-10-22T03:43:38.830345+00:00"
+      },
+      "calibrationTarget": null,
+      "gameProjection": null,
+      "players": [
+        {
+          "id": 201950,
+          "name": "Jrue Holiday",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 203081,
+          "name": "Damian Lillard",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1626172,
+          "name": "Kevon Looney",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1629012,
+          "name": "Collin Sexton",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1629020,
+          "name": "Jarred Vanderbilt",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1629029,
+          "name": "Luka Dončić",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1629057,
+          "name": "Robert Williams III",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1629630,
+          "name": "Ja Morant",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1629656,
+          "name": "Quentin Grimes",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1629680,
+          "name": "Matisse Thybulle",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630166,
+          "name": "Deni Avdija",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630249,
+          "name": "Vít Krejčí",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630533,
+          "name": "Ziaire Williams",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630559,
+          "name": "Austin Reaves",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630572,
+          "name": "Sandro Mamukelashvili",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630695,
+          "name": "Micah Potter",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630702,
+          "name": "Jaden Hardy",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630703,
+          "name": "Scoot Henderson",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631101,
+          "name": "Shaedon Sharpe",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631117,
+          "name": "Walker Kessler",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631222,
+          "name": "Jake LaRavia",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631321,
+          "name": "Sidy Cissoko",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1641739,
+          "name": "Toumani Camara",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1641751,
+          "name": "Arthur Kaluma",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642261,
+          "name": "Dalton Knecht",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642270,
+          "name": "Donovan Clingan",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642355,
+          "name": "Bronny James",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642382,
+          "name": "Branden Carlson",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642876,
+          "name": "Adou Thiero",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642905,
+          "name": "Yang Hansen",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642910,
+          "name": "John Tonje",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642959,
+          "name": "Chris Youngblood",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1643024,
+          "name": "Chris Mañon",
+          "team": "LAL",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1643257,
+          "name": "Jayson Kent",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1643418,
+          "name": "Cameron Carr",
+          "team": "LAL",
           "injuryStatus": null,
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
