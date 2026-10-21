@@ -20,7 +20,7 @@
  function card(p,index,showGame){
   const {pick,game,row,review}=p,box=node('article',null,'favorite-card');
   box.append(node('p',String(index+1).padStart(2,'0')+' / '+pick.team,'eyebrow'),node('span',p.status,'pick-state '+p.state),node('h3',pick.label));
-  if(showGame)box.append(link(game.away+' at '+game.home+' · '+et(game.startsAt),gameUrl(game)));
+  if(showGame)box.append(link(game.away+' at '+game.home+' · '+et(E.tip(game)),gameUrl(game)));
   const price=node('div',snapshotPrice(row),'card-price');price.append(node('small',' / contract · before fees'));box.append(price);
   box.append(node('p',pick.side.toUpperCase()+' on “'+(row?.market.title||pick.contractTitle)+'”','contract-side'));
   box.append(node('p','Price limit '+cents(pick.maxPrice)+' · '+pick.conviction,'price-limit'),node('p',pick.thesis,'pick-thesis'));
@@ -71,15 +71,15 @@
   $('slateCount').textContent=games.length+' games';favorites($('dailyFavorites'),games,true);tabs(games);
   const combos=games.map(g=>R.combo(g,research)).filter(Boolean).sort((a,b)=>(a.closed?2:a.ready?0:1)-(b.closed?2:b.ready?0:1)||(a.priority??99)-(b.priority??99));
   renderCombo($('dailyCombo'),combos[0],true);$('gameCards').replaceChildren();
-  for(const g of games){const review=R.reviewFor(research,g),a=link('',gameUrl(g));a.className='matchup-card';a.append(node('p',et(g.startsAt),'tip'),node('h3',g.awayName+' at '+g.homeName));
-   a.append(node('p',review?.headline||'Matchup research pending'),node('small',Date.now()>=Date.parse(g.startsAt)?'Pregame closed · Read the saved research':R.favorites([g],research).length+' reviewed props · Open game analysis →'));$('gameCards').append(a);}
+  for(const g of games){const review=R.reviewFor(research,g),a=link('',gameUrl(g));a.className='matchup-card';a.append(node('p',et(E.tip(g)),'tip'),node('h3',g.awayName+' at '+g.homeName));
+   a.append(node('p',review?.headline||'Matchup research pending'),node('small',Date.now()>=Date.parse(E.tip(g))?'Pregame closed · Read the saved research':R.favorites([g],research).length+' reviewed props · Open game analysis →'));$('gameCards').append(a);}
   if(!games.length)$('gameCards').append(node('p','No games in the saved schedule for this date.','empty-picks'));
  }
  function renderGame(){
   const g=currentGame();$('gameContent').hidden=!g;$('missingGame').hidden=!!g;if(!g)return;
   const review=R.reviewFor(research,g);tabs(board.games.filter(x=>E.day(x.startsAt)===E.day(g.startsAt)),g.id);
   $('backToBoard').href='betting.html?date='+E.day(g.startsAt);$('detailTitle').textContent=g.awayName+' at '+g.homeName;document.title=g.away+' at '+g.home+' · NBAI';
-  $('detailTime').textContent=et(g.startsAt);$('detailBadge').textContent=Date.now()>=Date.parse(g.startsAt)?'Pregame closed':'Pregame research';
+  $('detailTime').textContent=et(E.tip(g));$('detailBadge').textContent=Date.now()>=Date.parse(E.tip(g))?'Pregame closed':'Pregame research';
   $('gameHeadline').textContent=review?.headline||'Research in progress';$('gameOpinion').textContent=review?.analysis||'A matchup opinion will appear once the news, roles and historical context have been reviewed.';
   $('gameSources').replaceChildren();sources($('gameSources'),review?.sources);
   favorites($('gameFavorites'),[g],false);renderCombo($('comboCard'),R.combo(g,research),false);
@@ -92,7 +92,7 @@
  function renderCombo(target,c,showGame){
   target.replaceChildren();if(!c){target.append(node('p','A favorite game script will appear after the matchup and its individual legs have been reviewed.'));return;}
   target.append(node('p',c.closed?'SAVED PREGAME SCRIPT':'WINNER + A PLAYER FROM EACH TEAM','eyebrow'),node('h3',c.title));
-  if(showGame)target.append(link(c.game.away+' at '+c.game.home+' · '+et(c.game.startsAt),gameUrl(c.game)));
+  if(showGame)target.append(link(c.game.away+' at '+c.game.home+' · '+et(E.tip(c.game)),gameUrl(c.game)));
   target.append(node('p',c.script));const list=node('ol');
   const win=node('li');win.append(node('strong',c.winner?.name+' to win'),node('small',c.winner?.choice?c.winner.choice.side.toUpperCase()+' on “'+c.winner.choice.market.title+'” · Single ask '+snapshotPrice(c.winner.choice):'Winner quote unavailable'));list.append(win);
   for(const p of c.props){const li=node('li');li.append(node('strong',p.pick.label),node('small',p.pick.side.toUpperCase()+' · Single ask '+snapshotPrice(p.row)+' · '+p.status));list.append(li);}target.append(list);

@@ -54,10 +54,73 @@ def build(events, rosters, statuses, exclusions, roster_at, injury_at, provider_
 
 def export(run, events, rosters, statuses, exclusions, roster_at, injury_at, provider_at):
     run = Path(run)
+    # ESPN occasionally omits signed two-way players. Keep the original snapshot
+    # immutable and confirm any strict-subset addition against a fresh NBA page.
+    # Membership evidence never supplies health or a starting-role assertion.
+    from current_roster_reconciliation import reconcile
+    canonical_path = P.ROOT/'web/season-data.js'
+    canonical_bytes = canonical_path.read_bytes()
+    data = json.loads(canonical_bytes.decode().split(' = ', 1)[1].rstrip(';\n'))
+    canonical = dict(season=data['season'], teams=data['teams'], players={
+        key: {field: player[field] for field in ['id', 'n', 'team', 'rookie', 'rateProvenance'] if field in player}
+        for key, player in data['players'].items()})
+    original = run/'rosters.parquet'
+    if not original.exists():
+        rosters.to_parquet(original, index=False)
+    else:
+        # Bind the original pin to the actual rows being reconciled, including
+        # all identity and metadata columns. Ordering and parquet dtype changes
+        # do not change row meaning, but changed values must fail closed.
+        ordering = ['TEAM', 'PLAYER_ID', 'ESPN_ID']
+        stored = pd.read_parquet(original)
+        try:
+            pd.testing.assert_frame_equal(
+                stored.sort_values(ordering).reset_index(drop=True).sort_index(axis=1),
+                rosters.sort_values(ordering).reset_index(drop=True).sort_index(axis=1),
+                check_dtype=False, check_exact=True)
+        except (AssertionError, KeyError, TypeError) as exc:
+            raise ValueError('Original roster pin does not match supplied roster rows') from exc
+    blocked = {}
+    by_event = {e['EVENT_ID']: e for e in events}
+    for exclusion in exclusions:
+        event = by_event[exclusion['event']]
+        for team in [event['HOME_TEAM'], event['AWAY_TEAM']]:
+            blocked.setdefault(team, []).append(exclusion['reason'])
+    raw_dir = run/'raw'/'roster_reconciliation'
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    P.write_json(raw_dir/'canonical-roster.json', canonical)
+    effective, audit = reconcile(rosters, canonical, raw_dir, unresolved=blocked)
+    if canonical_path.read_bytes() != canonical_bytes:
+        raise ValueError('Canonical roster changed during availability reconciliation')
+    audit['originalRoster'] = {'path': str(original.relative_to(P.ROOT)), 'sha256': P.sha(original)}
+    audit['canonicalWebsiteSha256'] = P.sha(canonical_path)
+    audit['sourceHashes'] = {str((P.ROOT/'scripts'/name).relative_to(P.ROOT)): P.sha(P.ROOT/'scripts'/name)
+                           for name in ['game_availability.py', 'current_roster_reconciliation.py']}
+    statuses = dict(statuses)
+    for pid in audit['appendedPlayerIds']:
+        statuses[pid] = dict(status='Unknown', out=False)
+    exclusions = list(exclusions)
+    for event in events:
+        if {event['HOME_TEAM'], event['AWAY_TEAM']}.intersection(audit['heldTeams']):
+            exclusions.append(dict(event=event['EVENT_ID'], reason='Current roster reconciliation needs review'))
+    if audit['appendedPlayerIds']:
+        effective_path = run/'current_roster'/'rosters.parquet'
+        effective_path.parent.mkdir(parents=True, exist_ok=True)
+        effective.to_parquet(effective_path, index=False)
+    else:
+        effective_path = original
+    audit['effectiveRoster'] = {'path': str(effective_path.relative_to(P.ROOT)), 'sha256': P.sha(effective_path)}
+    P.write_json(run/'roster-reconciliation.json', audit)
     files = [p for p in run.rglob('*') if p.is_file() and
-             (p.suffix == '.parquet' or p.parent.name == 'raw' or p.name == 'roster_cache_reference.json')]
-    result = build(events, rosters, statuses, exclusions, roster_at, injury_at, provider_at,
+             (p.suffix == '.parquet' or (run/'raw') in p.parents or p.name in ['roster_cache_reference.json', 'roster-reconciliation.json'])
+             and not (p == original and effective_path != original)]
+    result = build(events, effective, statuses, exclusions, roster_at, injury_at, provider_at,
         {str(p.relative_to(P.ROOT)): P.sha(p) for p in files})
+    result['rosterReconciliation'] = dict(appendedPlayerIds=audit['appendedPlayerIds'],
+        heldTeams=audit['heldTeams'], sourcePath=str((run/'roster-reconciliation.json').relative_to(P.ROOT)),
+        meaning='Fresh NBA roster confirmation supplies membership only. NBA-only players retain Unknown availability and cannot become recommended props.')
+    if audit['appendedPlayerIds']:
+        result['source'] = 'ESPN rosters/injuries with independently confirmed NBA roster additions'
     P.write_json(run/'game-availability.json', result)
     destination = P.ROOT/'web/game-availability.json'
     temporary = destination.with_suffix('.json.tmp')

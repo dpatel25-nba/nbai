@@ -19,7 +19,7 @@
    r.player?.team===p.team&&r.market.stat===p.stat&&r.market.threshold===p.threshold);
   const row=matches.length===1?matches[0][p.side]:null;
   let state='ready',status='Within our price limit';
-  if(now>=Date.parse(game.startsAt)){state='closed';status='Pregame closed';}
+  if(now>=Date.parse(E.tip(game))){state='closed';status='Pregame closed';}
   else if(!Number.isFinite(Date.parse(review.reviewedAt))||Date.parse(review.reviewedAt)>now+1000||
           !Number.isFinite(Date.parse(review.validUntil))||now>=Date.parse(review.validUntil)){
    state='review';status='Research update needed';
@@ -58,7 +58,7 @@
   if(props.some(p=>!p)||new Set(props.map(p=>p.pick.team)).size!==2)return null;
   const winner=E.winnerSides(game).find(w=>w.team===c.winnerTeam);
   const ready=props.every(p=>p.state==='ready')&&winner?.choice?.eligible;
-  return {game,review,...c,props,winner,ready:!!ready,closed:now>=Date.parse(game.startsAt),priced:false};
+  return {game,review,...c,props,winner,ready:!!ready,closed:now>=Date.parse(E.tip(game)),priced:false};
  }
  const api={reviewFor,reviewed,assess,picks,favorites,combo};
  if(typeof module!=='undefined')module.exports=api;else root.NBAI_RESEARCH_PICKS=api;

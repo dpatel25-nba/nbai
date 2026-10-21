@@ -7,8 +7,13 @@
  const mean=a=>a.reduce((n,v)=>n+v,0)/a.length;
  function estimate(hits){const n=hits.length,p=mean(hits),z=1.96;return {probability:p,lower:(p+z*z/(2*n)-z*Math.sqrt(p*(1-p)/n+z*z/(4*n*n)))/(1+z*z/n),n};}
  function fee(price){return Math.ceil((.07*price*(1-price)-1e-12)*100)/100;}
+ // Keep provider startsAt as the research identity; close and display at the earlier official tip.
+ function tip(game){
+  const times=[game.startsAt,game.model?.officialStartsAt].filter(t=>Number.isFinite(Date.parse(t)));
+  return times.sort((a,b)=>Date.parse(a)-Date.parse(b))[0];
+ }
  function hold(game,bundle,now){
-  if(Date.parse(game.startsAt)<=now)return 'Game has started — pregame opinion closed';
+  if(Date.parse(tip(game))<=now)return 'Game has started — pregame opinion closed';
   if(!game.model)return 'Matching game forecast unavailable';
   if(game.model.reviewRequired)return game.model.reviewRequired;
   const until=Date.parse(bundle.validUntil);
@@ -110,6 +115,6 @@
   if(m.stat==='DD'||m.stat==='TD')return `${m.player} · ${row.side==='yes'?'':'No '}${STATS[m.stat]}`;
   return `${m.player} · ${row.side==='yes'?Math.floor(m.threshold)+1+'+':'Under '+m.threshold} ${STATS[m.stat]}`;
  }
- const api={STATS,FRESH_MS,day,estimate,fee,hold,playerHits,side,build,favorites,winnerSides,combo,label};
+ const api={STATS,FRESH_MS,day,tip,estimate,fee,hold,playerHits,side,build,favorites,winnerSides,combo,label};
  if(typeof module!=='undefined')module.exports=api;else root.NBAI_KALSHI_DAY=api;
 })(typeof window!=='undefined'?window:globalThis);

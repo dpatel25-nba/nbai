@@ -55,3 +55,17 @@ test('Wrong game or duplicate research records cannot attach to the slate',()=>{
  const {g,data}=fixture();data.games[0].startsAt='2026-10-21T19:00:00Z';assert.equal(R.picks([g],data,now).length,0);
  data.games[0].startsAt=g.startsAt;data.games.push(structuredClone(data.games[0]));assert.equal(R.reviewFor(data,g),null);
 });
+test('Official tip closes opinions before a delayed provider start without changing research identity',()=>{
+ const {model,quotes,data}=fixture();
+ model.games[0].officialStartsAt='2026-10-20T18:55:00Z';
+ const before=Date.parse('2026-10-20T18:54:00Z'),at=Date.parse('2026-10-20T18:55:00Z');
+ const g=E.build(model,quotes,before).games[0];
+ assert.equal(E.tip(g),'2026-10-20T18:55:00Z');
+ assert.equal(R.reviewFor(data,g),data.games[0]);
+ assert.equal(R.picks([g],data,at).length,3);
+ assert.ok(R.picks([g],data,at).every(p=>p.state==='closed'));
+ assert.equal(R.combo(g,data,at).closed,true);
+ assert.match(E.build(model,quotes,at).games[0].hold,/started/);
+ model.games[0].officialStartsAt='bad';assert.equal(E.tip(E.build(model,quotes,before).games[0]),model.games[0].startsAt);
+ model.games[0].officialStartsAt='2026-10-20T19:10:00Z';assert.equal(E.tip(E.build(model,quotes,before).games[0]),model.games[0].startsAt);
+});

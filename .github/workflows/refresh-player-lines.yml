@@ -23,12 +23,14 @@ jobs:
         with:
           node-version: '22'
       - name: Install collector dependency
-        run: python -m pip install 'requests>=2.32.3,<3' 'numpy==2.0.2' 'pandas==2.3.3' 'joblib>=1.4,<2'
+        run: python -m pip install 'requests>=2.32.3,<3' 'numpy==2.0.2' 'pandas==2.3.3' 'joblib>=1.4,<2' 'pyarrow==21.0.0'
       - name: Test collection and failure handling
         run: |
           python tests/test_collect_player_consensus.py
           python tests/test_game_market_quotes.py
           python tests/test_game_availability.py
+          python tests/test_current_roster_reconciliation.py
+          node --test tests/test_season_projection_review.cjs
           node --test tests/test_player_line_pipeline.cjs tests/test_consensus_analysis.cjs tests/test_day_board.cjs tests/test_game_availability.cjs tests/test_game_calibration.cjs tests/test_game_watchlist_export.cjs tests/test_watchlist_quotes.cjs tests/test_game_period_accounting.cjs tests/test_manual_orders.cjs tests/test_kalshi_day.cjs
       - name: Collect supported NBA lines
         id: collect

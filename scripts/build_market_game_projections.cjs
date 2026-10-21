@@ -23,7 +23,7 @@ for(const event of market.events){
   const availability=forGame(availabilitySnapshot,d,game);
   const players=Object.values(d.players).filter(p=>[home,away].includes(p.team)).map(player=>({player,samples:[]}));
   games.push({eventId:event.id,providerStartsAt:event.commence_time,offsetMinutes,game,players,scores:[],availability,
-    reviewRequired:availability.holdReason||review(d,NBAI_SEASON,home)||review(d,NBAI_SEASON,away)});
+    reviewRequired:availability.holdReason||review(d,NBAI_SEASON,home,new Set(availability.outIds))||review(d,NBAI_SEASON,away,new Set(availability.outIds))});
 }
 let cache;const runs=2000,seedPrefix='market-matchups-v1:',calibrationGames=512,calibrationPasses=4;
 for(let i=0;i<runs&&games.length;i++){
