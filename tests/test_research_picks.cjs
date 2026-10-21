@@ -69,3 +69,16 @@ test('Official tip closes opinions before a delayed provider start without chang
  model.games[0].officialStartsAt='bad';assert.equal(E.tip(E.build(model,quotes,before).games[0]),model.games[0].startsAt);
  model.games[0].officialStartsAt='2026-10-20T19:10:00Z';assert.equal(E.tip(E.build(model,quotes,before).games[0]),model.games[0].startsAt);
 });
+test('Editorial watches cannot become recommendations merely through price movement',()=>{
+ const {g,data}=fixture(),p=data.games[0].picks[0];p.editorialDecision='watch';p.auditReason='Role evidence is insufficient.';
+ const row=g.props.find(r=>r.market.ticker===p.ticker).yes;Object.assign(row,{price:.01,edge:.9,fresh:true,liquid:true,hold:null});
+ assert.equal(R.assess(p,g,data.games[0],now).state,'watch');
+ assert.equal(R.combo(g,{games:[{...data.games[0],combo:{...data.games[0].combo,propTickers:['p1','p3']}}]},now).ready,false);
+});
+test('Withdrawals retain their audit record but cannot appear as favorites or combo legs',()=>{
+ const {g,data}=fixture();data.games[0].picks[1].editorialDecision='withdraw';
+ assert.equal(R.picks([g],data,now).find(p=>p.pick.ticker==='p2').state,'withdrawn');
+ assert.equal(R.favorites([g],data,now).length,2);
+ assert.equal(R.combo(g,data,now),null);
+ assert.equal(data.games[0].picks.length,3);
+});

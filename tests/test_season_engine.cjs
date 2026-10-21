@@ -42,9 +42,10 @@ const impactTransfer=new E.Season(D,{membership:{...membership,[haliburton.id]:'
 assert.ok(impactTransfer.delta.IND<impactBase.delta.IND, 'removing Haliburton must lower Indiana target strength');
 assert.ok(impactTransfer.delta.NYK>impactBase.delta.NYK, 'adding Haliburton must raise New York target strength');
 const crowded = {players:{}};
-for(let i=0;i<12;i++) crowded.players[i]={id:i,n:String(i),MPG:36-i};
+for(let i=0;i<12;i++) crowded.players[i+1]={id:i+1,n:String(i+1),MPG:36-i};
 const crowdedRotation=E.rotation(crowded,'TEST',Object.fromEntries(Object.keys(crowded.players).map(id=>[id,'TEST'])));
-near(crowdedRotation[0].min,36); // Adding depth must not scale every starter down.
+assert.equal(crowdedRotation.length,12); // Selected support is not erased by budget exhaustion.
+near(crowdedRotation[0].min,36*240/366);
 for (const t of Object.keys(D.teams)) {
   const rotation=E.rotation(D,t,membership);
   near(rotation.reduce((s,p)=>s+p.min,0),240);

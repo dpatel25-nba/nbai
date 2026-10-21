@@ -30,7 +30,7 @@ jobs:
           python tests/test_game_market_quotes.py
           python tests/test_game_availability.py
           python tests/test_current_roster_reconciliation.py
-          node --test tests/test_season_projection_review.cjs
+          node --test tests/test_season_projection_review.cjs tests/test_season_rotation_allocation.cjs tests/test_research_picks.cjs
           node --test tests/test_player_line_pipeline.cjs tests/test_consensus_analysis.cjs tests/test_day_board.cjs tests/test_game_availability.cjs tests/test_game_calibration.cjs tests/test_game_watchlist_export.cjs tests/test_watchlist_quotes.cjs tests/test_game_period_accounting.cjs tests/test_manual_orders.cjs tests/test_kalshi_day.cjs
       - name: Collect supported NBA lines
         id: collect

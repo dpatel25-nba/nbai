@@ -19,11 +19,13 @@
    r.player?.team===p.team&&r.market.stat===p.stat&&r.market.threshold===p.threshold);
   const row=matches.length===1?matches[0][p.side]:null;
   let state='ready',status='Within our price limit';
-  if(now>=Date.parse(E.tip(game))){state='closed';status='Pregame closed';}
+  if(p.editorialDecision==='withdraw'){state='withdrawn';status='Withdrawn after review';}
+  else if(now>=Date.parse(E.tip(game))){state='closed';status='Pregame closed';}
   else if(!Number.isFinite(Date.parse(review.reviewedAt))||Date.parse(review.reviewedAt)>now+1000||
           !Number.isFinite(Date.parse(review.validUntil))||now>=Date.parse(review.validUntil)){
    state='review';status='Research update needed';
-  }else if(!row){state='wait';status='Exact contract unavailable';}
+  }else if(p.editorialDecision==='watch'){state='watch';status='Research watch — not a current pick';}
+  else if(!row){state='wait';status='Exact contract unavailable';}
   else if(row.hold){state='review';status='Availability or forecast review needed';}
   else if(!row.fresh||!row.liquid){state='wait';status='Waiting for a current offer';}
   else if(row.price>p.maxPrice+1e-9){state='price';status='Wait for a lower price';}
@@ -45,7 +47,7 @@
  }
  function favorites(games,data,now=Date.now(),limit=3){
   const seen=new Set();
-  return picks(games,data,now).filter(p=>{
+  return picks(games,data,now).filter(p=>p.pick.editorialDecision!=='withdraw').filter(p=>{
    if(seen.has(p.pick.playerId))return false;
    seen.add(p.pick.playerId);return true;
   }).slice(0,limit);
@@ -55,7 +57,7 @@
   if(!c||c.status!=='reviewed'||!c.script||!c.risk||!c.sources?.length||!c.sources.every(safeSource)||
      ![game.home,game.away].includes(c.winnerTeam)||c.propTickers?.length!==2)return null;
   const all=picks([game],data,now),props=c.propTickers.map(t=>all.find(p=>p.pick.ticker===t));
-  if(props.some(p=>!p)||new Set(props.map(p=>p.pick.team)).size!==2)return null;
+  if(props.some(p=>!p||p.pick.editorialDecision==='withdraw')||new Set(props.map(p=>p.pick.team)).size!==2)return null;
   const winner=E.winnerSides(game).find(w=>w.team===c.winnerTeam);
   const ready=props.every(p=>p.state==='ready')&&winner?.choice?.eligible;
   return {game,review,...c,props,winner,ready:!!ready,closed:now>=Date.parse(E.tip(game)),priced:false};

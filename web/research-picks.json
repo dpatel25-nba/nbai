@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T21:46:55.517129+00:00",
-  "method": "Editorial research using current injury/role reports and archived game data, with simulator support. No fitted news blend or verified betting edge. Actionable reviewed selections sort before price watches.",
+  "generatedAt": "2026-10-21T23:13:46.149857+00:00",
+  "method": "Every published pick audited against role evidence, two-season or matched-context historical outcomes, current news, price and counterarguments. Retained candidates still require fresh model agreement; editorial watches cannot auto-promote on price alone. Withdrawals remain visible separately. No demonstrated betting edge.",
   "modelSnapshot": {
-    "generatedAt": "2026-10-21T21:21:19.954Z",
-    "sourceModelHash": "da43e5a639511a387b9f76b60cabe4b15c46968b801f483d7721c0183727a0c0"
+    "generatedAt": "2026-10-21T23:03:56.148Z",
+    "sourceModelHash": "8a33760066ee8dccf08434b8e0845f8ec091bc0fc8545348f3bb380b8e7a4e9d"
   },
   "games": [
     {
@@ -666,15 +666,36 @@
             "url": "https://sports.yahoo.com/articles/hawks-vs-magic-preview-watch-133313460.html"
           }
         ]
+      },
+      "audit": {
+        "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
+        "timing": "after official tip; original pregame picks preserved",
+        "picks": [
+          {
+            "ticker": "KXNBAAST-26OCT21ATLORL-ORLDBANE3-4",
+            "decision": "keep",
+            "reason": "Four-assist case has support in both prior seasons and current projected starting role. Black absence does not automatically transfer every creation touch to Bane; Wagner/Suggs remain competitors. Keep as a price-limited lean, not a demonstrated betting edge."
+          },
+          {
+            "ticker": "KXNBA3PT-26OCT21ATLORL-ATLCMCCOLLUM3-3",
+            "decision": "keep",
+            "reason": "Both prior seasons support the threshold at the observed discounted ask. Projected starting role is credible; closing minutes are unconfirmed and Orlando perimeter defense matters. Keep the small fixed limit, not an automatic volume increase."
+          },
+          {
+            "ticker": "KXNBAAST-26OCT21ATLORL-ORLWCARTER34-2",
+            "decision": "watch",
+            "reason": "Observed ask exceeds the existing limit. Prior passing supports researching two assists, but Vucevic minutes competition and shared initiation remain unresolved. Do not turn a modest threshold into evidence of guaranteed volume."
+          }
+        ]
       }
     },
     {
       "gameId": "0022600088",
       "startsAt": "2026-10-21T23:40:00Z",
-      "reviewedAt": "2026-10-21T21:00:14.216650+00:00",
+      "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
       "validUntil": "2026-10-21T23:30:00.000Z",
       "headline": "Toronto’s defense meets Chicago’s changing rotation.",
-      "analysis": "Toronto’s Barnes–Leonard frontcourt gives us a defensive-control script, while Chicago is without Claxton. Barnes rebounds and Barrett assists remain price watches; Jones is a low-price, reserve-minute-dependent assist candidate. We are not treating the simulator’s large margins as demonstrated betting edges.",
+      "analysis": "Audit update: 0 retained research candidate(s), 3 watch(es), and 0 withdrawal(s). Toronto’s Barnes–Leonard frontcourt gives us a defensive-control script, while Chicago is without Claxton. Barnes rebounds and Barrett assists remain price watches; Jones is a low-price, reserve-minute-dependent assist candidate. We are not treating the simulator’s large margins as demonstrated betting edges.",
       "winnerTeam": "TOR",
       "winnerReason": "Game-script lean: Toronto gets enough stops to win at home. Its expensive winner price may leave little value even if this script is right.",
       "sources": [
@@ -701,13 +722,14 @@
           "contractTitle": "Tre Jones: 6+ assists",
           "maxPrice": 0.3,
           "priority": 15,
-          "conviction": "Longer shot; role dependent",
-          "thesis": "Jones has a track record of creating assists in a reserve role. At a low price, six assists is worth watching if he receives his usual secondary-guard minutes against Toronto.",
-          "risk": "Giddey is the projected starting point guard. Jones may receive fewer minutes or fewer possessions to initiate; six assists is a high threshold for a reserve, not a likely outcome.",
+          "conviction": "Research watch; confirmation needed",
+          "thesis": "The cheap ask and 27/65 six-assist games warrant monitoring, but do not establish a role-adjusted edge.",
+          "risk": "He hit this threshold in only 5/18 appearances under 25 minutes; Giddey can handle primary creation and Chicago has several available rotation players. His historical minutes must not be assumed tonight.",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 27 of 65 valid appearances; average 5.38 assists in 26.96 minutes. These are historical outcomes, not today’s probability.",
-            "Checked against the official NBA 4:45 PM ET injury report and a refreshed ESPN roster/injury snapshot. This player is not listed as out; absence from a report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the displayed ask and estimated one-contract fee. It is an uncalibrated supporting signal; the price limit is an editorial judgment."
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
           ],
           "sources": [
             {
@@ -721,8 +743,16 @@
             {
               "title": "NBA player statistics · historical context",
               "url": "https://www.nba.com/stats/player/1630200/traditional"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
-          ]
+          ],
+          "editorialDecision": "watch",
+          "auditReason": "The cheap ask and 27/65 six-assist games warrant monitoring, but do not establish a role-adjusted edge. He hit this threshold in only 5/18 appearances under 25 minutes; Giddey can handle primary creation and Chicago has several available rotation players. His historical minutes must not be assumed tonight. Confirm a substantial rotation role before considering the unchanged cap. A cheaper quote alone does not remove the minutes concern.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         },
         {
           "status": "reviewed",
@@ -735,15 +765,16 @@
           "side": "yes",
           "label": "Scottie Barnes · 8+ rebounds",
           "contractTitle": "Scottie Barnes: 8+ rebounds",
-          "maxPrice": 0.45,
+          "maxPrice": 0.42,
           "priority": 16,
-          "conviction": "Wait for price",
-          "thesis": "Barnes has a stable forward role, and Claxton’s absence changes Chicago’s interior rotation. Eight boards fits a Toronto defensive-control script, but the price needs room for uncertainty.",
-          "risk": "He reached eight in fewer than half of last season’s appearances. Poeltl and Leonard compete for rebounds, and a lopsided game could shorten his night.",
+          "conviction": "Research watch; confirmation needed",
+          "thesis": "Barnes has a secure all-around role, but eight rebounds occurred in 35/78 valid appearances.",
+          "risk": "The 49-cent ask exceeds even the old 45-cent cap. Claxton being out does not mechanically allocate his opponents’ rebounds to Barnes, with other Toronto rebounders sharing the floor.",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 35 of 78 valid appearances; average 7.45 rebounds in 33.64 minutes. These are historical outcomes, not today’s probability.",
-            "Checked against the official NBA 4:45 PM ET injury report and a refreshed ESPN roster/injury snapshot. This player is not listed as out; absence from a report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the displayed ask and estimated one-contract fee. It is an uncalibrated supporting signal; the price limit is an editorial judgment."
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
           ],
           "sources": [
             {
@@ -757,8 +788,16 @@
             {
               "title": "NBA player statistics · historical context",
               "url": "https://www.nba.com/stats/player/1630567/traditional"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
-          ]
+          ],
+          "editorialDecision": "watch",
+          "auditReason": "Barnes has a secure all-around role, but eight rebounds occurred in 35/78 valid appearances. The 49-cent ask exceeds even the old 45-cent cap. Claxton being out does not mechanically allocate his opponents’ rebounds to Barnes, with other Toronto rebounders sharing the floor. Lower the editorial watch ceiling from 45 to 42 cents, and require a fresh role-aware model. This is an uncertainty allowance, not an optimized fair price.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         },
         {
           "status": "reviewed",
@@ -773,13 +812,14 @@
           "contractTitle": "RJ Barrett: 4+ assists",
           "maxPrice": 0.39,
           "priority": 17,
-          "conviction": "Wait for price",
-          "thesis": "Barrett can reach four assists by attacking closeouts and finding Toronto’s finishers. The simulator supports that route, but the historical hit rate calls for a cheaper entry.",
-          "risk": "Quickley, Barnes and Leonard all create offense. Barrett can be primarily a scorer, so we are not assuming his assist volume rises simply because Toronto is favored.",
+          "conviction": "Research watch; confirmation needed",
+          "thesis": "Four assists occurred in 26/57 valid games, including 24/48 at 25-plus minutes.",
+          "risk": "The 42-cent ask exceeds the 39-cent cap. Quickley, Barnes and Leonard limit how confidently we can project Barrett as a principal creator.",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 26 of 57 valid appearances; average 3.32 assists in 30.28 minutes. These are historical outcomes, not today’s probability.",
-            "Checked against the official NBA 4:45 PM ET injury report and a refreshed ESPN roster/injury snapshot. This player is not listed as out; absence from a report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the displayed ask and estimated one-contract fee. It is an uncalibrated supporting signal; the price limit is an editorial judgment."
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
           ],
           "sources": [
             {
@@ -793,8 +833,16 @@
             {
               "title": "NBA player statistics · historical context",
               "url": "https://www.nba.com/stats/player/1629628/traditional"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
-          ]
+          ],
+          "editorialDecision": "watch",
+          "auditReason": "Four assists occurred in 26/57 valid games, including 24/48 at 25-plus minutes. The 42-cent ask exceeds the 39-cent cap. Quickley, Barnes and Leonard limit how confidently we can project Barrett as a principal creator. Retain 39-cent ceiling; recheck lineup and passing role. Do not infer extra assists solely from an attractive game total.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         }
       ],
       "combo": {
@@ -818,15 +866,36 @@
             "url": "https://raptorsrepublic.com/2026/10/21/gameday-bulls-raptors-october-21st/"
           }
         ]
+      },
+      "audit": {
+        "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
+        "timing": "before official tip",
+        "picks": [
+          {
+            "ticker": "KXNBAAST-26OCT21CHITOR-CHITJONES30-6",
+            "decision": "watch",
+            "reason": "He hit this threshold in only 5/18 appearances under 25 minutes; Giddey can handle primary creation and Chicago has several available rotation players. His historical minutes must not be assumed tonight."
+          },
+          {
+            "ticker": "KXNBAREB-26OCT21CHITOR-TORSBARNES4-8",
+            "decision": "watch",
+            "reason": "The 49-cent ask exceeds even the old 45-cent cap. Claxton being out does not mechanically allocate his opponents’ rebounds to Barnes, with other Toronto rebounders sharing the floor."
+          },
+          {
+            "ticker": "KXNBAAST-26OCT21CHITOR-TORRBARRETT9-4",
+            "decision": "watch",
+            "reason": "The 42-cent ask exceeds the 39-cent cap. Quickley, Barnes and Leonard limit how confidently we can project Barrett as a principal creator."
+          }
+        ]
       }
     },
     {
       "gameId": "0022600090",
       "startsAt": "2026-10-22T00:10:00Z",
-      "reviewedAt": "2026-10-21T21:00:14.216650+00:00",
+      "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
       "validUntil": "2026-10-22T00:00:00.000Z",
       "headline": "Indiana’s returning creators meet New Orleans’ paint pressure.",
-      "analysis": "Nesmith’s absence gives Oubre a plausible wing opportunity, while Haliburton’s return makes last season’s Indiana usage a poor direct template. Oubre points is our first look. Zubac under 12 rebounds is secondary; Zion assists needs a cheaper price. We have not assumed confirmed starters or unchanged workloads.",
+      "analysis": "Audit update: 0 retained research candidate(s), 3 watch(es), and 0 withdrawal(s). Nesmith’s absence gives Oubre a plausible wing opportunity, while Haliburton’s return makes last season’s Indiana usage a poor direct template. Oubre points is our first look. Zubac under 12 rebounds is secondary; Zion assists needs a cheaper price. We have not assumed confirmed starters or unchanged workloads.",
       "winnerTeam": "NOP",
       "winnerReason": "Game-script lean: New Orleans creates enough offense through paint pressure to edge a competitive opener. Indiana’s returning playmaking is the main threat.",
       "sources": [
@@ -853,13 +922,14 @@
           "contractTitle": "Kelly Oubre Jr.: 15+ points",
           "maxPrice": 0.4,
           "priority": 12,
-          "conviction": "Preferred, role dependent",
-          "thesis": "Nesmith is out and Oubre is projected to start. That gives Oubre a plausible path to enough wing minutes and assisted scoring chances to reach 15 points at a discounted price.",
-          "risk": "This is a new team and Haliburton, Siakam and Nembhard can dominate possessions. Projected starting status is not confirmed; a smaller role would weaken this pick.",
+          "conviction": "Research watch; confirmation needed",
+          "thesis": "Nesmith is officially out, creating a plausible wing opportunity. Oubre scored 15-plus in 26/42 games at 25-plus minutes.",
+          "risk": "He had zero such games in eight appearances below 25 minutes. Independent projected starting lineups are not confirmation; a new team with Haliburton changes touches.",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 26 of 50 valid appearances; average 14.1 points in 31.49 minutes. These are historical outcomes, not today’s probability.",
-            "Checked against the official NBA 4:45 PM ET injury report and a refreshed ESPN roster/injury snapshot. This player is not listed as out; absence from a report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the displayed ask and estimated one-contract fee. It is an uncalibrated supporting signal; the price limit is an editorial judgment."
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
           ],
           "sources": [
             {
@@ -873,8 +943,20 @@
             {
               "title": "NBA player statistics · historical context",
               "url": "https://www.nba.com/stats/player/1626162/traditional"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
+            },
+            {
+              "title": "Independent role and matchup audit",
+              "url": "https://www.indycornrows.com/p/pacers-off-to-new-orleans-to-tip"
             }
-          ]
+          ],
+          "editorialDecision": "watch",
+          "auditReason": "Nesmith is officially out, creating a plausible wing opportunity. Oubre scored 15-plus in 26/42 games at 25-plus minutes. He had zero such games in eight appearances below 25 minutes. Independent projected starting lineups are not confirmation; a new team with Haliburton changes touches. Retain 40-cent cap but wait for a confirmed starter/substantial-minutes role. Nesmith’s absence is opportunity, not a guarantee that Oubre inherits every minute.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         },
         {
           "status": "reviewed",
@@ -887,15 +969,16 @@
           "side": "no",
           "label": "Ivica Zubac · 11 or fewer rebounds",
           "contractTitle": "Ivica Zubac: 12+ rebounds",
-          "maxPrice": 0.58,
+          "maxPrice": 0.52,
           "priority": 14,
-          "conviction": "Secondary lean",
-          "thesis": "Twelve rebounds is a demanding threshold. The lower side fits a game where Indiana shares defensive boards and New Orleans finishes enough possessions to limit easy rebound volume.",
-          "risk": "Zubac remains Indiana’s central rebounder. A fast game, poor Pelicans shooting or extra minutes can push him to 12. Last season’s mixed-team history is only a reference.",
+          "conviction": "Research watch; confirmation needed",
+          "thesis": "The full sample was 31/48 below 12 rebounds, but the relevant high-minute comparison is weaker.",
+          "risk": "Only 21/37 appearances at 25-plus minutes stayed under 12; the other short appearances inflate the full-sample under rate. Healthy Haliburton and a potentially faster Indiana offense can increase rebound opportunities.",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 31 of 48 valid appearances; average 10.6 rebounds in 30.14 minutes. These are historical outcomes, not today’s probability.",
-            "Checked against the official NBA 4:45 PM ET injury report and a refreshed ESPN roster/injury snapshot. This player is not listed as out; absence from a report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the displayed ask and estimated one-contract fee. It is an uncalibrated supporting signal; the price limit is an editorial judgment."
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
           ],
           "sources": [
             {
@@ -909,8 +992,20 @@
             {
               "title": "NBA player statistics · historical context",
               "url": "https://www.nba.com/stats/player/1627826/traditional"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
+            },
+            {
+              "title": "Independent role and matchup audit",
+              "url": "https://www.indycornrows.com/p/pacers-off-to-new-orleans-to-tip"
             }
-          ]
+          ],
+          "editorialDecision": "watch",
+          "auditReason": "The full sample was 31/48 below 12 rebounds, but the relevant high-minute comparison is weaker. Only 21/37 appearances at 25-plus minutes stayed under 12; the other short appearances inflate the full-sample under rate. Healthy Haliburton and a potentially faster Indiana offense can increase rebound opportunities. Tighten ceiling from 58 to 52 cents as an editorial uncertainty allowance; require evidence on workload and pace. Do not call the current 55-cent ask a robust edge.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         },
         {
           "status": "reviewed",
@@ -925,13 +1020,14 @@
           "contractTitle": "Zion Williamson: 4+ assists",
           "maxPrice": 0.35,
           "priority": 19,
-          "conviction": "Wait for price",
-          "thesis": "Zion’s paint attacks can create kickout assists when Indiana brings help. Four assists fits a competitive, offense-driven game, but last season’s record supports a lower price than the current offer.",
-          "risk": "Murray and the other Pelicans guards share creation. Zion may finish possessions himself, and four assists depends on perimeter conversion. His role and minutes remain important.",
+          "conviction": "Research watch; confirmation needed",
+          "thesis": "Zion can generate paint touches and kickouts, with 25/61 four-assist games in the archived season.",
+          "risk": "The 40-cent ask exceeds the 35-cent cap; 3.21 assists per appearance and a full complement of creators do not establish an automatic role increase.",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 25 of 61 valid appearances; average 3.21 assists in 29.64 minutes. These are historical outcomes, not today’s probability.",
-            "Checked against the official NBA 4:45 PM ET injury report and a refreshed ESPN roster/injury snapshot. This player is not listed as out; absence from a report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the displayed ask and estimated one-contract fee. It is an uncalibrated supporting signal; the price limit is an editorial judgment."
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
           ],
           "sources": [
             {
@@ -945,8 +1041,20 @@
             {
               "title": "NBA player statistics · historical context",
               "url": "https://www.nba.com/stats/player/1629627/traditional"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
+            },
+            {
+              "title": "Independent role and matchup audit",
+              "url": "https://www.indycornrows.com/p/pacers-off-to-new-orleans-to-tip"
             }
-          ]
+          ],
+          "editorialDecision": "watch",
+          "auditReason": "Zion can generate paint touches and kickouts, with 25/61 four-assist games in the archived season. The 40-cent ask exceeds the 35-cent cap; 3.21 assists per appearance and a full complement of creators do not establish an automatic role increase. Retain 35-cent cap. Look for a real creation-role change, not just matchup storytelling.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         }
       ],
       "combo": {
@@ -968,6 +1076,27 @@
           {
             "title": "Pacers–Pelicans projected lineup and team news",
             "url": "https://www.rotowire.com/betting/nba/game/pelicans-vs-pacers-odds-2026-10-21-3018874"
+          }
+        ]
+      },
+      "audit": {
+        "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
+        "timing": "before official tip",
+        "picks": [
+          {
+            "ticker": "KXNBAPTS-26OCT21INDNOP-INDKOUBRE10-15",
+            "decision": "watch",
+            "reason": "He had zero such games in eight appearances below 25 minutes. Independent projected starting lineups are not confirmation; a new team with Haliburton changes touches."
+          },
+          {
+            "ticker": "KXNBAREB-26OCT21INDNOP-INDIZUBAC40-12",
+            "decision": "watch",
+            "reason": "Only 21/37 appearances at 25-plus minutes stayed under 12; the other short appearances inflate the full-sample under rate. Healthy Haliburton and a potentially faster Indiana offense can increase rebound opportunities."
+          },
+          {
+            "ticker": "KXNBAAST-26OCT21INDNOP-NOPZWILLIAMSON1-4",
+            "decision": "watch",
+            "reason": "The 40-cent ask exceeds the 35-cent cap; 3.21 assists per appearance and a full complement of creators do not establish an automatic role increase."
           }
         ]
       }
@@ -1127,16 +1256,37 @@
           }
         ],
         "title": "MIL at WAS game-script combination"
+      },
+      "audit": {
+        "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
+        "timing": "after official tip; original pregame picks preserved",
+        "picks": [
+          {
+            "ticker": "KXNBAPTS-26OCT21MILWAS-MILTHERRO11-20",
+            "decision": "watch",
+            "reason": "The prior64-cent limit relied too readily on a new-team usage uplift. Last season20/33 at31.3minutes contrasts with56/77 at35.4minutes the year before. Neither proves tonight receives the larger workload. Current ask is above both old and more cautious60-cent limit. Rotation repair must pass before considering support."
+          },
+          {
+            "ticker": "KXNBA3PT-26OCT21MILWAS-MILMTURNER3-2",
+            "decision": "watch",
+            "reason": "Historical two-three production is credible, but Ware is a real competing rotation player. Do not promote when the hold disappears until Turners revised minutes and probabilities are checked against a source-supported rotation."
+          },
+          {
+            "ticker": "KXNBAREB-26OCT21MILWAS-WASADAVIS23-12",
+            "decision": "watch",
+            "reason": "The twelve-rebound side is near50% across both prior seasons, leaving only a small price cushion. New teammates Sarr/Ayton and debut workload matter; the old model is held. No automatic promotion from repairing Milwaukee."
+          }
+        ]
       }
     },
     {
       "gameId": "0022600087",
       "headline": "Charlotte relies on perimeter replacements against Brooklyns new frontcourt.",
-      "analysis": "Charlotte needs Miller and Allen to supply shooting with Knueppel and White out. Brooklyns Porter/Randle frontcourt offers a route to keep the game competitive and collect misses. This is an uncertain opening-night script, not a guaranteed pace forecast.",
+      "analysis": "Audit update: 2 retained research candidate(s), 1 watch(es), and 0 withdrawal(s). Charlotte needs Miller and Allen to supply shooting with Knueppel and White out. Brooklyns Porter/Randle frontcourt offers a route to keep the game competitive and collect misses. This is an uncertain opening-night script, not a guaranteed pace forecast.",
       "winnerTeam": "BKN",
       "winnerReason": "Brooklyns healthier rotation is the editorial lean; Charlotte shooting is the obvious threat.",
       "startsAt": "2026-10-21T23:30:00Z",
-      "reviewedAt": "2026-10-21T21:46:55.517129+00:00",
+      "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
       "validUntil": "2026-10-21T23:30:00.000Z",
       "sources": [
         {
@@ -1161,7 +1311,7 @@
           "threshold": 2.5,
           "side": "yes",
           "maxPrice": 0.5,
-          "thesis": "Knueppel and White are out, and Allen is projected to enter the starting lineup. His established three-point volume supports researching three makes at this price.",
+          "thesis": "Current news supports a replacement starting opportunity, and last seasons three-make rate only narrowly clears ask plus fee. The older season was weaker in fewer minutes. Keep as a thin, role-dependent lean at50c, not a favorite or large model edge; withdraw if replacement minutes fail to materialize.",
           "risk": "A projected start is not confirmed minutes; Charlotte lacks creators, and cold shooting can overwhelm the extra opportunity.",
           "sources": [
             {
@@ -1171,21 +1321,29 @@
             {
               "title": "Hornets projected lineups and replacement roles",
               "url": "https://www.aol.com/articles/hornets-vs-nets-watch-projected-120311000.html"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
           ],
           "status": "reviewed",
           "player": "Grayson Allen",
           "label": "Grayson Allen · 3+ made threes",
           "contractTitle": "Grayson Allen: 3+ threes",
-          "priority": 11,
-          "conviction": "Price sensitive",
+          "priority": 21,
+          "conviction": "Retained after audit",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 27 of 51 valid appearances; average 3.12 made threes in 28.77 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment.",
             "2025-26 regular-season positive-minute appearances: 27/51 met this side of the threshold; descriptive across prior teams, not a forecast.",
-            "Prior-season average minutes: 28.8."
-          ]
+            "Prior-season average minutes: 28.8.",
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable."
+          ],
+          "editorialDecision": "keep",
+          "auditReason": "Current news supports a replacement starting opportunity, and last seasons three-make rate only narrowly clears ask plus fee. The older season was weaker in fewer minutes. Keep as a thin, role-dependent lean at50c, not a favorite or large model edge; withdraw if replacement minutes fail to materialize.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         },
         {
           "ticker": "KXNBA3PT-26OCT21CHABKN-CHABMILLER24-3",
@@ -1194,8 +1352,8 @@
           "stat": "FG3M",
           "threshold": 2.5,
           "side": "yes",
-          "maxPrice": 0.64,
-          "thesis": "With Knueppel and White unavailable, Miller is the clearest established perimeter scoring option. Three makes is preferable to chasing the more demanding four-three contract.",
+          "maxPrice": 0.56,
+          "thesis": "The64-cent ceiling needs about66% success after a2-cent fee. Last season was39/65=60%, and the30-plus-minute subset23/38 is also about61%. The older27-game season is stronger but small. Missing teammates support extra attempts, not a measured probability uplift. Lower to a conservative56-cent research watch; no claim that56c is a calibrated fair price.",
           "risk": "The prior-season hit rate alone does not justify this price; the thesis requires increased shot opportunity. Opponents can load up on Miller and reduce shot quality.",
           "sources": [
             {
@@ -1205,6 +1363,10 @@
             {
               "title": "Hornets projected lineups and replacement roles",
               "url": "https://www.aol.com/articles/hornets-vs-nets-watch-projected-120311000.html"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
           ],
           "status": "reviewed",
@@ -1212,14 +1374,19 @@
           "label": "Brandon Miller · 3+ made threes",
           "contractTitle": "Brandon Miller: 3+ threes",
           "priority": 12,
-          "conviction": "Price sensitive",
+          "conviction": "Research watch; confirmation needed",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 39 of 65 valid appearances; average 3.14 made threes in 30.28 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment.",
             "2025-26 regular-season positive-minute appearances: 39/65 met this side of the threshold; descriptive across prior teams, not a forecast.",
-            "Prior-season average minutes: 30.3."
-          ]
+            "Prior-season average minutes: 30.3.",
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
+          ],
+          "editorialDecision": "watch",
+          "auditReason": "The64-cent ceiling needs about66% success after a2-cent fee. Last season was39/65=60%, and the30-plus-minute subset23/38 is also about61%. The older27-game season is stronger but small. Missing teammates support extra attempts, not a measured probability uplift. Lower to a conservative56-cent research watch; no claim that56c is a calibrated fair price.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         },
         {
           "ticker": "KXNBAREB-26OCT21CHABKN-BKNMPORTER17-6",
@@ -1229,7 +1396,7 @@
           "threshold": 5.5,
           "side": "yes",
           "maxPrice": 0.6,
-          "thesis": "Porter retains a substantial wing role and has an established six-rebound baseline. This offers a different statistical route from Charlotte shooting overs.",
+          "thesis": "Six rebounds has support across both prior seasons at substantial minutes. Randle/Sharpe competition deserves an explicit discount; observed57c remains within a restrained limit. Do not use the simulator75% as a validated probability.",
           "risk": "Randle and Sharpe compete for rebounds; a new frontcourt can reduce Porters share even if his minutes are stable.",
           "sources": [
             {
@@ -1239,21 +1406,29 @@
             {
               "title": "Charlotte at Brooklyn current roster context",
               "url": "https://www.cappersdirect.com/hornets-vs-nets-odds-october-21-2026/"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
           ],
           "status": "reviewed",
           "player": "Michael Porter Jr.",
           "label": "Michael Porter Jr. · 6+ rebounds",
           "contractTitle": "Michael Porter Jr.: 6+ rebounds",
-          "priority": 13,
-          "conviction": "Price sensitive",
+          "priority": 2,
+          "conviction": "Retained after audit",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 34 of 52 valid appearances; average 7.06 rebounds in 32.47 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment.",
             "2025-26 regular-season positive-minute appearances: 34/52 met this side of the threshold; descriptive across prior teams, not a forecast.",
-            "Prior-season average minutes: 32.5."
-          ]
+            "Prior-season average minutes: 32.5.",
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable."
+          ],
+          "editorialDecision": "keep",
+          "auditReason": "Six rebounds has support across both prior seasons at substantial minutes. Randle/Sharpe competition deserves an explicit discount; observed57c remains within a restrained limit. Do not use the simulator75% as a validated probability.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         }
       ],
       "combo": {
@@ -1280,16 +1455,37 @@
           }
         ],
         "title": "CHA at BKN game-script combination"
+      },
+      "audit": {
+        "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
+        "timing": "before official tip",
+        "picks": [
+          {
+            "ticker": "KXNBA3PT-26OCT21CHABKN-CHAGALLEN8-3",
+            "decision": "keep",
+            "reason": "Current news supports a replacement starting opportunity, and last seasons three-make rate only narrowly clears ask plus fee. The older season was weaker in fewer minutes. Keep as a thin, role-dependent lean at50c, not a favorite or large model edge; withdraw if replacement minutes fail to materialize."
+          },
+          {
+            "ticker": "KXNBA3PT-26OCT21CHABKN-CHABMILLER24-3",
+            "decision": "watch",
+            "reason": "The64-cent ceiling needs about66% success after a2-cent fee. Last season was39/65=60%, and the30-plus-minute subset23/38 is also about61%. The older27-game season is stronger but small. Missing teammates support extra attempts, not a measured probability uplift. Lower to a conservative56-cent research watch; no claim that56c is a calibrated fair price."
+          },
+          {
+            "ticker": "KXNBAREB-26OCT21CHABKN-BKNMPORTER17-6",
+            "decision": "keep",
+            "reason": "Six rebounds has support across both prior seasons at substantial minutes. Randle/Sharpe competition deserves an explicit discount; observed57c remains within a restrained limit. Do not use the simulator75% as a validated probability."
+          }
+        ]
       }
     },
     {
       "gameId": "0022600004",
       "headline": "Ball stretches Miami while the Heat redistribute creation and rebounds.",
-      "analysis": "Ball offers perimeter scoring next to Edwards. Miami can split finishing and rebounding between Giannis and Bam, with Wiggins contributing secondary passing. New roles make old-team rates an imperfect guide.",
+      "analysis": "Audit update: 1 retained research candidate(s), 2 watch(es), and 0 withdrawal(s). Ball offers perimeter scoring next to Edwards. Miami can split finishing and rebounding between Giannis and Bam, with Wiggins contributing secondary passing. New roles make old-team rates an imperfect guide.",
       "winnerTeam": "MIA",
       "winnerReason": "Miamis frontcourt is the script lean; Minnesotas new backcourt can overturn it with shooting.",
       "startsAt": "2026-10-21T23:40:00Z",
-      "reviewedAt": "2026-10-21T21:46:55.517129+00:00",
+      "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
       "validUntil": "2026-10-21T23:30:00.000Z",
       "sources": [
         {
@@ -1309,8 +1505,8 @@
           "stat": "FG3M",
           "threshold": 3.5,
           "side": "yes",
-          "maxPrice": 0.48,
-          "thesis": "Ball brings established high-volume perimeter shooting to Minnesotas starting backcourt. Four threes has historical support without assuming he also increases his assist load.",
+          "maxPrice": 0.46,
+          "thesis": "Prior seasons support four threes, but Charlotte attempt share is not established alongside Edwards. At48c the small cushion is sensitive to that change; retain only a46-cent price watch until current shooting volume is evidenced. New-team creation does not itself guarantee extra three-point attempts.",
           "risk": "Edwards shares possessions and Miami can pressure Ball on the perimeter. New-team usage and shooting variance remain material.",
           "sources": [
             {
@@ -1320,6 +1516,10 @@
             {
               "title": "Minnesota at Miami roster and role preview",
               "url": "https://dknetwork.draftkings.com/2026/10/21/minnesota-timberwolves-vs-miami-heat-prediction-pick-for-wednesday-10-21-26/"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
           ],
           "status": "reviewed",
@@ -1327,14 +1527,19 @@
           "label": "LaMelo Ball · 4+ made threes",
           "contractTitle": "LaMelo Ball: 4+ threes",
           "priority": 11,
-          "conviction": "Price sensitive",
+          "conviction": "Research watch; confirmation needed",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 39 of 71 valid appearances; average 3.8 made threes in 28.03 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment.",
             "2025-26 regular-season positive-minute appearances: 39/71 met this side of the threshold; descriptive across prior teams, not a forecast.",
-            "Prior-season average minutes: 28.0."
-          ]
+            "Prior-season average minutes: 28.0.",
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
+          ],
+          "editorialDecision": "watch",
+          "auditReason": "Prior seasons support four threes, but Charlotte attempt share is not established alongside Edwards. At48c the small cushion is sensitive to that change; retain only a46-cent price watch until current shooting volume is evidenced. New-team creation does not itself guarantee extra three-point attempts.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         },
         {
           "ticker": "KXNBAAST-26OCT21MINMIA-MIAAWIGGINS22-2",
@@ -1343,8 +1548,8 @@
           "stat": "AST",
           "threshold": 1.5,
           "side": "yes",
-          "maxPrice": 0.61,
-          "thesis": "Two assists is a modest threshold for an established wing who can pass to Miami finishers and shooters. This does not require Wiggins to become a primary ball-handler.",
+          "maxPrice": 0.59,
+          "thesis": "Two assists has a repeatable historical baseline in both prior seasons. Keep only up to59c and frame it as a modest continuation case. There is no direct evidence that adding Giannis increases Wiggins touches or assists; that causal claim must not be made.",
           "risk": "Giannis and Mitchell can absorb creation, while defensive responsibility against Edwards can limit Wiggins offensive involvement.",
           "sources": [
             {
@@ -1354,21 +1559,29 @@
             {
               "title": "Minnesota at Miami roster and role preview",
               "url": "https://dknetwork.draftkings.com/2026/10/21/minnesota-timberwolves-vs-miami-heat-prediction-pick-for-wednesday-10-21-26/"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
           ],
           "status": "reviewed",
           "player": "Andrew Wiggins",
           "label": "Andrew Wiggins · 2+ assists",
           "contractTitle": "Andrew Wiggins: 2+ assists",
-          "priority": 12,
-          "conviction": "Price sensitive",
+          "priority": 22,
+          "conviction": "Retained after audit",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 52 of 68 valid appearances; average 2.68 assists in 30.33 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment.",
             "2025-26 regular-season positive-minute appearances: 52/68 met this side of the threshold; descriptive across prior teams, not a forecast.",
-            "Prior-season average minutes: 30.3."
-          ]
+            "Prior-season average minutes: 30.3.",
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable."
+          ],
+          "editorialDecision": "keep",
+          "auditReason": "Two assists has a repeatable historical baseline in both prior seasons. Keep only up to59c and frame it as a modest continuation case. There is no direct evidence that adding Giannis increases Wiggins touches or assists; that causal claim must not be made.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         },
         {
           "ticker": "KXNBAREB-26OCT21MINMIA-MIAGANTETOKOUNMPO7-12",
@@ -1378,7 +1591,7 @@
           "threshold": 11.5,
           "side": "no",
           "maxPrice": 0.61,
-          "thesis": "The under-twelve threshold has a substantial historical cushion, and sharing the frontcourt with Bam offers a plausible reason not to assume an increased rebound share.",
+          "thesis": "The published rebound-under narrative is materially incomplete:2024-25 was31/67 under12 versus25/36 in the injury-shortened2025-26 season. Average minutes rose from28.9 last year to34.2 the year before, while the simulator assumes about32 now. Bam sharing boards is only an inference, and Minnesota lost frontcourt size. Withhold at58c; no new fair-price claim until role/workload uncertainty is resolved.",
           "risk": "Minnesotas thinner frontcourt and a faster game can generate extra boards. Giannis can still dominate the glass; the new-role adjustment is inference.",
           "sources": [
             {
@@ -1388,6 +1601,10 @@
             {
               "title": "Minnesota at Miami roster and role preview",
               "url": "https://dknetwork.draftkings.com/2026/10/21/minnesota-timberwolves-vs-miami-heat-prediction-pick-for-wednesday-10-21-26/"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
           ],
           "status": "reviewed",
@@ -1395,14 +1612,19 @@
           "label": "Giannis Antetokounmpo · 11 or fewer rebounds",
           "contractTitle": "Giannis Antetokounmpo: 12+ rebounds",
           "priority": 3,
-          "conviction": "Price sensitive",
+          "conviction": "Research watch; confirmation needed",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 25 of 36 valid appearances; average 9.78 rebounds in 28.87 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment.",
             "2025-26 regular-season positive-minute appearances: 25/36 met this side of the threshold; descriptive across prior teams, not a forecast.",
-            "Prior-season average minutes: 28.9."
-          ]
+            "Prior-season average minutes: 28.9.",
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
+          ],
+          "editorialDecision": "watch",
+          "auditReason": "The published rebound-under narrative is materially incomplete:2024-25 was31/67 under12 versus25/36 in the injury-shortened2025-26 season. Average minutes rose from28.9 last year to34.2 the year before, while the simulator assumes about32 now. Bam sharing boards is only an inference, and Minnesota lost frontcourt size. Withhold at58c; no new fair-price claim until role/workload uncertainty is resolved.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": false
         }
       ],
       "combo": {
@@ -1425,16 +1647,37 @@
           }
         ],
         "title": "MIN at MIA game-script combination"
+      },
+      "audit": {
+        "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
+        "timing": "before official tip",
+        "picks": [
+          {
+            "ticker": "KXNBA3PT-26OCT21MINMIA-MINLBALL1-4",
+            "decision": "watch",
+            "reason": "Prior seasons support four threes, but Charlotte attempt share is not established alongside Edwards. At48c the small cushion is sensitive to that change; retain only a46-cent price watch until current shooting volume is evidenced. New-team creation does not itself guarantee extra three-point attempts."
+          },
+          {
+            "ticker": "KXNBAAST-26OCT21MINMIA-MIAAWIGGINS22-2",
+            "decision": "keep",
+            "reason": "Two assists has a repeatable historical baseline in both prior seasons. Keep only up to59c and frame it as a modest continuation case. There is no direct evidence that adding Giannis increases Wiggins touches or assists; that causal claim must not be made."
+          },
+          {
+            "ticker": "KXNBAREB-26OCT21MINMIA-MIAGANTETOKOUNMPO7-12",
+            "decision": "watch",
+            "reason": "The published rebound-under narrative is materially incomplete:2024-25 was31/67 under12 versus25/36 in the injury-shortened2025-26 season. Average minutes rose from28.9 last year to34.2 the year before, while the simulator assumes about32 now. Bam sharing boards is only an inference, and Minnesota lost frontcourt size. Withhold at58c; no new fair-price claim until role/workload uncertainty is resolved."
+          }
+        ]
       }
     },
     {
       "gameId": "0022600089",
       "headline": "Utahs spacing meets Memphis young starting unit.",
-      "analysis": "Jackson supplies Utah spacing while Wells contributes complementary scoring. Grant is a reserve shooting watch, not a thirty-minute assumption. Edeys uncertain workload makes a rebounding-led script less defensible.",
+      "analysis": "Audit update: 2 retained research candidate(s), 0 watch(es), and 1 withdrawal(s). Jackson supplies Utah spacing while Wells contributes complementary scoring. Grant is a reserve shooting watch, not a thirty-minute assumption. Edeys uncertain workload makes a rebounding-led script less defensible.",
       "winnerTeam": "MEM",
       "winnerReason": "Memphis at home is a modest editorial lean; Utahs veteran scoring and Memphis new roles keep confidence limited.",
       "startsAt": "2026-10-22T00:10:00Z",
-      "reviewedAt": "2026-10-21T21:46:55.517129+00:00",
+      "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
       "validUntil": "2026-10-22T00:00:00.000Z",
       "sources": [
         {
@@ -1459,7 +1702,7 @@
           "threshold": 1.5,
           "side": "yes",
           "maxPrice": 0.54,
-          "thesis": "Jackson is projected to start for Utah and has an established two-three baseline. The modest threshold is preferable to projecting a major scoring breakout on his new team.",
+          "thesis": "Two made threes has similar support in both prior seasons and he is projected to start. Surgery recovery and shot competition are explicit risks. Keep only as a thin price-sensitive lean; no upward repricing beyond54c based on the small simulator margin.",
           "risk": "Return from knee surgery and competition for attempts create uncertainty. The model margin after fees is small, so do not chase a higher price.",
           "sources": [
             {
@@ -1469,21 +1712,29 @@
             {
               "title": "Utah at Memphis projected starting lineups",
               "url": "https://staging-aws.sports.yahoo.com/articles/game-preview-utah-jazz-memphis-142704187.html"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
           ],
           "status": "reviewed",
           "player": "Jaren Jackson Jr.",
           "label": "Jaren Jackson Jr. · 2+ made threes",
           "contractTitle": "Jaren Jackson Jr.: 2+ threes",
-          "priority": 11,
-          "conviction": "Price sensitive",
+          "priority": 21,
+          "conviction": "Retained after audit",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 29 of 48 valid appearances; average 1.75 made threes in 30.31 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment.",
             "2025-26 regular-season positive-minute appearances: 29/48 met this side of the threshold; descriptive across prior teams, not a forecast.",
-            "Prior-season average minutes: 30.3."
-          ]
+            "Prior-season average minutes: 30.3.",
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable."
+          ],
+          "editorialDecision": "keep",
+          "auditReason": "Two made threes has similar support in both prior seasons and he is projected to start. Surgery recovery and shot competition are explicit risks. Keep only as a thin price-sensitive lean; no upward repricing beyond54c based on the small simulator margin.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         },
         {
           "ticker": "KXNBAPTS-26OCT21UTAMEM-MEMJWELLS0-10",
@@ -1493,7 +1744,7 @@
           "threshold": 9.5,
           "side": "yes",
           "maxPrice": 0.6,
-          "thesis": "Wells is projected to remain in the starting lineup. Ten points is supported by his prior-season scoring baseline without relying on a large minutes expansion.",
+          "thesis": "Ten points is supported by the latest season and projected starting role. The earlier season was materially weaker, so this is a modest continuation assumption, not guaranteed development. Keep near the observed56-57c, without projecting a large minutes increase.",
           "risk": "Jerome, Boozer and Coward compete for touches; starter status alone does not guarantee enough attempts.",
           "sources": [
             {
@@ -1503,21 +1754,29 @@
             {
               "title": "Utah at Memphis projected starting lineups",
               "url": "https://staging-aws.sports.yahoo.com/articles/game-preview-utah-jazz-memphis-142704187.html"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
           ],
           "status": "reviewed",
           "player": "Jaylen Wells",
           "label": "Jaylen Wells · 10+ points",
           "contractTitle": "Jaylen Wells: 10+ points",
-          "priority": 12,
-          "conviction": "Price sensitive",
+          "priority": 22,
+          "conviction": "Retained after audit",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 46 of 69 valid appearances; average 12.54 points in 26.39 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment.",
             "2025-26 regular-season positive-minute appearances: 46/69 met this side of the threshold; descriptive across prior teams, not a forecast.",
-            "Prior-season average minutes: 26.4."
-          ]
+            "Prior-season average minutes: 26.4.",
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable."
+          ],
+          "editorialDecision": "keep",
+          "auditReason": "Ten points is supported by the latest season and projected starting role. The earlier season was materially weaker, so this is a modest continuation assumption, not guaranteed development. Keep near the observed56-57c, without projecting a large minutes increase.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         },
         {
           "ticker": "KXNBA3PT-26OCT21UTAMEM-MEMJGRANT9-2",
@@ -1527,7 +1786,7 @@
           "threshold": 1.5,
           "side": "yes",
           "maxPrice": 0.4,
-          "thesis": "Grant offers established floor spacing, but his new reserve role requires a much lower price than an unchanged-role projection would suggest. This is a price watch.",
+          "thesis": "Withdraw from published picks and combos: the old starting-role production and roughly30 simulator minutes are not a source-confirmed Memphis reserve workload. A40-cent cap was an arbitrary discount, not a validated correction. Neither his skill nor a large apparent simulator edge repairs the missing opportunity evidence.",
           "risk": "The simulator assumes about thirty minutes; the starting lineup preview does not establish that workload. If his role is brief, even two threes becomes demanding.",
           "sources": [
             {
@@ -1541,6 +1800,10 @@
             {
               "title": "Jazz-Grizzlies availability and player updates",
               "url": "https://www.rotowire.com/betting/nba/game/grizzlies-vs-jazz-odds-2026-10-21-3018722"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
           ],
           "status": "reviewed",
@@ -1548,14 +1811,19 @@
           "label": "Jerami Grant · 2+ made threes",
           "contractTitle": "Jerami Grant: 2+ threes",
           "priority": 13,
-          "conviction": "Price watch",
+          "conviction": "Withdrawn after review",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 40 of 57 valid appearances; average 2.39 made threes in 29.74 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment.",
             "2025-26 regular-season positive-minute appearances: 40/57 met this side of the threshold; descriptive across prior teams, not a forecast.",
-            "Prior-season average minutes: 29.7."
-          ]
+            "Prior-season average minutes: 29.7.",
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
+          ],
+          "editorialDecision": "withdraw",
+          "auditReason": "Withdraw from published picks and combos: the old starting-role production and roughly30 simulator minutes are not a source-confirmed Memphis reserve workload. A40-cent cap was an arbitrary discount, not a validated correction. Neither his skill nor a large apparent simulator edge repairs the missing opportunity evidence.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": false
         }
       ],
       "combo": {
@@ -1582,16 +1850,37 @@
           }
         ],
         "title": "UTA at MEM game-script combination"
+      },
+      "audit": {
+        "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
+        "timing": "before official tip",
+        "picks": [
+          {
+            "ticker": "KXNBA3PT-26OCT21UTAMEM-UTAJJACKSON20-2",
+            "decision": "keep",
+            "reason": "Two made threes has similar support in both prior seasons and he is projected to start. Surgery recovery and shot competition are explicit risks. Keep only as a thin price-sensitive lean; no upward repricing beyond54c based on the small simulator margin."
+          },
+          {
+            "ticker": "KXNBAPTS-26OCT21UTAMEM-MEMJWELLS0-10",
+            "decision": "keep",
+            "reason": "Ten points is supported by the latest season and projected starting role. The earlier season was materially weaker, so this is a modest continuation assumption, not guaranteed development. Keep near the observed56-57c, without projecting a large minutes increase."
+          },
+          {
+            "ticker": "KXNBA3PT-26OCT21UTAMEM-MEMJGRANT9-2",
+            "decision": "withdraw",
+            "reason": "Withdraw from published picks and combos: the old starting-role production and roughly30 simulator minutes are not a source-confirmed Memphis reserve workload. A40-cent cap was an arbitrary discount, not a validated correction. Neither his skill nor a large apparent simulator edge repairs the missing opportunity evidence."
+          }
+        ]
       }
     },
     {
       "gameId": "0022600091",
       "headline": "Houston's established offense meets a reshuffled Dallas rotation",
-      "analysis": "Houston can play through Durant and Sengun while Dallas reintroduces Irving. That supports Houston's offensive roles but changes Flagg's assist responsibility.",
+      "analysis": "Audit update: 1 retained research candidate(s), 2 watch(es), and 0 withdrawal(s). Houston can play through Durant and Sengun while Dallas reintroduces Irving. That supports Houston's offensive roles but changes Flagg's assist responsibility.",
       "winnerTeam": "HOU",
       "winnerReason": "Houston has the more established available core; this is a winner lean, not endorsement of the 79c quote.",
       "startsAt": "2026-10-22T00:40:00Z",
-      "reviewedAt": "2026-10-21T21:46:55.517129+00:00",
+      "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
       "validUntil": "2026-10-22T00:30:00.000Z",
       "sources": [
         {
@@ -1612,8 +1901,8 @@
           "threshold": 24.5,
           "side": "yes",
           "maxPrice": 0.47,
-          "thesis": "Dallas is missing multiple forwards and its backup center. Durant remains Houston's established perimeter scorer; his valid last-season scoring sample supports investigating this threshold.",
-          "risk": "VanVleet returning and Sengun/Amen sharing possessions may reduce attempts. A comfortable Houston lead can shorten fourth-quarter minutes.",
+          "thesis": "A durable high-minute scoring role and 45/78 games with 25-plus points support keeping this price-sensitive candidate.",
+          "risk": "VanVleet’s return can redistribute touches; game flow and Dallas rotation changes remain uncertain. The simulator’s margin is small and its archived availability input has expired.",
           "sources": [
             {
               "title": "Official NBA injury report · 5:15 PM ET",
@@ -1622,19 +1911,27 @@
             {
               "title": "Dallas–Houston preview · Dallas Mavericks",
               "url": "https://www.nba.com/mavs/news/mavericks-rockets-preview-schedule-is-tough-but-may-ready-to-make-his-nba-debut"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
           ],
           "status": "reviewed",
           "player": "Kevin Durant",
           "label": "Kevin Durant · 25+ points",
           "contractTitle": "Kevin Durant: 25+ points",
-          "priority": 42,
-          "conviction": "Price sensitive",
+          "priority": 5,
+          "conviction": "Retained after audit",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 45 of 78 valid appearances; average 25.97 points in 36.41 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment."
-          ]
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable."
+          ],
+          "editorialDecision": "keep",
+          "auditReason": "A durable high-minute scoring role and 45/78 games with 25-plus points support keeping this price-sensitive candidate. VanVleet’s return can redistribute touches; game flow and Dallas rotation changes remain uncertain. The simulator’s margin is small and its archived availability input has expired. Retain 47-cent ceiling; current 45-cent quote qualifies on price, but refresh availability/model before any ready label. No assumption that old hit rate is today’s probability.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         },
         {
           "ticker": "KXNBAAST-26OCT21DALHOU-HOUASENGUN28-6",
@@ -1644,8 +1941,8 @@
           "threshold": 5.5,
           "side": "yes",
           "maxPrice": 0.4,
-          "thesis": "An interior hub can generate assists to Houston's cutters and perimeter finishers. Last season's valid sample supports a six-assist threshold.",
-          "risk": "VanVleet returns to initiation duties; the model margin after fees is narrow. Teammate shooting and a blowout can erase the case.",
+          "thesis": "Six assists occurred in 42/72 valid appearances and his passing remains a plausible offense route.",
+          "risk": "VanVleet’s return can move initiation away from Sengun. Last season’s assist frequency is not a matched sample for that combination, and the modeled margin was thin.",
           "sources": [
             {
               "title": "Official NBA injury report · 5:15 PM ET",
@@ -1654,6 +1951,10 @@
             {
               "title": "Dallas–Houston preview · Dallas Mavericks",
               "url": "https://www.nba.com/mavs/news/mavericks-rockets-preview-schedule-is-tough-but-may-ready-to-make-his-nba-debut"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
           ],
           "status": "reviewed",
@@ -1661,12 +1962,17 @@
           "label": "Alperen Sengun · 6+ assists",
           "contractTitle": "Alperen Sengun: 6+ assists",
           "priority": 43,
-          "conviction": "Price sensitive",
+          "conviction": "Research watch; confirmation needed",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 42 of 72 valid appearances; average 6.18 assists in 33.3 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment."
-          ]
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
+          ],
+          "editorialDecision": "watch",
+          "auditReason": "Six assists occurred in 42/72 valid appearances and his passing remains a plausible offense route. VanVleet’s return can move initiation away from Sengun. Last season’s assist frequency is not a matched sample for that combination, and the modeled margin was thin. Retain 40-cent ceiling but require evidence that his hub role survives the new guard distribution. Current 39-cent ask alone is insufficient to label ready.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         },
         {
           "ticker": "KXNBAAST-26OCT21DALHOU-DALCFLAGG32-6",
@@ -1676,8 +1982,8 @@
           "threshold": 5.5,
           "side": "no",
           "maxPrice": 0.6,
-          "thesis": "Flagg can remain productive while finishing with five or fewer assists. Irving's return gives Dallas another creator, supporting restraint on a six-assist threshold.",
-          "risk": "Flagg could retain lead-creator stretches or accumulate assists while chasing the game. Irving's first regular-season workload is uncertain.",
+          "thesis": "The archived under landed in 44/70 games, but the hypothesis relies on a specific distribution of initiation.",
+          "risk": "Kyrie’s return does not prove an unrestricted workload or reduced Flagg creation. We found no matching prior-season Kyrie/Flagg minutes sample; development can increase Flagg’s responsibility.",
           "sources": [
             {
               "title": "Official NBA injury report · 5:15 PM ET",
@@ -1686,6 +1992,10 @@
             {
               "title": "Dallas–Houston preview · Dallas Mavericks",
               "url": "https://www.nba.com/mavs/news/mavericks-rockets-preview-schedule-is-tough-but-may-ready-to-make-his-nba-debut"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
           ],
           "status": "reviewed",
@@ -1693,12 +2003,17 @@
           "label": "Cooper Flagg · 5 or fewer assists",
           "contractTitle": "Cooper Flagg: 6+ assists",
           "priority": 44,
-          "conviction": "Price sensitive",
+          "conviction": "Research watch; confirmation needed",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 44 of 70 valid appearances; average 4.51 assists in 33.48 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment."
-          ]
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
+          ],
+          "editorialDecision": "watch",
+          "auditReason": "The archived under landed in 44/70 games, but the hypothesis relies on a specific distribution of initiation. Kyrie’s return does not prove an unrestricted workload or reduced Flagg creation. We found no matching prior-season Kyrie/Flagg minutes sample; development can increase Flagg’s responsibility. Retain 60-cent ceiling as a watch only; wait for credible Kyrie/Flagg role information. Do not invent a known minutes restriction, or assume one is absent.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         }
       ],
       "combo": {
@@ -1726,16 +2041,37 @@
         ],
         "priced": false,
         "status": "reviewed"
+      },
+      "audit": {
+        "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
+        "timing": "before official tip",
+        "picks": [
+          {
+            "ticker": "KXNBAPTS-26OCT21DALHOU-HOUKDURANT7-25",
+            "decision": "keep",
+            "reason": "VanVleet’s return can redistribute touches; game flow and Dallas rotation changes remain uncertain. The simulator’s margin is small and its archived availability input has expired."
+          },
+          {
+            "ticker": "KXNBAAST-26OCT21DALHOU-HOUASENGUN28-6",
+            "decision": "watch",
+            "reason": "VanVleet’s return can move initiation away from Sengun. Last season’s assist frequency is not a matched sample for that combination, and the modeled margin was thin."
+          },
+          {
+            "ticker": "KXNBAAST-26OCT21DALHOU-DALCFLAGG32-6",
+            "decision": "watch",
+            "reason": "Kyrie’s return does not prove an unrestricted workload or reduced Flagg creation. We found no matching prior-season Kyrie/Flagg minutes sample; development can increase Flagg’s responsibility."
+          }
+        ]
       }
     },
     {
       "gameId": "0022600005",
       "headline": "Lakers creators face a depleted Warriors frontcourt",
-      "analysis": "The Lakers can control possession while Golden State relies on its available veterans. Prioritize role-compatible lines over aggressive rookie or injury-return extrapolation.",
+      "analysis": "Audit update: 1 retained research candidate(s), 1 watch(es), and 1 withdrawal(s). The Lakers can control possession while Golden State relies on its available veterans. Prioritize role-compatible lines over aggressive rookie or injury-return extrapolation.",
       "winnerTeam": "LAL",
       "winnerReason": "Lakers lean based on the available core and Golden State absences; Curry clearance still matters.",
       "startsAt": "2026-10-22T02:00:00Z",
-      "reviewedAt": "2026-10-21T21:46:55.517129+00:00",
+      "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
       "validUntil": "2026-10-22T02:00:00.000Z",
       "sources": [
         {
@@ -1755,9 +2091,9 @@
           "stat": "REB",
           "threshold": 3.5,
           "side": "yes",
-          "maxPrice": 0.62,
-          "thesis": "Bassey and Porzingis are out, supporting available frontcourt minutes for Horford. Four rebounds is below his valid last-season average even with fewer minutes than the current simulation.",
-          "risk": "Green, Lendeborg and smaller lineups can share center minutes. Age, fouls and unexpected workload limits remain meaningful.",
+          "maxPrice": 0.6,
+          "thesis": "Four rebounds occurred in 33/44 valid appearances and in 21/31 below 25 minutes. The case can survive moderate minutes and does not require the simulator’s roughly 26-minute expectation.",
+          "risk": "NBA preview describes carefully managed workload; Green-at-center units and other available size mean absent centers do not force a Horford minutes increase.",
           "sources": [
             {
               "title": "Official NBA injury report · 5:15 PM ET",
@@ -1766,19 +2102,35 @@
             {
               "title": "Lakers roles and Kessler expectations · NBA",
               "url": "https://www.nba.com/news/walker-kessler-lakers-expectations"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
+            },
+            {
+              "title": "Independent role and matchup audit",
+              "url": "https://www.nba.com/game/gsw-vs-lal-0022600005"
+            },
+            {
+              "title": "Independent role and matchup audit",
+              "url": "https://www.fantasylabs.com/articles/nba-dfs-picks-breakdown-on-draftkings-wednesday-october-21-2026/"
             }
           ],
           "status": "reviewed",
           "player": "Al Horford",
           "label": "Al Horford · 4+ rebounds",
           "contractTitle": "Al Horford: 4+ rebounds",
-          "priority": 45,
-          "conviction": "Price sensitive",
+          "priority": 3,
+          "conviction": "Retained after audit",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 33 of 44 valid appearances; average 4.91 rebounds in 21.37 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment."
-          ]
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable."
+          ],
+          "editorialDecision": "keep",
+          "auditReason": "Four rebounds occurred in 33/44 valid appearances and in 21/31 below 25 minutes. The case can survive moderate minutes and does not require the simulator’s roughly 26-minute expectation. NBA preview describes carefully managed workload; Green-at-center units and other available size mean absent centers do not force a Horford minutes increase. Tighten cap from 62 to 60 cents. Keep as a secondary candidate at the observed 59 cents, subject to fresh availability; withdraw on any specific limited-role report.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         },
         {
           "ticker": "KXNBAREB-26OCT21GSWLAL-LALLDONCIC77-8",
@@ -1787,9 +2139,9 @@
           "stat": "REB",
           "threshold": 7.5,
           "side": "yes",
-          "maxPrice": 0.49,
-          "thesis": "The Lakers can finish defensive possessions through Doncic against a depleted opponent. Current scenarios support eight rebounds, with a large prior-season sample for comparison.",
-          "risk": "His prior hit rate alone does not establish value at this price; Kessler absorbs boards, and a one-sided game can reduce Doncic's minutes.",
+          "maxPrice": 0.44,
+          "thesis": "Eight rebounds occurred in 31/64 games; his overall involvement is secure but that is not enough for a rebound-specific price edge.",
+          "risk": "The 50-cent ask exceeds the old 49-cent cap; even that old ceiling plus fees exceeded the 48.4% historical rate. Available Kessler adds a rebound-sharing concern and the model’s uplift needs explanation.",
           "sources": [
             {
               "title": "Official NBA injury report · 5:15 PM ET",
@@ -1798,6 +2150,18 @@
             {
               "title": "Lakers roles and Kessler expectations · NBA",
               "url": "https://www.nba.com/news/walker-kessler-lakers-expectations"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
+            },
+            {
+              "title": "Independent role and matchup audit",
+              "url": "https://www.nba.com/game/gsw-vs-lal-0022600005"
+            },
+            {
+              "title": "Independent role and matchup audit",
+              "url": "https://www.fantasylabs.com/articles/nba-dfs-picks-breakdown-on-draftkings-wednesday-october-21-2026/"
             }
           ],
           "status": "reviewed",
@@ -1805,12 +2169,17 @@
           "label": "Luka Dončić · 8+ rebounds",
           "contractTitle": "Luka Dončić: 8+ rebounds",
           "priority": 46,
-          "conviction": "Price sensitive",
+          "conviction": "Research watch; confirmation needed",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 31 of 64 valid appearances; average 7.73 rebounds in 35.76 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment."
-          ]
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
+          ],
+          "editorialDecision": "watch",
+          "auditReason": "Eight rebounds occurred in 31/64 games; his overall involvement is secure but that is not enough for a rebound-specific price edge. The 50-cent ask exceeds the old 49-cent cap; even that old ceiling plus fees exceeded the 48.4% historical rate. Available Kessler adds a rebound-sharing concern and the model’s uplift needs explanation. Tighten watch ceiling to 44 cents as an editorial uncertainty allowance. Do not promote without a defensible rebound-role explanation and fresh supporting model.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         },
         {
           "ticker": "KXNBAAST-26OCT21GSWLAL-LALAREAVES15-6",
@@ -1820,8 +2189,8 @@
           "threshold": 5.5,
           "side": "no",
           "maxPrice": 0.48,
-          "thesis": "With Doncic directing possessions, Reaves can contribute primarily as a scorer and finish below six assists. The prior-season sample and current simulation both support consideration.",
-          "risk": "Sexton is out and LeBron has departed, which can increase Reaves' handling responsibility. Hot teammate shooting could defeat this under.",
+          "thesis": "The original full-season under comparison is not sufficiently matched to the current offense.",
+          "risk": "With no LeBron row and positive-minute Doncic, Reaves stayed below six assists in only 4/12 archived games, averaging 7.17. This small exploratory subset is not causal proof, but directly challenges the under. Sexton is officially out, adding another reason not to assume suppressed creation.",
           "sources": [
             {
               "title": "Official NBA injury report · 5:15 PM ET",
@@ -1830,6 +2199,18 @@
             {
               "title": "Lakers roles and Kessler expectations · NBA",
               "url": "https://www.nba.com/news/walker-kessler-lakers-expectations"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
+            },
+            {
+              "title": "Independent role and matchup audit",
+              "url": "https://www.nba.com/game/gsw-vs-lal-0022600005"
+            },
+            {
+              "title": "Independent role and matchup audit",
+              "url": "https://www.fantasylabs.com/articles/nba-dfs-picks-breakdown-on-draftkings-wednesday-october-21-2026/"
             }
           ],
           "status": "reviewed",
@@ -1837,12 +2218,17 @@
           "label": "Austin Reaves · 5 or fewer assists",
           "contractTitle": "Austin Reaves: 6+ assists",
           "priority": 47,
-          "conviction": "Price sensitive",
+          "conviction": "Withdrawn after review",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 29 of 51 valid appearances; average 5.49 assists in 34.54 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment."
-          ]
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
+          ],
+          "editorialDecision": "withdraw",
+          "auditReason": "The original full-season under comparison is not sufficiently matched to the current offense. With no LeBron row and positive-minute Doncic, Reaves stayed below six assists in only 4/12 archived games, averaging 7.17. This small exploratory subset is not causal proof, but directly challenges the under. Sexton is officially out, adding another reason not to assume suppressed creation. Remove this favorite and any dependent combo leg. No replacement cap: a modestly cheaper quote would not repair the untested role thesis.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": false
         }
       ],
       "combo": {
@@ -1870,16 +2256,37 @@
         ],
         "priced": false,
         "status": "reviewed"
+      },
+      "audit": {
+        "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
+        "timing": "before official tip",
+        "picks": [
+          {
+            "ticker": "KXNBAREB-26OCT21GSWLAL-GSWAHORFORD20-4",
+            "decision": "keep",
+            "reason": "NBA preview describes carefully managed workload; Green-at-center units and other available size mean absent centers do not force a Horford minutes increase."
+          },
+          {
+            "ticker": "KXNBAREB-26OCT21GSWLAL-LALLDONCIC77-8",
+            "decision": "watch",
+            "reason": "The 50-cent ask exceeds the old 49-cent cap; even that old ceiling plus fees exceeded the 48.4% historical rate. Available Kessler adds a rebound-sharing concern and the model’s uplift needs explanation."
+          },
+          {
+            "ticker": "KXNBAAST-26OCT21GSWLAL-LALAREAVES15-6",
+            "decision": "withdraw",
+            "reason": "With no LeBron row and positive-minute Doncic, Reaves stayed below six assists in only 4/12 archived games, averaging 7.17. This small exploratory subset is not causal proof, but directly challenges the under. Sexton is officially out, adding another reason not to assume suppressed creation."
+          }
+        ]
       }
     },
     {
       "gameId": "0022600092",
       "headline": "Two new backcourts make assists more useful than hype",
-      "analysis": "Both teams can share creation. Morant and Gillespie offer lower assist thresholds; Booker scoring stays on watch until price compensates for the model's fee-adjusted disagreement.",
+      "analysis": "Audit update: 1 retained research candidate(s), 2 watch(es), and 0 withdrawal(s). Both teams can share creation. Morant and Gillespie offer lower assist thresholds; Booker scoring stays on watch until price compensates for the model's fee-adjusted disagreement.",
       "winnerTeam": "POR",
       "winnerReason": "Slight Portland lean at home; keep it conditional because Avdija is questionable and the new guard combinations are unproven.",
       "startsAt": "2026-10-22T02:10:00Z",
-      "reviewedAt": "2026-10-21T21:46:55.517129+00:00",
+      "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
       "validUntil": "2026-10-22T02:00:00.000Z",
       "sources": [
         {
@@ -1900,8 +2307,8 @@
           "threshold": 5.5,
           "side": "yes",
           "maxPrice": 0.42,
-          "thesis": "Morant's drives can create finishes for Portland. The old-team history is supportive but discounted heavily because the backcourt and role have changed.",
-          "risk": "Lillard shares creation; Avdija's availability changes touches. Only twenty valid games support last season's baseline, all with Memphis.",
+          "thesis": "Six assists occurred in 16/20 valid prior-season appearances, a useful but small signal.",
+          "risk": "That sample came from his previous team. Lillard and Avdija can share initiation on Portland, and Avdija is questionable; 80% is not a transferable forecast. Current 45 cents is above cap.",
           "sources": [
             {
               "title": "Official NBA injury report · 5:15 PM ET",
@@ -1910,6 +2317,10 @@
             {
               "title": "Portland opening-night roster context · Trail Blazers",
               "url": "https://www.nba.com/blazers/news/portland-trail-blazers-announce-new-fan-offerings-ahead-of-opening-night-vs-phoenix-suns"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
           ],
           "status": "reviewed",
@@ -1917,12 +2328,17 @@
           "label": "Ja Morant · 6+ assists",
           "contractTitle": "Ja Morant: 6+ assists",
           "priority": 48,
-          "conviction": "Price sensitive",
+          "conviction": "Research watch; confirmation needed",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 16 of 20 valid appearances; average 8.05 assists in 28.42 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment."
-          ]
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
+          ],
+          "editorialDecision": "watch",
+          "auditReason": "Six assists occurred in 16/20 valid prior-season appearances, a useful but small signal. That sample came from his previous team. Lillard and Avdija can share initiation on Portland, and Avdija is questionable; 80% is not a transferable forecast. Current 45 cents is above cap. Retain 42-cent ceiling and recheck Avdija and guard-role distribution. Do not automatically increase Morant’s projection for either status.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         },
         {
           "ticker": "KXNBAAST-26OCT21PHXPOR-PHXCGILLESPIE12-4",
@@ -1932,8 +2348,8 @@
           "threshold": 3.5,
           "side": "yes",
           "maxPrice": 0.48,
-          "thesis": "Gillespie's eighty-game valid sample shows repeated four-assist games. A supporting guard can reach this threshold through routine ball movement without leading Phoenix in usage.",
-          "risk": "Booker and Green also create; reduced minutes or shooting-heavy assignments can suppress assists. The historical sample is descriptive, not a new-role guarantee.",
+          "thesis": "Four assists occurred in 52/80 appearances and 46/64 at 25-plus minutes; the current 40-cent ask leaves more room than many slate candidates.",
+          "risk": "Only 6/16 sub-25-minute appearances reached four. Booker and Green share initiation, and starting status or a guaranteed 28-minute role has not been established.",
           "sources": [
             {
               "title": "Official NBA injury report · 5:15 PM ET",
@@ -1942,19 +2358,27 @@
             {
               "title": "Collin Gillespie role profile · Phoenix Suns",
               "url": "https://www.nba.com/suns/news/collin-gillespie-is-surprising-the-nba-but-his-teammates-always-knew"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
           ],
           "status": "reviewed",
           "player": "Collin Gillespie",
           "label": "Collin Gillespie · 4+ assists",
           "contractTitle": "Collin Gillespie: 4+ assists",
-          "priority": 2,
-          "conviction": "Price sensitive",
+          "priority": 1,
+          "conviction": "Retained after audit",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 52 of 80 valid appearances; average 4.64 assists in 28.52 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment."
-          ]
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable."
+          ],
+          "editorialDecision": "keep",
+          "auditReason": "Four assists occurred in 52/80 appearances and 46/64 at 25-plus minutes; the current 40-cent ask leaves more room than many slate candidates. Only 6/16 sub-25-minute appearances reached four. Booker and Green share initiation, and starting status or a guaranteed 28-minute role has not been established. Retain 48-cent ceiling, but the observed 40-cent price is the compelling part. Keep subject to fresh availability and no reduced-role news; do not imply all prices up to the cap have equal merit.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         },
         {
           "ticker": "KXNBAPTS-26OCT21PHXPOR-PHXDBOOKER15-25",
@@ -1964,8 +2388,8 @@
           "threshold": 24.5,
           "side": "yes",
           "maxPrice": 0.47,
-          "thesis": "Booker remains an established scoring option, but the fifty-cent ask at review leaves a negative simulated margin after the website's fee reserve. Keep the scoring thesis on a price watch.",
-          "risk": "Camara's defense, Green/Bridges sharing attempts and early-season rotation uncertainty limit conviction. Do not present this as playable at the current ask.",
+          "thesis": "Twenty-five points occurred in 36/64 valid appearances and he remains a primary scoring option.",
+          "risk": "The current 50-cent ask exceeds the 47-cent ceiling. The supporting model did not justify paying the higher price after estimated fees; scoring responsibility alone is insufficient.",
           "sources": [
             {
               "title": "Official NBA injury report · 5:15 PM ET",
@@ -1974,6 +2398,10 @@
             {
               "title": "Portland opening-night roster context · Trail Blazers",
               "url": "https://www.nba.com/blazers/news/portland-trail-blazers-announce-new-fan-offerings-ahead-of-opening-night-vs-phoenix-suns"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
             }
           ],
           "status": "reviewed",
@@ -1981,12 +2409,18 @@
           "label": "Devin Booker · 25+ points",
           "contractTitle": "Devin Booker: 25+ points",
           "priority": 50,
-          "conviction": "Price sensitive",
+          "conviction": "Research watch; confirmation needed",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 36 of 64 valid appearances; average 26.06 points in 33.54 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "Fundamental price watch: the current offer does not have simulator agreement after the estimated one-contract fee. A lower price and renewed signal agreement are required; do not treat this as ready."
-          ]
+            "Fundamental price watch: the current offer does not have simulator agreement after the estimated one-contract fee. A lower price and renewed signal agreement are required; do not treat this as ready.",
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
+          ],
+          "editorialDecision": "watch",
+          "auditReason": "Twenty-five points occurred in 36/64 valid appearances and he remains a primary scoring option. The current 50-cent ask exceeds the 47-cent ceiling. The supporting model did not justify paying the higher price after estimated fees; scoring responsibility alone is insufficient. Retain 47-cent ceiling. Reassess after a real quote change and fresh model, without raising the cap to make the pick ready.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         }
       ],
       "combo": {
@@ -2014,16 +2448,37 @@
         ],
         "priced": false,
         "status": "reviewed"
+      },
+      "audit": {
+        "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
+        "timing": "before official tip",
+        "picks": [
+          {
+            "ticker": "KXNBAAST-26OCT21PHXPOR-PORJMORANT1-6",
+            "decision": "watch",
+            "reason": "That sample came from his previous team. Lillard and Avdija can share initiation on Portland, and Avdija is questionable; 80% is not a transferable forecast. Current 45 cents is above cap."
+          },
+          {
+            "ticker": "KXNBAAST-26OCT21PHXPOR-PHXCGILLESPIE12-4",
+            "decision": "keep",
+            "reason": "Only 6/16 sub-25-minute appearances reached four. Booker and Green share initiation, and starting status or a guaranteed 28-minute role has not been established."
+          },
+          {
+            "ticker": "KXNBAPTS-26OCT21PHXPOR-PHXDBOOKER15-25",
+            "decision": "watch",
+            "reason": "The current 50-cent ask exceeds the 47-cent ceiling. The supporting model did not justify paying the higher price after estimated fees; scoring responsibility alone is insufficient."
+          }
+        ]
       }
     },
     {
       "gameId": "0022600093",
       "headline": "Clippers share scoring while Sacramento relies on its veterans",
-      "analysis": "Los Angeles is short of wings, but that does not guarantee Garland piles up assists. Sacramento's remaining center depth supports Sabonis; LaVine provides a separate shooting path.",
+      "analysis": "Audit update: 1 retained research candidate(s), 1 watch(es), and 1 withdrawal(s). Los Angeles is short of wings, but that does not guarantee Garland piles up assists. Sacramento's remaining center depth supports Sabonis; LaVine provides a separate shooting path.",
       "winnerTeam": "LAC",
       "winnerReason": "Clippers lean from current scenarios and home court, with meaningful uncertainty from missing scorers.",
       "startsAt": "2026-10-22T02:40:00Z",
-      "reviewedAt": "2026-10-21T21:46:55.517129+00:00",
+      "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
       "validUntil": "2026-10-22T02:30:00.000Z",
       "sources": [
         {
@@ -2044,8 +2499,8 @@
           "threshold": 7.5,
           "side": "no",
           "maxPrice": 0.48,
-          "thesis": "The Clippers can distribute scoring while Garland balances creating and shooting. His valid last-season sample more often finished below eight assists; a conservative cap discounts the changed role.",
-          "risk": "With Ingram, Beal and Strus absent, Garland's playmaking load may rise. Seven assists in 23 preseason minutes is counterevidence, not confirmation of this under.",
+          "thesis": "The old under rate was 28/45 overall and 15/19 in his prior Clippers sample, but those lineups are not the present team.",
+          "risk": "Harden and Leonard departures plus Ingram, Beal and Strus absences increase the plausibility of a concentrated Garland passing role. Distributed team scoring can create point-guard assists; it is not an under mechanism. Seven assists in 23 preseason minutes is counterevidence, not a reliable new estimate.",
           "sources": [
             {
               "title": "Official NBA injury report · 5:15 PM ET",
@@ -2054,6 +2509,14 @@
             {
               "title": "Darius Garland player updates · LA Clippers",
               "url": "https://www.nba.com/clippers/player/1629636/darius-garland"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
+            },
+            {
+              "title": "Independent role and matchup audit",
+              "url": "https://www.nba.com/news/starting-5-october-2-2026"
             }
           ],
           "status": "reviewed",
@@ -2061,12 +2524,17 @@
           "label": "Darius Garland · 7 or fewer assists",
           "contractTitle": "Darius Garland: 8+ assists",
           "priority": 51,
-          "conviction": "Price sensitive",
+          "conviction": "Withdrawn after review",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 28 of 45 valid appearances; average 6.69 assists in 29.87 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment."
-          ]
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
+          ],
+          "editorialDecision": "withdraw",
+          "auditReason": "The old under rate was 28/45 overall and 15/19 in his prior Clippers sample, but those lineups are not the present team. Harden and Leonard departures plus Ingram, Beal and Strus absences increase the plausibility of a concentrated Garland passing role. Distributed team scoring can create point-guard assists; it is not an under mechanism. Seven assists in 23 preseason minutes is counterevidence, not a reliable new estimate. Remove this favorite and any combo using it. No new cap until a role-aware under argument is supported; do not let a high simulator percentage override contradictory fundamentals.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": false
         },
         {
           "ticker": "KXNBAREB-26OCT21SACLAC-SACDSABONIS11-12",
@@ -2076,8 +2544,8 @@
           "threshold": 11.5,
           "side": "yes",
           "maxPrice": 0.6,
-          "thesis": "Cardwell and Raynaud are out, supporting Sabonis' role on the glass. Current simulation supports twelve rebounds, but the existing sixty-cent ceiling remains fixed.",
-          "risk": "Only nineteen valid games last season and a return from an interrupted season make workload uncertain. The 61¢ ask at review exceeded the cap.",
+          "thesis": "Missing Sacramento center depth supports his opportunity, and 12 rebounds occurred in 9/14 prior-season games at 25-plus minutes.",
+          "risk": "Only 19 valid appearances last season and an interrupted workload make the distribution uncertain. The full sample hit only 10/19, so the current 60-cent ask is not automatically attractive because it now meets the old cap.",
           "sources": [
             {
               "title": "Official NBA injury report · 5:15 PM ET",
@@ -2086,6 +2554,14 @@
             {
               "title": "Darius Garland player updates · LA Clippers",
               "url": "https://www.nba.com/clippers/player/1629636/darius-garland"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
+            },
+            {
+              "title": "Independent role and matchup audit",
+              "url": "https://www.nba.com/news/starting-5-october-2-2026"
             }
           ],
           "status": "reviewed",
@@ -2093,12 +2569,17 @@
           "label": "Domantas Sabonis · 12+ rebounds",
           "contractTitle": "Domantas Sabonis: 12+ rebounds",
           "priority": 52,
-          "conviction": "Price sensitive",
+          "conviction": "Research watch; confirmation needed",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 10 of 19 valid appearances; average 11.37 rebounds in 29.66 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment."
-          ]
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable.",
+            "A lower quote or positive model number does not remove this editorial hold. New role evidence and another review are required."
+          ],
+          "editorialDecision": "watch",
+          "auditReason": "Missing Sacramento center depth supports his opportunity, and 12 rebounds occurred in 9/14 prior-season games at 25-plus minutes. Only 19 valid appearances last season and an interrupted workload make the distribution uncertain. The full sample hit only 10/19, so the current 60-cent ask is not automatically attractive because it now meets the old cap. Retain 60-cent ceiling but wait for credible workload confirmation. Do not turn a price-watch into ready without resolving the role issue.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         },
         {
           "ticker": "KXNBA3PT-26OCT21SACLAC-SACZLAVINE8-3",
@@ -2108,8 +2589,8 @@
           "threshold": 2.5,
           "side": "yes",
           "maxPrice": 0.4,
-          "thesis": "LaVine has a clear off-ball scoring route beside Sacramento's creators. Three made threes is supported by a shooting history and positive current simulated margin at the observed ask.",
-          "risk": "Three-point outcomes are volatile. Acuff changes the offense and Monk's status affects attempts; historical shooting volume may not transfer unchanged.",
+          "thesis": "Three made threes occurred in 16/38 valid appearances and 15/30 at 25-plus minutes; the observed 38-cent ask offers a modest price-sensitive case.",
+          "risk": "Three-point variance is large and the full-sample support is narrow after fees. Acuff changes the offense, Monk is questionable rather than out, and shooting volume must not be assumed unchanged.",
           "sources": [
             {
               "title": "Official NBA injury report · 5:15 PM ET",
@@ -2118,19 +2599,31 @@
             {
               "title": "Darius Garland player updates · LA Clippers",
               "url": "https://www.nba.com/clippers/player/1629636/darius-garland"
+            },
+            {
+              "title": "Official NBA injury report · 6:45 PM ET",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-21_06_45PM.pdf"
+            },
+            {
+              "title": "Independent role and matchup audit",
+              "url": "https://www.nba.com/news/starting-5-october-2-2026"
             }
           ],
           "status": "reviewed",
           "player": "Zach LaVine",
           "label": "Zach LaVine · 3+ made threes",
           "contractTitle": "Zach LaVine: 3+ threes",
-          "priority": 53,
-          "conviction": "Price sensitive",
+          "priority": 4,
+          "conviction": "Retained after audit",
           "evidence": [
             "Archived 2025–26 regular season: this side landed in 16 of 38 valid appearances; average 2.55 made threes in 31.22 minutes. Historical outcomes are not today’s probability.",
-            "Checked against the official NBA 5:15 PM ET injury report and refreshed ESPN/NBA roster observations. Absence from an injury report does not confirm unrestricted minutes.",
-            "The current simulator supports this side after the captured ask and estimated one-contract fee. It remains an uncalibrated supporting signal; the price limit is an editorial judgment."
-          ]
+            "Audited against the official NBA 6:45 PM ET injury report. Historical rates describe past outcomes; role-based subsets use actual game conditions and are exploratory, not calibrated probabilities.",
+            "The minute-allocation cutoff has been repaired. The simulator now gives all selected players a capped share of 240 minutes; these remain conditional scenarios, not confirmed workloads. The current model and price must still agree before a retained pick becomes actionable."
+          ],
+          "editorialDecision": "keep",
+          "auditReason": "Three made threes occurred in 16/38 valid appearances and 15/30 at 25-plus minutes; the observed 38-cent ask offers a modest price-sensitive case. Three-point variance is large and the full-sample support is narrow after fees. Acuff changes the offense, Monk is questionable rather than out, and shooting volume must not be assumed unchanged. Retain 40-cent ceiling as a secondary, lower-conviction candidate; fresh availability and a normal minutes role remain required. Do not label this a strong measured edge.",
+          "auditedAt": "2026-10-21T23:13:46.149857+00:00",
+          "priceLimitActive": true
         }
       ],
       "combo": {
@@ -2157,7 +2650,29 @@
           }
         ],
         "priced": false,
-        "status": "reviewed"
+        "status": "withdrawn",
+        "withdrawalReason": "This game script was withdrawn because its Garland assist-under leg did not survive the role audit. We are not substituting another leg just to complete a combo."
+      },
+      "audit": {
+        "reviewedAt": "2026-10-21T23:13:46.149857+00:00",
+        "timing": "before official tip",
+        "picks": [
+          {
+            "ticker": "KXNBAAST-26OCT21SACLAC-LACDGARLAND10-8",
+            "decision": "withdraw",
+            "reason": "Harden and Leonard departures plus Ingram, Beal and Strus absences increase the plausibility of a concentrated Garland passing role. Distributed team scoring can create point-guard assists; it is not an under mechanism. Seven assists in 23 preseason minutes is counterevidence, not a reliable new estimate."
+          },
+          {
+            "ticker": "KXNBAREB-26OCT21SACLAC-SACDSABONIS11-12",
+            "decision": "watch",
+            "reason": "Only 19 valid appearances last season and an interrupted workload make the distribution uncertain. The full sample hit only 10/19, so the current 60-cent ask is not automatically attractive because it now meets the old cap."
+          },
+          {
+            "ticker": "KXNBA3PT-26OCT21SACLAC-SACZLAVINE8-3",
+            "decision": "keep",
+            "reason": "Three-point variance is large and the full-sample support is narrow after fees. Acuff changes the offense, Monk is questionable rather than out, and shooting volume must not be assumed unchanged."
+          }
+        ]
       }
     }
   ]

@@ -23,7 +23,8 @@
   if(showGame)box.append(link(game.away+' at '+game.home+' · '+et(E.tip(game)),gameUrl(game)));
   const price=node('div',snapshotPrice(row),'card-price');price.append(node('small',' / contract · before fees'));box.append(price);
   box.append(node('p',pick.side.toUpperCase()+' on “'+(row?.market.title||pick.contractTitle)+'”','contract-side'));
-  box.append(node('p','Price limit '+cents(pick.maxPrice)+' · '+pick.conviction,'price-limit'),node('p',pick.thesis,'pick-thesis'));
+  if(pick.auditReason)box.append(node('p','Audit: '+pick.auditReason,'pick-risk'));
+  box.append(node('p',(pick.priceLimitActive===false?'No active price limit':'Price limit '+cents(pick.maxPrice))+' · '+pick.conviction,'price-limit'),node('p',pick.thesis,'pick-thesis'));
   const risk=node('p',null,'pick-risk');risk.append(node('strong','What could go wrong: '),document.createTextNode(pick.risk));box.append(risk);
   const detail=node('details',null,'pick-evidence');detail.dataset.disclosure='pick-'+pick.ticker;detail.append(node('summary','Research & sources'));
   for(const line of pick.evidence||[])detail.append(node('p',line));sources(detail,pick.sources);
@@ -35,7 +36,7 @@
  function favorites(target,games,showGame){
   target.replaceChildren();const picks=R.favorites(games,research);
   picks.forEach((p,i)=>target.append(card(p,i,showGame)));
-  if(picks.length<3)target.append(node('p',picks.length?'Only '+picks.length+' players have completed research reviews for this slate.':'Research is pending for this slate. Favorites appear after a source-backed review; unreviewed lines stay on the player board.','empty-picks'));
+  if(picks.length<3)target.append(node('p',picks.length?'Only '+picks.length+' reviewed ideas remain on this shortlist after the audit. We are not filling empty slots with weaker picks.':'Research is pending for this slate. Favorites appear after a source-backed review; unreviewed lines stay on the player board.','empty-picks'));
  }
  function marketStatus(){
   const fresh=quotes?.markets?.some(m=>Date.now()-Date.parse(m.observedAt)<=E.FRESH_MS&&Date.now()>=Date.parse(m.observedAt)-1000);
@@ -82,7 +83,11 @@
   $('detailTime').textContent=et(E.tip(g));$('detailBadge').textContent=Date.now()>=Date.parse(E.tip(g))?'Pregame closed':'Pregame research';
   $('gameHeadline').textContent=review?.headline||'Research in progress';$('gameOpinion').textContent=review?.analysis||'A matchup opinion will appear once the news, roles and historical context have been reviewed.';
   $('gameSources').replaceChildren();sources($('gameSources'),review?.sources);
-  favorites($('gameFavorites'),[g],false);renderCombo($('comboCard'),R.combo(g,research),false);
+  const postTip=review?.audit?.timing?.startsWith('after official tip');$('postTipAudit').hidden=!postTip;$('postTipAuditItems').replaceChildren();if(postTip)for(const a of review.audit.picks){const p=review.picks.find(p=>p.ticker===a.ticker);$('postTipAuditItems').append(node('p',(p?.label||a.ticker)+' — '+a.decision+': '+a.reason));}
+  favorites($('gameFavorites'),[g],false);
+  const withdrawn=R.picks([g],research).filter(p=>p.pick.editorialDecision==='withdraw');
+  $('withdrawnSection').hidden=!withdrawn.length;$('withdrawnPicks').replaceChildren();withdrawn.forEach((p,i)=>$('withdrawnPicks').append(card(p,i,false)));
+  renderCombo($('comboCard'),R.combo(g,research),false);
   $('winnerCards').replaceChildren();for(const w of E.winnerSides(g)){const r=w.choice,cell=node('article',null,'winner-card');cell.append(node('h3',w.name),node('div',snapshotPrice(r),'winner-price'));
    cell.append(node('small',r?r.side.toUpperCase()+' on “'+r.market.title+'”':'No matching winner offer'));
    cell.append(node('p',review?.winnerTeam===w.team?review.winnerReason:'See the matchup script above. A game lean alone does not establish value at this price.'));
@@ -90,7 +95,7 @@
   playerLines();
  }
  function renderCombo(target,c,showGame){
-  target.replaceChildren();if(!c){target.append(node('p','A favorite game script will appear after the matchup and its individual legs have been reviewed.'));return;}
+  target.replaceChildren();if(!c){const g=detailPage?currentGame():null,review=g?R.reviewFor(research,g):null;target.append(node('p',review?.combo?.withdrawalReason||'A favorite game script will appear after the matchup and its individual legs have been reviewed.'));return;}
   target.append(node('p',c.closed?'SAVED PREGAME SCRIPT':'WINNER + A PLAYER FROM EACH TEAM','eyebrow'),node('h3',c.title));
   if(showGame)target.append(link(c.game.away+' at '+c.game.home+' · '+et(E.tip(c.game)),gameUrl(c.game)));
   target.append(node('p',c.script));const list=node('ol');
@@ -111,7 +116,7 @@
    const details=node('details',null,'player-lines');details.dataset.disclosure='player-'+name;if(search)details.open=true;details.append(node('summary',name+' · '+markets.length+' lines'));
    const scroll=node('div',null,'table-scroll'),table=node('table',null,'kalshi-lines-table'),head=node('thead'),tr=node('tr');for(const title of ['Contract','YES ask','NO ask','Research view'])tr.append(node('th',title));head.append(tr);table.append(head);const body=node('tbody');
    for(const r of markets){const tr=node('tr'),title=node('td');title.append(external(r.market.title+' ↗',r.market.url),node('small','Observed '+et(r.market.observedAt)));tr.append(title,node('td',snapshotPrice(r.yes)),node('td',snapshotPrice(r.no)));
-    const p=reviews.find(p=>p.pick.ticker===r.market.ticker),view=node('td');view.textContent=p?p.pick.side.toUpperCase()+' · '+p.status+' · Limit '+cents(p.pick.maxPrice):'Not reviewed';tr.append(view);body.append(tr);}
+    const p=reviews.find(p=>p.pick.ticker===r.market.ticker),view=node('td');view.textContent=p?p.pick.side.toUpperCase()+' · '+p.status+(p.pick.priceLimitActive===false?' · Price limit suspended':' · Limit '+cents(p.pick.maxPrice)):'Not reviewed';tr.append(view);body.append(tr);}
    table.append(body);scroll.append(table);details.append(scroll);$('allPlayerLines').append(details);
   }
   if(!rows.length)$('allPlayerLines').append(node('p','No recognized lines match this selection.','empty-picks'));

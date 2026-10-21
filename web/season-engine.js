@@ -36,17 +36,19 @@
     return games.sort((a,b) => a.tip.localeCompare(b.tip) || a.id.localeCompare(b.id));
   }
   function rotation(data, team, membership, excluded = new Set()) {
-    const available = Object.values(data.players).filter(p => membership[p.id] === team && !excluded.has(String(p.id)))
-      .sort((a,b) => b.MPG-a.MPG || a.id-b.id).slice(0,12);
-    if (available.length < 5) throw new Error(`${team} needs at least five players. Add players before simulating.`);
-    // Preserve projected starter roles; the marginal bench player absorbs an
-    // overflowing rotation, matching the existing Python roster builder.
-    const candidates = [], minutes = [];let assigned = 0;
-    for (const p of available) {
-      const min = Math.min(clamp(p.MPG,1,48),240-assigned);
-      if (min<=1e-9) break;
-      candidates.push(p);minutes.push(min);assigned+=min;
+    const eligible = Object.values(data.players).filter(p => membership[p.id] === team && !excluded.has(String(p.id)));
+    const seen = new Set();
+    for (const p of eligible) {
+      if (!Number.isSafeInteger(p.id) || p.id <= 0 || seen.has(p.id) || !Number.isFinite(p.MPG) || p.MPG < 0)
+        throw new Error('Rotation requires unique player IDs and finite nonnegative MPG.');
+      seen.add(p.id);
     }
+    const available = eligible.sort((a,b) => b.MPG-a.MPG || a.id-b.id).slice(0,12);
+    if (available.length < 5) throw new Error(`${team} needs at least five players. Add players before simulating.`);
+    // Allocate the team budget across every selected player. Cumulative clipping
+    // previously erased later selected players once earlier weights reached 240.
+    // These remain conditional scenario weights, not confirmed playing roles.
+    const minutes = available.map(p => clamp(p.MPG,1,48));
     let remaining = 240, active = minutes.map((_,i) => i), final = minutes.map(() => 0);
     while (active.length) {
       const total = active.reduce((s,i) => s+minutes[i],0);
@@ -55,7 +57,10 @@
       capped.forEach(i => {final[i] = 48; remaining -= 48;});
       active = active.filter(i => !capped.includes(i));
     }
-    return candidates.map((p,i) => ({id:p.id,n:p.n,min:final[i]}));
+    if (final.some(min => !Number.isFinite(min) || min <= 0 || min > 48+1e-9) ||
+        Math.abs(final.reduce((sum,min) => sum+min,0)-240) > 1e-8)
+      throw new Error('Rotation minute allocation invariant failed.');
+    return available.map((p,i) => ({id:p.id,n:p.n,min:final[i]}));
   }
   class Season {
     constructor(data, options = {}) {
