@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-23T04:50:44.899Z",
+  "generatedAt": "2026-10-23T11:40:19.421Z",
   "scope": "game",
   "runs": 2000,
   "seedPrefix": "market-matchups-v1:",
@@ -9624,7 +9624,7 @@
     "web/season-engine.js": "eb9252a1582df10e6111b694229d9943ab5b9b734a6b7012abcbd2a631ea9e08",
     "web/season-possession.js": "133537a8a45a321a3cb884fbe3140b0917b2b3a85f36de26490a5f4d8e5f05a5",
     "web/season-availability.json": "a2ebd5a3bd2fb4b2642bb138c59fc6d696e8f23a3a21de89a3658c02f3fdc67c",
-    "web/game-availability.json": "012aad1602ce8317b924910e02c8447127a8599da39061f0d732cb337032eac2",
+    "web/game-availability.json": "c12b10d7206821d095d7669a36ae34d451f1e2b6c8a9a59dd4e6d950198c7a0f",
     "scripts/game_availability.cjs": "ad4ebaddf8a1a29c1d4f9285e6694211308ac46a65d954a040ae31f212edde00",
     "scripts/build_market_game_projections.cjs": "126d7f4b7efcd447531b892b4184db8887474fcb3346c5050d0388805bc2ece5",
     "scripts/match_market_schedule.cjs": "f49aa4bdf06f89d1589098030436af429a52562ea785f39198adfd8b152bcdc3",
@@ -9635,8 +9635,8 @@
     "web/lib/game-watchlist-targets.json": "54e78bb4477557b5e4c684a00fba33c6a53bafca0205f6affd07b79ca3d0770b"
   },
   "marketInventoryHash": "14cec956be46929c3ae2939a53b80fe64b4a1ca9f3b3e619d98b8015bf31e643",
-  "inputSignature": "0d4d3bb8caa17afb17283b6b7275f79748ac75f78fd672559122491ebbf6c074",
-  "availabilityValidUntil": "2026-10-23T10:50:18.878214+00:00",
+  "inputSignature": "04c29801d1974910a5de55ed553e2501c26c68471f1a0669d34e367b68a06c95",
+  "availabilityValidUntil": "2026-10-23T17:39:41.013773+00:00",
   "assumptions": "Matchup-specific possession scenarios using current roster and ESPN injury observations. Reported Out players are excluded; other players are conditional on playing. Questionable participation, confirmed starters and minutes restrictions are not modeled. Not calibrated betting probabilities.",
   "events": [
     {
@@ -9896,8 +9896,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-23T10:50:18.878214+00:00",
-        "observedAt": "2026-10-23T04:50:20.586439+00:00",
+        "validUntil": "2026-10-23T17:39:41.013773+00:00",
+        "observedAt": "2026-10-23T11:39:42.876283+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -11705,8 +11705,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-23T10:50:18.878214+00:00",
-        "observedAt": "2026-10-23T04:50:20.586439+00:00",
+        "validUntil": "2026-10-23T17:39:41.013773+00:00",
+        "observedAt": "2026-10-23T11:39:42.876283+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -13280,12 +13280,124 @@
       "availability": {
         "holdReason": null,
         "outIds": [
+          "1642927",
           "1643407",
           "1641774",
-          "1642364",
-          "1642927"
+          "1642364"
         ],
         "players": [
+          {
+            "id": 203937,
+            "name": "Kyle Anderson",
+            "team": "TOR",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1630567,
+            "name": "Scottie Barnes",
+            "team": "TOR",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1629628,
+            "name": "RJ Barrett",
+            "team": "TOR",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642419,
+            "name": "Jamison Battle",
+            "team": "TOR",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642927,
+            "name": "Nate Bittle",
+            "team": "TOR",
+            "status": "Out",
+            "out": true
+          },
+          {
+            "id": 1643558,
+            "name": "Jaden Bradley",
+            "team": "TOR",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1643512,
+            "name": "Allen Graves",
+            "team": "TOR",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1631218,
+            "name": "Trayce Jackson-Davis",
+            "team": "TOR",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 202695,
+            "name": "Kawhi Leonard",
+            "team": "TOR",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642918,
+            "name": "Alijah Martin",
+            "team": "TOR",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642867,
+            "name": "Collin Murray-Boyles",
+            "team": "TOR",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1627751,
+            "name": "Jakob Poeltl",
+            "team": "TOR",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1630193,
+            "name": "Immanuel Quickley",
+            "team": "TOR",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642347,
+            "name": "Jamal Shead",
+            "team": "TOR",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1641869,
+            "name": "Malachi Smith",
+            "team": "TOR",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642266,
+            "name": "Ja'Kobe Walter",
+            "team": "TOR",
+            "status": "Not listed",
+            "out": false
+          },
           {
             "id": 1629028,
             "name": "Deandre Ayton",
@@ -13411,125 +13523,19 @@
             "team": "WAS",
             "status": "Not listed",
             "out": false
-          },
-          {
-            "id": 203937,
-            "name": "Kyle Anderson",
-            "team": "TOR",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630567,
-            "name": "Scottie Barnes",
-            "team": "TOR",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1629628,
-            "name": "RJ Barrett",
-            "team": "TOR",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642419,
-            "name": "Jamison Battle",
-            "team": "TOR",
-            "status": "Not listed",
-            "out": false
-          },
+          }
+        ],
+        "validUntil": "2026-10-23T17:39:41.013773+00:00",
+        "observedAt": "2026-10-23T11:39:42.876283+00:00",
+        "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
+        "excluded": [
           {
             "id": 1642927,
             "name": "Nate Bittle",
             "team": "TOR",
-            "status": "Out",
-            "out": true
+            "status": "Out"
           },
-          {
-            "id": 1643558,
-            "name": "Jaden Bradley",
-            "team": "TOR",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1643512,
-            "name": "Allen Graves",
-            "team": "TOR",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1631218,
-            "name": "Trayce Jackson-Davis",
-            "team": "TOR",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 202695,
-            "name": "Kawhi Leonard",
-            "team": "TOR",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642918,
-            "name": "Alijah Martin",
-            "team": "TOR",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642867,
-            "name": "Collin Murray-Boyles",
-            "team": "TOR",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1627751,
-            "name": "Jakob Poeltl",
-            "team": "TOR",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630193,
-            "name": "Immanuel Quickley",
-            "team": "TOR",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642347,
-            "name": "Jamal Shead",
-            "team": "TOR",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641869,
-            "name": "Malachi Smith",
-            "team": "TOR",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642266,
-            "name": "Ja'Kobe Walter",
-            "team": "TOR",
-            "status": "Not listed",
-            "out": false
-          }
-        ],
-        "validUntil": "2026-10-23T10:50:18.878214+00:00",
-        "observedAt": "2026-10-23T04:50:20.586439+00:00",
-        "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
-        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
-        "excluded": [
           {
             "id": 1643407,
             "name": "AJ Dybantsa",
@@ -13546,12 +13552,6 @@
             "id": 1642364,
             "name": "Jamir Watkins",
             "team": "WAS",
-            "status": "Out"
-          },
-          {
-            "id": 1642927,
-            "name": "Nate Bittle",
-            "team": "TOR",
             "status": "Out"
           }
         ],
@@ -15121,7 +15121,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-23T10:50:18.878214+00:00"
+        "validUntil": "2026-10-23T17:39:41.013773+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -16050,8 +16050,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-23T10:50:18.878214+00:00",
-        "observedAt": "2026-10-23T04:50:20.586439+00:00",
+        "validUntil": "2026-10-23T17:39:41.013773+00:00",
+        "observedAt": "2026-10-23T11:39:42.876283+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -17942,8 +17942,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-23T10:50:18.878214+00:00",
-        "observedAt": "2026-10-23T04:50:20.586439+00:00",
+        "validUntil": "2026-10-23T17:39:41.013773+00:00",
+        "observedAt": "2026-10-23T11:39:42.876283+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [],
@@ -19532,7 +19532,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-23T10:50:18.878214+00:00"
+        "validUntil": "2026-10-23T17:39:41.013773+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -20457,8 +20457,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-23T10:50:18.878214+00:00",
-        "observedAt": "2026-10-23T04:50:20.586439+00:00",
+        "validUntil": "2026-10-23T17:39:41.013773+00:00",
+        "observedAt": "2026-10-23T11:39:42.876283+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -22318,8 +22318,8 @@
             "out": true
           }
         ],
-        "validUntil": "2026-10-23T10:50:18.878214+00:00",
-        "observedAt": "2026-10-23T04:50:20.586439+00:00",
+        "validUntil": "2026-10-23T17:39:41.013773+00:00",
+        "observedAt": "2026-10-23T11:39:42.876283+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -24168,8 +24168,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-23T10:50:18.878214+00:00",
-        "observedAt": "2026-10-23T04:50:20.586439+00:00",
+        "validUntil": "2026-10-23T17:39:41.013773+00:00",
+        "observedAt": "2026-10-23T11:39:42.876283+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -26077,8 +26077,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-23T10:50:18.878214+00:00",
-        "observedAt": "2026-10-23T04:50:20.586439+00:00",
+        "validUntil": "2026-10-23T17:39:41.013773+00:00",
+        "observedAt": "2026-10-23T11:39:42.876283+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -27723,7 +27723,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-23T10:50:18.878214+00:00"
+        "validUntil": "2026-10-23T17:39:41.013773+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -28392,7 +28392,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-23T10:50:18.878214+00:00"
+        "validUntil": "2026-10-23T17:39:41.013773+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -29061,7 +29061,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-23T10:50:18.878214+00:00"
+        "validUntil": "2026-10-23T17:39:41.013773+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -29749,7 +29749,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-23T10:50:18.878214+00:00"
+        "validUntil": "2026-10-23T17:39:41.013773+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -30399,7 +30399,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-23T10:50:18.878214+00:00"
+        "validUntil": "2026-10-23T17:39:41.013773+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
