@@ -43,6 +43,7 @@
   $('quoteStatus').textContent=quotes?`${quoteFailed?'Live refresh unavailable. ':''}${fresh?'Recent Kalshi quotes':'Saved quotes only'} · Last scan ${et(quotes.generatedAt)}. Refreshes every 30 seconds while visible.`:'Prices unavailable. Retrying every 30 seconds.';
   $('quoteDot').classList.toggle('live',!!fresh&&!quoteFailed);
   $('researchStatus').textContent=research?`${researchFailed?'Research refresh failed; retaining the dated review. ':''}News, role and historical-data reviews · Updated ${et(research.generatedAt)}. Price limits are judgments, not guaranteed edges.`:'Research reviews are loading. Picks are not generated from prices alone.';
+  if(research?.modelSnapshot?.status==='rotation_review_required')$('researchStatus').textContent+=' Simulator minutes are under review. Today’s selections are fundamental research leans, not model-confirmed edges.';
   $('coverageDetails').replaceChildren();
   if(quotes){const list=node('ul');for(const c of quotes.coverage||[])list.append(node('li',c.series+': '+(c.complete?c.accepted+' recognized contracts':'Unavailable in this scan')));$('coverageDetails').append(list);}
  }
@@ -85,9 +86,15 @@
   $('gameSources').replaceChildren();sources($('gameSources'),review?.sources);
   const postTip=review?.audit?.timing?.startsWith('after official tip');$('postTipAudit').hidden=!postTip;$('postTipAuditItems').replaceChildren();if(postTip)for(const a of review.audit.picks){const p=review.picks.find(p=>p.ticker===a.ticker);$('postTipAuditItems').append(node('p',(p?.label||a.ticker)+' — '+a.decision+': '+a.reason));}
   favorites($('gameFavorites'),[g],false);
+  const allReviewed=R.favorites([g],research,Date.now(),Infinity),extra=allReviewed.slice(3);
+  if($('additionalPicks')){$('additionalPicks').replaceChildren();$('additionalPicksSection').hidden=!extra.length;extra.forEach((p,i)=>$('additionalPicks').append(card(p,i+3,false)));}
   const withdrawn=R.picks([g],research).filter(p=>p.pick.editorialDecision==='withdraw');
   $('withdrawnSection').hidden=!withdrawn.length;$('withdrawnPicks').replaceChildren();withdrawn.forEach((p,i)=>$('withdrawnPicks').append(card(p,i,false)));
   renderCombo($('comboCard'),R.combo(g,research),false);
+  if($('additionalCombos')){
+   $('additionalCombos').replaceChildren();
+   for(const c of R.combos(g,research).slice(1)){const box=node('div',null,'combo-panel');renderCombo(box,c,false);$('additionalCombos').append(box);}
+  }
   $('winnerCards').replaceChildren();for(const w of E.winnerSides(g)){const r=w.choice,cell=node('article',null,'winner-card');cell.append(node('h3',w.name),node('div',snapshotPrice(r),'winner-price'));
    cell.append(node('small',r?r.side.toUpperCase()+' on “'+r.market.title+'”':'No matching winner offer'));
    cell.append(node('p',review?.winnerTeam===w.team?review.winnerReason:'See the matchup script above. A game lean alone does not establish value at this price.'));

@@ -29,7 +29,8 @@
   else if(row.hold){state='review';status='Availability or forecast review needed';}
   else if(!row.fresh||!row.liquid){state='wait';status='Waiting for a current offer';}
   else if(row.price>p.maxPrice+1e-9){state='price';status='Wait for a lower price';}
-  else if(!(row.edge>0)||!(row.rank>0)){state='review';status='Insufficient model margin at this price';}
+  else if(review.modelEvidenceStatus==='rotation_review_required'){state='review';status='Fundamental lean — rotation model under review';}
+  else if(!(row.edge>0)||!(row.rank>0)){state='review';status=p.basis==='fundamental'?'Fundamental lean — model does not confirm':'Insufficient model margin at this price';}
   return {pick:p,game,review,row,state,status};
  }
  function picks(games,data,now=Date.now()){
@@ -52,8 +53,8 @@
    seen.add(p.pick.playerId);return true;
   }).slice(0,limit);
  }
- function combo(game,data,now=Date.now()){
-  const review=reviewFor(data,game),c=review?.combo;
+ function combo(game,data,now=Date.now(),selection=null){
+  const review=reviewFor(data,game),c=selection||review?.combo;
   if(!c||c.status!=='reviewed'||!c.script||!c.risk||!c.sources?.length||!c.sources.every(safeSource)||
      ![game.home,game.away].includes(c.winnerTeam)||c.propTickers?.length!==2)return null;
   const all=picks([game],data,now),props=c.propTickers.map(t=>all.find(p=>p.pick.ticker===t));
@@ -62,6 +63,10 @@
   const ready=props.every(p=>p.state==='ready')&&winner?.choice?.eligible;
   return {game,review,...c,props,winner,ready:!!ready,closed:now>=Date.parse(E.tip(game)),priced:false};
  }
- const api={reviewFor,reviewed,assess,picks,favorites,combo};
+ function combos(game,data,now=Date.now()){
+  const review=reviewFor(data,game);
+  return [review?.combo,...(review?.additionalCombos||[])].filter(Boolean).map(c=>combo(game,data,now,c)).filter(Boolean);
+ }
+ const api={reviewFor,reviewed,assess,picks,favorites,combo,combos};
  if(typeof module!=='undefined')module.exports=api;else root.NBAI_RESEARCH_PICKS=api;
 })(typeof window!=='undefined'?window:globalThis);

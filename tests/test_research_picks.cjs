@@ -90,3 +90,18 @@ test('Positive average edge alone cannot promote a pick within simulation sampli
  row.rank=.001;assert.equal(R.assess(p,g,data.games[0],now).state,'ready');
  row.rank=undefined;assert.equal(R.assess(p,g,data.games[0],now).state,'review');
 });
+
+test('A diagnosed rotation defect blocks model certification even when simulated edge is positive',()=>{
+ const {g,data}=fixture();data.games[0].modelEvidenceStatus='rotation_review_required';
+ const p=R.picks([g],data,now)[0];
+ assert.equal(p.state,'review');assert.match(p.status,/rotation model under review/);
+ assert.equal(R.combo(g,data,now).ready,false);
+});
+test('Additional scripts retain exact reviewed legs, tip closure and unverified pricing',()=>{
+ const {g,data}=fixture();
+ data.games[0].additionalCombos=[{...data.games[0].combo,title:'Alternative',propTickers:['p1','p3']},
+  {...data.games[0].combo,propTickers:['missing','p3']}];
+ const c=R.combos(g,data,now);assert.equal(c.length,2);assert.ok(c.every(x=>x.priced===false));
+ assert.ok(R.combos(g,data,Date.parse(g.startsAt)).every(x=>x.closed));
+ data.games[0].picks[0].editorialDecision='withdraw';assert.equal(R.combos(g,data,now).length,1);
+});
