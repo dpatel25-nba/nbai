@@ -1,1802 +1,50 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-25T20:51:53.489348+00:00",
-  "rosterObservedAt": "2026-10-25T20:51:44.131223+00:00",
-  "injuryObservedAt": "2026-10-25T20:51:50.844629+00:00",
-  "providerUpdatedAt": "2026-10-25T20:51:48Z",
-  "validUntil": "2026-10-26T02:51:44.131223+00:00",
+  "generatedAt": "2026-10-26T04:47:56.647683+00:00",
+  "rosterObservedAt": "2026-10-26T04:47:54.348123+00:00",
+  "injuryObservedAt": "2026-10-26T04:47:55.425516+00:00",
+  "providerUpdatedAt": "2026-10-26T04:47:45Z",
+  "validUntil": "2026-10-26T10:47:54.348123+00:00",
   "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
   "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
   "sourceHashes": {
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/roster-reconciliation.json": "24a2974131489bee2bd79a5e5c69bd16cda800a87757f29fdbdbadb1d6b3a7eb",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_DET.json": "1b6a4d2af230f69d91127b21cec4facf3d9bcf643fc0dfb14c9d10a3c72f33e9",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_CLE.json": "39e6bdc3ffba25fb8bae84d54cf7cb092eaeebc8a50152c26d663c153e547303",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_LAL.json": "a558c93493e34a1e16a980a68bce154bdebe215ab13a27eadbb4694bdb03fced",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_PHI.json": "4fb45bff40a8b55949f8af1dbab288eb8a37c48e6d3ce019c1e9906d7399fa02",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/injuries.json": "1a5238393eb7cf156d62126c43934c060f882c16fd5abe1eb6d5eee427824618",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_ATL.json": "586a44726e67e24a069e97600ad4d1d9bcb0dd802a00f9d7b5f143886e9a0936",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_ORL.json": "9c59c2e4d85f83d492e8f961bf2f751d40d6a013f8715bb4842fd3ae7adec1c8",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_BKN.json": "92a26d97aafb1b196b1ed1aa3c0be495678ad854655f9bcd5fa116c5c11b4c82",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_CHI.json": "69ff3fdc0f7be6f17fb2192d4a3fe36775909d34ceb9bb31bf8be007282888a1",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_UTA.json": "fea61d1da818f517b06bbe50ab7fd55d60c984a34a975c349c7b31e7eefe31fc",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_MIL.json": "3269febf87c8b2bd18dc141d9a80862b2f1b546b46ac4cc097d2b88c6694e606",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_TOR.json": "991304e3dbf8495629d69076c89fd9f80bea3feac9eaa57d55b88c67a08dcd3f",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_OKC.json": "1433626ff0ac7bab27dd5bc56b9bb7805d9ef1153696268c0402cf57166d2bcb",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_MIN.json": "21afd45e61f3e9fbdcf748ad764b2e3b90d885c0ffc6e73baedf3c1e48d2965e",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_LAC.json": "eddb6ede905b0db9163b26337c3102aa45a595834d344a597ddb9ce29d068c11",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_GSW.json": "f6af1a7dbce51ed06aa6353741cfa677e255f411f64687a30d4618fb39907c24",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_HOU.json": "c6dfce048ef3bea08b5ef232670ec5d587e9a4c61d8afd0d91321fcbca51d254",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_BOS.json": "f3620dfcd06059f6a6096ad0ce35fdc0e84f13d9f866925428cde9bb1e82d13e",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_DEN.json": "394cabbbfeee317d5f284f30addb3d28ebbffc3ab7709201b9303e140ba54560",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_SAC.json": "e963d7fd3a560d8257b9b887bf2378154bf97ec743c6c0fb0db222b6590d0e65",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_IND.json": "b6aeb45bb42fb624fb5e06614e5ee4ff2896d30f580f34de1c89816295b3bdff",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_PHX.json": "ba1cf49a75829ee4efaef5051bbd2792a31f23f4e4cb61c1c740b9c508407e9b",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_MIA.json": "fdce88988516b87abb432b6996a670b497158c2c6cc9ebcebd343fbbe0e2e91d",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_DAL.json": "3448482ad62f2c4c85637aefa3de1f968842314fa7d6c01903c2b0bf25e76bdf",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_CHA.json": "92c71f9ec04421d3c9ddcec1ca50adbdc5d4923408275415d76a2bee85c1c6b5",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/schedule_2026-10-26.json": "6441ea13b7954b8b46f52a15906968d7b02346d2e2aabe23628730b9f220595d",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/schedule_2026-10-25.json": "0d501a6cd110c8fcaae75cf30b1db02881a3aacbfae914b4d74047181adb42d9",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_NYK.json": "d9b2769737f269e1eda0ebee2cb142c7671b8fb9eaf6fc4f9269f7e559f42abb",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_WAS.json": "9749970003b0a88b79ea3486a2b6a09633d8d3ef7e4e566cccc83d3e2b62a7d0",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_MEM.json": "a82cdc354fac3b21ffabedbd9c24513af31a4119c9763c3da57adc036545430a",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/current_roster/rosters.parquet": "d9fd5962fd234042fe3fcbf91240b124aec15d58bbd70f75f21c7dccef8f62db",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_reconciliation/canonical-roster.json": "41312eacc954fc45e6b0479a8bd1b1e696e1a33e70434fd97a1e92ed00d97839",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_reconciliation/CLE.html": "3d2247566d9f6a99f8930862416948f28186dbbbd1c0b3d4b6f103134f3512ff",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_reconciliation/CHA.receipt.json": "3a161721ab4ff37c22ebd2eab77111aea035c1f4c585cb17169696c9c1c43719",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_reconciliation/CHA.html": "ca4d715884410a2feec4d9dc79a70acd797e7bac85d74add68c4f42461fb65a1",
-    "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/raw/roster_reconciliation/CLE.receipt.json": "5eb04d199a0852039874c156af81be1fa4dd6aa7598aa56f17bb60bea92c8775"
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/roster-reconciliation.json": "27181c0d63a0f730d1205cf06b357695854d5fba4248081878b2873bcf39347a",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_DET.json": "966fb0c3e7209091e69753955faa9542a2d44d24596092bd93fbd4901e59787c",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_CLE.json": "72fd1c71618158744d13f6e79df7020ab689ae3458549a01e7a9f2c28ac8f0f0",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_LAL.json": "59684b22f78292a0a8d93c812d230af7389cb79aea0faa7f7fc0ba92295b362a",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/injuries.json": "abe7da8362d84ef9a539298c21f3638cdfda12fa533102cb97f714e4e90a6120",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_SAS.json": "f825db43e01e0a6d042f6a3e731aaad46c2adf77c922aa5ed1c12575bf3d3955",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_ATL.json": "05e4afe408aedd086d5545ba92896f100b3ffc1de46c35ea6e08b51c7e179b03",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_BKN.json": "b7499e8635fcbade268b34db98c22c6eb7b4e79780d7c45da357cc735d933e40",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_CHI.json": "7c33f0624c5c634bb3c6d759960af8afbb361a1fb8c4db41443f4af74ef50a3b",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_UTA.json": "247e5e6ea69232108aaed5dc38fa916dd6f4b0c25f8eea7c74bf8d94142ee6ee",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_MIL.json": "caf2565bcb6fe19d30adab05701f3a64dedb1b5dc83173be8d5dbb509ef2ac51",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_OKC.json": "1b9d2ac00f4fabc8b958f04b547c62d0becfd7dbdc8bda82bbb11ac93aa422e8",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_MIN.json": "1092fbd86a3da78a3abcd131de8fb868bc9212e61d9b33d945cd151c1b7461e1",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/schedule_2026-10-27.json": "2e8ae4c74fc3a223499aa26fb596cc7954b8ffebccd4580fb0cfcc6a6bbb1fd2",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_GSW.json": "f169e343bd72d6a41248c1406a977e71a065469f31ed803942fd39fb4779f801",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_HOU.json": "793345ffe06db2679b6e0af8e85823e7b27bc4823a06c838ec233520af057fd2",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_BOS.json": "ea58724e416784fed1ce282a1595ce08b8ae55f18081ffe6ebc32c3f479323ec",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_DEN.json": "eccd5793690c33b674574447168c56cfcf0a9f988378a31a901f4f1c503e84dd",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_SAC.json": "e626e1fbfd818e0ae6c5f40e0e630924eda2b4864314d7d34ae639d21d153e14",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_IND.json": "6b87f9d10ed138b9584f55d69d3a472d5a7291fc5cf5f4a9afbcaeed8600068a",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_POR.json": "3e1ea9eef044f10c08a1387aa556012a9eb83c263d39866604b6d73302438557",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_PHX.json": "dd0e75bc0d5e0ed292866b688508cffab55fb6f2ab30400aaaa0d9e9b01a7e0d",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_MIA.json": "ac88eccca25acb290317e1823ae529bd6668c7885acc76f8d07513504f174034",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_DAL.json": "de8ae7cd63c9aaa3912718ebcb55f884c1beb2531205c9186d865e97326cc191",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_CHA.json": "0d90db530fcea8163e76b1660db19d80ecdbf6e15aadf2c9079f43bc663752cc",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/schedule_2026-10-26.json": "7060ca0e7d5ea69243fda57fd5ca58551e2611223f5ea7d21fd4ab337ef312c4",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_NYK.json": "ad79e63bd10fdc1ade2d99ce8e219e894a47ca2da02306b5cb49386799c7e32c",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_WAS.json": "4d5f777f52e823a4b8d1b2e690fee40bf33c8495a5360e484bdc5c51910b5d64",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_MEM.json": "e7d3840915e46b7b4bcae6637c9426172238821527015137ca6bf29ee4d569e9",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/current_roster/rosters.parquet": "29b2dcf24e25e539cc41743d41e958fe2134028e4a9b1f076c8fb07722cae246",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_reconciliation/canonical-roster.json": "41312eacc954fc45e6b0479a8bd1b1e696e1a33e70434fd97a1e92ed00d97839",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_reconciliation/CLE.html": "8d9dd13cb2b801f17db66b8131195f096648ec24ee5be4ea7cc46c97f0eede8f",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_reconciliation/CHA.receipt.json": "00a822321735cddcb6eb46863a885dfc4e8bed2c38aefd4a9cf2a453e665fb8d",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_reconciliation/CHA.html": "c86d2ed89f0e1675ecb09dda6dd5938f91a470638494ca7ae7c3c818da0d61e5",
+    "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/raw/roster_reconciliation/CLE.receipt.json": "796c02e27b7bd73746286e3e29fd6ae3618759bf9a7be7d420410afb10a041e1"
   },
   "events": [
-    {
-      "eventId": "401909861",
-      "home": "UTA",
-      "away": "LAL",
-      "startsAt": "2026-10-25T21:00:00+00:00",
-      "season": "2026-27",
-      "holdReason": null,
-      "players": [
-        {
-          "id": 1643418,
-          "name": "Cameron Carr",
-          "team": "LAL",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1629029,
-          "name": "Luka Doncic",
-          "team": "LAL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629656,
-          "name": "Quentin Grimes",
-          "team": "LAL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630702,
-          "name": "Jaden Hardy",
-          "team": "LAL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642355,
-          "name": "Bronny James",
-          "team": "LAL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641751,
-          "name": "Arthur Kaluma",
-          "team": "LAL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1631117,
-          "name": "Walker Kessler",
-          "team": "LAL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1631222,
-          "name": "Jake LaRavia",
-          "team": "LAL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1626172,
-          "name": "Kevon Looney",
-          "team": "LAL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630572,
-          "name": "Sandro Mamukelashvili",
-          "team": "LAL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1643024,
-          "name": "Chris Manon",
-          "team": "LAL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1643758,
-          "name": "AK Okereke",
-          "team": "LAL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630559,
-          "name": "Austin Reaves",
-          "team": "LAL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629012,
-          "name": "Collin Sexton",
-          "team": "LAL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642876,
-          "name": "Adou Thiero",
-          "team": "LAL",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1629680,
-          "name": "Matisse Thybulle",
-          "team": "LAL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629020,
-          "name": "Jarred Vanderbilt",
-          "team": "LAL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630533,
-          "name": "Ziaire Williams",
-          "team": "LAL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641725,
-          "name": "Trey Alexander",
-          "team": "UTA",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1642846,
-          "name": "Ace Bailey",
-          "team": "UTA",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1628964,
-          "name": "Mo Bamba",
-          "team": "UTA",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1628396,
-          "name": "Tony Bradley",
-          "team": "UTA",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642268,
-          "name": "Isaiah Collier",
-          "team": "UTA",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642271,
-          "name": "Kyle Filipowski",
-          "team": "UTA",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641718,
-          "name": "Keyonte George",
-          "team": "UTA",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630182,
-          "name": "Josh Green",
-          "team": "UTA",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629637,
-          "name": "Jaxson Hayes",
-          "team": "UTA",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642396,
-          "name": "Blake Hinson",
-          "team": "UTA",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1631127,
-          "name": "Harrison Ingram",
-          "team": "UTA",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1628991,
-          "name": "Jaren Jackson Jr.",
-          "team": "UTA",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1628374,
-          "name": "Lauri Markkanen",
-          "team": "UTA",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629004,
-          "name": "Svi Mykhailiuk",
-          "team": "UTA",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 203994,
-          "name": "Jusuf Nurkic",
-          "team": "UTA",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1629006,
-          "name": "Josh Okogie",
-          "team": "UTA",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1643408,
-          "name": "Darryn Peterson",
-          "team": "UTA",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641729,
-          "name": "Brice Sensabaugh",
-          "team": "UTA",
-          "status": "Not listed",
-          "out": false
-        }
-      ]
-    },
-    {
-      "eventId": "401909862",
-      "home": "BKN",
-      "away": "IND",
-      "startsAt": "2026-10-25T22:00:00+00:00",
-      "season": "2026-27",
-      "holdReason": null,
-      "players": [
-        {
-          "id": 1643548,
-          "name": "Tyler Bilodeau",
-          "team": "BKN",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1643414,
-          "name": "Mikel Brown Jr.",
-          "team": "BKN",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1641730,
-          "name": "Noah Clowney",
-          "team": "BKN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642856,
-          "name": "Egor Demin",
-          "team": "BKN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1631165,
-          "name": "Keon Ellis",
-          "team": "BKN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1643538,
-          "name": "Joshua Jefferson",
-          "team": "BKN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1643052,
-          "name": "Chaney Johnson",
-          "team": "BKN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629611,
-          "name": "Terance Mann",
-          "team": "BKN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1631169,
-          "name": "Josh Minott",
-          "team": "BKN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641761,
-          "name": "Grant Nelson",
-          "team": "BKN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629008,
-          "name": "Michael Porter Jr.",
-          "team": "BKN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642962,
-          "name": "Drake Powell",
-          "team": "BKN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 203944,
-          "name": "Julius Randle",
-          "team": "BKN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642879,
-          "name": "Ben Saraf",
-          "team": "BKN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630549,
-          "name": "Day'Ron Sharpe",
-          "team": "BKN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642849,
-          "name": "Nolan Traore",
-          "team": "BKN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629021,
-          "name": "Moritz Wagner",
-          "team": "BKN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642874,
-          "name": "Danny Wolf",
-          "team": "BKN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641738,
-          "name": "Kobe Brown",
-          "team": "IND",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642277,
-          "name": "Johnny Furphy",
-          "team": "IND",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1630169,
-          "name": "Tyrese Haliburton",
-          "team": "IND",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630643,
-          "name": "Jay Huff",
-          "team": "IND",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1631245,
-          "name": "Quenton Jackson",
-          "team": "IND",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 204456,
-          "name": "T.J. McConnell",
-          "team": "IND",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1626204,
-          "name": "Larry Nance Jr.",
-          "team": "IND",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629614,
-          "name": "Andrew Nembhard",
-          "team": "IND",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630174,
-          "name": "Aaron Nesmith",
-          "team": "IND",
-          "status": "Day-To-Day",
-          "out": false
-        },
-        {
-          "id": 1626162,
-          "name": "Kelly Oubre Jr.",
-          "team": "IND",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641767,
-          "name": "Ben Sheppard",
-          "team": "IND",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1627783,
-          "name": "Pascal Siakam",
-          "team": "IND",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641771,
-          "name": "Jalen Slawson",
-          "team": "IND",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1643552,
-          "name": "Braden Smith",
-          "team": "IND",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630167,
-          "name": "Obi Toppin",
-          "team": "IND",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641716,
-          "name": "Jarace Walker",
-          "team": "IND",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1627826,
-          "name": "Ivica Zubac",
-          "team": "IND",
-          "status": "Not listed",
-          "out": false
-        }
-      ]
-    },
-    {
-      "eventId": "401909863",
-      "home": "NYK",
-      "away": "ORL",
-      "startsAt": "2026-10-25T23:00:00+00:00",
-      "season": "2026-27",
-      "holdReason": "Current roster reconciliation needs review",
-      "players": [
-        {
-          "id": 1643022,
-          "name": "Jaden Akins",
-          "team": "NYK",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630631,
-          "name": "Jose Alvarado",
-          "team": "NYK",
-          "status": "Day-To-Day",
-          "out": false
-        },
-        {
-          "id": 1628384,
-          "name": "OG Anunoby",
-          "team": "NYK",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1628969,
-          "name": "Mikal Bridges",
-          "team": "NYK",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1628973,
-          "name": "Jalen Brunson",
-          "team": "NYK",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 203903,
-          "name": "Jordan Clarkson",
-          "team": "NYK",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642359,
-          "name": "Pacome Dadiet",
-          "team": "NYK",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642885,
-          "name": "Mohamed Diawara",
-          "team": "NYK",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 203083,
-          "name": "Andre Drummond",
-          "team": "NYK",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1628404,
-          "name": "Josh Hart",
-          "team": "NYK",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642278,
-          "name": "Tyler Kolek",
-          "team": "NYK",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630540,
-          "name": "Miles McBride",
-          "team": "NYK",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1643589,
-          "name": "Tyler Nickel",
-          "team": "NYK",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629013,
-          "name": "Landry Shamet",
-          "team": "NYK",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1626157,
-          "name": "Karl-Anthony Towns",
-          "team": "NYK",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630164,
-          "name": "James Wiseman",
-          "team": "NYK",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1631094,
-          "name": "Paolo Banchero",
-          "team": "ORL",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1630217,
-          "name": "Desmond Bane",
-          "team": "ORL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629048,
-          "name": "Goga Bitadze",
-          "team": "ORL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641710,
-          "name": "Anthony Black",
-          "team": "ORL",
-          "status": "Day-To-Day",
-          "out": false
-        },
-        {
-          "id": 1631288,
-          "name": "Jamal Cain",
-          "team": "ORL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1628975,
-          "name": "Jevon Carter",
-          "team": "ORL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1628976,
-          "name": "Wendell Carter Jr.",
-          "team": "ORL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630658,
-          "name": "Colin Castleton",
-          "team": "ORL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641783,
-          "name": "Tristan da Silva",
-          "team": "ORL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1628371,
-          "name": "Jonathan Isaac",
-          "team": "ORL",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1631457,
-          "name": "Alex Morales",
-          "team": "ORL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1643593,
-          "name": "Izaiyah Nelson",
-          "team": "ORL",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1642869,
-          "name": "Noah Penda",
-          "team": "ORL",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1642859,
-          "name": "Jase Richardson",
-          "team": "ORL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630591,
-          "name": "Jalen Suggs",
-          "team": "ORL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 202696,
-          "name": "Nikola Vucevic",
-          "team": "ORL",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630532,
-          "name": "Franz Wagner",
-          "team": "ORL",
-          "status": "Not listed",
-          "out": false
-        }
-      ]
-    },
-    {
-      "eventId": "401909864",
-      "home": "MIN",
-      "away": "TOR",
-      "startsAt": "2026-10-25T23:00:00+00:00",
-      "season": "2026-27",
-      "holdReason": null,
-      "players": [
-        {
-          "id": 1630163,
-          "name": "LaMelo Ball",
-          "team": "MIN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642866,
-          "name": "Joan Beringer",
-          "team": "MIN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641740,
-          "name": "Jaylen Clark",
-          "team": "MIN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1628978,
-          "name": "Donte DiVincenzo",
-          "team": "MIN",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1630245,
-          "name": "Ayo Dosunmu",
-          "team": "MIN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630162,
-          "name": "Anthony Edwards",
-          "team": "MIN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642912,
-          "name": "Isaiah Evans",
-          "team": "MIN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 203497,
-          "name": "Rudy Gobert",
-          "team": "MIN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630538,
-          "name": "Bones Hyland",
-          "team": "MIN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630228,
-          "name": "Jonathan Kuminga",
-          "team": "MIN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1626168,
-          "name": "Trey Lyles",
-          "team": "MIN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630183,
-          "name": "Jaden McDaniels",
-          "team": "MIN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642389,
-          "name": "Zyon Pullin",
-          "team": "MIN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630545,
-          "name": "Terrence Shannon Jr.",
-          "team": "MIN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642262,
-          "name": "Cody Williams",
-          "team": "MIN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642911,
-          "name": "Rocco Zikarsky",
-          "team": "MIN",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 203937,
-          "name": "Kyle Anderson",
-          "team": "TOR",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630567,
-          "name": "Scottie Barnes",
-          "team": "TOR",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629628,
-          "name": "RJ Barrett",
-          "team": "TOR",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642419,
-          "name": "Jamison Battle",
-          "team": "TOR",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642927,
-          "name": "Nate Bittle",
-          "team": "TOR",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1643558,
-          "name": "Jaden Bradley",
-          "team": "TOR",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1643512,
-          "name": "Allen Graves",
-          "team": "TOR",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1631218,
-          "name": "Trayce Jackson-Davis",
-          "team": "TOR",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 202695,
-          "name": "Kawhi Leonard",
-          "team": "TOR",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642918,
-          "name": "Alijah Martin",
-          "team": "TOR",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642867,
-          "name": "Collin Murray-Boyles",
-          "team": "TOR",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1627751,
-          "name": "Jakob Poeltl",
-          "team": "TOR",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630193,
-          "name": "Immanuel Quickley",
-          "team": "TOR",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642347,
-          "name": "Jamal Shead",
-          "team": "TOR",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641869,
-          "name": "Malachi Smith",
-          "team": "TOR",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642266,
-          "name": "Ja'Kobe Walter",
-          "team": "TOR",
-          "status": "Not listed",
-          "out": false
-        }
-      ]
-    },
-    {
-      "eventId": "401909865",
-      "home": "OKC",
-      "away": "LAC",
-      "startsAt": "2026-10-25T23:00:00+00:00",
-      "season": "2026-27",
-      "holdReason": "Current roster reconciliation needs review",
-      "players": [
-        {
-          "id": 203078,
-          "name": "Bradley Beal",
-          "team": "LAC",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1642353,
-          "name": "Cam Christie",
-          "team": "LAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641711,
-          "name": "Gradey Dick",
-          "team": "LAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1627739,
-          "name": "Kris Dunn",
-          "team": "LAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629636,
-          "name": "Darius Garland",
-          "team": "LAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629060,
-          "name": "Rui Hachimura",
-          "team": "LAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1627742,
-          "name": "Brandon Ingram",
-          "team": "LAC",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1630543,
-          "name": "Isaiah Jackson",
-          "team": "LAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1627884,
-          "name": "Derrick Jones Jr.",
-          "team": "LAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 201572,
-          "name": "Brook Lopez",
-          "team": "LAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1643568,
-          "name": "Nick Martinelli",
-          "team": "LAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642394,
-          "name": "Baba Miller",
-          "team": "LAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641757,
-          "name": "Jordan Miller",
-          "team": "LAC",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1642949,
-          "name": "Yanic Konan Niederhauser",
-          "team": "LAC",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1629618,
-          "name": "Jalen Pickett",
-          "team": "LAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642920,
-          "name": "Kobe Sanders",
-          "team": "LAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629622,
-          "name": "Max Strus",
-          "team": "LAC",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1643413,
-          "name": "Keaton Wagler",
-          "team": "LAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642964,
-          "name": "Brooks Barnhizer",
-          "team": "OKC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1627936,
-          "name": "Alex Caruso",
-          "team": "OKC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1643717,
-          "name": "Josh Dix",
-          "team": "OKC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1628983,
-          "name": "Shai Gilgeous-Alexander",
-          "team": "OKC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1628392,
-          "name": "Isaiah Hartenstein",
-          "team": "OKC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1631096,
-          "name": "Chet Holmgren",
-          "team": "OKC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1643530,
-          "name": "Aday Mara",
-          "team": "OKC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642272,
-          "name": "Jared McCain",
-          "team": "OKC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642349,
-          "name": "Ajay Mitchell",
-          "team": "OKC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642923,
-          "name": "Otega Oweh",
-          "team": "OKC",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1642850,
-          "name": "Thomas Sorber",
-          "team": "OKC",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1642892,
-          "name": "Bennett Stirtz",
-          "team": "OKC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642260,
-          "name": "Nikola Topic",
-          "team": "OKC",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1641717,
-          "name": "Cason Wallace",
-          "team": "OKC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1631114,
-          "name": "Jalen Williams",
-          "team": "OKC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1631119,
-          "name": "Jaylin Williams",
-          "team": "OKC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629026,
-          "name": "Kenrich Williams",
-          "team": "OKC",
-          "status": "Not listed",
-          "out": false
-        }
-      ]
-    },
-    {
-      "eventId": "401909866",
-      "home": "PHI",
-      "away": "DET",
-      "startsAt": "2026-10-25T23:30:00+00:00",
-      "season": "2026-27",
-      "holdReason": null,
-      "players": [
-        {
-          "id": 1628381,
-          "name": "John Collins",
-          "team": "DET",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630595,
-          "name": "Cade Cunningham",
-          "team": "DET",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1631105,
-          "name": "Jalen Duren",
-          "team": "DET",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1629750,
-          "name": "Javonte Green",
-          "team": "DET",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641989,
-          "name": "Elijah Harkless",
-          "team": "DET",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641842,
-          "name": "Ronald Holland II",
-          "team": "DET",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1628989,
-          "name": "Kevin Huerter",
-          "team": "DET",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642450,
-          "name": "Daniss Jenkins",
-          "team": "DET",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630198,
-          "name": "Isaiah Joe",
-          "team": "DET",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642403,
-          "name": "Isaac Jones",
-          "team": "DET",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642404,
-          "name": "Chaz Lanier",
-          "team": "DET",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1643536,
-          "name": "Ebuka Okorie",
-          "team": "DET",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642391,
-          "name": "Ugonna Onyenso",
-          "team": "DET",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1627752,
-          "name": "Taurean Prince",
-          "team": "DET",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630194,
-          "name": "Paul Reed",
-          "team": "DET",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629130,
-          "name": "Duncan Robinson",
-          "team": "DET",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642449,
-          "name": "Tolu Smith",
-          "team": "DET",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641709,
-          "name": "Ausar Thompson",
-          "team": "DET",
-          "status": "Day-To-Day",
-          "out": false
-        },
-        {
-          "id": 1631230,
-          "name": "Dominick Barlow",
-          "team": "PHI",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1641737,
-          "name": "Adem Bona",
-          "team": "PHI",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1627759,
-          "name": "Jaylen Brown",
-          "team": "PHI",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 203484,
-          "name": "Kentavious Caldwell-Pope",
-          "team": "PHI",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642845,
-          "name": "VJ Edgecombe",
-          "team": "PHI",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642348,
-          "name": "Justin Edwards",
-          "team": "PHI",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 203954,
-          "name": "Joel Embiid",
-          "team": "PHI",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1629605,
-          "name": "Tacko Fall",
-          "team": "PHI",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1630574,
-          "name": "Ariel Hukporti",
-          "team": "PHI",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 2544,
-          "name": "LeBron James",
-          "team": "PHI",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1631126,
-          "name": "Caleb Love",
-          "team": "PHI",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630178,
-          "name": "Tyrese Maxey",
-          "team": "PHI",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642889,
-          "name": "Labaron Philon Jr.",
-          "team": "PHI",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641712,
-          "name": "Rayan Rupert",
-          "team": "PHI",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629014,
-          "name": "Anfernee Simons",
-          "team": "PHI",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629731,
-          "name": "Dean Wade",
-          "team": "PHI",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1631133,
-          "name": "Jabari Walker",
-          "team": "PHI",
-          "status": "Out",
-          "out": true
-        }
-      ]
-    },
-    {
-      "eventId": "401909867",
-      "home": "SAC",
-      "away": "MEM",
-      "startsAt": "2026-10-26T01:00:00+00:00",
-      "season": "2026-27",
-      "holdReason": "Current roster reconciliation needs review",
-      "players": [
-        {
-          "id": 1643409,
-          "name": "Cameron Boozer",
-          "team": "MEM",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1643721,
-          "name": "Carson Cooper",
-          "team": "MEM",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642907,
-          "name": "Cedric Coward",
-          "team": "MEM",
-          "status": "Day-To-Day",
-          "out": false
-        },
-        {
-          "id": 1641744,
-          "name": "Zach Edey",
-          "team": "MEM",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 203924,
-          "name": "Jerami Grant",
-          "team": "MEM",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641707,
-          "name": "Taylor Hendricks",
-          "team": "MEM",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641713,
-          "name": "GG Jackson",
-          "team": "MEM",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629660,
-          "name": "Ty Jerome",
-          "team": "MEM",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1643510,
-          "name": "Karim Lopez",
-          "team": "MEM",
-          "status": "Day-To-Day",
-          "out": false
-        },
-        {
-          "id": 1642942,
-          "name": "Jahmai Mashack",
-          "team": "MEM",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1631200,
-          "name": "Kris Murray",
-          "team": "MEM",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630590,
-          "name": "Scotty Pippen Jr.",
-          "team": "MEM",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642366,
-          "name": "Quinten Post",
-          "team": "MEM",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641765,
-          "name": "Olivier-Maxence Prosper",
-          "team": "MEM",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642914,
-          "name": "Javon Small",
-          "team": "MEM",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642285,
-          "name": "Cam Spencer",
-          "team": "MEM",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630191,
-          "name": "Isaiah Stewart",
-          "team": "MEM",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642377,
-          "name": "Jaylen Wells",
-          "team": "MEM",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1630173,
-          "name": "Precious Achiuwa",
-          "team": "SAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1643411,
-          "name": "Darius Acuff Jr.",
-          "team": "SAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1641778,
-          "name": "Leaky Black",
-          "team": "SAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642928,
-          "name": "Dylan Cardwell",
-          "team": "SAC",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1642363,
-          "name": "Nique Clifford",
-          "team": "SAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1629631,
-          "name": "De'Andre Hunter",
-          "team": "SAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642284,
-          "name": "Alex Karaban",
-          "team": "SAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 203897,
-          "name": "Zach LaVine",
-          "team": "SAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642367,
-          "name": "Jonathan Mogbo",
-          "team": "SAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1628370,
-          "name": "Malik Monk",
-          "team": "SAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1631099,
-          "name": "Keegan Murray",
-          "team": "SAC",
-          "status": "Day-To-Day",
-          "out": false
-        },
-        {
-          "id": 1631342,
-          "name": "Daeqwon Plowden",
-          "team": "SAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1642875,
-          "name": "Maxime Raynaud",
-          "team": "SAC",
-          "status": "Out",
-          "out": true
-        },
-        {
-          "id": 1627734,
-          "name": "Domantas Sabonis",
-          "team": "SAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1643567,
-          "name": "Emanuel Sharp",
-          "team": "SAC",
-          "status": "Not listed",
-          "out": false
-        },
-        {
-          "id": 1627732,
-          "name": "Ben Simmons",
-          "team": "SAC",
-          "status": "Out",
-          "out": true
-        }
-      ]
-    },
     {
       "eventId": "401909868",
       "home": "CHA",
@@ -2864,7 +1112,7 @@
           "id": 1630174,
           "name": "Aaron Nesmith",
           "team": "IND",
-          "status": "Day-To-Day",
+          "status": "Not listed",
           "out": false
         },
         {
@@ -2920,7 +1168,7 @@
           "id": 1627826,
           "name": "Ivica Zubac",
           "team": "IND",
-          "status": "Not listed",
+          "status": "Day-To-Day",
           "out": false
         },
         {
@@ -3154,21 +1402,21 @@
           "id": 1641717,
           "name": "Cason Wallace",
           "team": "OKC",
-          "status": "Not listed",
+          "status": "Day-To-Day",
           "out": false
         },
         {
           "id": 1631114,
           "name": "Jalen Williams",
           "team": "OKC",
-          "status": "Not listed",
+          "status": "Day-To-Day",
           "out": false
         },
         {
           "id": 1631119,
           "name": "Jaylin Williams",
           "team": "OKC",
-          "status": "Not listed",
+          "status": "Day-To-Day",
           "out": false
         },
         {
@@ -3437,8 +1685,8 @@
           "id": 203500,
           "name": "Steven Adams",
           "team": "HOU",
-          "status": "Day-To-Day",
-          "out": false
+          "status": "Out",
+          "out": true
         },
         {
           "id": 203992,
@@ -3549,7 +1797,7 @@
           "id": 1627832,
           "name": "Fred VanVleet",
           "team": "HOU",
-          "status": "Day-To-Day",
+          "status": "Not listed",
           "out": false
         }
       ]
@@ -3560,7 +1808,7 @@
       "away": "MEM",
       "startsAt": "2026-10-27T01:00:00+00:00",
       "season": "2026-27",
-      "holdReason": "Current roster reconciliation needs review",
+      "holdReason": null,
       "players": [
         {
           "id": 1643409,
@@ -3580,7 +1828,7 @@
           "id": 1642907,
           "name": "Cedric Coward",
           "team": "MEM",
-          "status": "Day-To-Day",
+          "status": "Not listed",
           "out": false
         },
         {
@@ -3622,8 +1870,8 @@
           "id": 1643510,
           "name": "Karim Lopez",
           "team": "MEM",
-          "status": "Day-To-Day",
-          "out": false
+          "status": "Out",
+          "out": true
         },
         {
           "id": 1642942,
@@ -3898,8 +2146,8 @@
           "id": 1642461,
           "name": "Spencer Jones",
           "team": "DEN",
-          "status": "Day-To-Day",
-          "out": false
+          "status": "Out",
+          "out": true
         },
         {
           "id": 1626145,
@@ -3947,7 +2195,7 @@
           "id": 1629646,
           "name": "Charles Bassey",
           "team": "GSW",
-          "status": "Not listed",
+          "status": "Day-To-Day",
           "out": false
         },
         {
@@ -3968,21 +2216,21 @@
           "id": 201939,
           "name": "Stephen Curry",
           "team": "GSW",
-          "status": "Day-To-Day",
+          "status": "Not listed",
           "out": false
         },
         {
           "id": 203110,
           "name": "Draymond Green",
           "team": "GSW",
-          "status": "Day-To-Day",
+          "status": "Not listed",
           "out": false
         },
         {
           "id": 201143,
           "name": "Al Horford",
           "team": "GSW",
-          "status": "Day-To-Day",
+          "status": "Not listed",
           "out": false
         },
         {
@@ -4038,7 +2286,7 @@
           "id": 1641764,
           "name": "Brandin Podziemski",
           "team": "GSW",
-          "status": "Day-To-Day",
+          "status": "Not listed",
           "out": false
         },
         {
@@ -4066,7 +2314,1006 @@
           "id": 1630314,
           "name": "Brandon Williams",
           "team": "GSW",
+          "status": "Day-To-Day",
+          "out": false
+        }
+      ]
+    },
+    {
+      "eventId": "401909877",
+      "home": "BOS",
+      "away": "BKN",
+      "startsAt": "2026-10-27T23:30:00+00:00",
+      "season": "2026-27",
+      "holdReason": null,
+      "players": [
+        {
+          "id": 1643548,
+          "name": "Tyler Bilodeau",
+          "team": "BKN",
+          "status": "Out",
+          "out": true
+        },
+        {
+          "id": 1643414,
+          "name": "Mikel Brown Jr.",
+          "team": "BKN",
+          "status": "Out",
+          "out": true
+        },
+        {
+          "id": 1641730,
+          "name": "Noah Clowney",
+          "team": "BKN",
           "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642856,
+          "name": "Egor Demin",
+          "team": "BKN",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1631165,
+          "name": "Keon Ellis",
+          "team": "BKN",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1643538,
+          "name": "Joshua Jefferson",
+          "team": "BKN",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1643052,
+          "name": "Chaney Johnson",
+          "team": "BKN",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1629611,
+          "name": "Terance Mann",
+          "team": "BKN",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1631169,
+          "name": "Josh Minott",
+          "team": "BKN",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1641761,
+          "name": "Grant Nelson",
+          "team": "BKN",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1629008,
+          "name": "Michael Porter Jr.",
+          "team": "BKN",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642962,
+          "name": "Drake Powell",
+          "team": "BKN",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 203944,
+          "name": "Julius Randle",
+          "team": "BKN",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642879,
+          "name": "Ben Saraf",
+          "team": "BKN",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630549,
+          "name": "Day'Ron Sharpe",
+          "team": "BKN",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642849,
+          "name": "Nolan Traore",
+          "team": "BKN",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1629021,
+          "name": "Moritz Wagner",
+          "team": "BKN",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642874,
+          "name": "Danny Wolf",
+          "team": "BKN",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642269,
+          "name": "Devin Carter",
+          "team": "BOS",
+          "status": "Out",
+          "out": true
+        },
+        {
+          "id": 1643416,
+          "name": "Chris Cenac Jr.",
+          "team": "BOS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 201144,
+          "name": "Mike Conley",
+          "team": "BOS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630568,
+          "name": "Luka Garza",
+          "team": "BOS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 202331,
+          "name": "Paul George",
+          "team": "BOS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642864,
+          "name": "Hugo Gonzalez",
+          "team": "BOS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1631199,
+          "name": "Ron Harper Jr.",
+          "team": "BOS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630573,
+          "name": "Sam Hauser",
+          "team": "BOS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1641759,
+          "name": "Dillon Mitchell",
+          "team": "BOS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630202,
+          "name": "Payton Pritchard",
+          "team": "BOS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1629674,
+          "name": "Neemias Queta",
+          "team": "BOS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1629011,
+          "name": "Mitchell Robinson",
+          "team": "BOS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1631248,
+          "name": "Baylor Scheierman",
+          "team": "BOS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1628369,
+          "name": "Jayson Tatum",
+          "team": "BOS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1641775,
+          "name": "Jordan Walsh",
+          "team": "BOS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1628401,
+          "name": "Derrick White",
+          "team": "BOS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642873,
+          "name": "Amari Williams",
+          "team": "BOS",
+          "status": "Not listed",
+          "out": false
+        }
+      ]
+    },
+    {
+      "eventId": "401909878",
+      "home": "NYK",
+      "away": "DET",
+      "startsAt": "2026-10-28T00:00:00+00:00",
+      "season": "2026-27",
+      "holdReason": "Current roster reconciliation needs review",
+      "players": [
+        {
+          "id": 1628381,
+          "name": "John Collins",
+          "team": "DET",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630595,
+          "name": "Cade Cunningham",
+          "team": "DET",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1631105,
+          "name": "Jalen Duren",
+          "team": "DET",
+          "status": "Out",
+          "out": true
+        },
+        {
+          "id": 1629750,
+          "name": "Javonte Green",
+          "team": "DET",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1641989,
+          "name": "Elijah Harkless",
+          "team": "DET",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1641842,
+          "name": "Ronald Holland II",
+          "team": "DET",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1628989,
+          "name": "Kevin Huerter",
+          "team": "DET",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642450,
+          "name": "Daniss Jenkins",
+          "team": "DET",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630198,
+          "name": "Isaiah Joe",
+          "team": "DET",
+          "status": "Day-To-Day",
+          "out": false
+        },
+        {
+          "id": 1642403,
+          "name": "Isaac Jones",
+          "team": "DET",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642404,
+          "name": "Chaz Lanier",
+          "team": "DET",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1643536,
+          "name": "Ebuka Okorie",
+          "team": "DET",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642391,
+          "name": "Ugonna Onyenso",
+          "team": "DET",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1627752,
+          "name": "Taurean Prince",
+          "team": "DET",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630194,
+          "name": "Paul Reed",
+          "team": "DET",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1629130,
+          "name": "Duncan Robinson",
+          "team": "DET",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642449,
+          "name": "Tolu Smith",
+          "team": "DET",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1641709,
+          "name": "Ausar Thompson",
+          "team": "DET",
+          "status": "Out",
+          "out": true
+        },
+        {
+          "id": 1643022,
+          "name": "Jaden Akins",
+          "team": "NYK",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630631,
+          "name": "Jose Alvarado",
+          "team": "NYK",
+          "status": "Out",
+          "out": true
+        },
+        {
+          "id": 1628384,
+          "name": "OG Anunoby",
+          "team": "NYK",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1628969,
+          "name": "Mikal Bridges",
+          "team": "NYK",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1628973,
+          "name": "Jalen Brunson",
+          "team": "NYK",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 203903,
+          "name": "Jordan Clarkson",
+          "team": "NYK",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642359,
+          "name": "Pacome Dadiet",
+          "team": "NYK",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642885,
+          "name": "Mohamed Diawara",
+          "team": "NYK",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 203083,
+          "name": "Andre Drummond",
+          "team": "NYK",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1628404,
+          "name": "Josh Hart",
+          "team": "NYK",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642278,
+          "name": "Tyler Kolek",
+          "team": "NYK",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630540,
+          "name": "Miles McBride",
+          "team": "NYK",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1643589,
+          "name": "Tyler Nickel",
+          "team": "NYK",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1629013,
+          "name": "Landry Shamet",
+          "team": "NYK",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1626157,
+          "name": "Karl-Anthony Towns",
+          "team": "NYK",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630164,
+          "name": "James Wiseman",
+          "team": "NYK",
+          "status": "Not listed",
+          "out": false
+        }
+      ]
+    },
+    {
+      "eventId": "401909879",
+      "home": "SAS",
+      "away": "SAC",
+      "startsAt": "2026-10-28T00:00:00+00:00",
+      "season": "2026-27",
+      "holdReason": "Current roster reconciliation needs review",
+      "players": [
+        {
+          "id": 1630173,
+          "name": "Precious Achiuwa",
+          "team": "SAC",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1643411,
+          "name": "Darius Acuff Jr.",
+          "team": "SAC",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1641778,
+          "name": "Leaky Black",
+          "team": "SAC",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642928,
+          "name": "Dylan Cardwell",
+          "team": "SAC",
+          "status": "Out",
+          "out": true
+        },
+        {
+          "id": 1642363,
+          "name": "Nique Clifford",
+          "team": "SAC",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1629631,
+          "name": "De'Andre Hunter",
+          "team": "SAC",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642284,
+          "name": "Alex Karaban",
+          "team": "SAC",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 203897,
+          "name": "Zach LaVine",
+          "team": "SAC",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642367,
+          "name": "Jonathan Mogbo",
+          "team": "SAC",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1628370,
+          "name": "Malik Monk",
+          "team": "SAC",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1631099,
+          "name": "Keegan Murray",
+          "team": "SAC",
+          "status": "Out",
+          "out": true
+        },
+        {
+          "id": 1631342,
+          "name": "Daeqwon Plowden",
+          "team": "SAC",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642875,
+          "name": "Maxime Raynaud",
+          "team": "SAC",
+          "status": "Out",
+          "out": true
+        },
+        {
+          "id": 1627734,
+          "name": "Domantas Sabonis",
+          "team": "SAC",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1643567,
+          "name": "Emanuel Sharp",
+          "team": "SAC",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1627732,
+          "name": "Ben Simmons",
+          "team": "SAC",
+          "status": "Out",
+          "out": true
+        },
+        {
+          "id": 203084,
+          "name": "Harrison Barnes",
+          "team": "SAS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1643576,
+          "name": "Maliq Brown",
+          "team": "SAS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642868,
+          "name": "Carter Bryant",
+          "team": "SAS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642264,
+          "name": "Stephon Castle",
+          "team": "SAS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630577,
+          "name": "Julian Champagnie",
+          "team": "SAS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1628368,
+          "name": "De'Aaron Fox",
+          "team": "SAS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1643551,
+          "name": "Ja'Kobi Gillespie",
+          "team": "SAS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642844,
+          "name": "Dylan Harper",
+          "team": "SAS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 202699,
+          "name": "Tobias Harris",
+          "team": "SAS",
+          "status": "Out",
+          "out": true
+        },
+        {
+          "id": 1629640,
+          "name": "Keldon Johnson",
+          "team": "SAS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642357,
+          "name": "David Jones Garcia",
+          "team": "SAS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1628436,
+          "name": "Luke Kornet",
+          "team": "SAS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1629162,
+          "name": "Jordan McLaughlin",
+          "team": "SAS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1643519,
+          "name": "Jayden Quaintance",
+          "team": "SAS",
+          "status": "Out",
+          "out": true
+        },
+        {
+          "id": 1643542,
+          "name": "Tarris Reed Jr.",
+          "team": "SAS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630170,
+          "name": "Devin Vassell",
+          "team": "SAS",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1641705,
+          "name": "Victor Wembanyama",
+          "team": "SAS",
+          "status": "Not listed",
+          "out": false
+        }
+      ]
+    },
+    {
+      "eventId": "401909880",
+      "home": "LAL",
+      "away": "POR",
+      "startsAt": "2026-10-28T03:00:00+00:00",
+      "season": "2026-27",
+      "holdReason": null,
+      "players": [
+        {
+          "id": 1643418,
+          "name": "Cameron Carr",
+          "team": "LAL",
+          "status": "Out",
+          "out": true
+        },
+        {
+          "id": 1629029,
+          "name": "Luka Doncic",
+          "team": "LAL",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1629656,
+          "name": "Quentin Grimes",
+          "team": "LAL",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630702,
+          "name": "Jaden Hardy",
+          "team": "LAL",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642355,
+          "name": "Bronny James",
+          "team": "LAL",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1641751,
+          "name": "Arthur Kaluma",
+          "team": "LAL",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1631117,
+          "name": "Walker Kessler",
+          "team": "LAL",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1631222,
+          "name": "Jake LaRavia",
+          "team": "LAL",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1626172,
+          "name": "Kevon Looney",
+          "team": "LAL",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630572,
+          "name": "Sandro Mamukelashvili",
+          "team": "LAL",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1643024,
+          "name": "Chris Manon",
+          "team": "LAL",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1643758,
+          "name": "AK Okereke",
+          "team": "LAL",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630559,
+          "name": "Austin Reaves",
+          "team": "LAL",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1629012,
+          "name": "Collin Sexton",
+          "team": "LAL",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642876,
+          "name": "Adou Thiero",
+          "team": "LAL",
+          "status": "Out",
+          "out": true
+        },
+        {
+          "id": 1629680,
+          "name": "Matisse Thybulle",
+          "team": "LAL",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1629020,
+          "name": "Jarred Vanderbilt",
+          "team": "LAL",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630533,
+          "name": "Ziaire Williams",
+          "team": "LAL",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630166,
+          "name": "Deni Avdija",
+          "team": "POR",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1641739,
+          "name": "Toumani Camara",
+          "team": "POR",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642382,
+          "name": "Branden Carlson",
+          "team": "POR",
+          "status": "Day-To-Day",
+          "out": false
+        },
+        {
+          "id": 1631321,
+          "name": "Sidy Cissoko",
+          "team": "POR",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642270,
+          "name": "Donovan Clingan",
+          "team": "POR",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642905,
+          "name": "Yang Hansen",
+          "team": "POR",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630703,
+          "name": "Scoot Henderson",
+          "team": "POR",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 201950,
+          "name": "Jrue Holiday",
+          "team": "POR",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1643257,
+          "name": "Jayson Kent",
+          "team": "POR",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630249,
+          "name": "Vit Krejci",
+          "team": "POR",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 203081,
+          "name": "Damian Lillard",
+          "team": "POR",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1629630,
+          "name": "Ja Morant",
+          "team": "POR",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1630695,
+          "name": "Micah Potter",
+          "team": "POR",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1631101,
+          "name": "Shaedon Sharpe",
+          "team": "POR",
+          "status": "Out",
+          "out": true
+        },
+        {
+          "id": 1642910,
+          "name": "John Tonje",
+          "team": "POR",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1629057,
+          "name": "Robert Williams III",
+          "team": "POR",
+          "status": "Not listed",
+          "out": false
+        },
+        {
+          "id": 1642959,
+          "name": "Chris Youngblood",
+          "team": "POR",
+          "status": "Day-To-Day",
           "out": false
         }
       ]
@@ -4082,16 +3329,15 @@
     ],
     "heldTeams": [
       "DAL",
-      "LAC",
-      "MEM",
+      "DET",
       "MIA",
       "NYK",
       "OKC",
-      "ORL",
       "PHX",
-      "SAC"
+      "SAC",
+      "SAS"
     ],
-    "sourcePath": "data/features/game_availability/3786f2e86d364ad8b5a73987e737a980/roster-reconciliation.json",
+    "sourcePath": "data/features/game_availability/a14399fbd6534b43b8996c066a2496ef/roster-reconciliation.json",
     "meaning": "Fresh NBA roster confirmation supplies membership only. NBA-only players retain Unknown availability and cannot become recommended props."
   }
 }
