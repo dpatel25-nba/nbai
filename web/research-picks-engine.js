@@ -29,6 +29,7 @@
   else if(row.hold){state='review';status='Availability or forecast review needed';}
   else if(!row.fresh||!row.liquid){state='wait';status='Waiting for a current offer';}
   else if(row.price>p.maxPrice+1e-9){state='price';status='Wait for a lower price';}
+  else if(review.reviewType==='automated_statistics'){state='review';status='Automated research lean — not model-confirmed';}
   else if(review.modelEvidenceStatus==='rotation_review_required'){state='review';status='Fundamental lean — rotation model under review';}
   else if(!(row.edge>0)||!(row.rank>0)){state='review';status=p.basis==='fundamental'?'Fundamental lean — model does not confirm':'Insufficient model margin at this price';}
   return {pick:p,game,review,row,state,status};

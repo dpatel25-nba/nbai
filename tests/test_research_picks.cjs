@@ -97,6 +97,13 @@ test('A diagnosed rotation defect blocks model certification even when simulated
  assert.equal(p.state,'review');assert.match(p.status,/rotation model under review/);
  assert.equal(R.combo(g,data,now).ready,false);
 });
+test('Automated historical screens never become model-certified recommendations',()=>{
+ const {g,data}=fixture();data.games[0].reviewType='automated_statistics';
+ const result=R.picks([g],data,now);
+ assert.ok(result.every(p=>p.state!=='ready'));
+ assert.match(result[0].status,/Automated research lean/);
+ assert.equal(R.combo(g,data,now).ready,false);
+});
 test('Additional scripts retain exact reviewed legs, tip closure and unverified pricing',()=>{
  const {g,data}=fixture();
  data.games[0].additionalCombos=[{...data.games[0].combo,title:'Alternative',propTickers:['p1','p3']},

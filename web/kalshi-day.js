@@ -28,7 +28,7 @@
   const risk=node('p',null,'pick-risk');risk.append(node('strong','What could go wrong: '),document.createTextNode(pick.risk));box.append(risk);
   const detail=node('details',null,'pick-evidence');detail.dataset.disclosure='pick-'+pick.ticker;detail.append(node('summary','Research & sources'));
   for(const line of pick.evidence||[])detail.append(node('p',line));sources(detail,pick.sources);
-  detail.append(node('small','Research reviewed '+et(review.reviewedAt)+'. Historical results and preseason samples are context, not today’s win probability.'));box.append(detail);
+  detail.append(node('small',(review.reviewType==='automated_statistics'?'Automatic screen run ':'Research reviewed ')+et(review.reviewedAt)+'. Historical results and preseason samples are context, not today’s win probability.'));box.append(detail);
   box.append(node('small',row?'Quote observed '+et(row.market.observedAt)+'. '+(row.fresh?'':'Saved observation; refresh before using. '):'No matching offer was returned.'));
   if(row)box.append(external('View exact Kalshi contract ↗',row.market.url));
   return box;
@@ -43,6 +43,7 @@
   $('quoteStatus').textContent=quotes?`${quoteFailed?'Live refresh unavailable. ':''}${fresh?'Recent Kalshi quotes':'Saved quotes only'} · Last scan ${et(quotes.generatedAt)}. Refreshes every 30 seconds while visible.`:'Prices unavailable. Retrying every 30 seconds.';
   $('quoteDot').classList.toggle('live',!!fresh&&!quoteFailed);
   $('researchStatus').textContent=research?`${researchFailed?'Research refresh failed; retaining the dated review. ':''}News, role and historical-data reviews · Updated ${et(research.generatedAt)}. Price limits are judgments, not guaranteed edges.`:'Research reviews are loading. Picks are not generated from prices alone.';
+  if(research?.automation?.dateEt===selectedDate)$('researchStatus').textContent=`${researchFailed?'Refresh failed; retaining the dated card. ':''}Automatic daily research · Updated ${et(research.generatedAt)}. Screens historical results, recent minutes, reported availability and current prices. No human editorial review or proven betting edge.`;
   if(research?.modelSnapshot?.status==='rotation_review_required')$('researchStatus').textContent+=' Simulator minutes are under review. Today’s selections are fundamental research leans, not model-confirmed edges.';
   $('coverageDetails').replaceChildren();
   if(quotes){const list=node('ul');for(const c of quotes.coverage||[])list.append(node('li',c.series+': '+(c.complete?c.accepted+' recognized contracts':'Unavailable in this scan')));$('coverageDetails').append(list);}

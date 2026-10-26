@@ -17,7 +17,8 @@ The local preview server serves the same GET-only market API.
 
 ### Publishing a research review
 
-`research-picks.json` is a curated publication, not an automated news generator.
+`research-picks.json` supports sourced editorial reviews and explicitly labeled
+automatic statistical research cards. Neither mode establishes a betting edge.
 Each game review must bind the exact game id/start time, reviewed timestamp,
 expiry, matchup narrative and source URLs. Each prop requires an exact ticker,
 player id/team, stat/threshold/side, thesis, counterargument, supporting evidence,
@@ -27,7 +28,7 @@ Preserve raw research inputs and an immutable copy of the published review under
 `data/features/fundamental_prop_research/`. Do not replace an earlier prediction
 with a hindsight explanation after the game.
 
-A daily selection comes only from completed editorial reviews. The browser then
+A manual daily selection comes only from completed editorial reviews. The browser then
 requires a fresh liquid quote, an unexpired research review and usable model
 availability, plus positive model probability minus ask and the estimated
 one-contract taker fee. This is a supporting signal, not probability calibration
@@ -40,9 +41,41 @@ strict contract identity/rule checks. Browser prices refresh every 30 seconds;
 quotes older than 75 seconds are visibly saved and cannot qualify as actionable.
 Failed refreshes preserve their original timestamps. Reviews expire at their
 explicit deadline, and pregame recommendations close at the scheduled tip.
-Review expiry does not automatically trigger new news research: the AI workspace
-or a reviewer must publish a fresh, sourced review. Availability/model refreshes
-remain the existing separate projection workflow.
+Manual review expiry does not automatically trigger new editorial research.
+The daily cloud workflow publishes a separate, explicitly automatic screen.
+
+### Automatic daily cards
+
+`.github/workflows/publish-daily-research.yml` runs at minute 37 every two UTC
+hours, after successful player-line refreshes, and on manual dispatch. GitHub
+scheduled runs can be delayed. It runs in the cloud; no local computer is needed.
+Both publishing jobs share a concurrency group. The new job uses free public
+feeds and does not increase the existing paid odds-collection schedule.
+
+The job refreshes ESPN availability and the matching model identity bundle,
+then `scripts/publish_daily_research.py` obtains today's Eastern-date slate,
+the latest two completed team box scores, a recent official NBA injury PDF,
+and Kalshi offers. Both teams must have submitted official reports. Uncertain
+player status, unresolved roster identities, missing observations, changed
+workloads, insufficient historical samples and expensive offers produce passes.
+The static `daily-pick-history.json` contains descriptive 2024–25 and 2025–26
+regular-season counts, exported by `scripts/export_daily_pick_history.py`.
+
+Automatic cards remain research leans even when model numbers appear favorable.
+Their fixed historical-price screen is unvalidated, excludes DNPs from historical
+hit fractions, and is before fees; it supplies no matchup probability or proven
+expected return. Recent opportunity checks do not resolve opponent or role bias.
+No automatic winners, parlays or orders are created. Cards expire after three
+hours or official tip, whichever is earlier. Started games remain immutable.
+
+The job publishes only after all source, bundle and selection checks succeed.
+Failures retain the existing public files and their original expiry timestamps.
+Every run archives raw inputs, receipts and superseded cards under
+`data/features/daily_research_publication/`; Actions retains these artifacts for
+30 days and git retains published revisions. Successful pushes trigger Vercel.
+Tests: `python tests/test_publish_daily_research.py` and the research/day Node
+tests above. Use Actions' **Publish daily research picks → Run workflow** for
+an immediate refresh.
 
 A combo requires a reviewed winner and one reviewed player from each team.
 It displays the hypothesis and how it can fail. Exact Kalshi acceptance, combined
@@ -310,9 +343,9 @@ payload. See [season simulator documentation](../docs/SEASON_SIMULATOR.md).
 In Vercel → your project → **Settings → Domains → Add**. It walks you through buying one
 (or connecting one you own). `nbai.gg`, `nbai.app`, `nbai.io` are good candidates (~$10–15/yr).
 
-## Keeping it fresh during the season (later)
-A scheduled job (GitHub Actions) can run the scraper + `export_web.py` + push each morning,
-so the site updates itself. We'll set that up once daily games are flowing.
+## Keeping it fresh during the season
+Daily research publication is installed through the cloud workflow described
+above. The separate player-line workflow continues on its six-hour schedule.
 
 ## Daily game board
 
