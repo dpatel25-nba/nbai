@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-27T15:53:37.577Z",
+  "generatedAt": "2026-10-27T15:55:36.363Z",
   "scope": "game",
   "runs": 2000,
   "seedPrefix": "market-matchups-v1:",
@@ -9624,7 +9624,7 @@
     "web/season-engine.js": "eb9252a1582df10e6111b694229d9943ab5b9b734a6b7012abcbd2a631ea9e08",
     "web/season-possession.js": "133537a8a45a321a3cb884fbe3140b0917b2b3a85f36de26490a5f4d8e5f05a5",
     "web/season-availability.json": "a2ebd5a3bd2fb4b2642bb138c59fc6d696e8f23a3a21de89a3658c02f3fdc67c",
-    "web/game-availability.json": "49247b5a222d8bed5979bac24e96361bc34d52cf98381f84ccb887c2a0ac8f9c",
+    "web/game-availability.json": "39f240e88b2fec8541f1489941b1625e82bde11f8a36b21b4c46987ae0b10cfa",
     "scripts/game_availability.cjs": "ad4ebaddf8a1a29c1d4f9285e6694211308ac46a65d954a040ae31f212edde00",
     "scripts/build_market_game_projections.cjs": "5bb013efeb75937e1b29aa8c96068aff75a9473e5a2ed77b3e409c52b1e4f317",
     "scripts/match_market_schedule.cjs": "f49aa4bdf06f89d1589098030436af429a52562ea785f39198adfd8b152bcdc3",
@@ -9636,8 +9636,8 @@
     "web/lib/game-watchlist-targets.json": "54e78bb4477557b5e4c684a00fba33c6a53bafca0205f6affd07b79ca3d0770b"
   },
   "marketInventoryHash": "32a32c224128cafabca5a17931e25e93745bfdfd5e8d102dbad1f125781d61d5",
-  "inputSignature": "8cf38a5212b8cf1c0e9e5680a4a11b9ab0098ce0e9b25d6d262fd3d3c10e7a0f",
-  "availabilityValidUntil": "2026-10-27T20:07:34.966004+00:00",
+  "inputSignature": "d0a02809053d914c64a494b8c251e12c7f098b36e7d793929f58c451a5d09177",
+  "availabilityValidUntil": "2026-10-27T21:55:06.830541+00:00",
   "assumptions": "Matchup-specific possession scenarios using current roster and ESPN injury observations. Reported Out players are excluded; other players are conditional on playing. Questionable participation, confirmed starters and minutes restrictions are not modeled. Not calibrated betting probabilities.",
   "events": [
     {
@@ -9656,10 +9656,129 @@
       "availability": {
         "holdReason": null,
         "outIds": [
-          "1643548",
-          "1642269"
+          "1642269",
+          "1643548"
         ],
         "players": [
+          {
+            "id": 1642269,
+            "name": "Devin Carter",
+            "team": "BOS",
+            "status": "Out",
+            "out": true
+          },
+          {
+            "id": 1643416,
+            "name": "Chris Cenac Jr.",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 201144,
+            "name": "Mike Conley",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1630568,
+            "name": "Luka Garza",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 202331,
+            "name": "Paul George",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642864,
+            "name": "Hugo Gonzalez",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1631199,
+            "name": "Ron Harper Jr.",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1630573,
+            "name": "Sam Hauser",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1641759,
+            "name": "Dillon Mitchell",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1630202,
+            "name": "Payton Pritchard",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1629674,
+            "name": "Neemias Queta",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1629011,
+            "name": "Mitchell Robinson",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1631248,
+            "name": "Baylor Scheierman",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1628369,
+            "name": "Jayson Tatum",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1641775,
+            "name": "Jordan Walsh",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1628401,
+            "name": "Derrick White",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642873,
+            "name": "Amari Williams",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
           {
             "id": 1643548,
             "name": "Tyler Bilodeau",
@@ -9785,142 +9904,23 @@
             "team": "BKN",
             "status": "Not listed",
             "out": false
-          },
-          {
-            "id": 1642269,
-            "name": "Devin Carter",
-            "team": "BOS",
-            "status": "Out",
-            "out": true
-          },
-          {
-            "id": 1643416,
-            "name": "Chris Cenac Jr.",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 201144,
-            "name": "Mike Conley",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630568,
-            "name": "Luka Garza",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 202331,
-            "name": "Paul George",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642864,
-            "name": "Hugo Gonzalez",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1631199,
-            "name": "Ron Harper Jr.",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630573,
-            "name": "Sam Hauser",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641759,
-            "name": "Dillon Mitchell",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630202,
-            "name": "Payton Pritchard",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1629674,
-            "name": "Neemias Queta",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1629011,
-            "name": "Mitchell Robinson",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1631248,
-            "name": "Baylor Scheierman",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1628369,
-            "name": "Jayson Tatum",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641775,
-            "name": "Jordan Walsh",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1628401,
-            "name": "Derrick White",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642873,
-            "name": "Amari Williams",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
           }
         ],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00",
-        "observedAt": "2026-10-27T14:07:36.014612+00:00",
+        "validUntil": "2026-10-27T21:55:06.830541+00:00",
+        "observedAt": "2026-10-27T15:55:09.381408+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
           {
-            "id": 1643548,
-            "name": "Tyler Bilodeau",
-            "team": "BKN",
-            "status": "Out"
-          },
-          {
             "id": 1642269,
             "name": "Devin Carter",
             "team": "BOS",
+            "status": "Out"
+          },
+          {
+            "id": 1643548,
+            "name": "Tyler Bilodeau",
+            "team": "BKN",
             "status": "Out"
           }
         ],
@@ -11503,7 +11503,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00"
+        "validUntil": "2026-10-27T21:55:06.830541+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -12154,7 +12154,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00"
+        "validUntil": "2026-10-27T21:55:06.830541+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -13093,8 +13093,8 @@
             "out": true
           }
         ],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00",
-        "observedAt": "2026-10-27T14:07:36.014612+00:00",
+        "validUntil": "2026-10-27T21:55:06.830541+00:00",
+        "observedAt": "2026-10-27T15:55:09.381408+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -14955,8 +14955,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00",
-        "observedAt": "2026-10-27T14:07:36.014612+00:00",
+        "validUntil": "2026-10-27T21:55:06.830541+00:00",
+        "observedAt": "2026-10-27T15:55:09.381408+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -16588,7 +16588,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00"
+        "validUntil": "2026-10-27T21:55:06.830541+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -17258,7 +17258,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00"
+        "validUntil": "2026-10-27T21:55:06.830541+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -17928,7 +17928,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00"
+        "validUntil": "2026-10-27T21:55:06.830541+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -18617,7 +18617,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00"
+        "validUntil": "2026-10-27T21:55:06.830541+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -19555,8 +19555,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00",
-        "observedAt": "2026-10-27T14:07:36.014612+00:00",
+        "validUntil": "2026-10-27T21:55:06.830541+00:00",
+        "observedAt": "2026-10-27T15:55:09.381408+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -21402,8 +21402,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00",
-        "observedAt": "2026-10-27T14:07:36.014612+00:00",
+        "validUntil": "2026-10-27T21:55:06.830541+00:00",
+        "observedAt": "2026-10-27T15:55:09.381408+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -23030,7 +23030,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00"
+        "validUntil": "2026-10-27T21:55:06.830541+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -23742,7 +23742,8 @@
           "1643593",
           "1642869",
           "1630591",
-          "1642927"
+          "1642927",
+          "202695"
         ],
         "players": [
           {
@@ -23924,8 +23925,8 @@
             "id": 202695,
             "name": "Kawhi Leonard",
             "team": "TOR",
-            "status": "Day-To-Day",
-            "out": false
+            "status": "Out",
+            "out": true
           },
           {
             "id": 1642918,
@@ -23977,8 +23978,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00",
-        "observedAt": "2026-10-27T14:07:36.014612+00:00",
+        "validUntil": "2026-10-27T21:55:06.830541+00:00",
+        "observedAt": "2026-10-27T15:55:09.381408+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -24017,99 +24018,62 @@
             "name": "Nate Bittle",
             "team": "TOR",
             "status": "Out"
-          }
-        ],
-        "uncertain": [
+          },
           {
             "id": 202695,
             "name": "Kawhi Leonard",
             "team": "TOR",
-            "status": "Day-To-Day"
+            "status": "Out"
           }
-        ]
+        ],
+        "uncertain": []
       },
       "calibrationTarget": {
-        "homeScore": 115.82487021928488,
-        "awayScore": 110.95112978071512,
-        "homeMargin": 4.8737404385697545
+        "homeScore": 114.10917606524016,
+        "awayScore": 112.66682393475983,
+        "homeMargin": 1.4423521304803302
       },
       "gameProjection": {
         "homeScore": {
-          "mean": 116.269,
-          "p10": 101,
-          "p90": 131
+          "mean": 114.1905,
+          "p10": 100,
+          "p90": 129
         },
         "awayScore": {
-          "mean": 110.8535,
-          "p10": 96,
-          "p90": 125
+          "mean": 113.4305,
+          "p10": 99,
+          "p90": 128
         },
         "homeMargin": {
-          "mean": 5.4155,
-          "p10": -12,
-          "p90": 22
+          "mean": 0.76,
+          "p10": -17,
+          "p90": 18
         },
         "total": {
-          "mean": 227.1225,
+          "mean": 227.621,
           "p10": 204,
           "p90": 251
         },
-        "homeWinShare": 0.664
+        "homeWinShare": 0.524
       },
       "players": [
         {
           "id": 202695,
           "name": "Kawhi Leonard",
           "team": "TOR",
-          "injuryStatus": "Day-To-Day",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 24.179179294069865,
-            "p10": 17.142857142857146,
-            "p90": 31.36633663366339
-          },
+          "injuryStatus": "Out",
+          "playedScenarios": 0,
+          "projectionStatus": "reported_out",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 19.974,
-              "p10": 10,
-              "p90": 30
-            },
-            "AST": {
-              "mean": 2.6095,
-              "p10": 1,
-              "p90": 5
-            },
-            "REB": {
-              "mean": 3.922,
-              "p10": 1,
-              "p90": 7
-            },
-            "STL": {
-              "mean": 0.954,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.521,
-              "p10": 0,
-              "p90": 2
-            },
-            "FG_PCT": {
-              "mean": 52.973262249206854,
-              "p10": 35.294117647058826,
-              "p90": 71.42857142857143
-            },
-            "FT_PCT": {
-              "mean": 86.30648745728098,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 41.75836018461445,
-              "p10": 0,
-              "p90": 75
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
@@ -24120,48 +24084,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 25.062542883318045,
+            "mean": 25.07004288331804,
             "p10": 17.760000000000012,
             "p90": 32.64000000000002
           },
           "stats": {
             "PTS": {
-              "mean": 12.686,
+              "mean": 13.263,
               "p10": 6,
               "p90": 21
             },
             "AST": {
-              "mean": 2.6375,
+              "mean": 2.694,
               "p10": 1,
               "p90": 5
             },
             "REB": {
-              "mean": 7.5575,
+              "mean": 7.5835,
               "p10": 4,
               "p90": 12
             },
             "STL": {
-              "mean": 0.474,
+              "mean": 0.497,
               "p10": 0,
               "p90": 1
             },
             "BLK": {
-              "mean": 0.5685,
+              "mean": 0.5465,
               "p10": 0,
               "p90": 2
             },
             "FG_PCT": {
-              "mean": 48.624352967158714,
-              "p10": 28.571428571428573,
-              "p90": 70
+              "mean": 49.92053742026514,
+              "p10": 29.41176470588235,
+              "p90": 71.42857142857143
             },
             "FT_PCT": {
-              "mean": 82.55601816484163,
+              "mean": 81.39742226698743,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 34.18104878540343,
+              "mean": 35.77718846391033,
               "p10": 0,
               "p90": 75
             }
@@ -24172,51 +24136,51 @@
           "name": "Kyle Anderson",
           "team": "TOR",
           "injuryStatus": "Not listed",
-          "playedScenarios": 1997,
+          "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 14.977474037018059,
-            "p10": 8.000000000000002,
-            "p90": 22.080000000000016
+            "mean": 15.662970439314684,
+            "p10": 9.50495049504951,
+            "p90": 22.53061224489795
           },
           "stats": {
             "PTS": {
-              "mean": 4.527290936404607,
+              "mean": 4.8825,
               "p10": 0,
-              "p90": 9
+              "p90": 10
             },
             "AST": {
-              "mean": 2.4051076614922384,
+              "mean": 2.441,
               "p10": 0,
               "p90": 5
             },
             "REB": {
-              "mean": 2.6905358037055582,
-              "p10": 0,
+              "mean": 2.9535,
+              "p10": 1,
               "p90": 5
             },
             "STL": {
-              "mean": 0.5317976965448172,
+              "mean": 0.589,
               "p10": 0,
-              "p90": 1
+              "p90": 2
             },
             "BLK": {
-              "mean": 0.5042563845768653,
+              "mean": 0.5365,
               "p10": 0,
-              "p90": 1
+              "p90": 2
             },
             "FG_PCT": {
-              "mean": 51.465656093315395,
+              "mean": 49.781003852824554,
               "p10": 0,
               "p90": 100
             },
             "FT_PCT": {
-              "mean": 73.19429925080073,
-              "p10": 50,
+              "mean": 71.04419431002636,
+              "p10": 40,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 35.281207133058984,
+              "mean": 30.85623257666269,
               "p10": 0,
               "p90": 100
             }
@@ -24230,48 +24194,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 21.030091627096578,
-            "p10": 14.588235294117649,
-            "p90": 28.03960396039606
+            "mean": 21.98032294167632,
+            "p10": 15.058823529411766,
+            "p90": 28.606060606060584
           },
           "stats": {
             "PTS": {
-              "mean": 8.294,
-              "p10": 3,
-              "p90": 14
+              "mean": 9.8505,
+              "p10": 4,
+              "p90": 16
             },
             "AST": {
-              "mean": 2.1455,
+              "mean": 2.076,
               "p10": 0,
               "p90": 4
             },
             "REB": {
-              "mean": 6.2405,
+              "mean": 6.708,
               "p10": 3,
-              "p90": 10
+              "p90": 11
             },
             "STL": {
-              "mean": 0.7025,
+              "mean": 0.8645,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.9985,
+              "mean": 1.0425,
               "p10": 0,
               "p90": 2
             },
             "FG_PCT": {
-              "mean": 68.50802713698732,
-              "p10": 40,
+              "mean": 67.91914206316797,
+              "p10": 42.857142857142854,
               "p90": 100
             },
             "FT_PCT": {
-              "mean": 63.12794665478139,
-              "p10": 25,
+              "mean": 64.70851498970373,
+              "p10": 33.333333333333336,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 29.09090909090909,
+              "mean": 32.25806451612903,
               "p10": 0,
               "p90": 100
             }
@@ -24310,44 +24274,44 @@
           },
           "stats": {
             "PTS": {
-              "mean": 5.183959899749373,
+              "mean": 5.379949874686717,
               "p10": 0,
               "p90": 11
             },
             "AST": {
-              "mean": 1.3949874686716792,
+              "mean": 1.4130325814536342,
               "p10": 0,
               "p90": 3
             },
             "REB": {
-              "mean": 1.1338345864661654,
+              "mean": 1.2040100250626566,
               "p10": 0,
               "p90": 3
             },
             "STL": {
-              "mean": 0.5268170426065163,
+              "mean": 0.5573934837092732,
               "p10": 0,
-              "p90": 1
+              "p90": 2
             },
             "BLK": {
-              "mean": 0.1799498746867168,
+              "mean": 0.19047619047619047,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 37.90522983585151,
+              "mean": 40.30082044351334,
               "p10": 0,
-              "p90": 71.42857142857143
+              "p90": 75
             },
             "FT_PCT": {
-              "mean": 74.59161147902871,
-              "p10": 50,
+              "mean": 71.94273058060436,
+              "p10": 40,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 33.12734665945668,
+              "mean": 35.42402376008923,
               "p10": 0,
-              "p90": 75
+              "p90": 80
             }
           }
         },
@@ -24359,50 +24323,50 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 23.995840272732774,
+            "mean": 23.973340272732777,
             "p10": 17.10891089108912,
             "p90": 30.857142857142826
           },
           "stats": {
             "PTS": {
-              "mean": 8.929,
-              "p10": 3,
-              "p90": 15
+              "mean": 9.1495,
+              "p10": 4,
+              "p90": 16
             },
             "AST": {
-              "mean": 1.9085,
+              "mean": 1.935,
               "p10": 0,
               "p90": 4
             },
             "REB": {
-              "mean": 5.7855,
+              "mean": 5.8045,
               "p10": 3,
               "p90": 9
             },
             "STL": {
-              "mean": 0.559,
+              "mean": 0.6095,
               "p10": 0,
-              "p90": 1
+              "p90": 2
             },
             "BLK": {
-              "mean": 0.5655,
+              "mean": 0.5915,
               "p10": 0,
               "p90": 2
             },
             "FG_PCT": {
-              "mean": 48.128880465950765,
-              "p10": 20,
+              "mean": 49.31055914498277,
+              "p10": 25,
               "p90": 75
             },
             "FT_PCT": {
-              "mean": 75.26486648579686,
+              "mean": 75.48449373618946,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 27.81417563296764,
+              "mean": 29.751559595309654,
               "p10": 0,
-              "p90": 75
+              "p90": 100
             }
           }
         },
@@ -24414,48 +24378,48 @@
           "playedScenarios": 1999,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 15.694183201272875,
+            "mean": 15.654163191267871,
             "p10": 9.42056074766355,
-            "p90": 22.588235294117624
+            "p90": 22.560000000000016
           },
           "stats": {
             "PTS": {
-              "mean": 5.147573786893447,
+              "mean": 5.216108054027013,
               "p10": 0,
               "p90": 10
             },
             "AST": {
-              "mean": 1.5952976488244122,
+              "mean": 1.637318659329665,
               "p10": 0,
-              "p90": 3
+              "p90": 4
             },
             "REB": {
-              "mean": 4.333666833416708,
+              "mean": 4.386693346673336,
               "p10": 1,
               "p90": 8
             },
             "STL": {
-              "mean": 0.534767383691846,
+              "mean": 0.5537768884442221,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 1.0440220110055027,
+              "mean": 1.0255127563781892,
               "p10": 0,
               "p90": 2
             },
             "FG_PCT": {
-              "mean": 59.66774299794153,
+              "mean": 61.10952756105384,
               "p10": 20,
               "p90": 100
             },
             "FT_PCT": {
-              "mean": 68.8263405236155,
+              "mean": 68.05297698196088,
               "p10": 33.333333333333336,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 19.016536118363796,
+              "mean": 15.987210231814549,
               "p10": 0,
               "p90": 100
             }
@@ -24469,50 +24433,50 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 24.833557155355997,
-            "p10": 17.66037735849057,
-            "p90": 32.326530612244866
+            "mean": 25.90738263547014,
+            "p10": 18.174757281553394,
+            "p90": 32.91428571428566
           },
           "stats": {
             "PTS": {
-              "mean": 17.0435,
-              "p10": 9,
-              "p90": 27
+              "mean": 19.2685,
+              "p10": 10,
+              "p90": 29
             },
             "AST": {
-              "mean": 3.3375,
+              "mean": 3.499,
               "p10": 1,
               "p90": 6
             },
             "REB": {
-              "mean": 4.8925,
+              "mean": 4.2765,
               "p10": 2,
-              "p90": 8
+              "p90": 7
             },
             "STL": {
-              "mean": 0.578,
+              "mean": 0.5345,
               "p10": 0,
-              "p90": 2
+              "p90": 1
             },
             "BLK": {
-              "mean": 0.235,
+              "mean": 0.265,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 50.861028342832384,
+              "mean": 50.82295237086151,
               "p10": 33.333333333333336,
-              "p90": 70
+              "p90": 68.75
             },
             "FT_PCT": {
-              "mean": 69.58682105863647,
-              "p10": 42.857142857142854,
+              "mean": 69.11832988210504,
+              "p10": 44.44444444444444,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 36.1484698171012,
+              "mean": 35.76227717940974,
               "p10": 0,
-              "p90": 75
+              "p90": 66.66666666666667
             }
           }
         },
@@ -24524,50 +24488,50 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 23.966696425304864,
-            "p10": 16.941176470588232,
-            "p90": 30.923076923076874
+            "mean": 24.979130646992118,
+            "p10": 17.872340425531913,
+            "p90": 32.48484848484846
           },
           "stats": {
             "PTS": {
-              "mean": 13.9235,
-              "p10": 6,
-              "p90": 23
+              "mean": 15.123,
+              "p10": 7,
+              "p90": 24
             },
             "AST": {
-              "mean": 3.8655,
+              "mean": 3.914,
               "p10": 1,
               "p90": 7
             },
             "REB": {
-              "mean": 3.209,
+              "mean": 3.055,
               "p10": 1,
               "p90": 6
             },
             "STL": {
-              "mean": 0.859,
+              "mean": 0.7845,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.1455,
+              "mean": 0.139,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 45.624751813361186,
-              "p10": 25,
+              "mean": 46.10444245418555,
+              "p10": 26.666666666666668,
               "p90": 66.66666666666667
             },
             "FT_PCT": {
-              "mean": 82.32701110791001,
+              "mean": 83.93173163902253,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 39.70861403013285,
+              "mean": 39.0092412607471,
               "p10": 0,
-              "p90": 70
+              "p90": 66.66666666666667
             }
           }
         },
@@ -24579,48 +24543,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 28.350546467954036,
-            "p10": 21.176470588235276,
+            "mean": 28.32554646795404,
+            "p10": 21.230769230769216,
             "p90": 35.26530612244896
           },
           "stats": {
             "PTS": {
-              "mean": 16.8885,
+              "mean": 17.201,
               "p10": 9,
               "p90": 26
             },
             "AST": {
-              "mean": 3.613,
+              "mean": 3.7905,
               "p10": 1,
               "p90": 6
             },
             "REB": {
-              "mean": 3.9425,
+              "mean": 3.9415,
               "p10": 1,
               "p90": 7
             },
             "STL": {
-              "mean": 0.9915,
+              "mean": 1.0585,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.4005,
+              "mean": 0.387,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 45.92852222960532,
-              "p10": 27.77777777777778,
-              "p90": 63.63636363636363
+              "mean": 46.90541247019957,
+              "p10": 28.571428571428573,
+              "p90": 66.66666666666667
             },
             "FT_PCT": {
-              "mean": 88.27600822992903,
+              "mean": 88.56488216525827,
               "p10": 60,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 36.34366499809136,
+              "mean": 37.253916748128965,
               "p10": 0,
               "p90": 66.66666666666667
             }
@@ -24634,48 +24598,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 28.27674263197965,
-            "p10": 21.06122448979591,
-            "p90": 35.294117647058755
+            "mean": 28.256742631979666,
+            "p10": 21.028571428571414,
+            "p90": 35.32075471698118
           },
           "stats": {
             "PTS": {
-              "mean": 22.62,
+              "mean": 22.859,
               "p10": 13,
               "p90": 33
             },
             "AST": {
-              "mean": 3.088,
+              "mean": 3.1875,
               "p10": 1,
-              "p90": 5
+              "p90": 6
             },
             "REB": {
-              "mean": 4.4815,
+              "mean": 4.378,
               "p10": 2,
               "p90": 7
             },
             "STL": {
-              "mean": 1.0365,
+              "mean": 1.0765,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.327,
+              "mean": 0.3435,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 45.75401041497767,
-              "p10": 30.434782608695652,
+              "mean": 46.31956777434849,
+              "p10": 30.76923076923077,
               "p90": 61.111111111111114
             },
             "FT_PCT": {
-              "mean": 84.47194178221653,
-              "p10": 60,
+              "mean": 84.24327536450338,
+              "p10": 57.142857142857146,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 29.40824793206327,
+              "mean": 29.50400639282532,
               "p10": 0,
               "p90": 57.142857142857146
             }
@@ -24689,50 +24653,50 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 26.894866190631294,
-            "p10": 19.878787878787865,
-            "p90": 33.69230769230764
+            "mean": 28.067226934931114,
+            "p10": 20.509090909090908,
+            "p90": 35.34065934065938
           },
           "stats": {
             "PTS": {
-              "mean": 15.562,
-              "p10": 8,
-              "p90": 24
+              "mean": 17.4825,
+              "p10": 9,
+              "p90": 26
             },
             "AST": {
-              "mean": 4.591,
+              "mean": 4.0855,
               "p10": 2,
-              "p90": 8
+              "p90": 7
             },
             "REB": {
-              "mean": 5.867,
+              "mean": 7.081,
               "p10": 3,
-              "p90": 9
+              "p90": 11
             },
             "STL": {
-              "mean": 0.776,
+              "mean": 0.932,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 1.21,
+              "mean": 1.2235,
               "p10": 0,
               "p90": 3
             },
             "FG_PCT": {
-              "mean": 50.868596034970764,
-              "p10": 31.57894736842105,
-              "p90": 71.42857142857143
+              "mean": 50.39641432929922,
+              "p10": 33.333333333333336,
+              "p90": 69.23076923076923
             },
             "FT_PCT": {
-              "mean": 77.74446775985433,
+              "mean": 78.19718870901306,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 33.54819908400872,
+              "mean": 32.70721947400846,
               "p10": 0,
-              "p90": 100
+              "p90": 75
             }
           }
         },
@@ -24763,48 +24727,48 @@
           "playedScenarios": 1999,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 16.42554813485159,
+            "mean": 16.44305688922878,
             "p10": 9.980198019801986,
-            "p90": 22.978723404255316
+            "p90": 22.89908256880737
           },
           "stats": {
             "PTS": {
-              "mean": 4.724862431215608,
+              "mean": 4.879939969984992,
               "p10": 0,
-              "p90": 9
+              "p90": 10
             },
             "AST": {
-              "mean": 1.32016008004002,
+              "mean": 1.3451725862931465,
               "p10": 0,
               "p90": 3
             },
             "REB": {
-              "mean": 4.210105052526263,
+              "mean": 4.20360180090045,
               "p10": 1,
-              "p90": 8
+              "p90": 7
             },
             "STL": {
-              "mean": 0.4177088544272136,
+              "mean": 0.42771385692846425,
               "p10": 0,
               "p90": 1
             },
             "BLK": {
-              "mean": 0.3441720860430215,
+              "mean": 0.327663831915958,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 46.18491539972611,
+              "mean": 48.22596435348595,
               "p10": 0,
               "p90": 100
             },
             "FT_PCT": {
-              "mean": 78.64815863976933,
+              "mean": 78.82081632653055,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 24.437203791469194,
+              "mean": 25.92206790123457,
               "p10": 0,
               "p90": 100
             }
@@ -24856,48 +24820,48 @@
           "playedScenarios": 1997,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 12.695954650986014,
+            "mean": 12.703465917886364,
             "p10": 7.200000000000003,
-            "p90": 19.294117647058812
+            "p90": 19.384615384615376
           },
           "stats": {
             "PTS": {
-              "mean": 5.743615423134702,
+              "mean": 5.838758137205809,
               "p10": 0,
               "p90": 11
             },
             "AST": {
-              "mean": 0.7681522283425137,
+              "mean": 0.771657486229344,
               "p10": 0,
               "p90": 2
             },
             "REB": {
-              "mean": 1.899849774661993,
+              "mean": 1.871807711567351,
               "p10": 0,
               "p90": 4
             },
             "STL": {
-              "mean": 0.4376564847270906,
+              "mean": 0.4486730095142714,
               "p10": 0,
               "p90": 1
             },
             "BLK": {
-              "mean": 0.1757636454682023,
+              "mean": 0.18077115673510266,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 45.759662372497054,
+              "mean": 46.13615050200143,
               "p10": 0,
               "p90": 100
             },
             "FT_PCT": {
-              "mean": 77.27211275924503,
+              "mean": 76.78021778620574,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 35.6104240701256,
+              "mean": 36.48811911447296,
               "p10": 0,
               "p90": 100
             }
@@ -24911,48 +24875,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 20.318964855975704,
+            "mean": 20.3214648559757,
             "p10": 12.83168316831684,
-            "p90": 27.733333333333366
+            "p90": 27.743119266055086
           },
           "stats": {
             "PTS": {
-              "mean": 7.5485,
+              "mean": 7.728,
               "p10": 2,
-              "p90": 13
+              "p90": 14
             },
             "AST": {
-              "mean": 2.446,
+              "mean": 2.563,
               "p10": 1,
               "p90": 5
             },
             "REB": {
-              "mean": 3.2895,
+              "mean": 3.2185,
               "p10": 1,
               "p90": 6
             },
             "STL": {
-              "mean": 0.5875,
+              "mean": 0.6085,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.375,
+              "mean": 0.3805,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 46.4297730736725,
+              "mean": 47.65921990174869,
               "p10": 20,
               "p90": 75
             },
             "FT_PCT": {
-              "mean": 76.34247960531232,
+              "mean": 77.59608187276727,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 30.34762241768614,
+              "mean": 33.08561047485099,
               "p10": 0,
               "p90": 100
             }
@@ -24966,48 +24930,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 22.666099716615104,
+            "mean": 22.67109971661509,
             "p10": 15.31914893617021,
-            "p90": 30.240000000000023
+            "p90": 30.185567010309228
           },
           "stats": {
             "PTS": {
-              "mean": 9.03,
+              "mean": 9.1915,
               "p10": 3,
-              "p90": 15
+              "p90": 16
             },
             "AST": {
-              "mean": 2.4635,
+              "mean": 2.543,
               "p10": 1,
               "p90": 5
             },
             "REB": {
-              "mean": 2.8875,
+              "mean": 2.883,
               "p10": 1,
               "p90": 5
             },
             "STL": {
-              "mean": 0.923,
+              "mean": 0.986,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.5545,
+              "mean": 0.579,
               "p10": 0,
               "p90": 2
             },
             "FG_PCT": {
-              "mean": 43.87803082937656,
+              "mean": 45.10291243498841,
               "p10": 20,
-              "p90": 70
+              "p90": 71.42857142857143
             },
             "FT_PCT": {
-              "mean": 72.86494012339439,
-              "p10": 42.857142857142854,
+              "mean": 73.15151090382393,
+              "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 32.92599903589508,
+              "mean": 34.30760007072911,
               "p10": 0,
               "p90": 100
             }
@@ -25021,28 +24985,28 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 21.1147993022452,
-            "p10": 14.588235294117649,
+            "mean": 21.099799302245195,
+            "p10": 14.628571428571432,
             "p90": 27.99999999999996
           },
           "stats": {
             "PTS": {
-              "mean": 7.394,
+              "mean": 7.619,
               "p10": 2,
-              "p90": 13
+              "p90": 14
             },
             "AST": {
-              "mean": 1.383,
+              "mean": 1.4395,
               "p10": 0,
               "p90": 3
             },
             "REB": {
-              "mean": 2.68,
+              "mean": 2.7295,
               "p10": 1,
               "p90": 5
             },
             "STL": {
-              "mean": 0.6595,
+              "mean": 0.72,
               "p10": 0,
               "p90": 2
             },
@@ -25052,19 +25016,19 @@
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 42.15513153447387,
-              "p10": 14.285714285714286,
-              "p90": 66.66666666666667
+              "mean": 44.323466227945985,
+              "p10": 16.666666666666668,
+              "p90": 75
             },
             "FT_PCT": {
-              "mean": 88.8144639903774,
+              "mean": 88.063520492189,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 34.19224138906426,
+              "mean": 37.16918094477351,
               "p10": 0,
-              "p90": 75
+              "p90": 100
             }
           }
         },
@@ -25076,48 +25040,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 19.596721417310555,
-            "p10": 12.560747663551401,
-            "p90": 27.08910891089111
+            "mean": 20.728297352487132,
+            "p10": 13.333333333333337,
+            "p90": 27.885714285714247
           },
           "stats": {
             "PTS": {
-              "mean": 6.4385,
+              "mean": 7.192,
               "p10": 2,
               "p90": 13
             },
             "AST": {
-              "mean": 2.6965,
+              "mean": 2.8075,
               "p10": 1,
               "p90": 5
             },
             "REB": {
-              "mean": 3.362,
+              "mean": 3.298,
               "p10": 1,
               "p90": 6
             },
             "STL": {
-              "mean": 0.645,
+              "mean": 0.6045,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.3305,
+              "mean": 0.3265,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 46.93454485556521,
-              "p10": 0,
+              "mean": 48.09704556330561,
+              "p10": 16.666666666666668,
               "p90": 80
             },
             "FT_PCT": {
-              "mean": 87.94448500581382,
+              "mean": 86.01549566656932,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 39.204399149095615,
+              "mean": 39.19278103935627,
               "p10": 0,
               "p90": 100
             }
@@ -25131,50 +25095,50 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 17.291295608178654,
-            "p10": 10.181818181818176,
-            "p90": 24.485148514851485
+            "mean": 18.067684655294574,
+            "p10": 10.568807339449545,
+            "p90": 25.188118811881207
           },
           "stats": {
             "PTS": {
-              "mean": 6.9405,
+              "mean": 8.319,
               "p10": 2,
-              "p90": 13
+              "p90": 15
             },
             "AST": {
-              "mean": 1.117,
+              "mean": 1.036,
               "p10": 0,
-              "p90": 3
+              "p90": 2
             },
             "REB": {
-              "mean": 2.2565,
+              "mean": 2.411,
               "p10": 0,
-              "p90": 4
+              "p90": 5
             },
             "STL": {
-              "mean": 0.4955,
+              "mean": 0.569,
               "p10": 0,
-              "p90": 1
+              "p90": 2
             },
             "BLK": {
-              "mean": 0.2,
+              "mean": 0.198,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 45.920174299805645,
-              "p10": 12.5,
-              "p90": 80
+              "mean": 46.227455970610315,
+              "p10": 20,
+              "p90": 75
             },
             "FT_PCT": {
-              "mean": 79.97335747013575,
+              "mean": 79.4760580631279,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 40.71139080398328,
+              "mean": 39.9077518006847,
               "p10": 0,
-              "p90": 100
+              "p90": 80
             }
           }
         },
@@ -25186,48 +25150,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 17.658926096823674,
-            "p10": 10.415094339622641,
-            "p90": 25
+            "mean": 18.49672429719691,
+            "p10": 12.23529411764706,
+            "p90": 25.41176470588232
           },
           "stats": {
             "PTS": {
-              "mean": 5.774,
-              "p10": 1,
-              "p90": 11
+              "mean": 6.509,
+              "p10": 2,
+              "p90": 12
             },
             "AST": {
-              "mean": 4.054,
+              "mean": 4.12,
               "p10": 1,
               "p90": 7
             },
             "REB": {
-              "mean": 1.4485,
+              "mean": 1.516,
               "p10": 0,
               "p90": 3
             },
             "STL": {
-              "mean": 0.542,
+              "mean": 0.623,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.155,
+              "mean": 0.165,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 41.360031816950986,
+              "mean": 41.80973601635881,
               "p10": 0,
               "p90": 75
             },
             "FT_PCT": {
-              "mean": 77.58180367118909,
+              "mean": 76.50045207956595,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 34.07229303156267,
+              "mean": 35.31094233370686,
               "p10": 0,
               "p90": 100
             }
@@ -25260,48 +25224,48 @@
           "playedScenarios": 1994,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 13.259011715383922,
+            "mean": 13.266534283087033,
             "p10": 7.384615384615386,
-            "p90": 19.878787878787865
+            "p90": 19.960396039603975
           },
           "stats": {
             "PTS": {
-              "mean": 4.998996990972919,
+              "mean": 5.147442326980943,
               "p10": 0,
               "p90": 10
             },
             "AST": {
-              "mean": 1.3560682046138415,
+              "mean": 1.364593781344032,
               "p10": 0,
               "p90": 3
             },
             "REB": {
-              "mean": 1.4954864593781345,
+              "mean": 1.4704112337011033,
               "p10": 0,
               "p90": 3
             },
             "STL": {
-              "mean": 0.44232698094282846,
+              "mean": 0.4583751253761284,
               "p10": 0,
               "p90": 1
             },
             "BLK": {
-              "mean": 0.11083249749247744,
+              "mean": 0.10381143430290872,
               "p10": 0,
-              "p90": 1
+              "p90": 0
             },
             "FG_PCT": {
-              "mean": 45.366371832527115,
+              "mean": 46.780971181339964,
               "p10": 0,
               "p90": 100
             },
             "FT_PCT": {
-              "mean": 73.96806870415995,
+              "mean": 72.68498082753695,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 33.1677569856484,
+              "mean": 35.30734538773129,
               "p10": 0,
               "p90": 100
             }
@@ -25315,48 +25279,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 18.317801122894473,
-            "p10": 12.116504854368928,
-            "p90": 25.263157894736867
+            "mean": 18.944233691951442,
+            "p10": 12.244897959183676,
+            "p90": 25.696969696969678
           },
           "stats": {
             "PTS": {
-              "mean": 6.4665,
+              "mean": 7.613,
               "p10": 2,
-              "p90": 12
+              "p90": 14
             },
             "AST": {
-              "mean": 2.008,
+              "mean": 1.9765,
               "p10": 0,
               "p90": 4
             },
             "REB": {
-              "mean": 3.7495,
+              "mean": 3.9145,
               "p10": 1,
               "p90": 7
             },
             "STL": {
-              "mean": 0.602,
+              "mean": 0.668,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.778,
+              "mean": 0.853,
               "p10": 0,
               "p90": 2
             },
             "FG_PCT": {
-              "mean": 58.44392486673569,
+              "mean": 57.884602950794026,
               "p10": 25,
               "p90": 100
             },
             "FT_PCT": {
-              "mean": 68.52943497474757,
+              "mean": 68.51841977941699,
               "p10": 33.333333333333336,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 33.529306005034165,
+              "mean": 33.364720652856235,
               "p10": 0,
               "p90": 100
             }
@@ -25386,51 +25350,51 @@
           "name": "Alijah Martin",
           "team": "TOR",
           "injuryStatus": "Not listed",
-          "playedScenarios": 1996,
+          "playedScenarios": 1997,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 14.402020035608846,
-            "p10": 7.680000000000003,
-            "p90": 20.78350515463916
+            "mean": 15.019692274456682,
+            "p10": 8.160000000000004,
+            "p90": 22.18867924528304
           },
           "stats": {
             "PTS": {
-              "mean": 6.2990981963927855,
+              "mean": 6.99298948422634,
               "p10": 2,
-              "p90": 12
+              "p90": 13
             },
             "AST": {
-              "mean": 1.3952905811623246,
+              "mean": 1.5403104656985478,
               "p10": 0,
               "p90": 3
             },
             "REB": {
-              "mean": 2.6417835671342687,
+              "mean": 2.445668502754131,
               "p10": 0,
               "p90": 5
             },
             "STL": {
-              "mean": 0.6032064128256514,
+              "mean": 0.5743615423134703,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.36472945891783565,
+              "mean": 0.4031046569854782,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 43.884302912833476,
-              "p10": 0,
+              "mean": 44.32581215177233,
+              "p10": 12.5,
               "p90": 75
             },
             "FT_PCT": {
-              "mean": 77.25597479873136,
+              "mean": 77.32605940939273,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 30.95908090724446,
+              "mean": 32.741870821139166,
               "p10": 0,
               "p90": 100
             }
@@ -25460,51 +25424,51 @@
           "name": "Allen Graves",
           "team": "TOR",
           "injuryStatus": "Not listed",
-          "playedScenarios": 1999,
+          "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 17.698990736202013,
-            "p10": 10.415094339622641,
-            "p90": 24.979591836734677
+            "mean": 18.377757499163646,
+            "p10": 12.11214953271028,
+            "p90": 25.384615384615355
           },
           "stats": {
             "PTS": {
-              "mean": 5.048024012006003,
+              "mean": 5.447,
               "p10": 0,
-              "p90": 10
+              "p90": 11
             },
             "AST": {
-              "mean": 1.271135567783892,
+              "mean": 1.361,
               "p10": 0,
               "p90": 3
             },
             "REB": {
-              "mean": 2.619809904952476,
+              "mean": 2.508,
               "p10": 1,
               "p90": 5
             },
             "STL": {
-              "mean": 0.3901950975487744,
+              "mean": 0.3955,
               "p10": 0,
               "p90": 1
             },
             "BLK": {
-              "mean": 0.4062031015507754,
+              "mean": 0.419,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 47.01890558256995,
+              "mean": 46.0681610386587,
               "p10": 0,
-              "p90": 100
+              "p90": 85.71428571428571
             },
             "FT_PCT": {
-              "mean": 75.03069781371663,
+              "mean": 75.78207203561304,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 35.070094874359704,
+              "mean": 34.02687925457447,
               "p10": 0,
               "p90": 100
             }
@@ -25515,18 +25479,54 @@
           "name": "Jaden Bradley",
           "team": "TOR",
           "injuryStatus": "Not listed",
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
+          "playedScenarios": 1997,
+          "projectionStatus": "available",
+          "minutes": {
+            "mean": 14.525394260868238,
+            "p10": 7.698113207547169,
+            "p90": 20.97087378640776
+          },
           "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
+            "PTS": {
+              "mean": 5.529293940911367,
+              "p10": 0,
+              "p90": 11
+            },
+            "AST": {
+              "mean": 1.2944416624937407,
+              "p10": 0,
+              "p90": 3
+            },
+            "REB": {
+              "mean": 2.0645968953430147,
+              "p10": 0,
+              "p90": 4
+            },
+            "STL": {
+              "mean": 0.400100150225338,
+              "p10": 0,
+              "p90": 1
+            },
+            "BLK": {
+              "mean": 0.26489734601902853,
+              "p10": 0,
+              "p90": 1
+            },
+            "FG_PCT": {
+              "mean": 47.39495465517448,
+              "p10": 0,
+              "p90": 100
+            },
+            "FT_PCT": {
+              "mean": 76.43147219901599,
+              "p10": 50,
+              "p90": 100
+            },
+            "FG3_PCT": {
+              "mean": 35.94338359953604,
+              "p10": 0,
+              "p90": 100
+            }
           }
         },
         {
@@ -25567,7 +25567,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00"
+        "validUntil": "2026-10-27T21:55:06.830541+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -26485,8 +26485,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00",
-        "observedAt": "2026-10-27T14:07:36.014612+00:00",
+        "validUntil": "2026-10-27T21:55:06.830541+00:00",
+        "observedAt": "2026-10-27T15:55:09.381408+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -28327,8 +28327,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00",
-        "observedAt": "2026-10-27T14:07:36.014612+00:00",
+        "validUntil": "2026-10-27T21:55:06.830541+00:00",
+        "observedAt": "2026-10-27T15:55:09.381408+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -30167,8 +30167,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00",
-        "observedAt": "2026-10-27T14:07:36.014612+00:00",
+        "validUntil": "2026-10-27T21:55:06.830541+00:00",
+        "observedAt": "2026-10-27T15:55:09.381408+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -31783,7 +31783,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00"
+        "validUntil": "2026-10-27T21:55:06.830541+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -32472,7 +32472,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00"
+        "validUntil": "2026-10-27T21:55:06.830541+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -33402,8 +33402,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-27T20:07:34.966004+00:00",
-        "observedAt": "2026-10-27T14:07:36.014612+00:00",
+        "validUntil": "2026-10-27T21:55:06.830541+00:00",
+        "observedAt": "2026-10-27T15:55:09.381408+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
