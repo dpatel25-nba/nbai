@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-27T12:13:24.595Z",
+  "generatedAt": "2026-10-27T12:39:34.286Z",
   "scope": "game",
   "runs": 2000,
   "seedPrefix": "market-matchups-v1:",
@@ -9624,7 +9624,7 @@
     "web/season-engine.js": "eb9252a1582df10e6111b694229d9943ab5b9b734a6b7012abcbd2a631ea9e08",
     "web/season-possession.js": "133537a8a45a321a3cb884fbe3140b0917b2b3a85f36de26490a5f4d8e5f05a5",
     "web/season-availability.json": "a2ebd5a3bd2fb4b2642bb138c59fc6d696e8f23a3a21de89a3658c02f3fdc67c",
-    "web/game-availability.json": "4e379797e29685346430a6797972cac0766a3c16be315e5fac5adb6b0e310832",
+    "web/game-availability.json": "55d9c8c3ac93620c449afbd583b26188ffbd0fec2bace6c034d20c4ba3bc0644",
     "scripts/game_availability.cjs": "ad4ebaddf8a1a29c1d4f9285e6694211308ac46a65d954a040ae31f212edde00",
     "scripts/build_market_game_projections.cjs": "126d7f4b7efcd447531b892b4184db8887474fcb3346c5050d0388805bc2ece5",
     "scripts/match_market_schedule.cjs": "f49aa4bdf06f89d1589098030436af429a52562ea785f39198adfd8b152bcdc3",
@@ -9635,8 +9635,8 @@
     "web/lib/game-watchlist-targets.json": "54e78bb4477557b5e4c684a00fba33c6a53bafca0205f6affd07b79ca3d0770b"
   },
   "marketInventoryHash": "32a32c224128cafabca5a17931e25e93745bfdfd5e8d102dbad1f125781d61d5",
-  "inputSignature": "58466c29c8d5c2e999e23e8e8fde98f9209aac9058bf5eec8efbbee12d8a57c9",
-  "availabilityValidUntil": "2026-10-27T18:13:09.795901+00:00",
+  "inputSignature": "a8ecdf3d4ee63f65536f5dc652707aa58c1989e5de0ccfaa0eacf7e9cf731eda",
+  "availabilityValidUntil": "2026-10-27T18:39:11.003457+00:00",
   "assumptions": "Matchup-specific possession scenarios using current roster and ESPN injury observations. Reported Out players are excluded; other players are conditional on playing. Questionable participation, confirmed starters and minutes restrictions are not modeled. Not calibrated betting probabilities.",
   "events": [
     {
@@ -9654,10 +9654,129 @@
       "availability": {
         "holdReason": null,
         "outIds": [
-          "1643548",
-          "1642269"
+          "1642269",
+          "1643548"
         ],
         "players": [
+          {
+            "id": 1642269,
+            "name": "Devin Carter",
+            "team": "BOS",
+            "status": "Out",
+            "out": true
+          },
+          {
+            "id": 1643416,
+            "name": "Chris Cenac Jr.",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 201144,
+            "name": "Mike Conley",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1630568,
+            "name": "Luka Garza",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 202331,
+            "name": "Paul George",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642864,
+            "name": "Hugo Gonzalez",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1631199,
+            "name": "Ron Harper Jr.",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1630573,
+            "name": "Sam Hauser",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1641759,
+            "name": "Dillon Mitchell",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1630202,
+            "name": "Payton Pritchard",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1629674,
+            "name": "Neemias Queta",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1629011,
+            "name": "Mitchell Robinson",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1631248,
+            "name": "Baylor Scheierman",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1628369,
+            "name": "Jayson Tatum",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1641775,
+            "name": "Jordan Walsh",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1628401,
+            "name": "Derrick White",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642873,
+            "name": "Amari Williams",
+            "team": "BOS",
+            "status": "Not listed",
+            "out": false
+          },
           {
             "id": 1643548,
             "name": "Tyler Bilodeau",
@@ -9783,142 +9902,23 @@
             "team": "BKN",
             "status": "Not listed",
             "out": false
-          },
-          {
-            "id": 1642269,
-            "name": "Devin Carter",
-            "team": "BOS",
-            "status": "Out",
-            "out": true
-          },
-          {
-            "id": 1643416,
-            "name": "Chris Cenac Jr.",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 201144,
-            "name": "Mike Conley",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630568,
-            "name": "Luka Garza",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 202331,
-            "name": "Paul George",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642864,
-            "name": "Hugo Gonzalez",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1631199,
-            "name": "Ron Harper Jr.",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630573,
-            "name": "Sam Hauser",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641759,
-            "name": "Dillon Mitchell",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630202,
-            "name": "Payton Pritchard",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1629674,
-            "name": "Neemias Queta",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1629011,
-            "name": "Mitchell Robinson",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1631248,
-            "name": "Baylor Scheierman",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1628369,
-            "name": "Jayson Tatum",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641775,
-            "name": "Jordan Walsh",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1628401,
-            "name": "Derrick White",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642873,
-            "name": "Amari Williams",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
           }
         ],
-        "validUntil": "2026-10-27T18:13:09.795901+00:00",
-        "observedAt": "2026-10-27T12:13:11.384642+00:00",
+        "validUntil": "2026-10-27T18:39:11.003457+00:00",
+        "observedAt": "2026-10-27T12:39:11.839008+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
           {
-            "id": 1643548,
-            "name": "Tyler Bilodeau",
-            "team": "BKN",
-            "status": "Out"
-          },
-          {
             "id": 1642269,
             "name": "Devin Carter",
             "team": "BOS",
+            "status": "Out"
+          },
+          {
+            "id": 1643548,
+            "name": "Tyler Bilodeau",
+            "team": "BKN",
             "status": "Out"
           }
         ],
@@ -11500,7 +11500,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-27T18:13:09.795901+00:00"
+        "validUntil": "2026-10-27T18:39:11.003457+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -12150,7 +12150,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-27T18:13:09.795901+00:00"
+        "validUntil": "2026-10-27T18:39:11.003457+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -13088,8 +13088,8 @@
             "out": true
           }
         ],
-        "validUntil": "2026-10-27T18:13:09.795901+00:00",
-        "observedAt": "2026-10-27T12:13:11.384642+00:00",
+        "validUntil": "2026-10-27T18:39:11.003457+00:00",
+        "observedAt": "2026-10-27T12:39:11.839008+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -14949,8 +14949,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-27T18:13:09.795901+00:00",
-        "observedAt": "2026-10-27T12:13:11.384642+00:00",
+        "validUntil": "2026-10-27T18:39:11.003457+00:00",
+        "observedAt": "2026-10-27T12:39:11.839008+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -16581,7 +16581,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-27T18:13:09.795901+00:00"
+        "validUntil": "2026-10-27T18:39:11.003457+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -17250,7 +17250,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-27T18:13:09.795901+00:00"
+        "validUntil": "2026-10-27T18:39:11.003457+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -17919,7 +17919,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-27T18:13:09.795901+00:00"
+        "validUntil": "2026-10-27T18:39:11.003457+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -18607,7 +18607,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-27T18:13:09.795901+00:00"
+        "validUntil": "2026-10-27T18:39:11.003457+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
