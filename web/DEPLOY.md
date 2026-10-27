@@ -2,10 +2,10 @@
 
 ## Research-led Game Day (current)
 
-`index.html` and `betting.html` lead with three researched player props, one
-reviewed game-script combo and game tabs. `matchup.html?game=<NBA game id>&date=YYYY-MM-DD`
-contains the matchup narrative, three reviewed props, a game script, winner asks
-and searchable player contracts. Public model percentages, simulated scores,
+`index.html` and `betting.html` show three ranked favorites under every matchup.
+`matchup.html?game=<NBA game id>&date=YYYY-MM-DD` contains the matchup narrative,
+its three favorites and searchable player contracts. Archived editorial reviews
+can also retain their game scripts and winner asks. Public model percentages, simulated scores,
 model margins and automatic model-only recommendations are removed from these
 views. The separate simulators and research tools remain available.
 
@@ -53,18 +53,29 @@ Both publishing jobs share a concurrency group. The new job uses free public
 feeds and does not increase the existing paid odds-collection schedule.
 
 The job refreshes ESPN availability and the matching model identity bundle,
-then `scripts/publish_daily_research.py` obtains today's Eastern-date slate,
-the latest two completed team box scores, a recent official NBA injury PDF,
-and Kalshi offers. Both teams must have submitted official reports. Uncertain
-player status, unresolved roster identities, missing observations, changed
-workloads, insufficient historical samples and expensive offers produce passes.
+including exact public schedule matches absent from the sportsbook event inventory.
+These supplemental ESPN identities contain no invented quotes.
+Then `scripts/publish_daily_research.py` obtains today's Eastern-date slate,
+the latest three completed team box scores, a recent official NBA injury PDF,
+and Kalshi offers. Per the user's October 27 direction, each matchup gets three
+ranked favorites from distinct players. Current individual roster identities,
+recent playing evidence and available/probable status are required. Official
+out/questionable/doubtful entries are excluded. A team report or other roster
+entry requiring review is retained in source notes; it does not exclude an
+otherwise individually verified player. Insufficient sourced alternatives fail
+the publication rather than invent players, observations or prices.
 The static `daily-pick-history.json` contains descriptive 2024–25 and 2025–26
 regular-season counts, exported by `scripts/export_daily_pick_history.py`.
 
-Automatic cards remain research leans even when model numbers appear favorable.
-Their fixed historical-price screen is unvalidated, excludes DNPs from historical
-hit fractions, and is before fees; it supplies no matchup probability or proven
-expected return. Recent opportunity checks do not resolve opponent or role bias.
+Favorites rank historical threshold frequency against the observed ask, with
+recent threshold results, minutes and opportunity adjustments. The score can
+be negative: this is a relative ranking, not the earlier positive-screen-only
+policy. Historical hit fractions exclude DNPs and include prior teams; neither
+the ranking nor model numbers establish positive expected return. No active
+limit-price judgment is attached to ranked favorites. Model confirmation and
+execution remain false. The main page shows three cards under every matchup;
+cards show the player/line, price and brief evidence without like/pass badges.
+Detailed risks, source gaps and methodology remain in expandable source panels.
 No automatic winners, parlays or orders are created. Cards expire after three
 hours or official tip, whichever is earlier. Started games remain immutable.
 

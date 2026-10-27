@@ -34,7 +34,7 @@ jobs:
       - name: Test research selection and publication guards
         run: |
           python tests/test_publish_daily_research.py
-          node --test tests/test_research_picks.cjs tests/test_kalshi_day.cjs
+          node --test tests/test_research_picks.cjs tests/test_kalshi_day.cjs tests/test_projection_event_inventory.cjs
       - name: Refresh public availability and matching identity bundle
         run: |
           python scripts/collect_game_availability.py

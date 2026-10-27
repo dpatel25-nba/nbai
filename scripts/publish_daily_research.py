@@ -24,11 +24,14 @@ BASE='https://site.api.espn.com/apis/site/v2/sports/basketball/nba'
 ET=ZoneInfo('America/New_York')
 ALIASES={'NY':'NYK','SA':'SAS','GS':'GSW','PHO':'PHX','NO':'NOP','UTAH':'UTA','WSH':'WAS'}
 STATS={'PTS':'points','REB':'rebounds','AST':'assists','FG3M':'threes'}
-VERSION='daily-statistical-research-v1'
+VERSION='daily-ranked-favorites-v2'
 POLICY={'minimumSeasonAppearances':25,'minimumAsk':.20,'maximumAsk':.65,'minimumDisplayedSize':5,
     'historicalRateBuffer':.10,'minimumRecentMinutes':20,'minimumWorkloadRatio':.75,'maximumWorkloadRatio':1.35,
-    'minimumRecentOpportunityRatio':.80,'maximumPicksPerGame':2,'maximumPicksPerDay':12,'reviewHours':3,
+    'minimumRecentOpportunityRatio':.80,'maximumPicksPerGame':3,'reviewHours':3,
     'minimumThresholds':{'PTS':9.5,'REB':3.5,'AST':2.5,'FG3M':1.5}}
+FAVORITE_POLICY={'picksPerGame':3,'minimumAsk':.15,'maximumAsk':.85,'minimumDisplayedSize':5,
+    'minimumRecentMinutes':18,'minimumSeasonAppearances':15,'recentTeamGames':3,
+    'ranking':'Historical threshold frequency minus ask, with recent threshold results, workload and opportunity adjustments. Relative ranking only; not a win probability or positive-EV filter.'}
 
 def clock(value):
     d=datetime.fromisoformat(value.replace('Z','+00:00'))
@@ -162,6 +165,55 @@ def merge_reviews(previous, reviews, now):
     result.extend(r for gid,r in incoming.items() if gid not in seen)
     return result
 
+def favorite_candidate(market,history,recent,status,now):
+    """Rank sourced alternatives; a negative ranking score is still comparable.
+
+    Unlike the earlier positive-screen-only card, every game gets its three
+    highest-ranked distinct available players. No injury or identity fallback.
+    """
+    stat=market.get('stat');threshold=market.get('threshold');ask=market.get('yesAsk')
+    if stat not in STATS or not isinstance(threshold,(int,float)) or not math.isfinite(threshold) or threshold<POLICY['minimumThresholds'][stat]:return None
+    if status not in ['Not listed','Available','Active','Probable']:return None
+    if not market.get('quoteValid') or not isinstance(ask,(float,int)) or not FAVORITE_POLICY['minimumAsk']<=ask<=FAVORITE_POLICY['maximumAsk']:return None
+    if (market.get('yesSize') or 0)<FAVORITE_POLICY['minimumDisplayedSize']:return None
+    if not -1<=(now-clock(market['observedAt'])).total_seconds()<=900:return None
+    if not recent or not recent[0].get('played') or recent[0]['minutes']<FAVORITE_POLICY['minimumRecentMinutes']:return None
+    played=[r for r in recent if r.get('played')]
+    minutes=sum(r['minutes'] for r in played)/len(played)
+    if minutes<FAVORITE_POLICY['minimumRecentMinutes']:return None
+    hist=[]
+    for year in ['2024-25','2025-26']:
+        h=history.get(year,{});s=h.get('stats',{}).get(stat,{})
+        if s.get('n',0)<FAVORITE_POLICY['minimumSeasonAppearances']:continue
+        hist.append({'season':year,'hits':sum(v for k,v in s['counts'].items() if float(k)>threshold),
+                     'n':s['n'],'meanMinutes':h['meanMinutes']})
+    if not hist or hist[-1]['season']!='2025-26':return None
+    opportunity={'PTS':'FGA','FG3M':'FG3A'}.get(stat,stat)
+    old=history['2025-26'].get('stats',{}).get(opportunity,{})
+    if not old.get('n') or any(opportunity not in r.get('stats',{}) for r in played):return None
+    prior_opportunity=sum(float(k)*v for k,v in old['counts'].items())/old['n']
+    recent_opportunity=sum(r['stats'][opportunity] for r in played)/len(played)
+    historical=min(h['hits']/h['n'] for h in hist)
+    recent_hits=sum(r['stats'][stat]>threshold for r in played)/len(played)
+    ratio=recent_opportunity/prior_opportunity if prior_opportunity else 0.
+    score=historical-ask+.10*(recent_hits-.5)+.05*min(1.,minutes/hist[-1]['meanMinutes'])-.15*max(0.,1-ratio)
+    return {'history':hist,'recent':played,'recentMinutes':minutes,'rankingScore':score,
+            'recentMissingOrDnp':len(recent)-len(played),
+            'opportunity':{'stat':opportunity,'recent':recent_opportunity,'historical':prior_opportunity}}
+
+def select_three(candidates,reviews):
+    ordered=sorted(candidates,key=lambda r:(-r['rankingScore'],-min(h['n'] for h in r['history']),r['market']['ticker']))
+    selected=[]
+    for review in reviews:
+        choices=[];used=set()
+        for row in ordered:
+            if row['review']['gameId']!=review['gameId'] or row['person']['id'] in used:continue
+            choices.append(row);used.add(row['person']['id'])
+            if len(choices)==3:break
+        require(len(choices)==3,'Three sourced available favorites not yet available for '+review['away']+'@'+review['home'])
+        selected.extend(choices)
+    return selected
+
 def build(root,run,date,now,model,availability,quotes,history,today,latest,boxes,official):
     require(history['latestGameDate']<date,'historical data overlaps target day')
     require(clock(availability['generatedAt'])<=now+timedelta(seconds=1) and clock(availability['validUntil'])>now,'availability expired or future dated')
@@ -182,18 +234,15 @@ def build(root,run,date,now,model,availability,quotes,history,today,latest,boxes
         av=av[0]
         review={'gameId':game['gameId'],'home':game['home'],'away':game['away'],'startsAt':game['startsAt'],
             'officialStartsAt':tip.isoformat(),'reviewedAt':now.isoformat(),'validUntil':min(tip,now+timedelta(hours=POLICY['reviewHours']),clock(availability['validUntil'])).isoformat(),
-            'reviewType':'automated_statistics','modelEvidenceStatus':'rotation_review_required',
-            'headline':'Daily statistical research · '+game['away']+' at '+game['home'],
-            'analysis':'Automated screen of two archived seasons, the latest completed team games, current reported availability and observed Kalshi prices. Historical frequencies are not matchup probabilities. No independent winner edge is claimed.',
+            'reviewType':'automated_statistics','selectionMode':'ranked_favorites','modelEvidenceStatus':'rotation_review_required',
+            'headline':'Three favorites · '+game['away']+' at '+game['home'],
+            'analysis':'Our three player-prop favorites for this matchup, ranked using recent playing time, stat opportunities, historical results and current prices.',
             'winnerTeam':None,'winnerReason':'No automatic winner recommendation; this screen evaluates player thresholds only.',
             'sources':[{'title':'Official NBA injury report · '+official['reportedAt'],'url':official['url']},source,{'title':'Today’s ESPN matchup','url':'https://www.espn.com/nba/game/_/gameId/'+event['id']}],
             'picks':[],'combo':{'status':'held','withdrawalReason':'Singles research only. No validated joint probability or executable combo price.'}}
         reviews.append(review)
         official_hold=official_game_hold(official,date,game['away'],game['home'],game['homeName'],game['awayName'])
-        if official_hold:
-            review['analysis']='Pass pending official availability: '+official_hold+'. No automatic picks for this matchup.';continue
-        if av.get('holdReason'):
-            review['analysis']='Pass pending roster/availability reconciliation: '+av['holdReason']+'. No automatic picks for this matchup.';continue
+        review['sourceNotes']=[reason for reason in [official_hold,av.get('holdReason')] if reason]
         statuses={p['id']:p for p in av['players']}
         for market in quotes['markets']:
             identity=market.get('identity',{})
@@ -207,44 +256,34 @@ def build(root,run,date,now,model,availability,quotes,history,today,latest,boxes
                 and norm(r['team'])==norm(team_name) and person_key(r['player'])==person_key(person['name'])]
             if len(official_status)>1 or any(s not in ['Available','Probable'] for s in official_status):excluded['official_status_hold']+=1;continue
             recent=[]
-            for past in latest.get(person['team'],[])[:2]:
+            for past in latest.get(person['team'],[])[:3]:
                 row=boxes.get(past['id'],{}).get(person['team'],{}).get(norm(person['name']))
                 if row is None:recent.append({'played':None});continue
                 recent.append({**row,'eventId':past['id'],'date':past['date'],'url':'https://www.espn.com/nba/boxscore/_/gameId/'+past['id']})
-            result=candidate(market,person,history['players'].get(str(person['id']),{}),recent,a['status'],now)
+            result=favorite_candidate(market,history['players'].get(str(person['id']),{}),recent,a['status'],now)
             if not result:excluded['screen_not_met']+=1;continue
             result.update(game=game,review=review,market=market,person=person,status=a['status'])
             candidates.append(result)
-    candidates.sort(key=lambda r:(-r['screenMargin'],-min(h['n'] for h in r['history']),r['market']['ticker']))
-    counts=Counter();used=set();selected=[]
-    # Round-robin by game: breadth before a second prop in the same matchup.
-    for round_number in range(POLICY['maximumPicksPerGame']):
-        for r in candidates:
-            game,person,market=r['game'],r['person'],r['market'];gid=game['gameId']
-            if counts[gid]!=round_number or person['id'] in used or len(selected)>=POLICY['maximumPicksPerDay']:continue
-            counts[gid]+=1;used.add(person['id']);selected.append(r)
+    selected=select_three(candidates,reviews)
     for priority,r in enumerate(selected,1):
         market,person=r['market'],r['person'];stat=market['stat'];recent=r['recent'];h=r['history']
         label=f"{person['name']} {math.floor(market['threshold'])+1}+ {STATS[stat]}"
         evidence=[f"{x['season']}: {x['hits']}/{x['n']} valid positive-minute appearances reached this threshold; includes prior teams." for x in h]
         evidence += [f"Latest completed team game: {x['minutes']:g} minutes and {x['stats'][stat]:g} {STATS[stat]} on {x['date'][:10]}." for x in recent]
         evidence += [f"Current provider status: {r['status']}. Not listed does not confirm health or a starting role.",
-            f"Recent {r['opportunity']['stat']} average {r['opportunity']['recent']:.1f}, versus {r['opportunity']['historical']:.1f} in 2025–26. The fixed screen requires at least 80% of that historical opportunity/count level.",
-            'Price ceiling is the lower of the two historical hit fractions minus 10 percentage points, capped at 65¢; this is a fixed screening rule before fees, not a fair-value estimate.',
-            'Automatically generated from source data; no human news interpretation or model-certified edge. Recheck lineup, workload and actual fees before any entry.']
+            f"Recent {r['opportunity']['stat']} average {r['opportunity']['recent']:.1f}, versus {r['opportunity']['historical']:.1f} in 2025–26.",
+            f"{r['recentMissingOrDnp']} recent team-game slot(s) lacked a played box; those slots were not treated as zero production.",
+            'These are relative favorites among available contracts. The ranking is not a calibrated win probability or proof of positive expected return.',*r['review']['sourceNotes']]
         pick={'status':'reviewed','reviewType':'automated_statistics','ticker':market['ticker'],'playerId':person['id'],
             'player':person['name'],'team':person['team'],'stat':stat,'threshold':market['threshold'],'side':'yes',
-            'priority':priority,'label':label,'contractTitle':market['title'],'maxPrice':r['maxPrice'],
-            'conviction':'Automated statistical research lean','basis':'fundamental','modelConfirmed':False,
-            'thesis':f"Both archived seasons support investigating this threshold: {h[0]['hits']}/{h[0]['n']} and {h[1]['hits']}/{h[1]['n']} hits. The last {len(recent)} completed team game(s) show {r['recentMinutes']:.1f} average minutes; the observed offer passes the fixed historical-price screen.",
+            'priority':priority,'label':label,'contractTitle':market['title'],'maxPrice':market['yesAsk'],'priceLimitActive':False,
+            'conviction':'Favorite','basis':'fundamental','modelConfirmed':False,'rankingScore':r['rankingScore'],
+            'thesis':f"Averaging {r['recentMinutes']:.1f} minutes and {sum(x['stats'][stat] for x in recent)/len(recent):.1f} {STATS[stat]} across the last {len(recent)} played team games. Reached this line in {h[-1]['hits']} of {h[-1]['n']} appearances last season.",
             'risk':'Older roles and opponents may differ from today. Minutes, foul trouble, shooting variance and late injury news can invalidate the comparison. This screen does not establish positive expected return.',
             'history':h,'quoteAtReview':{'price':market['yesAsk'],'size':market['yesSize'],'observedAt':market['observedAt']},
             'evidence':evidence,'sources':[{'title':'Official NBA injury report · '+official['reportedAt'],'url':official['url']},source,historical_source,*[{'title':'Recent completed game box score','url':x['url']} for x in recent]],
-            'withinPriceLimit':True,'executionVerified':False}
+            'executionVerified':False}
         r['review']['picks'].append(pick)
-    for review in reviews:
-        if not review['picks'] and 'Pass pending' not in review['analysis']:
-            review['analysis']+=' No player threshold passed every availability, workload, sample-size and price rule at this scan; pass for now.'
     return reviews,dict(eligibleCandidates=len(candidates),selected=len(selected),excluded=dict(excluded))
 
 def main():
@@ -271,16 +310,16 @@ def main():
             for code in teams(event).values():latest.setdefault(code,[]).append(event)
     wanted={t for e in pending for t in teams(e).values()}
     for code in latest:latest[code].sort(key=lambda e:e['date'],reverse=True)
-    ids=sorted({e['id'] for code in wanted for e in latest.get(code,[])[:2]})
+    ids=sorted({e['id'] for code in wanted for e in latest.get(code,[])[:3]})
     boxes={eid:parse_box(fetch(run,'box-'+eid,BASE+'/summary?event='+eid)) for eid in ids}
     quote_path=run/'quotes.json'
     js="const fs=require('fs');require('./web/lib/kalshi-board.cjs').collect().then(q=>fs.writeFileSync(process.argv[1],JSON.stringify(q))).catch(e=>{console.error(e.message);process.exit(1)});"
     subprocess.run([os.environ.get('NBAI_NODE_BIN','node'),'-e',js,str(quote_path)],cwd=root,check=True,timeout=180)
     quotes=json.loads(quote_path.read_text());now=datetime.now(timezone.utc)
     reviews,summary=build(root,run,date,now,model,availability,quotes,history,today,latest,boxes,official)
-    result={**previous,'generatedAt':now.isoformat(),'automation':{'version':VERSION,'dateEt':date,'policy':POLICY,
+    result={**previous,'generatedAt':now.isoformat(),'automation':{'version':VERSION,'dateEt':date,'policy':FAVORITE_POLICY,'selectionMode':'ranked_favorites',
         'mode':'Automated statistical research; no human editorial review or demonstrated betting edge.'},
-        'method':'Daily automatic research screen: two historical seasons, recent completed-game workloads, fresh availability and current Kalshi offers. Explicit passes when evidence is insufficient.',
+        'method':'Three ranked favorites per matchup using historical results, recent minutes and opportunities, current availability and observed offers. Relative research ranking; not a calibrated betting edge.',
         'modelSnapshot':{'generatedAt':model['generatedAt'],'status':'rotation_review_required'},
         'games':merge_reviews(previous['games'],reviews,now)}
     save(run/'published-research.json',result)

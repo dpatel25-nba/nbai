@@ -19,32 +19,32 @@
  }
  function card(p,index,showGame){
   const {pick,game,row,review}=p,box=node('article',null,'favorite-card');
-  box.append(node('p',String(index+1).padStart(2,'0')+' / '+pick.team,'eyebrow'),node('span',p.status,'pick-state '+p.state),node('h3',pick.label));
+  box.dataset.pickState=p.state;
+  box.append(node('p',String(index+1).padStart(2,'0')+' / '+pick.team,'eyebrow'),node('h3',pick.label));
   if(showGame)box.append(link(game.away+' at '+game.home+' · '+et(E.tip(game)),gameUrl(game)));
   const price=node('div',snapshotPrice(row),'card-price');price.append(node('small',' / contract · before fees'));box.append(price);
   box.append(node('p',pick.side.toUpperCase()+' on “'+(row?.market.title||pick.contractTitle)+'”','contract-side'));
-  if(pick.auditReason)box.append(node('p','Audit: '+pick.auditReason,'pick-risk'));
-  box.append(node('p',(pick.priceLimitActive===false?'No active price limit':'Price limit '+cents(pick.maxPrice))+' · '+pick.conviction,'price-limit'),node('p',pick.thesis,'pick-thesis'));
-  const risk=node('p',null,'pick-risk');risk.append(node('strong','What could go wrong: '),document.createTextNode(pick.risk));box.append(risk);
+  box.append(node('p',pick.thesis,'pick-thesis'));
   const detail=node('details',null,'pick-evidence');detail.dataset.disclosure='pick-'+pick.ticker;detail.append(node('summary','Research & sources'));
+  if(pick.auditReason)detail.append(node('p',pick.auditReason));
+  detail.append(node('p',pick.risk));
   for(const line of pick.evidence||[])detail.append(node('p',line));sources(detail,pick.sources);
   detail.append(node('small',(review.reviewType==='automated_statistics'?'Automatic screen run ':'Research reviewed ')+et(review.reviewedAt)+'. Historical results and preseason samples are context, not today’s win probability.'));box.append(detail);
   box.append(node('small',row?'Quote observed '+et(row.market.observedAt)+'. '+(row.fresh?'':'Saved observation; refresh before using. '):'No matching offer was returned.'));
+  if(p.state==='closed')box.append(node('small','Saved pregame selection · Game has started.'));
   if(row)box.append(external('View exact Kalshi contract ↗',row.market.url));
   return box;
  }
  function favorites(target,games,showGame){
   target.replaceChildren();const picks=R.favorites(games,research);
   picks.forEach((p,i)=>target.append(card(p,i,showGame)));
-  if(picks.length<3)target.append(node('p',picks.length?'Only '+picks.length+' reviewed ideas remain on this shortlist after the audit. We are not filling empty slots with weaker picks.':'Research is pending for this slate. Favorites appear after a source-backed review; unreviewed lines stay on the player board.','empty-picks'));
+  if(!picks.length)target.append(node('p','Favorites are updating.','empty-picks'));
  }
  function marketStatus(){
   const fresh=quotes?.markets?.some(m=>Date.now()-Date.parse(m.observedAt)<=E.FRESH_MS&&Date.now()>=Date.parse(m.observedAt)-1000);
   $('quoteStatus').textContent=quotes?`${quoteFailed?'Live refresh unavailable. ':''}${fresh?'Recent Kalshi quotes':'Saved quotes only'} · Last scan ${et(quotes.generatedAt)}. Refreshes every 30 seconds while visible.`:'Prices unavailable. Retrying every 30 seconds.';
   $('quoteDot').classList.toggle('live',!!fresh&&!quoteFailed);
-  $('researchStatus').textContent=research?`${researchFailed?'Research refresh failed; retaining the dated review. ':''}News, role and historical-data reviews · Updated ${et(research.generatedAt)}. Price limits are judgments, not guaranteed edges.`:'Research reviews are loading. Picks are not generated from prices alone.';
-  if(research?.automation?.dateEt===selectedDate)$('researchStatus').textContent=`${researchFailed?'Refresh failed; retaining the dated card. ':''}Automatic daily research · Updated ${et(research.generatedAt)}. Screens historical results, recent minutes, reported availability and current prices. No human editorial review or proven betting edge.`;
-  if(research?.modelSnapshot?.status==='rotation_review_required')$('researchStatus').textContent+=' Simulator minutes are under review. Today’s selections are fundamental research leans, not model-confirmed edges.';
+  $('researchStatus').textContent=research?`${researchFailed?'Refresh unavailable · ':''}Favorites updated ${et(research.generatedAt)} · Recent games, player availability and current prices.`:'Loading today’s favorites…';
   $('coverageDetails').replaceChildren();
   if(quotes){const list=node('ul');for(const c of quotes.coverage||[])list.append(node('li',c.series+': '+(c.complete?c.accepted+' recognized contracts':'Unavailable in this scan')));$('coverageDetails').append(list);}
  }
@@ -72,17 +72,21 @@
   $('gameDate').value=selectedDate;const games=board.games.filter(g=>E.day(g.startsAt)===selectedDate);
   $('slateTitle').textContent=new Date(selectedDate+'T12:00:00Z').toLocaleDateString('en-US',{timeZone:'America/New_York',weekday:'long',month:'long',day:'numeric'});
   $('slateCount').textContent=games.length+' games';favorites($('dailyFavorites'),games,true);tabs(games);
+  const ranked=research?.automation?.selectionMode==='ranked_favorites'&&research.automation.dateEt===selectedDate;
+  $('dailyPicks').hidden=ranked;
   const combos=games.map(g=>R.combo(g,research)).filter(Boolean).sort((a,b)=>(a.closed?2:a.ready?0:1)-(b.closed?2:b.ready?0:1)||(a.priority??99)-(b.priority??99));
-  renderCombo($('dailyCombo'),combos[0],true);$('gameCards').replaceChildren();
+  renderCombo($('dailyCombo'),combos[0],true);$('dailyCombo').closest('section').hidden=!combos.length;$('gameCards').replaceChildren();$('gameCards').classList.toggle('per-game-favorites',ranked);
   for(const g of games){const review=R.reviewFor(research,g),a=link('',gameUrl(g));a.className='matchup-card';a.append(node('p',et(E.tip(g)),'tip'),node('h3',g.awayName+' at '+g.homeName));
-   a.append(node('p',review?.headline||'Matchup research pending'),node('small',Date.now()>=Date.parse(E.tip(g))?'Pregame closed · Read the saved research':R.favorites([g],research).length+' reviewed props · Open game analysis →'));$('gameCards').append(a);}
+   a.append(node('small',Date.now()>=Date.parse(E.tip(g))?'Saved pregame picks':R.favorites([g],research).length+' favorites · Matchup details →'));
+   if(ranked){const section=node('section',null,'matchup-picks');section.dataset.gameId=g.id;section.append(a);const grid=node('div',null,'favorite-grid');favorites(grid,[g],false);section.append(grid);$('gameCards').append(section);}
+   else $('gameCards').append(a);}
   if(!games.length)$('gameCards').append(node('p','No games in the saved schedule for this date.','empty-picks'));
  }
  function renderGame(){
   const g=currentGame();$('gameContent').hidden=!g;$('missingGame').hidden=!!g;if(!g)return;
   const review=R.reviewFor(research,g);tabs(board.games.filter(x=>E.day(x.startsAt)===E.day(g.startsAt)),g.id);
   $('backToBoard').href='betting.html?date='+E.day(g.startsAt);$('detailTitle').textContent=g.awayName+' at '+g.homeName;document.title=g.away+' at '+g.home+' · NBAI';
-  $('detailTime').textContent=et(E.tip(g));$('detailBadge').textContent=Date.now()>=Date.parse(E.tip(g))?'Pregame closed':'Pregame research';
+  $('detailTime').textContent=et(E.tip(g));$('detailBadge').textContent=Date.now()>=Date.parse(E.tip(g))?'Saved pregame picks':'Three favorites';
   $('gameHeadline').textContent=review?.headline||'Research in progress';$('gameOpinion').textContent=review?.analysis||'A matchup opinion will appear once the news, roles and historical context have been reviewed.';
   $('gameSources').replaceChildren();sources($('gameSources'),review?.sources);
   const postTip=review?.audit?.timing?.startsWith('after official tip');$('postTipAudit').hidden=!postTip;$('postTipAuditItems').replaceChildren();if(postTip)for(const a of review.audit.picks){const p=review.picks.find(p=>p.ticker===a.ticker);$('postTipAuditItems').append(node('p',(p?.label||a.ticker)+' — '+a.decision+': '+a.reason));}
@@ -92,6 +96,10 @@
   const withdrawn=R.picks([g],research).filter(p=>p.pick.editorialDecision==='withdraw');
   $('withdrawnSection').hidden=!withdrawn.length;$('withdrawnPicks').replaceChildren();withdrawn.forEach((p,i)=>$('withdrawnPicks').append(card(p,i,false)));
   renderCombo($('comboCard'),R.combo(g,research),false);
+  $('comboCard').closest('section').hidden=!R.combo(g,research);
+  $('winnerCards').closest('section').hidden=review?.selectionMode==='ranked_favorites';
+  document.querySelector('.detail-nav a[href="#gameCombo"]').hidden=!R.combo(g,research);
+  document.querySelector('.detail-nav a[href="#gameWinner"]').hidden=review?.selectionMode==='ranked_favorites';
   if($('additionalCombos')){
    $('additionalCombos').replaceChildren();
    for(const c of R.combos(g,research).slice(1)){const box=node('div',null,'combo-panel');renderCombo(box,c,false);$('additionalCombos').append(box);}
@@ -122,9 +130,9 @@
   const reviews=R.picks([g],research);
   for(const [name,markets] of [...grouped].sort((a,b)=>a[0].localeCompare(b[0]))){
    const details=node('details',null,'player-lines');details.dataset.disclosure='player-'+name;if(search)details.open=true;details.append(node('summary',name+' · '+markets.length+' lines'));
-   const scroll=node('div',null,'table-scroll'),table=node('table',null,'kalshi-lines-table'),head=node('thead'),tr=node('tr');for(const title of ['Contract','YES ask','NO ask','Research view'])tr.append(node('th',title));head.append(tr);table.append(head);const body=node('tbody');
+   const scroll=node('div',null,'table-scroll'),table=node('table',null,'kalshi-lines-table'),head=node('thead'),tr=node('tr');for(const title of ['Contract','YES ask','NO ask','Featured'])tr.append(node('th',title));head.append(tr);table.append(head);const body=node('tbody');
    for(const r of markets){const tr=node('tr'),title=node('td');title.append(external(r.market.title+' ↗',r.market.url),node('small','Observed '+et(r.market.observedAt)));tr.append(title,node('td',snapshotPrice(r.yes)),node('td',snapshotPrice(r.no)));
-    const p=reviews.find(p=>p.pick.ticker===r.market.ticker),view=node('td');view.textContent=p?p.pick.side.toUpperCase()+' · '+p.status+(p.pick.priceLimitActive===false?' · Price limit suspended':' · Limit '+cents(p.pick.maxPrice)):'Not reviewed';tr.append(view);body.append(tr);}
+    const p=reviews.find(p=>p.pick.ticker===r.market.ticker),view=node('td');view.textContent=p?'Favorite · '+p.pick.side.toUpperCase():'—';tr.append(view);body.append(tr);}
    table.append(body);scroll.append(table);details.append(scroll);$('allPlayerLines').append(details);
   }
   if(!rows.length)$('allPlayerLines').append(node('p','No recognized lines match this selection.','empty-picks'));

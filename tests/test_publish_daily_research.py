@@ -8,7 +8,7 @@ from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
-from publish_daily_research import candidate, merge_reviews, parse_box, official_game_hold, official_report
+from publish_daily_research import candidate, favorite_candidate, select_three, merge_reviews, parse_box, official_game_hold, official_report
 
 NOW=datetime(2026,10,26,18,tzinfo=timezone.utc)
 
@@ -24,6 +24,24 @@ class DailyResearchTests(unittest.TestCase):
         self.assertEqual(result['maxPrice'],.60)
         m['yesAsk']=.61;self.assertIsNone(candidate(m,{},h,r,'Not listed',NOW))
         m['yesAsk']=.4;del h['2024-25'];self.assertIsNone(candidate(m,{},h,r,'Not listed',NOW))
+
+    def test_favorites_rank_without_requiring_positive_screen_margin(self):
+        m,h,r=self.fixture();m['yesAsk']=.8
+        for x in r:x['stats']['PTS']=20
+        ranked=favorite_candidate(m,h,r,'Not listed',NOW)
+        self.assertIsNotNone(ranked);self.assertLess(ranked['rankingScore'],0)
+        self.assertIsNone(favorite_candidate(m,h,r,'Questionable',NOW))
+        r[0]['played']=False;self.assertIsNone(favorite_candidate(m,h,r,'Not listed',NOW))
+
+    def test_exactly_three_distinct_players_per_game_without_daily_cap(self):
+        reviews=[{'gameId':str(i),'home':'H','away':'A'} for i in range(9)];rows=[]
+        for review in reviews:
+            for i,score in [(1,3),(1,2.9),(2,2),(3,-.1),(4,-.2)]:
+                rows.append({'review':review,'person':{'id':i},'market':{'ticker':review['gameId']+str(score)},'history':[{'n':50}], 'rankingScore':score})
+        selected=select_three(rows,reviews)
+        self.assertEqual(len(selected),27)
+        for review in reviews:self.assertEqual({r['person']['id'] for r in selected if r['review']==review},{1,2,3})
+        with self.assertRaises(ValueError):select_three(rows[:3],reviews[:1])
 
     def test_unknown_dnp_changed_workload_and_injuries_withhold(self):
         for status in ['Out','Questionable','Doubtful','Unknown']:

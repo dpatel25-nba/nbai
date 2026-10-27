@@ -16,13 +16,13 @@ if(!process.argv.includes('--force')&&previous?.inputSignature===fingerprint.inp
 }
 const hash=s=>{let h=2166136261;for(let i=0;i<s.length;i++)h=Math.imul(h^s.charCodeAt(i),16777619);return h>>>0;};
 const games=[],rejected=[];
-for(const event of market.events){
+for(const event of require('./projection_event_inventory.cjs')(d,market,availabilitySnapshot)){
   const match=matchEvent(d,event);
   if(!match){rejected.push({eventId:event.id,reason:event.sport_key==='basketball_nba_preseason'?'Preseason projections are not supported by the regular-season model':'Unique same-team schedule match within 15 minutes not verified'});continue;}
   const {home,away,game,offsetMinutes}=match;
   const availability=forGame(availabilitySnapshot,d,game);
   const players=Object.values(d.players).filter(p=>[home,away].includes(p.team)).map(player=>({player,samples:[]}));
-  games.push({eventId:event.id,providerStartsAt:event.commence_time,offsetMinutes,game,players,scores:[],availability,
+  games.push({eventId:event.id,eventSource:event.identitySource||'sportsbook-event-inventory',providerStartsAt:event.commence_time,offsetMinutes,game,players,scores:[],availability,
     reviewRequired:availability.holdReason||review(d,NBAI_SEASON,home,new Set(availability.outIds))||review(d,NBAI_SEASON,away,new Set(availability.outIds))});
 }
 let cache;const runs=2000,seedPrefix='market-matchups-v1:',calibrationGames=512,calibrationPasses=4;
@@ -47,7 +47,7 @@ const output={schemaVersion:1,generatedAt:new Date().toISOString(),scope:'game',
   ...fingerprint,
   availabilityValidUntil:availabilitySnapshot.validUntil,
   assumptions:'Matchup-specific possession scenarios using current roster and ESPN injury observations. Reported Out players are excluded; other players are conditional on playing. Questionable participation, confirmed starters and minutes restrictions are not modeled. Not calibrated betting probabilities.',
-  events:games.map(e=>({eventId:e.eventId,gameId:e.game.id,home:e.game.home,away:e.game.away,homeName:d.teams[e.game.home].name,awayName:d.teams[e.game.away].name,startsAt:e.providerStartsAt,officialStartsAt:new Date(e.game.tip).toISOString(),scheduleOffsetMinutes:e.offsetMinutes,scheduleMatchMethod:'Unique home/away match within 15 minutes',reviewRequired:e.reviewRequired,
+  events:games.map(e=>({eventId:e.eventId,eventSource:e.eventSource,gameId:e.game.id,home:e.game.home,away:e.game.away,homeName:d.teams[e.game.home].name,awayName:d.teams[e.game.away].name,startsAt:e.providerStartsAt,officialStartsAt:new Date(e.game.tip).toISOString(),scheduleOffsetMinutes:e.offsetMinutes,scheduleMatchMethod:'Unique home/away match within 15 minutes',reviewRequired:e.reviewRequired,
     availability:e.availability,
     calibrationTarget:e.calibrationTarget||null,
     gameProjection:e.scores.length?{homeScore:summary(e.scores.map(g=>g.H)),awayScore:summary(e.scores.map(g=>g.A)),homeMargin:summary(e.scores.map(g=>g.H-g.A)),total:summary(e.scores.map(g=>g.H+g.A)),homeWinShare:e.scores.filter(g=>g.H>g.A).length/runs}:null,

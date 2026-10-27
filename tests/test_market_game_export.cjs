@@ -2,20 +2,21 @@ const fs=require('node:fs'),assert=require('node:assert/strict'),crypto=require(
 const {summary}=require('../scripts/player_projection_stats.cjs');
 global.window=global;require('../web/season-data.js');
 const models=JSON.parse(fs.readFileSync('web/player-game-projections.json')),quotes=JSON.parse(fs.readFileSync('web/player-consensus.json'));
+const inventory=require('../scripts/projection_event_inventory.cjs')(NBAI_SEASON_DATA,quotes,JSON.parse(fs.readFileSync('web/game-availability.json')));
 const samplePath='data/features/player_props/consensus/game-projection-samples.json';
 const saved=fs.existsSync(samplePath)?JSON.parse(fs.readFileSync(samplePath)):null;
 const fingerprint=require('../scripts/market_projection_inputs.cjs').inputs(process.cwd(),quotes);
 assert.equal(models.inputSignature,fingerprint.inputSignature);
 assert.equal(models.marketInventoryHash,fingerprint.marketInventoryHash);
-assert.equal(models.scope,'game');assert.equal(models.runs,2000);assert.equal(models.events.length+models.rejected.length,quotes.events.length);
+assert.equal(models.scope,'game');assert.equal(models.runs,2000);assert.equal(models.events.length+models.rejected.length,inventory.length);
 assert.equal(models.calibration.gamesPerPass,512);assert.equal(models.calibration.passes,4);
 assert.equal(models.coverage.teams,new Set(models.events.flatMap(e=>[e.home,e.away])).size);
 assert.equal(models.coverage.rosteredPlayers,new Set(models.events.flatMap(e=>e.players.map(p=>p.id))).size);
-for(const event of quotes.events){const matching=require('../scripts/match_market_schedule.cjs')(NBAI_SEASON_DATA,event);assert.equal(models.events.some(e=>e.eventId===event.id),!!matching);}
+for(const event of inventory){const matching=require('../scripts/match_market_schedule.cjs')(NBAI_SEASON_DATA,event);assert.equal(models.events.some(e=>e.eventId===event.id),!!matching);}
 for(const [file,sha] of Object.entries(models.sourceHashes))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'),sha);
 for(const e of models.events){
  assert.deepEqual(e.players.map(p=>p.id).sort((a,b)=>a-b),Object.values(NBAI_SEASON_DATA.players).filter(p=>[e.home,e.away].includes(p.team)).map(p=>p.id).sort((a,b)=>a-b));
- const event=quotes.events.find(x=>x.id===e.eventId),game=NBAI_SEASON_DATA.schedule.find(g=>g.id===e.gameId);
+ const event=inventory.find(x=>x.id===e.eventId),game=NBAI_SEASON_DATA.schedule.find(g=>g.id===e.gameId);
  assert.equal(Date.parse(e.officialStartsAt),Date.parse(game.tip));assert.ok(Math.abs(Date.parse(e.startsAt)-Date.parse(game.tip))<=15*60000);assert.equal((Date.parse(e.startsAt)-Date.parse(game.tip))/60000,e.scheduleOffsetMinutes);assert.equal(Date.parse(e.startsAt),Date.parse(event.commence_time));
  assert.equal(NBAI_SEASON_DATA.teams[e.home].name,event.home_team);assert.equal(NBAI_SEASON_DATA.teams[e.away].name,event.away_team);
  if(e.reviewRequired){assert.equal(e.gameProjection,null);assert.ok(e.players.every(p=>p.playedScenarios===0));}
