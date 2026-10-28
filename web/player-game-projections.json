@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-27T22:16:10.504Z",
+  "generatedAt": "2026-10-27T23:59:43.927Z",
   "scope": "game",
   "runs": 2000,
   "seedPrefix": "market-matchups-v1:",
@@ -14,7 +14,7 @@
     "events": 20,
     "teams": 28,
     "rosteredPlayers": 484,
-    "playersWithProjections": 228
+    "playersWithProjections": 204
   },
   "schedule": [
     {
@@ -9624,7 +9624,7 @@
     "web/season-engine.js": "eb9252a1582df10e6111b694229d9943ab5b9b734a6b7012abcbd2a631ea9e08",
     "web/season-possession.js": "133537a8a45a321a3cb884fbe3140b0917b2b3a85f36de26490a5f4d8e5f05a5",
     "web/season-availability.json": "a2ebd5a3bd2fb4b2642bb138c59fc6d696e8f23a3a21de89a3658c02f3fdc67c",
-    "web/game-availability.json": "c4d624413dd22a08c2437ebec3497dd827771503cabfddeee2d93be296416b04",
+    "web/game-availability.json": "14f0f28d94a9db0fcab0a14ae4b13053a51361fd70dbe4d4f8f804b9dd70d2d7",
     "scripts/game_availability.cjs": "ad4ebaddf8a1a29c1d4f9285e6694211308ac46a65d954a040ae31f212edde00",
     "scripts/build_market_game_projections.cjs": "5bb013efeb75937e1b29aa8c96068aff75a9473e5a2ed77b3e409c52b1e4f317",
     "scripts/match_market_schedule.cjs": "f49aa4bdf06f89d1589098030436af429a52562ea785f39198adfd8b152bcdc3",
@@ -9636,8 +9636,8 @@
     "web/lib/game-watchlist-targets.json": "54e78bb4477557b5e4c684a00fba33c6a53bafca0205f6affd07b79ca3d0770b"
   },
   "marketInventoryHash": "39cf3aa53f9c20134982a77cf1876db11ab28636e7e1f2a41c43e7a5be72e74e",
-  "inputSignature": "1557439fb582797f074976950823cab3f6eb0fd34552651d593867a510726b50",
-  "availabilityValidUntil": "2026-10-28T04:15:40.720048+00:00",
+  "inputSignature": "d228315b615d73a4543f338ce5dbedce2f5829f9dbea2b9b58d9a698d472b2dc",
+  "availabilityValidUntil": "2026-10-28T05:59:03.048796+00:00",
   "assumptions": "Matchup-specific possession scenarios using current roster and ESPN injury observations. Reported Out players are excluded; other players are conditional on playing. Questionable participation, confirmed starters and minutes restrictions are not modeled. Not calibrated betting probabilities.",
   "events": [
     {
@@ -9652,706 +9652,154 @@
       "officialStartsAt": "2026-10-27T23:30:00.000Z",
       "scheduleOffsetMinutes": 10,
       "scheduleMatchMethod": "Unique home/away match within 15 minutes",
-      "reviewRequired": null,
+      "reviewRequired": "No current availability observation matched to this game.",
       "availability": {
-        "holdReason": null,
-        "outIds": [
-          "1642269",
-          "1643548"
-        ],
-        "players": [
-          {
-            "id": 1642269,
-            "name": "Devin Carter",
-            "team": "BOS",
-            "status": "Out",
-            "out": true
-          },
-          {
-            "id": 1643416,
-            "name": "Chris Cenac Jr.",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 201144,
-            "name": "Mike Conley",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630568,
-            "name": "Luka Garza",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 202331,
-            "name": "Paul George",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642864,
-            "name": "Hugo Gonzalez",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1631199,
-            "name": "Ron Harper Jr.",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630573,
-            "name": "Sam Hauser",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641759,
-            "name": "Dillon Mitchell",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630202,
-            "name": "Payton Pritchard",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1629674,
-            "name": "Neemias Queta",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1629011,
-            "name": "Mitchell Robinson",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1631248,
-            "name": "Baylor Scheierman",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1628369,
-            "name": "Jayson Tatum",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641775,
-            "name": "Jordan Walsh",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1628401,
-            "name": "Derrick White",
-            "team": "BOS",
-            "status": "Day-To-Day",
-            "out": false
-          },
-          {
-            "id": 1642873,
-            "name": "Amari Williams",
-            "team": "BOS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1643548,
-            "name": "Tyler Bilodeau",
-            "team": "BKN",
-            "status": "Out",
-            "out": true
-          },
-          {
-            "id": 1643414,
-            "name": "Mikel Brown Jr.",
-            "team": "BKN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641730,
-            "name": "Noah Clowney",
-            "team": "BKN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642856,
-            "name": "Egor Demin",
-            "team": "BKN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1631165,
-            "name": "Keon Ellis",
-            "team": "BKN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1643538,
-            "name": "Joshua Jefferson",
-            "team": "BKN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1643052,
-            "name": "Chaney Johnson",
-            "team": "BKN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1629611,
-            "name": "Terance Mann",
-            "team": "BKN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1631169,
-            "name": "Josh Minott",
-            "team": "BKN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641761,
-            "name": "Grant Nelson",
-            "team": "BKN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1629008,
-            "name": "Michael Porter Jr.",
-            "team": "BKN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642962,
-            "name": "Drake Powell",
-            "team": "BKN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 203944,
-            "name": "Julius Randle",
-            "team": "BKN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642879,
-            "name": "Ben Saraf",
-            "team": "BKN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630549,
-            "name": "Day'Ron Sharpe",
-            "team": "BKN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642849,
-            "name": "Nolan Traore",
-            "team": "BKN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1629021,
-            "name": "Moritz Wagner",
-            "team": "BKN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642874,
-            "name": "Danny Wolf",
-            "team": "BKN",
-            "status": "Not listed",
-            "out": false
-          }
-        ],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00",
-        "observedAt": "2026-10-27T22:15:42.684541+00:00",
-        "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
-        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
-        "excluded": [
-          {
-            "id": 1642269,
-            "name": "Devin Carter",
-            "team": "BOS",
-            "status": "Out"
-          },
-          {
-            "id": 1643548,
-            "name": "Tyler Bilodeau",
-            "team": "BKN",
-            "status": "Out"
-          }
-        ],
-        "uncertain": [
-          {
-            "id": 1628401,
-            "name": "Derrick White",
-            "team": "BOS",
-            "status": "Day-To-Day"
-          }
-        ]
+        "holdReason": "No current availability observation matched to this game.",
+        "outIds": [],
+        "players": [],
+        "validUntil": "2026-10-28T05:59:03.048796+00:00"
       },
-      "calibrationTarget": {
-        "homeScore": 112.41882118911545,
-        "awayScore": 102.35717881088455,
-        "homeMargin": 10.0616423782309
-      },
-      "gameProjection": {
-        "homeScore": {
-          "mean": 112.494,
-          "p10": 98,
-          "p90": 128
-        },
-        "awayScore": {
-          "mean": 102.005,
-          "p10": 87,
-          "p90": 117
-        },
-        "homeMargin": {
-          "mean": 10.489,
-          "p10": -7,
-          "p90": 28
-        },
-        "total": {
-          "mean": 214.499,
-          "p10": 191,
-          "p90": 240
-        },
-        "homeWinShare": 0.7855
-      },
+      "calibrationTarget": null,
+      "gameProjection": null,
       "players": [
         {
           "id": 201144,
           "name": "Mike Conley",
           "team": "BOS",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 20.265607872884008,
-            "p10": 13,
-            "p90": 27.641509433962273
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 6.3695,
-              "p10": 1,
-              "p90": 12
-            },
-            "AST": {
-              "mean": 3.4955,
-              "p10": 1,
-              "p90": 6
-            },
-            "REB": {
-              "mean": 1.833,
-              "p10": 0,
-              "p90": 4
-            },
-            "STL": {
-              "mean": 0.805,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.2195,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 40.029627057629924,
-              "p10": 0,
-              "p90": 66.66666666666667
-            },
-            "FT_PCT": {
-              "mean": 89.78080401299988,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 39.12870451210774,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 202331,
           "name": "Paul George",
           "team": "BOS",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 25.018248057421054,
-            "p10": 17.760000000000012,
-            "p90": 32.62135922330096
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 13.5595,
-              "p10": 6,
-              "p90": 22
-            },
-            "AST": {
-              "mean": 2.8535,
-              "p10": 1,
-              "p90": 5
-            },
-            "REB": {
-              "mean": 3.6635,
-              "p10": 1,
-              "p90": 7
-            },
-            "STL": {
-              "mean": 1.2565,
-              "p10": 0,
-              "p90": 3
-            },
-            "BLK": {
-              "mean": 0.2985,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 43.56260192441853,
-              "p10": 23.80952380952381,
-              "p90": 63.63636363636363
-            },
-            "FT_PCT": {
-              "mean": 84.35764155941816,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 37.12234392738454,
-              "p10": 0,
-              "p90": 66.66666666666667
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 203944,
           "name": "Julius Randle",
           "team": "BKN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 25.4584001782019,
-            "p10": 17.939393939393927,
-            "p90": 32.84210526315794
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 15.445,
-              "p10": 8,
-              "p90": 24
-            },
-            "AST": {
-              "mean": 2.9665,
-              "p10": 1,
-              "p90": 5
-            },
-            "REB": {
-              "mean": 5.5425,
-              "p10": 2,
-              "p90": 9
-            },
-            "STL": {
-              "mean": 0.5695,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.1295,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 47.23302301212187,
-              "p10": 28.571428571428573,
-              "p90": 66.66666666666667
-            },
-            "FT_PCT": {
-              "mean": 79.67555567535116,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 32.035850416296405,
-              "p10": 0,
-              "p90": 66.66666666666667
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1628369,
           "name": "Jayson Tatum",
           "team": "BOS",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 28.875813600017146,
-            "p10": 22.080000000000016,
-            "p90": 35.64356435643567
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 25.242,
-              "p10": 15,
-              "p90": 36
-            },
-            "AST": {
-              "mean": 4.3345,
-              "p10": 2,
-              "p90": 7
-            },
-            "REB": {
-              "mean": 7.4035,
-              "p10": 4,
-              "p90": 11
-            },
-            "STL": {
-              "mean": 0.899,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.563,
-              "p10": 0,
-              "p90": 2
-            },
-            "FG_PCT": {
-              "mean": 44.415927141300315,
-              "p10": 30.434782608695652,
-              "p90": 59.09090909090909
-            },
-            "FT_PCT": {
-              "mean": 81.79122628726152,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 34.687397922424886,
-              "p10": 14.285714285714286,
-              "p90": 57.142857142857146
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1628401,
           "name": "Derrick White",
           "team": "BOS",
-          "injuryStatus": "Day-To-Day",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 26.34246349572398,
-            "p10": 19.304347826086953,
-            "p90": 33.15463917525767
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 15.267,
-              "p10": 7,
-              "p90": 24
-            },
-            "AST": {
-              "mean": 4.307,
-              "p10": 2,
-              "p90": 7
-            },
-            "REB": {
-              "mean": 3.641,
-              "p10": 1,
-              "p90": 6
-            },
-            "STL": {
-              "mean": 1.0125,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.839,
-              "p10": 0,
-              "p90": 2
-            },
-            "FG_PCT": {
-              "mean": 41.94286264580792,
-              "p10": 25,
-              "p90": 60.869565217391305
-            },
-            "FT_PCT": {
-              "mean": 88.42919391214842,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 35.401907744528934,
-              "p10": 12.5,
-              "p90": 60
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1629008,
           "name": "Michael Porter Jr.",
           "team": "BKN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 26.109156622739825,
-            "p10": 18.35294117647058,
-            "p90": 33
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 17.0725,
-              "p10": 8,
-              "p90": 27
-            },
-            "AST": {
-              "mean": 1.7575,
-              "p10": 0,
-              "p90": 4
-            },
-            "REB": {
-              "mean": 6.5545,
-              "p10": 3,
-              "p90": 10
-            },
-            "STL": {
-              "mean": 0.611,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.2695,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 46.885997822072596,
-              "p10": 28.571428571428573,
-              "p90": 66.66666666666667
-            },
-            "FT_PCT": {
-              "mean": 81.40765272252489,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 37.16969116996908,
-              "p10": 11.11111111111111,
-              "p90": 66.66666666666667
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1629011,
           "name": "Mitchell Robinson",
           "team": "BOS",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 17.194171703016337,
-            "p10": 10.153846153846155,
-            "p90": 23.538461538461515
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 4.471,
-              "p10": 0,
-              "p90": 9
-            },
-            "AST": {
-              "mean": 0.9605,
-              "p10": 0,
-              "p90": 2
-            },
-            "REB": {
-              "mean": 6.8935,
-              "p10": 3,
-              "p90": 11
-            },
-            "STL": {
-              "mean": 0.927,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.827,
-              "p10": 0,
-              "p90": 2
-            },
-            "FG_PCT": {
-              "mean": 63.71203649193807,
-              "p10": 16.666666666666668,
-              "p90": 100
-            },
-            "FT_PCT": {
-              "mean": 48.674754853732225,
-              "p10": 0,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 54.54545454545455,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1629021,
           "name": "Moritz Wagner",
           "team": "BKN",
-          "injuryStatus": "Not listed",
+          "injuryStatus": null,
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -10370,172 +9818,64 @@
           "id": 1629611,
           "name": "Terance Mann",
           "team": "BKN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 18.760835670780054,
-            "p10": 12.000000000000007,
-            "p90": 25.44000000000002
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 6.665,
-              "p10": 2,
-              "p90": 13
-            },
-            "AST": {
-              "mean": 1.768,
-              "p10": 0,
-              "p90": 4
-            },
-            "REB": {
-              "mean": 2.6885,
-              "p10": 1,
-              "p90": 5
-            },
-            "STL": {
-              "mean": 0.4375,
-              "p10": 0,
-              "p90": 1
-            },
-            "BLK": {
-              "mean": 0.252,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 47.43112460238479,
-              "p10": 16.666666666666668,
-              "p90": 80
-            },
-            "FT_PCT": {
-              "mean": 76.34858454302893,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 34.40381100813602,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1629674,
           "name": "Neemias Queta",
           "team": "BOS",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 18.218790047724966,
-            "p10": 11.076923076923078,
-            "p90": 25.212121212121193
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 6.019,
-              "p10": 2,
-              "p90": 11
-            },
-            "AST": {
-              "mean": 1.3505,
-              "p10": 0,
-              "p90": 3
-            },
-            "REB": {
-              "mean": 5.3125,
-              "p10": 2,
-              "p90": 9
-            },
-            "STL": {
-              "mean": 0.573,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.8425,
-              "p10": 0,
-              "p90": 2
-            },
-            "FG_PCT": {
-              "mean": 62.613245029444315,
-              "p10": 33.333333333333336,
-              "p90": 100
-            },
-            "FT_PCT": {
-              "mean": 71.66418380447163,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 17.171717171717173,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1630202,
           "name": "Payton Pritchard",
           "team": "BOS",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 23.57543428582516,
-            "p10": 16.754716981132077,
-            "p90": 30.451612903225783
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 13.432,
-              "p10": 5,
-              "p90": 22
-            },
-            "AST": {
-              "mean": 3.437,
-              "p10": 1,
-              "p90": 6
-            },
-            "REB": {
-              "mean": 3.249,
-              "p10": 1,
-              "p90": 6
-            },
-            "STL": {
-              "mean": 0.669,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.097,
-              "p10": 0,
-              "p90": 0
-            },
-            "FG_PCT": {
-              "mean": 44.935191870728055,
-              "p10": 25,
-              "p90": 66.66666666666667
-            },
-            "FT_PCT": {
-              "mean": 85.21190316644858,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 36.77578883986009,
-              "p10": 10,
-              "p90": 66.66666666666667
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1630549,
           "name": "Day'Ron Sharpe",
           "team": "BKN",
-          "injuryStatus": "Not listed",
+          "injuryStatus": null,
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -10554,7 +9894,7 @@
           "id": 1630568,
           "name": "Luka Garza",
           "team": "BOS",
-          "injuryStatus": "Not listed",
+          "injuryStatus": null,
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -10573,117 +9913,45 @@
           "id": 1630573,
           "name": "Sam Hauser",
           "team": "BOS",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 19.004295603099024,
-            "p10": 12.356435643564364,
-            "p90": 26.40000000000002
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 7.4245,
-              "p10": 2,
-              "p90": 14
-            },
-            "AST": {
-              "mean": 1.1205,
-              "p10": 0,
-              "p90": 3
-            },
-            "REB": {
-              "mean": 2.9585,
-              "p10": 1,
-              "p90": 5
-            },
-            "STL": {
-              "mean": 0.4305,
-              "p10": 0,
-              "p90": 1
-            },
-            "BLK": {
-              "mean": 0.2715,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 41.12864926599777,
-              "p10": 14.285714285714286,
-              "p90": 70
-            },
-            "FT_PCT": {
-              "mean": 90.81975375701612,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 38.683729374883185,
-              "p10": 0,
-              "p90": 70
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1631165,
           "name": "Keon Ellis",
           "team": "BKN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 17.86179436239086,
-            "p10": 10.514285714285716,
-            "p90": 25.165048543689313
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 5.281,
-              "p10": 0,
-              "p90": 11
-            },
-            "AST": {
-              "mean": 1.088,
-              "p10": 0,
-              "p90": 3
-            },
-            "REB": {
-              "mean": 2.245,
-              "p10": 0,
-              "p90": 4
-            },
-            "STL": {
-              "mean": 0.9765,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.5055,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 44.53980325086223,
-              "p10": 0,
-              "p90": 87.5
-            },
-            "FT_PCT": {
-              "mean": 77.3486343486343,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 38.931843765543476,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1631169,
           "name": "Josh Minott",
           "team": "BKN",
-          "injuryStatus": "Not listed",
+          "injuryStatus": null,
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -10702,7 +9970,7 @@
           "id": 1631199,
           "name": "Ron Harper Jr.",
           "team": "BOS",
-          "injuryStatus": "Not listed",
+          "injuryStatus": null,
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -10721,227 +9989,83 @@
           "id": 1631248,
           "name": "Baylor Scheierman",
           "team": "BOS",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 15.68869556685429,
-            "p10": 9.600000000000005,
-            "p90": 22.615384615384595
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 4.1705,
-              "p10": 0,
-              "p90": 9
-            },
-            "AST": {
-              "mean": 1.4135,
-              "p10": 0,
-              "p90": 3
-            },
-            "REB": {
-              "mean": 2.715,
-              "p10": 1,
-              "p90": 5
-            },
-            "STL": {
-              "mean": 0.542,
-              "p10": 0,
-              "p90": 1
-            },
-            "BLK": {
-              "mean": 0.102,
-              "p10": 0,
-              "p90": 0
-            },
-            "FG_PCT": {
-              "mean": 42.88570238357679,
-              "p10": 0,
-              "p90": 100
-            },
-            "FT_PCT": {
-              "mean": 84.64808145480416,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 37.17542295011077,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1641730,
           "name": "Noah Clowney",
           "team": "BKN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 20.462144834216346,
-            "p10": 13.043478260869568,
-            "p90": 27.711340206185525
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 8.261,
-              "p10": 2,
-              "p90": 15
-            },
-            "AST": {
-              "mean": 0.931,
-              "p10": 0,
-              "p90": 2
-            },
-            "REB": {
-              "mean": 3.4905,
-              "p10": 1,
-              "p90": 6
-            },
-            "STL": {
-              "mean": 0.502,
-              "p10": 0,
-              "p90": 1
-            },
-            "BLK": {
-              "mean": 0.412,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 39.56800129549933,
-              "p10": 12.5,
-              "p90": 66.66666666666667
-            },
-            "FT_PCT": {
-              "mean": 80.5454040650286,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 33.154869789928625,
-              "p10": 0,
-              "p90": 66.66666666666667
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1641759,
           "name": "Dillon Mitchell",
           "team": "BOS",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 1996,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 14.333896136891727,
-            "p10": 7.659574468085105,
-            "p90": 20.640000000000015
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 7.736973947895792,
-              "p10": 2,
-              "p90": 15
-            },
-            "AST": {
-              "mean": 2.064629258517034,
-              "p10": 0,
-              "p90": 4
-            },
-            "REB": {
-              "mean": 2.708416833667335,
-              "p10": 1,
-              "p90": 5
-            },
-            "STL": {
-              "mean": 0.5440881763527055,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.3336673346693387,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 45.47394775214567,
-              "p10": 16.666666666666668,
-              "p90": 75
-            },
-            "FT_PCT": {
-              "mean": 73.23365736827284,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 29.791699528541685,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1641761,
           "name": "Grant Nelson",
           "team": "BKN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 19.108815786769515,
-            "p10": 12.480000000000008,
-            "p90": 25.600000000000026
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 7.4785,
-              "p10": 2,
-              "p90": 13
-            },
-            "AST": {
-              "mean": 2.23,
-              "p10": 0,
-              "p90": 4
-            },
-            "REB": {
-              "mean": 3.6135,
-              "p10": 1,
-              "p90": 6
-            },
-            "STL": {
-              "mean": 0.5615,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.6655,
-              "p10": 0,
-              "p90": 2
-            },
-            "FG_PCT": {
-              "mean": 49.02836129078713,
-              "p10": 20,
-              "p90": 80
-            },
-            "FT_PCT": {
-              "mean": 76.66687421066716,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 34.195064629847245,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1641775,
           "name": "Jordan Walsh",
           "team": "BOS",
-          "injuryStatus": "Not listed",
+          "injuryStatus": null,
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -10960,9 +10084,9 @@
           "id": 1642269,
           "name": "Devin Carter",
           "team": "BOS",
-          "injuryStatus": "Out",
+          "injuryStatus": null,
           "playedScenarios": 0,
-          "projectionStatus": "reported_out",
+          "projectionStatus": "no_projected_minutes",
           "minutes": null,
           "stats": {
             "PTS": null,
@@ -10979,117 +10103,45 @@
           "id": 1642849,
           "name": "Nolan Traore",
           "team": "BKN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 18.520241882128293,
-            "p10": 12.11214953271028,
-            "p90": 25.56521739130433
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 7.4385,
-              "p10": 2,
-              "p90": 14
-            },
-            "AST": {
-              "mean": 2.693,
-              "p10": 1,
-              "p90": 5
-            },
-            "REB": {
-              "mean": 1.8465,
-              "p10": 0,
-              "p90": 4
-            },
-            "STL": {
-              "mean": 0.845,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.413,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 37.690517861280576,
-              "p10": 12.5,
-              "p90": 66.66666666666667
-            },
-            "FT_PCT": {
-              "mean": 78.14012291908632,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 31.18119891328355,
-              "p10": 0,
-              "p90": 80
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1642856,
           "name": "Egor Dëmin",
           "team": "BKN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 20.80904837477958,
-            "p10": 13.224489795918371,
-            "p90": 27.84000000000002
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 8.4095,
-              "p10": 2,
-              "p90": 15
-            },
-            "AST": {
-              "mean": 2.3775,
-              "p10": 0,
-              "p90": 5
-            },
-            "REB": {
-              "mean": 2.913,
-              "p10": 1,
-              "p90": 5
-            },
-            "STL": {
-              "mean": 0.5625,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.231,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 37.94937304548422,
-              "p10": 12.5,
-              "p90": 62.5
-            },
-            "FT_PCT": {
-              "mean": 82.23240101492883,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 35.804865656689216,
-              "p10": 0,
-              "p90": 66.66666666666667
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1642864,
           "name": "Hugo González",
           "team": "BOS",
-          "injuryStatus": "Not listed",
+          "injuryStatus": null,
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -11108,172 +10160,64 @@
           "id": 1642873,
           "name": "Amari Williams",
           "team": "BOS",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 1996,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 14.965323055933458,
-            "p10": 8,
-            "p90": 21.3861386138614
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 3.0395791583166334,
-              "p10": 0,
-              "p90": 6
-            },
-            "AST": {
-              "mean": 1.3967935871743486,
-              "p10": 0,
-              "p90": 3
-            },
-            "REB": {
-              "mean": 3.649799599198397,
-              "p10": 1,
-              "p90": 7
-            },
-            "STL": {
-              "mean": 0.42935871743486975,
-              "p10": 0,
-              "p90": 1
-            },
-            "BLK": {
-              "mean": 0.5636272545090181,
-              "p10": 0,
-              "p90": 2
-            },
-            "FG_PCT": {
-              "mean": 49.94281534676507,
-              "p10": 0,
-              "p90": 100
-            },
-            "FT_PCT": {
-              "mean": 76.35132340777496,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 35.9375,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1642874,
           "name": "Danny Wolf",
           "team": "BKN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 17.682476750254885,
-            "p10": 10.455445544554461,
-            "p90": 24.791208791208817
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 6.957,
-              "p10": 2,
-              "p90": 13
-            },
-            "AST": {
-              "mean": 1.6175,
-              "p10": 0,
-              "p90": 3
-            },
-            "REB": {
-              "mean": 4.0775,
-              "p10": 1,
-              "p90": 7
-            },
-            "STL": {
-              "mean": 0.422,
-              "p10": 0,
-              "p90": 1
-            },
-            "BLK": {
-              "mean": 0.4075,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 39.95975182060282,
-              "p10": 10,
-              "p90": 66.66666666666667
-            },
-            "FT_PCT": {
-              "mean": 76.81722903767631,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 31.48039910053944,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1642879,
           "name": "Ben Saraf",
           "team": "BKN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 17.923186042176653,
-            "p10": 10.66666666666666,
-            "p90": 25.165048543689313
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 6.1595,
-              "p10": 2,
-              "p90": 11
-            },
-            "AST": {
-              "mean": 2.442,
-              "p10": 1,
-              "p90": 5
-            },
-            "REB": {
-              "mean": 2.1405,
-              "p10": 0,
-              "p90": 4
-            },
-            "STL": {
-              "mean": 0.717,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.1675,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 41.39895992445442,
-              "p10": 0,
-              "p90": 75
-            },
-            "FT_PCT": {
-              "mean": 80.5162434801351,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 25.893941713877425,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1642962,
           "name": "Drake Powell",
           "team": "BKN",
-          "injuryStatus": "Not listed",
+          "injuryStatus": null,
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -11292,172 +10236,64 @@
           "id": 1643052,
           "name": "Chaney Johnson",
           "team": "BKN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 18.323841524384463,
-            "p10": 12.11214953271028,
-            "p90": 25.290322580645142
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 6.1705,
-              "p10": 2,
-              "p90": 12
-            },
-            "AST": {
-              "mean": 1.798,
-              "p10": 0,
-              "p90": 4
-            },
-            "REB": {
-              "mean": 3.882,
-              "p10": 1,
-              "p90": 7
-            },
-            "STL": {
-              "mean": 0.6925,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.367,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 48.54335879963735,
-              "p10": 14.285714285714286,
-              "p90": 83.33333333333333
-            },
-            "FT_PCT": {
-              "mean": 77.817021174667,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 29.684251271842548,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1643414,
           "name": "Mikel Brown Jr.",
           "team": "BKN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 19.730057971177878,
-            "p10": 12.705882352941178,
-            "p90": 25.95918367346937
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 6.667,
-              "p10": 2,
-              "p90": 12
-            },
-            "AST": {
-              "mean": 1.5465,
-              "p10": 0,
-              "p90": 3
-            },
-            "REB": {
-              "mean": 3.675,
-              "p10": 1,
-              "p90": 6
-            },
-            "STL": {
-              "mean": 0.561,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.339,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 42.47851071336049,
-              "p10": 12.5,
-              "p90": 71.42857142857143
-            },
-            "FT_PCT": {
-              "mean": 71.6517474317916,
-              "p10": 44.44444444444444,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 27.690933626092168,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1643416,
           "name": "Chris Cenac Jr.",
           "team": "BOS",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 17.32585901299482,
-            "p10": 10.212765957446807,
-            "p90": 24.68571428571426
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 5.784,
-              "p10": 1,
-              "p90": 11
-            },
-            "AST": {
-              "mean": 1.1755,
-              "p10": 0,
-              "p90": 3
-            },
-            "REB": {
-              "mean": 2.955,
-              "p10": 1,
-              "p90": 5
-            },
-            "STL": {
-              "mean": 0.604,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.3095,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 46.05278371974869,
-              "p10": 0,
-              "p90": 80
-            },
-            "FT_PCT": {
-              "mean": 74.30959352994486,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 31.292431706224846,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1643538,
           "name": "Joshua Jefferson",
           "team": "BKN",
-          "injuryStatus": "Not listed",
+          "injuryStatus": null,
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -11476,9 +10312,9 @@
           "id": 1643548,
           "name": "Tyler Bilodeau",
           "team": "BKN",
-          "injuryStatus": "Out",
+          "injuryStatus": null,
           "playedScenarios": 0,
-          "projectionStatus": "reported_out",
+          "projectionStatus": "no_projected_minutes",
           "minutes": null,
           "stats": {
             "PTS": null,
@@ -11510,7 +10346,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00"
+        "validUntil": "2026-10-28T05:59:03.048796+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -12161,7 +10997,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00"
+        "validUntil": "2026-10-28T05:59:03.048796+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -12849,6 +11685,7 @@
       "availability": {
         "holdReason": null,
         "outIds": [
+          "1643418",
           "1642876",
           "1631101",
           "1642959"
@@ -12858,8 +11695,8 @@
             "id": 1643418,
             "name": "Cameron Carr",
             "team": "LAL",
-            "status": "Not listed",
-            "out": false
+            "status": "Out",
+            "out": true
           },
           {
             "id": 1629029,
@@ -13100,11 +11937,17 @@
             "out": true
           }
         ],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00",
-        "observedAt": "2026-10-27T22:15:42.684541+00:00",
+        "validUntil": "2026-10-28T05:59:03.048796+00:00",
+        "observedAt": "2026-10-27T23:59:04.260836+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
+          {
+            "id": 1643418,
+            "name": "Cameron Carr",
+            "team": "LAL",
+            "status": "Out"
+          },
           {
             "id": 1642876,
             "name": "Adou Thiero",
@@ -14657,9 +13500,9 @@
           "id": 1643418,
           "name": "Cameron Carr",
           "team": "LAL",
-          "injuryStatus": "Not listed",
+          "injuryStatus": "Out",
           "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
+          "projectionStatus": "reported_out",
           "minutes": null,
           "stats": {
             "PTS": null,
@@ -14958,8 +13801,8 @@
             "out": true
           }
         ],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00",
-        "observedAt": "2026-10-27T22:15:42.684541+00:00",
+        "validUntil": "2026-10-28T05:59:03.048796+00:00",
+        "observedAt": "2026-10-27T23:59:04.260836+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -16846,8 +15689,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00",
-        "observedAt": "2026-10-27T22:15:42.684541+00:00",
+        "validUntil": "2026-10-28T05:59:03.048796+00:00",
+        "observedAt": "2026-10-27T23:59:04.260836+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -18713,8 +17556,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00",
-        "observedAt": "2026-10-27T22:15:42.684541+00:00",
+        "validUntil": "2026-10-28T05:59:03.048796+00:00",
+        "observedAt": "2026-10-27T23:59:04.260836+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -20581,8 +19424,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00",
-        "observedAt": "2026-10-27T22:15:42.684541+00:00",
+        "validUntil": "2026-10-28T05:59:03.048796+00:00",
+        "observedAt": "2026-10-27T23:59:04.260836+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -22172,7 +21015,8 @@
           "202710",
           "1630541",
           "204001",
-          "1628978"
+          "1628978",
+          "1630162"
         ],
         "players": [
           {
@@ -22340,8 +21184,8 @@
             "id": 1630162,
             "name": "Anthony Edwards",
             "team": "MIN",
-            "status": "Day-To-Day",
-            "out": false
+            "status": "Out",
+            "out": true
           },
           {
             "id": 1642912,
@@ -22414,8 +21258,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00",
-        "observedAt": "2026-10-27T22:15:42.684541+00:00",
+        "validUntil": "2026-10-28T05:59:03.048796+00:00",
+        "observedAt": "2026-10-27T23:59:04.260836+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -22442,6 +21286,12 @@
             "name": "Donte DiVincenzo",
             "team": "MIN",
             "status": "Out"
+          },
+          {
+            "id": 1630162,
+            "name": "Anthony Edwards",
+            "team": "MIN",
+            "status": "Out"
           }
         ],
         "uncertain": [
@@ -22450,42 +21300,36 @@
             "name": "Yaxel Lendeborg",
             "team": "GSW",
             "status": "Day-To-Day"
-          },
-          {
-            "id": 1630162,
-            "name": "Anthony Edwards",
-            "team": "MIN",
-            "status": "Day-To-Day"
           }
         ]
       },
       "calibrationTarget": {
-        "homeScore": 118.71150727149399,
-        "awayScore": 112.104492728506,
-        "homeMargin": 6.607014542987983
+        "homeScore": 117.36599478711743,
+        "awayScore": 113.45000521288256,
+        "homeMargin": 3.915989574234871
       },
       "gameProjection": {
         "homeScore": {
-          "mean": 119.041,
-          "p10": 103,
-          "p90": 134
+          "mean": 117.062,
+          "p10": 102,
+          "p90": 132
         },
         "awayScore": {
-          "mean": 112.545,
-          "p10": 97,
-          "p90": 128
+          "mean": 112.7335,
+          "p10": 98,
+          "p90": 129
         },
         "homeMargin": {
-          "mean": 6.496,
-          "p10": -11,
-          "p90": 24
+          "mean": 4.3285,
+          "p10": -14,
+          "p90": 22
         },
         "total": {
-          "mean": 231.586,
-          "p10": 207,
-          "p90": 256
+          "mean": 229.7955,
+          "p10": 205,
+          "p90": 255
         },
-        "homeWinShare": 0.686
+        "homeWinShare": 0.6385
       },
       "players": [
         {
@@ -22496,48 +21340,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 22.03704452913225,
-            "p10": 14.88000000000001,
-            "p90": 29.93548387096772
+            "mean": 21.98954452913224,
+            "p10": 14.912621359223296,
+            "p90": 29.837837837837796
           },
           "stats": {
             "PTS": {
-              "mean": 7.955,
+              "mean": 8.108,
               "p10": 2,
-              "p90": 14
+              "p90": 15
             },
             "AST": {
-              "mean": 2.139,
+              "mean": 2.0915,
               "p10": 0,
               "p90": 4
             },
             "REB": {
-              "mean": 4.2595,
+              "mean": 4.335,
               "p10": 1,
               "p90": 7
             },
             "STL": {
-              "mean": 0.474,
+              "mean": 0.472,
               "p10": 0,
               "p90": 1
             },
             "BLK": {
-              "mean": 0.6675,
+              "mean": 0.6995,
               "p10": 0,
               "p90": 2
             },
             "FG_PCT": {
-              "mean": 45.86240172415266,
+              "mean": 45.77197590840196,
               "p10": 18.181818181818183,
               "p90": 75
             },
             "FT_PCT": {
-              "mean": 84.34434587539515,
+              "mean": 84.36914323962519,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 38.78173440384226,
+              "mean": 39.18343926629777,
               "p10": 0,
               "p90": 75
             }
@@ -22551,49 +21395,49 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 27.488269223722657,
-            "p10": 20.235294117647044,
-            "p90": 35.040000000000006
+            "mean": 27.49826922372266,
+            "p10": 20.210526315789483,
+            "p90": 35
           },
           "stats": {
             "PTS": {
-              "mean": 21.842,
-              "p10": 12,
+              "mean": 21.958,
+              "p10": 11,
               "p90": 33
             },
             "AST": {
-              "mean": 3.6225,
+              "mean": 3.5905,
               "p10": 1,
               "p90": 6
             },
             "REB": {
-              "mean": 3.534,
+              "mean": 3.5355,
               "p10": 1,
               "p90": 6
             },
             "STL": {
-              "mean": 0.5735,
+              "mean": 0.6115,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.279,
+              "mean": 0.278,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 45.823686790801,
-              "p10": 29.41176470588235,
-              "p90": 62.5
+              "mean": 45.64610107260917,
+              "p10": 28.571428571428573,
+              "p90": 61.53846153846154
             },
             "FT_PCT": {
-              "mean": 91.45350838337428,
+              "mean": 91.47842420395132,
               "p10": 66.66666666666667,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 39.98823217368989,
-              "p10": 20,
+              "mean": 39.73583475532164,
+              "p10": 18.181818181818183,
               "p90": 60
             }
           }
@@ -22625,48 +21469,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 22.703313772555695,
+            "mean": 22.700813772555694,
             "p10": 15.31914893617021,
-            "p90": 30.29126213592232
+            "p90": 30.260869565217362
           },
           "stats": {
             "PTS": {
-              "mean": 6.059,
+              "mean": 6.0005,
               "p10": 2,
-              "p90": 11
+              "p90": 12
             },
             "AST": {
-              "mean": 4.723,
+              "mean": 4.747,
               "p10": 2,
               "p90": 8
             },
             "REB": {
-              "mean": 4.955,
+              "mean": 4.926,
               "p10": 2,
               "p90": 8
             },
             "STL": {
-              "mean": 0.692,
+              "mean": 0.691,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.619,
+              "mean": 0.616,
               "p10": 0,
               "p90": 2
             },
             "FG_PCT": {
-              "mean": 46.005611769465055,
+              "mean": 46.38136571993621,
               "p10": 0,
               "p90": 80
             },
             "FT_PCT": {
-              "mean": 69.78520153379701,
-              "p10": 40,
+              "mean": 70.38920776643984,
+              "p10": 33.333333333333336,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 35.618570497602676,
+              "mean": 35.40611044789312,
               "p10": 0,
               "p90": 100
             }
@@ -22680,48 +21524,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 24.36188553039922,
-            "p10": 17.454545454545443,
-            "p90": 30.891089108910915
+            "mean": 25.52644000453513,
+            "p10": 18.064516129032246,
+            "p90": 32.65979381443293
           },
           "stats": {
             "PTS": {
-              "mean": 8.866,
-              "p10": 3,
-              "p90": 15
+              "mean": 11.0245,
+              "p10": 5,
+              "p90": 18
             },
             "AST": {
-              "mean": 1.3,
+              "mean": 1.3185,
               "p10": 0,
               "p90": 3
             },
             "REB": {
-              "mean": 8.264,
-              "p10": 4,
-              "p90": 13
+              "mean": 9.4565,
+              "p10": 5,
+              "p90": 14
             },
             "STL": {
-              "mean": 0.6455,
+              "mean": 0.681,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.9785,
+              "mean": 1.068,
               "p10": 0,
               "p90": 2
             },
             "FG_PCT": {
-              "mean": 71.55516781084084,
-              "p10": 42.857142857142854,
+              "mean": 70.73927371270223,
+              "p10": 50,
               "p90": 100
             },
             "FT_PCT": {
-              "mean": 62.339273804985915,
-              "p10": 33.333333333333336,
+              "mean": 62.462225115920184,
+              "p10": 28.571428571428573,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 5.454545454545454,
+              "mean": 5.405405405405405,
               "p10": 0,
               "p90": 0
             }
@@ -22751,51 +21595,51 @@
           "name": "Trey Lyles",
           "team": "MIN",
           "injuryStatus": "Not listed",
-          "playedScenarios": 1998,
+          "playedScenarios": 1999,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 15.777037300864809,
-            "p10": 9.696969696969692,
-            "p90": 22.690909090909095
+            "mean": 16.49345098154198,
+            "p10": 10,
+            "p90": 22.956521739130423
           },
           "stats": {
             "PTS": {
-              "mean": 6.069069069069069,
-              "p10": 0,
-              "p90": 12
+              "mean": 7.08104052026013,
+              "p10": 2,
+              "p90": 13
             },
             "AST": {
-              "mean": 1.3593593593593594,
+              "mean": 1.3366683341670835,
               "p10": 0,
               "p90": 3
             },
             "REB": {
-              "mean": 3.373873873873874,
+              "mean": 3.6843421710855426,
               "p10": 1,
-              "p90": 6
+              "p90": 7
             },
             "STL": {
-              "mean": 0.45645645645645644,
+              "mean": 0.49074537268634316,
               "p10": 0,
               "p90": 1
             },
             "BLK": {
-              "mean": 0.1991991991991992,
+              "mean": 0.24062031015507754,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 46.46416923900273,
-              "p10": 0,
-              "p90": 100
+              "mean": 45.1103859911781,
+              "p10": 12.5,
+              "p90": 75
             },
             "FT_PCT": {
-              "mean": 71.92166807551416,
-              "p10": 40,
+              "mean": 70.11757078297002,
+              "p10": 33.333333333333336,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 39.21895158326068,
+              "mean": 37.70424927861625,
               "p10": 0,
               "p90": 100
             }
@@ -22809,28 +21653,28 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 17.51178609631992,
+            "mean": 17.521786096319925,
             "p10": 10.317757009345794,
-            "p90": 24.96000000000002
+            "p90": 24.941176470588204
           },
           "stats": {
             "PTS": {
-              "mean": 6.967,
+              "mean": 7.021,
               "p10": 2,
               "p90": 13
             },
             "AST": {
-              "mean": 1.094,
+              "mean": 1.0955,
               "p10": 0,
-              "p90": 2
+              "p90": 3
             },
             "REB": {
-              "mean": 2.7875,
+              "mean": 2.823,
               "p10": 1,
               "p90": 5
             },
             "STL": {
-              "mean": 0.227,
+              "mean": 0.2315,
               "p10": 0,
               "p90": 1
             },
@@ -22840,17 +21684,17 @@
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 46.63072013192852,
+              "mean": 47.521861988283035,
               "p10": 16.666666666666668,
-              "p90": 75
+              "p90": 80
             },
             "FT_PCT": {
-              "mean": 81.60569105691062,
+              "mean": 81.52564102564105,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 39.76738814421472,
+              "mean": 40.551326404760985,
               "p10": 0,
               "p90": 100
             }
@@ -22902,48 +21746,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 20.810903755191795,
-            "p10": 13.25714285714286,
-            "p90": 27.91836734693875
+            "mean": 20.825903755191796,
+            "p10": 13.360824742268042,
+            "p90": 27.885714285714247
           },
           "stats": {
             "PTS": {
-              "mean": 9.975,
-              "p10": 4,
-              "p90": 18
+              "mean": 9.9775,
+              "p10": 3,
+              "p90": 17
             },
             "AST": {
-              "mean": 2.442,
+              "mean": 2.5115,
               "p10": 0,
               "p90": 5
             },
             "REB": {
-              "mean": 3.142,
+              "mean": 3.23,
               "p10": 1,
               "p90": 6
             },
             "STL": {
-              "mean": 1.241,
+              "mean": 1.247,
               "p10": 0,
               "p90": 3
             },
             "BLK": {
-              "mean": 0.401,
+              "mean": 0.4395,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 41.436571626171144,
+              "mean": 41.72355031584446,
               "p10": 18.181818181818183,
               "p90": 66.66666666666667
             },
             "FT_PCT": {
-              "mean": 80.98700454691236,
+              "mean": 82.03443760272566,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 33.59743623810108,
+              "mean": 34.4331326194822,
               "p10": 0,
               "p90": 66.66666666666667
             }
@@ -22972,55 +21816,19 @@
           "id": 1630162,
           "name": "Anthony Edwards",
           "team": "MIN",
-          "injuryStatus": "Day-To-Day",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 28.42720476116562,
-            "p10": 22.080000000000016,
-            "p90": 35.32075471698118
-          },
+          "injuryStatus": "Out",
+          "playedScenarios": 0,
+          "projectionStatus": "reported_out",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 25.218,
-              "p10": 15,
-              "p90": 37
-            },
-            "AST": {
-              "mean": 3.508,
-              "p10": 1,
-              "p90": 6
-            },
-            "REB": {
-              "mean": 4.444,
-              "p10": 2,
-              "p90": 7
-            },
-            "STL": {
-              "mean": 1.1905,
-              "p10": 0,
-              "p90": 3
-            },
-            "BLK": {
-              "mean": 0.4765,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 49.33906731628158,
-              "p10": 33.333333333333336,
-              "p90": 64.70588235294117
-            },
-            "FT_PCT": {
-              "mean": 82.28708110821621,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 40.4668843811209,
-              "p10": 16.666666666666668,
-              "p90": 66.66666666666667
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
@@ -23031,50 +21839,50 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 23.584724856979342,
-            "p10": 17.076923076923077,
-            "p90": 30.545454545454522
+            "mean": 25.877345507653978,
+            "p10": 19.018867924528312,
+            "p90": 32.792079207920814
           },
           "stats": {
             "PTS": {
-              "mean": 19.765,
-              "p10": 10,
-              "p90": 31
+              "mean": 21.8405,
+              "p10": 12,
+              "p90": 33
             },
             "AST": {
-              "mean": 5.593,
-              "p10": 2,
+              "mean": 5.9885,
+              "p10": 3,
               "p90": 9
             },
             "REB": {
-              "mean": 4.5295,
+              "mean": 4.6045,
               "p10": 2,
               "p90": 8
             },
             "STL": {
-              "mean": 1.061,
+              "mean": 1.1645,
               "p10": 0,
-              "p90": 2
+              "p90": 3
             },
             "BLK": {
-              "mean": 0.1945,
+              "mean": 0.1955,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 43.76898047960688,
+              "mean": 43.05101521884585,
               "p10": 27.272727272727273,
               "p90": 60
             },
             "FT_PCT": {
-              "mean": 86.46598061535812,
+              "mean": 86.88795517560372,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 38.03801671451244,
-              "p10": 14.285714285714286,
-              "p90": 62.5
+              "mean": 37.242480699947215,
+              "p10": 16.666666666666668,
+              "p90": 60
             }
           }
         },
@@ -23086,48 +21894,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 24.648700974976872,
-            "p10": 17.584158415841596,
-            "p90": 32.16494845360819
+            "mean": 26.919017725106574,
+            "p10": 20.038834951456305,
+            "p90": 33.742574257425765
           },
           "stats": {
             "PTS": {
-              "mean": 7.8095,
-              "p10": 2,
-              "p90": 14
+              "mean": 9.4275,
+              "p10": 4,
+              "p90": 16
             },
             "AST": {
-              "mean": 1.533,
+              "mean": 1.7045,
               "p10": 0,
               "p90": 3
             },
             "REB": {
-              "mean": 3.4815,
+              "mean": 3.5995,
               "p10": 1,
               "p90": 6
             },
             "STL": {
-              "mean": 0.7895,
+              "mean": 0.9115,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.4875,
+              "mean": 0.524,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 53.59219148267678,
-              "p10": 25,
-              "p90": 83.33333333333333
+              "mean": 53.33945933005483,
+              "p10": 26.666666666666668,
+              "p90": 80
             },
             "FT_PCT": {
-              "mean": 80.25019298204776,
+              "mean": 78.46688236094516,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 38.533167426297226,
+              "mean": 40.746207019085425,
               "p10": 0,
               "p90": 100
             }
@@ -23141,48 +21949,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 19.9140742169865,
-            "p10": 12.705882352941178,
-            "p90": 27.15151515151513
+            "mean": 21.84483473820114,
+            "p10": 14.912621359223296,
+            "p90": 28.514851485148537
           },
           "stats": {
             "PTS": {
-              "mean": 12.0755,
-              "p10": 5,
+              "mean": 12.5235,
+              "p10": 6,
               "p90": 20
             },
             "AST": {
-              "mean": 1.8105,
+              "mean": 1.883,
               "p10": 0,
               "p90": 4
             },
             "REB": {
-              "mean": 4.9805,
+              "mean": 5.339,
               "p10": 2,
-              "p90": 8
+              "p90": 9
             },
             "STL": {
-              "mean": 0.635,
+              "mean": 0.707,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.292,
+              "mean": 0.3075,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 52.51864420748976,
+              "mean": 51.23119816785729,
               "p10": 28.571428571428573,
               "p90": 75
             },
             "FT_PCT": {
-              "mean": 72.01418372072857,
+              "mean": 72.03717048222731,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 35.927776407051034,
+              "mean": 36.17339820250779,
               "p10": 0,
               "p90": 100
             }
@@ -23196,50 +22004,50 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 23.005148648242074,
-            "p10": 15.529411764705884,
-            "p90": 30.36734693877548
+            "mean": 24.09445739664001,
+            "p10": 17.411764705882348,
+            "p90": 30.720000000000024
           },
           "stats": {
             "PTS": {
-              "mean": 10.562,
-              "p10": 4,
-              "p90": 18
+              "mean": 13.547,
+              "p10": 6,
+              "p90": 22
             },
             "AST": {
-              "mean": 2.8945,
+              "mean": 2.775,
               "p10": 1,
               "p90": 5
             },
             "REB": {
-              "mean": 2.324,
-              "p10": 0,
-              "p90": 4
+              "mean": 2.623,
+              "p10": 1,
+              "p90": 5
             },
             "STL": {
-              "mean": 0.866,
+              "mean": 0.944,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.195,
+              "mean": 0.193,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 54.103469336301764,
-              "p10": 28.571428571428573,
-              "p90": 80
+              "mean": 53.478201198639766,
+              "p10": 33.333333333333336,
+              "p90": 75
             },
             "FT_PCT": {
-              "mean": 81.66513164101582,
+              "mean": 83.0454155454155,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 42.502959460581884,
+              "mean": 42.19059681404384,
               "p10": 0,
-              "p90": 100
+              "p90": 83.33333333333333
             }
           }
         },
@@ -23251,48 +22059,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 18.2830338981288,
-            "p10": 12.000000000000002,
+            "mean": 18.278033898128793,
+            "p10": 12.000000000000004,
             "p90": 25.165048543689313
           },
           "stats": {
             "PTS": {
-              "mean": 9.3465,
-              "p10": 3,
+              "mean": 9.523,
+              "p10": 4,
               "p90": 16
             },
             "AST": {
-              "mean": 2.631,
+              "mean": 2.6275,
               "p10": 1,
               "p90": 5
             },
             "REB": {
-              "mean": 2.275,
+              "mean": 2.25,
               "p10": 0,
               "p90": 4
             },
             "STL": {
-              "mean": 0.627,
+              "mean": 0.6245,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.2075,
+              "mean": 0.2135,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 48.90560681949154,
-              "p10": 20,
+              "mean": 49.34407812199777,
+              "p10": 25,
               "p90": 75
             },
             "FT_PCT": {
-              "mean": 78.11869416591654,
+              "mean": 78.55307922964798,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 28.24116239700658,
+              "mean": 28.88066703423196,
               "p10": 0,
               "p90": 100
             }
@@ -23303,51 +22111,51 @@
           "name": "Bones Hyland",
           "team": "MIN",
           "injuryStatus": "Not listed",
-          "playedScenarios": 1994,
+          "playedScenarios": 1996,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 13.526607014037397,
-            "p10": 7.456310679611648,
-            "p90": 20.160000000000014
+            "mean": 14.736275410440289,
+            "p10": 8,
+            "p90": 20.97087378640776
           },
           "stats": {
             "PTS": {
-              "mean": 6.824974924774323,
-              "p10": 2,
-              "p90": 14
+              "mean": 6.482965931863728,
+              "p10": 1,
+              "p90": 12
             },
             "AST": {
-              "mean": 2.2482447342026077,
+              "mean": 2.381763527054108,
+              "p10": 0,
+              "p90": 5
+            },
+            "REB": {
+              "mean": 1.6983967935871744,
               "p10": 0,
               "p90": 4
             },
-            "REB": {
-              "mean": 1.4037111334002006,
-              "p10": 0,
-              "p90": 3
-            },
             "STL": {
-              "mean": 0.5902708124373119,
+              "mean": 0.5430861723446894,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.15897693079237712,
+              "mean": 0.1683366733466934,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 46.35010501794714,
-              "p10": 0,
-              "p90": 83.33333333333333
+              "mean": 46.15836582089706,
+              "p10": 11.11111111111111,
+              "p90": 80
             },
             "FT_PCT": {
-              "mean": 77.66320747773604,
+              "mean": 79.86754970797521,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 38.95512937766444,
+              "mean": 39.12844574995626,
               "p10": 0,
               "p90": 100
             }
@@ -23377,18 +22185,54 @@
           "name": "Terrence Shannon Jr",
           "team": "MIN",
           "injuryStatus": "Not listed",
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
+          "playedScenarios": 1996,
+          "projectionStatus": "available",
+          "minutes": {
+            "mean": 12.544886022251305,
+            "p10": 7.200000000000003,
+            "p90": 18.534653465346548
+          },
           "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
+            "PTS": {
+              "mean": 7.240981963927855,
+              "p10": 2,
+              "p90": 13
+            },
+            "AST": {
+              "mean": 1.18937875751503,
+              "p10": 0,
+              "p90": 3
+            },
+            "REB": {
+              "mean": 1.466432865731463,
+              "p10": 0,
+              "p90": 3
+            },
+            "STL": {
+              "mean": 0.4088176352705411,
+              "p10": 0,
+              "p90": 1
+            },
+            "BLK": {
+              "mean": 0.09168336673346693,
+              "p10": 0,
+              "p90": 0
+            },
+            "FG_PCT": {
+              "mean": 48.493823549949695,
+              "p10": 14.285714285714286,
+              "p90": 83.33333333333333
+            },
+            "FT_PCT": {
+              "mean": 80.08359675515096,
+              "p10": 50,
+              "p90": 100
+            },
+            "FG3_PCT": {
+              "mean": 39.36320502696184,
+              "p10": 0,
+              "p90": 100
+            }
           }
         },
         {
@@ -23399,48 +22243,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 16.743021737274415,
+            "mean": 16.733021737274413,
             "p10": 10.153846153846155,
             "p90": 23.076923076923055
           },
           "stats": {
             "PTS": {
-              "mean": 6.2365,
+              "mean": 6.325,
               "p10": 2,
               "p90": 12
             },
             "AST": {
-              "mean": 1.745,
+              "mean": 1.8075,
               "p10": 0,
               "p90": 4
             },
             "REB": {
-              "mean": 3.104,
+              "mean": 3.103,
               "p10": 1,
               "p90": 6
             },
             "STL": {
-              "mean": 0.588,
+              "mean": 0.604,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.2355,
+              "mean": 0.2475,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 50.26470756850264,
-              "p10": 14.285714285714286,
+              "mean": 50.16692321488581,
+              "p10": 12.5,
               "p90": 100
             },
             "FT_PCT": {
-              "mean": 72.37822262663025,
-              "p10": 40,
+              "mean": 73.26568265682656,
+              "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 35.31939083864409,
+              "mean": 36.30321119802385,
               "p10": 0,
               "p90": 100
             }
@@ -23451,51 +22295,51 @@
           "name": "Jaylen Clark",
           "team": "MIN",
           "injuryStatus": "Not listed",
-          "playedScenarios": 1991,
+          "playedScenarios": 1994,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 11.98836751606601,
-            "p10": 6.058252427184464,
-            "p90": 17.94392523364485
+            "mean": 13.008227044900407,
+            "p10": 7.27272727272727,
+            "p90": 19.764705882352928
           },
           "stats": {
             "PTS": {
-              "mean": 3.2395781014565546,
+              "mean": 4.362086258776329,
               "p10": 0,
-              "p90": 7
+              "p90": 9
             },
             "AST": {
-              "mean": 0.8071320944249121,
+              "mean": 0.8485456369107321,
               "p10": 0,
               "p90": 2
             },
             "REB": {
-              "mean": 1.6092415871421397,
+              "mean": 1.705616850551655,
               "p10": 0,
-              "p90": 3
+              "p90": 4
             },
             "STL": {
-              "mean": 0.5876443997990959,
+              "mean": 0.708124373119358,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.09994977398292315,
+              "mean": 0.10882647943831494,
               "p10": 0,
-              "p90": 0
+              "p90": 1
             },
             "FG_PCT": {
-              "mean": 48.96407775231297,
+              "mean": 48.476492376059056,
               "p10": 0,
               "p90": 100
             },
             "FT_PCT": {
-              "mean": 73.45130845130839,
+              "mean": 72.93415340086823,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 38.58797648249813,
+              "mean": 38.77686032630327,
               "p10": 0,
               "p90": 100
             }
@@ -23509,50 +22353,50 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 24.057082927082064,
+            "mean": 24.01208292708206,
             "p10": 17.076923076923077,
-            "p90": 30.923076923076874
+            "p90": 30.891089108910915
           },
           "stats": {
             "PTS": {
-              "mean": 13.337,
+              "mean": 13.283,
               "p10": 6,
-              "p90": 22
+              "p90": 21
             },
             "AST": {
-              "mean": 2.9275,
+              "mean": 2.957,
               "p10": 1,
               "p90": 5
             },
             "REB": {
-              "mean": 4.235,
+              "mean": 4.2755,
               "p10": 2,
               "p90": 7
             },
             "STL": {
-              "mean": 0.907,
+              "mean": 0.909,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.1645,
+              "mean": 0.179,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 46.868093559343855,
+              "mean": 46.7574367433053,
               "p10": 25,
               "p90": 66.66666666666667
             },
             "FT_PCT": {
-              "mean": 74.60319151017784,
+              "mean": 75.24241153759242,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 38.85319104450186,
+              "mean": 37.61830057775623,
               "p10": 0,
-              "p90": 75
+              "p90": 66.66666666666667
             }
           }
         },
@@ -23564,50 +22408,50 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 19.096220333637838,
-            "p10": 12.5,
-            "p90": 25.63106796116504
+            "mean": 20.187890136808527,
+            "p10": 12.83168316831684,
+            "p90": 27.428571428571406
           },
           "stats": {
             "PTS": {
-              "mean": 6.294,
-              "p10": 2,
-              "p90": 12
+              "mean": 8.4945,
+              "p10": 3,
+              "p90": 15
             },
             "AST": {
-              "mean": 1.849,
+              "mean": 1.8715,
               "p10": 0,
               "p90": 4
             },
             "REB": {
-              "mean": 2.368,
-              "p10": 0,
-              "p90": 4
+              "mean": 2.4715,
+              "p10": 1,
+              "p90": 5
             },
             "STL": {
-              "mean": 0.5995,
+              "mean": 0.681,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.2295,
+              "mean": 0.2465,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 45.994773545051345,
-              "p10": 16.666666666666668,
-              "p90": 75
+              "mean": 45.44261878045109,
+              "p10": 20,
+              "p90": 71.42857142857143
             },
             "FT_PCT": {
-              "mean": 72.20585526280144,
-              "p10": 50,
+              "mean": 72.0084882855553,
+              "p10": 40,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 26.953118089341014,
+              "mean": 26.026201654370734,
               "p10": 0,
-              "p90": 100
+              "p90": 66.66666666666667
             }
           }
         },
@@ -23619,48 +22463,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 17.929936668929095,
-            "p10": 10.615384615384617,
-            "p90": 25.165048543689313
+            "mean": 19.471037251419006,
+            "p10": 12.631578947368418,
+            "p90": 26.13861386138616
           },
           "stats": {
             "PTS": {
-              "mean": 6.5265,
-              "p10": 2,
-              "p90": 12
+              "mean": 8.956,
+              "p10": 3,
+              "p90": 16
             },
             "AST": {
-              "mean": 2.889,
+              "mean": 3.001,
               "p10": 1,
               "p90": 5
             },
             "REB": {
-              "mean": 2.813,
+              "mean": 2.8695,
               "p10": 1,
               "p90": 5
             },
             "STL": {
-              "mean": 0.504,
+              "mean": 0.603,
               "p10": 0,
-              "p90": 1
+              "p90": 2
             },
             "BLK": {
-              "mean": 0.232,
+              "mean": 0.2475,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 53.45392386787676,
-              "p10": 20,
-              "p90": 100
+              "mean": 52.77792134123071,
+              "p10": 25,
+              "p90": 80
             },
             "FT_PCT": {
-              "mean": 79.13417534846101,
+              "mean": 78.79645554645558,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 37.484941893424015,
+              "mean": 36.20770874721574,
               "p10": 0,
               "p90": 100
             }
@@ -23674,48 +22518,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 14.750856679956875,
-            "p10": 8,
-            "p90": 21.06122448979591
+            "mean": 14.70085667995687,
+            "p10": 7.922330097087376,
+            "p90": 20.8301886792453
           },
           "stats": {
             "PTS": {
-              "mean": 4.729,
+              "mean": 4.9055,
               "p10": 0,
-              "p90": 9
+              "p90": 10
             },
             "AST": {
-              "mean": 1.4285,
+              "mean": 1.451,
               "p10": 0,
               "p90": 3
             },
             "REB": {
-              "mean": 3.1205,
+              "mean": 3.091,
               "p10": 1,
               "p90": 6
             },
             "STL": {
-              "mean": 0.5795,
+              "mean": 0.5855,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.361,
+              "mean": 0.375,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 48.83394108885584,
+              "mean": 47.799885758523274,
               "p10": 0,
               "p90": 100
             },
             "FT_PCT": {
-              "mean": 76.6868987898597,
+              "mean": 77.64403475438382,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 31.48337785693083,
+              "mean": 30.819809851651495,
               "p10": 0,
               "p90": 100
             }
@@ -23729,48 +22573,48 @@
           "playedScenarios": 1999,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 20.281907827416468,
-            "p10": 12.972972972972965,
-            "p90": 27.486486486486474
+            "mean": 20.249391569287404,
+            "p10": 12.960000000000008,
+            "p90": 27.3548387096774
           },
           "stats": {
             "PTS": {
-              "mean": 8.969484742371186,
+              "mean": 8.866433216608304,
               "p10": 3,
               "p90": 16
             },
             "AST": {
-              "mean": 2.6898449224612304,
+              "mean": 2.7388694347173588,
               "p10": 1,
               "p90": 5
             },
             "REB": {
-              "mean": 5.153576788394197,
+              "mean": 5.1935967983991995,
               "p10": 2,
               "p90": 9
             },
             "STL": {
-              "mean": 0.6063031515757878,
+              "mean": 0.6233116558279139,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.7893946973486743,
+              "mean": 0.847423711855928,
               "p10": 0,
               "p90": 2
             },
             "FG_PCT": {
-              "mean": 46.18316326686107,
+              "mean": 45.56317372530963,
               "p10": 20,
               "p90": 71.42857142857143
             },
             "FT_PCT": {
-              "mean": 75.57126483475042,
+              "mean": 76.05926817218528,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 33.38569039655997,
+              "mean": 32.7294765329785,
               "p10": 0,
               "p90": 100
             }
@@ -23803,48 +22647,48 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 18.662896689880696,
-            "p10": 12.356435643564364,
-            "p90": 25.35849056603777
+            "mean": 19.997971509992617,
+            "p10": 12.83168316831684,
+            "p90": 27.428571428571406
           },
           "stats": {
             "PTS": {
-              "mean": 5.832,
+              "mean": 6.1255,
               "p10": 2,
               "p90": 11
             },
             "AST": {
-              "mean": 2.0355,
+              "mean": 2.149,
               "p10": 0,
               "p90": 4
             },
             "REB": {
-              "mean": 4.358,
-              "p10": 1,
+              "mean": 4.8525,
+              "p10": 2,
               "p90": 8
             },
             "STL": {
-              "mean": 0.5355,
+              "mean": 0.5685,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.5635,
+              "mean": 0.606,
               "p10": 0,
               "p90": 2
             },
             "FG_PCT": {
-              "mean": 55.36661386003797,
+              "mean": 53.938886084145864,
               "p10": 16.666666666666668,
               "p90": 100
             },
             "FT_PCT": {
-              "mean": 77.72048637190593,
+              "mean": 79.85978559236752,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 34.42273135669362,
+              "mean": 32.046160674656015,
               "p10": 0,
               "p90": 100
             }
@@ -23877,48 +22721,48 @@
           "playedScenarios": 1999,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 18.381766200908285,
-            "p10": 11.881188118811888,
-            "p90": 25.263157894736867
+            "mean": 18.371761198407032,
+            "p10": 12.000000000000002,
+            "p90": 25.237113402061823
           },
           "stats": {
             "PTS": {
-              "mean": 5.973486743371686,
+              "mean": 5.844922461230615,
               "p10": 0,
-              "p90": 12
+              "p90": 11
             },
             "AST": {
-              "mean": 1.4977488744372187,
+              "mean": 1.5022511255627813,
               "p10": 0,
               "p90": 3
             },
             "REB": {
-              "mean": 2.4512256128064034,
-              "p10": 1,
+              "mean": 2.5052526263131565,
+              "p10": 0,
               "p90": 5
             },
             "STL": {
-              "mean": 0.8199099549774888,
+              "mean": 0.8289144572286143,
               "p10": 0,
               "p90": 2
             },
             "BLK": {
-              "mean": 0.10705352676338169,
+              "mean": 0.12256128064032017,
               "p10": 0,
-              "p90": 0
+              "p90": 1
             },
             "FG_PCT": {
-              "mean": 47.258699432612225,
+              "mean": 46.46895487101644,
               "p10": 0,
-              "p90": 87.5
+              "p90": 83.33333333333333
             },
             "FT_PCT": {
-              "mean": 82.54927148164231,
+              "mean": 82.57877465324275,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 34.99332993898201,
+              "mean": 35.106161980475825,
               "p10": 0,
               "p90": 100
             }
@@ -23932,50 +22776,50 @@
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
-            "mean": 17.78284518932509,
+            "mean": 17.73784518932509,
             "p10": 10.415094339622641,
-            "p90": 24.979591836734677
+            "p90": 24.96000000000002
           },
           "stats": {
             "PTS": {
-              "mean": 11.1625,
-              "p10": 4,
-              "p90": 20
+              "mean": 10.928,
+              "p10": 3,
+              "p90": 19
             },
             "AST": {
-              "mean": 1.304,
+              "mean": 1.3115,
               "p10": 0,
               "p90": 3
             },
             "REB": {
-              "mean": 1.981,
+              "mean": 2.0165,
               "p10": 0,
               "p90": 4
             },
             "STL": {
-              "mean": 0.3585,
+              "mean": 0.3305,
               "p10": 0,
               "p90": 1
             },
             "BLK": {
-              "mean": 0.1465,
+              "mean": 0.15,
               "p10": 0,
               "p90": 1
             },
             "FG_PCT": {
-              "mean": 39.5640851965663,
+              "mean": 39.37113298773416,
               "p10": 16.666666666666668,
               "p90": 62.5
             },
             "FT_PCT": {
-              "mean": 81.43225758934375,
+              "mean": 81.89444759385228,
               "p10": 50,
               "p90": 100
             },
             "FG3_PCT": {
-              "mean": 36.95267380417375,
-              "p10": 12.5,
-              "p90": 66.66666666666667
+              "mean": 36.58649057323723,
+              "p10": 11.11111111111111,
+              "p90": 62.5
             }
           }
         },
@@ -24017,7 +22861,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00"
+        "validUntil": "2026-10-28T05:59:03.048796+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -24687,7 +23531,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00"
+        "validUntil": "2026-10-28T05:59:03.048796+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -25357,7 +24201,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00"
+        "validUntil": "2026-10-28T05:59:03.048796+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -26046,7 +24890,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00"
+        "validUntil": "2026-10-28T05:59:03.048796+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -26735,7 +25579,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00"
+        "validUntil": "2026-10-28T05:59:03.048796+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -27443,7 +26287,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00"
+        "validUntil": "2026-10-28T05:59:03.048796+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -28362,8 +27206,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00",
-        "observedAt": "2026-10-27T22:15:42.684541+00:00",
+        "validUntil": "2026-10-28T05:59:03.048796+00:00",
+        "observedAt": "2026-10-27T23:59:04.260836+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -29965,6 +28809,7 @@
       "availability": {
         "holdReason": null,
         "outIds": [
+          "1643813",
           "1642461",
           "1631124",
           "1642274"
@@ -30002,8 +28847,8 @@
             "id": 1643813,
             "name": "Alpha Diallo",
             "team": "DEN",
-            "status": "Day-To-Day",
-            "out": false
+            "status": "Out",
+            "out": true
           },
           {
             "id": 203932,
@@ -30216,11 +29061,17 @@
             "out": false
           }
         ],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00",
-        "observedAt": "2026-10-27T22:15:42.684541+00:00",
+        "validUntil": "2026-10-28T05:59:03.048796+00:00",
+        "observedAt": "2026-10-27T23:59:04.260836+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
+          {
+            "id": 1643813,
+            "name": "Alpha Diallo",
+            "team": "DEN",
+            "status": "Out"
+          },
           {
             "id": 1642461,
             "name": "Spencer Jones",
@@ -30241,12 +29092,6 @@
           }
         ],
         "uncertain": [
-          {
-            "id": 1643813,
-            "name": "Alpha Diallo",
-            "team": "DEN",
-            "status": "Day-To-Day"
-          },
           {
             "id": 1629661,
             "name": "Cameron Johnson",
@@ -31804,9 +30649,9 @@
           "id": 1643813,
           "name": "Alpha Diallo",
           "team": "DEN",
-          "injuryStatus": "Day-To-Day",
+          "injuryStatus": "Out",
           "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
+          "projectionStatus": "reported_out",
           "minutes": null,
           "stats": {
             "PTS": null,
@@ -31838,7 +30683,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00"
+        "validUntil": "2026-10-28T05:59:03.048796+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -32527,7 +31372,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00"
+        "validUntil": "2026-10-28T05:59:03.048796+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -33196,15 +32041,142 @@
       "availability": {
         "holdReason": null,
         "outIds": [
+          "1643418",
+          "1642876",
           "203078",
           "1629060",
           "1627742",
           "1641757",
           "1642949",
-          "1629622",
-          "1642876"
+          "1629622"
         ],
         "players": [
+          {
+            "id": 1643418,
+            "name": "Cameron Carr",
+            "team": "LAL",
+            "status": "Out",
+            "out": true
+          },
+          {
+            "id": 1629029,
+            "name": "Luka Doncic",
+            "team": "LAL",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1629656,
+            "name": "Quentin Grimes",
+            "team": "LAL",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1630702,
+            "name": "Jaden Hardy",
+            "team": "LAL",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642355,
+            "name": "Bronny James",
+            "team": "LAL",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1641751,
+            "name": "Arthur Kaluma",
+            "team": "LAL",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1631117,
+            "name": "Walker Kessler",
+            "team": "LAL",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1631222,
+            "name": "Jake LaRavia",
+            "team": "LAL",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1626172,
+            "name": "Kevon Looney",
+            "team": "LAL",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1630572,
+            "name": "Sandro Mamukelashvili",
+            "team": "LAL",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1643024,
+            "name": "Chris Manon",
+            "team": "LAL",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1643758,
+            "name": "AK Okereke",
+            "team": "LAL",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1630559,
+            "name": "Austin Reaves",
+            "team": "LAL",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1629012,
+            "name": "Collin Sexton",
+            "team": "LAL",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642876,
+            "name": "Adou Thiero",
+            "team": "LAL",
+            "status": "Out",
+            "out": true
+          },
+          {
+            "id": 1629680,
+            "name": "Matisse Thybulle",
+            "team": "LAL",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1629020,
+            "name": "Jarred Vanderbilt",
+            "team": "LAL",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1630533,
+            "name": "Ziaire Williams",
+            "team": "LAL",
+            "status": "Not listed",
+            "out": false
+          },
           {
             "id": 203078,
             "name": "Bradley Beal",
@@ -33330,139 +32302,25 @@
             "team": "LAC",
             "status": "Not listed",
             "out": false
-          },
+          }
+        ],
+        "validUntil": "2026-10-28T05:59:03.048796+00:00",
+        "observedAt": "2026-10-27T23:59:04.260836+00:00",
+        "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
+        "excluded": [
           {
             "id": 1643418,
             "name": "Cameron Carr",
             "team": "LAL",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1629029,
-            "name": "Luka Doncic",
-            "team": "LAL",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1629656,
-            "name": "Quentin Grimes",
-            "team": "LAL",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630702,
-            "name": "Jaden Hardy",
-            "team": "LAL",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642355,
-            "name": "Bronny James",
-            "team": "LAL",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641751,
-            "name": "Arthur Kaluma",
-            "team": "LAL",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1631117,
-            "name": "Walker Kessler",
-            "team": "LAL",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1631222,
-            "name": "Jake LaRavia",
-            "team": "LAL",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1626172,
-            "name": "Kevon Looney",
-            "team": "LAL",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630572,
-            "name": "Sandro Mamukelashvili",
-            "team": "LAL",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1643024,
-            "name": "Chris Manon",
-            "team": "LAL",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1643758,
-            "name": "AK Okereke",
-            "team": "LAL",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630559,
-            "name": "Austin Reaves",
-            "team": "LAL",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1629012,
-            "name": "Collin Sexton",
-            "team": "LAL",
-            "status": "Not listed",
-            "out": false
+            "status": "Out"
           },
           {
             "id": 1642876,
             "name": "Adou Thiero",
             "team": "LAL",
-            "status": "Out",
-            "out": true
+            "status": "Out"
           },
-          {
-            "id": 1629680,
-            "name": "Matisse Thybulle",
-            "team": "LAL",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1629020,
-            "name": "Jarred Vanderbilt",
-            "team": "LAL",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630533,
-            "name": "Ziaire Williams",
-            "team": "LAL",
-            "status": "Not listed",
-            "out": false
-          }
-        ],
-        "validUntil": "2026-10-28T04:15:40.720048+00:00",
-        "observedAt": "2026-10-27T22:15:42.684541+00:00",
-        "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
-        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
-        "excluded": [
           {
             "id": 203078,
             "name": "Bradley Beal",
@@ -33497,12 +32355,6 @@
             "id": 1629622,
             "name": "Max Strus",
             "team": "LAC",
-            "status": "Out"
-          },
-          {
-            "id": 1642876,
-            "name": "Adou Thiero",
-            "team": "LAL",
             "status": "Out"
           }
         ],
@@ -34996,9 +33848,9 @@
           "id": 1643418,
           "name": "Cameron Carr",
           "team": "LAL",
-          "injuryStatus": "Not listed",
+          "injuryStatus": "Out",
           "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
+          "projectionStatus": "reported_out",
           "minutes": null,
           "stats": {
             "PTS": null,
