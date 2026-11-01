@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01T20:49:47.175Z",
+  "generatedAt": "2026-11-01T22:02:56.105Z",
   "scope": "game",
   "runs": 2000,
   "seedPrefix": "market-matchups-v1:",
@@ -11,7 +11,7 @@
     "note": "Fixed independent warm-up seeds; numerical calibration to model score targets, not validation against game outcomes."
   },
   "coverage": {
-    "events": 24,
+    "events": 23,
     "teams": 30,
     "rosteredPlayers": 519,
     "playersWithProjections": 167
@@ -9624,7 +9624,7 @@
     "web/season-engine.js": "eb9252a1582df10e6111b694229d9943ab5b9b734a6b7012abcbd2a631ea9e08",
     "web/season-possession.js": "133537a8a45a321a3cb884fbe3140b0917b2b3a85f36de26490a5f4d8e5f05a5",
     "web/season-availability.json": "a2ebd5a3bd2fb4b2642bb138c59fc6d696e8f23a3a21de89a3658c02f3fdc67c",
-    "web/game-availability.json": "31a1b95e476500e5ba0815aef9f17aa42d4ec580619c19dcf9ca552ad4c14247",
+    "web/game-availability.json": "ef0fed65b995f5e5619bcfcc8139105bab5224ed7eb76707182e5715e53c51df",
     "scripts/game_availability.cjs": "ad4ebaddf8a1a29c1d4f9285e6694211308ac46a65d954a040ae31f212edde00",
     "scripts/build_market_game_projections.cjs": "5bb013efeb75937e1b29aa8c96068aff75a9473e5a2ed77b3e409c52b1e4f317",
     "scripts/match_market_schedule.cjs": "f49aa4bdf06f89d1589098030436af429a52562ea785f39198adfd8b152bcdc3",
@@ -9635,681 +9635,11 @@
     "scripts/export_game_watchlist.cjs": "3ab0df69dd03f631fac9cd0b5a28f665f381afae4547c8b738ad66af5fd8a3b2",
     "web/lib/game-watchlist-targets.json": "54e78bb4477557b5e4c684a00fba33c6a53bafca0205f6affd07b79ca3d0770b"
   },
-  "marketInventoryHash": "beb7e6a7fd312677d383972e4a7b1b4ee50a4cab7a33c62509ae905f6aa7afef",
-  "inputSignature": "54c61f75e4325ca8755cef87439047e116948ab20a76e01eecc3c3c3a41d8e27",
-  "availabilityValidUntil": "2026-11-02T02:49:17.087448+00:00",
+  "marketInventoryHash": "cbc35ddfbbb0c715442c4ba185ace5a17722844b64475b6a1417e348783bd747",
+  "inputSignature": "d3c71946b3dd46647187ec09235c8ac7e38eff2dc2dd73460d42b7d25f12528e",
+  "availabilityValidUntil": "2026-11-02T04:02:21.191543+00:00",
   "assumptions": "Matchup-specific possession scenarios using current roster and ESPN injury observations. Reported Out players are excluded; other players are conditional on playing. Questionable participation, confirmed starters and minutes restrictions are not modeled. Not calibrated betting probabilities.",
   "events": [
-    {
-      "eventId": "e8559eaac12af915cfe6597644620c13",
-      "eventSource": "sportsbook-event-inventory",
-      "gameId": "0022600154",
-      "home": "ORL",
-      "away": "BOS",
-      "homeName": "Orlando Magic",
-      "awayName": "Boston Celtics",
-      "startsAt": "2026-11-01T20:40:00Z",
-      "officialStartsAt": "2026-11-01T20:30:00.000Z",
-      "scheduleOffsetMinutes": 10,
-      "scheduleMatchMethod": "Unique home/away match within 15 minutes",
-      "reviewRequired": "No current availability observation matched to this game.",
-      "availability": {
-        "holdReason": "No current availability observation matched to this game.",
-        "outIds": [],
-        "players": [],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00"
-      },
-      "calibrationTarget": null,
-      "gameProjection": null,
-      "players": [
-        {
-          "id": 201144,
-          "name": "Mike Conley",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 202331,
-          "name": "Paul George",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 202696,
-          "name": "Nikola Vučević",
-          "team": "ORL",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628369,
-          "name": "Jayson Tatum",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628371,
-          "name": "Jonathan Isaac",
-          "team": "ORL",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628401,
-          "name": "Derrick White",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628975,
-          "name": "Jevon Carter",
-          "team": "ORL",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628976,
-          "name": "Wendell Carter Jr.",
-          "team": "ORL",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1629011,
-          "name": "Mitchell Robinson",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1629048,
-          "name": "Goga Bitadze",
-          "team": "ORL",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1629674,
-          "name": "Neemias Queta",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630202,
-          "name": "Payton Pritchard",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630217,
-          "name": "Desmond Bane",
-          "team": "ORL",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630532,
-          "name": "Franz Wagner",
-          "team": "ORL",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630568,
-          "name": "Luka Garza",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630573,
-          "name": "Sam Hauser",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630591,
-          "name": "Jalen Suggs",
-          "team": "ORL",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630658,
-          "name": "Colin Castleton",
-          "team": "ORL",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631094,
-          "name": "Paolo Banchero",
-          "team": "ORL",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631199,
-          "name": "Ron Harper Jr.",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631248,
-          "name": "Baylor Scheierman",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631288,
-          "name": "Jamal Cain",
-          "team": "ORL",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631457,
-          "name": "Alex Morales",
-          "team": "ORL",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1641710,
-          "name": "Anthony Black",
-          "team": "ORL",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1641759,
-          "name": "Dillon Mitchell",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1641775,
-          "name": "Jordan Walsh",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1641783,
-          "name": "Tristan da Silva",
-          "team": "ORL",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642269,
-          "name": "Devin Carter",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642859,
-          "name": "Jase Richardson",
-          "team": "ORL",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642864,
-          "name": "Hugo González",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642869,
-          "name": "Noah Penda",
-          "team": "ORL",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642873,
-          "name": "Amari Williams",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1643416,
-          "name": "Chris Cenac Jr.",
-          "team": "BOS",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1643593,
-          "name": "Izaiyah Nelson",
-          "team": "ORL",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        }
-      ]
-    },
     {
       "eventId": "fc3e945a5be88d3f933456bc512c956d",
       "eventSource": "sportsbook-event-inventory",
@@ -10322,12 +9652,12 @@
       "officialStartsAt": "2026-11-01T22:00:00.000Z",
       "scheduleOffsetMinutes": 10,
       "scheduleMatchMethod": "Unique home/away match within 15 minutes",
-      "reviewRequired": "Current roster reconciliation needs review",
+      "reviewRequired": "No current availability observation matched to this game.",
       "availability": {
-        "holdReason": "Current roster reconciliation needs review",
+        "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00"
+        "validUntil": "2026-11-02T04:02:21.191543+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -11016,7 +10346,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00"
+        "validUntil": "2026-11-02T04:02:21.191543+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -11724,7 +11054,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00"
+        "validUntil": "2026-11-02T04:02:21.191543+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -12394,7 +11724,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00"
+        "validUntil": "2026-11-02T04:02:21.191543+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -13064,7 +12394,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00"
+        "validUntil": "2026-11-02T04:02:21.191543+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -13734,7 +13064,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00"
+        "validUntil": "2026-11-02T04:02:21.191543+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -14423,7 +13753,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00"
+        "validUntil": "2026-11-02T04:02:21.191543+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -15074,7 +14404,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00"
+        "validUntil": "2026-11-02T04:02:21.191543+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -15763,7 +15093,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00"
+        "validUntil": "2026-11-02T04:02:21.191543+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -16693,8 +16023,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00",
-        "observedAt": "2026-11-01T20:49:20.073213+00:00",
+        "validUntil": "2026-11-02T04:02:21.191543+00:00",
+        "observedAt": "2026-11-01T22:02:22.652553+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -18595,8 +17925,8 @@
             "out": true
           }
         ],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00",
-        "observedAt": "2026-11-01T20:49:20.073213+00:00",
+        "validUntil": "2026-11-02T04:02:21.191543+00:00",
+        "observedAt": "2026-11-01T22:02:22.652553+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -20205,7 +19535,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00"
+        "validUntil": "2026-11-02T04:02:21.191543+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -21082,7 +20412,7 @@
             "id": 1630264,
             "name": "Anthony Gill",
             "team": "WAS",
-            "status": "Not listed",
+            "status": "Day-To-Day",
             "out": false
           },
           {
@@ -21124,7 +20454,7 @@
             "id": 1642259,
             "name": "Alex Sarr",
             "team": "WAS",
-            "status": "Not listed",
+            "status": "Day-To-Day",
             "out": false
           },
           {
@@ -21149,8 +20479,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00",
-        "observedAt": "2026-11-01T20:49:20.073213+00:00",
+        "validUntil": "2026-11-02T04:02:21.191543+00:00",
+        "observedAt": "2026-11-01T22:02:22.652553+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -21203,7 +20533,20 @@
             "status": "Out"
           }
         ],
-        "uncertain": []
+        "uncertain": [
+          {
+            "id": 1630264,
+            "name": "Anthony Gill",
+            "team": "WAS",
+            "status": "Day-To-Day"
+          },
+          {
+            "id": 1642259,
+            "name": "Alex Sarr",
+            "team": "WAS",
+            "status": "Day-To-Day"
+          }
+        ]
       },
       "calibrationTarget": {
         "homeScore": 121.32736059002643,
@@ -21752,7 +21095,7 @@
           "id": 1630264,
           "name": "Anthony Gill",
           "team": "WAS",
-          "injuryStatus": "Not listed",
+          "injuryStatus": "Day-To-Day",
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -22306,7 +21649,7 @@
           "id": 1642259,
           "name": "Alex Sarr",
           "team": "WAS",
-          "injuryStatus": "Not listed",
+          "injuryStatus": "Day-To-Day",
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
@@ -22790,7 +22133,7 @@
             "id": 1643591,
             "name": "Tobe Awaka",
             "team": "CHI",
-            "status": "Not listed",
+            "status": "Day-To-Day",
             "out": false
           },
           {
@@ -22881,7 +22224,7 @@
             "id": 1630188,
             "name": "Jalen Smith",
             "team": "CHI",
-            "status": "Not listed",
+            "status": "Day-To-Day",
             "out": false
           },
           {
@@ -23025,8 +22368,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00",
-        "observedAt": "2026-11-01T20:49:20.073213+00:00",
+        "validUntil": "2026-11-02T04:02:21.191543+00:00",
+        "observedAt": "2026-11-01T22:02:22.652553+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -23050,6 +22393,18 @@
           }
         ],
         "uncertain": [
+          {
+            "id": 1643591,
+            "name": "Tobe Awaka",
+            "team": "CHI",
+            "status": "Day-To-Day"
+          },
+          {
+            "id": 1630188,
+            "name": "Jalen Smith",
+            "team": "CHI",
+            "status": "Day-To-Day"
+          },
           {
             "id": 1643517,
             "name": "Dailyn Swain",
@@ -23837,7 +23192,7 @@
           "id": 1630188,
           "name": "Jalen Smith",
           "team": "CHI",
-          "injuryStatus": "Not listed",
+          "injuryStatus": "Day-To-Day",
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -24575,7 +23930,7 @@
           "id": 1643591,
           "name": "Tobe Awaka",
           "team": "CHI",
-          "injuryStatus": "Not listed",
+          "injuryStatus": "Day-To-Day",
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -24628,7 +23983,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00"
+        "validUntil": "2026-11-02T04:02:21.191543+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -25489,7 +24844,7 @@
             "id": 1627749,
             "name": "Dejounte Murray",
             "team": "NOP",
-            "status": "Day-To-Day",
+            "status": "Not listed",
             "out": false
           },
           {
@@ -25535,8 +24890,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00",
-        "observedAt": "2026-11-01T20:49:20.073213+00:00",
+        "validUntil": "2026-11-02T04:02:21.191543+00:00",
+        "observedAt": "2026-11-01T22:02:22.652553+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -25575,12 +24930,6 @@
           {
             "id": 1630530,
             "name": "Trey Murphy III",
-            "team": "NOP",
-            "status": "Day-To-Day"
-          },
-          {
-            "id": 1627749,
-            "name": "Dejounte Murray",
             "team": "NOP",
             "status": "Day-To-Day"
           }
@@ -25693,7 +25042,7 @@
           "id": 1627749,
           "name": "Dejounte Murray",
           "team": "NOP",
-          "injuryStatus": "Day-To-Day",
+          "injuryStatus": "Not listed",
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
@@ -27182,7 +26531,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00"
+        "validUntil": "2026-11-02T04:02:21.191543+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -27993,7 +27342,7 @@
             "id": 203991,
             "name": "Clint Capela",
             "team": "HOU",
-            "status": "Not listed",
+            "status": "Day-To-Day",
             "out": false
           },
           {
@@ -28095,8 +27444,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00",
-        "observedAt": "2026-11-01T20:49:20.073213+00:00",
+        "validUntil": "2026-11-02T04:02:21.191543+00:00",
+        "observedAt": "2026-11-01T22:02:22.652553+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -28120,6 +27469,12 @@
           }
         ],
         "uncertain": [
+          {
+            "id": 203991,
+            "name": "Clint Capela",
+            "team": "HOU",
+            "status": "Day-To-Day"
+          },
           {
             "id": 1642263,
             "name": "Reed Sheppard",
@@ -28400,7 +27755,7 @@
           "id": 203991,
           "name": "Clint Capela",
           "team": "HOU",
-          "injuryStatus": "Not listed",
+          "injuryStatus": "Day-To-Day",
           "playedScenarios": 1999,
           "projectionStatus": "available",
           "minutes": {
@@ -29686,7 +29041,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00"
+        "validUntil": "2026-11-02T04:02:21.191543+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -30620,8 +29975,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00",
-        "observedAt": "2026-11-01T20:49:20.073213+00:00",
+        "validUntil": "2026-11-02T04:02:21.191543+00:00",
+        "observedAt": "2026-11-01T22:02:22.652553+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -32216,7 +31571,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00"
+        "validUntil": "2026-11-02T04:02:21.191543+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -32905,7 +32260,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00"
+        "validUntil": "2026-11-02T04:02:21.191543+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -33575,7 +32930,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-02T02:49:17.087448+00:00"
+        "validUntil": "2026-11-02T04:02:21.191543+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
