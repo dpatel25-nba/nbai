@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T21:53:02.848Z",
+  "generatedAt": "2026-11-07T23:56:50.318Z",
   "scope": "game",
   "runs": 2000,
   "seedPrefix": "market-matchups-v1:",
@@ -14,7 +14,7 @@
     "events": 18,
     "teams": 27,
     "rosteredPlayers": 467,
-    "playersWithProjections": 143
+    "playersWithProjections": 119
   },
   "schedule": [
     {
@@ -9624,7 +9624,7 @@
     "web/season-engine.js": "eb9252a1582df10e6111b694229d9943ab5b9b734a6b7012abcbd2a631ea9e08",
     "web/season-possession.js": "133537a8a45a321a3cb884fbe3140b0917b2b3a85f36de26490a5f4d8e5f05a5",
     "web/season-availability.json": "a2ebd5a3bd2fb4b2642bb138c59fc6d696e8f23a3a21de89a3658c02f3fdc67c",
-    "web/game-availability.json": "25096f0726bde5104816b6f39154fa3deeb444b289837f0371b919aed1bfb411",
+    "web/game-availability.json": "ab3d6a6d5507669e86d7a63d8b3cb23380c3eaaf18d5cce57efe10a69747ca6e",
     "scripts/game_availability.cjs": "ad4ebaddf8a1a29c1d4f9285e6694211308ac46a65d954a040ae31f212edde00",
     "scripts/build_market_game_projections.cjs": "5bb013efeb75937e1b29aa8c96068aff75a9473e5a2ed77b3e409c52b1e4f317",
     "scripts/match_market_schedule.cjs": "f49aa4bdf06f89d1589098030436af429a52562ea785f39198adfd8b152bcdc3",
@@ -9636,8 +9636,8 @@
     "web/lib/game-watchlist-targets.json": "54e78bb4477557b5e4c684a00fba33c6a53bafca0205f6affd07b79ca3d0770b"
   },
   "marketInventoryHash": "119c5bba64e7925d634c7f3b5cfcc0a38e1f0c81e497a8b221ea56ccb51e4f7d",
-  "inputSignature": "cb9e8d598cedb9788f3103ac35694af3705c3d77143887bb1de2689b2ab5e8a4",
-  "availabilityValidUntil": "2026-11-08T03:52:42.486959+00:00",
+  "inputSignature": "4504cff1dd8c4a78ccfacc05b284593c872d999d1d8a3fe246bacdb07a8da473",
+  "availabilityValidUntil": "2026-11-08T05:56:19.162905+00:00",
   "assumptions": "Matchup-specific possession scenarios using current roster and ESPN injury observations. Reported Out players are excluded; other players are conditional on playing. Questionable participation, confirmed starters and minutes restrictions are not modeled. Not calibrated betting probabilities.",
   "events": [
     {
@@ -9652,1093 +9652,289 @@
       "officialStartsAt": "2026-11-07T22:00:00.000Z",
       "scheduleOffsetMinutes": 10,
       "scheduleMatchMethod": "Unique home/away match within 15 minutes",
-      "reviewRequired": null,
+      "reviewRequired": "No current availability observation matched to this game.",
       "availability": {
-        "holdReason": null,
-        "outIds": [
-          "1631124",
-          "1642277",
-          "1630169",
-          "1641767"
-        ],
-        "players": [
-          {
-            "id": 1628963,
-            "name": "Marvin Bagley III",
-            "team": "DEN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1631128,
-            "name": "Christian Braun",
-            "team": "DEN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642350,
-            "name": "Trevon Brazile",
-            "team": "DEN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 201942,
-            "name": "DeMar DeRozan",
-            "team": "DEN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1643813,
-            "name": "Alpha Diallo",
-            "team": "DEN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 203932,
-            "name": "Aaron Gordon",
-            "team": "DEN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641747,
-            "name": "DaRon Holmes II",
-            "team": "DEN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1643624,
-            "name": "Bryce Hopkins",
-            "team": "DEN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1629661,
-            "name": "Cameron Johnson",
-            "team": "DEN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 203999,
-            "name": "Nikola Jokic",
-            "team": "DEN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642461,
-            "name": "Spencer Jones",
-            "team": "DEN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1626145,
-            "name": "Tyus Jones",
-            "team": "DEN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1627750,
-            "name": "Jamal Murray",
-            "team": "DEN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642948,
-            "name": "Ryan Nembhard",
-            "team": "DEN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630192,
-            "name": "Zeke Nnaji",
-            "team": "DEN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1631124,
-            "name": "Julian Strawther",
-            "team": "DEN",
-            "status": "Out",
-            "out": true
-          },
-          {
-            "id": 1641715,
-            "name": "Cam Whitmore",
-            "team": "DEN",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641738,
-            "name": "Kobe Brown",
-            "team": "IND",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642277,
-            "name": "Johnny Furphy",
-            "team": "IND",
-            "status": "Out",
-            "out": true
-          },
-          {
-            "id": 1630169,
-            "name": "Tyrese Haliburton",
-            "team": "IND",
-            "status": "Out",
-            "out": true
-          },
-          {
-            "id": 1630643,
-            "name": "Jay Huff",
-            "team": "IND",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1631245,
-            "name": "Quenton Jackson",
-            "team": "IND",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 204456,
-            "name": "T.J. McConnell",
-            "team": "IND",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1626204,
-            "name": "Larry Nance Jr.",
-            "team": "IND",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1629614,
-            "name": "Andrew Nembhard",
-            "team": "IND",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630174,
-            "name": "Aaron Nesmith",
-            "team": "IND",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1626162,
-            "name": "Kelly Oubre Jr.",
-            "team": "IND",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641767,
-            "name": "Ben Sheppard",
-            "team": "IND",
-            "status": "Out",
-            "out": true
-          },
-          {
-            "id": 1627783,
-            "name": "Pascal Siakam",
-            "team": "IND",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641771,
-            "name": "Jalen Slawson",
-            "team": "IND",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1643552,
-            "name": "Braden Smith",
-            "team": "IND",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630167,
-            "name": "Obi Toppin",
-            "team": "IND",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641716,
-            "name": "Jarace Walker",
-            "team": "IND",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1627826,
-            "name": "Ivica Zubac",
-            "team": "IND",
-            "status": "Not listed",
-            "out": false
-          }
-        ],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00",
-        "observedAt": "2026-11-07T21:52:43.495934+00:00",
-        "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
-        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
-        "excluded": [
-          {
-            "id": 1631124,
-            "name": "Julian Strawther",
-            "team": "DEN",
-            "status": "Out"
-          },
-          {
-            "id": 1642277,
-            "name": "Johnny Furphy",
-            "team": "IND",
-            "status": "Out"
-          },
-          {
-            "id": 1630169,
-            "name": "Tyrese Haliburton",
-            "team": "IND",
-            "status": "Out"
-          },
-          {
-            "id": 1641767,
-            "name": "Ben Sheppard",
-            "team": "IND",
-            "status": "Out"
-          }
-        ],
-        "uncertain": []
+        "holdReason": "No current availability observation matched to this game.",
+        "outIds": [],
+        "players": [],
+        "validUntil": "2026-11-08T05:56:19.162905+00:00"
       },
-      "calibrationTarget": {
-        "homeScore": 116.42529223635277,
-        "awayScore": 121.57870776364723,
-        "homeMargin": -5.153415527294456
-      },
-      "gameProjection": {
-        "homeScore": {
-          "mean": 116.067,
-          "p10": 102,
-          "p90": 131
-        },
-        "awayScore": {
-          "mean": 121.4315,
-          "p10": 106,
-          "p90": 136
-        },
-        "homeMargin": {
-          "mean": -5.3645,
-          "p10": -23,
-          "p90": 12
-        },
-        "total": {
-          "mean": 237.4985,
-          "p10": 214,
-          "p90": 262
-        },
-        "homeWinShare": 0.344
-      },
+      "calibrationTarget": null,
+      "gameProjection": null,
       "players": [
         {
           "id": 201942,
           "name": "DeMar DeRozan",
           "team": "DEN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 25.074321430206297,
-            "p10": 17.814432989690715,
-            "p90": 32.42857142857138
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 15.0115,
-              "p10": 8,
-              "p90": 23
-            },
-            "AST": {
-              "mean": 3.602,
-              "p10": 1,
-              "p90": 6
-            },
-            "REB": {
-              "mean": 3.0685,
-              "p10": 1,
-              "p90": 6
-            },
-            "STL": {
-              "mean": 0.7325,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.2915,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 49.938973812148944,
-              "p10": 30.76923076923077,
-              "p90": 70
-            },
-            "FT_PCT": {
-              "mean": 85.26609555756994,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 32.93027005239827,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 203932,
           "name": "Aaron Gordon",
           "team": "DEN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 21.800228749651797,
-            "p10": 14.912621359223296,
-            "p90": 28.799999999999958
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 10.0615,
-              "p10": 4,
-              "p90": 17
-            },
-            "AST": {
-              "mean": 2.392,
-              "p10": 0,
-              "p90": 4
-            },
-            "REB": {
-              "mean": 3.333,
-              "p10": 1,
-              "p90": 6
-            },
-            "STL": {
-              "mean": 0.4375,
-              "p10": 0,
-              "p90": 1
-            },
-            "BLK": {
-              "mean": 0.2875,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 53.72612976440028,
-              "p10": 25,
-              "p90": 81.81818181818181
-            },
-            "FT_PCT": {
-              "mean": 73.4578280666926,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 38.659884644867006,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 203999,
           "name": "Nikola Jokić",
           "team": "DEN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 26.07241858105856,
-            "p10": 19.294117647058812,
-            "p90": 32.816326530612216
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 20.306,
-              "p10": 11,
-              "p90": 30
-            },
-            "AST": {
-              "mean": 6.8185,
-              "p10": 3,
-              "p90": 11
-            },
-            "REB": {
-              "mean": 8.65,
-              "p10": 5,
-              "p90": 13
-            },
-            "STL": {
-              "mean": 1.1445,
-              "p10": 0,
-              "p90": 3
-            },
-            "BLK": {
-              "mean": 0.6885,
-              "p10": 0,
-              "p90": 2
-            },
-            "FG_PCT": {
-              "mean": 58.34773039021238,
-              "p10": 40,
-              "p90": 76.47058823529412
-            },
-            "FT_PCT": {
-              "mean": 81.22825440557399,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 39.00658105421263,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 204456,
           "name": "T.J. McConnell",
           "team": "IND",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 1998,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 13.51428287712089,
-            "p10": 7.456310679611648,
-            "p90": 20.307692307692296
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 7.606606606606607,
-              "p10": 2,
-              "p90": 14
-            },
-            "AST": {
-              "mean": 3.053053053053053,
-              "p10": 1,
-              "p90": 6
-            },
-            "REB": {
-              "mean": 1.955955955955956,
-              "p10": 0,
-              "p90": 4
-            },
-            "STL": {
-              "mean": 0.5655655655655656,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.14814814814814814,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 53.14615906919147,
-              "p10": 25,
-              "p90": 83.33333333333333
-            },
-            "FT_PCT": {
-              "mean": 78.07595912859071,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 32.2733918128655,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1626145,
           "name": "Tyus Jones",
           "team": "DEN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 18.233721717105478,
-            "p10": 11.885714285714288,
-            "p90": 25.35849056603777
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 6.02,
-              "p10": 1,
-              "p90": 12
-            },
-            "AST": {
-              "mean": 4.2605,
-              "p10": 1,
-              "p90": 7
-            },
-            "REB": {
-              "mean": 2.0325,
-              "p10": 0,
-              "p90": 4
-            },
-            "STL": {
-              "mean": 0.7635,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.112,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 45.491985477489116,
-              "p10": 11.11111111111111,
-              "p90": 75
-            },
-            "FT_PCT": {
-              "mean": 83.5842490842491,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 39.650524079095355,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1626162,
           "name": "Kelly Oubre Jr.",
           "team": "IND",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 26.023432813333436,
-            "p10": 18.461538461538456,
-            "p90": 33.027522935779864
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 12.3855,
-              "p10": 5,
-              "p90": 20
-            },
-            "AST": {
-              "mean": 1.426,
-              "p10": 0,
-              "p90": 3
-            },
-            "REB": {
-              "mean": 3.86,
-              "p10": 1,
-              "p90": 7
-            },
-            "STL": {
-              "mean": 0.778,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.395,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 45.53714019712,
-              "p10": 25,
-              "p90": 66.66666666666667
-            },
-            "FT_PCT": {
-              "mean": 75.8444558097605,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 30.795393242215315,
-              "p10": 0,
-              "p90": 66.66666666666667
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1626204,
           "name": "Larry Nance Jr.",
           "team": "IND",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 1998,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 14.266092200418624,
-            "p10": 7.529411764705883,
-            "p90": 20.444444444444432
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 4.72972972972973,
-              "p10": 0,
-              "p90": 10
-            },
-            "AST": {
-              "mean": 1.480980980980981,
-              "p10": 0,
-              "p90": 3
-            },
-            "REB": {
-              "mean": 2.835335335335335,
-              "p10": 1,
-              "p90": 5
-            },
-            "STL": {
-              "mean": 0.5835835835835835,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.2677677677677678,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 51.20369845303508,
-              "p10": 0,
-              "p90": 100
-            },
-            "FT_PCT": {
-              "mean": 67.16368344027913,
-              "p10": 33.333333333333336,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 38.58896089665326,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1627750,
           "name": "Jamal Murray",
           "team": "DEN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 26.20352767166961,
-            "p10": 19.47169811320756,
-            "p90": 33.12000000000002
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 18.1955,
-              "p10": 9,
-              "p90": 28
-            },
-            "AST": {
-              "mean": 4.29,
-              "p10": 2,
-              "p90": 7
-            },
-            "REB": {
-              "mean": 3.602,
-              "p10": 1,
-              "p90": 6
-            },
-            "STL": {
-              "mean": 0.816,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.4385,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 48.30747078351231,
-              "p10": 30.76923076923077,
-              "p90": 66.66666666666667
-            },
-            "FT_PCT": {
-              "mean": 87.54502801315537,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 41.11875987818657,
-              "p10": 0,
-              "p90": 75
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1627783,
           "name": "Pascal Siakam",
           "team": "IND",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 26.53614415974297,
-            "p10": 19.294117647058812,
-            "p90": 33.742574257425765
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 18.788,
-              "p10": 10,
-              "p90": 28
-            },
-            "AST": {
-              "mean": 3.142,
-              "p10": 1,
-              "p90": 6
-            },
-            "REB": {
-              "mean": 4.8255,
-              "p10": 2,
-              "p90": 8
-            },
-            "STL": {
-              "mean": 0.6345,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.3525,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 49.80317779383673,
-              "p10": 33.333333333333336,
-              "p90": 66.66666666666667
-            },
-            "FT_PCT": {
-              "mean": 71.73707035902565,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 35.767611825103884,
-              "p10": 0,
-              "p90": 75
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1627826,
           "name": "Ivica Zubac",
           "team": "IND",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 25.171583701048284,
-            "p10": 17.777777777777775,
-            "p90": 32.65979381443293
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 11.1435,
-              "p10": 5,
-              "p90": 18
-            },
-            "AST": {
-              "mean": 1.845,
-              "p10": 0,
-              "p90": 4
-            },
-            "REB": {
-              "mean": 7.579,
-              "p10": 4,
-              "p90": 12
-            },
-            "STL": {
-              "mean": 0.375,
-              "p10": 0,
-              "p90": 1
-            },
-            "BLK": {
-              "mean": 0.966,
-              "p10": 0,
-              "p90": 2
-            },
-            "FG_PCT": {
-              "mean": 62.15893031326304,
-              "p10": 40,
-              "p90": 85.71428571428571
-            },
-            "FT_PCT": {
-              "mean": 70.83211626896764,
-              "p10": 37.5,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 23.076923076923077,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1628963,
           "name": "Marvin Bagley III",
           "team": "DEN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 1998,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 15.260776628953613,
-            "p10": 8.326530612244897,
-            "p90": 22.458715596330304
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 7.402902902902903,
-              "p10": 2,
-              "p90": 14
-            },
-            "AST": {
-              "mean": 1.0625625625625625,
-              "p10": 0,
-              "p90": 2
-            },
-            "REB": {
-              "mean": 4.9524524524524525,
-              "p10": 2,
-              "p90": 9
-            },
-            "STL": {
-              "mean": 0.3913913913913914,
-              "p10": 0,
-              "p90": 1
-            },
-            "BLK": {
-              "mean": 0.5565565565565566,
-              "p10": 0,
-              "p90": 2
-            },
-            "FG_PCT": {
-              "mean": 60.42988134641472,
-              "p10": 30,
-              "p90": 100
-            },
-            "FT_PCT": {
-              "mean": 69.46150850912768,
-              "p10": 40,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 42.51100440176071,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1629614,
           "name": "Andrew Nembhard",
           "team": "IND",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 24.39569797099746,
-            "p10": 17.5,
-            "p90": 31.999999999999943
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 10.5905,
-              "p10": 4,
-              "p90": 18
-            },
-            "AST": {
-              "mean": 4.7455,
-              "p10": 2,
-              "p90": 8
-            },
-            "REB": {
-              "mean": 2.238,
-              "p10": 0,
-              "p90": 4
-            },
-            "STL": {
-              "mean": 0.544,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.1695,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 45.11084808084641,
-              "p10": 22.22222222222222,
-              "p90": 66.66666666666667
-            },
-            "FT_PCT": {
-              "mean": 81.7529791975184,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 33.21116830839783,
-              "p10": 0,
-              "p90": 75
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1629661,
           "name": "Cameron Johnson",
           "team": "DEN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 22.397471732182165,
-            "p10": 15.272727272727263,
-            "p90": 29.71428571428567
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 10.3445,
-              "p10": 4,
-              "p90": 17
-            },
-            "AST": {
-              "mean": 2.002,
-              "p10": 0,
-              "p90": 4
-            },
-            "REB": {
-              "mean": 3.2735,
-              "p10": 1,
-              "p90": 6
-            },
-            "STL": {
-              "mean": 0.6155,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.2225,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 48.43888683128146,
-              "p10": 25,
-              "p90": 75
-            },
-            "FT_PCT": {
-              "mean": 83.91059869557027,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 41.00126974432283,
-              "p10": 0,
-              "p90": 75
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1630167,
           "name": "Obi Toppin",
           "team": "IND",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 16.95079543278722,
-            "p10": 10.036363636363635,
-            "p90": 23.309278350515456
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 10.54,
-              "p10": 4,
-              "p90": 18
-            },
-            "AST": {
-              "mean": 1.747,
-              "p10": 0,
-              "p90": 4
-            },
-            "REB": {
-              "mean": 3.7855,
-              "p10": 1,
-              "p90": 7
-            },
-            "STL": {
-              "mean": 0.4565,
-              "p10": 0,
-              "p90": 1
-            },
-            "BLK": {
-              "mean": 0.474,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 51.70042501499146,
-              "p10": 26.666666666666668,
-              "p90": 75
-            },
-            "FT_PCT": {
-              "mean": 80.10941729794183,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 36.81808607764013,
-              "p10": 0,
-              "p90": 75
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1630169,
           "name": "Tyrese Haliburton",
           "team": "IND",
-          "injuryStatus": "Out",
+          "injuryStatus": null,
           "playedScenarios": 0,
-          "projectionStatus": "reported_out",
+          "projectionStatus": "no_projected_minutes",
           "minutes": null,
           "stats": {
             "PTS": null,
@@ -10755,62 +9951,26 @@
           "id": 1630174,
           "name": "Aaron Nesmith",
           "team": "IND",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 23.61509297855274,
-            "p10": 15.99999999999999,
-            "p90": 30.504672897196205
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 10.802,
-              "p10": 4,
-              "p90": 18
-            },
-            "AST": {
-              "mean": 1.485,
-              "p10": 0,
-              "p90": 3
-            },
-            "REB": {
-              "mean": 2.6765,
-              "p10": 1,
-              "p90": 5
-            },
-            "STL": {
-              "mean": 0.61,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.429,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 46.45549782646698,
-              "p10": 25,
-              "p90": 71.42857142857143
-            },
-            "FT_PCT": {
-              "mean": 82.19701059174737,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 39.74583013327941,
-              "p10": 0,
-              "p90": 75
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1630192,
           "name": "Zeke Nnaji",
           "team": "DEN",
-          "injuryStatus": "Not listed",
+          "injuryStatus": null,
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -10829,64 +9989,28 @@
           "id": 1630643,
           "name": "Jay Huff",
           "team": "IND",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 15.643366679766967,
-            "p10": 9.600000000000001,
-            "p90": 22.641509433962288
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 7.716,
-              "p10": 2,
-              "p90": 15
-            },
-            "AST": {
-              "mean": 1.1055,
-              "p10": 0,
-              "p90": 3
-            },
-            "REB": {
-              "mean": 3.1305,
-              "p10": 1,
-              "p90": 6
-            },
-            "STL": {
-              "mean": 0.3265,
-              "p10": 0,
-              "p90": 1
-            },
-            "BLK": {
-              "mean": 1.3925,
-              "p10": 0,
-              "p90": 3
-            },
-            "FG_PCT": {
-              "mean": 48.241682977316366,
-              "p10": 16.666666666666668,
-              "p90": 83.33333333333333
-            },
-            "FT_PCT": {
-              "mean": 81.46041995198107,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 34.79907916576349,
-              "p10": 0,
-              "p90": 75
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1631124,
           "name": "Julian Strawther",
           "team": "DEN",
-          "injuryStatus": "Out",
+          "injuryStatus": null,
           "playedScenarios": 0,
-          "projectionStatus": "reported_out",
+          "projectionStatus": "no_projected_minutes",
           "minutes": null,
           "stats": {
             "PTS": null,
@@ -10903,227 +10027,83 @@
           "id": 1631128,
           "name": "Christian Braun",
           "team": "DEN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 23.3135877188997,
-            "p10": 16.77669902912621,
-            "p90": 30.339622641509486
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 8.5305,
-              "p10": 3,
-              "p90": 15
-            },
-            "AST": {
-              "mean": 1.8675,
-              "p10": 0,
-              "p90": 4
-            },
-            "REB": {
-              "mean": 3.586,
-              "p10": 1,
-              "p90": 6
-            },
-            "STL": {
-              "mean": 0.6935,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.3385,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 54.29475376761456,
-              "p10": 25,
-              "p90": 83.33333333333333
-            },
-            "FT_PCT": {
-              "mean": 77.42145464721372,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 36.92089263045372,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1631245,
           "name": "Quenton Jackson",
           "team": "IND",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 15.613875925298721,
-            "p10": 9.6,
-            "p90": 22.709677419354822
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 7.4555,
-              "p10": 2,
-              "p90": 14
-            },
-            "AST": {
-              "mean": 2.6965,
-              "p10": 1,
-              "p90": 5
-            },
-            "REB": {
-              "mean": 1.9805,
-              "p10": 0,
-              "p90": 4
-            },
-            "STL": {
-              "mean": 0.7915,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.1685,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 46.43206566178749,
-              "p10": 16.666666666666668,
-              "p90": 77.77777777777777
-            },
-            "FT_PCT": {
-              "mean": 80.15559028059027,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 35.26172427877997,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1641715,
           "name": "Cam Whitmore",
           "team": "DEN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 1999,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 14.182416245208355,
-            "p10": 7.680000000000003,
-            "p90": 20.377358490566053
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 8.76488244122061,
-              "p10": 2,
-              "p90": 16
-            },
-            "AST": {
-              "mean": 0.7423711855927964,
-              "p10": 0,
-              "p90": 2
-            },
-            "REB": {
-              "mean": 2.3726863431715857,
-              "p10": 0,
-              "p90": 5
-            },
-            "STL": {
-              "mean": 0.5077538769384692,
-              "p10": 0,
-              "p90": 1
-            },
-            "BLK": {
-              "mean": 0.27813906953476736,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 45.942849117939105,
-              "p10": 20,
-              "p90": 72.72727272727273
-            },
-            "FT_PCT": {
-              "mean": 72.8773923835653,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 35.559379377093244,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1641716,
           "name": "Jarace Walker",
           "team": "IND",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 19.109224739434055,
-            "p10": 12.387096774193541,
-            "p90": 26.467289719626127
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 8.155,
-              "p10": 2,
-              "p90": 15
-            },
-            "AST": {
-              "mean": 1.935,
-              "p10": 0,
-              "p90": 4
-            },
-            "REB": {
-              "mean": 3.302,
-              "p10": 1,
-              "p90": 6
-            },
-            "STL": {
-              "mean": 0.6145,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.3675,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 44.405078540445125,
-              "p10": 16.666666666666668,
-              "p90": 75
-            },
-            "FT_PCT": {
-              "mean": 74.52520481077602,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 38.673712021641826,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1641738,
           "name": "Kobe Brown",
           "team": "IND",
-          "injuryStatus": "Not listed",
+          "injuryStatus": null,
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -11142,7 +10122,7 @@
           "id": 1641747,
           "name": "DaRon Holmes II",
           "team": "DEN",
-          "injuryStatus": "Not listed",
+          "injuryStatus": null,
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -11161,9 +10141,9 @@
           "id": 1641767,
           "name": "Ben Sheppard",
           "team": "IND",
-          "injuryStatus": "Out",
+          "injuryStatus": null,
           "playedScenarios": 0,
-          "projectionStatus": "reported_out",
+          "projectionStatus": "no_projected_minutes",
           "minutes": null,
           "stats": {
             "PTS": null,
@@ -11180,64 +10160,28 @@
           "id": 1641771,
           "name": "Jalen Slawson",
           "team": "IND",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 20.088190896575917,
-            "p10": 12.800000000000002,
-            "p90": 27.428571428571406
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 6.167,
-              "p10": 1,
-              "p90": 12
-            },
-            "AST": {
-              "mean": 2.4945,
-              "p10": 1,
-              "p90": 5
-            },
-            "REB": {
-              "mean": 3.754,
-              "p10": 1,
-              "p90": 7
-            },
-            "STL": {
-              "mean": 0.8015,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.742,
-              "p10": 0,
-              "p90": 2
-            },
-            "FG_PCT": {
-              "mean": 43.26769908344147,
-              "p10": 0,
-              "p90": 75
-            },
-            "FT_PCT": {
-              "mean": 75.14256803684371,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 34.27236149798819,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1642277,
           "name": "Johnny Furphy",
           "team": "IND",
-          "injuryStatus": "Out",
+          "injuryStatus": null,
           "playedScenarios": 0,
-          "projectionStatus": "reported_out",
+          "projectionStatus": "no_projected_minutes",
           "minutes": null,
           "stats": {
             "PTS": null,
@@ -11254,172 +10198,64 @@
           "id": 1642350,
           "name": "Trevon Brazile",
           "team": "DEN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 1998,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 15.3140349775934,
-            "p10": 8.685714285714287,
-            "p90": 22.42990654205605
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 7.211211211211211,
-              "p10": 2,
-              "p90": 14
-            },
-            "AST": {
-              "mean": 1.8793793793793794,
-              "p10": 0,
-              "p90": 4
-            },
-            "REB": {
-              "mean": 3.4144144144144146,
-              "p10": 1,
-              "p90": 6
-            },
-            "STL": {
-              "mean": 0.5325325325325325,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.5155155155155156,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 47.850081903390496,
-              "p10": 14.285714285714286,
-              "p90": 80
-            },
-            "FT_PCT": {
-              "mean": 73.76066115154387,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 33.815477376445735,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1642461,
           "name": "Spencer Jones",
           "team": "DEN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 1999,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 17.167628800280358,
-            "p10": 10.285714285714286,
-            "p90": 23.520000000000017
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 4.062531265632816,
-              "p10": 0,
-              "p90": 9
-            },
-            "AST": {
-              "mean": 0.9544772386193097,
-              "p10": 0,
-              "p90": 2
-            },
-            "REB": {
-              "mean": 2.5137568784392195,
-              "p10": 0,
-              "p90": 5
-            },
-            "STL": {
-              "mean": 0.5982991495747874,
-              "p10": 0,
-              "p90": 2
-            },
-            "BLK": {
-              "mean": 0.3891945972986493,
-              "p10": 0,
-              "p90": 1
-            },
-            "FG_PCT": {
-              "mean": 50.66248299082066,
-              "p10": 0,
-              "p90": 100
-            },
-            "FT_PCT": {
-              "mean": 66.50510204081627,
-              "p10": 33.333333333333336,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 38.45868998691845,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1642948,
           "name": "Ryan Nembhard",
           "team": "DEN",
-          "injuryStatus": "Not listed",
-          "playedScenarios": 2000,
-          "projectionStatus": "available",
-          "minutes": {
-            "mean": 15.92611558131986,
-            "p10": 9.696969696969692,
-            "p90": 22.81188118811883
-          },
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
           "stats": {
-            "PTS": {
-              "mean": 5.5415,
-              "p10": 0,
-              "p90": 11
-            },
-            "AST": {
-              "mean": 4.3245,
-              "p10": 1,
-              "p90": 8
-            },
-            "REB": {
-              "mean": 1.7115,
-              "p10": 0,
-              "p90": 4
-            },
-            "STL": {
-              "mean": 0.352,
-              "p10": 0,
-              "p90": 1
-            },
-            "BLK": {
-              "mean": 0.0935,
-              "p10": 0,
-              "p90": 0
-            },
-            "FG_PCT": {
-              "mean": 45.37483622946044,
-              "p10": 0,
-              "p90": 80
-            },
-            "FT_PCT": {
-              "mean": 80.06936632920885,
-              "p10": 50,
-              "p90": 100
-            },
-            "FG3_PCT": {
-              "mean": 37.269971130890006,
-              "p10": 0,
-              "p90": 100
-            }
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
           }
         },
         {
           "id": 1643552,
           "name": "Braden Smith",
           "team": "IND",
-          "injuryStatus": "Not listed",
+          "injuryStatus": null,
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -11438,7 +10274,7 @@
           "id": 1643624,
           "name": "Bryce Hopkins",
           "team": "DEN",
-          "injuryStatus": "Not listed",
+          "injuryStatus": null,
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -11457,7 +10293,7 @@
           "id": 1643813,
           "name": "Alpha Diallo",
           "team": "DEN",
-          "injuryStatus": "Not listed",
+          "injuryStatus": null,
           "playedScenarios": 0,
           "projectionStatus": "no_projected_minutes",
           "minutes": null,
@@ -11491,7 +10327,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00"
+        "validUntil": "2026-11-08T05:56:19.162905+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -12199,7 +11035,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00"
+        "validUntil": "2026-11-08T05:56:19.162905+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -12888,7 +11724,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00"
+        "validUntil": "2026-11-08T05:56:19.162905+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -13814,8 +12650,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00",
-        "observedAt": "2026-11-07T21:52:43.495934+00:00",
+        "validUntil": "2026-11-08T05:56:19.162905+00:00",
+        "observedAt": "2026-11-07T23:56:21.065360+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -15679,8 +14515,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00",
-        "observedAt": "2026-11-07T21:52:43.495934+00:00",
+        "validUntil": "2026-11-08T05:56:19.162905+00:00",
+        "observedAt": "2026-11-07T23:56:21.065360+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -17281,133 +16117,14 @@
       "availability": {
         "holdReason": null,
         "outIds": [
-          "202699",
-          "1643519",
           "1630249",
           "1629630",
           "1631101",
-          "1629057"
+          "1629057",
+          "202699",
+          "1643519"
         ],
         "players": [
-          {
-            "id": 203084,
-            "name": "Harrison Barnes",
-            "team": "SAS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1643576,
-            "name": "Maliq Brown",
-            "team": "SAS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642868,
-            "name": "Carter Bryant",
-            "team": "SAS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642264,
-            "name": "Stephon Castle",
-            "team": "SAS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630577,
-            "name": "Julian Champagnie",
-            "team": "SAS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1628368,
-            "name": "De'Aaron Fox",
-            "team": "SAS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1643551,
-            "name": "Ja'Kobi Gillespie",
-            "team": "SAS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642844,
-            "name": "Dylan Harper",
-            "team": "SAS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 202699,
-            "name": "Tobias Harris",
-            "team": "SAS",
-            "status": "Out",
-            "out": true
-          },
-          {
-            "id": 1629640,
-            "name": "Keldon Johnson",
-            "team": "SAS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642357,
-            "name": "David Jones Garcia",
-            "team": "SAS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1628436,
-            "name": "Luke Kornet",
-            "team": "SAS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1629162,
-            "name": "Jordan McLaughlin",
-            "team": "SAS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1643519,
-            "name": "Jayden Quaintance",
-            "team": "SAS",
-            "status": "Out",
-            "out": true
-          },
-          {
-            "id": 1643542,
-            "name": "Tarris Reed Jr.",
-            "team": "SAS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630170,
-            "name": "Devin Vassell",
-            "team": "SAS",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641705,
-            "name": "Victor Wembanyama",
-            "team": "SAS",
-            "status": "Not listed",
-            "out": false
-          },
           {
             "id": 1630166,
             "name": "Deni Avdija",
@@ -17526,25 +16243,132 @@
             "team": "POR",
             "status": "Not listed",
             "out": false
-          }
-        ],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00",
-        "observedAt": "2026-11-07T21:52:43.495934+00:00",
-        "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
-        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
-        "excluded": [
+          },
+          {
+            "id": 203084,
+            "name": "Harrison Barnes",
+            "team": "SAS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1643576,
+            "name": "Maliq Brown",
+            "team": "SAS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642868,
+            "name": "Carter Bryant",
+            "team": "SAS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642264,
+            "name": "Stephon Castle",
+            "team": "SAS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1630577,
+            "name": "Julian Champagnie",
+            "team": "SAS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1628368,
+            "name": "De'Aaron Fox",
+            "team": "SAS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1643551,
+            "name": "Ja'Kobi Gillespie",
+            "team": "SAS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642844,
+            "name": "Dylan Harper",
+            "team": "SAS",
+            "status": "Not listed",
+            "out": false
+          },
           {
             "id": 202699,
             "name": "Tobias Harris",
             "team": "SAS",
-            "status": "Out"
+            "status": "Out",
+            "out": true
+          },
+          {
+            "id": 1629640,
+            "name": "Keldon Johnson",
+            "team": "SAS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642357,
+            "name": "David Jones Garcia",
+            "team": "SAS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1628436,
+            "name": "Luke Kornet",
+            "team": "SAS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1629162,
+            "name": "Jordan McLaughlin",
+            "team": "SAS",
+            "status": "Not listed",
+            "out": false
           },
           {
             "id": 1643519,
             "name": "Jayden Quaintance",
             "team": "SAS",
-            "status": "Out"
+            "status": "Out",
+            "out": true
           },
+          {
+            "id": 1643542,
+            "name": "Tarris Reed Jr.",
+            "team": "SAS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1630170,
+            "name": "Devin Vassell",
+            "team": "SAS",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1641705,
+            "name": "Victor Wembanyama",
+            "team": "SAS",
+            "status": "Not listed",
+            "out": false
+          }
+        ],
+        "validUntil": "2026-11-08T05:56:19.162905+00:00",
+        "observedAt": "2026-11-07T23:56:21.065360+00:00",
+        "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
+        "excluded": [
           {
             "id": 1630249,
             "name": "Vit Krejci",
@@ -17567,6 +16391,18 @@
             "id": 1629057,
             "name": "Robert Williams III",
             "team": "POR",
+            "status": "Out"
+          },
+          {
+            "id": 202699,
+            "name": "Tobias Harris",
+            "team": "SAS",
+            "status": "Out"
+          },
+          {
+            "id": 1643519,
+            "name": "Jayden Quaintance",
+            "team": "SAS",
             "status": "Out"
           }
         ],
@@ -19132,6 +17968,7 @@
           "1629651",
           "1628380",
           "1631230",
+          "1641737",
           "1630574"
         ],
         "players": [
@@ -19265,8 +18102,8 @@
             "id": 1641737,
             "name": "Adem Bona",
             "team": "PHI",
-            "status": "Day-To-Day",
-            "out": false
+            "status": "Out",
+            "out": true
           },
           {
             "id": 1627759,
@@ -19300,7 +18137,7 @@
             "id": 203954,
             "name": "Joel Embiid",
             "team": "PHI",
-            "status": "Not listed",
+            "status": "Day-To-Day",
             "out": false
           },
           {
@@ -19374,8 +18211,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00",
-        "observedAt": "2026-11-07T21:52:43.495934+00:00",
+        "validUntil": "2026-11-08T05:56:19.162905+00:00",
+        "observedAt": "2026-11-07T23:56:21.065360+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -19394,6 +18231,12 @@
           {
             "id": 1631230,
             "name": "Dominick Barlow",
+            "team": "PHI",
+            "status": "Out"
+          },
+          {
+            "id": 1641737,
+            "name": "Adem Bona",
             "team": "PHI",
             "status": "Out"
           },
@@ -19418,8 +18261,8 @@
             "status": "Day-To-Day"
           },
           {
-            "id": 1641737,
-            "name": "Adem Bona",
+            "id": 203954,
+            "name": "Joel Embiid",
             "team": "PHI",
             "status": "Day-To-Day"
           }
@@ -19568,7 +18411,7 @@
           "id": 203954,
           "name": "Joel Embiid",
           "team": "PHI",
-          "injuryStatus": "Not listed",
+          "injuryStatus": "Day-To-Day",
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
@@ -20526,9 +19369,9 @@
           "id": 1641737,
           "name": "Adem Bona",
           "team": "PHI",
-          "injuryStatus": "Day-To-Day",
+          "injuryStatus": "Out",
           "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
+          "projectionStatus": "reported_out",
           "minutes": null,
           "stats": {
             "PTS": null,
@@ -20983,7 +19826,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00"
+        "validUntil": "2026-11-08T05:56:19.162905+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -21691,7 +20534,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00"
+        "validUntil": "2026-11-08T05:56:19.162905+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -22361,7 +21204,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00"
+        "validUntil": "2026-11-08T05:56:19.162905+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -23031,7 +21874,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00"
+        "validUntil": "2026-11-08T05:56:19.162905+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -23720,7 +22563,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00"
+        "validUntil": "2026-11-08T05:56:19.162905+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -24409,7 +23252,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00"
+        "validUntil": "2026-11-08T05:56:19.162905+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -25079,7 +23922,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00"
+        "validUntil": "2026-11-08T05:56:19.162905+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -26014,8 +24857,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00",
-        "observedAt": "2026-11-07T21:52:43.495934+00:00",
+        "validUntil": "2026-11-08T05:56:19.162905+00:00",
+        "observedAt": "2026-11-07T23:56:21.065360+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [],
@@ -27605,7 +26448,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00"
+        "validUntil": "2026-11-08T05:56:19.162905+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -28313,7 +27156,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-08T03:52:42.486959+00:00"
+        "validUntil": "2026-11-08T05:56:19.162905+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
