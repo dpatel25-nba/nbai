@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-11T18:02:45.205Z",
+  "generatedAt": "2026-11-11T19:36:44.989Z",
   "scope": "game",
   "runs": 2000,
   "seedPrefix": "market-matchups-v1:",
@@ -9624,7 +9624,7 @@
     "web/season-engine.js": "eb9252a1582df10e6111b694229d9943ab5b9b734a6b7012abcbd2a631ea9e08",
     "web/season-possession.js": "133537a8a45a321a3cb884fbe3140b0917b2b3a85f36de26490a5f4d8e5f05a5",
     "web/season-availability.json": "a2ebd5a3bd2fb4b2642bb138c59fc6d696e8f23a3a21de89a3658c02f3fdc67c",
-    "web/game-availability.json": "a8de8d83db9ce52ee28ca3311e98d085bfb9eed0619336359c0bca0921ecd840",
+    "web/game-availability.json": "36009ec1c152d0099d62929300d30a31f6d873e47de2bf8578afafad2d70379c",
     "scripts/game_availability.cjs": "ad4ebaddf8a1a29c1d4f9285e6694211308ac46a65d954a040ae31f212edde00",
     "scripts/build_market_game_projections.cjs": "5bb013efeb75937e1b29aa8c96068aff75a9473e5a2ed77b3e409c52b1e4f317",
     "scripts/match_market_schedule.cjs": "f49aa4bdf06f89d1589098030436af429a52562ea785f39198adfd8b152bcdc3",
@@ -9635,9 +9635,9 @@
     "scripts/export_game_watchlist.cjs": "3ab0df69dd03f631fac9cd0b5a28f665f381afae4547c8b738ad66af5fd8a3b2",
     "web/lib/game-watchlist-targets.json": "54e78bb4477557b5e4c684a00fba33c6a53bafca0205f6affd07b79ca3d0770b"
   },
-  "marketInventoryHash": "05281841cbcf93ef05208bef1dfbdacd8b8f4fa520238b0c10f11d364f09eae9",
-  "inputSignature": "7427a73a910ddaf92932ddc1a1101dcae9df85321e3854cec52959bc6ea40538",
-  "availabilityValidUntil": "2026-11-12T00:02:07.880298+00:00",
+  "marketInventoryHash": "c24ce5bfd3b0d65c46139373a0035728bf988390b1ed29696a77443e0010a9ae",
+  "inputSignature": "c3a537ad79bc6aab86b8ad092a2abcfc67ffdd8242ed757d6061ce1e9ebe1b3f",
+  "availabilityValidUntil": "2026-11-12T01:36:11.212766+00:00",
   "assumptions": "Matchup-specific possession scenarios using current roster and ESPN injury observations. Reported Out players are excluded; other players are conditional on playing. Questionable participation, confirmed starters and minutes restrictions are not modeled. Not calibrated betting probabilities.",
   "events": [
     {
@@ -9657,7 +9657,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00"
+        "validUntil": "2026-11-12T01:36:11.212766+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -10327,7 +10327,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00"
+        "validUntil": "2026-11-12T01:36:11.212766+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -11232,8 +11232,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00",
-        "observedAt": "2026-11-11T18:02:08.846664+00:00",
+        "validUntil": "2026-11-12T01:36:11.212766+00:00",
+        "observedAt": "2026-11-11T19:36:13.322515+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -12866,7 +12866,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00"
+        "validUntil": "2026-11-12T01:36:11.212766+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -13554,6 +13554,7 @@
       "availability": {
         "holdReason": null,
         "outIds": [
+          "1643591",
           "202699",
           "1643519"
         ],
@@ -13562,8 +13563,8 @@
             "id": 1643591,
             "name": "Tobe Awaka",
             "team": "CHI",
-            "status": "Day-To-Day",
-            "out": false
+            "status": "Out",
+            "out": true
           },
           {
             "id": 1641824,
@@ -13674,7 +13675,7 @@
             "id": 1643410,
             "name": "Caleb Wilson",
             "team": "CHI",
-            "status": "Not listed",
+            "status": "Day-To-Day",
             "out": false
           },
           {
@@ -13797,11 +13798,17 @@
             "out": false
           }
         ],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00",
-        "observedAt": "2026-11-11T18:02:08.846664+00:00",
+        "validUntil": "2026-11-12T01:36:11.212766+00:00",
+        "observedAt": "2026-11-11T19:36:13.322515+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
+          {
+            "id": 1643591,
+            "name": "Tobe Awaka",
+            "team": "CHI",
+            "status": "Out"
+          },
           {
             "id": 202699,
             "name": "Tobias Harris",
@@ -13817,12 +13824,6 @@
         ],
         "uncertain": [
           {
-            "id": 1643591,
-            "name": "Tobe Awaka",
-            "team": "CHI",
-            "status": "Day-To-Day"
-          },
-          {
             "id": 1628380,
             "name": "Zach Collins",
             "team": "CHI",
@@ -13831,6 +13832,12 @@
           {
             "id": 1626181,
             "name": "Norman Powell",
+            "team": "CHI",
+            "status": "Day-To-Day"
+          },
+          {
+            "id": 1643410,
+            "name": "Caleb Wilson",
             "team": "CHI",
             "status": "Day-To-Day"
           },
@@ -15089,7 +15096,7 @@
           "id": 1643410,
           "name": "Caleb Wilson",
           "team": "CHI",
-          "injuryStatus": "Not listed",
+          "injuryStatus": "Day-To-Day",
           "playedScenarios": 2000,
           "projectionStatus": "available",
           "minutes": {
@@ -15347,9 +15354,9 @@
           "id": 1643591,
           "name": "Tobe Awaka",
           "team": "CHI",
-          "injuryStatus": "Day-To-Day",
+          "injuryStatus": "Out",
           "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
+          "projectionStatus": "reported_out",
           "minutes": null,
           "stats": {
             "PTS": null,
@@ -15400,7 +15407,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00"
+        "validUntil": "2026-11-12T01:36:11.212766+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -16366,8 +16373,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00",
-        "observedAt": "2026-11-11T18:02:08.846664+00:00",
+        "validUntil": "2026-11-12T01:36:11.212766+00:00",
+        "observedAt": "2026-11-11T19:36:13.322515+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -18007,7 +18014,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00"
+        "validUntil": "2026-11-12T01:36:11.212766+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -18695,15 +18702,134 @@
       "availability": {
         "holdReason": null,
         "outIds": [
+          "203500",
+          "203991",
           "202710",
           "1630541",
           "1627780",
           "204001",
-          "1630314",
-          "203500",
-          "203991"
+          "1630314"
         ],
         "players": [
+          {
+            "id": 203500,
+            "name": "Steven Adams",
+            "team": "HOU",
+            "status": "Out",
+            "out": true
+          },
+          {
+            "id": 203992,
+            "name": "Bogdan Bogdanovic",
+            "team": "HOU",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 203991,
+            "name": "Clint Capela",
+            "team": "HOU",
+            "status": "Out",
+            "out": true
+          },
+          {
+            "id": 1643595,
+            "name": "Quadir Copeland",
+            "team": "HOU",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642384,
+            "name": "Isaiah Crawford",
+            "team": "HOU",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 201142,
+            "name": "Kevin Durant",
+            "team": "HOU",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1631106,
+            "name": "Tari Eason",
+            "team": "HOU",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1641763,
+            "name": "Julian Phillips",
+            "team": "HOU",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1630578,
+            "name": "Alperen Sengun",
+            "team": "HOU",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1642263,
+            "name": "Reed Sheppard",
+            "team": "HOU",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 203935,
+            "name": "Marcus Smart",
+            "team": "HOU",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1631095,
+            "name": "Jabari Smith Jr.",
+            "team": "HOU",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1630256,
+            "name": "Jae'Sean Tate",
+            "team": "HOU",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1641708,
+            "name": "Amen Thompson",
+            "team": "HOU",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1643570,
+            "name": "Bruce Thornton",
+            "team": "HOU",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1631131,
+            "name": "Oscar Tshiebwe",
+            "team": "HOU",
+            "status": "Not listed",
+            "out": false
+          },
+          {
+            "id": 1627832,
+            "name": "Fred VanVleet",
+            "team": "HOU",
+            "status": "Not listed",
+            "out": false
+          },
           {
             "id": 1629646,
             "name": "Charles Bassey",
@@ -18829,132 +18955,25 @@
             "team": "GSW",
             "status": "Out",
             "out": true
-          },
+          }
+        ],
+        "validUntil": "2026-11-12T01:36:11.212766+00:00",
+        "observedAt": "2026-11-11T19:36:13.322515+00:00",
+        "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
+        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
+        "excluded": [
           {
             "id": 203500,
             "name": "Steven Adams",
             "team": "HOU",
-            "status": "Out",
-            "out": true
-          },
-          {
-            "id": 203992,
-            "name": "Bogdan Bogdanovic",
-            "team": "HOU",
-            "status": "Not listed",
-            "out": false
+            "status": "Out"
           },
           {
             "id": 203991,
             "name": "Clint Capela",
             "team": "HOU",
-            "status": "Out",
-            "out": true
+            "status": "Out"
           },
-          {
-            "id": 1643595,
-            "name": "Quadir Copeland",
-            "team": "HOU",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642384,
-            "name": "Isaiah Crawford",
-            "team": "HOU",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 201142,
-            "name": "Kevin Durant",
-            "team": "HOU",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1631106,
-            "name": "Tari Eason",
-            "team": "HOU",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641763,
-            "name": "Julian Phillips",
-            "team": "HOU",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630578,
-            "name": "Alperen Sengun",
-            "team": "HOU",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1642263,
-            "name": "Reed Sheppard",
-            "team": "HOU",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 203935,
-            "name": "Marcus Smart",
-            "team": "HOU",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1631095,
-            "name": "Jabari Smith Jr.",
-            "team": "HOU",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1630256,
-            "name": "Jae'Sean Tate",
-            "team": "HOU",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1641708,
-            "name": "Amen Thompson",
-            "team": "HOU",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1643570,
-            "name": "Bruce Thornton",
-            "team": "HOU",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1631131,
-            "name": "Oscar Tshiebwe",
-            "team": "HOU",
-            "status": "Not listed",
-            "out": false
-          },
-          {
-            "id": 1627832,
-            "name": "Fred VanVleet",
-            "team": "HOU",
-            "status": "Not listed",
-            "out": false
-          }
-        ],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00",
-        "observedAt": "2026-11-11T18:02:08.846664+00:00",
-        "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
-        "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
-        "excluded": [
           {
             "id": 202710,
             "name": "Jimmy Butler III",
@@ -18983,18 +19002,6 @@
             "id": 1630314,
             "name": "Brandon Williams",
             "team": "GSW",
-            "status": "Out"
-          },
-          {
-            "id": 203500,
-            "name": "Steven Adams",
-            "team": "HOU",
-            "status": "Out"
-          },
-          {
-            "id": 203991,
-            "name": "Clint Capela",
-            "team": "HOU",
             "status": "Out"
           }
         ],
@@ -20568,6 +20575,676 @@
       ]
     },
     {
+      "eventId": "d4f288eeb0132970825be17748f2b4f0",
+      "eventSource": "sportsbook-event-inventory",
+      "gameId": "0022600226",
+      "home": "POR",
+      "away": "OKC",
+      "homeName": "Portland Trail Blazers",
+      "awayName": "Oklahoma City Thunder",
+      "startsAt": "2026-11-12T03:10:00Z",
+      "officialStartsAt": "2026-11-12T03:00:00.000Z",
+      "scheduleOffsetMinutes": 10,
+      "scheduleMatchMethod": "Unique home/away match within 15 minutes",
+      "reviewRequired": "Current roster reconciliation needs review",
+      "availability": {
+        "holdReason": "Current roster reconciliation needs review",
+        "outIds": [],
+        "players": [],
+        "validUntil": "2026-11-12T01:36:11.212766+00:00"
+      },
+      "calibrationTarget": null,
+      "gameProjection": null,
+      "players": [
+        {
+          "id": 201950,
+          "name": "Jrue Holiday",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 203081,
+          "name": "Damian Lillard",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1627936,
+          "name": "Alex Caruso",
+          "team": "OKC",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1628392,
+          "name": "Isaiah Hartenstein",
+          "team": "OKC",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1628983,
+          "name": "Shai Gilgeous-Alexander",
+          "team": "OKC",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1629026,
+          "name": "Kenrich Williams",
+          "team": "OKC",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1629057,
+          "name": "Robert Williams III",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1629630,
+          "name": "Ja Morant",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630166,
+          "name": "Deni Avdija",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630249,
+          "name": "Vít Krejčí",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630695,
+          "name": "Micah Potter",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1630703,
+          "name": "Scoot Henderson",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631096,
+          "name": "Chet Holmgren",
+          "team": "OKC",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631101,
+          "name": "Shaedon Sharpe",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631114,
+          "name": "Jalen Williams",
+          "team": "OKC",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631119,
+          "name": "Jaylin Williams",
+          "team": "OKC",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1631321,
+          "name": "Sidy Cissoko",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1641717,
+          "name": "Cason Wallace",
+          "team": "OKC",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1641739,
+          "name": "Toumani Camara",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642260,
+          "name": "Nikola Topić",
+          "team": "OKC",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642270,
+          "name": "Donovan Clingan",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642272,
+          "name": "Jared McCain",
+          "team": "OKC",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642349,
+          "name": "Ajay Mitchell",
+          "team": "OKC",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642382,
+          "name": "Branden Carlson",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642850,
+          "name": "Thomas Sorber",
+          "team": "OKC",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642892,
+          "name": "Bennett Stirtz",
+          "team": "OKC",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642905,
+          "name": "Yang Hansen",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642910,
+          "name": "John Tonje",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642923,
+          "name": "Otega Oweh",
+          "team": "OKC",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642959,
+          "name": "Chris Youngblood",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1642964,
+          "name": "Brooks Barnhizer",
+          "team": "OKC",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1643257,
+          "name": "Jayson Kent",
+          "team": "POR",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1643530,
+          "name": "Aday Mara",
+          "team": "OKC",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        },
+        {
+          "id": 1643717,
+          "name": "Josh Dix",
+          "team": "OKC",
+          "injuryStatus": null,
+          "playedScenarios": 0,
+          "projectionStatus": "no_projected_minutes",
+          "minutes": null,
+          "stats": {
+            "PTS": null,
+            "AST": null,
+            "REB": null,
+            "STL": null,
+            "BLK": null,
+            "FG_PCT": null,
+            "FT_PCT": null,
+            "FG3_PCT": null
+          }
+        }
+      ]
+    },
+    {
       "eventId": "a6555e8b7252dfb32f1817fc8c59ad83",
       "eventSource": "sportsbook-event-inventory",
       "gameId": "0022600010",
@@ -20584,7 +21261,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00"
+        "validUntil": "2026-11-12T01:36:11.212766+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -21254,7 +21931,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00"
+        "validUntil": "2026-11-12T01:36:11.212766+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -21924,7 +22601,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00"
+        "validUntil": "2026-11-12T01:36:11.212766+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -22613,7 +23290,7 @@
         "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00"
+        "validUntil": "2026-11-12T01:36:11.212766+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -23286,676 +23963,6 @@
       ]
     },
     {
-      "eventId": "espn:401909975",
-      "eventSource": "espn-availability-schedule",
-      "gameId": "0022600226",
-      "home": "POR",
-      "away": "OKC",
-      "homeName": "Portland Trail Blazers",
-      "awayName": "Oklahoma City Thunder",
-      "startsAt": "2026-11-12T03:00:00+00:00",
-      "officialStartsAt": "2026-11-12T03:00:00.000Z",
-      "scheduleOffsetMinutes": 0,
-      "scheduleMatchMethod": "Unique home/away match within 15 minutes",
-      "reviewRequired": "Current roster reconciliation needs review",
-      "availability": {
-        "holdReason": "Current roster reconciliation needs review",
-        "outIds": [],
-        "players": [],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00"
-      },
-      "calibrationTarget": null,
-      "gameProjection": null,
-      "players": [
-        {
-          "id": 201950,
-          "name": "Jrue Holiday",
-          "team": "POR",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 203081,
-          "name": "Damian Lillard",
-          "team": "POR",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1627936,
-          "name": "Alex Caruso",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628392,
-          "name": "Isaiah Hartenstein",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1628983,
-          "name": "Shai Gilgeous-Alexander",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1629026,
-          "name": "Kenrich Williams",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1629057,
-          "name": "Robert Williams III",
-          "team": "POR",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1629630,
-          "name": "Ja Morant",
-          "team": "POR",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630166,
-          "name": "Deni Avdija",
-          "team": "POR",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630249,
-          "name": "Vít Krejčí",
-          "team": "POR",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630695,
-          "name": "Micah Potter",
-          "team": "POR",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1630703,
-          "name": "Scoot Henderson",
-          "team": "POR",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631096,
-          "name": "Chet Holmgren",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631101,
-          "name": "Shaedon Sharpe",
-          "team": "POR",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631114,
-          "name": "Jalen Williams",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631119,
-          "name": "Jaylin Williams",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1631321,
-          "name": "Sidy Cissoko",
-          "team": "POR",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1641717,
-          "name": "Cason Wallace",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1641739,
-          "name": "Toumani Camara",
-          "team": "POR",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642260,
-          "name": "Nikola Topić",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642270,
-          "name": "Donovan Clingan",
-          "team": "POR",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642272,
-          "name": "Jared McCain",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642349,
-          "name": "Ajay Mitchell",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642382,
-          "name": "Branden Carlson",
-          "team": "POR",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642850,
-          "name": "Thomas Sorber",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642892,
-          "name": "Bennett Stirtz",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642905,
-          "name": "Yang Hansen",
-          "team": "POR",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642910,
-          "name": "John Tonje",
-          "team": "POR",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642923,
-          "name": "Otega Oweh",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642959,
-          "name": "Chris Youngblood",
-          "team": "POR",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1642964,
-          "name": "Brooks Barnhizer",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1643257,
-          "name": "Jayson Kent",
-          "team": "POR",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1643530,
-          "name": "Aday Mara",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        },
-        {
-          "id": 1643717,
-          "name": "Josh Dix",
-          "team": "OKC",
-          "injuryStatus": null,
-          "playedScenarios": 0,
-          "projectionStatus": "no_projected_minutes",
-          "minutes": null,
-          "stats": {
-            "PTS": null,
-            "AST": null,
-            "REB": null,
-            "STL": null,
-            "BLK": null,
-            "FG_PCT": null,
-            "FT_PCT": null,
-            "FG3_PCT": null
-          }
-        }
-      ]
-    },
-    {
       "eventId": "espn:401909976",
       "eventSource": "espn-availability-schedule",
       "gameId": "0022600227",
@@ -23972,7 +23979,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00"
+        "validUntil": "2026-11-12T01:36:11.212766+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -24883,8 +24890,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00",
-        "observedAt": "2026-11-11T18:02:08.846664+00:00",
+        "validUntil": "2026-11-12T01:36:11.212766+00:00",
+        "observedAt": "2026-11-11T19:36:13.322515+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -26536,7 +26543,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00"
+        "validUntil": "2026-11-12T01:36:11.212766+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -27438,8 +27445,8 @@
             "out": true
           }
         ],
-        "validUntil": "2026-11-12T00:02:07.880298+00:00",
-        "observedAt": "2026-11-11T18:02:08.846664+00:00",
+        "validUntil": "2026-11-12T01:36:11.212766+00:00",
+        "observedAt": "2026-11-11T19:36:13.322515+00:00",
         "source": "ESPN rosters/injuries with independently confirmed NBA roster additions",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
