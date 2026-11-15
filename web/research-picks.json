@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-15T18:53:20.114883+00:00",
+  "generatedAt": "2026-11-15T23:10:08.930628+00:00",
   "method": "Three ranked favorites per matchup using historical results, recent minutes and opportunities, current availability and observed offers. Relative research ranking; not a calibrated betting edge.",
   "modelSnapshot": {
-    "generatedAt": "2026-11-15T18:53:04.918Z",
+    "generatedAt": "2026-11-15T23:09:57.276Z",
     "status": "rotation_review_required"
   },
   "games": [
@@ -44446,8 +44446,8 @@
       "away": "HOU",
       "startsAt": "2026-11-16T00:10:00Z",
       "officialStartsAt": "2026-11-16T00:00:00+00:00",
-      "reviewedAt": "2026-11-15T18:53:20.114883+00:00",
-      "validUntil": "2026-11-15T21:53:20.114883+00:00",
+      "reviewedAt": "2026-11-15T23:10:08.930628+00:00",
+      "validUntil": "2026-11-16T00:00:00+00:00",
       "reviewType": "automated_statistics",
       "selectionMode": "ranked_favorites",
       "modelEvidenceStatus": "rotation_review_required",
@@ -44457,8 +44457,8 @@
       "winnerReason": "No automatic winner recommendation; this screen evaluates player thresholds only.",
       "sources": [
         {
-          "title": "Official NBA injury report · 2026-11-15T13:45:00-05:00",
-          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_45PM.pdf"
+          "title": "Official NBA injury report · 2026-11-15T18:00:00-05:00",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_00PM.pdf"
         },
         {
           "title": "Current ESPN roster and injury observations",
@@ -44473,6 +44473,86 @@
         {
           "status": "reviewed",
           "reviewType": "automated_statistics",
+          "ticker": "KXNBAPTS-26NOV15HOUWAS-HOUKDURANT7-20",
+          "playerId": 201142,
+          "player": "Kevin Durant",
+          "team": "HOU",
+          "stat": "PTS",
+          "threshold": 19.5,
+          "side": "yes",
+          "priority": 1,
+          "label": "Kevin Durant 20+ points",
+          "contractTitle": "Kevin Durant: 20+ points",
+          "maxPrice": 0.62,
+          "priceLimitActive": false,
+          "conviction": "Favorite",
+          "basis": "fundamental",
+          "modelConfirmed": false,
+          "rankingScore": 0.27804138187069033,
+          "thesis": "Averaging 34.3 minutes and 21.7 points across the last 3 played team games. Reached this line in 64 of 78 appearances last season.",
+          "risk": "Older roles and opponents may differ from today. Minutes, foul trouble, shooting variance and late injury news can invalidate the comparison. This screen does not establish positive expected return.",
+          "history": [
+            {
+              "season": "2024-25",
+              "hits": 54,
+              "n": 62,
+              "meanMinutes": 36.527150537634405
+            },
+            {
+              "season": "2025-26",
+              "hits": 64,
+              "n": 78,
+              "meanMinutes": 36.40811965811965
+            }
+          ],
+          "quoteAtReview": {
+            "price": 0.62,
+            "size": 840.29,
+            "observedAt": "2026-11-15T23:10:05.359Z"
+          },
+          "evidence": [
+            "2024-25: 54/62 valid positive-minute appearances reached this threshold; includes prior teams.",
+            "2025-26: 64/78 valid positive-minute appearances reached this threshold; includes prior teams.",
+            "Latest completed team game: 33 minutes and 22 points on 2026-11-14.",
+            "Latest completed team game: 34 minutes and 20 points on 2026-11-12.",
+            "Latest completed team game: 36 minutes and 23 points on 2026-11-10.",
+            "Current provider status: Not listed. Not listed does not confirm health or a starting role.",
+            "Recent FGA average 15.3, versus 17.6 in 2025–26.",
+            "0 recent team-game slot(s) lacked a played box; those slots were not treated as zero production.",
+            "These are relative favorites among available contracts. The ranking is not a calibrated win probability or proof of positive expected return.",
+            "Current roster reconciliation needs review"
+          ],
+          "sources": [
+            {
+              "title": "Official NBA injury report · 2026-11-15T18:00:00-05:00",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_00PM.pdf"
+            },
+            {
+              "title": "Current ESPN roster and injury observations",
+              "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries"
+            },
+            {
+              "title": "NBA traditional box-score archive · 2024–25 and 2025–26",
+              "url": "https://www.nba.com/stats/players/traditional"
+            },
+            {
+              "title": "Recent completed game box score",
+              "url": "https://www.espn.com/nba/boxscore/_/gameId/401909301"
+            },
+            {
+              "title": "Recent completed game box score",
+              "url": "https://www.espn.com/nba/boxscore/_/gameId/401909974"
+            },
+            {
+              "title": "Recent completed game box score",
+              "url": "https://www.espn.com/nba/boxscore/_/gameId/401909957"
+            }
+          ],
+          "executionVerified": false
+        },
+        {
+          "status": "reviewed",
+          "reviewType": "automated_statistics",
           "ticker": "KXNBAREB-26NOV15HOUWAS-WASADAVIS23-12",
           "playerId": 203076,
           "player": "Anthony Davis",
@@ -44480,15 +44560,15 @@
           "stat": "REB",
           "threshold": 11.5,
           "side": "yes",
-          "priority": 16,
+          "priority": 2,
           "label": "Anthony Davis 12+ rebounds",
           "contractTitle": "Anthony Davis: 12+ rebounds",
-          "maxPrice": 0.32,
+          "maxPrice": 0.33,
           "priceLimitActive": false,
           "conviction": "Favorite",
           "basis": "fundamental",
           "modelConfirmed": false,
-          "rankingScore": 0.2701960784313725,
+          "rankingScore": 0.2601960784313725,
           "thesis": "Averaging 37.3 minutes and 13.7 rebounds across the last 3 played team games. Reached this line in 10 of 20 appearances last season.",
           "risk": "Older roles and opponents may differ from today. Minutes, foul trouble, shooting variance and late injury news can invalidate the comparison. This screen does not establish positive expected return.",
           "history": [
@@ -44506,9 +44586,9 @@
             }
           ],
           "quoteAtReview": {
-            "price": 0.32,
-            "size": 25,
-            "observedAt": "2026-11-15T18:53:16.679Z"
+            "price": 0.33,
+            "size": 500,
+            "observedAt": "2026-11-15T23:10:05.623Z"
           },
           "evidence": [
             "2024-25: 25/51 valid positive-minute appearances reached this threshold; includes prior teams.",
@@ -44524,8 +44604,8 @@
           ],
           "sources": [
             {
-              "title": "Official NBA injury report · 2026-11-15T13:45:00-05:00",
-              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_45PM.pdf"
+              "title": "Official NBA injury report · 2026-11-15T18:00:00-05:00",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_00PM.pdf"
             },
             {
               "title": "Current ESPN roster and injury observations",
@@ -44553,59 +44633,58 @@
         {
           "status": "reviewed",
           "reviewType": "automated_statistics",
-          "ticker": "KXNBAPTS-26NOV15HOUWAS-HOUKDURANT7-20",
-          "playerId": 201142,
-          "player": "Kevin Durant",
-          "team": "HOU",
+          "ticker": "KXNBAPTS-26NOV15HOUWAS-WASBCOULIBALY0-10",
+          "playerId": 1641731,
+          "player": "Bilal Coulibaly",
+          "team": "WAS",
           "stat": "PTS",
-          "threshold": 19.5,
+          "threshold": 9.5,
           "side": "yes",
-          "priority": 17,
-          "label": "Kevin Durant 20+ points",
-          "contractTitle": "Kevin Durant: 20+ points",
-          "maxPrice": 0.64,
+          "priority": 3,
+          "label": "Bilal Coulibaly 10+ points",
+          "contractTitle": "Bilal Coulibaly: 10+ points",
+          "maxPrice": 0.31,
           "priceLimitActive": false,
           "conviction": "Favorite",
           "basis": "fundamental",
           "modelConfirmed": false,
-          "rankingScore": 0.2580413818706903,
-          "thesis": "Averaging 34.3 minutes and 21.7 points across the last 3 played team games. Reached this line in 64 of 78 appearances last season.",
+          "rankingScore": 0.24475265515836964,
+          "thesis": "Averaging 27.0 minutes and 4.5 points across the last 2 played team games. Reached this line in 36 of 56 appearances last season.",
           "risk": "Older roles and opponents may differ from today. Minutes, foul trouble, shooting variance and late injury news can invalidate the comparison. This screen does not establish positive expected return.",
           "history": [
             {
               "season": "2024-25",
-              "hits": 54,
-              "n": 62,
-              "meanMinutes": 36.527150537634405
+              "hits": 37,
+              "n": 59,
+              "meanMinutes": 33.00847457627118
             },
             {
               "season": "2025-26",
-              "hits": 64,
-              "n": 78,
-              "meanMinutes": 36.40811965811965
+              "hits": 36,
+              "n": 56,
+              "meanMinutes": 26.20714285714286
             }
           ],
           "quoteAtReview": {
-            "price": 0.64,
-            "size": 2468.56,
-            "observedAt": "2026-11-15T18:53:16.398Z"
+            "price": 0.31,
+            "size": 3997.93,
+            "observedAt": "2026-11-15T23:10:05.359Z"
           },
           "evidence": [
-            "2024-25: 54/62 valid positive-minute appearances reached this threshold; includes prior teams.",
-            "2025-26: 64/78 valid positive-minute appearances reached this threshold; includes prior teams.",
-            "Latest completed team game: 33 minutes and 22 points on 2026-11-14.",
-            "Latest completed team game: 34 minutes and 20 points on 2026-11-12.",
-            "Latest completed team game: 36 minutes and 23 points on 2026-11-10.",
+            "2024-25: 37/59 valid positive-minute appearances reached this threshold; includes prior teams.",
+            "2025-26: 36/56 valid positive-minute appearances reached this threshold; includes prior teams.",
+            "Latest completed team game: 29 minutes and 4 points on 2026-11-13.",
+            "Latest completed team game: 25 minutes and 5 points on 2026-11-12.",
             "Current provider status: Not listed. Not listed does not confirm health or a starting role.",
-            "Recent FGA average 15.3, versus 17.6 in 2025–26.",
-            "0 recent team-game slot(s) lacked a played box; those slots were not treated as zero production.",
+            "Recent FGA average 5.0, versus 9.7 in 2025–26.",
+            "1 recent team-game slot(s) lacked a played box; those slots were not treated as zero production.",
             "These are relative favorites among available contracts. The ranking is not a calibrated win probability or proof of positive expected return.",
             "Current roster reconciliation needs review"
           ],
           "sources": [
             {
-              "title": "Official NBA injury report · 2026-11-15T13:45:00-05:00",
-              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_45PM.pdf"
+              "title": "Official NBA injury report · 2026-11-15T18:00:00-05:00",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_00PM.pdf"
             },
             {
               "title": "Current ESPN roster and injury observations",
@@ -44617,95 +44696,11 @@
             },
             {
               "title": "Recent completed game box score",
-              "url": "https://www.espn.com/nba/boxscore/_/gameId/401909301"
+              "url": "https://www.espn.com/nba/boxscore/_/gameId/401909977"
             },
             {
               "title": "Recent completed game box score",
-              "url": "https://www.espn.com/nba/boxscore/_/gameId/401909974"
-            },
-            {
-              "title": "Recent completed game box score",
-              "url": "https://www.espn.com/nba/boxscore/_/gameId/401909957"
-            }
-          ],
-          "executionVerified": false
-        },
-        {
-          "status": "reviewed",
-          "reviewType": "automated_statistics",
-          "ticker": "KXNBAREB-26NOV15HOUWAS-HOUATHOMPSON1-8",
-          "playerId": 1641708,
-          "player": "Amen Thompson",
-          "team": "HOU",
-          "stat": "REB",
-          "threshold": 7.5,
-          "side": "yes",
-          "priority": 18,
-          "label": "Amen Thompson 8+ rebounds",
-          "contractTitle": "Amen Thompson: 8+ rebounds",
-          "maxPrice": 0.46,
-          "priceLimitActive": false,
-          "conviction": "Favorite",
-          "basis": "fundamental",
-          "modelConfirmed": false,
-          "rankingScore": 0.1351255979885671,
-          "thesis": "Averaging 35.0 minutes and 8.7 rebounds across the last 3 played team games. Reached this line in 42 of 79 appearances last season.",
-          "risk": "Older roles and opponents may differ from today. Minutes, foul trouble, shooting variance and late injury news can invalidate the comparison. This screen does not establish positive expected return.",
-          "history": [
-            {
-              "season": "2024-25",
-              "hits": 38,
-              "n": 69,
-              "meanMinutes": 32.2524154589372
-            },
-            {
-              "season": "2025-26",
-              "hits": 42,
-              "n": 79,
-              "meanMinutes": 37.38248945147679
-            }
-          ],
-          "quoteAtReview": {
-            "price": 0.46,
-            "size": 1953.14,
-            "observedAt": "2026-11-15T18:53:16.679Z"
-          },
-          "evidence": [
-            "2024-25: 38/69 valid positive-minute appearances reached this threshold; includes prior teams.",
-            "2025-26: 42/79 valid positive-minute appearances reached this threshold; includes prior teams.",
-            "Latest completed team game: 41 minutes and 10 rebounds on 2026-11-14.",
-            "Latest completed team game: 29 minutes and 7 rebounds on 2026-11-12.",
-            "Latest completed team game: 35 minutes and 9 rebounds on 2026-11-10.",
-            "Current provider status: Not listed. Not listed does not confirm health or a starting role.",
-            "Recent REB average 8.7, versus 7.8 in 2025–26.",
-            "0 recent team-game slot(s) lacked a played box; those slots were not treated as zero production.",
-            "These are relative favorites among available contracts. The ranking is not a calibrated win probability or proof of positive expected return.",
-            "Current roster reconciliation needs review"
-          ],
-          "sources": [
-            {
-              "title": "Official NBA injury report · 2026-11-15T13:45:00-05:00",
-              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_45PM.pdf"
-            },
-            {
-              "title": "Current ESPN roster and injury observations",
-              "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries"
-            },
-            {
-              "title": "NBA traditional box-score archive · 2024–25 and 2025–26",
-              "url": "https://www.nba.com/stats/players/traditional"
-            },
-            {
-              "title": "Recent completed game box score",
-              "url": "https://www.espn.com/nba/boxscore/_/gameId/401909301"
-            },
-            {
-              "title": "Recent completed game box score",
-              "url": "https://www.espn.com/nba/boxscore/_/gameId/401909974"
-            },
-            {
-              "title": "Recent completed game box score",
-              "url": "https://www.espn.com/nba/boxscore/_/gameId/401909957"
+              "url": "https://www.espn.com/nba/boxscore/_/gameId/401909966"
             }
           ],
           "executionVerified": false
@@ -44725,8 +44720,8 @@
       "away": "ATL",
       "startsAt": "2026-11-16T01:10:00Z",
       "officialStartsAt": "2026-11-16T01:00:00+00:00",
-      "reviewedAt": "2026-11-15T18:53:20.114883+00:00",
-      "validUntil": "2026-11-15T21:53:20.114883+00:00",
+      "reviewedAt": "2026-11-15T23:10:08.930628+00:00",
+      "validUntil": "2026-11-16T01:00:00+00:00",
       "reviewType": "automated_statistics",
       "selectionMode": "ranked_favorites",
       "modelEvidenceStatus": "rotation_review_required",
@@ -44736,8 +44731,8 @@
       "winnerReason": "No automatic winner recommendation; this screen evaluates player thresholds only.",
       "sources": [
         {
-          "title": "Official NBA injury report · 2026-11-15T13:45:00-05:00",
-          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_45PM.pdf"
+          "title": "Official NBA injury report · 2026-11-15T18:00:00-05:00",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_00PM.pdf"
         },
         {
           "title": "Current ESPN roster and injury observations",
@@ -44752,46 +44747,46 @@
         {
           "status": "reviewed",
           "reviewType": "automated_statistics",
-          "ticker": "KXNBAPTS-26NOV15ATLMIL-ATLCMCCOLLUM3-20",
+          "ticker": "KXNBAPTS-26NOV15ATLMIL-ATLCMCCOLLUM3-15",
           "playerId": 203468,
           "player": "CJ McCollum",
           "team": "ATL",
           "stat": "PTS",
-          "threshold": 19.5,
+          "threshold": 14.5,
           "side": "yes",
-          "priority": 19,
-          "label": "CJ McCollum 20+ points",
-          "contractTitle": "CJ McCollum: 20+ points",
-          "maxPrice": 0.32,
+          "priority": 4,
+          "label": "CJ McCollum 15+ points",
+          "contractTitle": "CJ McCollum: 15+ points",
+          "maxPrice": 0.57,
           "priceLimitActive": false,
           "conviction": "Favorite",
           "basis": "fundamental",
           "modelConfirmed": false,
-          "rankingScore": 0.2035531789799579,
-          "thesis": "Averaging 28.0 minutes and 20.5 points across the last 2 played team games. Reached this line in 32 of 75 appearances last season.",
+          "rankingScore": 0.2068865123132913,
+          "thesis": "Averaging 28.0 minutes and 20.5 points across the last 2 played team games. Reached this line in 51 of 75 appearances last season.",
           "risk": "Older roles and opponents may differ from today. Minutes, foul trouble, shooting variance and late injury news can invalidate the comparison. This screen does not establish positive expected return.",
           "history": [
             {
               "season": "2024-25",
-              "hits": 28,
+              "hits": 39,
               "n": 56,
               "meanMinutes": 32.708928571428565
             },
             {
               "season": "2025-26",
-              "hits": 32,
+              "hits": 51,
               "n": 75,
               "meanMinutes": 29.859333333333332
             }
           ],
           "quoteAtReview": {
-            "price": 0.32,
-            "size": 141,
-            "observedAt": "2026-11-15T18:53:16.398Z"
+            "price": 0.57,
+            "size": 500,
+            "observedAt": "2026-11-15T23:10:05.359Z"
           },
           "evidence": [
-            "2024-25: 28/56 valid positive-minute appearances reached this threshold; includes prior teams.",
-            "2025-26: 32/75 valid positive-minute appearances reached this threshold; includes prior teams.",
+            "2024-25: 39/56 valid positive-minute appearances reached this threshold; includes prior teams.",
+            "2025-26: 51/75 valid positive-minute appearances reached this threshold; includes prior teams.",
             "Latest completed team game: 32 minutes and 20 points on 2026-11-14.",
             "Latest completed team game: 24 minutes and 21 points on 2026-11-10.",
             "Current provider status: Not listed. Not listed does not confirm health or a starting role.",
@@ -44801,8 +44796,8 @@
           ],
           "sources": [
             {
-              "title": "Official NBA injury report · 2026-11-15T13:45:00-05:00",
-              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_45PM.pdf"
+              "title": "Official NBA injury report · 2026-11-15T18:00:00-05:00",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_00PM.pdf"
             },
             {
               "title": "Current ESPN roster and injury observations",
@@ -44833,15 +44828,15 @@
           "stat": "FG3M",
           "threshold": 1.5,
           "side": "yes",
-          "priority": 20,
+          "priority": 5,
           "label": "Myles Turner 2+ threes",
           "contractTitle": "Myles Turner: 2+ threes",
-          "maxPrice": 0.51,
+          "maxPrice": 0.5,
           "priceLimitActive": false,
           "conviction": "Favorite",
           "basis": "fundamental",
           "modelConfirmed": false,
-          "rankingScore": 0.13154929577464786,
+          "rankingScore": 0.14154929577464787,
           "thesis": "Averaging 29.0 minutes and 2.5 threes across the last 2 played team games. Reached this line in 42 of 71 appearances last season.",
           "risk": "Older roles and opponents may differ from today. Minutes, foul trouble, shooting variance and late injury news can invalidate the comparison. This screen does not establish positive expected return.",
           "history": [
@@ -44859,9 +44854,9 @@
             }
           ],
           "quoteAtReview": {
-            "price": 0.51,
-            "size": 3836,
-            "observedAt": "2026-11-15T18:53:17.216Z"
+            "price": 0.5,
+            "size": 2154,
+            "observedAt": "2026-11-15T23:10:06.149Z"
           },
           "evidence": [
             "2024-25: 45/72 valid positive-minute appearances reached this threshold; includes prior teams.",
@@ -44875,8 +44870,8 @@
           ],
           "sources": [
             {
-              "title": "Official NBA injury report · 2026-11-15T13:45:00-05:00",
-              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_45PM.pdf"
+              "title": "Official NBA injury report · 2026-11-15T18:00:00-05:00",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_00PM.pdf"
             },
             {
               "title": "Current ESPN roster and injury observations",
@@ -44907,15 +44902,15 @@
           "stat": "PTS",
           "threshold": 9.5,
           "side": "yes",
-          "priority": 21,
+          "priority": 6,
           "label": "Dyson Daniels 10+ points",
           "contractTitle": "Dyson Daniels: 10+ points",
-          "maxPrice": 0.54,
+          "maxPrice": 0.53,
           "priceLimitActive": false,
           "conviction": "Favorite",
           "basis": "fundamental",
           "modelConfirmed": false,
-          "rankingScore": 0.11023369233895547,
+          "rankingScore": 0.12023369233895548,
           "thesis": "Averaging 33.5 minutes and 8.0 points across the last 2 played team games. Reached this line in 52 of 76 appearances last season.",
           "risk": "Older roles and opponents may differ from today. Minutes, foul trouble, shooting variance and late injury news can invalidate the comparison. This screen does not establish positive expected return.",
           "history": [
@@ -44933,9 +44928,9 @@
             }
           ],
           "quoteAtReview": {
-            "price": 0.54,
-            "size": 1162.56,
-            "observedAt": "2026-11-15T18:53:16.398Z"
+            "price": 0.53,
+            "size": 1005,
+            "observedAt": "2026-11-15T23:10:05.359Z"
           },
           "evidence": [
             "2024-25: 60/76 valid positive-minute appearances reached this threshold; includes prior teams.",
@@ -44949,8 +44944,8 @@
           ],
           "sources": [
             {
-              "title": "Official NBA injury report · 2026-11-15T13:45:00-05:00",
-              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_45PM.pdf"
+              "title": "Official NBA injury report · 2026-11-15T18:00:00-05:00",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_00PM.pdf"
             },
             {
               "title": "Current ESPN roster and injury observations",
@@ -44984,8 +44979,8 @@
       "away": "OKC",
       "startsAt": "2026-11-16T02:10:00Z",
       "officialStartsAt": "2026-11-16T02:00:00+00:00",
-      "reviewedAt": "2026-11-15T18:53:20.114883+00:00",
-      "validUntil": "2026-11-15T21:53:20.114883+00:00",
+      "reviewedAt": "2026-11-15T23:10:08.930628+00:00",
+      "validUntil": "2026-11-16T02:00:00+00:00",
       "reviewType": "automated_statistics",
       "selectionMode": "ranked_favorites",
       "modelEvidenceStatus": "rotation_review_required",
@@ -44995,8 +44990,8 @@
       "winnerReason": "No automatic winner recommendation; this screen evaluates player thresholds only.",
       "sources": [
         {
-          "title": "Official NBA injury report · 2026-11-15T13:45:00-05:00",
-          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_45PM.pdf"
+          "title": "Official NBA injury report · 2026-11-15T18:00:00-05:00",
+          "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_00PM.pdf"
         },
         {
           "title": "Current ESPN roster and injury observations",
@@ -45018,15 +45013,15 @@
           "stat": "PTS",
           "threshold": 9.5,
           "side": "yes",
-          "priority": 22,
+          "priority": 7,
           "label": "Domantas Sabonis 10+ points",
           "contractTitle": "Domantas Sabonis: 10+ points",
-          "maxPrice": 0.76,
+          "maxPrice": 0.73,
           "priceLimitActive": false,
           "conviction": "Favorite",
           "basis": "fundamental",
           "modelConfirmed": false,
-          "rankingScore": 0.15052664327920467,
+          "rankingScore": 0.1805266432792047,
           "thesis": "Averaging 29.5 minutes and 10.5 points across the last 2 played team games. Reached this line in 17 of 19 appearances last season.",
           "risk": "Older roles and opponents may differ from today. Minutes, foul trouble, shooting variance and late injury news can invalidate the comparison. This screen does not establish positive expected return.",
           "history": [
@@ -45044,9 +45039,9 @@
             }
           ],
           "quoteAtReview": {
-            "price": 0.76,
-            "size": 100,
-            "observedAt": "2026-11-15T18:53:16.398Z"
+            "price": 0.73,
+            "size": 511,
+            "observedAt": "2026-11-15T23:10:05.359Z"
           },
           "evidence": [
             "2024-25: 65/69 valid positive-minute appearances reached this threshold; includes prior teams.",
@@ -45061,8 +45056,8 @@
           ],
           "sources": [
             {
-              "title": "Official NBA injury report · 2026-11-15T13:45:00-05:00",
-              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_45PM.pdf"
+              "title": "Official NBA injury report · 2026-11-15T18:00:00-05:00",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_00PM.pdf"
             },
             {
               "title": "Current ESPN roster and injury observations",
@@ -45086,86 +45081,6 @@
         {
           "status": "reviewed",
           "reviewType": "automated_statistics",
-          "ticker": "KXNBAREB-26NOV15OKCSAC-OKCSGILGEOUSALEXANDER2-4",
-          "playerId": 1628983,
-          "player": "Shai Gilgeous-Alexander",
-          "team": "OKC",
-          "stat": "REB",
-          "threshold": 3.5,
-          "side": "yes",
-          "priority": 23,
-          "label": "Shai Gilgeous-Alexander 4+ rebounds",
-          "contractTitle": "Shai Gilgeous-Alexander: 4+ rebounds",
-          "maxPrice": 0.58,
-          "priceLimitActive": false,
-          "conviction": "Favorite",
-          "basis": "fundamental",
-          "modelConfirmed": false,
-          "rankingScore": 0.12294117647058825,
-          "thesis": "Averaging 34.7 minutes and 5.3 rebounds across the last 3 played team games. Reached this line in 41 of 68 appearances last season.",
-          "risk": "Older roles and opponents may differ from today. Minutes, foul trouble, shooting variance and late injury news can invalidate the comparison. This screen does not establish positive expected return.",
-          "history": [
-            {
-              "season": "2024-25",
-              "hits": 50,
-              "n": 76,
-              "meanMinutes": 34.179385964912285
-            },
-            {
-              "season": "2025-26",
-              "hits": 41,
-              "n": 68,
-              "meanMinutes": 33.220098039215685
-            }
-          ],
-          "quoteAtReview": {
-            "price": 0.58,
-            "size": 500,
-            "observedAt": "2026-11-15T18:53:16.679Z"
-          },
-          "evidence": [
-            "2024-25: 50/76 valid positive-minute appearances reached this threshold; includes prior teams.",
-            "2025-26: 41/68 valid positive-minute appearances reached this threshold; includes prior teams.",
-            "Latest completed team game: 39 minutes and 4 rebounds on 2026-11-14.",
-            "Latest completed team game: 36 minutes and 4 rebounds on 2026-11-12.",
-            "Latest completed team game: 29 minutes and 8 rebounds on 2026-11-11.",
-            "Current provider status: Not listed. Not listed does not confirm health or a starting role.",
-            "Recent REB average 5.3, versus 4.3 in 2025–26.",
-            "0 recent team-game slot(s) lacked a played box; those slots were not treated as zero production.",
-            "These are relative favorites among available contracts. The ranking is not a calibrated win probability or proof of positive expected return.",
-            "Current roster reconciliation needs review"
-          ],
-          "sources": [
-            {
-              "title": "Official NBA injury report · 2026-11-15T13:45:00-05:00",
-              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_45PM.pdf"
-            },
-            {
-              "title": "Current ESPN roster and injury observations",
-              "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries"
-            },
-            {
-              "title": "NBA traditional box-score archive · 2024–25 and 2025–26",
-              "url": "https://www.nba.com/stats/players/traditional"
-            },
-            {
-              "title": "Recent completed game box score",
-              "url": "https://www.espn.com/nba/boxscore/_/gameId/401909304"
-            },
-            {
-              "title": "Recent completed game box score",
-              "url": "https://www.espn.com/nba/boxscore/_/gameId/401909975"
-            },
-            {
-              "title": "Recent completed game box score",
-              "url": "https://www.espn.com/nba/boxscore/_/gameId/401909965"
-            }
-          ],
-          "executionVerified": false
-        },
-        {
-          "status": "reviewed",
-          "reviewType": "automated_statistics",
           "ticker": "KXNBAPTS-26NOV15OKCSAC-SACZLAVINE8-25",
           "playerId": 203897,
           "player": "Zach LaVine",
@@ -45173,15 +45088,15 @@
           "stat": "PTS",
           "threshold": 24.5,
           "side": "yes",
-          "priority": 24,
+          "priority": 8,
           "label": "Zach LaVine 25+ points",
           "contractTitle": "Zach LaVine: 25+ points",
-          "maxPrice": 0.24,
+          "maxPrice": 0.22,
           "priceLimitActive": false,
           "conviction": "Favorite",
           "basis": "fundamental",
           "modelConfirmed": false,
-          "rankingScore": 0.08365464222353636,
+          "rankingScore": 0.10365464222353638,
           "thesis": "Averaging 31.3 minutes and 19.3 points across the last 3 played team games. Reached this line in 12 of 38 appearances last season.",
           "risk": "Older roles and opponents may differ from today. Minutes, foul trouble, shooting variance and late injury news can invalidate the comparison. This screen does not establish positive expected return.",
           "history": [
@@ -45199,9 +45114,9 @@
             }
           ],
           "quoteAtReview": {
-            "price": 0.24,
-            "size": 100,
-            "observedAt": "2026-11-15T18:53:16.398Z"
+            "price": 0.22,
+            "size": 323,
+            "observedAt": "2026-11-15T23:10:05.359Z"
           },
           "evidence": [
             "2024-25: 34/74 valid positive-minute appearances reached this threshold; includes prior teams.",
@@ -45217,8 +45132,8 @@
           ],
           "sources": [
             {
-              "title": "Official NBA injury report · 2026-11-15T13:45:00-05:00",
-              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_45PM.pdf"
+              "title": "Official NBA injury report · 2026-11-15T18:00:00-05:00",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_00PM.pdf"
             },
             {
               "title": "Current ESPN roster and injury observations",
@@ -45239,6 +45154,86 @@
             {
               "title": "Recent completed game box score",
               "url": "https://www.espn.com/nba/boxscore/_/gameId/401909951"
+            }
+          ],
+          "executionVerified": false
+        },
+        {
+          "status": "reviewed",
+          "reviewType": "automated_statistics",
+          "ticker": "KXNBAPTS-26NOV15OKCSAC-OKCSGILGEOUSALEXANDER2-25",
+          "playerId": 1628983,
+          "player": "Shai Gilgeous-Alexander",
+          "team": "OKC",
+          "stat": "PTS",
+          "threshold": 24.5,
+          "side": "yes",
+          "priority": 9,
+          "label": "Shai Gilgeous-Alexander 25+ points",
+          "contractTitle": "Shai Gilgeous-Alexander: 25+ points",
+          "maxPrice": 0.82,
+          "priceLimitActive": false,
+          "conviction": "Favorite",
+          "basis": "fundamental",
+          "modelConfirmed": false,
+          "rankingScore": 0.1035294117647059,
+          "thesis": "Averaging 34.7 minutes and 32.3 points across the last 3 played team games. Reached this line in 56 of 68 appearances last season.",
+          "risk": "Older roles and opponents may differ from today. Minutes, foul trouble, shooting variance and late injury news can invalidate the comparison. This screen does not establish positive expected return.",
+          "history": [
+            {
+              "season": "2024-25",
+              "hits": 68,
+              "n": 76,
+              "meanMinutes": 34.179385964912285
+            },
+            {
+              "season": "2025-26",
+              "hits": 56,
+              "n": 68,
+              "meanMinutes": 33.220098039215685
+            }
+          ],
+          "quoteAtReview": {
+            "price": 0.82,
+            "size": 509,
+            "observedAt": "2026-11-15T23:10:05.359Z"
+          },
+          "evidence": [
+            "2024-25: 68/76 valid positive-minute appearances reached this threshold; includes prior teams.",
+            "2025-26: 56/68 valid positive-minute appearances reached this threshold; includes prior teams.",
+            "Latest completed team game: 39 minutes and 40 points on 2026-11-14.",
+            "Latest completed team game: 36 minutes and 31 points on 2026-11-12.",
+            "Latest completed team game: 29 minutes and 26 points on 2026-11-11.",
+            "Current provider status: Not listed. Not listed does not confirm health or a starting role.",
+            "Recent FGA average 22.7, versus 19.4 in 2025–26.",
+            "0 recent team-game slot(s) lacked a played box; those slots were not treated as zero production.",
+            "These are relative favorites among available contracts. The ranking is not a calibrated win probability or proof of positive expected return.",
+            "Current roster reconciliation needs review"
+          ],
+          "sources": [
+            {
+              "title": "Official NBA injury report · 2026-11-15T18:00:00-05:00",
+              "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_00PM.pdf"
+            },
+            {
+              "title": "Current ESPN roster and injury observations",
+              "url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries"
+            },
+            {
+              "title": "NBA traditional box-score archive · 2024–25 and 2025–26",
+              "url": "https://www.nba.com/stats/players/traditional"
+            },
+            {
+              "title": "Recent completed game box score",
+              "url": "https://www.espn.com/nba/boxscore/_/gameId/401909304"
+            },
+            {
+              "title": "Recent completed game box score",
+              "url": "https://www.espn.com/nba/boxscore/_/gameId/401909975"
+            },
+            {
+              "title": "Recent completed game box score",
+              "url": "https://www.espn.com/nba/boxscore/_/gameId/401909965"
             }
           ],
           "executionVerified": false
