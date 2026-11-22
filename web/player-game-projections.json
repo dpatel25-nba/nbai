@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-22T19:42:06.991Z",
+  "generatedAt": "2026-11-22T20:49:50.742Z",
   "scope": "game",
   "runs": 2000,
   "seedPrefix": "market-matchups-v1:",
@@ -9624,7 +9624,7 @@
     "web/season-engine.js": "eb9252a1582df10e6111b694229d9943ab5b9b734a6b7012abcbd2a631ea9e08",
     "web/season-possession.js": "133537a8a45a321a3cb884fbe3140b0917b2b3a85f36de26490a5f4d8e5f05a5",
     "web/season-availability.json": "a2ebd5a3bd2fb4b2642bb138c59fc6d696e8f23a3a21de89a3658c02f3fdc67c",
-    "web/game-availability.json": "baaf2e27a3d6bbd6c6d68838ea52399769dc00f9bf6d38a8bfe02063ba3e21cd",
+    "web/game-availability.json": "da20b69e2ace9157750fb8d4df575051e70b718d00ae7f725a63a54b6b97f79a",
     "scripts/game_availability.cjs": "ad4ebaddf8a1a29c1d4f9285e6694211308ac46a65d954a040ae31f212edde00",
     "scripts/build_market_game_projections.cjs": "5bb013efeb75937e1b29aa8c96068aff75a9473e5a2ed77b3e409c52b1e4f317",
     "scripts/match_market_schedule.cjs": "f49aa4bdf06f89d1589098030436af429a52562ea785f39198adfd8b152bcdc3",
@@ -9636,8 +9636,8 @@
     "web/lib/game-watchlist-targets.json": "54e78bb4477557b5e4c684a00fba33c6a53bafca0205f6affd07b79ca3d0770b"
   },
   "marketInventoryHash": "c97185f96793df13028025ec790cdf335a2d49f8ecf3636d42e217c0428cc880",
-  "inputSignature": "6be064855670a2902a53f96625a630300d2a952ede8a8fe7480d250918a04de4",
-  "availabilityValidUntil": "2026-11-23T01:41:40.426774+00:00",
+  "inputSignature": "a1f5644417dee1fbf341bf0682bcc72977ca9cec8aaadace835a9c07e559b0f3",
+  "availabilityValidUntil": "2026-11-23T02:49:36.059168+00:00",
   "assumptions": "Matchup-specific possession scenarios using current roster and ESPN injury observations. Reported Out players are excluded; other players are conditional on playing. Questionable participation, confirmed starters and minutes restrictions are not modeled. Not calibrated betting probabilities.",
   "events": [
     {
@@ -9652,12 +9652,12 @@
       "officialStartsAt": "2026-11-22T20:30:00.000Z",
       "scheduleOffsetMinutes": 10,
       "scheduleMatchMethod": "Unique home/away match within 15 minutes",
-      "reviewRequired": "Current roster reconciliation needs review",
+      "reviewRequired": "No current availability observation matched to this game.",
       "availability": {
-        "holdReason": "Current roster reconciliation needs review",
+        "holdReason": "No current availability observation matched to this game.",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-23T01:41:40.426774+00:00"
+        "validUntil": "2026-11-23T02:49:36.059168+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -10365,7 +10365,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-23T01:41:40.426774+00:00"
+        "validUntil": "2026-11-23T02:49:36.059168+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -11035,7 +11035,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-23T01:41:40.426774+00:00"
+        "validUntil": "2026-11-23T02:49:36.059168+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -11705,7 +11705,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-23T01:41:40.426774+00:00"
+        "validUntil": "2026-11-23T02:49:36.059168+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -12649,8 +12649,8 @@
             "out": false
           }
         ],
-        "validUntil": "2026-11-23T01:41:40.426774+00:00",
-        "observedAt": "2026-11-22T19:41:42.191257+00:00",
+        "validUntil": "2026-11-23T02:49:36.059168+00:00",
+        "observedAt": "2026-11-22T20:49:36.980536+00:00",
         "source": "ESPN current rosters and injury feed",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -14295,7 +14295,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-23T01:41:40.426774+00:00"
+        "validUntil": "2026-11-23T02:49:36.059168+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -15217,8 +15217,8 @@
             "out": true
           }
         ],
-        "validUntil": "2026-11-23T01:41:40.426774+00:00",
-        "observedAt": "2026-11-22T19:41:42.191257+00:00",
+        "validUntil": "2026-11-23T02:49:36.059168+00:00",
+        "observedAt": "2026-11-22T20:49:36.980536+00:00",
         "source": "ESPN current rosters and injury feed",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -16851,7 +16851,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-23T01:41:40.426774+00:00"
+        "validUntil": "2026-11-23T02:49:36.059168+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -17805,8 +17805,8 @@
             "out": true
           }
         ],
-        "validUntil": "2026-11-23T01:41:40.426774+00:00",
-        "observedAt": "2026-11-22T19:41:42.191257+00:00",
+        "validUntil": "2026-11-23T02:49:36.059168+00:00",
+        "observedAt": "2026-11-22T20:49:36.980536+00:00",
         "source": "ESPN current rosters and injury feed",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -19420,7 +19420,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-23T01:41:40.426774+00:00"
+        "validUntil": "2026-11-23T02:49:36.059168+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -20090,7 +20090,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-23T01:41:40.426774+00:00"
+        "validUntil": "2026-11-23T02:49:36.059168+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -20760,7 +20760,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-23T01:41:40.426774+00:00"
+        "validUntil": "2026-11-23T02:49:36.059168+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -21430,7 +21430,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-23T01:41:40.426774+00:00"
+        "validUntil": "2026-11-23T02:49:36.059168+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -22352,8 +22352,8 @@
             "out": true
           }
         ],
-        "validUntil": "2026-11-23T01:41:40.426774+00:00",
-        "observedAt": "2026-11-22T19:41:42.191257+00:00",
+        "validUntil": "2026-11-23T02:49:36.059168+00:00",
+        "observedAt": "2026-11-22T20:49:36.980536+00:00",
         "source": "ESPN current rosters and injury feed",
         "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/injuries",
         "excluded": [
@@ -23986,7 +23986,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-23T01:41:40.426774+00:00"
+        "validUntil": "2026-11-23T02:49:36.059168+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -24675,7 +24675,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-23T01:41:40.426774+00:00"
+        "validUntil": "2026-11-23T02:49:36.059168+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
@@ -25383,7 +25383,7 @@
         "holdReason": "Current roster reconciliation needs review",
         "outIds": [],
         "players": [],
-        "validUntil": "2026-11-23T01:41:40.426774+00:00"
+        "validUntil": "2026-11-23T02:49:36.059168+00:00"
       },
       "calibrationTarget": null,
       "gameProjection": null,
